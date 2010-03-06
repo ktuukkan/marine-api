@@ -2,9 +2,14 @@ Java Marine API readme
 Version 0.1 (pre-alpha)
 <http://sourceforge.net/project/marineapi/>
 
-Copyright 2010 Kimmo Tuukkanen
+Copyright 2010 Kimmo Tuukkanen <ktuukkan@users.sourceforge.net>
 
-1. LICENSING
+1. SYSTEM REQUIREMENTS
+ 
+ * Java JDK 1.5 or later
+ 
+
+2. LICENSING
 
 Java Marine API is free software: you can redistribute it and/or modify it
 under the terms of the GNU Lesser General Public License as published by the
@@ -20,16 +25,31 @@ You should have received a copy of the GNU Lesser General Public License
 along with Java Marine API. If not, see <http://www.gnu.org/licenses/>.
 
 
-2. DISCLAIMER CONCERNING THE NMEA 0183 STANDARD
+3. NMEA 0183 NOTICE
 
-The interpretation of NMEA 0183 sentences for this library is based only on the
-freely available resources in the web. Thus, it is NOT guaranteed that the
-library would conform and follow the standard accurately.
+Java Marine API is not approved by National Marine Electronics Association. The
+interpretation of NMEA sentences for this library is based entirely on freely
+available resources in the web. Thus, it is NOT guaranteed that the library
+would conform and follow the standard accurately.
 
-The development of library is based on the following resources:
+The NMEA information for development of Java Marine API has been collected from
+the following resources (in random order, thanks guys!):
 
- * http://en.wikipedia.org/wiki/NMEA
- * http://home.mira.net/~gnb/gps/nmea.html (Glenn Baddeley)
- * http://www.gpsinformation.org/dale/nmea.htm (Dale DePriest)
- * http://gpsd.berlios.de/NMEA.txt (gpsd project)
+ * Wikipedia's NMEA article
+   <http://en.wikipedia.org/wiki/NMEA>
+ 
+ * "NMEA sentence information" by Glenn Baddeley
+   <http://home.mira.net/~gnb/gps/nmea.html>
+ 
+ * "NMEA data" by Dale DePriest
+   <http://www.gpsinformation.org/dale/nmea.htm>
+ 
+ * "The NMEA FAQ" by Peter Bennett
+   <http://vancouver-webpages.com/peter/nmeafaq.txt>
+ 
+ * "NMEA Revealed" by Eric S. Raymond
+   <http://gpsd.berlios.de/NMEA.txt>
 
+All disclaimers and warnings concerning the accuracy of information in the above
+resources apply equally to Java Marine API. Upon notice of any mistakes, please
+contact <ktuukkan@users.sourceforge.net>.
