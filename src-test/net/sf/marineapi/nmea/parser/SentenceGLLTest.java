@@ -1,21 +1,15 @@
-/**
- * 
- */
 package net.sf.marineapi.nmea.parser;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
-
-import net.sf.marineapi.nmea.parser.SentenceGLL;
 import net.sf.marineapi.nmea.util.DataStatus;
 import net.sf.marineapi.nmea.util.Direction;
 import net.sf.marineapi.nmea.util.Position;
 
 import org.junit.Before;
 import org.junit.Test;
-
 
 /**
  * Tests the GLL sentence parser.
@@ -53,7 +47,8 @@ public class SentenceGLLTest {
     }
 
     /**
-     * Test method for {@link net.sf.marineapi.nmea.parser.SentenceGLL#getPosition()}.
+     * Test method for
+     * {@link net.sf.marineapi.nmea.parser.SentenceGLL#getPosition()}.
      */
     @Test
     public void testGetPosition() {
@@ -66,10 +61,28 @@ public class SentenceGLLTest {
         assertTrue(lon == p.getLongitude());
         assertEquals(Direction.NORTH, p.getLatHemisphere());
         assertEquals(Direction.EAST, p.getLonHemisphere());
+
+        final String invalid1 = "$GPGLL,6111.552,E,02501.941,W,120045,A";
+        SentenceGLL fail = new SentenceGLL(invalid1);
+        try {
+            Position p2 = fail.getPosition();
+        } catch (Exception e) {
+            // pass
+        }
+
+        final String invalid2 = "$GPGLL,6111.552,N,02501.941,S,120045,A";
+        fail = new SentenceGLL(invalid2);
+        try {
+            Position p3 = fail.getPosition();
+        } catch (Exception e) {
+            // pass
+        }
+
     }
 
     /**
-     * Test method for {@link net.sf.marineapi.nmea.parser.SentenceGLL#getUtcHours()}.
+     * Test method for
+     * {@link net.sf.marineapi.nmea.parser.SentenceGLL#getUtcHours()}.
      */
     @Test
     public void testGetUtcHours() {
@@ -95,7 +108,8 @@ public class SentenceGLLTest {
     }
 
     /**
-     * Test method for {@link net.sf.marineapi.nmea.parser.SentenceGLL#getUtcTime()}.
+     * Test method for
+     * {@link net.sf.marineapi.nmea.parser.SentenceGLL#getUtcTime()}.
      */
     @Test
     public void testGetUtcTime() {

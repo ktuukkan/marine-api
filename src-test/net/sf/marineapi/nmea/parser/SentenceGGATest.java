@@ -4,9 +4,6 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
-
-import net.sf.marineapi.nmea.parser.ParseException;
-import net.sf.marineapi.nmea.parser.SentenceGGA;
 import net.sf.marineapi.nmea.util.Datum;
 import net.sf.marineapi.nmea.util.Direction;
 import net.sf.marineapi.nmea.util.GpsFixQuality;
@@ -17,7 +14,11 @@ import net.sf.marineapi.nmea.util.Units;
 import org.junit.Before;
 import org.junit.Test;
 
-
+/**
+ * Test the GGA sentence parser.
+ * 
+ * @author Kimmo Tuukkanen
+ */
 public class SentenceGGATest {
 
     public static final String EXAMPLE = "$GPGGA,120044,6011.552,N,02501.941,E,1,00,2.0,28.0,M,19.6,M,,*79";
@@ -54,7 +55,7 @@ public class SentenceGGATest {
         try {
             gga.getDgpsAge();
             fail("Did not throw ParseException");
-        } catch (ParseException e) {
+        } catch (DataNotAvailableException e) {
             // ok
         } catch (Exception e) {
             e.printStackTrace();
@@ -66,10 +67,10 @@ public class SentenceGGATest {
         try {
             gga.getDgpsStationId();
             fail("Did not throw ParseException");
-        } catch (ParseException e) {
+        } catch (DataNotAvailableException e) {
             // ok
         } catch (Exception e) {
-            e.printStackTrace();
+            fail(e.getMessage());
         }
     }
 

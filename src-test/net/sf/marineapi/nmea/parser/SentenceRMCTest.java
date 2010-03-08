@@ -1,6 +1,3 @@
-/**
- * 
- */
 package net.sf.marineapi.nmea.parser;
 
 import static org.junit.Assert.assertEquals;
@@ -22,7 +19,7 @@ import org.junit.Test;
 /**
  * Tests the RMC sentence parser.
  * 
- * @author kimmot
+ * @author Kimmo Tuukkanen
  */
 public class SentenceRMCTest {
 

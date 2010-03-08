@@ -1,6 +1,6 @@
 /* 
  * SentenceGGA.java
- * Copyright 2010 Kimmo Tuukkanen
+ * Copyright (C) 2010 Kimmo Tuukkanen
  * 
  * This file is part of Java Marine API.
  * <http://sourceforge.net/projects/marineapi/>
@@ -27,7 +27,7 @@ import net.sf.marineapi.nmea.util.SentenceId;
 import net.sf.marineapi.nmea.util.Units;
 
 /**
- * GGA sentence parser. Global Positioning System Fix Data. Time, position and
+ * GGA sentence parser. Global Positioning System fix data; time, position and
  * other fix related data for a GPS receiver.
  * <p>
  * Example:

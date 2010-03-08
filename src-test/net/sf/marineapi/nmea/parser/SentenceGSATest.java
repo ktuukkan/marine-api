@@ -1,19 +1,13 @@
-/**
- * 
- */
 package net.sf.marineapi.nmea.parser;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
-
-import net.sf.marineapi.nmea.parser.SentenceGSA;
 import net.sf.marineapi.nmea.util.GpsFixStatus;
 import net.sf.marineapi.nmea.util.GpsMode;
 
 import org.junit.Before;
 import org.junit.Test;
-
 
 /**
  * Tests the GSA sentence parser.
@@ -40,7 +34,8 @@ public class SentenceGSATest {
     }
 
     /**
-     * Test method for {@link net.sf.marineapi.nmea.parser.SentenceGSA#getGpsMode()}.
+     * Test method for
+     * {@link net.sf.marineapi.nmea.parser.SentenceGSA#getGpsMode()}.
      */
     @Test
     public void testGetGpsMode() {
@@ -48,8 +43,8 @@ public class SentenceGSATest {
     }
 
     /**
-     * Test method for {@link net.sf.marineapi.nmea.parser.SentenceGSA#getFixStatus()}
-     * .
+     * Test method for
+     * {@link net.sf.marineapi.nmea.parser.SentenceGSA#getFixStatus()} .
      */
     @Test
     public void testGetFixStatus() {

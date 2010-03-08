@@ -1,6 +1,3 @@
-/**
- * 
- */
 package net.sf.marineapi.nmea.parser;
 
 import static org.junit.Assert.assertEquals;
@@ -16,7 +13,9 @@ import org.junit.Before;
 import org.junit.Test;
 
 /**
- * @author kimmot
+ * Test the GSV sentence parser.
+ * 
+ * @author Kimmo Tuukkanen
  */
 public class SentenceGSVTest {
 

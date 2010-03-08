@@ -1,6 +1,3 @@
-/**
- * 
- */
 package net.sf.marineapi.nmea.parser;
 
 import static org.junit.Assert.assertEquals;
@@ -18,7 +15,6 @@ import org.junit.Test;
  * Tests the RMB sentence parser.
  * 
  * @author Kimmo Tuukkanen
- * @version $Revision$
  */
 public class SentenceRMBTest {
 
@@ -77,7 +73,7 @@ public class SentenceRMBTest {
             rmb.getOriginId();
             fail("Did not throw ParseException");
         } catch (Exception e) {
-            assertTrue(e instanceof ParseException);
+            assertTrue(e instanceof DataNotAvailableException);
         }
     }
 
@@ -129,7 +125,7 @@ public class SentenceRMBTest {
             assertTrue(0.0 == rmb.getVelocity());
             fail("Did not throw ParseException");
         } catch (Exception e) {
-            assertTrue(e instanceof ParseException);
+            assertTrue(e instanceof DataNotAvailableException);
         }
     }
 

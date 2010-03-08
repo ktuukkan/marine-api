@@ -1,5 +1,5 @@
 /* 
- * Datum.java
+ * DataNotAvailableException.java
  * Copyright (C) 2010 Kimmo Tuukkanen
  * 
  * This file is part of Java Marine API.
@@ -18,22 +18,31 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Java Marine API. If not, see <http://www.gnu.org/licenses/>.
  */
-package net.sf.marineapi.nmea.util;
+package net.sf.marineapi.nmea.parser;
 
 /**
- * Defines the supported datums, i.e. the coordinate systems used to specify
- * geographic positions.
+ * Exception that may be thrown when requested data is not available.
  * 
  * @author Kimmo Tuukkanen
  * @version $Revision$
- * @see net.sf.marineapi.nmea.util.Position
  */
-public enum Datum {
+public class DataNotAvailableException extends RuntimeException {
 
-    /** World Geodetic System 1984, the default datum in GPS systems. */
-    WGS84,
-    /** North American Datum 1983 */
-    NAD83,
-    /** North American Datum 1927 */
-    NAD27;
+    /** serialVersionUID */
+    private static final long serialVersionUID = 6685756782924152481L;
+
+    /**
+     * Constructor
+     */
+    public DataNotAvailableException() {
+    }
+
+    /**
+     * Constructor
+     * 
+     * @param msg Message
+     */
+    public DataNotAvailableException(String msg) {
+        super(msg);
+    }
 }

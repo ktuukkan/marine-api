@@ -1,6 +1,6 @@
 /* 
  * TimeSentence.java
- * Copyright 2010 Kimmo Tuukkanen
+ * Copyright (C) 2010 Kimmo Tuukkanen
  * 
  * This file is part of Java Marine API.
  * <http://sourceforge.net/projects/marineapi/>
@@ -21,9 +21,8 @@
 package net.sf.marineapi.nmea.parser;
 
 /**
- * Interface for sentence parsers that provide a UTC time data. Notice that some
- * sentences may contain only UTC time, while others may provide also UTC date
- * or both. Get the UTC date through <code>DateSentence</code> interface.
+ * Interface for sentences that provide a UTC time information. Notice that some
+ * sentences may contain only UTC time, while others may provide also date.
  * 
  * @author Kimmo Tuukkanen
  * @version $Revision$

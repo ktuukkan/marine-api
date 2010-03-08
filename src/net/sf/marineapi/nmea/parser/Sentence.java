@@ -1,6 +1,6 @@
 /* 
  * Sentence.java
- * Copyright 2010 Kimmo Tuukkanen
+ * Copyright (C) 2010 Kimmo Tuukkanen
  * 
  * This file is part of Java Marine API.
  * <http://sourceforge.net/projects/marineapi/>
@@ -288,7 +288,13 @@ public class Sentence {
      * @return Field parsed by <code>Double.parseDouble()</code>
      */
     protected final double getDoubleValue(int index) {
-        return Double.parseDouble(getStringValue(index));
+        double value;
+        try {
+            value = Double.parseDouble(getStringValue(index));
+        } catch (NumberFormatException ex) {
+            throw new ParseException("Field does not contain double value", ex);
+        }
+        return value;
     }
 
     /**
@@ -298,7 +304,13 @@ public class Sentence {
      * @return Field parsed by <code>Integer.parseInt()</code>
      */
     protected final int getIntValue(int index) {
-        return Integer.parseInt(getStringValue(index));
+        int value;
+        try {
+            value = Integer.parseInt(getStringValue(index));
+        } catch (NumberFormatException ex) {
+            throw new ParseException("Field does not contain int value", ex);
+        }
+        return value;
     }
 
     /**
@@ -322,12 +334,12 @@ public class Sentence {
      * 
      * @param index Field index
      * @return Field value as String
-     * @throws ParseException If the field contains no value
+     * @throws DataNotAvailableException If the field contains no value
      */
     protected final String getStringValue(int index) {
         String value = dataFields[index];
         if (value == null || value.isEmpty()) {
-            throw new ParseException("Data not available");
+            throw new DataNotAvailableException("Data not available");
         }
         return value;
     }
@@ -335,8 +347,8 @@ public class Sentence {
     /**
      * Gets the talker ID of the sentence. Talker ID is the next two characters
      * after the '$' in sentence address field. For example, if the address
-     * field is <code>$GPGGA</code>, the mfit.ethod returns the enum
-     * <code>GP</code>.
+     * field is <code>$GPGGA</code>, the method returns the enum <code>GP</code>
+     * .
      * 
      * @return Talker id String.
      */
