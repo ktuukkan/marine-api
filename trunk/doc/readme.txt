@@ -2,11 +2,12 @@ Java Marine API readme
 Version 0.1 (pre-alpha)
 <http://sourceforge.net/project/marineapi/>
 
-Copyright 2010 Kimmo Tuukkanen <ktuukkan@users.sourceforge.net>
+Copyright (C) 2010 Kimmo Tuukkanen <ktuukkan@users.sourceforge.net>
+
 
 1. SYSTEM REQUIREMENTS
  
- * Java JDK 1.5 or later
+ * Java JRE/JDK 1.5 or later
  
 
 2. LICENSING
@@ -25,15 +26,15 @@ You should have received a copy of the GNU Lesser General Public License
 along with Java Marine API. If not, see <http://www.gnu.org/licenses/>.
 
 
-3. NMEA 0183 NOTICE
+3. NOTICE AND ACKNOWLEDGEMENTS
 
 Java Marine API is not approved by National Marine Electronics Association. The
 interpretation of NMEA sentences for this library is based entirely on freely
 available resources in the web. Thus, it is NOT guaranteed that the library
 would conform and follow the standard accurately.
 
-The NMEA information for development of Java Marine API has been collected from
-the following resources (in random order, thanks guys!):
+The NMEA information for Java Marine API has been collected from the following
+resources (in random order, last checked on 2010-03-06):
 
  * Wikipedia's NMEA article
    <http://en.wikipedia.org/wiki/NMEA>
@@ -50,6 +51,7 @@ the following resources (in random order, thanks guys!):
  * "NMEA Revealed" by Eric S. Raymond
    <http://gpsd.berlios.de/NMEA.txt>
 
-All disclaimers and warnings concerning the accuracy of information in the above
-resources apply equally to Java Marine API. Upon notice of any mistakes, please
-contact <ktuukkan@users.sourceforge.net>.
+Thanks to all authors for collecting the information. All disclaimers and 
+warnings concerning the accuracy of information in the above resources apply
+equally to Java Marine API. Upon noticing or suspecting any errors, please
+contact the project author <ktuukkan@users.sourceforge.net>.

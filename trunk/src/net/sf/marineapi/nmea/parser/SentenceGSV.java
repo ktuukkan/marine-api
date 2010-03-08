@@ -1,6 +1,6 @@
 /* 
  * SentenceGSV.java
- * Copyright 2010 Kimmo Tuukkanen
+ * Copyright (C) 2010 Kimmo Tuukkanen
  * 
  * This file is part of Java Marine API.
  * <http://sourceforge.net/projects/marineapi/>

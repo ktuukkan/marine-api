@@ -1,4 +1,8 @@
 Java Marine API release notes
 Version 0.1 (pre-alpha)
+<http://sourceforge.net/project/marineapi/>
 
-http://sourceforge.net/project/marineapi/
+KNOWN ISSUES
+
+ * Position.distanceTo() does not produce correct results
+ 

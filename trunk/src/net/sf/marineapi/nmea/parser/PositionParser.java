@@ -1,6 +1,6 @@
 /* 
  * PositionParser.java
- * Copyright 2010 Kimmo Tuukkanen
+ * Copyright (C) 2010 Kimmo Tuukkanen
  * 
  * This file is part of Java Marine API.
  * <http://sourceforge.net/projects/marineapi/>
@@ -79,7 +79,7 @@ public abstract class PositionParser extends Sentence {
         if (Direction.NORTH.equals(d) || Direction.SOUTH.equals(d)) {
             return d;
         }
-        throw new ParseException("Invalid hemisphere indicator '" + ch + "'");
+        throw new ParseException("Invalid latitude hemisphere '" + ch + "'");
     }
 
     /**
@@ -93,6 +93,6 @@ public abstract class PositionParser extends Sentence {
         if (Direction.EAST.equals(d) || Direction.WEST.equals(d)) {
             return d;
         }
-        throw new ParseException("Invalid hemisphere indicator '" + ch + "'");
+        throw new ParseException("Invalid longitude hemisphere " + ch + "'");
     }
 }

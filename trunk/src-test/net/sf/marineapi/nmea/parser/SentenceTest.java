@@ -209,21 +209,46 @@ public class SentenceTest {
      */
     @Test
     public void testGetStringValue() {
+        String nmea = "$GPGLL,6011.552,N,02501.941,E,120045,A";
 
-        try {
-            String nmea = "$GPGLL,6011.552,N,02501.941,E,120045,A";
-            Sentence s = new Sentence(nmea);
-
-            int i = 0;
-            String[] fields = nmea.split(",", -1);
-            for (String field : fields) {
-                assertEquals(field, s.getStringValue(i++));
-            }
-
-        } catch (Exception e) {
-            fail(e.getMessage());
+        Sentence s = new Sentence(nmea);
+        String[] fields = nmea.split(",", -1);
+        for (int i = 0; i < fields.length; i++) {
+            assertEquals(fields[i], s.getStringValue(i));
         }
 
+        // sentence with invalid and missing values
+        nmea = "$GPGLL,foobar,N,,EAST,120045,A";
+
+        try {
+            Sentence s2 = new Sentence(nmea);
+            s2.getDoubleValue(1);
+            fail("Did not throw exception");
+        } catch (ParseException ex) {
+            // pass
+        } catch (Exception ex) {
+            fail(ex.getMessage());
+        }
+
+        try {
+            Sentence s3 = new Sentence(nmea);
+            s3.getCharValue(4);
+            fail("Did not throw exception");
+        } catch (ParseException ex) {
+            // pass
+        } catch (Exception ex) {
+            fail(ex.getMessage());
+        }
+
+        try {
+            Sentence s4 = new Sentence(nmea);
+            s4.getStringValue(3);
+            fail("Did not throw exception");
+        } catch (DataNotAvailableException ex) {
+            // pass
+        } catch (Exception ex) {
+            fail(ex.getMessage());
+        }
     }
 
     @Test
@@ -239,8 +264,8 @@ public class SentenceTest {
         }
 
         try {
-            sentence.getStringValue(Sentence.ADDRESS_FIELD);
-            // pass
+            String id = sentence.getStringValue(Sentence.ADDRESS_FIELD);
+            assertEquals("$GPRMC", id);
         } catch (IndexOutOfBoundsException e) {
             fail("Unexpected IndexOutOfBoundsException");
         } catch (Exception e) {

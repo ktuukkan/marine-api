@@ -1,6 +1,6 @@
 /* 
  * DateSentence.java
- * Copyright 2010 Kimmo Tuukkanen
+ * Copyright (C) 2010 Kimmo Tuukkanen
  * 
  * This file is part of Java Marine API.
  * <http://sourceforge.net/projects/marineapi/>
@@ -24,9 +24,7 @@ import java.util.Date;
 
 /**
  * Common interface for sentences that contain UTC date information. Notice that
- * some sentences may contain only UTC time, while others may provide also UTC
- * date or both. Get the UTC time data through <code>TimeSentence</code>
- * interface.
+ * some sentences contain only time without date information.
  * 
  * @author Kimmo Tuukkanen
  * @version $Revision$

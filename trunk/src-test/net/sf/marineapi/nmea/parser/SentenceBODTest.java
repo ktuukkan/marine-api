@@ -2,9 +2,6 @@ package net.sf.marineapi.nmea.parser;
 
 import junit.framework.TestCase;
 
-import net.sf.marineapi.nmea.parser.ParseException;
-import net.sf.marineapi.nmea.parser.SentenceBOD;
-
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -47,7 +44,8 @@ public class SentenceBODTest extends TestCase {
 
     /**
      * Test method for
-     * {@link net.sf.marineapi.nmea.parser.SentenceBOD#SentenceBOD(java.lang.String)}.
+     * {@link net.sf.marineapi.nmea.parser.SentenceBOD#SentenceBOD(java.lang.String)}
+     * .
      */
     @Test
     public void testSentenceBOD() {
@@ -114,7 +112,7 @@ public class SentenceBODTest extends TestCase {
 
         try {
             bod.getOriginWaypointId();
-        } catch (ParseException e) {
+        } catch (DataNotAvailableException e) {
             // ok, field is empty
         } catch (Exception e) {
             fail(e.getMessage());
@@ -123,7 +121,8 @@ public class SentenceBODTest extends TestCase {
 
     /**
      * Test method for
-     * {@link net.sf.marineapi.nmea.parser.SentenceBOD#getDestinationWaypointId()}.
+     * {@link net.sf.marineapi.nmea.parser.SentenceBOD#getDestinationWaypointId()}
+     * .
      */
     @Test
     public void testGetDestinationWaypointId() {

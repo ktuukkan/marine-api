@@ -1,6 +1,6 @@
 /* 
  * ParseException.java
- * Copyright 2010 Kimmo Tuukkanen
+ * Copyright (C) 2010 Kimmo Tuukkanen
  * 
  * This file is part of Java Marine API.
  * <http://sourceforge.net/projects/marineapi/>
@@ -46,5 +46,15 @@ public class ParseException extends RuntimeException {
      */
     public ParseException(String msg) {
         super(msg);
+    }
+
+    /**
+     * Constructor with message and cause.
+     * 
+     * @param msg Message
+     * @param cause Throwable that caused this exception
+     */
+    public ParseException(String msg, Throwable cause) {
+        super(msg, cause);
     }
 }
