@@ -232,11 +232,11 @@ public class Sentence {
         int chkd = nmea.indexOf(String.valueOf(CHECKSUM_DELIMITER));
 
         if (chkd < 0) {
-            re = "^[$]{1}[A-Z0-9]{5}[,][A-Za-z0-9,. ]{0,73}$";
+            re = "^[$]{1}[A-Z0-9]{5}[,][A-Za-z0-9,. -]{0,73}$";
             return nmea.matches(re);
         }
 
-        re = "^[$]{1}[A-Z0-9]{5}[,][A-Za-z0-9,. ]{0,70}[*][A-F0-9]{2}$";
+        re = "^[$]{1}[A-Z0-9]{5}[,][A-Za-z0-9,. -]{0,70}[*][A-F0-9]{2}$";
         int start = nmea.indexOf(CHECKSUM_DELIMITER) + 1;
         String chk = nmea.substring(start, nmea.length());
 

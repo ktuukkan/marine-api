@@ -20,6 +20,7 @@
  */
 package net.sf.marineapi.nmea.event;
 
+import java.util.Date;
 import java.util.EventObject;
 
 import net.sf.marineapi.nmea.parser.Sentence;
@@ -40,23 +41,26 @@ public class SentenceEvent extends EventObject {
     /**
      * Creates a new SentenceEvent object.
      * 
-     * @param source <code>Object</code> that fired this event
-     * @param nmea A valid NMEA sentence <code>String</code>
-     * @throws <code>IllegalArgumentExcepion</code> if sentence is invalid
+     * @param src <code>Object</code> that fired this event
+     * @param s Sentence that caused the event
+     * @throws <code>IllegalArgumentExcepion</code> if sentence is null
      */
-    public SentenceEvent(Object source, String nmea) {
-        super(source);
+    public SentenceEvent(Object src, Sentence s) {
+        super(src);
         timestamp = System.currentTimeMillis();
-        sentence = new Sentence(nmea);
+        if (s == null) {
+            throw new IllegalArgumentException("Sentence cannot be null");
+        }
+        this.sentence = s;
     }
 
     /**
-     * Get the time stamp when this event was created.
+     * Get time stamp when this event was created.
      * 
-     * @return Milliseconds time stamp
+     * @return Date
      */
-    public long getTimeStamp() {
-        return timestamp;
+    public Date getTimeStamp() {
+        return new Date(timestamp);
     }
 
     /**

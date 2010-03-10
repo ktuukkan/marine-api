@@ -23,8 +23,50 @@ public class PositionTest {
     }
 
     @Test
+    public void testSetLatitude() {
+        assertTrue(60.0 == instance.getLatitude());
+        instance.setLatitude(65.555);
+        assertTrue(65.555 == instance.getLatitude());
+        try {
+            instance.setLatitude(-0.0001);
+            fail("Did not throw exception");
+        } catch (IllegalArgumentException e) {
+            // pass
+        }
+
+        try {
+            instance.setLatitude(90.0001);
+            fail("Did not throw exception");
+        } catch (IllegalArgumentException e) {
+            // pass
+        }
+    }
+
+    @Test
     public void testGetLongitude() {
         assertTrue(25.0 == instance.getLongitude());
+    }
+
+    @Test
+    public void testSetLongitude() {
+
+        assertTrue(25.0 == instance.getLongitude());
+        instance.setLongitude(0.0);
+        assertTrue(0.0 == instance.getLongitude());
+
+        try {
+            instance.setLongitude(-0.0001);
+            fail("Did not throw exception");
+        } catch (IllegalArgumentException e) {
+            // pass
+        }
+
+        try {
+            instance.setLongitude(180.0001);
+            fail("Did not throw exception");
+        } catch (IllegalArgumentException e) {
+            // pass
+        }
     }
 
     @Test
