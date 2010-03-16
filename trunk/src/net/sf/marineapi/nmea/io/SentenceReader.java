@@ -29,7 +29,9 @@ import java.util.Vector;
 
 import net.sf.marineapi.nmea.event.SentenceEvent;
 import net.sf.marineapi.nmea.event.SentenceListener;
-import net.sf.marineapi.nmea.parser.Sentence;
+import net.sf.marineapi.nmea.parser.SentenceFactory;
+import net.sf.marineapi.nmea.sentence.NMEA;
+import net.sf.marineapi.nmea.sentence.Sentence;
 
 /**
  * Sentence provider reads NMEA sentences from the specified InputStream and
@@ -45,7 +47,9 @@ public class SentenceReader {
     private Worker worker;
 
     /**
-     * Constructor.
+     * Creates a new instance of SentenceReader.
+     * 
+     * @param source Stream from which to read NMEA data
      */
     public SentenceReader(InputStream source) {
         worker = new Worker(new BufferedReader(new InputStreamReader(source)));
@@ -91,8 +95,8 @@ public class SentenceReader {
      * 
      * @param nmea sentence string.
      */
-    private void fireSentenceRead(Sentence s) {
-        SentenceEvent se = new SentenceEvent(this, s);
+    private void fireSentenceRead(Sentence sentence) {
+        SentenceEvent se = new SentenceEvent(this, sentence);
         for (SentenceListener sl : getListeners()) {
             try {
                 sl.sentenceRead(se);
@@ -100,6 +104,12 @@ public class SentenceReader {
                 // nevermind listener failures
             }
         }
+    }
+
+    @Override
+    protected void finalize() throws Throwable {
+        worker.stop();
+        super.finalize();
     }
 
     /**
@@ -123,12 +133,14 @@ public class SentenceReader {
          */
         public void run() {
             String data = null;
+            SentenceFactory factory = SentenceFactory.getInstance();
             while (running) {
                 try {
                     if (in.ready()) {
                         data = in.readLine();
-                        if (Sentence.isValid(data)) {
-                            fireSentenceRead(new Sentence(data));
+                        if (NMEA.isValid(data)) {
+                            Sentence s = factory.createParser(data);
+                            fireSentenceRead(s);
                         }
                     }
                     Thread.sleep(100);
@@ -139,7 +151,7 @@ public class SentenceReader {
         }
 
         /**
-         * Stop the run loop.
+         * Stops the run loop.
          */
         public void stop() {
             this.running = false;

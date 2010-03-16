@@ -18,18 +18,17 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Java Marine API. If not, see <http://www.gnu.org/licenses/>.
  */
-package net.sf.marineapi.nmea.parser;
+package net.sf.marineapi.nmea.sentence;
 
 import net.sf.marineapi.nmea.util.Position;
 
 /**
- * Abstract base class for sentence parsers that can provide geographic position
- * data (latitude/longitude).
+ * Common interface for sentences that contain geographic location (lat/lon).
  * 
  * @author Kimmo Tuukkanen
  * @version $Revision$
  */
-public interface PositionSentence {
+public interface PositionSentence extends Sentence {
 
     /**
      * Gets the geographic position.

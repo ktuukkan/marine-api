@@ -3,6 +3,7 @@ package net.sf.marineapi.nmea.parser;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
+import net.sf.marineapi.nmea.sentence.GSASentence;
 import net.sf.marineapi.nmea.util.GpsFixStatus;
 import net.sf.marineapi.nmea.util.GpsMode;
 
@@ -19,7 +20,7 @@ public class SentenceGSATest {
     /** Example sentence */
     public static final String EXAMPLE = "$GPGSA,A,3,02,,,07,,09,24,26,,,,,1.6,1.6,1.0*3D";
 
-    private SentenceGSA instance;
+    private GSASentence instance;
 
     /**
      * @throws java.lang.Exception
@@ -27,7 +28,7 @@ public class SentenceGSATest {
     @Before
     public void setUp() throws Exception {
         try {
-            instance = new SentenceGSA(EXAMPLE);
+            instance = new GSASentenceImpl(EXAMPLE);
         } catch (Exception e) {
             fail(e.getMessage());
         }
@@ -35,7 +36,7 @@ public class SentenceGSATest {
 
     /**
      * Test method for
-     * {@link net.sf.marineapi.nmea.parser.SentenceGSA#getGpsMode()}.
+     * {@link net.sf.marineapi.nmea.parser.GSASentenceImpl#getGpsMode()}.
      */
     @Test
     public void testGetGpsMode() {
@@ -44,7 +45,7 @@ public class SentenceGSATest {
 
     /**
      * Test method for
-     * {@link net.sf.marineapi.nmea.parser.SentenceGSA#getFixStatus()} .
+     * {@link net.sf.marineapi.nmea.parser.GSASentenceImpl#getFixStatus()} .
      */
     @Test
     public void testGetFixStatus() {
@@ -53,7 +54,7 @@ public class SentenceGSATest {
 
     /**
      * Test method for
-     * {@link net.sf.marineapi.nmea.parser.SentenceGSA#getPositionDOP()}.
+     * {@link net.sf.marineapi.nmea.parser.GSASentenceImpl#getPositionDOP()}.
      */
     @Test
     public void testGetPositionDOP() {
@@ -64,7 +65,7 @@ public class SentenceGSATest {
 
     /**
      * Test method for
-     * {@link net.sf.marineapi.nmea.parser.SentenceGSA#getHorizontalDOP()}.
+     * {@link net.sf.marineapi.nmea.parser.GSASentenceImpl#getHorizontalDOP()}.
      */
     @Test
     public void testGetHorizontalDOP() {
@@ -75,7 +76,7 @@ public class SentenceGSATest {
 
     /**
      * Test method for
-     * {@link net.sf.marineapi.nmea.parser.SentenceGSA#getVerticalDOP()}.
+     * {@link net.sf.marineapi.nmea.parser.GSASentenceImpl#getVerticalDOP()}.
      */
     @Test
     public void testGetVerticalDOP() {
@@ -86,7 +87,7 @@ public class SentenceGSATest {
 
     /**
      * Test method for
-     * {@link net.sf.marineapi.nmea.parser.SentenceGSA#getSatellitesIds()}.
+     * {@link net.sf.marineapi.nmea.parser.GSASentenceImpl#getSatellitesIds()}.
      */
     @Test
     public void testGetSatelliteIds() {

@@ -1,5 +1,5 @@
 /* 
- * SentenceGSA.java
+ * GSASentenceImpl.java
  * Copyright (C) 2010 Kimmo Tuukkanen
  * 
  * This file is part of Java Marine API.
@@ -23,20 +23,18 @@ package net.sf.marineapi.nmea.parser;
 import java.util.ArrayList;
 import java.util.List;
 
+import net.sf.marineapi.nmea.sentence.GSASentence;
 import net.sf.marineapi.nmea.util.GpsFixStatus;
 import net.sf.marineapi.nmea.util.GpsMode;
 import net.sf.marineapi.nmea.util.SentenceId;
 
 /**
- * GSA sentence parser. Dilution of precision (DOP) of GPS fix and list of
- * active satellites.
- * <p>
- * Example: <code>$GPGSA,A,3,02,,,07,,09,24,26,,,,,1.6,1.6,1.0*3D</code>
+ * GSA sentence parser.
  * 
  * @author Kimmo Tuukkanen
  * @version $Revision$
  */
-public class SentenceGSA extends Sentence {
+class GSASentenceImpl extends SentenceImpl implements GSASentence {
 
     // field indices
     private final static int GPS_MODE = 1;
@@ -53,62 +51,56 @@ public class SentenceGSA extends Sentence {
     /**
      * Creates a new instance of GSA parser.
      * 
-     * @param nmea Sentence String
+     * @param nmea GSA sentence
      * @throws SentenceException if specified NMEA string is invalid
      */
-    public SentenceGSA(String nmea) {
+    public GSASentenceImpl(String nmea) {
         super(nmea, SentenceId.GSA);
     }
 
-    /**
-     * Get the GPS operation mode.
-     * 
-     * @return GpsMode enum
+    /*
+     * (non-Javadoc)
+     * @see net.sf.marineapi.nmea.parser.GSASentence#getGpsMode()
      */
     public GpsMode getGpsMode() {
         return GpsMode.valueOf(getCharValue(GPS_MODE));
     }
 
-    /**
-     * Get the GPS fix mode (2D, 3D or no fix).
-     * 
-     * @return GpsFixStatus enum
+    /*
+     * (non-Javadoc)
+     * @see net.sf.marineapi.nmea.parser.GSASentence#getFixStatus()
      */
     public GpsFixStatus getFixStatus() {
         return GpsFixStatus.valueOf(getIntValue(FIX_MODE));
     }
 
-    /**
-     * Get the dilution of precision (PDOP) for position.
-     * 
-     * @return double
+    /*
+     * (non-Javadoc)
+     * @see net.sf.marineapi.nmea.parser.GSASentence#getPositionDOP()
      */
     public double getPositionDOP() {
         return getDoubleValue(POSITION_DOP);
     }
 
-    /**
-     * Get the horizontal dilution Of precision (HDOP).
-     * 
-     * @return double
+    /*
+     * (non-Javadoc)
+     * @see net.sf.marineapi.nmea.parser.GSASentence#getHorizontalDOP()
      */
     public double getHorizontalDOP() {
         return getDoubleValue(HORIZONTAL_DOP);
     }
 
-    /**
-     * Get the vertical dilution of precision (VDOP).
-     * 
-     * @return double
+    /*
+     * (non-Javadoc)
+     * @see net.sf.marineapi.nmea.parser.GSASentence#getVerticalDOP()
      */
     public double getVerticalDOP() {
         return getDoubleValue(VERTICAL_DOP);
     }
 
-    /**
-     * Get list of satellites used for acquiring the GPS fix.
-     * 
-     * @return String array containing satellite IDs.
+    /*
+     * (non-Javadoc)
+     * @see net.sf.marineapi.nmea.parser.GSASentence#getSatellitesIds()
      */
     public String[] getSatellitesIds() {
         if (this.satellites == null) {

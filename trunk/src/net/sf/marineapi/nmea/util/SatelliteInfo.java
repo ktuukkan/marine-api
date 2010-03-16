@@ -21,11 +21,12 @@
 package net.sf.marineapi.nmea.util;
 
 /**
- * SatelliteInfo contains the information of a single GPS satellite vehicle.
+ * SatelliteInfo represents the information about a single GPS satellite
+ * vehicle.
  * 
  * @author Kimmo Tuukkanen
  * @version $Revision$
- * @see net.sf.marineapi.nmea.parser.SentenceGSV
+ * @see net.sf.marineapi.nmea.sentence.GSVSentence
  */
 public class SatelliteInfo {
 

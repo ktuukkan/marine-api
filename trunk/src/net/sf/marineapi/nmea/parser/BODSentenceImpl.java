@@ -1,5 +1,5 @@
 /* 
- * SentenceBOD.java
+ * BODSentenceImpl.java
  * Copyright (C) 2010 Kimmo Tuukkanen
  * 
  * This file is part of Java Marine API.
@@ -20,21 +20,19 @@
  */
 package net.sf.marineapi.nmea.parser;
 
+import net.sf.marineapi.nmea.sentence.BODSentence;
 import net.sf.marineapi.nmea.util.SentenceId;
 
 /**
- * BOD sentence parser. Bearing Origin to Destination (BOD), true and magnetic
- * in degrees. This sentence is transmitted by a GPS in the GOTO mode (with or
- * without active route).
- * <p>
- * Example: <code>$GPBOD,234.9,T,228.8,M,RUSKI,*1D</code>
+ * BOD sentence parser.
  * 
  * @author Kimmo Tuukkanen
  * @version $Revision$
+ * @see net.sf.marineapi.nmea.sentence.BODSentence
  */
-public class SentenceBOD extends Sentence {
+class BODSentenceImpl extends SentenceImpl implements BODSentence {
 
-    // Sentence field indices
+    // field indices
     private static final int BEARING_TRUE = 1;
     private static final int TRUE_INDICATOR = 2;
     private static final int BEARING_MAGN = 3;
@@ -49,49 +47,37 @@ public class SentenceBOD extends Sentence {
      * @throws IllegalArgumentException If specified String is invalid or does
      *             not contain a BOD sentence.
      */
-    public SentenceBOD(String nmea) {
+    public BODSentenceImpl(String nmea) {
         super(nmea, SentenceId.BOD);
     }
 
-    /**
-     * Get the true bearing from origin to destination.
-     * <p>
-     * <i>Notice: The bearing is calculated from the origin when GOTO is
-     * activated and it is <b>not</b> updated dynamically.</i>
-     * 
-     * @return true bearing value
+    /*
+     * (non-Javadoc)
+     * @see net.sf.marineapi.nmea.parser.BODSentence#getTrueBearing()
      */
     public double getTrueBearing() {
         return getDoubleValue(BEARING_TRUE);
     }
 
-    /**
-     * Get the magnetic bearing from origin to destination.
-     * <p>
-     * <i>Notice: The bearing is calculated from the origin when GOTO is
-     * activated and it is <b>not</b> updated dynamically.</i>
-     * 
-     * @return magnetic bearing value
+    /*
+     * (non-Javadoc)
+     * @see net.sf.marineapi.nmea.parser.BODSentence#getMagneticBearing()
      */
     public double getMagneticBearing() {
         return getDoubleValue(BEARING_MAGN);
     }
 
-    /**
-     * Get the ID of origin waypoint. This field is available only when route is
-     * active.
-     * 
-     * @return waypoint id
+    /*
+     * (non-Javadoc)
+     * @see net.sf.marineapi.nmea.parser.BODSentence#getOriginWaypointId()
      */
     public String getOriginWaypointId() {
         return getStringValue(ORIGIN);
     }
 
-    /**
-     * Get the ID of destination waypoint. This field should be always available
-     * in GOTO mode.
-     * 
-     * @return waypoint id
+    /*
+     * (non-Javadoc)
+     * @see net.sf.marineapi.nmea.parser.BODSentence#getDestinationWaypointId()
      */
     public String getDestinationWaypointId() {
         return getStringValue(DESTINATION);

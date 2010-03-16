@@ -20,7 +20,7 @@ public class SentenceZDATest {
     /** Example sentence */
     public static final String EXAMPLE = "$GPZDA,032915,07,08,2004,00,00*4D";
 
-    private SentenceZDA zda;
+    private ZDASentenceImpl zda;
 
     /**
      * @throws java.lang.Exception
@@ -28,7 +28,7 @@ public class SentenceZDATest {
     @Before
     public void setUp() throws Exception {
         try {
-            zda = new SentenceZDA(EXAMPLE);
+            zda = new ZDASentenceImpl(EXAMPLE);
         } catch (Exception e) {
             fail(e.getMessage());
         }
@@ -36,7 +36,7 @@ public class SentenceZDATest {
 
     /**
      * Test method for
-     * {@link net.sf.marineapi.nmea.parser.SentenceZDA#getUtcTime()}.
+     * {@link net.sf.marineapi.nmea.parser.ZDASentenceImpl#getUtcTime()}.
      */
     @Test
     public void testGetUtcTime() {
@@ -45,7 +45,7 @@ public class SentenceZDATest {
 
     /**
      * Test method for
-     * {@link net.sf.marineapi.nmea.parser.SentenceZDA#getUtcHours()}.
+     * {@link net.sf.marineapi.nmea.parser.ZDASentenceImpl#getUtcHours()}.
      */
     @Test
     public void testGetUtcHours() {
@@ -54,7 +54,7 @@ public class SentenceZDATest {
 
     /**
      * Test method for
-     * {@link net.sf.marineapi.nmea.parser.SentenceZDA#getUtcMinutes()}.
+     * {@link net.sf.marineapi.nmea.parser.ZDASentenceImpl#getUtcMinutes()}.
      */
     @Test
     public void testGetUtcMinutes() {
@@ -63,7 +63,7 @@ public class SentenceZDATest {
 
     /**
      * Test method for
-     * {@link net.sf.marineapi.nmea.parser.SentenceZDA#getUtcSeconds()}.
+     * {@link net.sf.marineapi.nmea.parser.ZDASentenceImpl#getUtcSeconds()}.
      */
     @Test
     public void testGetUtcSeconds() {
@@ -72,7 +72,7 @@ public class SentenceZDATest {
 
     /**
      * Test method for
-     * {@link net.sf.marineapi.nmea.parser.SentenceZDA#getUtcDay()}.
+     * {@link net.sf.marineapi.nmea.parser.ZDASentenceImpl#getUtcDay()}.
      */
     @Test
     public void testGetUtcDay() {
@@ -81,7 +81,7 @@ public class SentenceZDATest {
 
     /**
      * Test method for
-     * {@link net.sf.marineapi.nmea.parser.SentenceZDA#getUtcMonth()}.
+     * {@link net.sf.marineapi.nmea.parser.ZDASentenceImpl#getUtcMonth()}.
      */
     @Test
     public void testGetUtcMonth() {
@@ -90,7 +90,7 @@ public class SentenceZDATest {
 
     /**
      * Test method for
-     * {@link net.sf.marineapi.nmea.parser.SentenceZDA#getUtcYear()}.
+     * {@link net.sf.marineapi.nmea.parser.ZDASentenceImpl#getUtcYear()}.
      */
     @Test
     public void testGetUtcYear() {
@@ -99,7 +99,7 @@ public class SentenceZDATest {
 
     /**
      * Test method for
-     * {@link net.sf.marineapi.nmea.parser.SentenceZDA#getLocalZoneHours()}.
+     * {@link net.sf.marineapi.nmea.parser.ZDASentenceImpl#getLocalZoneHours()}.
      */
     @Test
     public void testGetLocalZoneHours() {
@@ -108,7 +108,7 @@ public class SentenceZDATest {
 
     /**
      * Test method for
-     * {@link net.sf.marineapi.nmea.parser.SentenceZDA#getLocalZoneMinutes()}.
+     * {@link net.sf.marineapi.nmea.parser.ZDASentenceImpl#getLocalZoneMinutes()}.
      */
     @Test
     public void testGetLocalZoneMinutes() {
@@ -117,7 +117,7 @@ public class SentenceZDATest {
 
     /**
      * Test method for
-     * {@link net.sf.marineapi.nmea.parser.SentenceZDA#getDate()}.
+     * {@link net.sf.marineapi.nmea.parser.ZDASentenceImpl#getDate()}.
      */
     @Test
     public void testGetDate() {

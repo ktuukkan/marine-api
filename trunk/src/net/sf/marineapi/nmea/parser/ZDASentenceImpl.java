@@ -1,5 +1,5 @@
 /* 
- * SentenceZDA.java
+ * ZDASentenceImpl.java
  * Copyright (C) 2010 Kimmo Tuukkanen
  * 
  * This file is part of Java Marine API.
@@ -23,20 +23,18 @@ package net.sf.marineapi.nmea.parser;
 import java.util.Date;
 import java.util.GregorianCalendar;
 
+import net.sf.marineapi.nmea.sentence.ZDASentence;
 import net.sf.marineapi.nmea.util.SentenceId;
 
 /**
- * ZDA sentence parser. UTC Time and Date with Local Time Zone Offset.
- * <p>
- * Example: <br>
- * <code>$GPZDA,032915,07,08,2004,00,00*4D</code>
+ * ZDA sentence parser.
  * 
  * @author Kimmo Tuukkanen
  * @version $Revision$
  */
-public class SentenceZDA extends Sentence implements TimeSentence, DateSentence {
+class ZDASentenceImpl extends SentenceImpl implements ZDASentence {
 
-    // Sentence field indexes
+    // field indexes
     private static final int UTC_TIME = 1;
     private static final int UTC_DAY = 2;
     private static final int UTC_MONTH = 3;
@@ -47,7 +45,7 @@ public class SentenceZDA extends Sentence implements TimeSentence, DateSentence 
     /**
      * Constructor.
      */
-    public SentenceZDA(String nmea) {
+    public ZDASentenceImpl(String nmea) {
         super(nmea, SentenceId.ZDA);
     }
 
@@ -107,21 +105,17 @@ public class SentenceZDA extends Sentence implements TimeSentence, DateSentence 
         return getIntValue(UTC_YEAR);
     }
 
-    /**
-     * Get offset to local time zone in hours, from +/- 0 to +/- 13 hours.
-     * 
-     * @return Time zone offset
-     * @throws ParseException
+    /*
+     * (non-Javadoc)
+     * @see net.sf.marineapi.nmea.parser.ZDASentence#getLocalZoneHours()
      */
     public int getLocalZoneHours() {
         return getIntValue(LOCAL_ZONE_HOURS);
     }
 
-    /**
-     * Get offset to local time zone in minutes, from 0 to +/- 59.
-     * 
-     * @return minutes integer
-     * @throws ParseException
+    /*
+     * (non-Javadoc)
+     * @see net.sf.marineapi.nmea.parser.ZDASentence#getLocalZoneMinutes()
      */
     public int getLocalZoneMinutes() {
         return getIntValue(LOCAL_ZONE_MINUTES);

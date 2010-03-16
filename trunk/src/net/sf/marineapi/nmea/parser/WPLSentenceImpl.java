@@ -1,5 +1,5 @@
 /* 
- * SentenceWPL.java
+ * WPLSentenceImpl.java
  * Copyright (C) 2010 Kimmo Tuukkanen
  * 
  * This file is part of Java Marine API.
@@ -20,21 +20,18 @@
  */
 package net.sf.marineapi.nmea.parser;
 
+import net.sf.marineapi.nmea.sentence.WPLSentence;
 import net.sf.marineapi.nmea.util.Direction;
 import net.sf.marineapi.nmea.util.SentenceId;
 import net.sf.marineapi.nmea.util.Waypoint;
 
 /**
- * WPL sentence parser. Waypoint location (latitude/longitude) and waypoint ID.
- * This sentence is transmitted by some GPS models in GOTO mode.
- * <p>
- * Example: <br>
- * <code>$GPWPL,5536.200,N,01436.500,E,RUSKI*1F</code>
+ * WPL sentence parser.
  * 
  * @author Kimmo Tuukkanen
  * @version $Revision$
  */
-public class SentenceWPL extends PositionParser {
+class WPLSentenceImpl extends PositionParser implements WPLSentence {
 
     // field ids
     private static final int LATITUDE = 1;
@@ -49,14 +46,13 @@ public class SentenceWPL extends PositionParser {
      * @param nmea WPL sentence String.
      * @throws IllegalArgumentException
      */
-    public SentenceWPL(String nmea) {
+    public WPLSentenceImpl(String nmea) {
         super(nmea, SentenceId.WPL);
     }
 
-    /**
-     * Get the destination waypoint.
-     * 
-     * @return waypoint object
+    /*
+     * (non-Javadoc)
+     * @see net.sf.marineapi.nmea.parser.WPLSentence#getWaypoint()
      */
     public Waypoint getWaypoint() {
         String id = getStringValue(WAYPOINT_ID);
