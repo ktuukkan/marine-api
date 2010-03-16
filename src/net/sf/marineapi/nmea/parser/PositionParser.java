@@ -30,7 +30,7 @@ import net.sf.marineapi.nmea.util.SentenceId;
  * @author Kimmo Tuukkanen
  * @version $Revision$
  */
-public abstract class PositionParser extends Sentence {
+abstract class PositionParser extends SentenceImpl {
 
     /**
      * Constructor.

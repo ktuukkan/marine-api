@@ -3,6 +3,7 @@ package net.sf.marineapi.nmea.parser;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
+import net.sf.marineapi.nmea.sentence.VTGSentence;
 import net.sf.marineapi.nmea.util.GpsMode;
 
 import org.junit.Before;
@@ -18,7 +19,7 @@ public class SentenceVTGTest {
     /** Example sentence */
     public static final String EXAMPLE = "$GPVTG,360.0,T,348.7,M,16.89,N,31.28,K,A";
 
-    private SentenceVTG vtg;
+    private VTGSentence vtg;
 
     /**
      * @throws java.lang.Exception
@@ -26,7 +27,7 @@ public class SentenceVTGTest {
     @Before
     public void setUp() throws Exception {
         try {
-            vtg = new SentenceVTG(EXAMPLE);
+            vtg = new VTGSentenceImpl(EXAMPLE);
         } catch (Exception e) {
             fail(e.getMessage());
         }
@@ -34,7 +35,7 @@ public class SentenceVTGTest {
 
     /**
      * Test method for
-     * {@link net.sf.marineapi.nmea.parser.SentenceVTG#getTrueCourse()}.
+     * {@link net.sf.marineapi.nmea.parser.VTGSentenceImpl#getTrueCourse()}.
      */
     @Test
     public void testGetTrueCourse() {
@@ -43,7 +44,7 @@ public class SentenceVTGTest {
 
     /**
      * Test method for
-     * {@link net.sf.marineapi.nmea.parser.SentenceVTG#getMagneticCourse()}.
+     * {@link net.sf.marineapi.nmea.parser.VTGSentenceImpl#getMagneticCourse()}.
      */
     @Test
     public void testGetMagneticCourse() {
@@ -52,7 +53,7 @@ public class SentenceVTGTest {
 
     /**
      * Test method for
-     * {@link net.sf.marineapi.nmea.parser.SentenceVTG#getSpeedKnots()}.
+     * {@link net.sf.marineapi.nmea.parser.VTGSentenceImpl#getSpeedKnots()}.
      */
     @Test
     public void testGetSpeedKnots() {
@@ -61,7 +62,7 @@ public class SentenceVTGTest {
 
     /**
      * Test method for
-     * {@link net.sf.marineapi.nmea.parser.SentenceVTG#getSpeedKmh()}.
+     * {@link net.sf.marineapi.nmea.parser.VTGSentenceImpl#getSpeedKmh()}.
      */
     @Test
     public void testGetSpeedKmh() {
@@ -70,7 +71,7 @@ public class SentenceVTGTest {
 
     /**
      * Test method for
-     * {@link net.sf.marineapi.nmea.parser.SentenceVTG#getMode()}.
+     * {@link net.sf.marineapi.nmea.parser.VTGSentenceImpl#getMode()}.
      */
     @Test
     public void testGetMode() {

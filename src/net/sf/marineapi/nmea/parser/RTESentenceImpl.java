@@ -1,5 +1,5 @@
 /* 
- * SentenceRTE.java
+ * RTESentenceImpl.java
  * Copyright (C) 2010 Kimmo Tuukkanen
  * 
  * This file is part of Java Marine API.
@@ -20,25 +20,17 @@
  */
 package net.sf.marineapi.nmea.parser;
 
+import net.sf.marineapi.nmea.sentence.RTESentence;
+import net.sf.marineapi.nmea.sentence.Sentence;
 import net.sf.marineapi.nmea.util.SentenceId;
 
 /**
- * RTE sentence parser. Route data and waypoint list.
- * <p>
- * Example: <code>$GPRTE,1,1,c,0,MELIN,RUSKI,KNUDAN*25</code>
+ * RTE sentence parser.
  * 
  * @author Kimmo Tuukkanen
+ * @version $Revision$
  */
-public class SentenceRTE extends Sentence {
-
-    /** Active route: complete, all waypoints in route order. */
-    public static final char ACTIVE_ROUTE = 'c';
-
-    /**
-     * Working route: the waypoint you just left, the waypoint you're heading to
-     * and then all the rest.
-     */
-    public static final char WORKING_ROUTE = 'w';
+class RTESentenceImpl extends SentenceImpl implements RTESentence {
 
     // fields indices
     private static final int NUMBER_OF_SENTENCES = 1;
@@ -46,6 +38,7 @@ public class SentenceRTE extends Sentence {
     private static final int STATUS = 3;
     private static final int ROUTE_ID = 4;
     private static final int FIRST_WPT = 5;
+
     // waypoint list
     private String[] waypoints = null;
 
@@ -54,14 +47,13 @@ public class SentenceRTE extends Sentence {
      * 
      * @param nmea RTE sentence string.
      */
-    public SentenceRTE(String nmea) {
+    public RTESentenceImpl(String nmea) {
         super(nmea, SentenceId.RTE);
     }
 
-    /**
-     * Get the list of waypoints of route.
-     * 
-     * @return String array containing waypoint IDs
+    /*
+     * (non-Javadoc)
+     * @see net.sf.marineapi.nmea.parser.RTESentence#getWaypointIds()
      */
     public String[] getWaypointIds() {
         if (waypoints == null) {
@@ -70,75 +62,65 @@ public class SentenceRTE extends Sentence {
         return waypoints;
     }
 
-    /**
-     * Get the number of waypoint IDs in this sentence.
-     * 
-     * @return integer
+    /*
+     * (non-Javadoc)
+     * @see net.sf.marineapi.nmea.parser.RTESentence#getNumberOfWaypoints()
      */
-    public int getNumberOfWaypoints() {
+    public int getWaypointCount() {
         return getWaypointIds().length;
     }
 
-    /**
-     * Tells if the sentence holds a current active route data.
-     * 
-     * @return true if active route, otherwise false.
+    /*
+     * (non-Javadoc)
+     * @see net.sf.marineapi.nmea.parser.RTESentence#isActiveRoute()
      */
     public boolean isActiveRoute() {
         return getCharValue(STATUS) == ACTIVE_ROUTE;
     }
 
-    /**
-     * Tells if the sentence holds a current working route data.
-     * 
-     * @return true if working route, otherwise false.
+    /*
+     * (non-Javadoc)
+     * @see net.sf.marineapi.nmea.parser.RTESentence#isWorkingRoute()
      */
     public boolean isWorkingRoute() {
         return getCharValue(STATUS) == WORKING_ROUTE;
     }
 
-    /**
-     * Get the number of sentences in RTE sequence.
-     * 
-     * @return integer
-     * @see #getSentenceNumber()
+    /*
+     * (non-Javadoc)
+     * @see net.sf.marineapi.nmea.parser.RTESentence#getNumberOfSentences()
      */
-    public int getNumberOfSentences() {
+    public int getSentenceCount() {
         return getIntValue(NUMBER_OF_SENTENCES);
     }
 
-    /**
-     * Get the number of this sentence in RTE sequence.
-     * 
-     * @return integer
-     * @see #getNumberOfSentences()
+    /*
+     * (non-Javadoc)
+     * @see net.sf.marineapi.nmea.parser.RTESentence#getSentenceNumber()
      */
-    public int getSentenceNumber() {
+    public int getSentenceIndex() {
         return getIntValue(SENTENCE_NUMBER);
     }
 
-    /**
-     * Tells if this sentence is the first one of the RTE sequence.
-     * 
-     * @return true if there's no sentences left, otherwise false.
+    /*
+     * (non-Javadoc)
+     * @see net.sf.marineapi.nmea.parser.RTESentence#isFirstInSequence()
      */
-    public boolean isFirstInSequence() {
-        return (getSentenceNumber() == 1);
+    public boolean isFirst() {
+        return (getSentenceIndex() == 1);
     }
 
-    /**
-     * Tells if this sentence is the last one of the RTE sequence.
-     * 
-     * @return true if there's no sentences left, otherwise false.
+    /*
+     * (non-Javadoc)
+     * @see net.sf.marineapi.nmea.parser.RTESentence#isLastInSequence()
      */
-    public boolean isLastInSequence() {
-        return (getSentenceNumber() == getNumberOfSentences());
+    public boolean isLast() {
+        return (getSentenceIndex() == getSentenceCount());
     }
 
-    /**
-     * Get the number or name of the route.
-     * 
-     * @return String
+    /*
+     * (non-Javadoc)
+     * @see net.sf.marineapi.nmea.parser.RTESentence#getRouteId()
      */
     public String getRouteId() {
         return getStringValue(ROUTE_ID);

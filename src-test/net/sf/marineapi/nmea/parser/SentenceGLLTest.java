@@ -23,7 +23,7 @@ public class SentenceGLLTest {
      */
     public static final String EXAMPLE = "$GPGLL,6011.552,N,02501.941,E,120045,A*26";
 
-    private SentenceGLL instance;
+    private GLLSentenceImpl instance;
 
     /**
      * @throws java.lang.Exception
@@ -31,7 +31,7 @@ public class SentenceGLLTest {
     @Before
     public void setUp() throws Exception {
         try {
-            instance = new SentenceGLL(EXAMPLE);
+            instance = new GLLSentenceImpl(EXAMPLE);
         } catch (Exception e) {
             fail(e.getMessage());
         }
@@ -39,7 +39,7 @@ public class SentenceGLLTest {
 
     /**
      * Test method for
-     * {@link net.sf.marineapi.nmea.parser.SentenceGLL#getDataStatus()}.
+     * {@link net.sf.marineapi.nmea.parser.GLLSentenceImpl#getDataStatus()}.
      */
     @Test
     public void testGetDataStatus() {
@@ -48,7 +48,7 @@ public class SentenceGLLTest {
 
     /**
      * Test method for
-     * {@link net.sf.marineapi.nmea.parser.SentenceGLL#getPosition()}.
+     * {@link net.sf.marineapi.nmea.parser.GLLSentenceImpl#getPosition()}.
      */
     @Test
     public void testGetPosition() {
@@ -63,7 +63,7 @@ public class SentenceGLLTest {
         assertEquals(Direction.EAST, p.getLonHemisphere());
 
         final String invalid1 = "$GPGLL,6111.552,E,02501.941,W,120045,A";
-        SentenceGLL fail = new SentenceGLL(invalid1);
+        GLLSentenceImpl fail = new GLLSentenceImpl(invalid1);
         try {
             Position p2 = fail.getPosition();
         } catch (Exception e) {
@@ -71,7 +71,7 @@ public class SentenceGLLTest {
         }
 
         final String invalid2 = "$GPGLL,6111.552,N,02501.941,S,120045,A";
-        fail = new SentenceGLL(invalid2);
+        fail = new GLLSentenceImpl(invalid2);
         try {
             Position p3 = fail.getPosition();
         } catch (Exception e) {
@@ -82,7 +82,7 @@ public class SentenceGLLTest {
 
     /**
      * Test method for
-     * {@link net.sf.marineapi.nmea.parser.SentenceGLL#getUtcHours()}.
+     * {@link net.sf.marineapi.nmea.parser.GLLSentenceImpl#getUtcHours()}.
      */
     @Test
     public void testGetUtcHours() {
@@ -91,7 +91,7 @@ public class SentenceGLLTest {
 
     /**
      * Test method for
-     * {@link net.sf.marineapi.nmea.parser.SentenceGLL#getUtcMinutes()}.
+     * {@link net.sf.marineapi.nmea.parser.GLLSentenceImpl#getUtcMinutes()}.
      */
     @Test
     public void testGetUtcMinutes() {
@@ -100,7 +100,7 @@ public class SentenceGLLTest {
 
     /**
      * Test method for
-     * {@link net.sf.marineapi.nmea.parser.SentenceGLL#getUtcSeconds()}.
+     * {@link net.sf.marineapi.nmea.parser.GLLSentenceImpl#getUtcSeconds()}.
      */
     @Test
     public void testGetUtcSeconds() {
@@ -109,7 +109,7 @@ public class SentenceGLLTest {
 
     /**
      * Test method for
-     * {@link net.sf.marineapi.nmea.parser.SentenceGLL#getUtcTime()}.
+     * {@link net.sf.marineapi.nmea.parser.GLLSentenceImpl#getUtcTime()}.
      */
     @Test
     public void testGetUtcTime() {

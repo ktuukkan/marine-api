@@ -2,6 +2,8 @@ package net.sf.marineapi.nmea.parser;
 
 import junit.framework.TestCase;
 
+import net.sf.marineapi.nmea.sentence.BODSentence;
+
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -15,7 +17,7 @@ public class SentenceBODTest extends TestCase {
 
     public static final String EXAMPLE = "$GPBOD,234.9,T,228.8,M,RUSKI,*1D";
 
-    private SentenceBOD bod;
+    private BODSentence bod;
 
     /**
      * setUp
@@ -26,7 +28,7 @@ public class SentenceBODTest extends TestCase {
     @Before
     public void setUp() throws Exception {
         try {
-            bod = new SentenceBOD(EXAMPLE);
+            bod = new BODSentenceImpl(EXAMPLE);
         } catch (Exception e) {
             fail(e.getMessage());
         }
@@ -44,14 +46,14 @@ public class SentenceBODTest extends TestCase {
 
     /**
      * Test method for
-     * {@link net.sf.marineapi.nmea.parser.SentenceBOD#SentenceBOD(java.lang.String)}
+     * {@link net.sf.marineapi.nmea.parser.BODSentenceImpl#SentenceBOD(java.lang.String)}
      * .
      */
     @Test
     public void testSentenceBOD() {
 
         try {
-            new SentenceBOD(null);
+            new BODSentenceImpl(null);
         } catch (IllegalArgumentException e) {
             // OK
         } catch (Exception e) {
@@ -59,7 +61,7 @@ public class SentenceBODTest extends TestCase {
         }
 
         try {
-            new SentenceBOD("$HUBBA,habba,doo,dah,doo");
+            new BODSentenceImpl("$HUBBA,habba,doo,dah,doo");
         } catch (IllegalArgumentException e) {
             // OK
         } catch (Exception e) {
@@ -67,7 +69,7 @@ public class SentenceBODTest extends TestCase {
         }
 
         try {
-            new SentenceBOD("foobar and haystack");
+            new BODSentenceImpl("foobar and haystack");
         } catch (IllegalArgumentException e) {
             // OK
         } catch (Exception e) {
@@ -77,7 +79,7 @@ public class SentenceBODTest extends TestCase {
 
     /**
      * Test method for
-     * {@link net.sf.marineapi.nmea.parser.SentenceBOD#getBearingTrue()}.
+     * {@link net.sf.marineapi.nmea.parser.BODSentenceImpl#getBearingTrue()}.
      */
     @Test
     public void testGetBearingTrue() {
@@ -91,7 +93,7 @@ public class SentenceBODTest extends TestCase {
 
     /**
      * Test method for
-     * {@link net.sf.marineapi.nmea.parser.SentenceBOD#getBearingMagnetic()}.
+     * {@link net.sf.marineapi.nmea.parser.BODSentenceImpl#getBearingMagnetic()}.
      */
     @Test
     public void testGetBearingMagnetic() {
@@ -105,7 +107,7 @@ public class SentenceBODTest extends TestCase {
 
     /**
      * Test method for
-     * {@link net.sf.marineapi.nmea.parser.SentenceBOD#getOriginWaypointId()}.
+     * {@link net.sf.marineapi.nmea.parser.BODSentenceImpl#getOriginWaypointId()}.
      */
     @Test
     public void testGetOriginWaypointId() {
@@ -121,7 +123,7 @@ public class SentenceBODTest extends TestCase {
 
     /**
      * Test method for
-     * {@link net.sf.marineapi.nmea.parser.SentenceBOD#getDestinationWaypointId()}
+     * {@link net.sf.marineapi.nmea.parser.BODSentenceImpl#getDestinationWaypointId()}
      * .
      */
     @Test

@@ -1,5 +1,5 @@
 /* 
- * SentenceGLL.java
+ * GLLSentenceImpl.java
  * Copyright (C) 2010 Kimmo Tuukkanen
  * 
  * This file is part of Java Marine API.
@@ -20,23 +20,21 @@
  */
 package net.sf.marineapi.nmea.parser;
 
+import net.sf.marineapi.nmea.sentence.GLLSentence;
 import net.sf.marineapi.nmea.util.DataStatus;
 import net.sf.marineapi.nmea.util.Direction;
 import net.sf.marineapi.nmea.util.Position;
 import net.sf.marineapi.nmea.util.SentenceId;
 
 /**
- * GLL Sentence parser. Geographic position (latitude/longitude).
- * <p>
- * Example: <code>$GPGLL,6011.552,N,02501.941,E,120045,A*26</code>
+ * GLL Sentence parser.
  * 
  * @author Kimmo Tuukkanen
  * @version $Revision$
  */
-public class SentenceGLL extends PositionParser implements PositionSentence,
-        TimeSentence {
+class GLLSentenceImpl extends PositionParser implements GLLSentence {
 
-    // Sentence field indexes
+    // field indices
     private final static int LATITUDE = 1;
     private final static int LAT_HEMISPHERE = 2;
     private final static int LONGITUDE = 3;
@@ -45,29 +43,19 @@ public class SentenceGLL extends PositionParser implements PositionSentence,
     private final static int DATA_STATUS = 6;
 
     /**
-     * Data status; char indicator for "valid".
-     */
-    public final static char STATUS_VALID = 'A';
-    /**
-     * Data status; char indicator for "invalid".
-     */
-    public final static char STATUS_INVALID = 'V';
-
-    /**
      * Constructor.
      * 
      * @param nmea GLL sentence String.
      * @throws IllegalArgumentException If the given sentence is invalid or does
      *             not contain GLL sentence.
      */
-    public SentenceGLL(String nmea) {
+    public GLLSentenceImpl(String nmea) {
         super(nmea, SentenceId.GLL);
     }
 
-    /**
-     * Get the data quality status, valid or invalid.
-     * 
-     * @return DataStatus.VALID or DataStatus.INVALID
+    /*
+     * (non-Javadoc)
+     * @see net.sf.marineapi.nmea.parser.GLLSentence#getDataStatus()
      */
     public DataStatus getDataStatus() {
         return DataStatus.valueOf(getCharValue(DATA_STATUS));

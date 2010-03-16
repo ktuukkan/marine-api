@@ -23,7 +23,7 @@ package net.sf.marineapi.nmea.event;
 import java.util.Date;
 import java.util.EventObject;
 
-import net.sf.marineapi.nmea.parser.Sentence;
+import net.sf.marineapi.nmea.sentence.Sentence;
 
 /**
  * Event object to be sent when sentence events occur. Sentence event occurs

@@ -23,12 +23,12 @@ public class SentenceGGATest {
 
     public static final String EXAMPLE = "$GPGGA,120044,6011.552,N,02501.941,E,1,00,2.0,28.0,M,19.6,M,,*79";
 
-    private SentenceGGA gga;
+    private GGASentenceImpl gga;
 
     @Before
     public void setUp() throws Exception {
         try {
-            gga = new SentenceGGA(EXAMPLE);
+            gga = new GGASentenceImpl(EXAMPLE);
         } catch (Exception e) {
             fail(e.getMessage());
         }
@@ -36,7 +36,7 @@ public class SentenceGGATest {
 
     @Test
     public void testSentenceGGA() {
-        SentenceGGA instance = new SentenceGGA(EXAMPLE);
+        GGASentenceImpl instance = new GGASentenceImpl(EXAMPLE);
         assertEquals(SentenceId.GGA, instance.getSentenceId());
     }
 

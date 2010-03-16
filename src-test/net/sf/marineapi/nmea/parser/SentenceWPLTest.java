@@ -3,6 +3,7 @@ package net.sf.marineapi.nmea.parser;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.fail;
+import net.sf.marineapi.nmea.sentence.WPLSentence;
 import net.sf.marineapi.nmea.util.Direction;
 import net.sf.marineapi.nmea.util.Waypoint;
 
@@ -19,7 +20,7 @@ public class SentenceWPLTest {
     /** Example sentence */
     public static final String EXAMPLE = "$GPWPL,5536.200,N,01436.500,E,RUSKI*1F";
 
-    private SentenceWPL wpl;
+    private WPLSentence wpl;
 
     /**
      * @throws java.lang.Exception
@@ -27,7 +28,7 @@ public class SentenceWPLTest {
     @Before
     public void setUp() throws Exception {
         try {
-            wpl = new SentenceWPL(EXAMPLE);
+            wpl = new WPLSentenceImpl(EXAMPLE);
         } catch (Exception e) {
             fail(e.getMessage());
         }
@@ -35,7 +36,7 @@ public class SentenceWPLTest {
 
     /**
      * Test method for
-     * {@link net.sf.marineapi.nmea.parser.SentenceWPL#getWaypoint()}.
+     * {@link net.sf.marineapi.nmea.parser.WPLSentenceImpl#getWaypoint()}.
      */
     @Test
     public void testGetWaypoint() {

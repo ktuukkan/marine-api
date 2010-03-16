@@ -18,7 +18,9 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Java Marine API. If not, see <http://www.gnu.org/licenses/>.
  */
-package net.sf.marineapi.nmea.parser;
+package net.sf.marineapi.nmea.sentence;
+
+import net.sf.marineapi.nmea.parser.ParseException;
 
 /**
  * Interface for sentences that provide a UTC time information. Notice that some
@@ -26,9 +28,9 @@ package net.sf.marineapi.nmea.parser;
  * 
  * @author Kimmo Tuukkanen
  * @version $Revision$
- * @see net.sf.marineapi.nmea.parser.DateSentence
+ * @see net.sf.marineapi.nmea.sentence.DateSentence
  */
-public interface TimeSentence {
+public interface TimeSentence extends Sentence {
 
     /**
      * Returns the hours of UTC time.

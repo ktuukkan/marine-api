@@ -1,5 +1,5 @@
 /* 
- * SentenceRMC.java
+ * RMCSentenceImpl.java
  * Copyright (C) 2010 Kimmo Tuukkanen
  * 
  * This file is part of Java Marine API.
@@ -23,6 +23,7 @@ package net.sf.marineapi.nmea.parser;
 import java.util.Date;
 import java.util.GregorianCalendar;
 
+import net.sf.marineapi.nmea.sentence.RMCSentence;
 import net.sf.marineapi.nmea.util.DataStatus;
 import net.sf.marineapi.nmea.util.Direction;
 import net.sf.marineapi.nmea.util.GpsMode;
@@ -30,16 +31,12 @@ import net.sf.marineapi.nmea.util.Position;
 import net.sf.marineapi.nmea.util.SentenceId;
 
 /**
- * RMC sentence parser. Recommended minimum specific GPS/Transit data.
- * <p>
- * Example:
- * <code>$GPRMC,120044,A,6011.552,N,02501.941,E,000.0,360.0,160705,006.1,E*7C</code>
+ * RMC sentence parser.
  * 
  * @author Kimmo Tuukkanen
  * @version $Revision$
  */
-public class SentenceRMC extends PositionParser implements PositionSentence,
-        TimeSentence, DateSentence {
+class RMCSentenceImpl extends PositionParser implements RMCSentence {
 
     private static final int UTC_TIME = 1;
     private static final int DATA_STATUS = 2;
@@ -57,64 +54,54 @@ public class SentenceRMC extends PositionParser implements PositionSentence,
     /**
      * Constructor.
      */
-    public SentenceRMC(String nmea) {
+    public RMCSentenceImpl(String nmea) {
         super(nmea, SentenceId.RMC);
     }
 
-    /**
-     * Get the corrected course over ground. Correction is done by subtracting
-     * or adding the magnetic variation from true course (easterly variation
-     * subtracted and westerly added).
-     * 
-     * @return Corrected true course
-     * @see #getCourse()
-     * @see #getVariation()
+    /*
+     * (non-Javadoc)
+     * @see net.sf.marineapi.nmea.parser.RMCSentence#getCorrectedCourse()
      */
     public double getCorrectedCourse() {
         return getCourse() + getVariation();
     }
 
-    /**
-     * Get true course over ground (COG), in degrees.
-     * 
-     * @return Course
+    /*
+     * (non-Javadoc)
+     * @see net.sf.marineapi.nmea.parser.RMCSentence#getCourse()
      */
     public double getCourse() {
         return getDoubleValue(COURSE);
 
     }
 
-    /**
-     * Gets the data status; valid or invalid.
-     * 
-     * @return DataStatus.VALID or DataStatus.INVALID
+    /*
+     * (non-Javadoc)
+     * @see net.sf.marineapi.nmea.parser.RMCSentence#getDataStatus()
      */
     public DataStatus getDataStatus() {
         return DataStatus.valueOf(getCharValue(DATA_STATUS));
     }
 
-    /**
-     * Get the direction of magnetic variation; east or west.
-     * 
-     * @return Direction.EAST or Direction.WEST
+    /*
+     * (non-Javadoc)
+     * @see net.sf.marineapi.nmea.parser.RMCSentence#getDirectionOfVariation()
      */
     public Direction getDirectionOfVariation() {
         return Direction.valueOf(getCharValue(VAR_HEMISPHERE));
     }
 
-    /**
-     * Get the GPS operating mode.
-     * 
-     * @return GpsMode enum
+    /*
+     * (non-Javadoc)
+     * @see net.sf.marineapi.nmea.parser.RMCSentence#getGpsMode()
      */
     public GpsMode getGpsMode() {
         return GpsMode.valueOf(getCharValue(MODE));
     }
 
-    /**
-     * Get speed over ground (SOG), in knots (nautical miles per hour).
-     * 
-     * @return Speed
+    /*
+     * (non-Javadoc)
+     * @see net.sf.marineapi.nmea.parser.RMCSentence#getSpeed()
      */
     public double getSpeed() {
         return getDoubleValue(SPEED);
@@ -209,12 +196,9 @@ public class SentenceRMC extends PositionParser implements PositionSentence,
         return y;
     }
 
-    /**
-     * Get the magnetic variation in degrees. Easterly variation subtracts from
-     * true course, and is thus returned as negative value. Otherwise, the value
-     * is positive.
-     * 
-     * @return Magnetic variation
+    /*
+     * (non-Javadoc)
+     * @see net.sf.marineapi.nmea.parser.RMCSentence#getVariation()
      */
     public double getVariation() {
         double variation = getDoubleValue(MAG_VARIATION);

@@ -1,5 +1,5 @@
 /* 
- * SentenceVTG.java
+ * VTGSentenceImpl.java
  * Copyright (C) 2010 Kimmo Tuukkanen
  * 
  * This file is part of Java Marine API.
@@ -20,35 +20,19 @@
  */
 package net.sf.marineapi.nmea.parser;
 
+import net.sf.marineapi.nmea.sentence.VTGSentence;
 import net.sf.marineapi.nmea.util.GpsMode;
 import net.sf.marineapi.nmea.util.SentenceId;
 
 /**
- * VTG sentence parser. True and magnetic course over ground (COG), speed in
- * km/h and knots (nautical miles per hour). Mode (last field, "A" in example)
- * may not always be available, depending on the NMEA version.
- * <p>
- * Example: <br>
- * <code>$GPVTG,46.96,T,,,16.89,N,31.28,K,A*43</code>
+ * VTG sentence parser.
  * 
  * @author Kimmo Tuukkanen
  * @version $Revision$
  */
-public class SentenceVTG extends Sentence {
+class VTGSentenceImpl extends SentenceImpl implements VTGSentence {
 
-    /** Units indicator for kilometers per hour */
-    public static final char KMPH = 'K';
-
-    /** Units indicator for knots (nautical miles per hour) */
-    public static final char KNOT = 'N';
-
-    /** Operating in manual mode (forced 2D or 3D). */
-    public static final char MODE_MANUAL = 'M';
-
-    /** Operating in automatic mode (2D/3D). */
-    public static final char MODE_AUTOMATIC = 'A';
-
-    // Sentence field indexes
+    // field indexes
     private static final int TRUE_COURSE = 1;
     private static final int TRUE_INDICATOR = 2;
     private static final int MAGNETIC_COURSE = 3;
@@ -65,51 +49,45 @@ public class SentenceVTG extends Sentence {
      * @param nmea VTG sentence String
      * @throws IllegalArgumentException
      */
-    public SentenceVTG(String nmea) {
+    public VTGSentenceImpl(String nmea) {
         super(nmea, SentenceId.VTG);
     }
 
-    /**
-     * Get the true course over ground.
-     * 
-     * @return True course
+    /*
+     * (non-Javadoc)
+     * @see net.sf.marineapi.nmea.parser.VTGSentence#getTrueCourse()
      */
     public double getTrueCourse() {
         return getDoubleValue(TRUE_COURSE);
     }
 
-    /**
-     * Get the magnetic course over ground.
-     * 
-     * @return Magnetic course
+    /*
+     * (non-Javadoc)
+     * @see net.sf.marineapi.nmea.parser.VTGSentence#getMagneticCourse()
      */
     public double getMagneticCourse() {
         return getDoubleValue(MAGNETIC_COURSE);
     }
 
-    /**
-     * Get speed over ground in knots (nautical miles per hour).
-     * 
-     * @return Speed in knots
+    /*
+     * (non-Javadoc)
+     * @see net.sf.marineapi.nmea.parser.VTGSentence#getSpeedKnots()
      */
     public double getSpeedKnots() {
         return getDoubleValue(SPEED_KNOTS);
     }
 
-    /**
-     * Get speed over ground in kilometers per hour.
-     * 
-     * @return Speed in km/h
+    /*
+     * (non-Javadoc)
+     * @see net.sf.marineapi.nmea.parser.VTGSentence#getSpeedKmh()
      */
     public double getSpeedKmh() {
         return getDoubleValue(SPEED_KMPH);
     }
 
-    /**
-     * Get the receiver operating mode. The field may not be available,
-     * depending on the NMEA version.
-     * 
-     * @return GpsMode or <code>null</code> if mode is not available
+    /*
+     * (non-Javadoc)
+     * @see net.sf.marineapi.nmea.parser.VTGSentence#getMode()
      */
     public GpsMode getMode() {
         return GpsMode.valueOf(getCharValue(MODE));

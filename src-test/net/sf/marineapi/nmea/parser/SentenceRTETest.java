@@ -6,6 +6,8 @@ import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
+import net.sf.marineapi.nmea.sentence.RTESentence;
+
 import org.junit.Before;
 import org.junit.Test;
 
@@ -19,7 +21,7 @@ public class SentenceRTETest {
     /** Example sentence */
     public static final String EXAMPLE = "$GPRTE,1,1,c,0,MELIN,RUSKI,KNUDAN*25";
 
-    private SentenceRTE rte;
+    private RTESentence rte;
 
     /**
      * @throws java.lang.Exception
@@ -27,7 +29,7 @@ public class SentenceRTETest {
     @Before
     public void setUp() throws Exception {
         try {
-            rte = new SentenceRTE(EXAMPLE);
+            rte = new RTESentenceImpl(EXAMPLE);
         } catch (Exception e) {
             fail(e.getMessage());
         }
@@ -35,7 +37,7 @@ public class SentenceRTETest {
 
     /**
      * Test method for
-     * {@link net.sf.marineapi.nmea.parser.SentenceRTE#getWaypointIds()}.
+     * {@link net.sf.marineapi.nmea.parser.RTESentenceImpl#getWaypointIds()}.
      */
     @Test
     public void testGetWaypointIds() {
@@ -49,16 +51,16 @@ public class SentenceRTETest {
 
     /**
      * Test method for
-     * {@link net.sf.marineapi.nmea.parser.SentenceRTE#getNumberOfWaypoints()}.
+     * {@link net.sf.marineapi.nmea.parser.RTESentenceImpl#getWaypointCount()}.
      */
     @Test
     public void testGetNumberOfWaypoints() {
-        assertTrue(3 == rte.getNumberOfWaypoints());
+        assertTrue(3 == rte.getWaypointCount());
     }
 
     /**
      * Test method for
-     * {@link net.sf.marineapi.nmea.parser.SentenceRTE#isActiveRoute()}.
+     * {@link net.sf.marineapi.nmea.parser.RTESentenceImpl#isActiveRoute()}.
      */
     @Test
     public void testIsActiveRoute() {
@@ -67,7 +69,7 @@ public class SentenceRTETest {
 
     /**
      * Test method for
-     * {@link net.sf.marineapi.nmea.parser.SentenceRTE#isWorkingRoute()}.
+     * {@link net.sf.marineapi.nmea.parser.RTESentenceImpl#isWorkingRoute()}.
      */
     @Test
     public void testIsWorkingRoute() {
@@ -76,43 +78,43 @@ public class SentenceRTETest {
 
     /**
      * Test method for
-     * {@link net.sf.marineapi.nmea.parser.SentenceRTE#getNumberOfSentences()}.
+     * {@link net.sf.marineapi.nmea.parser.RTESentenceImpl#getSentenceCount()}.
      */
     @Test
     public void testGetNumberOfSentences() {
-        assertTrue(1 == rte.getNumberOfSentences());
+        assertTrue(1 == rte.getSentenceCount());
     }
 
     /**
      * Test method for
-     * {@link net.sf.marineapi.nmea.parser.SentenceRTE#getSentenceNumber()}.
+     * {@link net.sf.marineapi.nmea.parser.RTESentenceImpl#getSentenceIndex()}.
      */
     @Test
     public void testGetSentenceNumber() {
-        assertTrue(1 == rte.getSentenceNumber());
+        assertTrue(1 == rte.getSentenceIndex());
     }
 
     /**
      * Test method for
-     * {@link net.sf.marineapi.nmea.parser.SentenceRTE#isFirstInSequence()}.
+     * {@link net.sf.marineapi.nmea.parser.RTESentenceImpl#isFirst()}.
      */
     @Test
     public void testIsFirstInSequence() {
-        assertTrue(rte.isFirstInSequence());
+        assertTrue(rte.isFirst());
     }
 
     /**
      * Test method for
-     * {@link net.sf.marineapi.nmea.parser.SentenceRTE#isLastInSequence()}.
+     * {@link net.sf.marineapi.nmea.parser.RTESentenceImpl#isLast()}.
      */
     @Test
     public void testIsLastInSequence() {
-        assertTrue(rte.isLastInSequence());
+        assertTrue(rte.isLast());
     }
 
     /**
      * Test method for
-     * {@link net.sf.marineapi.nmea.parser.SentenceRTE#getRouteId()}.
+     * {@link net.sf.marineapi.nmea.parser.RTESentenceImpl#getRouteId()}.
      */
     @Test
     public void testGetRouteId() {

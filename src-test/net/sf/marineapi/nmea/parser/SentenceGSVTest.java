@@ -7,6 +7,7 @@ import static org.junit.Assert.fail;
 
 import java.util.List;
 
+import net.sf.marineapi.nmea.sentence.GSVSentence;
 import net.sf.marineapi.nmea.util.SatelliteInfo;
 
 import org.junit.Before;
@@ -22,7 +23,7 @@ public class SentenceGSVTest {
     /** Example sentence */
     public static final String EXAMPLE = "$GPGSV,3,2,12,15,56,182,51,17,38,163,47,18,63,058,50,21,53,329,47*73";
 
-    private SentenceGSV gsv;
+    private GSVSentence gsv;
 
     /**
      * @throws java.lang.Exception
@@ -30,7 +31,7 @@ public class SentenceGSVTest {
     @Before
     public void setUp() throws Exception {
         try {
-            gsv = new SentenceGSV(EXAMPLE);
+            gsv = new GSVSentenceImpl(EXAMPLE);
         } catch (Exception e) {
             fail(e.getMessage());
         }
@@ -38,7 +39,7 @@ public class SentenceGSVTest {
 
     /**
      * Test method for
-     * {@link net.sf.marineapi.nmea.parser.SentenceGSV#getSentenceCount()}.
+     * {@link net.sf.marineapi.nmea.parser.GSVSentenceImpl#getSentenceCount()}.
      */
     @Test
     public void testGetSentenceCount() {
@@ -47,7 +48,7 @@ public class SentenceGSVTest {
 
     /**
      * Test method for
-     * {@link net.sf.marineapi.nmea.parser.SentenceGSV#getSentenceIndex()}.
+     * {@link net.sf.marineapi.nmea.parser.GSVSentenceImpl#getSentenceIndex()}.
      */
     @Test
     public void testGetSentenceNumber() {
@@ -56,7 +57,7 @@ public class SentenceGSVTest {
 
     /**
      * Test method for
-     * {@link net.sf.marineapi.nmea.parser.SentenceGSV#isFirst()}.
+     * {@link net.sf.marineapi.nmea.parser.GSVSentenceImpl#isFirst()}.
      */
     @Test
     public void testIsFirstInSequence() {
@@ -64,7 +65,7 @@ public class SentenceGSVTest {
     }
 
     /**
-     * Test method for {@link net.sf.marineapi.nmea.parser.SentenceGSV#isLast()}
+     * Test method for {@link net.sf.marineapi.nmea.parser.GSVSentenceImpl#isLast()}
      * .
      */
     @Test
@@ -74,7 +75,7 @@ public class SentenceGSVTest {
 
     /**
      * Test method for
-     * {@link net.sf.marineapi.nmea.parser.SentenceGSV#getSatelliteCount()}.
+     * {@link net.sf.marineapi.nmea.parser.GSVSentenceImpl#getSatelliteCount()}.
      */
     @Test
     public void testGetSatelliteCount() {
@@ -83,7 +84,7 @@ public class SentenceGSVTest {
 
     /**
      * Test method for
-     * {@link net.sf.marineapi.nmea.parser.SentenceGSV#getSatelliteInfo()}.
+     * {@link net.sf.marineapi.nmea.parser.GSVSentenceImpl#getSatelliteInfo()}.
      */
     @Test
     public void testGetSatelliteInfo() {

@@ -1,5 +1,5 @@
 /* 
- * SentenceGSV.java
+ * GSVSentenceImpl.java
  * Copyright (C) 2010 Kimmo Tuukkanen
  * 
  * This file is part of Java Marine API.
@@ -23,33 +23,27 @@ package net.sf.marineapi.nmea.parser;
 import java.util.ArrayList;
 import java.util.List;
 
+import net.sf.marineapi.nmea.sentence.GSVSentence;
 import net.sf.marineapi.nmea.util.SatelliteInfo;
 import net.sf.marineapi.nmea.util.SentenceId;
 
 /**
- * GSV sentence parser. Detailed satellite data; satellites in view, satellite
- * elevation, azimuth and signal noise ratio (SNR). GSV sentences are
- * transmitted typically in groups of two or three sentences, depending on the
- * number of satellites in view. Each GSV sentence may contain information about
- * up to four satellites. The last sentence in sequence may contain empty
- * satellite information fields. The empty fields may also be omitted, depending
- * on the device model and manufacturer.
- * <p>
- * Example: <br>
- * <code>$GPGSV,3,2,12,15,56,182,51,17,38,163,47,18,63,058,50,21,53,329,47*73</code>
+ * GSV sentence parser.
  * 
  * @author Kimmo Tuukkanen
  * @version $Revision$
  */
-public class SentenceGSV extends Sentence {
+class GSVSentenceImpl extends SentenceImpl implements GSVSentence {
 
-    // Field indices
+    // field indices
     private static final int NUMBER_OF_SENTENCES = 1;
     private static final int SENTENCE_NUMBER = 2;
     private static final int SATELLITES_IN_VIEW = 3;
-    // Indices of the satellite ID fields in sentence
+
+    // Satellite ID field indices
     private static final int[] ID_FIELDS = { 4, 8, 12, 16 };
-    // Satellite data fields relative to each satellite Id field
+
+    // Satellite data fields, relative to each satellite Id field
     private static final int ID_NUMBER = 0;
     private static final int ELEVATION = 1;
     private static final int AZIMUTH = 2;
@@ -58,66 +52,55 @@ public class SentenceGSV extends Sentence {
     /**
      * Constructor.
      * 
-     * @param nmea
-     * @throws IllegalArgumentException
+     * @param nmea GSV Sentence
      */
-    public SentenceGSV(String nmea) {
+    public GSVSentenceImpl(String nmea) {
         super(nmea, SentenceId.GSV);
     }
 
-    /**
-     * Get the number of sentences in GSV sequence.
-     * 
-     * @return integer value
+    /*
+     * (non-Javadoc)
+     * @see net.sf.marineapi.nmea.parser.GSVSentence#getSentenceCount()
      */
     public int getSentenceCount() {
         return getIntValue(NUMBER_OF_SENTENCES);
     }
 
-    /**
-     * Get the index of this sentence in GSV sequence.
-     * 
-     * @return integer value
+    /*
+     * (non-Javadoc)
+     * @see net.sf.marineapi.nmea.parser.GSVSentence#getSentenceIndex()
      */
     public int getSentenceIndex() {
         return getIntValue(SENTENCE_NUMBER);
     }
 
-    /**
-     * Tells if this is the first sentence in GSV sequence.
-     * 
-     * @return true if first, otherwise false.
-     * @see #getSentenceCount()
-     * @see #getSentenceIndex()
+    /*
+     * (non-Javadoc)
+     * @see net.sf.marineapi.nmea.parser.GSVSentence#isFirst()
      */
     public boolean isFirst() {
         return (getSentenceIndex() == 1);
     }
 
-    /**
-     * Tells if this is the last sentence in GSV sequence.
-     * 
-     * @return true if first, otherwise false.
-     * @see #getSentenceCount()
-     * @see #getSentenceIndex()
+    /*
+     * (non-Javadoc)
+     * @see net.sf.marineapi.nmea.parser.GSVSentence#isLast()
      */
     public boolean isLast() {
         return (getSentenceIndex() == getSentenceCount());
     }
 
-    /**
-     * Get the number of satellites in view.
-     * 
-     * @return integer value
+    /*
+     * (non-Javadoc)
+     * @see net.sf.marineapi.nmea.parser.GSVSentence#getSatelliteCount()
      */
     public int getSatelliteCount() {
         return getIntValue(SATELLITES_IN_VIEW);
     }
 
-    /**
-     * Get the satellite information of the sentence.
-     * 
-     * @return List of SatelliteInfo objects.
+    /*
+     * (non-Javadoc)
+     * @see net.sf.marineapi.nmea.parser.GSVSentence#getSatelliteInfo()
      */
     public List<SatelliteInfo> getSatelliteInfo() {
 

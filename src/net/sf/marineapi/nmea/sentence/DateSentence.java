@@ -18,9 +18,11 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Java Marine API. If not, see <http://www.gnu.org/licenses/>.
  */
-package net.sf.marineapi.nmea.parser;
+package net.sf.marineapi.nmea.sentence;
 
 import java.util.Date;
+
+import net.sf.marineapi.nmea.parser.ParseException;
 
 /**
  * Common interface for sentences that contain UTC date information. Notice that
@@ -28,9 +30,9 @@ import java.util.Date;
  * 
  * @author Kimmo Tuukkanen
  * @version $Revision$
- * @see net.sf.marineapi.nmea.parser.TimeSentence
+ * @see net.sf.marineapi.nmea.sentence.TimeSentence
  */
-public interface DateSentence {
+public interface DateSentence extends Sentence {
 
     /**
      * Pivot year used to determine century for a two-digit year values.
