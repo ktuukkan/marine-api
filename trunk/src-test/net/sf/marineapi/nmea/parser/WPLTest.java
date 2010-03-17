@@ -11,11 +11,11 @@ import org.junit.Before;
 import org.junit.Test;
 
 /**
- * SentenceWPLTest
+ * WPLTest
  * 
  * @author Kimmo Tuukkanen
  */
-public class SentenceWPLTest {
+public class WPLTest {
 
     /** Example sentence */
     public static final String EXAMPLE = "$GPWPL,5536.200,N,01436.500,E,RUSKI*1F";

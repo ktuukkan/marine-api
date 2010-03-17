@@ -15,7 +15,7 @@ import org.junit.Test;
  * 
  * @author Kimmo Tuukkanen
  */
-public class SentenceZDATest {
+public class ZDATest {
 
     /** Example sentence */
     public static final String EXAMPLE = "$GPZDA,032915,07,08,2004,00,00*4D";

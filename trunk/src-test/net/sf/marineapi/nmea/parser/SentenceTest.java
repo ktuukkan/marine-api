@@ -13,13 +13,13 @@ import org.junit.Before;
 import org.junit.Test;
 
 /**
- * Tests the base sentenceImpl parser.
+ * Tests the base instance parser.
  * 
  * @author Kimmo Tuukkanen
  */
 public class SentenceTest {
 
-    private SentenceImpl sentenceImpl;
+    private SentenceImpl instance;
 
     /**
      * setUp
@@ -28,7 +28,7 @@ public class SentenceTest {
      */
     @Before
     public void setUp() throws Exception {
-        sentenceImpl = new SentenceImpl(SentenceRMCTest.EXAMPLE);
+        instance = new SentenceImpl(RMCTest.EXAMPLE);
     }
 
     /**
@@ -39,8 +39,11 @@ public class SentenceTest {
     @Test
     public void testSentence() {
 
+        Sentence s = new SentenceImpl(TalkerId.GP, SentenceId.GLL, 5);
+        assertEquals("$GPGLL,,,,*50", s.toString());
+
         try {
-            new SentenceImpl("this is not a valid sentenceImpl");
+            new SentenceImpl("this is invalid sentence");
             fail("Did not throw exception");
         } catch (IllegalArgumentException se) {
             // ok
@@ -67,7 +70,7 @@ public class SentenceTest {
         }
 
         try {
-            new SentenceImpl(SentenceBODTest.EXAMPLE, SentenceId.GLL);
+            new SentenceImpl(BODTest.EXAMPLE, SentenceId.GLL);
             fail("Did not throw exception");
         } catch (IllegalArgumentException iae) {
             // OK
@@ -76,7 +79,7 @@ public class SentenceTest {
         }
 
         try {
-            new SentenceImpl(SentenceRMCTest.EXAMPLE, null);
+            new SentenceImpl(RMCTest.EXAMPLE, null);
             fail("Did not throw exception");
         } catch (IllegalArgumentException iae) {
             // OK
@@ -100,7 +103,7 @@ public class SentenceTest {
      */
     @Test
     public void testGetSentenceId() {
-        assertEquals(SentenceId.RMC, sentenceImpl.getSentenceId());
+        assertEquals(SentenceId.RMC, instance.getSentenceId());
     }
 
     /**
@@ -109,15 +112,16 @@ public class SentenceTest {
      */
     @Test
     public void testGetTalkerId() {
-        assertEquals(TalkerId.GP, sentenceImpl.getTalkerId());
+        assertEquals(TalkerId.GP, instance.getTalkerId());
     }
 
     /**
-     * Test method for {@link net.sf.marineapi.nmea.parser.SentenceImpl#toString()}.
+     * Test method for
+     * {@link net.sf.marineapi.nmea.parser.SentenceImpl#toString()}.
      */
     @Test
     public void testToString() {
-        assertEquals(SentenceRMCTest.EXAMPLE, sentenceImpl.toString());
+        assertEquals(RMCTest.EXAMPLE, instance.toString());
     }
 
     /**
@@ -127,14 +131,14 @@ public class SentenceTest {
      */
     @Test
     public void testCalcChecksum() {
-        assertEquals("1D", NMEA.calculateChecksum(SentenceBODTest.EXAMPLE));
-        assertEquals("79", NMEA.calculateChecksum(SentenceGGATest.EXAMPLE));
-        assertEquals("26", NMEA.calculateChecksum(SentenceGLLTest.EXAMPLE));
-        assertEquals("11", NMEA.calculateChecksum(SentenceRMCTest.EXAMPLE));
-        assertEquals("3D", NMEA.calculateChecksum(SentenceGSATest.EXAMPLE));
-        assertEquals("73", NMEA.calculateChecksum(SentenceGSVTest.EXAMPLE));
-        assertEquals("58", NMEA.calculateChecksum(SentenceRMBTest.EXAMPLE));
-        assertEquals("25", NMEA.calculateChecksum(SentenceRTETest.EXAMPLE));
+        assertEquals("1D", NMEA.calculateChecksum(BODTest.EXAMPLE));
+        assertEquals("79", NMEA.calculateChecksum(GGATest.EXAMPLE));
+        assertEquals("26", NMEA.calculateChecksum(GLLTest.EXAMPLE));
+        assertEquals("11", NMEA.calculateChecksum(RMCTest.EXAMPLE));
+        assertEquals("3D", NMEA.calculateChecksum(GSATest.EXAMPLE));
+        assertEquals("73", NMEA.calculateChecksum(GSVTest.EXAMPLE));
+        assertEquals("58", NMEA.calculateChecksum(RMBTest.EXAMPLE));
+        assertEquals("25", NMEA.calculateChecksum(RTETest.EXAMPLE));
     }
 
     /**
@@ -176,17 +180,17 @@ public class SentenceTest {
         assertTrue(NMEA.isValid(c));
         assertTrue(NMEA.isValid(NMEA.appendChecksum(c)));
 
-        assertTrue(NMEA.isValid(SentenceBODTest.EXAMPLE));
-        assertTrue(NMEA.isValid(SentenceGGATest.EXAMPLE));
-        assertTrue(NMEA.isValid(SentenceGLLTest.EXAMPLE));
-        assertTrue(NMEA.isValid(SentenceGSATest.EXAMPLE));
-        assertTrue(NMEA.isValid(SentenceGSVTest.EXAMPLE));
-        assertTrue(NMEA.isValid(SentenceRMBTest.EXAMPLE));
-        assertTrue(NMEA.isValid(SentenceRMCTest.EXAMPLE));
-        assertTrue(NMEA.isValid(SentenceRTETest.EXAMPLE));
-        assertTrue(NMEA.isValid(SentenceVTGTest.EXAMPLE));
-        assertTrue(NMEA.isValid(SentenceWPLTest.EXAMPLE));
-        assertTrue(NMEA.isValid(SentenceZDATest.EXAMPLE));
+        assertTrue(NMEA.isValid(BODTest.EXAMPLE));
+        assertTrue(NMEA.isValid(GGATest.EXAMPLE));
+        assertTrue(NMEA.isValid(GLLTest.EXAMPLE));
+        assertTrue(NMEA.isValid(GSATest.EXAMPLE));
+        assertTrue(NMEA.isValid(GSVTest.EXAMPLE));
+        assertTrue(NMEA.isValid(RMBTest.EXAMPLE));
+        assertTrue(NMEA.isValid(RMCTest.EXAMPLE));
+        assertTrue(NMEA.isValid(RTETest.EXAMPLE));
+        assertTrue(NMEA.isValid(VTGTest.EXAMPLE));
+        assertTrue(NMEA.isValid(WPLTest.EXAMPLE));
+        assertTrue(NMEA.isValid(ZDATest.EXAMPLE));
 
         assertFalse(NMEA.isValid(null));
         assertFalse(NMEA.isValid(""));
@@ -201,8 +205,7 @@ public class SentenceTest {
         assertFalse(NMEA.isValid("$GPGGAA,1,2,3,4,5,6,7,8,9"));
         assertFalse(NMEA.isValid("$GPGGA,1,2,3,4,5,6,7,8,9*00"));
         // invalid checksum, otherwise valid
-        assertFalse(NMEA
-                .isValid("$GPGLL,6011.552,N,02501.941,E,120045,A*00"));
+        assertFalse(NMEA.isValid("$GPGLL,6011.552,N,02501.941,E,120045,A*00"));
     }
 
     /**
@@ -219,7 +222,7 @@ public class SentenceTest {
             assertEquals(fields[i], s.getStringValue(i));
         }
 
-        // sentenceImpl with invalid and missing values
+        // instance with invalid and missing values
         nmea = "$GPGLL,foobar,N,,EAST,120045,A";
 
         try {
@@ -257,7 +260,7 @@ public class SentenceTest {
     public void testGetFieldIndexOutOfBounds() {
 
         try {
-            sentenceImpl.getStringValue(-1);
+            instance.getStringValue(-1);
             fail("Did not throw IndexOutOfBoundsException");
         } catch (IndexOutOfBoundsException e) {
             // pass
@@ -266,7 +269,7 @@ public class SentenceTest {
         }
 
         try {
-            String id = sentenceImpl.getStringValue(Sentence.ADDRESS_FIELD);
+            String id = instance.getStringValue(Sentence.ADDRESS_FIELD);
             assertEquals("$GPRMC", id);
         } catch (IndexOutOfBoundsException e) {
             fail("Unexpected IndexOutOfBoundsException");
@@ -275,7 +278,7 @@ public class SentenceTest {
         }
 
         try {
-            sentenceImpl.getStringValue(sentenceImpl.getFieldCount() - 1);
+            instance.getStringValue(instance.getFieldCount() - 1);
             // pass
         } catch (IndexOutOfBoundsException e) {
             fail("Unexpected IndexOutOfBoundsException");
@@ -284,7 +287,7 @@ public class SentenceTest {
         }
 
         try {
-            sentenceImpl.getStringValue(sentenceImpl.getFieldCount());
+            instance.getStringValue(instance.getFieldCount());
             fail("Did not throw IndexOutOfBoundsException");
         } catch (IndexOutOfBoundsException e) {
             // pass

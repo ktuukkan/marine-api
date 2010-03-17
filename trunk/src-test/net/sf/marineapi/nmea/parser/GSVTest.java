@@ -18,7 +18,7 @@ import org.junit.Test;
  * 
  * @author Kimmo Tuukkanen
  */
-public class SentenceGSVTest {
+public class GSVTest {
 
     /** Example sentence */
     public static final String EXAMPLE = "$GPGSV,3,2,12,15,56,182,51,17,38,163,47,18,63,058,50,21,53,329,47*73";

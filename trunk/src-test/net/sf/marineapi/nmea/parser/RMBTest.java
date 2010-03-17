@@ -17,7 +17,7 @@ import org.junit.Test;
  * 
  * @author Kimmo Tuukkanen
  */
-public class SentenceRMBTest {
+public class RMBTest {
 
     /** Example sentence */
     public static final String EXAMPLE = "$GPRMB,A,0.00,R,,RUSKI,5536.200,N,01436.500,E,432.3,234.9,,V*58";

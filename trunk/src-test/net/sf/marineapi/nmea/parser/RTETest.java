@@ -12,11 +12,11 @@ import org.junit.Before;
 import org.junit.Test;
 
 /**
- * SentenceRTETest
+ * RTETest
  * 
  * @author Kimmo Tuukkanen
  */
-public class SentenceRTETest {
+public class RTETest {
 
     /** Example sentence */
     public static final String EXAMPLE = "$GPRTE,1,1,c,0,MELIN,RUSKI,KNUDAN*25";

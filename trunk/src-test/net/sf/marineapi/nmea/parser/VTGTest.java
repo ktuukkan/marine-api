@@ -14,7 +14,7 @@ import org.junit.Test;
  * 
  * @author Kimmo Tuukkanen
  */
-public class SentenceVTGTest {
+public class VTGTest {
 
     /** Example sentence */
     public static final String EXAMPLE = "$GPVTG,360.0,T,348.7,M,16.89,N,31.28,K,A";

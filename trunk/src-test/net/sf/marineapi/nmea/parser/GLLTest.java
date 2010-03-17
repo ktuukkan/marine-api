@@ -16,7 +16,7 @@ import org.junit.Test;
  * 
  * @author Kimmo Tuukkanen
  */
-public class SentenceGLLTest {
+public class GLLTest {
 
     /**
      * Example sentence
