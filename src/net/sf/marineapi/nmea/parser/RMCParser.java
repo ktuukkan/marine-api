@@ -1,5 +1,5 @@
 /* 
- * RMCSentenceImpl.java
+ * RMCParser.java
  * Copyright (C) 2010 Kimmo Tuukkanen
  * 
  * This file is part of Java Marine API.
@@ -36,7 +36,7 @@ import net.sf.marineapi.nmea.util.SentenceId;
  * @author Kimmo Tuukkanen
  * @version $Revision$
  */
-class RMCSentenceImpl extends PositionParser implements RMCSentence {
+class RMCParser extends PositionParser implements RMCSentence {
 
     private static final int UTC_TIME = 1;
     private static final int DATA_STATUS = 2;
@@ -54,13 +54,13 @@ class RMCSentenceImpl extends PositionParser implements RMCSentence {
     /**
      * Constructor.
      */
-    public RMCSentenceImpl(String nmea) {
+    public RMCParser(String nmea) {
         super(nmea, SentenceId.RMC);
     }
 
     /*
      * (non-Javadoc)
-     * @see net.sf.marineapi.nmea.parser.RMCSentence#getCorrectedCourse()
+     * @see net.sf.marineapi.nmea.sentence.RMCSentence#getCorrectedCourse()
      */
     public double getCorrectedCourse() {
         return getCourse() + getVariation();
@@ -68,7 +68,7 @@ class RMCSentenceImpl extends PositionParser implements RMCSentence {
 
     /*
      * (non-Javadoc)
-     * @see net.sf.marineapi.nmea.parser.RMCSentence#getCourse()
+     * @see net.sf.marineapi.nmea.sentence.RMCSentence#getCourse()
      */
     public double getCourse() {
         return getDoubleValue(COURSE);
@@ -77,7 +77,7 @@ class RMCSentenceImpl extends PositionParser implements RMCSentence {
 
     /*
      * (non-Javadoc)
-     * @see net.sf.marineapi.nmea.parser.RMCSentence#getDataStatus()
+     * @see net.sf.marineapi.nmea.sentence.RMCSentence#getDataStatus()
      */
     public DataStatus getDataStatus() {
         return DataStatus.valueOf(getCharValue(DATA_STATUS));
@@ -85,7 +85,7 @@ class RMCSentenceImpl extends PositionParser implements RMCSentence {
 
     /*
      * (non-Javadoc)
-     * @see net.sf.marineapi.nmea.parser.RMCSentence#getDirectionOfVariation()
+     * @see net.sf.marineapi.nmea.sentence.RMCSentence#getDirectionOfVariation()
      */
     public Direction getDirectionOfVariation() {
         return Direction.valueOf(getCharValue(VAR_HEMISPHERE));
@@ -93,7 +93,7 @@ class RMCSentenceImpl extends PositionParser implements RMCSentence {
 
     /*
      * (non-Javadoc)
-     * @see net.sf.marineapi.nmea.parser.RMCSentence#getGpsMode()
+     * @see net.sf.marineapi.nmea.sentence.RMCSentence#getGpsMode()
      */
     public GpsMode getGpsMode() {
         return GpsMode.valueOf(getCharValue(MODE));
@@ -101,7 +101,7 @@ class RMCSentenceImpl extends PositionParser implements RMCSentence {
 
     /*
      * (non-Javadoc)
-     * @see net.sf.marineapi.nmea.parser.RMCSentence#getSpeed()
+     * @see net.sf.marineapi.nmea.sentence.RMCSentence#getSpeed()
      */
     public double getSpeed() {
         return getDoubleValue(SPEED);
@@ -109,7 +109,7 @@ class RMCSentenceImpl extends PositionParser implements RMCSentence {
 
     /*
      * (non-Javadoc)
-     * @see net.sf.marineapi.nmea.parser.PositionSentence#getPosition()
+     * @see net.sf.marineapi.nmea.sentence.PositionSentence#getPosition()
      */
     public Position getPosition() {
         double lat = parseLatitude(LATITUDE);
@@ -121,7 +121,7 @@ class RMCSentenceImpl extends PositionParser implements RMCSentence {
 
     /*
      * (non-Javadoc)
-     * @see net.sf.marineapi.nmea.parser.DateSentence#getDate()
+     * @see net.sf.marineapi.nmea.sentence.DateSentence#getDate()
      */
     public Date getDate() {
         int y = getUtcYear();
@@ -136,7 +136,7 @@ class RMCSentenceImpl extends PositionParser implements RMCSentence {
 
     /*
      * (non-Javadoc)
-     * @see net.sf.marineapi.nmea.parser.DateSentence#getUtcDay()
+     * @see net.sf.marineapi.nmea.sentence.DateSentence#getUtcDay()
      */
     public int getUtcDay() {
         return Integer.parseInt(getStringValue(UTC_DATE).substring(0, 2));
@@ -144,7 +144,7 @@ class RMCSentenceImpl extends PositionParser implements RMCSentence {
 
     /*
      * (non-Javadoc)
-     * @see net.sf.marineapi.nmea.parser.TimeSentence#getUtcHours()
+     * @see net.sf.marineapi.nmea.sentence.TimeSentence#getUtcHours()
      */
     public int getUtcHours() {
         return Integer.parseInt(getUtcTime().substring(0, 2));
@@ -152,7 +152,7 @@ class RMCSentenceImpl extends PositionParser implements RMCSentence {
 
     /*
      * (non-Javadoc)
-     * @see net.sf.marineapi.nmea.parser.TimeSentence#getUtcMinutes()
+     * @see net.sf.marineapi.nmea.sentence.TimeSentence#getUtcMinutes()
      */
     public int getUtcMinutes() {
         return Integer.parseInt(getUtcTime().substring(2, 4));
@@ -160,7 +160,7 @@ class RMCSentenceImpl extends PositionParser implements RMCSentence {
 
     /*
      * (non-Javadoc)
-     * @see net.sf.marineapi.nmea.parser.DateSentence#getUtcMonth()
+     * @see net.sf.marineapi.nmea.sentence.DateSentence#getUtcMonth()
      */
     public int getUtcMonth() {
         return Integer.parseInt(getStringValue(UTC_DATE).substring(2, 4));
@@ -168,7 +168,7 @@ class RMCSentenceImpl extends PositionParser implements RMCSentence {
 
     /*
      * (non-Javadoc)
-     * @see net.sf.marineapi.nmea.parser.TimeSentence#getUtcSeconds()
+     * @see net.sf.marineapi.nmea.sentence.TimeSentence#getUtcSeconds()
      */
     public double getUtcSeconds() {
         return Integer.parseInt(getUtcTime().substring(4, 6));
@@ -176,7 +176,7 @@ class RMCSentenceImpl extends PositionParser implements RMCSentence {
 
     /*
      * (non-Javadoc)
-     * @see net.sf.marineapi.nmea.parser.TimeSentence#getUtcTime()
+     * @see net.sf.marineapi.nmea.sentence.TimeSentence#getUtcTime()
      */
     public String getUtcTime() {
         return getStringValue(UTC_TIME);
@@ -184,7 +184,7 @@ class RMCSentenceImpl extends PositionParser implements RMCSentence {
 
     /*
      * (non-Javadoc)
-     * @see net.sf.marineapi.nmea.parser.DateSentence#getUtcYear()
+     * @see net.sf.marineapi.nmea.sentence.DateSentence#getUtcYear()
      */
     public int getUtcYear() {
         int y = Integer.parseInt(getStringValue(UTC_DATE).substring(4));
@@ -198,7 +198,7 @@ class RMCSentenceImpl extends PositionParser implements RMCSentence {
 
     /*
      * (non-Javadoc)
-     * @see net.sf.marineapi.nmea.parser.RMCSentence#getVariation()
+     * @see net.sf.marineapi.nmea.sentence.RMCSentence#getVariation()
      */
     public double getVariation() {
         double variation = getDoubleValue(MAG_VARIATION);

@@ -1,5 +1,5 @@
 /* 
- * GLLSentenceImpl.java
+ * GLLParser.java
  * Copyright (C) 2010 Kimmo Tuukkanen
  * 
  * This file is part of Java Marine API.
@@ -32,7 +32,7 @@ import net.sf.marineapi.nmea.util.SentenceId;
  * @author Kimmo Tuukkanen
  * @version $Revision$
  */
-class GLLSentenceImpl extends PositionParser implements GLLSentence {
+class GLLParser extends PositionParser implements GLLSentence {
 
     // field indices
     private final static int LATITUDE = 1;
@@ -49,13 +49,13 @@ class GLLSentenceImpl extends PositionParser implements GLLSentence {
      * @throws IllegalArgumentException If the given sentence is invalid or does
      *             not contain GLL sentence.
      */
-    public GLLSentenceImpl(String nmea) {
+    public GLLParser(String nmea) {
         super(nmea, SentenceId.GLL);
     }
 
     /*
      * (non-Javadoc)
-     * @see net.sf.marineapi.nmea.parser.GLLSentence#getDataStatus()
+     * @see net.sf.marineapi.nmea.sentence.GLLSentence#getDataStatus()
      */
     public DataStatus getDataStatus() {
         return DataStatus.valueOf(getCharValue(DATA_STATUS));
@@ -63,7 +63,7 @@ class GLLSentenceImpl extends PositionParser implements GLLSentence {
 
     /*
      * (non-Javadoc)
-     * @see net.sf.marineapi.nmea.parser.PositionSentence#getPosition()
+     * @see net.sf.marineapi.nmea.sentence.PositionSentence#getPosition()
      */
     public Position getPosition() {
         double lat = parseLatitude(LATITUDE);

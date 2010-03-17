@@ -30,7 +30,7 @@ public class RMBTest {
     @Before
     public void setUp() throws Exception {
         try {
-            rmb = new RMBSentenceImpl(EXAMPLE);
+            rmb = new RMBParser(EXAMPLE);
         } catch (Exception e) {
             fail(e.getMessage());
         }
@@ -38,7 +38,7 @@ public class RMBTest {
 
     /**
      * Test method for
-     * {@link net.sf.marineapi.nmea.parser.RMBSentenceImpl#getStatus()}.
+     * {@link net.sf.marineapi.nmea.parser.RMBParser#getStatus()}.
      */
     @Test
     public void testGetStatus() {
@@ -47,7 +47,7 @@ public class RMBTest {
 
     /**
      * Test method for
-     * {@link net.sf.marineapi.nmea.parser.RMBSentenceImpl#getCrossTrackError()}.
+     * {@link net.sf.marineapi.nmea.parser.RMBParser#getCrossTrackError()}.
      */
     @Test
     public void testGetCrossTrackError() {
@@ -56,7 +56,7 @@ public class RMBTest {
 
     /**
      * Test method for
-     * {@link net.sf.marineapi.nmea.parser.RMBSentenceImpl#getSteerTo()}.
+     * {@link net.sf.marineapi.nmea.parser.RMBParser#getSteerTo()}.
      */
     @Test
     public void testGetSteerTo() {
@@ -65,7 +65,7 @@ public class RMBTest {
 
     /**
      * Test method for
-     * {@link net.sf.marineapi.nmea.parser.RMBSentenceImpl#getOriginId()}.
+     * {@link net.sf.marineapi.nmea.parser.RMBParser#getOriginId()}.
      */
     @Test
     public void testGetOriginId() {
@@ -80,7 +80,7 @@ public class RMBTest {
 
     /**
      * Test method for
-     * {@link net.sf.marineapi.nmea.parser.RMBSentenceImpl#getDestination()} .
+     * {@link net.sf.marineapi.nmea.parser.RMBParser#getDestination()} .
      */
     @Test
     public void testGetDestination() {
@@ -99,7 +99,7 @@ public class RMBTest {
 
     /**
      * Test method for
-     * {@link net.sf.marineapi.nmea.parser.RMBSentenceImpl#getRange()}.
+     * {@link net.sf.marineapi.nmea.parser.RMBParser#getRange()}.
      */
     @Test
     public void testGetRange() {
@@ -108,7 +108,7 @@ public class RMBTest {
 
     /**
      * Test method for
-     * {@link net.sf.marineapi.nmea.parser.RMBSentenceImpl#getBearing()} .
+     * {@link net.sf.marineapi.nmea.parser.RMBParser#getBearing()} .
      */
     @Test
     public void testGetBearing() {
@@ -117,7 +117,7 @@ public class RMBTest {
 
     /**
      * Test method for
-     * {@link net.sf.marineapi.nmea.parser.RMBSentenceImpl#getVelocity()}.
+     * {@link net.sf.marineapi.nmea.parser.RMBParser#getVelocity()}.
      */
     @Test
     public void testGetVelocity() {
@@ -132,7 +132,7 @@ public class RMBTest {
 
     /**
      * Test method for
-     * {@link net.sf.marineapi.nmea.parser.RMBSentenceImpl#getArrivalStatus()}.
+     * {@link net.sf.marineapi.nmea.parser.RMBParser#getArrivalStatus()}.
      */
     @Test
     public void testGetArrivalStatus() {

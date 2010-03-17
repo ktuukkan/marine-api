@@ -1,5 +1,5 @@
 /* 
- * VTGSentenceImpl.java
+ * VTGParser.java
  * Copyright (C) 2010 Kimmo Tuukkanen
  * 
  * This file is part of Java Marine API.
@@ -30,7 +30,7 @@ import net.sf.marineapi.nmea.util.SentenceId;
  * @author Kimmo Tuukkanen
  * @version $Revision$
  */
-class VTGSentenceImpl extends SentenceImpl implements VTGSentence {
+class VTGParser extends SentenceParser implements VTGSentence {
 
     // field indexes
     private static final int TRUE_COURSE = 1;
@@ -49,13 +49,13 @@ class VTGSentenceImpl extends SentenceImpl implements VTGSentence {
      * @param nmea VTG sentence String
      * @throws IllegalArgumentException
      */
-    public VTGSentenceImpl(String nmea) {
+    public VTGParser(String nmea) {
         super(nmea, SentenceId.VTG);
     }
 
     /*
      * (non-Javadoc)
-     * @see net.sf.marineapi.nmea.parser.VTGSentence#getTrueCourse()
+     * @see net.sf.marineapi.nmea.sentence.VTGSentence#getTrueCourse()
      */
     public double getTrueCourse() {
         return getDoubleValue(TRUE_COURSE);
@@ -63,7 +63,7 @@ class VTGSentenceImpl extends SentenceImpl implements VTGSentence {
 
     /*
      * (non-Javadoc)
-     * @see net.sf.marineapi.nmea.parser.VTGSentence#getMagneticCourse()
+     * @see net.sf.marineapi.nmea.sentence.VTGSentence#getMagneticCourse()
      */
     public double getMagneticCourse() {
         return getDoubleValue(MAGNETIC_COURSE);
@@ -71,7 +71,7 @@ class VTGSentenceImpl extends SentenceImpl implements VTGSentence {
 
     /*
      * (non-Javadoc)
-     * @see net.sf.marineapi.nmea.parser.VTGSentence#getSpeedKnots()
+     * @see net.sf.marineapi.nmea.sentence.VTGSentence#getSpeedKnots()
      */
     public double getSpeedKnots() {
         return getDoubleValue(SPEED_KNOTS);
@@ -79,7 +79,7 @@ class VTGSentenceImpl extends SentenceImpl implements VTGSentence {
 
     /*
      * (non-Javadoc)
-     * @see net.sf.marineapi.nmea.parser.VTGSentence#getSpeedKmh()
+     * @see net.sf.marineapi.nmea.sentence.VTGSentence#getSpeedKmh()
      */
     public double getSpeedKmh() {
         return getDoubleValue(SPEED_KMPH);
@@ -87,7 +87,7 @@ class VTGSentenceImpl extends SentenceImpl implements VTGSentence {
 
     /*
      * (non-Javadoc)
-     * @see net.sf.marineapi.nmea.parser.VTGSentence#getMode()
+     * @see net.sf.marineapi.nmea.sentence.VTGSentence#getMode()
      */
     public GpsMode getMode() {
         return GpsMode.valueOf(getCharValue(MODE));

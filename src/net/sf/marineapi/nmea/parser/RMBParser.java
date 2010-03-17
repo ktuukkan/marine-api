@@ -1,5 +1,5 @@
 /* 
- * RMBSentenceImpl.java
+ * RMBParser.java
  * Copyright (C) 2010 Kimmo Tuukkanen
  * 
  * This file is part of Java Marine API.
@@ -32,7 +32,7 @@ import net.sf.marineapi.nmea.util.Waypoint;
  * @author Kimmo Tuukkanen
  * @version $Revision$
  */
-class RMBSentenceImpl extends PositionParser implements RMBSentence {
+class RMBParser extends PositionParser implements RMBSentence {
 
     // field indexes
     private static final int STATUS = 1;
@@ -54,13 +54,13 @@ class RMBSentenceImpl extends PositionParser implements RMBSentence {
      * 
      * @param nmea RMB sentence string
      */
-    public RMBSentenceImpl(String nmea) {
+    public RMBParser(String nmea) {
         super(nmea, SentenceId.RMB);
     }
 
     /*
      * (non-Javadoc)
-     * @see net.sf.marineapi.nmea.parser.RMBSentence#getArrivalStatus()
+     * @see net.sf.marineapi.nmea.sentence.RMBSentence#getArrivalStatus()
      */
     public DataStatus getArrivalStatus() {
         return DataStatus.valueOf(getCharValue(ARRIVAL_STATUS));
@@ -68,7 +68,7 @@ class RMBSentenceImpl extends PositionParser implements RMBSentence {
 
     /*
      * (non-Javadoc)
-     * @see net.sf.marineapi.nmea.parser.RMBSentence#getBearing()
+     * @see net.sf.marineapi.nmea.sentence.RMBSentence#getBearing()
      */
     public double getBearing() {
         return getDoubleValue(BEARING_TO_DEST);
@@ -76,7 +76,7 @@ class RMBSentenceImpl extends PositionParser implements RMBSentence {
 
     /*
      * (non-Javadoc)
-     * @see net.sf.marineapi.nmea.parser.RMBSentence#getCrossTrackError()
+     * @see net.sf.marineapi.nmea.sentence.RMBSentence#getCrossTrackError()
      */
     public double getCrossTrackError() {
         return getDoubleValue(CROSS_TRACK_ERROR);
@@ -84,7 +84,7 @@ class RMBSentenceImpl extends PositionParser implements RMBSentence {
 
     /*
      * (non-Javadoc)
-     * @see net.sf.marineapi.nmea.parser.RMBSentence#getDestination()
+     * @see net.sf.marineapi.nmea.sentence.RMBSentence#getDestination()
      */
     public Waypoint getDestination() {
         String id = getStringValue(DEST_WPT);
@@ -97,7 +97,7 @@ class RMBSentenceImpl extends PositionParser implements RMBSentence {
 
     /*
      * (non-Javadoc)
-     * @see net.sf.marineapi.nmea.parser.RMBSentence#getOriginId()
+     * @see net.sf.marineapi.nmea.sentence.RMBSentence#getOriginId()
      */
     public String getOriginId() {
         return getStringValue(ORIGIN_WPT);
@@ -105,7 +105,7 @@ class RMBSentenceImpl extends PositionParser implements RMBSentence {
 
     /*
      * (non-Javadoc)
-     * @see net.sf.marineapi.nmea.parser.RMBSentence#getRange()
+     * @see net.sf.marineapi.nmea.sentence.RMBSentence#getRange()
      */
     public double getRange() {
         return getDoubleValue(RANGE_TO_DEST);
@@ -113,7 +113,7 @@ class RMBSentenceImpl extends PositionParser implements RMBSentence {
 
     /*
      * (non-Javadoc)
-     * @see net.sf.marineapi.nmea.parser.RMBSentence#getStatus()
+     * @see net.sf.marineapi.nmea.sentence.RMBSentence#getStatus()
      */
     public DataStatus getStatus() {
         return DataStatus.valueOf(getCharValue(STATUS));
@@ -121,7 +121,7 @@ class RMBSentenceImpl extends PositionParser implements RMBSentence {
 
     /*
      * (non-Javadoc)
-     * @see net.sf.marineapi.nmea.parser.RMBSentence#getSteerTo()
+     * @see net.sf.marineapi.nmea.sentence.RMBSentence#getSteerTo()
      */
     public Direction getSteerTo() {
         return Direction.valueOf(getCharValue(STEER_TO));
@@ -129,7 +129,7 @@ class RMBSentenceImpl extends PositionParser implements RMBSentence {
 
     /*
      * (non-Javadoc)
-     * @see net.sf.marineapi.nmea.parser.RMBSentence#getVelocity()
+     * @see net.sf.marineapi.nmea.sentence.RMBSentence#getVelocity()
      */
     public double getVelocity() {
         return getDoubleValue(VELOCITY);
@@ -137,7 +137,7 @@ class RMBSentenceImpl extends PositionParser implements RMBSentence {
 
     /*
      * (non-Javadoc)
-     * @see net.sf.marineapi.nmea.parser.RMBSentence#hasArrived()
+     * @see net.sf.marineapi.nmea.sentence.RMBSentence#hasArrived()
      */
     public boolean hasArrived() {
         return DataStatus.VALID.equals(getArrivalStatus());

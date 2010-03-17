@@ -1,5 +1,5 @@
 /* 
- * BODSentenceImpl.java
+ * BODParser.java
  * Copyright (C) 2010 Kimmo Tuukkanen
  * 
  * This file is part of Java Marine API.
@@ -30,7 +30,7 @@ import net.sf.marineapi.nmea.util.SentenceId;
  * @version $Revision$
  * @see net.sf.marineapi.nmea.sentence.BODSentence
  */
-class BODSentenceImpl extends SentenceImpl implements BODSentence {
+class BODParser extends SentenceParser implements BODSentence {
 
     // field indices
     private static final int BEARING_TRUE = 1;
@@ -47,13 +47,13 @@ class BODSentenceImpl extends SentenceImpl implements BODSentence {
      * @throws IllegalArgumentException If specified String is invalid or does
      *             not contain a BOD sentence.
      */
-    public BODSentenceImpl(String nmea) {
+    public BODParser(String nmea) {
         super(nmea, SentenceId.BOD);
     }
 
     /*
      * (non-Javadoc)
-     * @see net.sf.marineapi.nmea.parser.BODSentence#getTrueBearing()
+     * @see net.sf.marineapi.nmea.sentence.BODSentence#getTrueBearing()
      */
     public double getTrueBearing() {
         return getDoubleValue(BEARING_TRUE);
@@ -61,7 +61,7 @@ class BODSentenceImpl extends SentenceImpl implements BODSentence {
 
     /*
      * (non-Javadoc)
-     * @see net.sf.marineapi.nmea.parser.BODSentence#getMagneticBearing()
+     * @see net.sf.marineapi.nmea.sentence.BODSentence#getMagneticBearing()
      */
     public double getMagneticBearing() {
         return getDoubleValue(BEARING_MAGN);
@@ -69,7 +69,7 @@ class BODSentenceImpl extends SentenceImpl implements BODSentence {
 
     /*
      * (non-Javadoc)
-     * @see net.sf.marineapi.nmea.parser.BODSentence#getOriginWaypointId()
+     * @see net.sf.marineapi.nmea.sentence.BODSentence#getOriginWaypointId()
      */
     public String getOriginWaypointId() {
         return getStringValue(ORIGIN);
@@ -77,7 +77,8 @@ class BODSentenceImpl extends SentenceImpl implements BODSentence {
 
     /*
      * (non-Javadoc)
-     * @see net.sf.marineapi.nmea.parser.BODSentence#getDestinationWaypointId()
+     * @see
+     * net.sf.marineapi.nmea.sentence.BODSentence#getDestinationWaypointId()
      */
     public String getDestinationWaypointId() {
         return getStringValue(DESTINATION);

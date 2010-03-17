@@ -28,7 +28,7 @@ public class BODTest extends TestCase {
     @Before
     public void setUp() throws Exception {
         try {
-            bod = new BODSentenceImpl(EXAMPLE);
+            bod = new BODParser(EXAMPLE);
         } catch (Exception e) {
             fail(e.getMessage());
         }
@@ -46,14 +46,14 @@ public class BODTest extends TestCase {
 
     /**
      * Test method for
-     * {@link net.sf.marineapi.nmea.parser.BODSentenceImpl#SentenceBOD(java.lang.String)}
+     * {@link net.sf.marineapi.nmea.parser.BODParser#SentenceBOD(java.lang.String)}
      * .
      */
     @Test
     public void testSentenceBOD() {
 
         try {
-            new BODSentenceImpl(null);
+            new BODParser(null);
         } catch (IllegalArgumentException e) {
             // OK
         } catch (Exception e) {
@@ -61,7 +61,7 @@ public class BODTest extends TestCase {
         }
 
         try {
-            new BODSentenceImpl("$HUBBA,habba,doo,dah,doo");
+            new BODParser("$HUBBA,habba,doo,dah,doo");
         } catch (IllegalArgumentException e) {
             // OK
         } catch (Exception e) {
@@ -69,7 +69,7 @@ public class BODTest extends TestCase {
         }
 
         try {
-            new BODSentenceImpl("foobar and haystack");
+            new BODParser("foobar and haystack");
         } catch (IllegalArgumentException e) {
             // OK
         } catch (Exception e) {
@@ -79,7 +79,7 @@ public class BODTest extends TestCase {
 
     /**
      * Test method for
-     * {@link net.sf.marineapi.nmea.parser.BODSentenceImpl#getBearingTrue()}.
+     * {@link net.sf.marineapi.nmea.parser.BODParser#getBearingTrue()}.
      */
     @Test
     public void testGetBearingTrue() {
@@ -93,7 +93,7 @@ public class BODTest extends TestCase {
 
     /**
      * Test method for
-     * {@link net.sf.marineapi.nmea.parser.BODSentenceImpl#getBearingMagnetic()}.
+     * {@link net.sf.marineapi.nmea.parser.BODParser#getBearingMagnetic()}.
      */
     @Test
     public void testGetBearingMagnetic() {
@@ -107,7 +107,7 @@ public class BODTest extends TestCase {
 
     /**
      * Test method for
-     * {@link net.sf.marineapi.nmea.parser.BODSentenceImpl#getOriginWaypointId()}.
+     * {@link net.sf.marineapi.nmea.parser.BODParser#getOriginWaypointId()}.
      */
     @Test
     public void testGetOriginWaypointId() {
@@ -123,7 +123,7 @@ public class BODTest extends TestCase {
 
     /**
      * Test method for
-     * {@link net.sf.marineapi.nmea.parser.BODSentenceImpl#getDestinationWaypointId()}
+     * {@link net.sf.marineapi.nmea.parser.BODParser#getDestinationWaypointId()}
      * .
      */
     @Test

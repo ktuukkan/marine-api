@@ -26,7 +26,7 @@ public class RMCTest {
     /** Example sentence */
     public static final String EXAMPLE = "$GPRMC,120044,A,6011.552,N,02501.941,E,000.0,360.0,160705,006.1,E,A*11";
 
-    RMCSentenceImpl rmc;
+    RMCParser rmc;
 
     /**
      * @throws java.lang.Exception
@@ -34,7 +34,7 @@ public class RMCTest {
     @Before
     public void setUp() throws Exception {
         try {
-            rmc = new RMCSentenceImpl(EXAMPLE);
+            rmc = new RMCParser(EXAMPLE);
         } catch (Exception e) {
             fail(e.getMessage());
         }
@@ -42,7 +42,7 @@ public class RMCTest {
 
     /**
      * Test method for
-     * {@link net.sf.marineapi.nmea.parser.RMCSentenceImpl#getDataStatus()}.
+     * {@link net.sf.marineapi.nmea.parser.RMCParser#getDataStatus()}.
      */
     @Test
     public void testGetDataStatus() {
@@ -51,7 +51,7 @@ public class RMCTest {
 
     /**
      * Test method for
-     * {@link net.sf.marineapi.nmea.parser.RMCSentenceImpl#getGpsMode()}.
+     * {@link net.sf.marineapi.nmea.parser.RMCParser#getGpsMode()}.
      */
     @Test
     public void testGetGpsMode() {
@@ -60,7 +60,7 @@ public class RMCTest {
 
     /**
      * Test method for
-     * {@link net.sf.marineapi.nmea.parser.RMCSentenceImpl#getSpeed()} .
+     * {@link net.sf.marineapi.nmea.parser.RMCParser#getSpeed()} .
      */
     @Test
     public void testGetSpeedOverGround() {
@@ -69,7 +69,7 @@ public class RMCTest {
 
     /**
      * Test method for
-     * {@link net.sf.marineapi.nmea.parser.RMCSentenceImpl#getCourse()} .
+     * {@link net.sf.marineapi.nmea.parser.RMCParser#getCourse()} .
      */
     @Test
     public void testGetCourseOverGround() {
@@ -78,7 +78,7 @@ public class RMCTest {
 
     /**
      * Test method for
-     * {@link net.sf.marineapi.nmea.parser.RMCSentenceImpl#getVariation()} .
+     * {@link net.sf.marineapi.nmea.parser.RMCParser#getVariation()} .
      */
     @Test
     public void testGetMagneticVariation() {
@@ -87,7 +87,7 @@ public class RMCTest {
 
     /**
      * Test method for
-     * {@link net.sf.marineapi.nmea.parser.RMCSentenceImpl#getDirectionOfVariation()}
+     * {@link net.sf.marineapi.nmea.parser.RMCParser#getDirectionOfVariation()}
      * .
      */
     @Test
@@ -98,7 +98,7 @@ public class RMCTest {
 
     /**
      * Test method for
-     * {@link net.sf.marineapi.nmea.parser.RMCSentenceImpl#getPosition()}.
+     * {@link net.sf.marineapi.nmea.parser.RMCParser#getPosition()}.
      */
     @Test
     public void testGetPosition() {
@@ -115,7 +115,7 @@ public class RMCTest {
 
     /**
      * Test method for
-     * {@link net.sf.marineapi.nmea.parser.RMCSentenceImpl#getUtcTime()}.
+     * {@link net.sf.marineapi.nmea.parser.RMCParser#getUtcTime()}.
      */
     @Test
     public void testGetUtcTime() {
@@ -124,7 +124,7 @@ public class RMCTest {
 
     /**
      * Test method for
-     * {@link net.sf.marineapi.nmea.parser.RMCSentenceImpl#getUtcHours()}.
+     * {@link net.sf.marineapi.nmea.parser.RMCParser#getUtcHours()}.
      */
     @Test
     public void testGetUtcHours() {
@@ -133,7 +133,7 @@ public class RMCTest {
 
     /**
      * Test method for
-     * {@link net.sf.marineapi.nmea.parser.RMCSentenceImpl#getUtcMinutes()}.
+     * {@link net.sf.marineapi.nmea.parser.RMCParser#getUtcMinutes()}.
      */
     @Test
     public void testGetUtcMinutes() {
@@ -142,7 +142,7 @@ public class RMCTest {
 
     /**
      * Test method for
-     * {@link net.sf.marineapi.nmea.parser.RMCSentenceImpl#getUtcSeconds()}.
+     * {@link net.sf.marineapi.nmea.parser.RMCParser#getUtcSeconds()}.
      */
     @Test
     public void testGetUtcSeconds() {
@@ -151,7 +151,7 @@ public class RMCTest {
 
     /**
      * Test method for
-     * {@link net.sf.marineapi.nmea.parser.RMCSentenceImpl#getUtcDay()}.
+     * {@link net.sf.marineapi.nmea.parser.RMCParser#getUtcDay()}.
      */
     @Test
     public void testGetUtcDay() {
@@ -160,7 +160,7 @@ public class RMCTest {
 
     /**
      * Test method for
-     * {@link net.sf.marineapi.nmea.parser.RMCSentenceImpl#getUtcMonth()}.
+     * {@link net.sf.marineapi.nmea.parser.RMCParser#getUtcMonth()}.
      */
     @Test
     public void testGetUtcMonth() {
@@ -169,7 +169,7 @@ public class RMCTest {
 
     /**
      * Test method for
-     * {@link net.sf.marineapi.nmea.parser.RMCSentenceImpl#getUtcYear()}.
+     * {@link net.sf.marineapi.nmea.parser.RMCParser#getUtcYear()}.
      */
     @Test
     public void testGetUtcYear() {
@@ -178,7 +178,7 @@ public class RMCTest {
 
     /**
      * Test method for
-     * {@link net.sf.marineapi.nmea.parser.RMCSentenceImpl#getDate()}.
+     * {@link net.sf.marineapi.nmea.parser.RMCParser#getDate()}.
      */
     @Test
     public void testGetDate() {

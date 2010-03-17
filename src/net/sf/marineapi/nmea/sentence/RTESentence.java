@@ -20,11 +20,11 @@
  */
 package net.sf.marineapi.nmea.sentence;
 
-
 /**
- * Interface for RTE sentence type. Route data and list of waypoints.
+ * Interface for RTE sentence type. Route data and list of waypoint IDs.
  * <p>
- * Example: <code>$GPRTE,1,1,c,0,MELIN,RUSKI,KNUDAN*25</code>
+ * Example:<br>
+ * <code>$GPRTE,1,1,c,0,MELIN,RUSKI,KNUDAN*25</code>
  * 
  * @author Kimmo Tuukkanen
  * @version $Revision$

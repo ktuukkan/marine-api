@@ -1,5 +1,5 @@
 /* 
- * GSVSentenceImpl.java
+ * GSVParser.java
  * Copyright (C) 2010 Kimmo Tuukkanen
  * 
  * This file is part of Java Marine API.
@@ -33,7 +33,7 @@ import net.sf.marineapi.nmea.util.SentenceId;
  * @author Kimmo Tuukkanen
  * @version $Revision$
  */
-class GSVSentenceImpl extends SentenceImpl implements GSVSentence {
+class GSVParser extends SentenceParser implements GSVSentence {
 
     // field indices
     private static final int NUMBER_OF_SENTENCES = 1;
@@ -54,13 +54,13 @@ class GSVSentenceImpl extends SentenceImpl implements GSVSentence {
      * 
      * @param nmea GSV Sentence
      */
-    public GSVSentenceImpl(String nmea) {
+    public GSVParser(String nmea) {
         super(nmea, SentenceId.GSV);
     }
 
     /*
      * (non-Javadoc)
-     * @see net.sf.marineapi.nmea.parser.GSVSentence#getSentenceCount()
+     * @see net.sf.marineapi.nmea.sentence.GSVSentence#getSentenceCount()
      */
     public int getSentenceCount() {
         return getIntValue(NUMBER_OF_SENTENCES);
@@ -68,7 +68,7 @@ class GSVSentenceImpl extends SentenceImpl implements GSVSentence {
 
     /*
      * (non-Javadoc)
-     * @see net.sf.marineapi.nmea.parser.GSVSentence#getSentenceIndex()
+     * @see net.sf.marineapi.nmea.sentence.GSVSentence#getSentenceIndex()
      */
     public int getSentenceIndex() {
         return getIntValue(SENTENCE_NUMBER);
@@ -76,7 +76,7 @@ class GSVSentenceImpl extends SentenceImpl implements GSVSentence {
 
     /*
      * (non-Javadoc)
-     * @see net.sf.marineapi.nmea.parser.GSVSentence#isFirst()
+     * @see net.sf.marineapi.nmea.sentence.GSVSentence#isFirst()
      */
     public boolean isFirst() {
         return (getSentenceIndex() == 1);
@@ -84,7 +84,7 @@ class GSVSentenceImpl extends SentenceImpl implements GSVSentence {
 
     /*
      * (non-Javadoc)
-     * @see net.sf.marineapi.nmea.parser.GSVSentence#isLast()
+     * @see net.sf.marineapi.nmea.sentence.GSVSentence#isLast()
      */
     public boolean isLast() {
         return (getSentenceIndex() == getSentenceCount());
@@ -92,7 +92,7 @@ class GSVSentenceImpl extends SentenceImpl implements GSVSentence {
 
     /*
      * (non-Javadoc)
-     * @see net.sf.marineapi.nmea.parser.GSVSentence#getSatelliteCount()
+     * @see net.sf.marineapi.nmea.sentence.GSVSentence#getSatelliteCount()
      */
     public int getSatelliteCount() {
         return getIntValue(SATELLITES_IN_VIEW);
@@ -100,7 +100,7 @@ class GSVSentenceImpl extends SentenceImpl implements GSVSentence {
 
     /*
      * (non-Javadoc)
-     * @see net.sf.marineapi.nmea.parser.GSVSentence#getSatelliteInfo()
+     * @see net.sf.marineapi.nmea.sentence.GSVSentence#getSatelliteInfo()
      */
     public List<SatelliteInfo> getSatelliteInfo() {
 
