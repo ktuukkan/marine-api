@@ -15,7 +15,7 @@ import org.junit.Test;
  * 
  * @author Kimmo Tuukkanen
  */
-public class SentenceGSATest {
+public class GSATest {
 
     /** Example sentence */
     public static final String EXAMPLE = "$GPGSA,A,3,02,,,07,,09,24,26,,,,,1.6,1.6,1.0*3D";

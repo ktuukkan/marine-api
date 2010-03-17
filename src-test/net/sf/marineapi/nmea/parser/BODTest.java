@@ -13,7 +13,7 @@ import org.junit.Test;
  * 
  * @author Kimmo Tuukkanen
  */
-public class SentenceBODTest extends TestCase {
+public class BODTest extends TestCase {
 
     public static final String EXAMPLE = "$GPBOD,234.9,T,228.8,M,RUSKI,*1D";
 
