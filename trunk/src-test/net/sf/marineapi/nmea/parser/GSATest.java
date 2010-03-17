@@ -28,7 +28,7 @@ public class GSATest {
     @Before
     public void setUp() throws Exception {
         try {
-            instance = new GSASentenceImpl(EXAMPLE);
+            instance = new GSAParser(EXAMPLE);
         } catch (Exception e) {
             fail(e.getMessage());
         }
@@ -36,7 +36,7 @@ public class GSATest {
 
     /**
      * Test method for
-     * {@link net.sf.marineapi.nmea.parser.GSASentenceImpl#getGpsMode()}.
+     * {@link net.sf.marineapi.nmea.parser.GSAParser#getGpsMode()}.
      */
     @Test
     public void testGetGpsMode() {
@@ -45,7 +45,7 @@ public class GSATest {
 
     /**
      * Test method for
-     * {@link net.sf.marineapi.nmea.parser.GSASentenceImpl#getFixStatus()} .
+     * {@link net.sf.marineapi.nmea.parser.GSAParser#getFixStatus()} .
      */
     @Test
     public void testGetFixStatus() {
@@ -54,7 +54,7 @@ public class GSATest {
 
     /**
      * Test method for
-     * {@link net.sf.marineapi.nmea.parser.GSASentenceImpl#getPositionDOP()}.
+     * {@link net.sf.marineapi.nmea.parser.GSAParser#getPositionDOP()}.
      */
     @Test
     public void testGetPositionDOP() {
@@ -65,7 +65,7 @@ public class GSATest {
 
     /**
      * Test method for
-     * {@link net.sf.marineapi.nmea.parser.GSASentenceImpl#getHorizontalDOP()}.
+     * {@link net.sf.marineapi.nmea.parser.GSAParser#getHorizontalDOP()}.
      */
     @Test
     public void testGetHorizontalDOP() {
@@ -76,7 +76,7 @@ public class GSATest {
 
     /**
      * Test method for
-     * {@link net.sf.marineapi.nmea.parser.GSASentenceImpl#getVerticalDOP()}.
+     * {@link net.sf.marineapi.nmea.parser.GSAParser#getVerticalDOP()}.
      */
     @Test
     public void testGetVerticalDOP() {
@@ -87,7 +87,7 @@ public class GSATest {
 
     /**
      * Test method for
-     * {@link net.sf.marineapi.nmea.parser.GSASentenceImpl#getSatellitesIds()}.
+     * {@link net.sf.marineapi.nmea.parser.GSAParser#getSatellitesIds()}.
      */
     @Test
     public void testGetSatelliteIds() {

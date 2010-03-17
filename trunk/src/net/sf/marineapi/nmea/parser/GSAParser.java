@@ -1,5 +1,5 @@
 /* 
- * GSASentenceImpl.java
+ * GSAParser.java
  * Copyright (C) 2010 Kimmo Tuukkanen
  * 
  * This file is part of Java Marine API.
@@ -34,7 +34,7 @@ import net.sf.marineapi.nmea.util.SentenceId;
  * @author Kimmo Tuukkanen
  * @version $Revision$
  */
-class GSASentenceImpl extends SentenceImpl implements GSASentence {
+class GSAParser extends SentenceParser implements GSASentence {
 
     // field indices
     private final static int GPS_MODE = 1;
@@ -54,13 +54,13 @@ class GSASentenceImpl extends SentenceImpl implements GSASentence {
      * @param nmea GSA sentence
      * @throws SentenceException if specified NMEA string is invalid
      */
-    public GSASentenceImpl(String nmea) {
+    public GSAParser(String nmea) {
         super(nmea, SentenceId.GSA);
     }
 
     /*
      * (non-Javadoc)
-     * @see net.sf.marineapi.nmea.parser.GSASentence#getGpsMode()
+     * @see net.sf.marineapi.nmea.sentence.GSASentence#getGpsMode()
      */
     public GpsMode getGpsMode() {
         return GpsMode.valueOf(getCharValue(GPS_MODE));
@@ -68,7 +68,7 @@ class GSASentenceImpl extends SentenceImpl implements GSASentence {
 
     /*
      * (non-Javadoc)
-     * @see net.sf.marineapi.nmea.parser.GSASentence#getFixStatus()
+     * @see net.sf.marineapi.nmea.sentence.GSASentence#getFixStatus()
      */
     public GpsFixStatus getFixStatus() {
         return GpsFixStatus.valueOf(getIntValue(FIX_MODE));
@@ -76,7 +76,7 @@ class GSASentenceImpl extends SentenceImpl implements GSASentence {
 
     /*
      * (non-Javadoc)
-     * @see net.sf.marineapi.nmea.parser.GSASentence#getPositionDOP()
+     * @see net.sf.marineapi.nmea.sentence.GSASentence#getPositionDOP()
      */
     public double getPositionDOP() {
         return getDoubleValue(POSITION_DOP);
@@ -84,7 +84,7 @@ class GSASentenceImpl extends SentenceImpl implements GSASentence {
 
     /*
      * (non-Javadoc)
-     * @see net.sf.marineapi.nmea.parser.GSASentence#getHorizontalDOP()
+     * @see net.sf.marineapi.nmea.sentence.GSASentence#getHorizontalDOP()
      */
     public double getHorizontalDOP() {
         return getDoubleValue(HORIZONTAL_DOP);
@@ -92,7 +92,7 @@ class GSASentenceImpl extends SentenceImpl implements GSASentence {
 
     /*
      * (non-Javadoc)
-     * @see net.sf.marineapi.nmea.parser.GSASentence#getVerticalDOP()
+     * @see net.sf.marineapi.nmea.sentence.GSASentence#getVerticalDOP()
      */
     public double getVerticalDOP() {
         return getDoubleValue(VERTICAL_DOP);
@@ -100,7 +100,7 @@ class GSASentenceImpl extends SentenceImpl implements GSASentence {
 
     /*
      * (non-Javadoc)
-     * @see net.sf.marineapi.nmea.parser.GSASentence#getSatellitesIds()
+     * @see net.sf.marineapi.nmea.sentence.GSASentence#getSatellitesIds()
      */
     public String[] getSatellitesIds() {
         if (this.satellites == null) {

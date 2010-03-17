@@ -25,12 +25,14 @@ import net.sf.marineapi.nmea.util.SentenceId;
 
 /**
  * Abstract base class for sentence parsers that provide geographic position or
- * waypoint data.
+ * waypoint data, and thus need to parse lat/lon values. However, notice that
+ * <code>PositionParser</code> does not implement <code>PositionSentence</code>
+ * interface because the extending parser may not provide current location.
  * 
  * @author Kimmo Tuukkanen
  * @version $Revision$
  */
-abstract class PositionParser extends SentenceImpl {
+public abstract class PositionParser extends SentenceParser {
 
     /**
      * Constructor.

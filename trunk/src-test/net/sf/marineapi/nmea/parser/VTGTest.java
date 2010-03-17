@@ -27,7 +27,7 @@ public class VTGTest {
     @Before
     public void setUp() throws Exception {
         try {
-            vtg = new VTGSentenceImpl(EXAMPLE);
+            vtg = new VTGParser(EXAMPLE);
         } catch (Exception e) {
             fail(e.getMessage());
         }
@@ -35,7 +35,7 @@ public class VTGTest {
 
     /**
      * Test method for
-     * {@link net.sf.marineapi.nmea.parser.VTGSentenceImpl#getTrueCourse()}.
+     * {@link net.sf.marineapi.nmea.parser.VTGParser#getTrueCourse()}.
      */
     @Test
     public void testGetTrueCourse() {
@@ -44,7 +44,7 @@ public class VTGTest {
 
     /**
      * Test method for
-     * {@link net.sf.marineapi.nmea.parser.VTGSentenceImpl#getMagneticCourse()}.
+     * {@link net.sf.marineapi.nmea.parser.VTGParser#getMagneticCourse()}.
      */
     @Test
     public void testGetMagneticCourse() {
@@ -53,7 +53,7 @@ public class VTGTest {
 
     /**
      * Test method for
-     * {@link net.sf.marineapi.nmea.parser.VTGSentenceImpl#getSpeedKnots()}.
+     * {@link net.sf.marineapi.nmea.parser.VTGParser#getSpeedKnots()}.
      */
     @Test
     public void testGetSpeedKnots() {
@@ -62,7 +62,7 @@ public class VTGTest {
 
     /**
      * Test method for
-     * {@link net.sf.marineapi.nmea.parser.VTGSentenceImpl#getSpeedKmh()}.
+     * {@link net.sf.marineapi.nmea.parser.VTGParser#getSpeedKmh()}.
      */
     @Test
     public void testGetSpeedKmh() {
@@ -71,7 +71,7 @@ public class VTGTest {
 
     /**
      * Test method for
-     * {@link net.sf.marineapi.nmea.parser.VTGSentenceImpl#getMode()}.
+     * {@link net.sf.marineapi.nmea.parser.VTGParser#getMode()}.
      */
     @Test
     public void testGetMode() {

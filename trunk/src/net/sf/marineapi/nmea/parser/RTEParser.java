@@ -1,5 +1,5 @@
 /* 
- * RTESentenceImpl.java
+ * RTEParser.java
  * Copyright (C) 2010 Kimmo Tuukkanen
  * 
  * This file is part of Java Marine API.
@@ -30,7 +30,7 @@ import net.sf.marineapi.nmea.util.SentenceId;
  * @author Kimmo Tuukkanen
  * @version $Revision$
  */
-class RTESentenceImpl extends SentenceImpl implements RTESentence {
+class RTEParser extends SentenceParser implements RTESentence {
 
     // fields indices
     private static final int NUMBER_OF_SENTENCES = 1;
@@ -47,13 +47,13 @@ class RTESentenceImpl extends SentenceImpl implements RTESentence {
      * 
      * @param nmea RTE sentence string.
      */
-    public RTESentenceImpl(String nmea) {
+    public RTEParser(String nmea) {
         super(nmea, SentenceId.RTE);
     }
 
     /*
      * (non-Javadoc)
-     * @see net.sf.marineapi.nmea.parser.RTESentence#getWaypointIds()
+     * @see net.sf.marineapi.nmea.sentence.RTESentence#getWaypointIds()
      */
     public String[] getWaypointIds() {
         if (waypoints == null) {
@@ -64,7 +64,7 @@ class RTESentenceImpl extends SentenceImpl implements RTESentence {
 
     /*
      * (non-Javadoc)
-     * @see net.sf.marineapi.nmea.parser.RTESentence#getNumberOfWaypoints()
+     * @see net.sf.marineapi.nmea.sentence.RTESentence#getWaypointCount()
      */
     public int getWaypointCount() {
         return getWaypointIds().length;
@@ -72,7 +72,7 @@ class RTESentenceImpl extends SentenceImpl implements RTESentence {
 
     /*
      * (non-Javadoc)
-     * @see net.sf.marineapi.nmea.parser.RTESentence#isActiveRoute()
+     * @see net.sf.marineapi.nmea.sentence.RTESentence#isActiveRoute()
      */
     public boolean isActiveRoute() {
         return getCharValue(STATUS) == ACTIVE_ROUTE;
@@ -80,7 +80,7 @@ class RTESentenceImpl extends SentenceImpl implements RTESentence {
 
     /*
      * (non-Javadoc)
-     * @see net.sf.marineapi.nmea.parser.RTESentence#isWorkingRoute()
+     * @see net.sf.marineapi.nmea.sentence.RTESentence#isWorkingRoute()
      */
     public boolean isWorkingRoute() {
         return getCharValue(STATUS) == WORKING_ROUTE;
@@ -88,7 +88,7 @@ class RTESentenceImpl extends SentenceImpl implements RTESentence {
 
     /*
      * (non-Javadoc)
-     * @see net.sf.marineapi.nmea.parser.RTESentence#getNumberOfSentences()
+     * @see net.sf.marineapi.nmea.sentence.RTESentence#getSentenceCount()
      */
     public int getSentenceCount() {
         return getIntValue(NUMBER_OF_SENTENCES);
@@ -96,7 +96,7 @@ class RTESentenceImpl extends SentenceImpl implements RTESentence {
 
     /*
      * (non-Javadoc)
-     * @see net.sf.marineapi.nmea.parser.RTESentence#getSentenceNumber()
+     * @see net.sf.marineapi.nmea.sentence.RTESentence#getSentenceIndex()
      */
     public int getSentenceIndex() {
         return getIntValue(SENTENCE_NUMBER);
@@ -104,7 +104,7 @@ class RTESentenceImpl extends SentenceImpl implements RTESentence {
 
     /*
      * (non-Javadoc)
-     * @see net.sf.marineapi.nmea.parser.RTESentence#isFirstInSequence()
+     * @see net.sf.marineapi.nmea.sentence.RTESentence#isFirst()
      */
     public boolean isFirst() {
         return (getSentenceIndex() == 1);
@@ -112,7 +112,7 @@ class RTESentenceImpl extends SentenceImpl implements RTESentence {
 
     /*
      * (non-Javadoc)
-     * @see net.sf.marineapi.nmea.parser.RTESentence#isLastInSequence()
+     * @see net.sf.marineapi.nmea.sentence.RTESentence#isLast()
      */
     public boolean isLast() {
         return (getSentenceIndex() == getSentenceCount());
@@ -120,7 +120,7 @@ class RTESentenceImpl extends SentenceImpl implements RTESentence {
 
     /*
      * (non-Javadoc)
-     * @see net.sf.marineapi.nmea.parser.RTESentence#getRouteId()
+     * @see net.sf.marineapi.nmea.sentence.RTESentence#getRouteId()
      */
     public String getRouteId() {
         return getStringValue(ROUTE_ID);

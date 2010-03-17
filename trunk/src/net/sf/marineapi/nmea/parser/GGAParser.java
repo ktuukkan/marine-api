@@ -1,5 +1,5 @@
 /* 
- * GGASentenceImpl.java
+ * GGAParser.java
  * Copyright (C) 2010 Kimmo Tuukkanen
  * 
  * This file is part of Java Marine API.
@@ -33,7 +33,7 @@ import net.sf.marineapi.nmea.util.Units;
  * @author Kimmo Tuukkanen
  * @version $Revision$
  */
-class GGASentenceImpl extends PositionParser implements GGASentence {
+class GGAParser extends PositionParser implements GGASentence {
 
     // GGA field indices
     private final static int UTC_TIME = 1;
@@ -58,13 +58,13 @@ class GGASentenceImpl extends PositionParser implements GGASentence {
      * @throws IllegalArgumentException If the specified sentence is invalid or
      *             not a GGA sentence.
      */
-    public GGASentenceImpl(String nmea) {
+    public GGAParser(String nmea) {
         super(nmea, SentenceId.GGA);
     }
 
     /*
      * (non-Javadoc)
-     * @see net.sf.marineapi.nmea.parser.GGASentence#getAltitude()
+     * @see net.sf.marineapi.nmea.sentence.GGASentence#getAltitude()
      */
     public double getAltitude() {
         return getDoubleValue(ALTITUDE);
@@ -72,7 +72,7 @@ class GGASentenceImpl extends PositionParser implements GGASentence {
 
     /*
      * (non-Javadoc)
-     * @see net.sf.marineapi.nmea.parser.GGASentence#getAltitudeUnits()
+     * @see net.sf.marineapi.nmea.sentence.GGASentence#getAltitudeUnits()
      */
     public Units getAltitudeUnits() {
         char ch = getCharValue(ALTITUDE_UNITS);
@@ -85,7 +85,7 @@ class GGASentenceImpl extends PositionParser implements GGASentence {
 
     /*
      * (non-Javadoc)
-     * @see net.sf.marineapi.nmea.parser.GGASentence#getDgpsAge()
+     * @see net.sf.marineapi.nmea.sentence.GGASentence#getDgpsAge()
      */
     public double getDgpsAge() {
         return getDoubleValue(DGPS_AGE);
@@ -93,7 +93,7 @@ class GGASentenceImpl extends PositionParser implements GGASentence {
 
     /*
      * (non-Javadoc)
-     * @see net.sf.marineapi.nmea.parser.GGASentence#getDgpsStationId()
+     * @see net.sf.marineapi.nmea.sentence.GGASentence#getDgpsStationId()
      */
     public String getDgpsStationId() {
         return getStringValue(DGPS_STATION_ID);
@@ -101,7 +101,7 @@ class GGASentenceImpl extends PositionParser implements GGASentence {
 
     /*
      * (non-Javadoc)
-     * @see net.sf.marineapi.nmea.parser.GGASentence#getFixQuality()
+     * @see net.sf.marineapi.nmea.sentence.GGASentence#getFixQuality()
      */
     public GpsFixQuality getFixQuality() {
         return GpsFixQuality.valueOf(getIntValue(FIX_QUALITY));
@@ -109,7 +109,7 @@ class GGASentenceImpl extends PositionParser implements GGASentence {
 
     /*
      * (non-Javadoc)
-     * @see net.sf.marineapi.nmea.parser.GGASentence#getGeoidalHeight()
+     * @see net.sf.marineapi.nmea.sentence.GGASentence#getGeoidalHeight()
      */
     public double getGeoidalHeight() {
         return getDoubleValue(GEOIDAL_HEIGHT);
@@ -117,7 +117,7 @@ class GGASentenceImpl extends PositionParser implements GGASentence {
 
     /*
      * (non-Javadoc)
-     * @see net.sf.marineapi.nmea.parser.GGASentence#getGeoidalHeightUnits()
+     * @see net.sf.marineapi.nmea.sentence.GGASentence#getGeoidalHeightUnits()
      */
     public Units getGeoidalHeightUnits() {
         return Units.valueOf(getCharValue(HEIGHT_UNITS));
@@ -125,7 +125,7 @@ class GGASentenceImpl extends PositionParser implements GGASentence {
 
     /*
      * (non-Javadoc)
-     * @see net.sf.marineapi.nmea.parser.GGASentence#getHorizontalDOP()
+     * @see net.sf.marineapi.nmea.sentence.GGASentence#getHorizontalDOP()
      */
     public double getHorizontalDOP() {
         return getDoubleValue(HORIZONTAL_DILUTION);
@@ -133,7 +133,7 @@ class GGASentenceImpl extends PositionParser implements GGASentence {
 
     /*
      * (non-Javadoc)
-     * @see net.sf.marineapi.nmea.parser.GGASentence#getSatelliteCount()
+     * @see net.sf.marineapi.nmea.sentence.GGASentence#getSatelliteCount()
      */
     public int getSatelliteCount() {
         return getIntValue(SATELLITES_IN_USE);
@@ -141,7 +141,7 @@ class GGASentenceImpl extends PositionParser implements GGASentence {
 
     /*
      * (non-Javadoc)
-     * @see net.sf.marineapi.nmea.parser.PositionSentence#getPosition()
+     * @see net.sf.marineapi.nmea.sentence.PositionSentence#getPosition()
      */
     public Position getPosition() {
         double lat = parseLatitude(LATITUDE);
@@ -153,7 +153,7 @@ class GGASentenceImpl extends PositionParser implements GGASentence {
 
     /*
      * (non-Javadoc)
-     * @see net.sf.marineapi.nmea.parser.TimeSentence#getUtcTime()
+     * @see net.sf.marineapi.nmea.sentence.TimeSentence#getUtcTime()
      */
     public String getUtcTime() {
         return getStringValue(UTC_TIME);
@@ -161,7 +161,7 @@ class GGASentenceImpl extends PositionParser implements GGASentence {
 
     /*
      * (non-Javadoc)
-     * @see net.sf.marineapi.nmea.parser.TimeSentence#getUtcHours()
+     * @see net.sf.marineapi.nmea.sentence.TimeSentence#getUtcHours()
      */
     public int getUtcHours() {
         return Integer.parseInt(getUtcTime().substring(0, 2));
@@ -169,7 +169,7 @@ class GGASentenceImpl extends PositionParser implements GGASentence {
 
     /*
      * (non-Javadoc)
-     * @see net.sf.marineapi.nmea.parser.TimeSentence#getUtcMinutes()
+     * @see net.sf.marineapi.nmea.sentence.TimeSentence#getUtcMinutes()
      */
     public int getUtcMinutes() {
         return Integer.parseInt(getUtcTime().substring(2, 4));
@@ -177,7 +177,7 @@ class GGASentenceImpl extends PositionParser implements GGASentence {
 
     /*
      * (non-Javadoc)
-     * @see net.sf.marineapi.nmea.parser.TimeSentence#getUtcSeconds()
+     * @see net.sf.marineapi.nmea.sentence.TimeSentence#getUtcSeconds()
      */
     public double getUtcSeconds() {
         return Integer.parseInt(getUtcTime().substring(4, 6));

@@ -29,7 +29,7 @@ public class RTETest {
     @Before
     public void setUp() throws Exception {
         try {
-            rte = new RTESentenceImpl(EXAMPLE);
+            rte = new RTEParser(EXAMPLE);
         } catch (Exception e) {
             fail(e.getMessage());
         }
@@ -37,7 +37,7 @@ public class RTETest {
 
     /**
      * Test method for
-     * {@link net.sf.marineapi.nmea.parser.RTESentenceImpl#getWaypointIds()}.
+     * {@link net.sf.marineapi.nmea.parser.RTEParser#getWaypointIds()}.
      */
     @Test
     public void testGetWaypointIds() {
@@ -51,7 +51,7 @@ public class RTETest {
 
     /**
      * Test method for
-     * {@link net.sf.marineapi.nmea.parser.RTESentenceImpl#getWaypointCount()}.
+     * {@link net.sf.marineapi.nmea.parser.RTEParser#getWaypointCount()}.
      */
     @Test
     public void testGetNumberOfWaypoints() {
@@ -60,7 +60,7 @@ public class RTETest {
 
     /**
      * Test method for
-     * {@link net.sf.marineapi.nmea.parser.RTESentenceImpl#isActiveRoute()}.
+     * {@link net.sf.marineapi.nmea.parser.RTEParser#isActiveRoute()}.
      */
     @Test
     public void testIsActiveRoute() {
@@ -69,7 +69,7 @@ public class RTETest {
 
     /**
      * Test method for
-     * {@link net.sf.marineapi.nmea.parser.RTESentenceImpl#isWorkingRoute()}.
+     * {@link net.sf.marineapi.nmea.parser.RTEParser#isWorkingRoute()}.
      */
     @Test
     public void testIsWorkingRoute() {
@@ -78,7 +78,7 @@ public class RTETest {
 
     /**
      * Test method for
-     * {@link net.sf.marineapi.nmea.parser.RTESentenceImpl#getSentenceCount()}.
+     * {@link net.sf.marineapi.nmea.parser.RTEParser#getSentenceCount()}.
      */
     @Test
     public void testGetNumberOfSentences() {
@@ -87,7 +87,7 @@ public class RTETest {
 
     /**
      * Test method for
-     * {@link net.sf.marineapi.nmea.parser.RTESentenceImpl#getSentenceIndex()}.
+     * {@link net.sf.marineapi.nmea.parser.RTEParser#getSentenceIndex()}.
      */
     @Test
     public void testGetSentenceNumber() {
@@ -96,7 +96,7 @@ public class RTETest {
 
     /**
      * Test method for
-     * {@link net.sf.marineapi.nmea.parser.RTESentenceImpl#isFirst()}.
+     * {@link net.sf.marineapi.nmea.parser.RTEParser#isFirst()}.
      */
     @Test
     public void testIsFirstInSequence() {
@@ -105,7 +105,7 @@ public class RTETest {
 
     /**
      * Test method for
-     * {@link net.sf.marineapi.nmea.parser.RTESentenceImpl#isLast()}.
+     * {@link net.sf.marineapi.nmea.parser.RTEParser#isLast()}.
      */
     @Test
     public void testIsLastInSequence() {
@@ -114,7 +114,7 @@ public class RTETest {
 
     /**
      * Test method for
-     * {@link net.sf.marineapi.nmea.parser.RTESentenceImpl#getRouteId()}.
+     * {@link net.sf.marineapi.nmea.parser.RTEParser#getRouteId()}.
      */
     @Test
     public void testGetRouteId() {

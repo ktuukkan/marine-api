@@ -55,44 +55,44 @@ public class SentenceFactory {
     public Sentence createParser(String nmea) {
 
         Sentence s = null;
-        SentenceId type = SentenceImpl.parseSentenceId(nmea);
+        SentenceId type = SentenceParser.parseSentenceId(nmea);
 
         switch (type) {
             case BOD:
-                s = new BODSentenceImpl(nmea);
+                s = new BODParser(nmea);
                 break;
             case GGA:
-                s = new GGASentenceImpl(nmea);
+                s = new GGAParser(nmea);
                 break;
             case GLL:
-                s = new GLLSentenceImpl(nmea);
+                s = new GLLParser(nmea);
                 break;
             case GSA:
-                s = new GSASentenceImpl(nmea);
+                s = new GSAParser(nmea);
                 break;
             case GSV:
-                s = new GSVSentenceImpl(nmea);
+                s = new GSVParser(nmea);
                 break;
             case RMB:
-                s = new RMBSentenceImpl(nmea);
+                s = new RMBParser(nmea);
                 break;
             case RMC:
-                s = new RMCSentenceImpl(nmea);
+                s = new RMCParser(nmea);
                 break;
             case RTE:
-                s = new RTESentenceImpl(nmea);
+                s = new RTEParser(nmea);
                 break;
             case VTG:
-                s = new VTGSentenceImpl(nmea);
+                s = new VTGParser(nmea);
                 break;
             case WPL:
-                s = new WPLSentenceImpl(nmea);
+                s = new WPLParser(nmea);
                 break;
             case ZDA:
-                s = new ZDASentenceImpl(nmea);
+                s = new ZDAParser(nmea);
                 break;
             default:
-                s = new SentenceImpl(nmea);
+                s = new SentenceParser(nmea);
         }
 
         return s;

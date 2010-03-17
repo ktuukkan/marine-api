@@ -1,5 +1,5 @@
 /* 
- * SentenceImpl.java
+ * SentenceParser.java
  * Copyright (C) 2010 Kimmo Tuukkanen
  * 
  * This file is part of Java Marine API.
@@ -27,18 +27,30 @@ import net.sf.marineapi.nmea.util.TalkerId;
 
 /**
  * <p>
- * Base sentence parser for all sentence types. Provides general services, such
- * as validation and checksum calculation.
+ * Base sentence parser for all NMEA sentence types. Provides general services
+ * such as sentence validation, field parsing and formatting.
  * <p>
- * The basic structure of an NMEA sentence is: <br>
+ * NMEA data is transmitted in the form of "sentences". Each sentence starts
+ * with a "$", a two letter "talker ID", a three letter "sentence ID", followed
+ * by a number of data fields separated by commas, and terminated by an optional
+ * checksum, and a carriage return/line feed. A sentence may contain up to 82
+ * characters including the "$" and CR/LF. If data for a field is not available,
+ * the field is simply omitted, but the commas that would delimit it are still
+ * sent, with no space between them.
+ * <p>
  * <code>
  * $&lt;address field&gt;,&lt;data field #1&gt;,&lt;data field #2&gt;,...,&lt;data field #n&gt;*&lt;checksum&gt;
  * </code>
+ * <p>
+ * For more details on sentence format, see <a
+ * href="http://vancouver-webpages.com/peter/nmeafaq.txt">NMEA FAQ</a> by Peter
+ * Bennett or <a href="http://gpsd.berlios.de/NMEA.txt">NMEA Revealed</a> by
+ * Eric S. Raymond.
  * 
  * @author Kimmo Tuukkanen
  * @version $Revision$
  */
-class SentenceImpl implements Sentence {
+public class SentenceParser implements Sentence {
 
     // The first two characters after '$'.
     private TalkerId talkerId;
@@ -48,14 +60,33 @@ class SentenceImpl implements Sentence {
     private final String[] dataFields;
 
     /**
-     * Creates a new instance of SentenceImpl. Sentence type is resolved
+     * Creates a new empty sentence with specified talker and sentence IDs.
+     * 
+     * @param talker Talker type Id
+     * @param type Sentence type Id
+     * @param fields Number of sentence data fields, including address field
+     */
+    public SentenceParser(TalkerId talker, SentenceId type, int fields) {
+        if (talker == null || type == null || fields < 1) {
+            throw new IllegalArgumentException("Invalid parameters");
+        }
+        this.sentenceId = type;
+        this.talkerId = talker;
+        this.dataFields = new String[fields];
+        for (int i = 0; i < this.dataFields.length; i++) {
+            dataFields[i] = "";
+        }
+    }
+
+    /**
+     * Creates a new instance of SentenceParser. Sentence type is resolved
      * automatically and checked against the supported types.
      * 
      * @param nmea A valid NMEA 0183 sentence
      * @throws IllegalArgumentException If the specified sentence is invalid or
      *             if sentence type is not supported.
      */
-    public SentenceImpl(String nmea) {
+    public SentenceParser(String nmea) {
         // check for valid sentence string
         if (!NMEA.isValid(nmea)) {
             String msg = String.format("Invalid data [%s]", nmea);
@@ -75,11 +106,11 @@ class SentenceImpl implements Sentence {
     }
 
     /**
-     * Creates a new instance of SentenceImpl. Sentence may be constructed only
+     * Creates a new instance of SentenceParser. Sentence may be constructed only
      * if parameter <code>nmea</code> contains a valid NMEA 0183 sentence of the
      * specified <code>type</code>.
      * <p>
-     * For example, GGASentenceImpl class should specify the type
+     * For example, GGAParser class should specify the type
      * <code>SentenceId.GGA</code> as <code>type</code> to succeed.
      * 
      * @param nmea NMEA sentence <code>String</code>
@@ -87,7 +118,7 @@ class SentenceImpl implements Sentence {
      * @throws IllegalArgumentException If the given String is not a valid NMEA
      *             0831 sentence or does not match the specified type.
      */
-    protected SentenceImpl(String nmea, SentenceId type) {
+    protected SentenceParser(String nmea, SentenceId type) {
         this(nmea);
         if (type == null) {
             throw new IllegalArgumentException(
@@ -102,27 +133,27 @@ class SentenceImpl implements Sentence {
 
     /*
      * (non-Javadoc)
-     * @see net.sf.marineapi.nmea.parser.Sentence#getSentenceId()
+     * @see net.sf.marineapi.nmea.sentence.Sentence#getSentenceId()
      */
-    public final SentenceId getSentenceId() {
+    public SentenceId getSentenceId() {
         return sentenceId;
     }
 
     /*
      * (non-Javadoc)
-     * @see net.sf.marineapi.nmea.parser.Sentence#getTalkerId()
+     * @see net.sf.marineapi.nmea.sentence.Sentence#getTalkerId()
      */
-    public final TalkerId getTalkerId() {
+    public TalkerId getTalkerId() {
         return talkerId;
     }
 
     /*
      * (non-Javadoc)
      * @see
-     * net.sf.marineapi.nmea.parser.Sentence#setTalkerId(net.sf.marineapi.nmea
-     * .util.TalkerId)
+     * net.sf.marineapi.nmea.sentence.Sentence#setTalkerId(net.sf.marineapi.
+     * nmea.util.TalkerId)
      */
-    public final void setTalkerId(TalkerId id) {
+    public void setTalkerId(TalkerId id) {
         this.talkerId = id;
     }
 
@@ -131,7 +162,7 @@ class SentenceImpl implements Sentence {
      * 
      * @param index Field index in sentence
      * @return Character contained in the field
-     * @throws ParseException If field contains more than one characters
+     * @throws ParseException If field contains more than one character
      */
     protected final char getCharValue(int index) {
         String val = getStringValue(index);
@@ -164,7 +195,7 @@ class SentenceImpl implements Sentence {
      * 
      * @return The number of fields
      */
-    protected final int getFieldCount() {
+    protected int getFieldCount() {
         return dataFields.length;
     }
 
@@ -189,12 +220,12 @@ class SentenceImpl implements Sentence {
      * first field is the sentence ID, followed by the actual data fields.
      * Checksum is not considered as a data field and has no index.
      * <p>
-     * Field indexing, let i = 0: <br>
+     * Field indexing, let i = 1: <br>
      * <code>$&lt;id&gt;,&lt;i&gt;,&lt;i+1&gt;,&lt;i+2&gt;,...,&lt;i+n&gt;*&lt;checksum&gt;</code>
      * 
      * @param index Field index
      * @return Field value as String
-     * @throws DataNotAvailableException If the field contains no value
+     * @throws DataNotAvailableException If the field is empty
      */
     protected final String getStringValue(int index) {
         String value = dataFields[index];
@@ -221,7 +252,7 @@ class SentenceImpl implements Sentence {
     }
 
     /**
-     * Parses the sentence Id from specified NMEA sentence.
+     * Parses the sentence Id of specified NMEA sentence.
      * 
      * @param nmea NMEA 0183 sentence String
      * @return SentenceId Sentence ID of the specified sentence
@@ -237,7 +268,7 @@ class SentenceImpl implements Sentence {
     }
 
     /**
-     * Parses the talker Id from specified NMEA sentence.
+     * Parses the talker Id of specified NMEA sentence.
      * 
      * @param nmea NMEA 0183 sentence String
      * @return TalkerId Talker ID of the specified sentence
@@ -286,7 +317,7 @@ class SentenceImpl implements Sentence {
         if (o == this) {
             return true;
         }
-        if (o instanceof SentenceImpl) {
+        if (o instanceof SentenceParser) {
             Sentence s = (Sentence) o;
             return s.toString().equals(toString());
         }

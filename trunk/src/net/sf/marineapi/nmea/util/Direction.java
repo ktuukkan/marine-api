@@ -62,7 +62,7 @@ public enum Direction {
     /**
      * Returns the corresponding char constant.
      */
-    private char toChar() {
+    public char toChar() {
         return ch;
     }
 }

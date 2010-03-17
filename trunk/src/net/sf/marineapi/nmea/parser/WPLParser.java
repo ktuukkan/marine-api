@@ -1,5 +1,5 @@
 /* 
- * WPLSentenceImpl.java
+ * WPLParser.java
  * Copyright (C) 2010 Kimmo Tuukkanen
  * 
  * This file is part of Java Marine API.
@@ -31,7 +31,7 @@ import net.sf.marineapi.nmea.util.Waypoint;
  * @author Kimmo Tuukkanen
  * @version $Revision$
  */
-class WPLSentenceImpl extends PositionParser implements WPLSentence {
+class WPLParser extends PositionParser implements WPLSentence {
 
     // field ids
     private static final int LATITUDE = 1;
@@ -46,13 +46,13 @@ class WPLSentenceImpl extends PositionParser implements WPLSentence {
      * @param nmea WPL sentence String.
      * @throws IllegalArgumentException
      */
-    public WPLSentenceImpl(String nmea) {
+    public WPLParser(String nmea) {
         super(nmea, SentenceId.WPL);
     }
 
     /*
      * (non-Javadoc)
-     * @see net.sf.marineapi.nmea.parser.WPLSentence#getWaypoint()
+     * @see net.sf.marineapi.nmea.sentence.WPLSentence#getWaypoint()
      */
     public Waypoint getWaypoint() {
         String id = getStringValue(WAYPOINT_ID);

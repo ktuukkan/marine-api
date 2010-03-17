@@ -28,7 +28,7 @@ public class WPLTest {
     @Before
     public void setUp() throws Exception {
         try {
-            wpl = new WPLSentenceImpl(EXAMPLE);
+            wpl = new WPLParser(EXAMPLE);
         } catch (Exception e) {
             fail(e.getMessage());
         }
@@ -36,7 +36,7 @@ public class WPLTest {
 
     /**
      * Test method for
-     * {@link net.sf.marineapi.nmea.parser.WPLSentenceImpl#getWaypoint()}.
+     * {@link net.sf.marineapi.nmea.parser.WPLParser#getWaypoint()}.
      */
     @Test
     public void testGetWaypoint() {

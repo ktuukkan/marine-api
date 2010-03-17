@@ -88,5 +88,10 @@ public interface Sentence {
      */
     void setTalkerId(TalkerId id);
 
+    /**
+     * Returns the String representation of sentence, in NMEA 0183 format.
+     * 
+     * @return Sentence String
+     */
     public String toString();
 }

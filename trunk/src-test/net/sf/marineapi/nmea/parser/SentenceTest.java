@@ -19,7 +19,7 @@ import org.junit.Test;
  */
 public class SentenceTest {
 
-    private SentenceImpl instance;
+    private SentenceParser instance;
 
     /**
      * setUp
@@ -28,22 +28,22 @@ public class SentenceTest {
      */
     @Before
     public void setUp() throws Exception {
-        instance = new SentenceImpl(RMCTest.EXAMPLE);
+        instance = new SentenceParser(RMCTest.EXAMPLE);
     }
 
     /**
      * Test method for
-     * {@link net.sf.marineapi.nmea.parser.SentenceImpl#Sentence(java.lang.String, net.sf.marineapi.nmea.util.SentenceId)}
+     * {@link net.sf.marineapi.nmea.parser.SentenceParser#Sentence(java.lang.String, net.sf.marineapi.nmea.util.SentenceId)}
      * .
      */
     @Test
     public void testSentence() {
 
-        Sentence s = new SentenceImpl(TalkerId.GP, SentenceId.GLL, 5);
+        Sentence s = new SentenceParser(TalkerId.GP, SentenceId.GLL, 5);
         assertEquals("$GPGLL,,,,*50", s.toString());
 
         try {
-            new SentenceImpl("this is invalid sentence");
+            new SentenceParser("this is invalid sentence");
             fail("Did not throw exception");
         } catch (IllegalArgumentException se) {
             // ok
@@ -52,7 +52,7 @@ public class SentenceTest {
         }
 
         try {
-            new SentenceImpl("$XZGGA,VALID,BUT,TALKER,NOT,SUPPORTED");
+            new SentenceParser("$XZGGA,VALID,BUT,TALKER,NOT,SUPPORTED");
             fail("Did not throw exception");
         } catch (IllegalArgumentException se) {
             assertTrue(se.getMessage().contains("[XZ]"));
@@ -61,7 +61,7 @@ public class SentenceTest {
         }
 
         try {
-            new SentenceImpl("$GPXYZ,VALID,BUT,TYPE,NOT,SUPPORTED");
+            new SentenceParser("$GPXYZ,VALID,BUT,TYPE,NOT,SUPPORTED");
             fail("Did not throw exception");
         } catch (IllegalArgumentException se) {
             assertTrue(se.getMessage().contains("[XYZ]"));
@@ -70,7 +70,7 @@ public class SentenceTest {
         }
 
         try {
-            new SentenceImpl(BODTest.EXAMPLE, SentenceId.GLL);
+            new SentenceParser(BODTest.EXAMPLE, SentenceId.GLL);
             fail("Did not throw exception");
         } catch (IllegalArgumentException iae) {
             // OK
@@ -79,7 +79,7 @@ public class SentenceTest {
         }
 
         try {
-            new SentenceImpl(RMCTest.EXAMPLE, null);
+            new SentenceParser(RMCTest.EXAMPLE, null);
             fail("Did not throw exception");
         } catch (IllegalArgumentException iae) {
             // OK
@@ -88,7 +88,7 @@ public class SentenceTest {
         }
 
         try {
-            new SentenceImpl(null, null);
+            new SentenceParser(null, null);
             fail("Did not throw exception");
         } catch (IllegalArgumentException iae) {
             // OK
@@ -99,7 +99,7 @@ public class SentenceTest {
 
     /**
      * Test method for
-     * {@link net.sf.marineapi.nmea.parser.SentenceImpl#getSentenceId()}.
+     * {@link net.sf.marineapi.nmea.parser.SentenceParser#getSentenceId()}.
      */
     @Test
     public void testGetSentenceId() {
@@ -108,7 +108,7 @@ public class SentenceTest {
 
     /**
      * Test method for
-     * {@link net.sf.marineapi.nmea.parser.SentenceImpl#getTalkerId()}.
+     * {@link net.sf.marineapi.nmea.parser.SentenceParser#getTalkerId()}.
      */
     @Test
     public void testGetTalkerId() {
@@ -117,7 +117,7 @@ public class SentenceTest {
 
     /**
      * Test method for
-     * {@link net.sf.marineapi.nmea.parser.SentenceImpl#toString()}.
+     * {@link net.sf.marineapi.nmea.parser.SentenceParser#toString()}.
      */
     @Test
     public void testToString() {
@@ -210,13 +210,13 @@ public class SentenceTest {
 
     /**
      * Test method for
-     * {@link net.sf.marineapi.nmea.parser.SentenceImpl#getStringValue(int)}.
+     * {@link net.sf.marineapi.nmea.parser.SentenceParser#getStringValue(int)}.
      */
     @Test
     public void testGetStringValue() {
         String nmea = "$GPGLL,6011.552,N,02501.941,E,120045,A";
 
-        SentenceImpl s = new SentenceImpl(nmea);
+        SentenceParser s = new SentenceParser(nmea);
         String[] fields = nmea.split(",", -1);
         for (int i = 0; i < fields.length; i++) {
             assertEquals(fields[i], s.getStringValue(i));
@@ -226,7 +226,7 @@ public class SentenceTest {
         nmea = "$GPGLL,foobar,N,,EAST,120045,A";
 
         try {
-            SentenceImpl s2 = new SentenceImpl(nmea);
+            SentenceParser s2 = new SentenceParser(nmea);
             s2.getDoubleValue(1);
             fail("Did not throw exception");
         } catch (ParseException ex) {
@@ -236,7 +236,7 @@ public class SentenceTest {
         }
 
         try {
-            SentenceImpl s3 = new SentenceImpl(nmea);
+            SentenceParser s3 = new SentenceParser(nmea);
             s3.getCharValue(4);
             fail("Did not throw exception");
         } catch (ParseException ex) {
@@ -246,7 +246,7 @@ public class SentenceTest {
         }
 
         try {
-            SentenceImpl s4 = new SentenceImpl(nmea);
+            SentenceParser s4 = new SentenceParser(nmea);
             s4.getStringValue(3);
             fail("Did not throw exception");
         } catch (DataNotAvailableException ex) {
