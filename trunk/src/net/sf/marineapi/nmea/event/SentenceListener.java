@@ -31,11 +31,10 @@ import java.util.EventListener;
 public interface SentenceListener extends EventListener {
 
     /**
-     * This method is invoked when a valid NMEA sentence has been read from the
-     * data stream.
+     * This method is invoked when a valid NMEA 0183 sentence has been read.
      * 
-     * @param se Event to dispatch
+     * @param se SentenceEvent to dispatch
      */
-    public void sentenceRead(SentenceEvent se);
+    public void sentenceRead(SentenceEvent event);
 
 }

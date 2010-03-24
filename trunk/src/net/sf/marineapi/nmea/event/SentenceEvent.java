@@ -26,8 +26,8 @@ import java.util.EventObject;
 import net.sf.marineapi.nmea.sentence.Sentence;
 
 /**
- * Event object to be sent when sentence events occur. Sentence event occurs
- * when a sentence has been read from NMEA source.
+ * Sentence events occur when a valid NMEA 0183 sentence has been read from the
+ * data source.
  * 
  * @author Kimmo Tuukkanen
  * @version $Revision$

@@ -95,7 +95,7 @@ public class SentenceReader {
      * 
      * @param nmea sentence string.
      */
-    private void fireSentenceRead(Sentence sentence) {
+    private void fireSentenceEvent(Sentence sentence) {
         SentenceEvent se = new SentenceEvent(this, sentence);
         for (SentenceListener sl : getListeners()) {
             try {
@@ -140,10 +140,10 @@ public class SentenceReader {
                         data = in.readLine();
                         if (NMEA.isValid(data)) {
                             Sentence s = factory.createParser(data);
-                            fireSentenceRead(s);
+                            fireSentenceEvent(s);
                         }
                     }
-                    Thread.sleep(100);
+                    Thread.sleep(75);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
