@@ -25,8 +25,9 @@ import net.sf.marineapi.nmea.util.Direction;
 import net.sf.marineapi.nmea.util.GpsMode;
 
 /**
- * Interface for RMC sentence type. Recommended minimum specific GPS/Transit
- * data.
+ * Interface for RMC sentence type. Recommended minimum navigation information;
+ * date/time, current location, speed over ground, true course over ground and
+ * magnetic variation.
  * <p>
  * Example:<br>
  * <code>$GPRMC,120044,A,6011.552,N,02501.941,E,000.0,360.0,160705,006.1,E*7C</code>

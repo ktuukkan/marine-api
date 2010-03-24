@@ -21,7 +21,8 @@
 package net.sf.marineapi.nmea.parser;
 
 /**
- * Exception that may be thrown when requested data is not available.
+ * Thrown to indicate that requested data is not available. For example, when
+ * invoking a getter for sentence data field that contains no value.
  * 
  * @author Kimmo Tuukkanen
  * @version $Revision$

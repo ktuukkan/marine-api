@@ -67,8 +67,12 @@ public class SentenceParser implements Sentence {
      * @param fields Number of sentence data fields, including address field
      */
     public SentenceParser(TalkerId talker, SentenceId type, int fields) {
-        if (talker == null || type == null || fields < 1) {
-            throw new IllegalArgumentException("Invalid parameters");
+        if (talker == null || type == null) {
+            throw new IllegalArgumentException(
+                    "Sentence and Talker IDs must be specified");
+        }
+        if (fields < 1) {
+            throw new IllegalArgumentException("Minimum number of fields is 1");
         }
         this.sentenceId = type;
         this.talkerId = talker;
@@ -106,9 +110,9 @@ public class SentenceParser implements Sentence {
     }
 
     /**
-     * Creates a new instance of SentenceParser. Sentence may be constructed only
-     * if parameter <code>nmea</code> contains a valid NMEA 0183 sentence of the
-     * specified <code>type</code>.
+     * Creates a new instance of SentenceParser. Sentence may be constructed
+     * only if parameter <code>nmea</code> contains a valid NMEA 0183 sentence
+     * of the specified <code>type</code>.
      * <p>
      * For example, GGAParser class should specify the type
      * <code>SentenceId.GGA</code> as <code>type</code> to succeed.
@@ -229,7 +233,7 @@ public class SentenceParser implements Sentence {
      */
     protected final String getStringValue(int index) {
         String value = dataFields[index];
-        if (value == null || value.isEmpty()) {
+        if (value == null || "".equals(value)) {
             throw new DataNotAvailableException("Data not available");
         }
         return value;

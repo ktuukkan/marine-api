@@ -21,8 +21,9 @@
 package net.sf.marineapi.nmea.parser;
 
 /**
- * ParseException may be thrown when a sentence parser is unable to parse given
- * data String.
+ * Thrown to indicate that parser is unable to parse requested data to expected
+ * native data type. For example, when a field contains invalid value that
+ * cannot be parsed to expected type.
  * 
  * @author Kimmo Tuukkanen
  * @version $Revision$

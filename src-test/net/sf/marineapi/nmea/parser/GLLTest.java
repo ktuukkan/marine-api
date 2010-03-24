@@ -66,6 +66,7 @@ public class GLLTest {
         GLLParser fail = new GLLParser(invalid1);
         try {
             Position p2 = fail.getPosition();
+            fail("Did not throw exception");
         } catch (Exception e) {
             // pass
         }
@@ -74,6 +75,7 @@ public class GLLTest {
         fail = new GLLParser(invalid2);
         try {
             Position p3 = fail.getPosition();
+            fail("Did not throw exception");
         } catch (Exception e) {
             // pass
         }
