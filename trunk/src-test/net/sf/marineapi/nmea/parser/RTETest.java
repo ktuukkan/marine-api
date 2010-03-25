@@ -23,11 +23,8 @@ public class RTETest {
 
     private RTESentence rte;
 
-    /**
-     * @throws java.lang.Exception
-     */
     @Before
-    public void setUp() throws Exception {
+    public void setUp() {
         try {
             rte = new RTEParser(EXAMPLE);
         } catch (Exception e) {

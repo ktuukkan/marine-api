@@ -21,8 +21,6 @@ public class BODTest extends TestCase {
 
     /**
      * setUp
-     * 
-     * @throws java.lang.Exception
      */
     @Override
     @Before
@@ -36,8 +34,6 @@ public class BODTest extends TestCase {
 
     /**
      * tearDown
-     * 
-     * @throws java.lang.Exception
      */
     @Override
     @After
@@ -46,7 +42,7 @@ public class BODTest extends TestCase {
 
     /**
      * Test method for
-     * {@link net.sf.marineapi.nmea.parser.BODParser#SentenceBOD(java.lang.String)}
+     * {@link net.sf.marineapi.nmea.parser.BODParser#BODParser(java.lang.String)}
      * .
      */
     @Test
@@ -79,10 +75,10 @@ public class BODTest extends TestCase {
 
     /**
      * Test method for
-     * {@link net.sf.marineapi.nmea.parser.BODParser#getBearingTrue()}.
+     * {@link net.sf.marineapi.nmea.parser.BODParser#getTrueBearing()}.
      */
     @Test
-    public void testGetBearingTrue() {
+    public void testGetTrueBearing() {
         try {
             double b = bod.getTrueBearing();
             assertTrue(234.9 == b);
@@ -93,10 +89,10 @@ public class BODTest extends TestCase {
 
     /**
      * Test method for
-     * {@link net.sf.marineapi.nmea.parser.BODParser#getBearingMagnetic()}.
+     * {@link net.sf.marineapi.nmea.parser.BODParser#getMagneticBearing()}.
      */
     @Test
-    public void testGetBearingMagnetic() {
+    public void testGetMagneticBearing() {
         try {
             double b = bod.getMagneticBearing();
             assertTrue(228.8 == b);
@@ -133,6 +129,111 @@ public class BODTest extends TestCase {
             assertEquals("RUSKI", id);
         } catch (ParseException e) {
             fail(e.getMessage());
+        }
+    }
+    
+    
+    
+    
+    /**
+     * Test method for
+     * {@link net.sf.marineapi.nmea.parser.BODParser#getTrueBearing()}.
+     */
+    @Test
+    public void testSetTrueBearing() {
+    	final double bearing = 180.0;
+        try {
+            bod.setTrueBearing(bearing);
+            assertEquals(bearing, bod.getTrueBearing());
+        } catch (Exception e) {
+            fail(e.getMessage());
+        }
+        
+        try {
+            bod.setTrueBearing(-0.01);
+            fail("Did not throw exception");
+        } catch (Exception e) {
+            assertTrue(e instanceof IllegalArgumentException);
+        }
+        
+        try {
+            bod.setTrueBearing(360.01);
+            fail("Did not throw exception");
+        } catch (Exception e) {
+            assertTrue(e instanceof IllegalArgumentException);
+        }
+    }
+
+    /**
+     * Test method for
+     * {@link net.sf.marineapi.nmea.parser.BODParser#getMagneticBearing()}.
+     */
+    @Test
+    public void testSetMagneticBearing() {
+    	final double bearing = 180.0;
+        try {
+            bod.setMagneticBearing(bearing);
+            assertEquals(bearing, bod.getMagneticBearing());
+        } catch (Exception e) {
+            fail(e.getMessage());
+        }
+        
+        try {
+            bod.setMagneticBearing(-0.01);
+            fail("Did not throw exception");
+        } catch (Exception e) {
+            assertTrue(e instanceof IllegalArgumentException);
+        }
+        
+        try {
+            bod.setMagneticBearing(360.01);
+            fail("Did not throw exception");
+        } catch (Exception e) {
+            assertTrue(e instanceof IllegalArgumentException);
+        }
+    }
+
+    /**
+     * Test method for
+     * {@link net.sf.marineapi.nmea.parser.BODParser#getOriginWaypointId()}.
+     */
+    @Test
+    public void testSetOriginWaypointId() {
+        try {
+            bod.setOriginWaypointId("TAINIO");
+            assertEquals("TAINIO", bod.getOriginWaypointId());
+        } catch (Exception e) {
+            fail(e.getMessage());
+        }
+    }
+
+    /**
+     * Test method for
+     * {@link net.sf.marineapi.nmea.parser.BODParser#getDestinationWaypointId()}
+     * .
+     */
+    @Test
+    public void testSetDestinationWaypointId() {
+
+        try {
+            bod.setDestinationWaypointId(null);
+            bod.getDestinationWaypointId();
+        } catch (Exception e) {
+            assertTrue(e instanceof DataNotAvailableException);
+        }
+    	
+    	try {
+            bod.setDestinationWaypointId("TIISKERI");
+            assertEquals("TIISKERI", bod.getDestinationWaypointId());
+        } catch (Exception e) {
+            fail(e.getMessage());
+        }
+        
+        try {
+            bod.setDestinationWaypointId("");
+            bod.getDestinationWaypointId();
+        } catch (Exception e) {
+            assertTrue(e instanceof DataNotAvailableException);
         }
     }
 }

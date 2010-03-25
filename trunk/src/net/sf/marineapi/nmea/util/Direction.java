@@ -49,6 +49,8 @@ public enum Direction {
 
     /**
      * Get the enum corresponding to specified char.
+     * @param c Char indicator for Direction
+     * @return Direction
      */
     public static Direction valueOf(char c) {
         for (Direction d : values()) {
@@ -61,6 +63,7 @@ public enum Direction {
 
     /**
      * Returns the corresponding char constant.
+     * @return Char indicator for Direction
      */
     public char toChar() {
         return ch;

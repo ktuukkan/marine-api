@@ -23,18 +23,14 @@ public class SentenceTest {
 
     /**
      * setUp
-     * 
-     * @throws java.lang.Exception
      */
     @Before
-    public void setUp() throws Exception {
+    public void setUp() {
         instance = new SentenceParser(RMCTest.EXAMPLE);
     }
 
     /**
-     * Test method for
-     * {@link net.sf.marineapi.nmea.parser.SentenceParser#Sentence(java.lang.String, net.sf.marineapi.nmea.util.SentenceId)}
-     * .
+     * Test method for SenteceParser constructor.
      */
     @Test
     public void testSentence() {
@@ -43,7 +39,7 @@ public class SentenceTest {
         assertEquals("$GPGLL,,,,*50", s.toString());
 
         try {
-            new SentenceParser("this is invalid sentence");
+            new SentenceParser("invalid_$GPGGA,,,,,,");
             fail("Did not throw exception");
         } catch (IllegalArgumentException se) {
             // ok

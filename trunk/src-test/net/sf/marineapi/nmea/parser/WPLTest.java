@@ -22,11 +22,8 @@ public class WPLTest {
 
     private WPLSentence wpl;
 
-    /**
-     * @throws java.lang.Exception
-     */
     @Before
-    public void setUp() throws Exception {
+    public void setUp() {
         try {
             wpl = new WPLParser(EXAMPLE);
         } catch (Exception e) {

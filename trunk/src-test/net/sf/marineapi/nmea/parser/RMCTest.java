@@ -28,11 +28,8 @@ public class RMCTest {
 
     RMCParser rmc;
 
-    /**
-     * @throws java.lang.Exception
-     */
     @Before
-    public void setUp() throws Exception {
+    public void setUp() {
         try {
             rmc = new RMCParser(EXAMPLE);
         } catch (Exception e) {

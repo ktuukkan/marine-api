@@ -49,6 +49,7 @@ public abstract class PositionParser extends SentenceParser {
      * format for latitude is <code>ddmm.mmm</code>.
      * 
      * @param index Index of field containing the latitude value.
+     * @return Latitude value in degrees
      */
     protected double parseLatitude(int index) {
         String field = getStringValue(index);
@@ -62,6 +63,7 @@ public abstract class PositionParser extends SentenceParser {
      * format for longitude is <code>dddmm.mmm</code>.
      * 
      * @param index Index of field containing the longitude value.
+     * @return Longitude value in degrees
      */
     protected double parseLongitude(int index) {
         String field = getStringValue(index);
@@ -74,6 +76,7 @@ public abstract class PositionParser extends SentenceParser {
      * Parses the hemisphere of latitude from specified field.
      * 
      * @param index Index of field that contains the latitude hemisphere value.
+     * @return Hemisphere of latitude
      */
     protected Direction parseHemisphereLat(int index) {
         char ch = getCharValue(index);
@@ -88,6 +91,7 @@ public abstract class PositionParser extends SentenceParser {
      * Parses the hemisphere of longitude from the specified field.
      * 
      * @param index Field index for longitude hemisphere indicator
+     * @return Hemisphere of longitude
      */
     protected Direction parseHemisphereLon(int index) {
         char ch = getCharValue(index);

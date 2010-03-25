@@ -26,10 +26,10 @@ public class GLLTest {
     private GLLParser instance;
 
     /**
-     * @throws java.lang.Exception
+     * setUp
      */
     @Before
-    public void setUp() throws Exception {
+    public void setUp() {
         try {
             instance = new GLLParser(EXAMPLE);
         } catch (Exception e) {
@@ -65,7 +65,7 @@ public class GLLTest {
         final String invalid1 = "$GPGLL,6111.552,E,02501.941,W,120045,A";
         GLLParser fail = new GLLParser(invalid1);
         try {
-            Position p2 = fail.getPosition();
+            fail.getPosition();
             fail("Did not throw exception");
         } catch (Exception e) {
             // pass
@@ -74,7 +74,7 @@ public class GLLTest {
         final String invalid2 = "$GPGLL,6111.552,N,02501.941,S,120045,A";
         fail = new GLLParser(invalid2);
         try {
-            Position p3 = fail.getPosition();
+            fail.getPosition();
             fail("Did not throw exception");
         } catch (Exception e) {
             // pass

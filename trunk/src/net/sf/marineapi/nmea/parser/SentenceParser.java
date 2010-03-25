@@ -52,35 +52,44 @@ import net.sf.marineapi.nmea.util.TalkerId;
  */
 public class SentenceParser implements Sentence {
 
-    // The first two characters after '$'.
-    private TalkerId talkerId;
-    // The next three characters after talker id.
-    private final SentenceId sentenceId;
-    // data fields, including the address field at index 0
-    private final String[] dataFields;
-
     /**
-     * Creates a new empty sentence with specified talker and sentence IDs.
+     * Parses the sentence Id of specified NMEA sentence.
      * 
-     * @param talker Talker type Id
-     * @param type Sentence type Id
-     * @param fields Number of sentence data fields, including address field
+     * @param nmea NMEA 0183 sentence String
+     * @return SentenceId Sentence ID of the specified sentence
      */
-    public SentenceParser(TalkerId talker, SentenceId type, int fields) {
-        if (talker == null || type == null) {
-            throw new IllegalArgumentException(
-                    "Sentence and Talker IDs must be specified");
-        }
-        if (fields < 1) {
-            throw new IllegalArgumentException("Minimum number of fields is 1");
-        }
-        this.sentenceId = type;
-        this.talkerId = talker;
-        this.dataFields = new String[fields];
-        for (int i = 0; i < this.dataFields.length; i++) {
-            dataFields[i] = "";
+    static SentenceId parseSentenceId(String nmea) {
+        String sid = nmea.substring(3, 6);
+        try {
+            return SentenceId.valueOf(sid);
+        } catch (Exception e) {
+            String msg = String.format("Unsupported sentence Id [%s]", sid);
+            throw new IllegalArgumentException(msg);
         }
     }
+    /**
+     * Parses the talker Id of specified NMEA sentence.
+     * 
+     * @param nmea NMEA 0183 sentence String
+     * @return TalkerId Talker ID of the specified sentence
+     */
+    static TalkerId parseTalkerId(String nmea) {
+        String tid = nmea.substring(1, 3);
+        try {
+            return TalkerId.valueOf(tid);
+        } catch (Exception e) {
+            String msg = String.format("Unsupported talker Id [%s]", tid);
+            throw new IllegalArgumentException(msg);
+        }
+    }
+    // The first two characters after '$'.
+    private TalkerId talkerId;
+
+    // The next three characters after talker id.
+    private final SentenceId sentenceId;
+
+    // data fields, including the address field at index 0
+    private final String[] dataFields;
 
     /**
      * Creates a new instance of SentenceParser. Sentence type is resolved
@@ -106,6 +115,29 @@ public class SentenceParser implements Sentence {
             dataFields = data.split(String.valueOf(FIELD_DELIMITER), -1);
         } else {
             dataFields = nmea.split(String.valueOf(FIELD_DELIMITER), -1);
+        }
+    }
+
+    /**
+     * Creates a new empty sentence with specified talker and sentence IDs.
+     * 
+     * @param talker Talker type Id
+     * @param type Sentence type Id
+     * @param fields Number of sentence data fields, including address field
+     */
+    public SentenceParser(TalkerId talker, SentenceId type, int fields) {
+        if (talker == null || type == null) {
+            throw new IllegalArgumentException(
+                    "Sentence and Talker IDs must be specified");
+        }
+        if (fields < 1) {
+            throw new IllegalArgumentException("Minimum number of fields is 1");
+        }
+        this.sentenceId = type;
+        this.talkerId = talker;
+        this.dataFields = new String[fields];
+        for (int i = 0; i < this.dataFields.length; i++) {
+            dataFields[i] = "";
         }
     }
 
@@ -150,7 +182,7 @@ public class SentenceParser implements Sentence {
     public TalkerId getTalkerId() {
         return talkerId;
     }
-
+    
     /*
      * (non-Javadoc)
      * @see
@@ -161,6 +193,49 @@ public class SentenceParser implements Sentence {
         this.talkerId = id;
     }
 
+    /**
+     * Get the String representation of the sentence without the line terminator
+     * (&lt;CR&gt;&lt;LF&gt;). Checksum is calculated and appended at the end of
+     * the sentence.
+     * 
+     * @return NMEA 0183 sentence String
+     */
+    @Override
+    public String toString() {
+
+        StringBuilder sb = new StringBuilder(MAX_LENGTH);
+        sb.append(BEGIN_CHAR);
+        sb.append(talkerId.toString());
+        sb.append(sentenceId.toString());
+
+        for (int i = 1; i < dataFields.length; i++) {
+            sb.append(FIELD_DELIMITER);
+            if(dataFields[i] != null) {
+            	sb.append(dataFields[i]);
+            }
+        }
+
+        String sentence = NMEA.appendChecksum(sb.toString());
+        if (NMEA.isValid(sentence)) {
+            return sentence;
+        }
+
+        String msg = String.format("Invalid result [%s]", sentence);
+        throw new IllegalStateException(msg);
+    }
+    
+    @Override
+    public boolean equals(Object o) {
+        if (o == this) {
+            return true;
+        }
+        if (o instanceof SentenceParser) {
+            Sentence s = (Sentence) o;
+            return s.toString().equals(toString());
+        }
+        return false;
+    }
+    
     /**
      * Parse a single character from the specified sentence field.
      * 
@@ -176,7 +251,7 @@ public class SentenceParser implements Sentence {
         }
         return val.charAt(0);
     }
-
+    
     /**
      * Parse double value from the specified sentence field.
      * 
@@ -199,7 +274,7 @@ public class SentenceParser implements Sentence {
      * 
      * @return The number of fields
      */
-    protected int getFieldCount() {
+    protected final int getFieldCount() {
         return dataFields.length;
     }
 
@@ -214,7 +289,7 @@ public class SentenceParser implements Sentence {
         try {
             value = Integer.parseInt(getStringValue(index));
         } catch (NumberFormatException ex) {
-            throw new ParseException("Field does not contain int value", ex);
+            throw new ParseException("Field does not contain integer value", ex);
         }
         return value;
     }
@@ -256,76 +331,46 @@ public class SentenceParser implements Sentence {
     }
 
     /**
-     * Parses the sentence Id of specified NMEA sentence.
+     * Set a character in specified field.
      * 
-     * @param nmea NMEA 0183 sentence String
-     * @return SentenceId Sentence ID of the specified sentence
+     * @param index Field index
+     * @param value Value to set
      */
-    static SentenceId parseSentenceId(String nmea) {
-        String sid = nmea.substring(3, 6);
-        try {
-            return SentenceId.valueOf(sid);
-        } catch (Exception e) {
-            String msg = String.format("Unsupported sentence Id [%s]", sid);
-            throw new IllegalArgumentException(msg);
-        }
+    protected final void setCharValue(int index, char value) {
+    	setStringValue(index, String.valueOf(value));
     }
 
     /**
-     * Parses the talker Id of specified NMEA sentence.
+     * Set a double value in specified field.
      * 
-     * @param nmea NMEA 0183 sentence String
-     * @return TalkerId Talker ID of the specified sentence
+     * @param index Field index
+     * @param value Value to set
      */
-    static TalkerId parseTalkerId(String nmea) {
-        String tid = nmea.substring(1, 3);
-        try {
-            return TalkerId.valueOf(tid);
-        } catch (Exception e) {
-            String msg = String.format("Unsupported talker Id [%s]", tid);
-            throw new IllegalArgumentException(msg);
-        }
+    protected final void setDoubleValue(int index, double value) {
+    	setStringValue(index, String.valueOf(value));
     }
 
     /**
-     * Get the String representation of the sentence without the line terminator
-     * (&lt;CR&gt;&lt;LF&gt;). Checksum is calculated and appended at the end of
-     * the sentence.
+     * Set a integer value in specified field.
      * 
-     * @return NMEA 0183 sentence String
+     * @param index Field index
+     * @param value Value to set
      */
-    @Override
-    public final String toString() {
-
-        StringBuilder sb = new StringBuilder(MAX_LENGTH);
-        sb.append(BEGIN_CHAR);
-        sb.append(talkerId.toString());
-        sb.append(sentenceId.toString());
-
-        for (int i = 1; i < dataFields.length; i++) {
-            sb.append(FIELD_DELIMITER);
-            sb.append(dataFields[i]);
-        }
-
-        String sentence = NMEA.appendChecksum(sb.toString());
-        if (NMEA.isValid(sentence)) {
-            return sentence;
-        }
-
-        String msg = String.format("Invalid result [%s]", sentence);
-        throw new IllegalStateException(msg);
+    protected final void setIntValue(int index, int value) {
+    	setStringValue(index, String.valueOf(value));
     }
-
-    @Override
-    public boolean equals(Object o) {
-        if (o == this) {
-            return true;
-        }
-        if (o instanceof SentenceParser) {
-            Sentence s = (Sentence) o;
-            return s.toString().equals(toString());
-        }
-        return false;
+    
+    /**
+     * Set a String value in specified data field.
+     * 
+     * @param index Field index
+     * @param value String to set, <code>null</code> is translated to empty String.
+     */
+    protected final void setStringValue(int index, String value) {
+    	if(index < 1) {
+    		throw new IllegalArgumentException("Index must be > 1");
+    	}
+    	dataFields[index] = value == null ? "" : value;
     }
 
 }

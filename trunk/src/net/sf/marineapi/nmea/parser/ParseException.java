@@ -28,7 +28,7 @@ package net.sf.marineapi.nmea.parser;
  * @author Kimmo Tuukkanen
  * @version $Revision$
  */
-public class ParseException extends RuntimeException {
+public class ParseException extends DataNotAvailableException {
 
     /** serialVersionUID */
     private static final long serialVersionUID = 6203761984607273569L;

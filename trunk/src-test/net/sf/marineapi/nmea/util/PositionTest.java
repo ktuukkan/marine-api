@@ -11,17 +11,26 @@ public class PositionTest {
 
     Position instance;
 
+    /**
+     * Setup
+     */
     @Before
-    public void setUp() throws Exception {
+    public void setUp() {
         instance = new Position(60.0, Direction.NORTH, 25.0, Direction.EAST,
                 Datum.WGS84);
     }
 
+    /**
+     * Test for getLatitude()
+     */
     @Test
     public void testGetLatitude() {
         assertTrue(60.0 == instance.getLatitude());
     }
 
+    /**
+     * Test for setLatitude()
+     */
     @Test
     public void testSetLatitude() {
         assertTrue(60.0 == instance.getLatitude());
@@ -42,11 +51,17 @@ public class PositionTest {
         }
     }
 
+    /**
+     * Test for getLongitude()
+     */
     @Test
     public void testGetLongitude() {
         assertTrue(25.0 == instance.getLongitude());
     }
 
+    /**
+     * Test for setLongitude()
+     */
     @Test
     public void testSetLongitude() {
 
@@ -69,13 +84,19 @@ public class PositionTest {
         }
     }
 
+    /**
+     * Test for getLatHemisphere()
+     */
     @Test
-    public void testGetLatitudeHemisphere() {
+    public void testGetLatHemisphere() {
         assertEquals(Direction.NORTH, instance.getLatHemisphere());
     }
 
+    /**
+     * Test for setLatHemisphere()
+     */
     @Test
-    public void testSetLatitudeHemisphere() {
+    public void testSetLatHemisphere() {
         instance.setLatHemisphere(Direction.SOUTH);
         assertEquals(Direction.SOUTH, instance.getLatHemisphere());
 
@@ -98,11 +119,17 @@ public class PositionTest {
         }
     }
 
+    /**
+     * Test for getLonHemisphere()
+     */
     @Test
-    public void testGetLongitudeHemisphere() {
+    public void testGetLonHemisphere() {
         assertEquals(Direction.EAST, instance.getLonHemisphere());
     }
 
+    /**
+     * Test for setLonHemisphere()
+     */
     @Test
     public void testSetLongitudeHemisphere() {
         instance.setLonHemisphere(Direction.WEST);
@@ -127,11 +154,17 @@ public class PositionTest {
         }
     }
 
+    /**
+     * Test for getDatum()
+     */
     @Test
     public void testGetDatum() {
         assertEquals(Datum.WGS84, instance.getDatum());
     }
 
+    /**
+     * Test for distanceTo()
+     */
     @Test
     public void testDistanceTo() {
 
@@ -152,6 +185,9 @@ public class PositionTest {
         assertEquals(expected, new Double(distance));
     }
 
+    /**
+     * Test for toWaypoint()
+     */
     @Test
     public void testToWaypoint() {
 

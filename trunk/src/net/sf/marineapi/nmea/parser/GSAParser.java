@@ -51,8 +51,8 @@ class GSAParser extends SentenceParser implements GSASentence {
     /**
      * Creates a new instance of GSA parser.
      * 
-     * @param nmea GSA sentence
-     * @throws SentenceException if specified NMEA string is invalid
+     * @param nmea GSA sentence String
+     * @throws IllegalArgumentException If specified sentence is invalid.
      */
     public GSAParser(String nmea) {
         super(nmea, SentenceId.GSA);

@@ -45,6 +45,7 @@ public enum DataStatus {
 
     /**
      * Returns the character used in NMEA sentences to indicate the status.
+     * @return Char indicator for DataStatus
      */
     public char toChar() {
         return character;

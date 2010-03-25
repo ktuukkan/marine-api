@@ -25,8 +25,11 @@ public class GGATest {
 
     private GGAParser gga;
 
+    /**
+     * setUp
+     */
     @Before
-    public void setUp() throws Exception {
+    public void setUp() {
         try {
             gga = new GGAParser(EXAMPLE);
         } catch (Exception e) {
@@ -34,8 +37,11 @@ public class GGATest {
         }
     }
 
+    /**
+     * 
+     */
     @Test
-    public void testSentenceGGA() {
+    public void testGGAParser() {
         GGAParser instance = new GGAParser(EXAMPLE);
         assertEquals(SentenceId.GGA, instance.getSentenceId());
     }

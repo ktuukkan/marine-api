@@ -34,20 +34,24 @@ class VTGParser extends SentenceParser implements VTGSentence {
 
     // field indexes
     private static final int TRUE_COURSE = 1;
+    @SuppressWarnings("unused")
     private static final int TRUE_INDICATOR = 2;
     private static final int MAGNETIC_COURSE = 3;
+    @SuppressWarnings("unused")
     private static final int MAGNETIC_INDICATOR = 4;
     private static final int SPEED_KNOTS = 5;
+    @SuppressWarnings("unused")
     private static final int KNOTS_INDICATOR = 6;
     private static final int SPEED_KMPH = 7;
+    @SuppressWarnings("unused")
     private static final int KMPH_INDICATOR = 8;
     private static final int MODE = 9;
 
     /**
-     * Constructor.
+     * Creates a new instance of VTGParser.
      * 
      * @param nmea VTG sentence String
-     * @throws IllegalArgumentException
+     * @throws IllegalArgumentException If specified sentence is invalid
      */
     public VTGParser(String nmea) {
         super(nmea, SentenceId.VTG);

@@ -52,7 +52,10 @@ class RMCParser extends PositionParser implements RMCSentence {
     private static final int MODE = 12;
 
     /**
-     * Constructor.
+     * Creates a new instance of RMCParser.
+     * 
+     * @param nmea RMC sentence String.
+     * @throws IllegalArgumentException If specified sentence is invalid.
      */
     public RMCParser(String nmea) {
         super(nmea, SentenceId.RMC);
