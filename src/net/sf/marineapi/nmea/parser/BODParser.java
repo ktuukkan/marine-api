@@ -34,8 +34,10 @@ class BODParser extends SentenceParser implements BODSentence {
 
     // field indices
     private static final int BEARING_TRUE = 1;
+    @SuppressWarnings("unused")
     private static final int TRUE_INDICATOR = 2;
     private static final int BEARING_MAGN = 3;
+    @SuppressWarnings("unused")
     private static final int MAGN_INDICATOR = 4;
     private static final int DESTINATION = 5;
     private static final int ORIGIN = 6;
@@ -43,7 +45,7 @@ class BODParser extends SentenceParser implements BODSentence {
     /**
      * Creates a new instance of BOD parser.
      * 
-     * @param nmea NMEA sentence
+     * @param nmea BOD sentence String
      * @throws IllegalArgumentException If specified String is invalid or does
      *             not contain a BOD sentence.
      */
@@ -83,4 +85,38 @@ class BODParser extends SentenceParser implements BODSentence {
     public String getDestinationWaypointId() {
         return getStringValue(DESTINATION);
     }
+
+	/* (non-Javadoc)
+	 * @see net.sf.marineapi.nmea.sentence.BODSentence#setDestinationWaypointId(java.lang.String)
+	 */
+	public void setDestinationWaypointId(String id) {
+		setStringValue(DESTINATION, id);
+	}
+
+	/* (non-Javadoc)
+	 * @see net.sf.marineapi.nmea.sentence.BODSentence#setMagneticBearing(double)
+	 */
+	public void setMagneticBearing(double bearing) {
+		if(bearing < 0 || bearing > 360) {
+			throw new IllegalArgumentException("Bearing value out of range 0..360 degrees");
+		}
+		setDoubleValue(BEARING_MAGN, bearing);
+	}
+
+	/* (non-Javadoc)
+	 * @see net.sf.marineapi.nmea.sentence.BODSentence#setOriginWaypointId(java.lang.String)
+	 */
+	public void setOriginWaypointId(String id) {
+		setStringValue(ORIGIN, id);		
+	}
+
+	/* (non-Javadoc)
+	 * @see net.sf.marineapi.nmea.sentence.BODSentence#setTrueBearing(double)
+	 */
+	public void setTrueBearing(double bearing) {
+		if(bearing < 0 || bearing > 360) {
+			throw new IllegalArgumentException("Bearing value out of range 0..360 degrees");
+		}
+		setDoubleValue(BEARING_TRUE, bearing);		
+	}
 }

@@ -23,7 +23,7 @@ package net.sf.marineapi.nmea.event;
 import java.util.EventListener;
 
 /**
- * Interface for receiving SentenceEvents.
+ * Base interface for listening to SentenceEvents.
  * 
  * @author Kimmo Tuukkanen
  * @version $Revision$
@@ -33,7 +33,7 @@ public interface SentenceListener extends EventListener {
     /**
      * This method is invoked when a valid NMEA 0183 sentence has been read.
      * 
-     * @param se SentenceEvent to dispatch
+     * @param event SentenceEvent to dispatch
      */
     public void sentenceRead(SentenceEvent event);
 

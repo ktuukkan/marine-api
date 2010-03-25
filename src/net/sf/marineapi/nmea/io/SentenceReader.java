@@ -122,6 +122,7 @@ public class SentenceReader {
 
         /**
          * Constructor
+         * @param buf BufferedReader for data input
          */
         public Worker(BufferedReader buf) {
             in = buf;

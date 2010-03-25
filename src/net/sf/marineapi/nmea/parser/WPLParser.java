@@ -41,10 +41,10 @@ class WPLParser extends PositionParser implements WPLSentence {
     private static final int WAYPOINT_ID = 5;
 
     /**
-     * Constructor.
+     * Creates a new instance of WPLParser.
      * 
      * @param nmea WPL sentence String.
-     * @throws IllegalArgumentException
+     * @throws IllegalArgumentException If specified sentence is invalid.
      */
     public WPLParser(String nmea) {
         super(nmea, SentenceId.WPL);

@@ -21,11 +21,8 @@ public class VTGTest {
 
     private VTGSentence vtg;
 
-    /**
-     * @throws java.lang.Exception
-     */
     @Before
-    public void setUp() throws Exception {
+    public void setUp() {
         try {
             vtg = new VTGParser(EXAMPLE);
         } catch (Exception e) {

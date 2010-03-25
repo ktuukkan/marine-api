@@ -41,9 +41,9 @@ public class SentenceEvent extends EventObject {
     /**
      * Creates a new SentenceEvent object.
      * 
-     * @param src <code>Object</code> that fired this event
-     * @param s Sentence that caused the event
-     * @throws <code>IllegalArgumentExcepion</code> if sentence is null
+     * @param src <code>Object</code> that fired the event
+     * @param s Sentence that triggered the event
+     * @throws IllegalArgumentException If specified sentence is <code>null</code>
      */
     public SentenceEvent(Object src, Sentence s) {
         super(src);

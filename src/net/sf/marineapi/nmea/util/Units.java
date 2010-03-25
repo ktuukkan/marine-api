@@ -21,7 +21,7 @@
 package net.sf.marineapi.nmea.util;
 
 /**
- * Defines the supported measurement units.
+ * Defines the supported units of measure.
  * 
  * @author Kimmo Tuukkanen
  * @version $Revision$
@@ -48,6 +48,9 @@ public enum Units {
 
     /**
      * Get the enum corresponding to specified char.
+     * 
+     * @param c Char indicator for unit
+     * @return Units enum
      */
     public static Units valueOf(char c) {
         for (Units u : values()) {
@@ -60,8 +63,10 @@ public enum Units {
 
     /**
      * Returns the corresponding char constant.
+     * 
+     * @return Char indicator of enum
      */
-    private char toChar() {
+    public char toChar() {
         return ch;
     }
 }

@@ -25,10 +25,10 @@ public class RMBTest {
     private RMBSentence rmb;
 
     /**
-     * @throws java.lang.Exception
+     * setUp
      */
     @Before
-    public void setUp() throws Exception {
+    public void setUp() {
         try {
             rmb = new RMBParser(EXAMPLE);
         } catch (Exception e) {

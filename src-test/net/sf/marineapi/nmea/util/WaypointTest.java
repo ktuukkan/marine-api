@@ -38,11 +38,8 @@ public class WaypointTest {
     private final String desc = "Description text";
     Waypoint point;
 
-    /**
-     * @throws java.lang.Exception
-     */
     @Before
-    public void setUp() throws Exception {
+    public void setUp() {
         point = new Waypoint(id1, 60.0, Direction.NORTH, 25.0, Direction.EAST,
                 Datum.WGS84);
     }

@@ -25,11 +25,8 @@ public class GSVTest {
 
     private GSVSentence gsv;
 
-    /**
-     * @throws java.lang.Exception
-     */
     @Before
-    public void setUp() throws Exception {
+    public void setUp() {
         try {
             gsv = new GSVParser(EXAMPLE);
         } catch (Exception e) {

@@ -72,6 +72,56 @@ public class Position {
     }
 
     /**
+     * Calculates the distance to specified Position.
+     * <p>
+     * Calculation is done by using the <a
+     * href="http://en.wikipedia.org/wiki/Haversine_formula">Haversine
+     * formula</a>. The mean <a
+     * href="http://en.wikipedia.org/wiki/Earth_radius#Mean_radius">earth
+     * radius</a> used in calculation is <code>6371.009</code> km.
+     * <p>
+     * The implementation is based on example found at <a href=
+     * "http://www.codecodex.com/wiki/Calculate_Distance_Between_Two_Points_on_a_Globe"
+     * >codecodex.com</a>.
+     * 
+     * @param p Position to which the distance is calculated.
+     * @return Distance to <code>p</code>, in meters.
+     */
+    public double distanceTo(Position p) {
+        return haversine(getLatitude(), getLongitude(), p.getLatitude(), p
+                .getLongitude());
+    }
+
+    /**
+     * Gets the position altitude from mean sea level.
+     * 
+     * @return Altitude value in meters
+     */
+	public double getAltitude() {
+		return altitude;
+	}
+
+    /**
+     * Gets the datum, i.e. the coordinate system used to define geographic
+     * position. Default is <code>Datum.WGS84</code>, unless datum is specified
+     * in the constructor. Notice also that datum cannot be set afterwards.
+     * 
+     * @return Datum enum
+     */
+    public Datum getDatum() {
+        return datum;
+    }
+
+    /**
+     * Get the hemisphere of latitude (North/South).
+     * 
+     * @return CompassPoint.N or CompassPoint.S
+     */
+    public Direction getLatHemisphere() {
+        return this.lathem;
+    }
+
+    /**
      * Get latitude value of Position
      * 
      * @return latitude degrees
@@ -90,21 +140,35 @@ public class Position {
     }
 
     /**
-     * Get the hemisphere of latitude (North/South).
-     * 
-     * @return CompassPoint.N or CompassPoint.S
-     */
-    public Direction getLatHemisphere() {
-        return this.lathem;
-    }
-
-    /**
      * Get the hemisphere of longitude (East/West).
      * 
      * @return CompassPoint.E or CompassPoint.W
      */
     public Direction getLonHemisphere() {
         return this.lonhem;
+    }
+
+    /**
+     * Sets the altitude of position above mean sea level.
+     * 
+     * @param altitude Altitude value to set, in meters.
+     */
+    public void setAltitude(double altitude) {
+		this.altitude = altitude;
+	}
+
+	/**
+     * Set the hemisphere of latitude (North/South).
+     * 
+     * @param lathem The hemisphere to set
+     */
+    public void setLatHemisphere(Direction lathem) {
+        if (Direction.NORTH.equals(lathem) || Direction.SOUTH.equals(lathem)) {
+            this.lathem = lathem;
+        } else {
+            throw new IllegalArgumentException(
+                    "Valid hemisphere for latitude is N or S");
+        }
     }
 
     /**
@@ -134,20 +198,6 @@ public class Position {
     }
 
     /**
-     * Set the hemisphere of latitude (North/South).
-     * 
-     * @param lathem The hemisphere to set
-     */
-    public void setLatHemisphere(Direction lathem) {
-        if (Direction.NORTH.equals(lathem) || Direction.SOUTH.equals(lathem)) {
-            this.lathem = lathem;
-        } else {
-            throw new IllegalArgumentException(
-                    "Valid hemisphere for latitude is N or S");
-        }
-    }
-
-    /**
      * Set the hemisphere of longitude (East/West).
      * 
      * @param lonhem The hemisphere to set
@@ -162,35 +212,14 @@ public class Position {
     }
 
     /**
-     * Gets the datum, i.e. the coordinate system used to define geographic
-     * position. Default is <code>Datum.WGS84</code>, unless datum is specified
-     * in the constructor. Notice also that datum cannot be set afterwards.
+     * Convenience method for creating a waypoint based in the Position.
      * 
-     * @return Datum enum
+     * @param id Waypoint ID or name
+     * @return the created Waypoint
      */
-    public Datum getDatum() {
-        return datum;
-    }
-
-    /**
-     * Calculates the distance to specified Position.
-     * <p>
-     * Calculation is done by using the <a
-     * href="http://en.wikipedia.org/wiki/Haversine_formula">Haversine
-     * formula</a>. The mean <a
-     * href="http://en.wikipedia.org/wiki/Earth_radius#Mean_radius">earth
-     * radius</a> used in calculation is <code>6371.009</code> km.
-     * <p>
-     * The implementation is based on example found at <a href=
-     * "http://www.codecodex.com/wiki/Calculate_Distance_Between_Two_Points_on_a_Globe"
-     * >codecodex.com</a>.
-     * 
-     * @param p Position to which the distance is calculated.
-     * @return Distance to <code>p</code>, in meters.
-     */
-    public double distanceTo(Position p) {
-        return haversine(getLatitude(), getLongitude(), p.getLatitude(), p
-                .getLongitude());
+    public Waypoint toWaypoint(String id) {
+        return new Waypoint(id, getLatitude(), getLatHemisphere(),
+                getLongitude(), getLonHemisphere());
     }
 
     private double haversine(double lat1, double lon1, double lat2, double lon2) {
@@ -293,16 +322,5 @@ public class Position {
         s = Math.round(s * 1000); // round to 1mm precision (#.###)
 
         return s / 1000;
-    }
-
-    /**
-     * Convenience method for creating a waypoint based in the Position.
-     * 
-     * @param id Waypoint ID or name
-     * @return the created Waypoint
-     */
-    public Waypoint toWaypoint(String id) {
-        return new Waypoint(id, getLatitude(), getLatHemisphere(),
-                getLongitude(), getLonHemisphere());
     }
 }

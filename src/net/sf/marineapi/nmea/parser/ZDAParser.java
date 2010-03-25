@@ -43,7 +43,10 @@ class ZDAParser extends SentenceParser implements ZDASentence {
     private static final int LOCAL_ZONE_MINUTES = 6;
 
     /**
-     * Constructor.
+     * Creates a new instance of ZDAParser.
+     * 
+     * @param nmea ZDA sentence String
+     * @throws IllegalArgumentException If specified sentence is invalid.
      */
     public ZDAParser(String nmea) {
         super(nmea, SentenceId.ZDA);

@@ -26,6 +26,8 @@ import net.sf.marineapi.nmea.util.SentenceId;
 /**
  * Factory for creating NMEA sentence parsers.
  * 
+ * TODO Add create method for "empty" sentences.
+ * 
  * @author Kimmo Tuukkanen
  * @version $Revision$
  */
@@ -38,6 +40,8 @@ public class SentenceFactory {
 
     /**
      * Returns the singleton instance of SentenceFactory.
+     * 
+     * @return SentenceFactory instance
      */
     public static SentenceFactory getInstance() {
         if (instance == null) {
@@ -45,7 +49,7 @@ public class SentenceFactory {
         }
         return instance;
     }
-
+    
     /**
      * Creates a parser for specified NMEA sentence String.
      * 

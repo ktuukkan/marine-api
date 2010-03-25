@@ -22,11 +22,8 @@ public class GSATest {
 
     private GSASentence instance;
 
-    /**
-     * @throws java.lang.Exception
-     */
     @Before
-    public void setUp() throws Exception {
+    public void setUp() {
         try {
             instance = new GSAParser(EXAMPLE);
         } catch (Exception e) {

@@ -22,11 +22,8 @@ public class ZDATest {
 
     private ZDAParser zda;
 
-    /**
-     * @throws java.lang.Exception
-     */
     @Before
-    public void setUp() throws Exception {
+    public void setUp() {
         try {
             zda = new ZDAParser(EXAMPLE);
         } catch (Exception e) {
