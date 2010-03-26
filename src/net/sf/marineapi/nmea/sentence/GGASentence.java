@@ -107,8 +107,67 @@ public interface GGASentence extends PositionSentence, TimeSentence {
     /**
      * Get the number of active satellites in use.
      * 
-     * @return number of satellites
+     * @return Number of satellites
      */
     int getSatelliteCount();
+
+    /**
+     * Set the antenna altitude.
+     * 
+     * @param alt Altitude to set
+     */
+    void setAltitude(double alt);
+
+    /**
+     * Sets the unit of altitude.
+     * 
+     * @param unit Units to set
+     */
+    void setAltitudeUnits(Units unit);
+
+    /**
+     * Sets the age of differential GPS data (DGPS).
+     * 
+     * @param age Seconds since last valid RTCM transmission to set.
+     */
+    void setDgpsAge(int age);
+
+    /**
+     * Sets the ID of DGPS station.
+     * 
+     * @param id Station ID to set
+     */
+    void setDgpsStationId(String id);
+
+    /**
+     * Sets the GPS fix quality.
+     * 
+     * @param quality Fix quality to set
+     */
+    void setFixQuality(GpsFixQuality quality);
+
+    /**
+     * Set height/separation of geoid above WGS84 ellipsoid, i.e. difference
+     * between WGS-84 earth ellipsoid and mean sea level. Negative values are
+     * below WGS-84 ellipsoid.
+     * 
+     * @param height Height value to set
+     */
+    void setGeoidalHeight(double height);
+
+    /**
+     * Get unit of height above geoid.
+     * 
+     * @param unit Unit to set
+     */
+    void setGeoidalHeightUnits(Units unit);
+
+    /**
+     * Set the horizontal dilution of precision (HDOP), i.e. the relative
+     * accuracy of horizontal position.
+     * 
+     * @param hdop Horizontal dilution
+     */
+    void setHorizontalDOP(double hdop);
 
 }

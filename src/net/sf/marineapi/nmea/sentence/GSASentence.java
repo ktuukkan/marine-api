@@ -25,7 +25,9 @@ import net.sf.marineapi.nmea.util.GpsMode;
 
 /**
  * Interface for GSA sentence type. Dilution of precision (DOP) of GPS fix and
- * list of active satellites.
+ * list of active satellites. DOP is an indication of the effect of satellite
+ * geometry on the accuracy of the fix. It is a unitless number where smaller is
+ * better.
  * <p>
  * Example:<br>
  * <code>$GPGSA,A,3,02,,,07,,09,24,26,,,,,1.6,1.6,1.0*3D</code>
@@ -36,13 +38,6 @@ import net.sf.marineapi.nmea.util.GpsMode;
 public interface GSASentence extends Sentence {
 
     /**
-     * Get the GPS operation mode.
-     * 
-     * @return GpsMode enum
-     */
-    GpsMode getGpsMode();
-
-    /**
      * Get the GPS fix mode (2D, 3D or no fix).
      * 
      * @return GpsFixStatus enum
@@ -50,11 +45,11 @@ public interface GSASentence extends Sentence {
     GpsFixStatus getFixStatus();
 
     /**
-     * Get the dilution of precision (PDOP) for position.
+     * Get the GPS operation mode.
      * 
-     * @return double
+     * @return GpsMode enum
      */
-    double getPositionDOP();
+    GpsMode getGpsMode();
 
     /**
      * Get the horizontal dilution Of precision (HDOP).
@@ -64,11 +59,11 @@ public interface GSASentence extends Sentence {
     double getHorizontalDOP();
 
     /**
-     * Get the vertical dilution of precision (VDOP).
+     * Get the dilution of precision (PDOP) for position.
      * 
      * @return double
      */
-    double getVerticalDOP();
+    double getPositionDOP();
 
     /**
      * Get list of satellites used for acquiring the GPS fix.
@@ -76,5 +71,12 @@ public interface GSASentence extends Sentence {
      * @return String array containing satellite IDs.
      */
     String[] getSatellitesIds();
+
+    /**
+     * Get the vertical dilution of precision (VDOP).
+     * 
+     * @return double
+     */
+    double getVerticalDOP();
 
 }

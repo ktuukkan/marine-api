@@ -53,37 +53,10 @@ class RTEParser extends SentenceParser implements RTESentence {
 
     /*
      * (non-Javadoc)
-     * @see net.sf.marineapi.nmea.sentence.RTESentence#getWaypointIds()
+     * @see net.sf.marineapi.nmea.sentence.RTESentence#getRouteId()
      */
-    public String[] getWaypointIds() {
-        if (waypoints == null) {
-            parseWaypoints();
-        }
-        return waypoints;
-    }
-
-    /*
-     * (non-Javadoc)
-     * @see net.sf.marineapi.nmea.sentence.RTESentence#getWaypointCount()
-     */
-    public int getWaypointCount() {
-        return getWaypointIds().length;
-    }
-
-    /*
-     * (non-Javadoc)
-     * @see net.sf.marineapi.nmea.sentence.RTESentence#isActiveRoute()
-     */
-    public boolean isActiveRoute() {
-        return getCharValue(STATUS) == ACTIVE_ROUTE;
-    }
-
-    /*
-     * (non-Javadoc)
-     * @see net.sf.marineapi.nmea.sentence.RTESentence#isWorkingRoute()
-     */
-    public boolean isWorkingRoute() {
-        return getCharValue(STATUS) == WORKING_ROUTE;
+    public String getRouteId() {
+        return getStringValue(ROUTE_ID);
     }
 
     /*
@@ -104,6 +77,33 @@ class RTEParser extends SentenceParser implements RTESentence {
 
     /*
      * (non-Javadoc)
+     * @see net.sf.marineapi.nmea.sentence.RTESentence#getWaypointCount()
+     */
+    public int getWaypointCount() {
+        return getWaypointIds().length;
+    }
+
+    /*
+     * (non-Javadoc)
+     * @see net.sf.marineapi.nmea.sentence.RTESentence#getWaypointIds()
+     */
+    public String[] getWaypointIds() {
+        if (waypoints == null) {
+            parseWaypoints();
+        }
+        return waypoints;
+    }
+
+    /*
+     * (non-Javadoc)
+     * @see net.sf.marineapi.nmea.sentence.RTESentence#isActiveRoute()
+     */
+    public boolean isActiveRoute() {
+        return getCharValue(STATUS) == ACTIVE_ROUTE;
+    }
+
+    /*
+     * (non-Javadoc)
      * @see net.sf.marineapi.nmea.sentence.RTESentence#isFirst()
      */
     public boolean isFirst() {
@@ -120,10 +120,10 @@ class RTEParser extends SentenceParser implements RTESentence {
 
     /*
      * (non-Javadoc)
-     * @see net.sf.marineapi.nmea.sentence.RTESentence#getRouteId()
+     * @see net.sf.marineapi.nmea.sentence.RTESentence#isWorkingRoute()
      */
-    public String getRouteId() {
-        return getStringValue(ROUTE_ID);
+    public boolean isWorkingRoute() {
+        return getCharValue(STATUS) == WORKING_ROUTE;
     }
 
     /**

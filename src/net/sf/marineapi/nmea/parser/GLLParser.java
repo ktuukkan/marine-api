@@ -104,4 +104,14 @@ class GLLParser extends PositionParser implements GLLSentence {
     public String getUtcTime() {
         return getStringValue(UTC_TIME);
     }
+
+    /*
+     * (non-Javadoc)
+     * @see
+     * net.sf.marineapi.nmea.sentence.GLLSentence#setDataStatus(net.sf.marineapi
+     * .nmea.util.DataStatus)
+     */
+    public void setDataStatus(DataStatus status) {
+        setCharValue(DATA_STATUS, status.toChar());
+    }
 }

@@ -29,4 +29,11 @@ public interface GLLSentence extends PositionSentence, TimeSentence {
      */
     DataStatus getDataStatus();
 
+    /**
+     * Set the data quality status, valid or invalid.
+     * 
+     * @param status DataStatus to set
+     */
+    void setDataStatus(DataStatus status);
+
 }

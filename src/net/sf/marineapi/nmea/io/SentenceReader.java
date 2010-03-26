@@ -44,6 +44,7 @@ public class SentenceReader {
 
     // Vector (synchronized) for SentenceListeners
     private final List<SentenceListener> listeners = new Vector<SentenceListener>();
+
     private Worker worker;
 
     /**
@@ -90,6 +91,12 @@ public class SentenceReader {
         }
     }
 
+    @Override
+    protected void finalize() throws Throwable {
+        worker.stop();
+        super.finalize();
+    }
+
     /**
      * Dispatch data to all listeners.
      * 
@@ -106,12 +113,6 @@ public class SentenceReader {
         }
     }
 
-    @Override
-    protected void finalize() throws Throwable {
-        worker.stop();
-        super.finalize();
-    }
-
     /**
      * Reads the input stream and fires sentence events.
      */
@@ -122,6 +123,7 @@ public class SentenceReader {
 
         /**
          * Constructor
+         * 
          * @param buf BufferedReader for data input
          */
         public Worker(BufferedReader buf) {

@@ -53,12 +53,12 @@ public class SatelliteInfo {
     }
 
     /**
-     * Get the ID of satellite vehicle, for example "05".
+     * Get satellite azimuth, in degrees from true north (0..359&deg;).
      * 
-     * @return ID String
+     * @return azimuth value
      */
-    public String getId() {
-        return this.id;
+    public double getAzimuth() {
+        return this.azimuth;
     }
 
     /**
@@ -71,12 +71,12 @@ public class SatelliteInfo {
     }
 
     /**
-     * Get satellite azimuth, in degrees from true north (0..359&deg;).
+     * Get the ID of satellite vehicle, for example "05".
      * 
-     * @return azimuth value
+     * @return ID String
      */
-    public double getAzimuth() {
-        return this.azimuth;
+    public String getId() {
+        return this.id;
     }
 
     /**

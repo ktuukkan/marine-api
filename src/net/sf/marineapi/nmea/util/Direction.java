@@ -48,7 +48,17 @@ public enum Direction {
     }
 
     /**
+     * Returns the corresponding char constant.
+     * 
+     * @return Char indicator for Direction
+     */
+    public char toChar() {
+        return ch;
+    }
+
+    /**
      * Get the enum corresponding to specified char.
+     * 
      * @param c Char indicator for Direction
      * @return Direction
      */
@@ -59,13 +69,5 @@ public enum Direction {
             }
         }
         return null;
-    }
-
-    /**
-     * Returns the corresponding char constant.
-     * @return Char indicator for Direction
-     */
-    public char toChar() {
-        return ch;
     }
 }

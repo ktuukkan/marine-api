@@ -43,7 +43,8 @@ public class SentenceEvent extends EventObject {
      * 
      * @param src <code>Object</code> that fired the event
      * @param s Sentence that triggered the event
-     * @throws IllegalArgumentException If specified sentence is <code>null</code>
+     * @throws IllegalArgumentException If specified sentence is
+     *             <code>null</code>
      */
     public SentenceEvent(Object src, Sentence s) {
         super(src);
@@ -55,20 +56,20 @@ public class SentenceEvent extends EventObject {
     }
 
     /**
-     * Get time stamp when this event was created.
-     * 
-     * @return Date
-     */
-    public Date getTimeStamp() {
-        return new Date(timestamp);
-    }
-
-    /**
      * Gets the Sentence object that triggered the event.
      * 
      * @return Sentence object
      */
     public Sentence getSentence() {
         return sentence;
+    }
+
+    /**
+     * Get time stamp when this event was created.
+     * 
+     * @return Date
+     */
+    public Date getTimeStamp() {
+        return new Date(timestamp);
     }
 }

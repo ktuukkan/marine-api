@@ -60,6 +60,37 @@ class GSVParser extends SentenceParser implements GSVSentence {
 
     /*
      * (non-Javadoc)
+     * @see net.sf.marineapi.nmea.sentence.GSVSentence#getSatelliteCount()
+     */
+    public int getSatelliteCount() {
+        return getIntValue(SATELLITES_IN_VIEW);
+    }
+
+    /*
+     * (non-Javadoc)
+     * @see net.sf.marineapi.nmea.sentence.GSVSentence#getSatelliteInfo()
+     */
+    public List<SatelliteInfo> getSatelliteInfo() {
+
+        List<SatelliteInfo> satellites = new ArrayList<SatelliteInfo>(4);
+
+        for (int satelliteIndex : ID_FIELDS) {
+            try {
+                String id = getSatelliteId(satelliteIndex);
+                double elev = getElevation(satelliteIndex);
+                double azm = getAzimuth(satelliteIndex);
+                double snr = getSignalNoiseRatio(satelliteIndex);
+                satellites.add(new SatelliteInfo(id, elev, azm, snr));
+            } catch (ParseException e) {
+                // nevermind missing satellite info
+            }
+        }
+
+        return satellites;
+    }
+
+    /*
+     * (non-Javadoc)
      * @see net.sf.marineapi.nmea.sentence.GSVSentence#getSentenceCount()
      */
     public int getSentenceCount() {
@@ -90,59 +121,6 @@ class GSVParser extends SentenceParser implements GSVSentence {
         return (getSentenceIndex() == getSentenceCount());
     }
 
-    /*
-     * (non-Javadoc)
-     * @see net.sf.marineapi.nmea.sentence.GSVSentence#getSatelliteCount()
-     */
-    public int getSatelliteCount() {
-        return getIntValue(SATELLITES_IN_VIEW);
-    }
-
-    /*
-     * (non-Javadoc)
-     * @see net.sf.marineapi.nmea.sentence.GSVSentence#getSatelliteInfo()
-     */
-    public List<SatelliteInfo> getSatelliteInfo() {
-
-        List<SatelliteInfo> satellites = new ArrayList<SatelliteInfo>(4);
-
-        for (int satelliteIndex : ID_FIELDS) {
-            try {
-                String id = getSatelliteId(satelliteIndex);
-                double elev = getElevation(satelliteIndex);
-                double azm = getAzimuth(satelliteIndex);
-                double snr = getSignalNoiseRatio(satelliteIndex);
-                satellites.add(new SatelliteInfo(id, elev, azm, snr));
-            } catch (ParseException e) {
-                // nevermind missing satellite info
-            }
-        }
-
-        return satellites;
-    }
-
-    /**
-     * Get satellite ID, for example "05". Parameter <code>sv</code> should be
-     * one of the <code>SATELLITE#</code> constants.
-     * 
-     * @param sv Satellite ID index.
-     * @return integer value
-     */
-    private String getSatelliteId(int sv) {
-        return getSatelliteData(sv, ID_NUMBER);
-    }
-
-    /**
-     * Get satellite elevation, in degrees (max. 90&deg;). Parameter
-     * <code>sv</code> should be one of the <code>SATELLITE#</code> constants.
-     * 
-     * @param sv Satellite ID index.
-     * @return integer value
-     */
-    private double getElevation(int sv) {
-        return Double.parseDouble(getSatelliteData(sv, ELEVATION));
-    }
-
     /**
      * Get satellite azimuth. Parameter <code>sv</code> should be one of the
      * <code>SATELLITE#</code> constants.
@@ -155,13 +133,14 @@ class GSVParser extends SentenceParser implements GSVSentence {
     }
 
     /**
-     * Get noise ratio of satellite signal.
+     * Get satellite elevation, in degrees (max. 90&deg;). Parameter
+     * <code>sv</code> should be one of the <code>SATELLITE#</code> constants.
      * 
      * @param sv Satellite ID index.
      * @return integer value
      */
-    private double getSignalNoiseRatio(int sv) {
-        return Double.parseDouble(getSatelliteData(sv, NOISE));
+    private double getElevation(int sv) {
+        return Double.parseDouble(getSatelliteData(sv, ELEVATION));
     }
 
     /**
@@ -179,6 +158,27 @@ class GSVParser extends SentenceParser implements GSVSentence {
             throw new ParseException("Satellite field index out of bounds");
         }
         return getStringValue((a + b));
+    }
+
+    /**
+     * Get satellite ID, for example "05". Parameter <code>sv</code> should be
+     * one of the <code>SATELLITE#</code> constants.
+     * 
+     * @param sv Satellite ID index.
+     * @return integer value
+     */
+    private String getSatelliteId(int sv) {
+        return getSatelliteData(sv, ID_NUMBER);
+    }
+
+    /**
+     * Get noise ratio of satellite signal.
+     * 
+     * @param sv Satellite ID index.
+     * @return integer value
+     */
+    private double getSignalNoiseRatio(int sv) {
+        return Double.parseDouble(getSatelliteData(sv, NOISE));
     }
 
 }

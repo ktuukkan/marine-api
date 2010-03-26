@@ -45,34 +45,6 @@ public abstract class PositionParser extends SentenceParser {
     }
 
     /**
-     * Parses the latitude degrees from the specified field. The assumed String
-     * format for latitude is <code>ddmm.mmm</code>.
-     * 
-     * @param index Index of field containing the latitude value.
-     * @return Latitude value in degrees
-     */
-    protected double parseLatitude(int index) {
-        String field = getStringValue(index);
-        int deg = Integer.parseInt(field.substring(0, 2));
-        double min = Double.parseDouble(field.substring(2));
-        return deg + (min / 60);
-    }
-
-    /**
-     * Parses the longitude degrees from the specified field. The assumed String
-     * format for longitude is <code>dddmm.mmm</code>.
-     * 
-     * @param index Index of field containing the longitude value.
-     * @return Longitude value in degrees
-     */
-    protected double parseLongitude(int index) {
-        String field = getStringValue(index);
-        int deg = Integer.parseInt(field.substring(0, 3));
-        double min = Double.parseDouble(field.substring(3));
-        return deg + (min / 60);
-    }
-
-    /**
      * Parses the hemisphere of latitude from specified field.
      * 
      * @param index Index of field that contains the latitude hemisphere value.
@@ -100,5 +72,33 @@ public abstract class PositionParser extends SentenceParser {
             return d;
         }
         throw new ParseException("Invalid longitude hemisphere " + ch + "'");
+    }
+
+    /**
+     * Parses the latitude degrees from the specified field. The assumed String
+     * format for latitude is <code>ddmm.mmm</code>.
+     * 
+     * @param index Index of field containing the latitude value.
+     * @return Latitude value in degrees
+     */
+    protected double parseLatitude(int index) {
+        String field = getStringValue(index);
+        int deg = Integer.parseInt(field.substring(0, 2));
+        double min = Double.parseDouble(field.substring(2));
+        return deg + (min / 60);
+    }
+
+    /**
+     * Parses the longitude degrees from the specified field. The assumed String
+     * format for longitude is <code>dddmm.mmm</code>.
+     * 
+     * @param index Index of field containing the longitude value.
+     * @return Longitude value in degrees
+     */
+    protected double parseLongitude(int index) {
+        String field = getStringValue(index);
+        int deg = Integer.parseInt(field.substring(0, 3));
+        double min = Double.parseDouble(field.substring(3));
+        return deg + (min / 60);
     }
 }

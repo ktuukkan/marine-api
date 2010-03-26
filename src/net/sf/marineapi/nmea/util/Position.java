@@ -97,9 +97,9 @@ public class Position {
      * 
      * @return Altitude value in meters
      */
-	public double getAltitude() {
-		return altitude;
-	}
+    public double getAltitude() {
+        return altitude;
+    }
 
     /**
      * Gets the datum, i.e. the coordinate system used to define geographic
@@ -154,10 +154,10 @@ public class Position {
      * @param altitude Altitude value to set, in meters.
      */
     public void setAltitude(double altitude) {
-		this.altitude = altitude;
-	}
+        this.altitude = altitude;
+    }
 
-	/**
+    /**
      * Set the hemisphere of latitude (North/South).
      * 
      * @param lathem The hemisphere to set

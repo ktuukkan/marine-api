@@ -88,6 +88,21 @@ class RMCParser extends PositionParser implements RMCSentence {
 
     /*
      * (non-Javadoc)
+     * @see net.sf.marineapi.nmea.sentence.DateSentence#getDate()
+     */
+    public Date getDate() {
+        int y = getUtcYear();
+        int m = getUtcMonth() - 1;
+        int d = getUtcDay();
+        int h = getUtcHours();
+        int mi = getUtcMinutes();
+        int s = (int) Math.floor(getUtcSeconds());
+        GregorianCalendar cal = new GregorianCalendar(y, m, d, h, mi, s);
+        return cal.getTime();
+    }
+
+    /*
+     * (non-Javadoc)
      * @see net.sf.marineapi.nmea.sentence.RMCSentence#getDirectionOfVariation()
      */
     public Direction getDirectionOfVariation() {
@@ -104,14 +119,6 @@ class RMCParser extends PositionParser implements RMCSentence {
 
     /*
      * (non-Javadoc)
-     * @see net.sf.marineapi.nmea.sentence.RMCSentence#getSpeed()
-     */
-    public double getSpeed() {
-        return getDoubleValue(SPEED);
-    }
-
-    /*
-     * (non-Javadoc)
      * @see net.sf.marineapi.nmea.sentence.PositionSentence#getPosition()
      */
     public Position getPosition() {
@@ -124,17 +131,10 @@ class RMCParser extends PositionParser implements RMCSentence {
 
     /*
      * (non-Javadoc)
-     * @see net.sf.marineapi.nmea.sentence.DateSentence#getDate()
+     * @see net.sf.marineapi.nmea.sentence.RMCSentence#getSpeed()
      */
-    public Date getDate() {
-        int y = getUtcYear();
-        int m = getUtcMonth() - 1;
-        int d = getUtcDay();
-        int h = getUtcHours();
-        int mi = getUtcMinutes();
-        int s = (int) Math.floor(getUtcSeconds());
-        GregorianCalendar cal = new GregorianCalendar(y, m, d, h, mi, s);
-        return cal.getTime();
+    public double getSpeed() {
+        return getDoubleValue(SPEED);
     }
 
     /*

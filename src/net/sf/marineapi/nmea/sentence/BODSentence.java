@@ -33,71 +33,72 @@ package net.sf.marineapi.nmea.sentence;
  */
 public interface BODSentence extends Sentence {
 
-	/**
-	 * Get the ID of destination waypoint. This field should be always available
-	 * in GOTO mode.
-	 * 
-	 * @return waypoint id
-	 */
-	String getDestinationWaypointId();
+    /**
+     * Get the ID of destination waypoint. This field should be always available
+     * in GOTO mode.
+     * 
+     * @return waypoint id
+     */
+    String getDestinationWaypointId();
 
-	/**
-	 * Get the magnetic bearing from origin to destination.
-	 * <p>
-	 * <i>Notice: The bearing is calculated from the origin when GOTO is
-	 * activated and it is <b>not</b> updated dynamically.</i>
-	 * 
-	 * @return magnetic bearing value
-	 */
-	double getMagneticBearing();
+    /**
+     * Get the magnetic bearing from origin to destination.
+     * <p>
+     * <i>Notice: The bearing is calculated from the origin when GOTO is
+     * activated and it is <b>not</b> updated dynamically.</i>
+     * 
+     * @return magnetic bearing value
+     */
+    double getMagneticBearing();
 
-	/**
-	 * Get the ID of origin waypoint. This field is available only when route is
-	 * active.
-	 * 
-	 * @return waypoint id
-	 */
-	String getOriginWaypointId();
+    /**
+     * Get the ID of origin waypoint. This field is available only when route is
+     * active.
+     * 
+     * @return waypoint id
+     */
+    String getOriginWaypointId();
 
-	/**
-	 * Get the true bearing from origin to destination.
-	 * <p>
-	 * <i>Notice: Typically the bearing is calculated when GOTO mode is
-	 * activated and it is <strong>not</strong> updated dynamically.</i>
-	 * 
-	 * @return True bearing
-	 */
-	double getTrueBearing();
+    /**
+     * Get the true bearing from origin to destination.
+     * <p>
+     * <i>Notice: Typically the bearing is calculated when GOTO mode is
+     * activated and it is <strong>not</strong> updated dynamically.</i>
+     * 
+     * @return True bearing
+     */
+    double getTrueBearing();
 
-	/**
-	 * Sets the destination waypoint ID.
-	 * 
-	 * @param id
-	 *            ID to set
-	 */
-	void setDestinationWaypointId(String id);
+    /**
+     * Sets the destination waypoint ID.
+     * 
+     * @param id ID to set
+     */
+    void setDestinationWaypointId(String id);
 
-	/**
-	 * Sets the true bearing from origin to destination, in degrees.
-	 * 
-	 * @param bearing Bearing value
-	 * @throws IllegalArgumentException If bearing value out range 0..360 degrees.
-	 */
-	void setMagneticBearing(double bearing);
+    /**
+     * Sets the true bearing from origin to destination, in degrees.
+     * 
+     * @param bearing Bearing value
+     * @throws IllegalArgumentException If bearing value out range 0..360
+     *             degrees.
+     */
+    void setMagneticBearing(double bearing);
 
-	/**
-	 * Sets the ID of origin waypoint.
-	 * 
-	 * @param id ID to set.
-	 */
-	void setOriginWaypointId(String id);
+    /**
+     * Sets the ID of origin waypoint.
+     * 
+     * @param id ID to set.
+     */
+    void setOriginWaypointId(String id);
 
-	/**
-	 * Sets the true bearing from origin to destination, in degrees.
-	 * 
-	 * @param bearing Bearing value
-	 * @throws IllegalArgumentException If bearing value out range 0..360 degrees.
-	 */
-	void setTrueBearing(double bearing);
+    /**
+     * Sets the true bearing from origin to destination, in degrees.
+     * 
+     * @param bearing Bearing value
+     * @throws IllegalArgumentException If bearing value out range 0..360
+     *             degrees.
+     */
+    void setTrueBearing(double bearing);
 
 }
