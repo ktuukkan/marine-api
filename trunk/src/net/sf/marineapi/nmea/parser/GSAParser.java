@@ -60,14 +60,6 @@ class GSAParser extends SentenceParser implements GSASentence {
 
     /*
      * (non-Javadoc)
-     * @see net.sf.marineapi.nmea.sentence.GSASentence#getGpsMode()
-     */
-    public GpsMode getGpsMode() {
-        return GpsMode.valueOf(getCharValue(GPS_MODE));
-    }
-
-    /*
-     * (non-Javadoc)
      * @see net.sf.marineapi.nmea.sentence.GSASentence#getFixStatus()
      */
     public GpsFixStatus getFixStatus() {
@@ -76,10 +68,10 @@ class GSAParser extends SentenceParser implements GSASentence {
 
     /*
      * (non-Javadoc)
-     * @see net.sf.marineapi.nmea.sentence.GSASentence#getPositionDOP()
+     * @see net.sf.marineapi.nmea.sentence.GSASentence#getGpsMode()
      */
-    public double getPositionDOP() {
-        return getDoubleValue(POSITION_DOP);
+    public GpsMode getGpsMode() {
+        return GpsMode.valueOf(getCharValue(GPS_MODE));
     }
 
     /*
@@ -92,10 +84,10 @@ class GSAParser extends SentenceParser implements GSASentence {
 
     /*
      * (non-Javadoc)
-     * @see net.sf.marineapi.nmea.sentence.GSASentence#getVerticalDOP()
+     * @see net.sf.marineapi.nmea.sentence.GSASentence#getPositionDOP()
      */
-    public double getVerticalDOP() {
-        return getDoubleValue(VERTICAL_DOP);
+    public double getPositionDOP() {
+        return getDoubleValue(POSITION_DOP);
     }
 
     /*
@@ -107,6 +99,14 @@ class GSAParser extends SentenceParser implements GSASentence {
             this.parseSatellites();
         }
         return this.satellites;
+    }
+
+    /*
+     * (non-Javadoc)
+     * @see net.sf.marineapi.nmea.sentence.GSASentence#getVerticalDOP()
+     */
+    public double getVerticalDOP() {
+        return getDoubleValue(VERTICAL_DOP);
     }
 
     /**

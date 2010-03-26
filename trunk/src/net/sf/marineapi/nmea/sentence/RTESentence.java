@@ -43,13 +43,6 @@ public interface RTESentence extends Sentence {
     public static final char WORKING_ROUTE = 'w';
 
     /**
-     * Get the number of waypoints IDs in this sentence.
-     * 
-     * @return integer
-     */
-    int getWaypointCount();
-
-    /**
      * Get the number or name of the route.
      * 
      * @return String
@@ -71,6 +64,13 @@ public interface RTESentence extends Sentence {
      * @see #getSentenceCount()
      */
     int getSentenceIndex();
+
+    /**
+     * Get the number of waypoints IDs in this sentence.
+     * 
+     * @return integer
+     */
+    int getWaypointCount();
 
     /**
      * Get the list of waypoints of route.

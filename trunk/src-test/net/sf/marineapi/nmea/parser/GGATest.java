@@ -136,4 +136,59 @@ public class GGATest {
         assertTrue(44 == gga.getUtcSeconds());
     }
 
+    @Test
+    public void testSetAltitude() {
+        gga.setAltitude(11.111);
+        assertTrue(11.111 == gga.getAltitude());
+    }
+
+    @Test
+    public void testSetAltitudeUnits() {
+        assertEquals(Units.METER, gga.getAltitudeUnits());
+        gga.setAltitudeUnits(Units.FEET);
+        assertEquals(Units.FEET, gga.getAltitudeUnits());
+    }
+
+    @Test
+    public void testSetDgpsAge() {
+        gga.setDgpsAge(33);
+        assertTrue(33 == gga.getDgpsAge());
+        gga.setDgpsAge(55);
+        assertTrue(55 == gga.getDgpsAge());
+    }
+
+    @Test
+    public void testSetDgpsStationId() {
+        gga.setDgpsStationId("0001");
+        assertEquals("0001", gga.getDgpsStationId());
+    }
+
+    @Test
+    public void testSetFixQuality() {
+        assertEquals(GpsFixQuality.NORMAL, gga.getFixQuality());
+        gga.setFixQuality(GpsFixQuality.INVALID);
+        assertEquals(GpsFixQuality.INVALID, gga.getFixQuality());
+    }
+
+    @Test
+    public void testSetGeoidalHeight() {
+        gga.setGeoidalHeight(3.14);
+        assertTrue(3.14 == gga.getGeoidalHeight());
+
+    }
+
+    @Test
+    public void testSetGeoidalHeightUnits() {
+        assertEquals(Units.METER, gga.getGeoidalHeightUnits());
+        gga.setGeoidalHeightUnits(Units.FEET);
+        assertEquals(Units.FEET, gga.getGeoidalHeightUnits());
+    }
+
+    @Test
+    public void testSetHorizontalDOP() {
+        assertTrue(2.0 == gga.getHorizontalDOP());
+        gga.setHorizontalDOP(1.1);
+        assertTrue(1.1 == gga.getHorizontalDOP());
+    }
+
 }

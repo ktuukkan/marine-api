@@ -133,14 +133,6 @@ class GGAParser extends PositionParser implements GGASentence {
 
     /*
      * (non-Javadoc)
-     * @see net.sf.marineapi.nmea.sentence.GGASentence#getSatelliteCount()
-     */
-    public int getSatelliteCount() {
-        return getIntValue(SATELLITES_IN_USE);
-    }
-
-    /*
-     * (non-Javadoc)
      * @see net.sf.marineapi.nmea.sentence.PositionSentence#getPosition()
      */
     public Position getPosition() {
@@ -153,10 +145,10 @@ class GGAParser extends PositionParser implements GGASentence {
 
     /*
      * (non-Javadoc)
-     * @see net.sf.marineapi.nmea.sentence.TimeSentence#getUtcTime()
+     * @see net.sf.marineapi.nmea.sentence.GGASentence#getSatelliteCount()
      */
-    public String getUtcTime() {
-        return getStringValue(UTC_TIME);
+    public int getSatelliteCount() {
+        return getIntValue(SATELLITES_IN_USE);
     }
 
     /*
@@ -181,6 +173,86 @@ class GGAParser extends PositionParser implements GGASentence {
      */
     public double getUtcSeconds() {
         return Integer.parseInt(getUtcTime().substring(4, 6));
+    }
+
+    /*
+     * (non-Javadoc)
+     * @see net.sf.marineapi.nmea.sentence.TimeSentence#getUtcTime()
+     */
+    public String getUtcTime() {
+        return getStringValue(UTC_TIME);
+    }
+
+    /*
+     * (non-Javadoc)
+     * @see net.sf.marineapi.nmea.sentence.GGASentence#setAltitude(double)
+     */
+    public void setAltitude(double alt) {
+        setDoubleValue(ALTITUDE, alt);
+    }
+
+    /*
+     * (non-Javadoc)
+     * @see
+     * net.sf.marineapi.nmea.sentence.GGASentence#setAltitudeUnits(net.sf.marineapi
+     * .nmea.util.Units)
+     */
+    public void setAltitudeUnits(Units unit) {
+        setCharValue(ALTITUDE_UNITS, unit.toChar());
+    }
+
+    /*
+     * (non-Javadoc)
+     * @see net.sf.marineapi.nmea.sentence.GGASentence#setDgpsAge(int)
+     */
+    public void setDgpsAge(int age) {
+        setIntValue(DGPS_AGE, age);
+    }
+
+    /*
+     * (non-Javadoc)
+     * @see
+     * net.sf.marineapi.nmea.sentence.GGASentence#setDgpsStationId(java.lang
+     * .String)
+     */
+    public void setDgpsStationId(String id) {
+        setStringValue(DGPS_STATION_ID, id);
+    }
+
+    /*
+     * (non-Javadoc)
+     * @see
+     * net.sf.marineapi.nmea.sentence.GGASentence#setFixQuality(net.sf.marineapi
+     * .nmea.util.GpsFixQuality)
+     */
+    public void setFixQuality(GpsFixQuality quality) {
+        setIntValue(FIX_QUALITY, quality.toInt());
+    }
+
+    /*
+     * (non-Javadoc)
+     * @see net.sf.marineapi.nmea.sentence.GGASentence#setGeoidalHeight(double)
+     */
+    public void setGeoidalHeight(double height) {
+        setDoubleValue(GEOIDAL_HEIGHT, height);
+    }
+
+    /*
+     * (non-Javadoc)
+     * @see
+     * net.sf.marineapi.nmea.sentence.GGASentence#setGeoidalHeightUnits(net.
+     * sf.marineapi.nmea.util.Units)
+     */
+    public void setGeoidalHeightUnits(Units unit) {
+        setCharValue(HEIGHT_UNITS, unit.toChar());
+    }
+
+    /*
+     * (non-Javadoc)
+     * @see net.sf.marineapi.nmea.sentence.GGASentence#setHorizontalDOP(double)
+     */
+    public void setHorizontalDOP(double hdop) {
+        setDoubleValue(HORIZONTAL_DILUTION, hdop);
     }
 
 }

@@ -33,6 +33,34 @@ public class NMEA {
     }
 
     /**
+     * Calculate and append a checksum to sentence String. If the sentence
+     * already contains the checksum, it is replaced with a new one.
+     * <p>
+     * For example, <br>
+     * <code>$GPGLL,6011.552,N,02501.941,E,120045,A</code><br>
+     * results in <br>
+     * <code>$GPGLL,6011.552,N,02501.941,E,120045,A*26</code>
+     * <p>
+     * <code>$GPGLL,6011.552,N,02501.941,E,120045,A*00</code><br>
+     * results in <br>
+     * <code>$GPGLL,6011.552,N,02501.941,E,120045,A*26</code>
+     * 
+     * @param sentence Sentence String without checksum.
+     * @return The given String with checksum.
+     */
+    public static String appendChecksum(String sentence) {
+
+        String str = sentence;
+
+        int i = str.indexOf(Sentence.CHECKSUM_DELIMITER);
+        if (i != -1) {
+            str = str.substring(0, i);
+        }
+
+        return str + Sentence.CHECKSUM_DELIMITER + NMEA.calculateChecksum(str);
+    }
+
+    /**
      * Calculates the checksum of sentence String. Checksum is a XOR of each
      * character between, but not including, the $ and * characters. The
      * resulting hex value is returned as a String in two digit format, padded
@@ -91,34 +119,6 @@ public class NMEA {
         String chk = nmea.substring(start, nmea.length());
 
         return nmea.matches(re) && chk.equals(NMEA.calculateChecksum(nmea));
-    }
-
-    /**
-     * Calculate and append a checksum to sentence String. If the sentence
-     * already contains the checksum, it is replaced with a new one.
-     * <p>
-     * For example, <br>
-     * <code>$GPGLL,6011.552,N,02501.941,E,120045,A</code><br>
-     * results in <br>
-     * <code>$GPGLL,6011.552,N,02501.941,E,120045,A*26</code>
-     * <p>
-     * <code>$GPGLL,6011.552,N,02501.941,E,120045,A*00</code><br>
-     * results in <br>
-     * <code>$GPGLL,6011.552,N,02501.941,E,120045,A*26</code>
-     * 
-     * @param sentence Sentence String without checksum.
-     * @return The given String with checksum.
-     */
-    public static String appendChecksum(String sentence) {
-
-        String str = sentence;
-
-        int i = str.indexOf(Sentence.CHECKSUM_DELIMITER);
-        if (i != -1) {
-            str = str.substring(0, i);
-        }
-
-        return str + Sentence.CHECKSUM_DELIMITER + NMEA.calculateChecksum(str);
     }
 
 }

@@ -47,6 +47,15 @@ public enum Units {
     }
 
     /**
+     * Returns the corresponding char constant.
+     * 
+     * @return Char indicator of enum
+     */
+    public char toChar() {
+        return ch;
+    }
+
+    /**
      * Get the enum corresponding to specified char.
      * 
      * @param c Char indicator for unit
@@ -59,14 +68,5 @@ public enum Units {
             }
         }
         return null;
-    }
-
-    /**
-     * Returns the corresponding char constant.
-     * 
-     * @return Char indicator of enum
-     */
-    public char toChar() {
-        return ch;
     }
 }

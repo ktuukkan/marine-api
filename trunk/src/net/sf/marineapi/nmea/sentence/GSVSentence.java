@@ -22,6 +22,20 @@ import net.sf.marineapi.nmea.util.SatelliteInfo;
 public interface GSVSentence extends Sentence {
 
     /**
+     * Get the number of satellites in view.
+     * 
+     * @return Satellite count
+     */
+    int getSatelliteCount();
+
+    /**
+     * Get the satellite information of the sentence.
+     * 
+     * @return List of SatelliteInfo objects.
+     */
+    List<SatelliteInfo> getSatelliteInfo();
+
+    /**
      * Get the number of sentences in GSV sequence.
      * 
      * @return Number of sentences
@@ -52,19 +66,5 @@ public interface GSVSentence extends Sentence {
      * @see #getSentenceIndex()
      */
     boolean isLast();
-
-    /**
-     * Get the number of satellites in view.
-     * 
-     * @return Satellite count
-     */
-    int getSatelliteCount();
-
-    /**
-     * Get the satellite information of the sentence.
-     * 
-     * @return List of SatelliteInfo objects.
-     */
-    List<SatelliteInfo> getSatelliteInfo();
 
 }

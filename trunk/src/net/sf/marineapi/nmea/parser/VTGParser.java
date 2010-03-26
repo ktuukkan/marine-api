@@ -59,14 +59,6 @@ class VTGParser extends SentenceParser implements VTGSentence {
 
     /*
      * (non-Javadoc)
-     * @see net.sf.marineapi.nmea.sentence.VTGSentence#getTrueCourse()
-     */
-    public double getTrueCourse() {
-        return getDoubleValue(TRUE_COURSE);
-    }
-
-    /*
-     * (non-Javadoc)
      * @see net.sf.marineapi.nmea.sentence.VTGSentence#getMagneticCourse()
      */
     public double getMagneticCourse() {
@@ -75,10 +67,10 @@ class VTGParser extends SentenceParser implements VTGSentence {
 
     /*
      * (non-Javadoc)
-     * @see net.sf.marineapi.nmea.sentence.VTGSentence#getSpeedKnots()
+     * @see net.sf.marineapi.nmea.sentence.VTGSentence#getMode()
      */
-    public double getSpeedKnots() {
-        return getDoubleValue(SPEED_KNOTS);
+    public GpsMode getMode() {
+        return GpsMode.valueOf(getCharValue(MODE));
     }
 
     /*
@@ -91,9 +83,17 @@ class VTGParser extends SentenceParser implements VTGSentence {
 
     /*
      * (non-Javadoc)
-     * @see net.sf.marineapi.nmea.sentence.VTGSentence#getMode()
+     * @see net.sf.marineapi.nmea.sentence.VTGSentence#getSpeedKnots()
      */
-    public GpsMode getMode() {
-        return GpsMode.valueOf(getCharValue(MODE));
+    public double getSpeedKnots() {
+        return getDoubleValue(SPEED_KNOTS);
+    }
+
+    /*
+     * (non-Javadoc)
+     * @see net.sf.marineapi.nmea.sentence.VTGSentence#getTrueCourse()
+     */
+    public double getTrueCourse() {
+        return getDoubleValue(TRUE_COURSE);
     }
 }

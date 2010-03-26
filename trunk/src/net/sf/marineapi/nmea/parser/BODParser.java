@@ -55,10 +55,11 @@ class BODParser extends SentenceParser implements BODSentence {
 
     /*
      * (non-Javadoc)
-     * @see net.sf.marineapi.nmea.sentence.BODSentence#getTrueBearing()
+     * @see
+     * net.sf.marineapi.nmea.sentence.BODSentence#getDestinationWaypointId()
      */
-    public double getTrueBearing() {
-        return getDoubleValue(BEARING_TRUE);
+    public String getDestinationWaypointId() {
+        return getStringValue(DESTINATION);
     }
 
     /*
@@ -79,44 +80,54 @@ class BODParser extends SentenceParser implements BODSentence {
 
     /*
      * (non-Javadoc)
-     * @see
-     * net.sf.marineapi.nmea.sentence.BODSentence#getDestinationWaypointId()
+     * @see net.sf.marineapi.nmea.sentence.BODSentence#getTrueBearing()
      */
-    public String getDestinationWaypointId() {
-        return getStringValue(DESTINATION);
+    public double getTrueBearing() {
+        return getDoubleValue(BEARING_TRUE);
     }
 
-	/* (non-Javadoc)
-	 * @see net.sf.marineapi.nmea.sentence.BODSentence#setDestinationWaypointId(java.lang.String)
-	 */
-	public void setDestinationWaypointId(String id) {
-		setStringValue(DESTINATION, id);
-	}
+    /*
+     * (non-Javadoc)
+     * @see
+     * net.sf.marineapi.nmea.sentence.BODSentence#setDestinationWaypointId(java
+     * .lang.String)
+     */
+    public void setDestinationWaypointId(String id) {
+        setStringValue(DESTINATION, id);
+    }
 
-	/* (non-Javadoc)
-	 * @see net.sf.marineapi.nmea.sentence.BODSentence#setMagneticBearing(double)
-	 */
-	public void setMagneticBearing(double bearing) {
-		if(bearing < 0 || bearing > 360) {
-			throw new IllegalArgumentException("Bearing value out of range 0..360 degrees");
-		}
-		setDoubleValue(BEARING_MAGN, bearing);
-	}
+    /*
+     * (non-Javadoc)
+     * @see
+     * net.sf.marineapi.nmea.sentence.BODSentence#setMagneticBearing(double)
+     */
+    public void setMagneticBearing(double bearing) {
+        if (bearing < 0 || bearing > 360) {
+            throw new IllegalArgumentException(
+                    "Bearing value out of range 0..360 degrees");
+        }
+        setDoubleValue(BEARING_MAGN, bearing);
+    }
 
-	/* (non-Javadoc)
-	 * @see net.sf.marineapi.nmea.sentence.BODSentence#setOriginWaypointId(java.lang.String)
-	 */
-	public void setOriginWaypointId(String id) {
-		setStringValue(ORIGIN, id);		
-	}
+    /*
+     * (non-Javadoc)
+     * @see
+     * net.sf.marineapi.nmea.sentence.BODSentence#setOriginWaypointId(java.lang
+     * .String)
+     */
+    public void setOriginWaypointId(String id) {
+        setStringValue(ORIGIN, id);
+    }
 
-	/* (non-Javadoc)
-	 * @see net.sf.marineapi.nmea.sentence.BODSentence#setTrueBearing(double)
-	 */
-	public void setTrueBearing(double bearing) {
-		if(bearing < 0 || bearing > 360) {
-			throw new IllegalArgumentException("Bearing value out of range 0..360 degrees");
-		}
-		setDoubleValue(BEARING_TRUE, bearing);		
-	}
+    /*
+     * (non-Javadoc)
+     * @see net.sf.marineapi.nmea.sentence.BODSentence#setTrueBearing(double)
+     */
+    public void setTrueBearing(double bearing) {
+        if (bearing < 0 || bearing > 360) {
+            throw new IllegalArgumentException(
+                    "Bearing value out of range 0..360 degrees");
+        }
+        setDoubleValue(BEARING_TRUE, bearing);
+    }
 }

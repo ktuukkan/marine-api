@@ -45,13 +45,6 @@ public interface VTGSentence {
     public static final char MODE_AUTOMATIC = 'A';
 
     /**
-     * Get the true course over ground.
-     * 
-     * @return True course
-     */
-    double getTrueCourse();
-
-    /**
      * Get the magnetic course over ground.
      * 
      * @return Magnetic course
@@ -59,11 +52,12 @@ public interface VTGSentence {
     double getMagneticCourse();
 
     /**
-     * Get speed over ground in knots (nautical miles per hour).
+     * Get the receiver operating mode. The field may not be available,
+     * depending on the NMEA version.
      * 
-     * @return Speed in knots
+     * @return GpsMode or <code>null</code> if mode is not available
      */
-    double getSpeedKnots();
+    GpsMode getMode();
 
     /**
      * Get speed over ground in kilometers per hour.
@@ -73,11 +67,17 @@ public interface VTGSentence {
     double getSpeedKmh();
 
     /**
-     * Get the receiver operating mode. The field may not be available,
-     * depending on the NMEA version.
+     * Get speed over ground in knots (nautical miles per hour).
      * 
-     * @return GpsMode or <code>null</code> if mode is not available
+     * @return Speed in knots
      */
-    GpsMode getMode();
+    double getSpeedKnots();
+
+    /**
+     * Get the true course over ground.
+     * 
+     * @return True course
+     */
+    double getTrueCourse();
 
 }

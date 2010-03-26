@@ -63,6 +63,13 @@ public interface Sentence {
     final static String TERMINATOR = "\r\n";
 
     /**
+     * Returns the String representation of sentence, in NMEA 0183 format.
+     * 
+     * @return Sentence String
+     */
+    public String toString();
+
+    /**
      * Get the sentence ID that specifies sentence type. ID is the last three
      * characters in address field. For example, in case of <code>$GPGGA</code>
      * the method returns <code>SentenceId.GGA</code>.
@@ -87,11 +94,4 @@ public interface Sentence {
      * @param id TalkerId to set
      */
     void setTalkerId(TalkerId id);
-
-    /**
-     * Returns the String representation of sentence, in NMEA 0183 format.
-     * 
-     * @return Sentence String
-     */
-    public String toString();
 }
