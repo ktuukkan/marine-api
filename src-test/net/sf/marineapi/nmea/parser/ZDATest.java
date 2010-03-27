@@ -1,7 +1,6 @@
 package net.sf.marineapi.nmea.parser;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
 import java.util.Date;
@@ -46,7 +45,7 @@ public class ZDATest {
      */
     @Test
     public void testGetUtcHours() {
-        assertTrue(3 == zda.getUtcHours());
+        assertEquals(3, zda.getUtcHours());
     }
 
     /**
@@ -55,7 +54,7 @@ public class ZDATest {
      */
     @Test
     public void testGetUtcMinutes() {
-        assertTrue(29 == zda.getUtcMinutes());
+        assertEquals(29, zda.getUtcMinutes());
     }
 
     /**
@@ -64,7 +63,7 @@ public class ZDATest {
      */
     @Test
     public void testGetUtcSeconds() {
-        assertTrue(15 == zda.getUtcSeconds());
+        assertEquals(15, zda.getUtcSeconds(), 0.001);
     }
 
     /**
@@ -73,7 +72,7 @@ public class ZDATest {
      */
     @Test
     public void testGetUtcDay() {
-        assertTrue(7 == zda.getUtcDay());
+        assertEquals(7, zda.getUtcDay());
     }
 
     /**
@@ -82,7 +81,7 @@ public class ZDATest {
      */
     @Test
     public void testGetUtcMonth() {
-        assertTrue(8 == zda.getUtcMonth());
+        assertEquals(8, zda.getUtcMonth());
     }
 
     /**
@@ -91,7 +90,7 @@ public class ZDATest {
      */
     @Test
     public void testGetUtcYear() {
-        assertTrue(2004 == zda.getUtcYear());
+        assertEquals(2004, zda.getUtcYear());
     }
 
     /**
@@ -100,7 +99,7 @@ public class ZDATest {
      */
     @Test
     public void testGetLocalZoneHours() {
-        assertTrue(0 == zda.getLocalZoneHours());
+        assertEquals(0, zda.getLocalZoneHours());
     }
 
     /**
@@ -109,21 +108,19 @@ public class ZDATest {
      */
     @Test
     public void testGetLocalZoneMinutes() {
-        assertTrue(0 == zda.getLocalZoneMinutes());
+        assertEquals(0, zda.getLocalZoneMinutes());
     }
 
     /**
-     * Test method for
-     * {@link net.sf.marineapi.nmea.parser.ZDAParser#getDate()}.
+     * Test method for {@link net.sf.marineapi.nmea.parser.ZDAParser#getDate()}.
      */
     @Test
     public void testGetDate() {
         GregorianCalendar cal = new GregorianCalendar(2004, 7, 7, 3, 29, 15);
         final Date expected = cal.getTime();
         Date parsed = zda.getDate();
-
         assertEquals(expected, parsed);
-        assertTrue(expected.getTime() == parsed.getTime());
+        assertEquals(expected.getTime(), parsed.getTime());
     }
 
 }

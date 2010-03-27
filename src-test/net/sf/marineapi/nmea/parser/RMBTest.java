@@ -51,7 +51,7 @@ public class RMBTest {
      */
     @Test
     public void testGetCrossTrackError() {
-        assertTrue(0.0 == rmb.getCrossTrackError());
+        assertEquals(0.0, rmb.getCrossTrackError(), 0.001);
     }
 
     /**
@@ -71,7 +71,7 @@ public class RMBTest {
     public void testGetOriginId() {
         // FIXME test data should contain ID
         try {
-            rmb.getOriginId();
+            assertEquals("", rmb.getOriginId());
             fail("Did not throw ParseException");
         } catch (Exception e) {
             assertTrue(e instanceof DataNotAvailableException);
@@ -84,26 +84,26 @@ public class RMBTest {
      */
     @Test
     public void testGetDestination() {
+        final String id = "RUSKI";
         final double lat = 55 + (36.200 / 60);
         final double lon = 14 + (36.500 / 60);
-        final String id = "RUSKI";
 
         Waypoint wp = rmb.getDestination();
         assertNotNull(wp);
         assertEquals(id, wp.getId());
-        assertTrue(lat == wp.getLatitude());
-        assertTrue(lon == wp.getLongitude());
+        assertEquals(lat, wp.getLatitude(), 0.0000001);
+        assertEquals(lon, wp.getLongitude(), 0.0000001);
         assertEquals(Direction.NORTH, wp.getLatHemisphere());
         assertEquals(Direction.EAST, wp.getLonHemisphere());
     }
 
     /**
-     * Test method for
-     * {@link net.sf.marineapi.nmea.parser.RMBParser#getRange()}.
+     * Test method for {@link net.sf.marineapi.nmea.parser.RMBParser#getRange()}
+     * .
      */
     @Test
     public void testGetRange() {
-        assertTrue(432.3 == rmb.getRange());
+        assertEquals(432.3, rmb.getRange(), 0.001);
     }
 
     /**
@@ -112,7 +112,7 @@ public class RMBTest {
      */
     @Test
     public void testGetBearing() {
-        assertTrue(234.9 == rmb.getBearing());
+        assertEquals(234.9, rmb.getBearing(), 0.001);
     }
 
     /**
@@ -123,7 +123,7 @@ public class RMBTest {
     public void testGetVelocity() {
         // FIXME test data should contain velocity
         try {
-            assertTrue(0.0 == rmb.getVelocity());
+            assertEquals(0.0, rmb.getVelocity(), 0.001);
             fail("Did not throw ParseException");
         } catch (Exception e) {
             assertTrue(e instanceof DataNotAvailableException);

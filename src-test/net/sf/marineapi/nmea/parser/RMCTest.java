@@ -56,12 +56,12 @@ public class RMCTest {
     }
 
     /**
-     * Test method for
-     * {@link net.sf.marineapi.nmea.parser.RMCParser#getSpeed()} .
+     * Test method for {@link net.sf.marineapi.nmea.parser.RMCParser#getSpeed()}
+     * .
      */
     @Test
     public void testGetSpeedOverGround() {
-        assertTrue(0.0 == rmc.getSpeed());
+        assertEquals(0.0, rmc.getSpeed(), 0.001);
     }
 
     /**
@@ -70,7 +70,7 @@ public class RMCTest {
      */
     @Test
     public void testGetCourseOverGround() {
-        assertTrue(360.0 == rmc.getCourse());
+        assertEquals(360.0, rmc.getCourse(), 0.001);
     }
 
     /**
@@ -79,7 +79,7 @@ public class RMCTest {
      */
     @Test
     public void testGetMagneticVariation() {
-        assertTrue(-6.1 == rmc.getVariation());
+        assertEquals(-6.1, rmc.getVariation(), 0.001);
     }
 
     /**
@@ -104,8 +104,8 @@ public class RMCTest {
 
         Position p = rmc.getPosition();
         assertNotNull(p);
-        assertTrue(lat == p.getLatitude());
-        assertTrue(lon == p.getLongitude());
+        assertEquals(lat, p.getLatitude(), 0.0000001);
+        assertEquals(lon, p.getLongitude(), 0.0000001);
         assertEquals(Direction.NORTH, p.getLatHemisphere());
         assertEquals(Direction.EAST, p.getLonHemisphere());
     }
@@ -125,7 +125,7 @@ public class RMCTest {
      */
     @Test
     public void testGetUtcHours() {
-        assertTrue(12 == rmc.getUtcHours());
+        assertEquals(12, rmc.getUtcHours());
     }
 
     /**
@@ -134,7 +134,7 @@ public class RMCTest {
      */
     @Test
     public void testGetUtcMinutes() {
-        assertTrue(0 == rmc.getUtcMinutes());
+        assertEquals(0, rmc.getUtcMinutes());
     }
 
     /**
@@ -143,7 +143,7 @@ public class RMCTest {
      */
     @Test
     public void testGetUtcSeconds() {
-        assertTrue(44 == rmc.getUtcSeconds());
+        assertEquals(44, rmc.getUtcSeconds(), 0.001);
     }
 
     /**
@@ -152,7 +152,7 @@ public class RMCTest {
      */
     @Test
     public void testGetUtcDay() {
-        assertTrue(16 == rmc.getUtcDay());
+        assertEquals(16, rmc.getUtcDay());
     }
 
     /**
@@ -161,7 +161,7 @@ public class RMCTest {
      */
     @Test
     public void testGetUtcMonth() {
-        assertTrue(7 == rmc.getUtcMonth());
+        assertEquals(7, rmc.getUtcMonth());
     }
 
     /**
@@ -170,12 +170,11 @@ public class RMCTest {
      */
     @Test
     public void testGetUtcYear() {
-        assertTrue(2005 == rmc.getUtcYear());
+        assertEquals(2005, rmc.getUtcYear());
     }
 
     /**
-     * Test method for
-     * {@link net.sf.marineapi.nmea.parser.RMCParser#getDate()}.
+     * Test method for {@link net.sf.marineapi.nmea.parser.RMCParser#getDate()}.
      */
     @Test
     public void testGetDate() {
@@ -185,7 +184,7 @@ public class RMCTest {
         Date parsed = rmc.getDate();
 
         assertEquals(expected, parsed);
-        assertTrue(expected.getTime() == parsed.getTime());
+        assertEquals(expected.getTime(), parsed.getTime());
     }
 
 }

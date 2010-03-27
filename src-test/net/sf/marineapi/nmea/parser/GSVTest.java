@@ -2,7 +2,6 @@ package net.sf.marineapi.nmea.parser;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
 import java.util.List;
@@ -40,7 +39,7 @@ public class GSVTest {
      */
     @Test
     public void testGetSentenceCount() {
-        assertTrue(3 == gsv.getSentenceCount());
+        assertEquals(3, gsv.getSentenceCount());
     }
 
     /**
@@ -49,12 +48,11 @@ public class GSVTest {
      */
     @Test
     public void testGetSentenceNumber() {
-        assertTrue(2 == gsv.getSentenceIndex());
+        assertEquals(2, gsv.getSentenceIndex());
     }
 
     /**
-     * Test method for
-     * {@link net.sf.marineapi.nmea.parser.GSVParser#isFirst()}.
+     * Test method for {@link net.sf.marineapi.nmea.parser.GSVParser#isFirst()}.
      */
     @Test
     public void testIsFirstInSequence() {
@@ -62,8 +60,7 @@ public class GSVTest {
     }
 
     /**
-     * Test method for {@link net.sf.marineapi.nmea.parser.GSVParser#isLast()}
-     * .
+     * Test method for {@link net.sf.marineapi.nmea.parser.GSVParser#isLast()} .
      */
     @Test
     public void testIsLastInSequence() {
@@ -76,7 +73,7 @@ public class GSVTest {
      */
     @Test
     public void testGetSatelliteCount() {
-        assertTrue(12 == gsv.getSatelliteCount());
+        assertEquals(12, gsv.getSatelliteCount());
     }
 
     /**
@@ -86,7 +83,7 @@ public class GSVTest {
     @Test
     public void testGetSatelliteInfo() {
         List<SatelliteInfo> sat = gsv.getSatelliteInfo();
-        assertTrue(sat.size() == 4);
+        assertEquals(4, sat.size());
         testSatelliteInfo(sat.get(0), "15", 56, 182, 51);
         testSatelliteInfo(sat.get(1), "17", 38, 163, 47);
         testSatelliteInfo(sat.get(2), "18", 63, 58, 50);
@@ -99,8 +96,8 @@ public class GSVTest {
     private void testSatelliteInfo(SatelliteInfo si, String id, int elevation,
             int azimuth, int noise) {
         assertEquals(id, si.getId());
-        assertTrue(elevation == si.getElevation());
-        assertTrue(azimuth == si.getAzimuth());
-        assertTrue(noise == si.getSignalNoiseRatio());
+        assertEquals(elevation, si.getElevation(), 0.001);
+        assertEquals(azimuth, si.getAzimuth(), 0.001);
+        assertEquals(noise, si.getNoise(), 0.001);
     }
 }

@@ -2,7 +2,6 @@ package net.sf.marineapi.nmea.parser;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 import net.sf.marineapi.nmea.util.DataStatus;
 import net.sf.marineapi.nmea.util.Direction;
@@ -57,8 +56,8 @@ public class GLLTest {
 
         Position p = instance.getPosition();
         assertNotNull(p);
-        assertTrue(lat == p.getLatitude());
-        assertTrue(lon == p.getLongitude());
+        assertEquals(lat, p.getLatitude(), 0.0000001);
+        assertEquals(lon, p.getLongitude(), 0.0000001);
         assertEquals(Direction.NORTH, p.getLatHemisphere());
         assertEquals(Direction.EAST, p.getLonHemisphere());
 
