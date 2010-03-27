@@ -1,7 +1,6 @@
 package net.sf.marineapi.nmea.parser;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 import net.sf.marineapi.nmea.sentence.VTGSentence;
 import net.sf.marineapi.nmea.util.GpsMode;
@@ -36,7 +35,7 @@ public class VTGTest {
      */
     @Test
     public void testGetTrueCourse() {
-        assertTrue(360.0 == vtg.getTrueCourse());
+        assertEquals(360.0, vtg.getTrueCourse(), 0.001);
     }
 
     /**
@@ -45,7 +44,7 @@ public class VTGTest {
      */
     @Test
     public void testGetMagneticCourse() {
-        assertTrue(348.7 == vtg.getMagneticCourse());
+        assertEquals(348.7, vtg.getMagneticCourse(), 0.001);
     }
 
     /**
@@ -54,7 +53,7 @@ public class VTGTest {
      */
     @Test
     public void testGetSpeedKnots() {
-        assertTrue(16.89 == vtg.getSpeedKnots());
+        assertEquals(16.89, vtg.getSpeedKnots(), 0.001);
     }
 
     /**
@@ -63,12 +62,11 @@ public class VTGTest {
      */
     @Test
     public void testGetSpeedKmh() {
-        assertTrue(31.28 == vtg.getSpeedKmh());
+        assertEquals(31.28, vtg.getSpeedKmh(), 0.001);
     }
 
     /**
-     * Test method for
-     * {@link net.sf.marineapi.nmea.parser.VTGParser#getMode()}.
+     * Test method for {@link net.sf.marineapi.nmea.parser.VTGParser#getMode()}.
      */
     @Test
     public void testGetMode() {

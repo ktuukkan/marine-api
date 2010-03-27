@@ -1,7 +1,6 @@
 package net.sf.marineapi.nmea.parser;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 import net.sf.marineapi.nmea.sentence.GSASentence;
 import net.sf.marineapi.nmea.util.GpsFixStatus;
@@ -89,7 +88,7 @@ public class GSATest {
     @Test
     public void testGetSatelliteIds() {
         String[] satellites = instance.getSatellitesIds();
-        assertTrue(satellites.length == 5);
+        assertEquals(5, satellites.length);
         assertEquals("02", satellites[0]);
         assertEquals("07", satellites[1]);
         assertEquals("09", satellites[2]);

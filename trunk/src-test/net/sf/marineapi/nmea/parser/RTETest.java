@@ -5,7 +5,6 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
-
 import net.sf.marineapi.nmea.sentence.RTESentence;
 
 import org.junit.Before;
@@ -40,7 +39,7 @@ public class RTETest {
     public void testGetWaypointIds() {
         String[] ids = rte.getWaypointIds();
         assertNotNull(ids);
-        assertTrue(ids.length == 3);
+        assertEquals(3, ids.length);
         assertEquals("MELIN", ids[0]);
         assertEquals("RUSKI", ids[1]);
         assertEquals("KNUDAN", ids[2]);
@@ -52,7 +51,7 @@ public class RTETest {
      */
     @Test
     public void testGetNumberOfWaypoints() {
-        assertTrue(3 == rte.getWaypointCount());
+        assertEquals(3, rte.getWaypointCount());
     }
 
     /**
@@ -79,7 +78,7 @@ public class RTETest {
      */
     @Test
     public void testGetNumberOfSentences() {
-        assertTrue(1 == rte.getSentenceCount());
+        assertEquals(1, rte.getSentenceCount());
     }
 
     /**
@@ -88,12 +87,11 @@ public class RTETest {
      */
     @Test
     public void testGetSentenceNumber() {
-        assertTrue(1 == rte.getSentenceIndex());
+        assertEquals(1, rte.getSentenceIndex());
     }
 
     /**
-     * Test method for
-     * {@link net.sf.marineapi.nmea.parser.RTEParser#isFirst()}.
+     * Test method for {@link net.sf.marineapi.nmea.parser.RTEParser#isFirst()}.
      */
     @Test
     public void testIsFirstInSequence() {
@@ -101,8 +99,7 @@ public class RTETest {
     }
 
     /**
-     * Test method for
-     * {@link net.sf.marineapi.nmea.parser.RTEParser#isLast()}.
+     * Test method for {@link net.sf.marineapi.nmea.parser.RTEParser#isLast()}.
      */
     @Test
     public void testIsLastInSequence() {

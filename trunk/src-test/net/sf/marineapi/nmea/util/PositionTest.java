@@ -25,7 +25,7 @@ public class PositionTest {
      */
     @Test
     public void testGetLatitude() {
-        assertTrue(60.0 == instance.getLatitude());
+        assertEquals(60.0, instance.getLatitude(), 0.0000001);
     }
 
     /**
@@ -33,9 +33,9 @@ public class PositionTest {
      */
     @Test
     public void testSetLatitude() {
-        assertTrue(60.0 == instance.getLatitude());
-        instance.setLatitude(65.555);
-        assertTrue(65.555 == instance.getLatitude());
+        assertEquals(60.0, instance.getLatitude(), 0.0000001);
+        instance.setLatitude(65.5555);
+        assertEquals(65.5555, instance.getLatitude(), 0.0000001);
         try {
             instance.setLatitude(-0.0001);
             fail("Did not throw exception");
@@ -56,7 +56,7 @@ public class PositionTest {
      */
     @Test
     public void testGetLongitude() {
-        assertTrue(25.0 == instance.getLongitude());
+        assertEquals(25.0, instance.getLongitude(), 0.0000001);
     }
 
     /**
@@ -65,9 +65,9 @@ public class PositionTest {
     @Test
     public void testSetLongitude() {
 
-        assertTrue(25.0 == instance.getLongitude());
+        assertEquals(25.0, instance.getLongitude(), 0.0000001);
         instance.setLongitude(0.0);
-        assertTrue(0.0 == instance.getLongitude());
+        assertEquals(0.0, instance.getLongitude(), 0.0000001);
 
         try {
             instance.setLongitude(-0.0001);
@@ -172,7 +172,7 @@ public class PositionTest {
                 Direction.EAST);
 
         // distance to "here" must be zero
-        assertTrue(0.0 == origin.distanceTo(origin));
+        assertEquals(0.0, origin.distanceTo(origin), 0.00001);
 
         // 1 degree north from instance's position
         Position destination = new Position(61.0, Direction.NORTH, 25.0,
@@ -181,8 +181,8 @@ public class PositionTest {
         double distance = origin.distanceTo(destination);
 
         // By definition, one degree equals 60 NM
-        Double expected = new Double(60 * 1852.0);
-        assertEquals(expected, new Double(distance));
+        double expected = (60 * 1852.0);
+        assertEquals(expected, distance, 0.001);
     }
 
     /**

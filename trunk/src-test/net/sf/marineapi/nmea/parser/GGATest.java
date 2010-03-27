@@ -2,7 +2,6 @@ package net.sf.marineapi.nmea.parser;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 import net.sf.marineapi.nmea.util.Datum;
 import net.sf.marineapi.nmea.util.Direction;
@@ -48,7 +47,7 @@ public class GGATest {
 
     @Test
     public void testGetAltitude() {
-        assertTrue(28.0 == gga.getAltitude());
+        assertEquals(28.0, gga.getAltitude(), 0.001);
     }
 
     @Test
@@ -87,7 +86,7 @@ public class GGATest {
 
     @Test
     public void testGetGeoidalHeight() {
-        assertTrue(19.6 == gga.getGeoidalHeight());
+        assertEquals(19.6, gga.getGeoidalHeight(), 0.001);
     }
 
     @Test
@@ -97,21 +96,25 @@ public class GGATest {
 
     @Test
     public void testGetHorizontalDOP() {
-        assertTrue(2.0 == gga.getHorizontalDOP());
+        assertEquals(2.0, gga.getHorizontalDOP(), 0.001);
     }
 
     @Test
     public void testGetNumberOfSatellites() {
-        assertTrue(0 == gga.getSatelliteCount());
+        assertEquals(0, gga.getSatelliteCount());
     }
 
     @Test
     public void testGetPosition() {
+        // expected lat/lon values
+        final double lat = 60 + (11.552 / 60);
+        final double lon = 25 + (1.941 / 60);
+
         Position p = gga.getPosition();
         assertNotNull(p);
-        assertTrue(60.19253333333333 == p.getLatitude());
+        assertEquals(lat, p.getLatitude(), 0.0000001);
         assertEquals(Direction.NORTH, p.getLatHemisphere());
-        assertTrue(25.03235 == p.getLongitude());
+        assertEquals(lon, p.getLongitude(), 0.0000001);
         assertEquals(Direction.EAST, p.getLonHemisphere());
         assertEquals(Datum.WGS84, p.getDatum());
     }
@@ -123,23 +126,24 @@ public class GGATest {
 
     @Test
     public void testGetUtcHours() {
-        assertTrue(12 == gga.getUtcHours());
+        assertEquals(12, gga.getUtcHours());
     }
 
     @Test
     public void testGetUtcMinutes() {
-        assertTrue(0 == gga.getUtcMinutes());
+        assertEquals(0, gga.getUtcMinutes());
     }
 
     @Test
     public void testGetUtcSeconds() {
-        assertTrue(44 == gga.getUtcSeconds());
+        assertEquals(44, gga.getUtcSeconds(), 0.001);
     }
 
     @Test
     public void testSetAltitude() {
-        gga.setAltitude(11.111);
-        assertTrue(11.111 == gga.getAltitude());
+        final double alt = 11.111;
+        gga.setAltitude(alt);
+        assertEquals(alt, gga.getAltitude(), 0.0001);
     }
 
     @Test
@@ -151,10 +155,9 @@ public class GGATest {
 
     @Test
     public void testSetDgpsAge() {
-        gga.setDgpsAge(33);
-        assertTrue(33 == gga.getDgpsAge());
-        gga.setDgpsAge(55);
-        assertTrue(55 == gga.getDgpsAge());
+        final double age = 33.3;
+        gga.setDgpsAge(age);
+        assertEquals(age, gga.getDgpsAge(), 0.001);
     }
 
     @Test
@@ -173,7 +176,7 @@ public class GGATest {
     @Test
     public void testSetGeoidalHeight() {
         gga.setGeoidalHeight(3.14);
-        assertTrue(3.14 == gga.getGeoidalHeight());
+        assertEquals(3.14, gga.getGeoidalHeight(), 0.0001);
 
     }
 
@@ -186,9 +189,9 @@ public class GGATest {
 
     @Test
     public void testSetHorizontalDOP() {
-        assertTrue(2.0 == gga.getHorizontalDOP());
-        gga.setHorizontalDOP(1.1);
-        assertTrue(1.1 == gga.getHorizontalDOP());
+        assertEquals(2.0, gga.getHorizontalDOP(), 0.001);
+        gga.setHorizontalDOP(0.025);
+        assertEquals(0.025, gga.getHorizontalDOP(), 0.001);
     }
 
 }

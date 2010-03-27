@@ -1,7 +1,6 @@
 package net.sf.marineapi.nmea.parser;
 
 import junit.framework.TestCase;
-
 import net.sf.marineapi.nmea.sentence.BODSentence;
 
 import org.junit.After;
@@ -81,7 +80,7 @@ public class BODTest extends TestCase {
     public void testGetTrueBearing() {
         try {
             double b = bod.getTrueBearing();
-            assertTrue(234.9 == b);
+            assertEquals(234.9, b, 0.001);
         } catch (ParseException e) {
             fail(e.getMessage());
         }
@@ -95,7 +94,7 @@ public class BODTest extends TestCase {
     public void testGetMagneticBearing() {
         try {
             double b = bod.getMagneticBearing();
-            assertTrue(228.8 == b);
+            assertEquals(228.8, b, 0.001);
         } catch (ParseException e) {
             fail(e.getMessage());
         }
@@ -131,31 +130,28 @@ public class BODTest extends TestCase {
             fail(e.getMessage());
         }
     }
-    
-    
-    
-    
+
     /**
      * Test method for
      * {@link net.sf.marineapi.nmea.parser.BODParser#getTrueBearing()}.
      */
     @Test
     public void testSetTrueBearing() {
-    	final double bearing = 180.0;
+        final double bearing = 180.0;
         try {
             bod.setTrueBearing(bearing);
             assertEquals(bearing, bod.getTrueBearing());
         } catch (Exception e) {
             fail(e.getMessage());
         }
-        
+
         try {
             bod.setTrueBearing(-0.01);
             fail("Did not throw exception");
         } catch (Exception e) {
             assertTrue(e instanceof IllegalArgumentException);
         }
-        
+
         try {
             bod.setTrueBearing(360.01);
             fail("Did not throw exception");
@@ -170,21 +166,21 @@ public class BODTest extends TestCase {
      */
     @Test
     public void testSetMagneticBearing() {
-    	final double bearing = 180.0;
+        final double bearing = 180.0;
         try {
             bod.setMagneticBearing(bearing);
             assertEquals(bearing, bod.getMagneticBearing());
         } catch (Exception e) {
             fail(e.getMessage());
         }
-        
+
         try {
             bod.setMagneticBearing(-0.01);
             fail("Did not throw exception");
         } catch (Exception e) {
             assertTrue(e instanceof IllegalArgumentException);
         }
-        
+
         try {
             bod.setMagneticBearing(360.01);
             fail("Did not throw exception");
@@ -221,14 +217,14 @@ public class BODTest extends TestCase {
         } catch (Exception e) {
             assertTrue(e instanceof DataNotAvailableException);
         }
-    	
-    	try {
+
+        try {
             bod.setDestinationWaypointId("TIISKERI");
             assertEquals("TIISKERI", bod.getDestinationWaypointId());
         } catch (Exception e) {
             fail(e.getMessage());
         }
-        
+
         try {
             bod.setDestinationWaypointId("");
             bod.getDestinationWaypointId();
