@@ -20,9 +20,9 @@
  */
 package net.sf.marineapi.nmea.parser;
 
+import net.sf.marineapi.nmea.sentence.SentenceId;
 import net.sf.marineapi.nmea.sentence.VTGSentence;
 import net.sf.marineapi.nmea.util.GpsMode;
-import net.sf.marineapi.nmea.util.SentenceId;
 
 /**
  * VTG sentence parser.

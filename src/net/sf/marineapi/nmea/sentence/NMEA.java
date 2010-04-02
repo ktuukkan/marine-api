@@ -91,18 +91,18 @@ public class NMEA {
     /**
      * Validates of the specified String against NMEA 0183 sentence format.
      * <p>
-     * Sentence is considered valid if it (1) begins with '$', (2) is at most 80
-     * characters long (without &lt;CR&gt;&lt;LF&gt;), (3) contains no illegal
-     * characters and (4) has a correct checksum.
+     * Sentence is considered valid if it (1) begins with '$' followed by 5 char
+     * ID, (2) is at most 80 characters long (without &lt;CR&gt;&lt;LF&gt;), (3)
+     * contains no illegal characters and (4) has a correct checksum.
      * <p>
      * Sentences without a checksum are validated by checking the general
      * sentence characteristics.
      * 
-     * @param nmea String
-     * @return <code>True</code> if valid, otherwise <code>false</code>.
+     * @param nmea NMEA sentence String
+     * @return <code>true</code> if valid, otherwise <code>false</code>.
      */
     public static boolean isValid(String nmea) {
-        if (nmea == null) {
+        if (nmea == null || "".equals(nmea)) {
             return false;
         }
 

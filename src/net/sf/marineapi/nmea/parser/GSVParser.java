@@ -24,8 +24,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import net.sf.marineapi.nmea.sentence.GSVSentence;
+import net.sf.marineapi.nmea.sentence.SentenceId;
 import net.sf.marineapi.nmea.util.SatelliteInfo;
-import net.sf.marineapi.nmea.util.SentenceId;
 
 /**
  * GSV sentence parser.

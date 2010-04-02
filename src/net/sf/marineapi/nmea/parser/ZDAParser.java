@@ -23,8 +23,8 @@ package net.sf.marineapi.nmea.parser;
 import java.util.Date;
 import java.util.GregorianCalendar;
 
+import net.sf.marineapi.nmea.sentence.SentenceId;
 import net.sf.marineapi.nmea.sentence.ZDASentence;
-import net.sf.marineapi.nmea.util.SentenceId;
 
 /**
  * ZDA sentence parser.

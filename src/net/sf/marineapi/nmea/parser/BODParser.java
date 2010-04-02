@@ -21,7 +21,7 @@
 package net.sf.marineapi.nmea.parser;
 
 import net.sf.marineapi.nmea.sentence.BODSentence;
-import net.sf.marineapi.nmea.util.SentenceId;
+import net.sf.marineapi.nmea.sentence.SentenceId;
 
 /**
  * BOD sentence parser.

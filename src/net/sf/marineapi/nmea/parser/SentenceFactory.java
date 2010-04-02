@@ -21,7 +21,7 @@
 package net.sf.marineapi.nmea.parser;
 
 import net.sf.marineapi.nmea.sentence.Sentence;
-import net.sf.marineapi.nmea.util.SentenceId;
+import net.sf.marineapi.nmea.sentence.SentenceId;
 
 /**
  * Factory for creating NMEA sentence parsers. TODO Add create method for

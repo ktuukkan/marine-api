@@ -18,7 +18,8 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Java Marine API. If not, see <http://www.gnu.org/licenses/>.
  */
-package net.sf.marineapi.nmea.util;
+package net.sf.marineapi.nmea.sentence;
+
 
 /**
  * Defines the supported NMEA 0831 sentence types. Sentence address field is a
@@ -26,7 +27,7 @@ package net.sf.marineapi.nmea.util;
  * 
  * @author Kimmo Tuukkanen
  * @version $Revision$
- * @see net.sf.marineapi.nmea.util.TalkerId
+ * @see net.sf.marineapi.nmea.sentence.TalkerId
  */
 public enum SentenceId {
 

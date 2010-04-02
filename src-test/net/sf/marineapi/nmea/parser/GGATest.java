@@ -3,11 +3,11 @@ package net.sf.marineapi.nmea.parser;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.fail;
+import net.sf.marineapi.nmea.sentence.SentenceId;
 import net.sf.marineapi.nmea.util.Datum;
 import net.sf.marineapi.nmea.util.Direction;
 import net.sf.marineapi.nmea.util.GpsFixQuality;
 import net.sf.marineapi.nmea.util.Position;
-import net.sf.marineapi.nmea.util.SentenceId;
 import net.sf.marineapi.nmea.util.Units;
 
 import org.junit.Before;

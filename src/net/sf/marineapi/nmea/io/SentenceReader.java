@@ -42,7 +42,7 @@ import net.sf.marineapi.nmea.sentence.Sentence;
  */
 public class SentenceReader {
 
-    // Vector (synchronized) for SentenceListeners
+    // Vector for SentenceListeners (synchronized)
     private final List<SentenceListener> listeners = new Vector<SentenceListener>();
 
     private Worker worker;

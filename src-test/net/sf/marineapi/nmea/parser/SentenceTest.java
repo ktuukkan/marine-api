@@ -6,8 +6,8 @@ import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 import net.sf.marineapi.nmea.sentence.NMEA;
 import net.sf.marineapi.nmea.sentence.Sentence;
-import net.sf.marineapi.nmea.util.SentenceId;
-import net.sf.marineapi.nmea.util.TalkerId;
+import net.sf.marineapi.nmea.sentence.SentenceId;
+import net.sf.marineapi.nmea.sentence.TalkerId;
 
 import org.junit.Before;
 import org.junit.Test;

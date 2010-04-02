@@ -21,10 +21,10 @@
 package net.sf.marineapi.nmea.parser;
 
 import net.sf.marineapi.nmea.sentence.GGASentence;
+import net.sf.marineapi.nmea.sentence.SentenceId;
 import net.sf.marineapi.nmea.util.Direction;
 import net.sf.marineapi.nmea.util.GpsFixQuality;
 import net.sf.marineapi.nmea.util.Position;
-import net.sf.marineapi.nmea.util.SentenceId;
 import net.sf.marineapi.nmea.util.Units;
 
 /**
@@ -205,8 +205,8 @@ class GGAParser extends PositionParser implements GGASentence {
      * (non-Javadoc)
      * @see net.sf.marineapi.nmea.sentence.GGASentence#setDgpsAge(int)
      */
-    public void setDgpsAge(int age) {
-        setIntValue(DGPS_AGE, age);
+    public void setDgpsAge(double age) {
+        setDoubleValue(DGPS_AGE, age);
     }
 
     /*

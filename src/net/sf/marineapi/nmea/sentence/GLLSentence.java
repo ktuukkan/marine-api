@@ -2,6 +2,7 @@ package net.sf.marineapi.nmea.sentence;
 
 import net.sf.marineapi.nmea.util.DataStatus;
 
+
 /**
  * Interface for GLL sentence type. Geographic position (latitude/longitude).
  * <p>
