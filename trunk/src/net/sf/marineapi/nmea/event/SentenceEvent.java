@@ -35,7 +35,7 @@ import net.sf.marineapi.nmea.sentence.Sentence;
 public class SentenceEvent extends EventObject {
 
     private static final long serialVersionUID = -2756954014186470514L;
-    private final long timestamp;
+    private final long timestamp = System.currentTimeMillis();
     private final Sentence sentence;
 
     /**
@@ -48,7 +48,6 @@ public class SentenceEvent extends EventObject {
      */
     public SentenceEvent(Object src, Sentence s) {
         super(src);
-        timestamp = System.currentTimeMillis();
         if (s == null) {
             throw new IllegalArgumentException("Sentence cannot be null");
         }

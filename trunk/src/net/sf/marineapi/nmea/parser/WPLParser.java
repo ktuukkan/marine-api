@@ -20,9 +20,9 @@
  */
 package net.sf.marineapi.nmea.parser;
 
+import net.sf.marineapi.nmea.sentence.SentenceId;
 import net.sf.marineapi.nmea.sentence.WPLSentence;
 import net.sf.marineapi.nmea.util.Direction;
-import net.sf.marineapi.nmea.util.SentenceId;
 import net.sf.marineapi.nmea.util.Waypoint;
 
 /**

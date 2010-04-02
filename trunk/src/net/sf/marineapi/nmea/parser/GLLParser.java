@@ -21,10 +21,10 @@
 package net.sf.marineapi.nmea.parser;
 
 import net.sf.marineapi.nmea.sentence.GLLSentence;
+import net.sf.marineapi.nmea.sentence.SentenceId;
 import net.sf.marineapi.nmea.util.DataStatus;
 import net.sf.marineapi.nmea.util.Direction;
 import net.sf.marineapi.nmea.util.Position;
-import net.sf.marineapi.nmea.util.SentenceId;
 
 /**
  * GLL Sentence parser.

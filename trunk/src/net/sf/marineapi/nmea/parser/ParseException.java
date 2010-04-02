@@ -21,9 +21,9 @@
 package net.sf.marineapi.nmea.parser;
 
 /**
- * Thrown to indicate that parser is unable to parse requested data to expected
- * native data type. For example, when a field contains invalid value that
- * cannot be parsed to expected type.
+ * Thrown to indicate that parser is unable interpret the contents of requested
+ * data field. For example, when a field contains invalid value that cannot be
+ * parsed to expected native data type.
  * 
  * @author Kimmo Tuukkanen
  * @version $Revision$
@@ -52,7 +52,7 @@ public class ParseException extends DataNotAvailableException {
     /**
      * Constructor with message and cause.
      * 
-     * @param msg Message
+     * @param msg Description of the Exception
      * @param cause Throwable that caused this exception
      */
     public ParseException(String msg, Throwable cause) {

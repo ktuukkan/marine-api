@@ -82,9 +82,9 @@ public class SatelliteInfo {
     /**
      * Get satellite the signal noise ratio, in dB (0-99 dB).
      * 
-     * @return noise value
+     * @return Noise ratio
      */
-    public double getSignalNoiseRatio() {
+    public double getNoise() {
         return this.noise;
     }
 

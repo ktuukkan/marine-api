@@ -130,7 +130,7 @@ public interface GGASentence extends PositionSentence, TimeSentence {
      * 
      * @param age Seconds since last valid RTCM transmission to set.
      */
-    void setDgpsAge(int age);
+    void setDgpsAge(double age);
 
     /**
      * Sets the ID of DGPS station.

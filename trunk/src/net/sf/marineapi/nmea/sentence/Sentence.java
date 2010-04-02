@@ -20,8 +20,6 @@
  */
 package net.sf.marineapi.nmea.sentence;
 
-import net.sf.marineapi.nmea.util.SentenceId;
-import net.sf.marineapi.nmea.util.TalkerId;
 
 /**
  * Base interface and constants for NMEA 0183 sentences.

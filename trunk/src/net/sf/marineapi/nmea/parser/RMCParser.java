@@ -24,11 +24,11 @@ import java.util.Date;
 import java.util.GregorianCalendar;
 
 import net.sf.marineapi.nmea.sentence.RMCSentence;
+import net.sf.marineapi.nmea.sentence.SentenceId;
 import net.sf.marineapi.nmea.util.DataStatus;
 import net.sf.marineapi.nmea.util.Direction;
 import net.sf.marineapi.nmea.util.GpsMode;
 import net.sf.marineapi.nmea.util.Position;
-import net.sf.marineapi.nmea.util.SentenceId;
 
 /**
  * RMC sentence parser.

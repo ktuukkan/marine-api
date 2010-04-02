@@ -24,9 +24,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import net.sf.marineapi.nmea.sentence.GSASentence;
+import net.sf.marineapi.nmea.sentence.SentenceId;
 import net.sf.marineapi.nmea.util.GpsFixStatus;
 import net.sf.marineapi.nmea.util.GpsMode;
-import net.sf.marineapi.nmea.util.SentenceId;
 
 /**
  * GSA sentence parser.
