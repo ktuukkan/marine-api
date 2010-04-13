@@ -29,14 +29,14 @@ public interface GSVSentence extends Sentence {
     int getSatelliteCount();
 
     /**
-     * Get the satellite information of the sentence.
+     * Get the satellites information.
      * 
      * @return List of SatelliteInfo objects.
      */
     List<SatelliteInfo> getSatelliteInfo();
 
     /**
-     * Get the number of sentences in GSV sequence.
+     * Get the total number of sentences in GSV sequence.
      * 
      * @return Number of sentences
      */
@@ -66,5 +66,26 @@ public interface GSVSentence extends Sentence {
      * @see #getSentenceIndex()
      */
     boolean isLast();
+
+    /**
+     * Set the satellites information.
+     * 
+     * @param info List of SatelliteInfo objects
+     */
+    void setSatelliteInfo(List<SatelliteInfo> info);
+
+    /**
+     * Set the total number of sentences in GSV sequence.
+     * 
+     * @param count Number of sentences
+     */
+    void setSentenceCount(int count);
+
+    /**
+     * Set the index of this sentence in GSV sequence.
+     * 
+     * @param index Sentence index to set
+     */
+    void setSentenceIndex(int index);
 
 }

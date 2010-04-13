@@ -36,4 +36,11 @@ public interface PositionSentence extends Sentence {
      * @return Position
      */
     Position getPosition();
+
+    /**
+     * Set the geographic position.
+     * 
+     * @param pos Position to set
+     */
+    void setPosition(Position pos);
 }

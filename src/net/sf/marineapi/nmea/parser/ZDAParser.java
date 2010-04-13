@@ -57,7 +57,7 @@ class ZDAParser extends SentenceParser implements ZDASentence {
      * @see net.sf.marineapi.nmea.sentence.DateSentence#getDate()
      */
     public Date getDate() {
-        // TODO refactor by removing duplicate code; see RMC parser
+        // FIXME remove duplicated code; see RMC parser
         int y = getUtcYear();
         int m = getUtcMonth() - 1;
         int d = getUtcDay();

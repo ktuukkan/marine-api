@@ -95,7 +95,7 @@ public class SentenceParser implements Sentence {
      * @param type Sentence type Id
      * @param fields Number of sentence data fields, including address field
      */
-    public SentenceParser(TalkerId talker, SentenceId type, int fields) {
+    protected SentenceParser(TalkerId talker, SentenceId type, int fields) {
         if (talker == null || type == null) {
             throw new IllegalArgumentException(
                     "Sentence and Talker IDs must be specified");
@@ -137,18 +137,6 @@ public class SentenceParser implements Sentence {
         }
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (o == this) {
-            return true;
-        }
-        if (o instanceof SentenceParser) {
-            Sentence s = (Sentence) o;
-            return s.toString().equals(toString());
-        }
-        return false;
-    }
-
     /*
      * (non-Javadoc)
      * @see net.sf.marineapi.nmea.sentence.Sentence#getSentenceId()
@@ -173,6 +161,18 @@ public class SentenceParser implements Sentence {
      */
     public void setTalkerId(TalkerId id) {
         this.talkerId = id;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == this) {
+            return true;
+        }
+        if (o instanceof SentenceParser) {
+            Sentence s = (Sentence) o;
+            return s.toString().equals(toString());
+        }
+        return false;
     }
 
     /**
@@ -334,8 +334,7 @@ public class SentenceParser implements Sentence {
      * Set a String value in specified data field.
      * 
      * @param index Field index
-     * @param value String to set, <code>null</code> is translated to empty
-     *            String.
+     * @param value String to set, <code>null</code> converts to empty String.
      */
     protected final void setStringValue(int index, String value) {
         if (index < 1) {

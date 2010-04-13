@@ -20,6 +20,9 @@
  */
 package net.sf.marineapi.nmea.parser;
 
+import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
+
 import net.sf.marineapi.nmea.sentence.SentenceId;
 import net.sf.marineapi.nmea.util.Direction;
 
@@ -100,5 +103,65 @@ public abstract class PositionParser extends SentenceParser {
         int deg = Integer.parseInt(field.substring(0, 3));
         double min = Double.parseDouble(field.substring(3));
         return deg + (min / 60);
+    }
+
+    /**
+     * Sets the latitude value in specified field, formatted in "ddmm.mmm".
+     * 
+     * @param index Field index
+     * @param lat Latitude value in degrees
+     */
+    protected void setLatitude(int index, double lat) {
+
+        int deg = (int) Math.floor(lat);
+        double min = (lat - deg) * 60;
+
+        DecimalFormat df = new DecimalFormat("00.000");
+        DecimalFormatSymbols dfs = new DecimalFormatSymbols();
+        dfs.setDecimalSeparator('.');
+        df.setDecimalFormatSymbols(dfs);
+
+        String result = String.format("%02d%s", deg, df.format(min));
+        setStringValue(index, result);
+    }
+
+    /**
+     * Set the hemisphere of latitude in specified field.
+     * 
+     * @param field Field index
+     * @param hem Direction.NORTH or Direction.SOUTH
+     */
+    protected void setLatHemisphere(int field, Direction hem) {
+        setCharValue(field, hem.toChar());
+    }
+
+    /**
+     * Sets the longitude value in specified field, formatted in "dddmm.mmm".
+     * 
+     * @param index Field index
+     * @param lon Longitude value in degrees
+     */
+    protected void setLongitude(int index, double lon) {
+
+        int deg = (int) Math.floor(lon);
+        double min = (lon - deg) * 60;
+
+        DecimalFormat nf = new DecimalFormat("00.000");
+        DecimalFormatSymbols dfs = new DecimalFormatSymbols();
+        dfs.setDecimalSeparator('.');
+        nf.setDecimalFormatSymbols(dfs);
+
+        String result = String.format("%03d%s", deg, nf.format(min));
+        setStringValue(index, result);
+    }
+
+    /**
+     * Set the hemisphere of longitude in specified field.
+     * 
+     * @param field Field index
+     * @param hem Direction.EAST or Direction.WEST
+     */
+    protected void setLonHemisphere(int field, Direction hem) {
+        setCharValue(field, hem.toChar());
     }
 }
