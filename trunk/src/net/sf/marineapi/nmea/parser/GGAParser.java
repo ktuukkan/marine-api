@@ -255,4 +255,17 @@ class GGAParser extends PositionParser implements GGASentence {
         setDoubleValue(HORIZONTAL_DILUTION, hdop);
     }
 
+    /*
+     * (non-Javadoc)
+     * @see
+     * net.sf.marineapi.nmea.sentence.PositionSentence#setPosition(net.sf.marineapi
+     * .nmea.util.Position)
+     */
+    public void setPosition(Position pos) {
+        setLatitude(LATITUDE, pos.getLatitude());
+        setLongitude(LONGITUDE, pos.getLongitude());
+        setLatHemisphere(LAT_HEMISPHERE, pos.getLatHemisphere());
+        setLonHemisphere(LON_HEMISPHERE, pos.getLonHemisphere());
+    }
+
 }

@@ -2,6 +2,7 @@ package net.sf.marineapi.nmea.parser;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 import net.sf.marineapi.nmea.util.DataStatus;
 import net.sf.marineapi.nmea.util.Direction;
@@ -16,6 +17,8 @@ import org.junit.Test;
  * @author Kimmo Tuukkanen
  */
 public class GLLTest {
+
+    // TODO Add tests for setters
 
     /**
      * Example sentence
@@ -43,6 +46,17 @@ public class GLLTest {
     @Test
     public void testGetDataStatus() {
         assertEquals(DataStatus.INVALID, instance.getDataStatus());
+    }
+
+    /**
+     * Test method for
+     * {@link net.sf.marineapi.nmea.parser.GLLParser#setDataStatus()}.
+     */
+    @Test
+    public void testSetDataStatus() {
+        assertEquals(DataStatus.INVALID, instance.getDataStatus());
+        instance.setDataStatus(DataStatus.VALID);
+        assertEquals(DataStatus.VALID, instance.getDataStatus());
     }
 
     /**
@@ -79,6 +93,40 @@ public class GLLTest {
             // pass
         }
 
+    }
+
+    /**
+     * Test method for
+     * {@link net.sf.marineapi.nmea.parser.GLLParser#setPosition()}.
+     */
+    @Test
+    public void testSetPosition() {
+        final double lat = 60 + (11.552 / 60);
+        final double lon = 25 + (1.941 / 60);
+        Position p1 = new Position(0.0, Direction.NORTH, 0.0, Direction.EAST);
+        Position p2 = new Position(lat, Direction.SOUTH, lon, Direction.WEST);
+
+        instance.setPosition(p1);
+
+        String s1 = instance.toString();
+        assertTrue(s1.contains(",0000.000,N,"));
+        assertTrue(s1.contains(",00000.000,E,"));
+
+        Position p = instance.getPosition();
+        assertNotNull(p);
+        assertEquals(0.0, p.getLatitude(), 0.0000001);
+        assertEquals(0.0, p.getLongitude(), 0.0000001);
+
+        instance.setPosition(p2);
+
+        String s2 = instance.toString();
+        assertTrue(s2.contains(",6011.552,S,"));
+        assertTrue(s2.contains(",02501.941,W,"));
+
+        p = instance.getPosition();
+        assertNotNull(p);
+        assertEquals(lat, p.getLatitude(), 0.0000001);
+        assertEquals(lon, p.getLongitude(), 0.0000001);
     }
 
     /**

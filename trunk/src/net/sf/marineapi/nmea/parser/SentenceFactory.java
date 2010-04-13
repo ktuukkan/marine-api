@@ -24,13 +24,14 @@ import net.sf.marineapi.nmea.sentence.Sentence;
 import net.sf.marineapi.nmea.sentence.SentenceId;
 
 /**
- * Factory for creating NMEA sentence parsers. TODO Add create method for
- * "empty" sentences.
+ * Factory for creating NMEA sentence parsers.
  * 
  * @author Kimmo Tuukkanen
  * @version $Revision$
  */
 public class SentenceFactory {
+
+    // TODO Add method for creating "empty" sentences.
 
     private static SentenceFactory instance;
 

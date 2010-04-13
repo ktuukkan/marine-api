@@ -122,4 +122,69 @@ class GSAParser extends SentenceParser implements GSASentence {
         this.satellites = result.toArray(new String[result.size()]);
     }
 
+    /*
+     * (non-Javadoc)
+     * @see
+     * net.sf.marineapi.nmea.sentence.GSASentence#setFixStatus(net.sf.marineapi
+     * .nmea.util.GpsFixStatus)
+     */
+    public void setFixStatus(GpsFixStatus status) {
+        setIntValue(FIX_MODE, status.toInt());
+    }
+
+    /*
+     * (non-Javadoc)
+     * @see
+     * net.sf.marineapi.nmea.sentence.GSASentence#setGpsMode(net.sf.marineapi
+     * .nmea.util.GpsMode)
+     */
+    public void setGpsMode(GpsMode mode) {
+        setCharValue(GPS_MODE, mode.toChar());
+    }
+
+    /*
+     * (non-Javadoc)
+     * @see
+     * net.sf.marineapi.nmea.sentence.GSASentence#setHorizontalPrecision(double)
+     */
+    public void setHorizontalPrecision(double hdop) {
+        setDoubleValue(HORIZONTAL_DOP, hdop);
+    }
+
+    /*
+     * (non-Javadoc)
+     * @see net.sf.marineapi.nmea.sentence.GSASentence#setPositionDOP(double)
+     */
+    public void setPositionDOP(double pdop) {
+        setDoubleValue(POSITION_DOP, pdop);
+    }
+
+    /*
+     * (non-Javadoc)
+     * @see
+     * net.sf.marineapi.nmea.sentence.GSASentence#setSatelliteIds(java.lang.
+     * String[])
+     */
+    public void setSatelliteIds(String[] ids) {
+        if (ids.length > (LAST_SV - FIRST_SV + 1)) {
+            throw new IllegalArgumentException("List length exceeded (12)");
+        }
+        int j = 0;
+        for (int i = FIRST_SV; i <= LAST_SV; i++) {
+            if (j < ids.length) {
+                setStringValue(i, ids[j++]);
+            } else {
+                setStringValue(i, "");
+            }
+        }
+    }
+
+    /*
+     * (non-Javadoc)
+     * @see net.sf.marineapi.nmea.sentence.GSASentence#setVerticalDOP(double)
+     */
+    public void setVerticalDOP(double vdop) {
+        setDoubleValue(VERTICAL_DOP, vdop);
+    }
+
 }
