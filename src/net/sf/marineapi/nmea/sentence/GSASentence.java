@@ -98,7 +98,7 @@ public interface GSASentence extends Sentence {
      * 
      * @param hdop Precision value to set
      */
-    void setHorizontalPrecision(double hdop);
+    void setHorizontalDOP(double hdop);
 
     /**
      * Set the dilution of precision for position.

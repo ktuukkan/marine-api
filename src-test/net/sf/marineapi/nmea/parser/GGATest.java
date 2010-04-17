@@ -2,6 +2,7 @@ package net.sf.marineapi.nmea.parser;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 import net.sf.marineapi.nmea.sentence.SentenceId;
 import net.sf.marineapi.nmea.util.Datum;
@@ -117,6 +118,25 @@ public class GGATest {
         assertEquals(lon, p.getLongitude(), 0.0000001);
         assertEquals(Direction.EAST, p.getLonHemisphere());
         assertEquals(Datum.WGS84, p.getDatum());
+    }
+
+    @Test
+    public void testSetPosition() {
+        final double lat = 61 + (1.111 / 60);
+        final double lon = 27 + (7.777 / 60);
+        Position p = new Position(lat, Direction.NORTH, lon, Direction.EAST);
+        gga.setPosition(p);
+
+        String str = gga.toString();
+        assertTrue(str.contains(",6101.111,N,"));
+        assertTrue(str.contains(",02707.777,E,"));
+
+        Position wp = gga.getPosition();
+        assertNotNull(wp);
+        assertEquals(lat, wp.getLatitude(), 0.0000001);
+        assertEquals(lon, wp.getLongitude(), 0.0000001);
+        assertEquals(Direction.NORTH, wp.getLatHemisphere());
+        assertEquals(Direction.EAST, wp.getLonHemisphere());
     }
 
     @Test

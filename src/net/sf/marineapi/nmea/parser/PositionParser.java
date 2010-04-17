@@ -56,10 +56,10 @@ public abstract class PositionParser extends SentenceParser {
     protected Direction parseHemisphereLat(int index) {
         char ch = getCharValue(index);
         Direction d = Direction.valueOf(ch);
-        if (Direction.NORTH.equals(d) || Direction.SOUTH.equals(d)) {
-            return d;
+        if (d != Direction.NORTH && d != Direction.SOUTH) {
+            throw new ParseException("Invalid latitude hemisphere '" + ch + "'");
         }
-        throw new ParseException("Invalid latitude hemisphere '" + ch + "'");
+        return d;
     }
 
     /**
@@ -71,10 +71,10 @@ public abstract class PositionParser extends SentenceParser {
     protected Direction parseHemisphereLon(int index) {
         char ch = getCharValue(index);
         Direction d = Direction.valueOf(ch);
-        if (Direction.EAST.equals(d) || Direction.WEST.equals(d)) {
-            return d;
+        if (d != Direction.EAST && d != Direction.WEST) {
+            throw new ParseException("Invalid longitude hemisphere " + ch + "'");
         }
-        throw new ParseException("Invalid longitude hemisphere " + ch + "'");
+        return d;
     }
 
     /**
@@ -106,6 +106,20 @@ public abstract class PositionParser extends SentenceParser {
     }
 
     /**
+     * Set the hemisphere of latitude in specified field.
+     * 
+     * @param field Field index
+     * @param hem Direction.NORTH or Direction.SOUTH
+     */
+    protected void setLatHemisphere(int field, Direction hem) {
+        if (hem != Direction.NORTH && hem != Direction.SOUTH) {
+            throw new IllegalArgumentException("Invalid latitude hemisphere: "
+                    + hem);
+        }
+        setCharValue(field, hem.toChar());
+    }
+
+    /**
      * Sets the latitude value in specified field, formatted in "ddmm.mmm".
      * 
      * @param index Field index
@@ -123,16 +137,6 @@ public abstract class PositionParser extends SentenceParser {
 
         String result = String.format("%02d%s", deg, df.format(min));
         setStringValue(index, result);
-    }
-
-    /**
-     * Set the hemisphere of latitude in specified field.
-     * 
-     * @param field Field index
-     * @param hem Direction.NORTH or Direction.SOUTH
-     */
-    protected void setLatHemisphere(int field, Direction hem) {
-        setCharValue(field, hem.toChar());
     }
 
     /**
@@ -162,6 +166,10 @@ public abstract class PositionParser extends SentenceParser {
      * @param hem Direction.EAST or Direction.WEST
      */
     protected void setLonHemisphere(int field, Direction hem) {
+        if (hem != Direction.EAST && hem != Direction.WEST) {
+            throw new IllegalArgumentException("Invalid longitude hemisphere: "
+                    + hem);
+        }
         setCharValue(field, hem.toChar());
     }
 }

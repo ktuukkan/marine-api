@@ -89,29 +89,6 @@ public class SentenceParser implements Sentence {
     }
 
     /**
-     * Creates a new empty sentence with specified talker and sentence IDs.
-     * 
-     * @param talker Talker type Id
-     * @param type Sentence type Id
-     * @param fields Number of sentence data fields, including address field
-     */
-    protected SentenceParser(TalkerId talker, SentenceId type, int fields) {
-        if (talker == null || type == null) {
-            throw new IllegalArgumentException(
-                    "Sentence and Talker IDs must be specified");
-        }
-        if (fields < 1) {
-            throw new IllegalArgumentException("Minimum number of fields is 1");
-        }
-        this.sentenceId = type;
-        this.talkerId = talker;
-        this.dataFields = new String[fields];
-        for (int i = 0; i < this.dataFields.length; i++) {
-            dataFields[i] = "";
-        }
-    }
-
-    /**
      * Creates a new instance of SentenceParser. Sentence may be constructed
      * only if parameter <code>nmea</code> contains a valid NMEA 0183 sentence
      * of the specified <code>type</code>.
@@ -134,6 +111,29 @@ public class SentenceParser implements Sentence {
             String msg = String.format("Sentence type mismatch [%s]",
                     getSentenceId());
             throw new IllegalArgumentException(msg);
+        }
+    }
+
+    /**
+     * Creates a new empty sentence with specified talker and sentence IDs.
+     * 
+     * @param talker Talker type Id
+     * @param type Sentence type Id
+     * @param fields Number of sentence data fields, including address field
+     */
+    protected SentenceParser(TalkerId talker, SentenceId type, int fields) {
+        if (talker == null || type == null) {
+            throw new IllegalArgumentException(
+                    "Sentence and Talker IDs must be specified");
+        }
+        if (fields < 1) {
+            throw new IllegalArgumentException("Minimum number of fields is 1");
+        }
+        this.sentenceId = type;
+        this.talkerId = talker;
+        this.dataFields = new String[fields];
+        for (int i = 0; i < this.dataFields.length; i++) {
+            dataFields[i] = "";
         }
     }
 
@@ -163,24 +163,13 @@ public class SentenceParser implements Sentence {
         this.talkerId = id;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (o == this) {
-            return true;
-        }
-        if (o instanceof SentenceParser) {
-            Sentence s = (Sentence) o;
-            return s.toString().equals(toString());
-        }
-        return false;
-    }
-
     /**
      * Get the String representation of the sentence without the line terminator
      * (&lt;CR&gt;&lt;LF&gt;). Checksum is calculated and appended at the end of
      * the sentence.
      * 
      * @return NMEA 0183 sentence String
+     * @throws IllegalStateException If formatting results in invalid sentence.
      */
     @Override
     public String toString() {
@@ -204,6 +193,23 @@ public class SentenceParser implements Sentence {
 
         String msg = String.format("Invalid result [%s]", sentence);
         throw new IllegalStateException(msg);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == this) {
+            return true;
+        }
+        if (o instanceof SentenceParser) {
+            Sentence s = (Sentence) o;
+            return s.toString().equals(toString());
+        }
+        return false;
+    }
+
+    @Override
+    public int hashCode() {
+        return toString().hashCode();
     }
 
     /**
@@ -317,6 +323,7 @@ public class SentenceParser implements Sentence {
      * @param value Value to set
      */
     protected final void setDoubleValue(int index, double value) {
+        // TODO add support for rounding to defined decimal precision
         setStringValue(index, String.valueOf(value));
     }
 
