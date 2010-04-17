@@ -46,9 +46,9 @@ public interface GGASentence extends PositionSentence, TimeSentence {
     public final static char ALT_UNIT_FEET = 'f';
 
     /**
-     * Get altitude of antenna.
+     * Get antenna altitude above mean sea level.
      * 
-     * @return Altitude, in meters.
+     * @return Altitude value
      */
     double getAltitude();
 

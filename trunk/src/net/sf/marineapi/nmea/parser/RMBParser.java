@@ -142,4 +142,101 @@ class RMBParser extends PositionParser implements RMBSentence {
     public boolean hasArrived() {
         return DataStatus.VALID.equals(getArrivalStatus());
     }
+
+    /*
+     * (non-Javadoc)
+     * @see
+     * net.sf.marineapi.nmea.sentence.RMBSentence#setArrivalStatus(net.sf.marineapi
+     * .nmea.util.DataStatus)
+     */
+    public void setArrivalStatus(DataStatus status) {
+        setCharValue(ARRIVAL_STATUS, status.toChar());
+    }
+
+    /*
+     * (non-Javadoc)
+     * @see net.sf.marineapi.nmea.sentence.RMBSentence#setBearing(double)
+     */
+    public void setBearing(double bearing) {
+        if (bearing < 0 || bearing > 360) {
+            throw new IllegalArgumentException(
+                    "Bearing out of range 0..360 degrees");
+        }
+        setDoubleValue(BEARING_TO_DEST, bearing);
+    }
+
+    /*
+     * (non-Javadoc)
+     * @see
+     * net.sf.marineapi.nmea.sentence.RMBSentence#setCrossTrackError(double)
+     */
+    public void setCrossTrackError(double xte) {
+        setDoubleValue(CROSS_TRACK_ERROR, xte);
+    }
+
+    /*
+     * (non-Javadoc)
+     * @see
+     * net.sf.marineapi.nmea.sentence.RMBSentence#setDestination(net.sf.marineapi
+     * .nmea.util.Waypoint)
+     */
+    public void setDestination(Waypoint dest) {
+        setStringValue(DEST_WPT, dest.getId());
+        setLatitude(DEST_LAT, dest.getLatitude());
+        setLatHemisphere(DEST_LAT_HEM, dest.getLatHemisphere());
+        setLongitude(DEST_LON, dest.getLongitude());
+        setLonHemisphere(DEST_LON_HEM, dest.getLonHemisphere());
+    }
+
+    /*
+     * (non-Javadoc)
+     * @see
+     * net.sf.marineapi.nmea.sentence.RMBSentence#setOriginId(java.lang.String)
+     */
+    public void setOriginId(String id) {
+        setStringValue(ORIGIN_WPT, id);
+    }
+
+    /*
+     * (non-Javadoc)
+     * @see net.sf.marineapi.nmea.sentence.RMBSentence#setRange(double)
+     */
+    public void setRange(double range) {
+        setDoubleValue(RANGE_TO_DEST, range);
+    }
+
+    /*
+     * (non-Javadoc)
+     * @see
+     * net.sf.marineapi.nmea.sentence.RMBSentence#setStatus(net.sf.marineapi
+     * .nmea.util.DataStatus)
+     */
+    public void setStatus(DataStatus status) {
+        setCharValue(STATUS, status.toChar());
+    }
+
+    /*
+     * (non-Javadoc)
+     * @see
+     * net.sf.marineapi.nmea.sentence.RMBSentence#setSteerTo(net.sf.marineapi
+     * .nmea.util.Direction)
+     */
+    public void setSteerTo(Direction steer) {
+        if (steer != Direction.LEFT && steer != Direction.RIGHT) {
+            throw new IllegalArgumentException(
+                    "Expected steer-to direction is LEFT or RIGHT.");
+        }
+        setCharValue(STEER_TO, steer.toChar());
+    }
+
+    /*
+     * (non-Javadoc)
+     * @see net.sf.marineapi.nmea.sentence.RMBSentence#setVelocity(double)
+     */
+    public void setVelocity(double velocity) {
+        if (velocity < 0) {
+            throw new IllegalArgumentException("Velocity cannot be negative");
+        }
+        setDoubleValue(VELOCITY, velocity);
+    }
 }

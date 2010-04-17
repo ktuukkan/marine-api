@@ -18,8 +18,6 @@ import org.junit.Test;
  */
 public class GLLTest {
 
-    // TODO Add tests for setters
-
     /**
      * Example sentence
      */

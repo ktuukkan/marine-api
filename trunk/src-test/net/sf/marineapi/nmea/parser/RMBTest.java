@@ -1,6 +1,7 @@
 package net.sf.marineapi.nmea.parser;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
@@ -47,6 +48,16 @@ public class RMBTest {
 
     /**
      * Test method for
+     * {@link net.sf.marineapi.nmea.parser.RMBParser#setStatus(DataStatus)}.
+     */
+    @Test
+    public void testSetStatus() {
+        rmb.setStatus(DataStatus.VALID);
+        assertEquals(DataStatus.VALID, rmb.getStatus());
+    }
+
+    /**
+     * Test method for
      * {@link net.sf.marineapi.nmea.parser.RMBParser#getCrossTrackError()}.
      */
     @Test
@@ -56,11 +67,43 @@ public class RMBTest {
 
     /**
      * Test method for
+     * {@link net.sf.marineapi.nmea.parser.RMBParser#setCrossTrackError(double)}
+     * .
+     */
+    @Test
+    public void testSetCrossTrackError() {
+        rmb.setCrossTrackError(1.111);
+        assertTrue(rmb.toString().contains(",1.111,"));
+        assertEquals(1.111, rmb.getCrossTrackError(), 0.001);
+    }
+
+    /**
+     * Test method for
      * {@link net.sf.marineapi.nmea.parser.RMBParser#getSteerTo()}.
      */
     @Test
     public void testGetSteerTo() {
         assertEquals(Direction.RIGHT, rmb.getSteerTo());
+    }
+
+    /**
+     * Test method for
+     * {@link net.sf.marineapi.nmea.parser.RMBParser#setSteerTo(Direction)}.
+     */
+    @Test
+    public void testSetSteerTo() {
+        rmb.setSteerTo(Direction.LEFT);
+        assertTrue(rmb.toString().contains(",L,"));
+        assertEquals(Direction.LEFT, rmb.getSteerTo());
+
+        try {
+            rmb.setSteerTo(Direction.NORTH);
+            fail("Did not throw IllegalArgumentException");
+        } catch (IllegalArgumentException e) {
+            assertTrue(e.getMessage().contains("LEFT or RIGHT"));
+        } catch (Exception e) {
+            fail(e.getMessage());
+        }
     }
 
     /**
@@ -76,6 +119,17 @@ public class RMBTest {
         } catch (Exception e) {
             assertTrue(e instanceof DataNotAvailableException);
         }
+    }
+
+    /**
+     * Test method for
+     * {@link net.sf.marineapi.nmea.parser.RMBParser#setOriginId(String)}.
+     */
+    @Test
+    public void testSetOriginId() {
+        rmb.setOriginId("ORIGIN");
+        assertTrue(rmb.toString().contains(",ORIGIN,"));
+        assertEquals("ORIGIN", rmb.getOriginId());
     }
 
     /**
@@ -98,6 +152,33 @@ public class RMBTest {
     }
 
     /**
+     * Test method for
+     * {@link net.sf.marineapi.nmea.parser.RMBParser#setDestination(Waypoint)} .
+     */
+    @Test
+    public void testSetDestination() {
+
+        final String id = "MYDEST";
+        final double lat = 61 + (1.111 / 60);
+        final double lon = 27 + (7.777 / 60);
+        Waypoint d = new Waypoint(id, lat, Direction.NORTH, lon, Direction.EAST);
+        rmb.setDestination(d);
+
+        String str = rmb.toString();
+        assertTrue(str.contains(",MYDEST,"));
+        assertTrue(str.contains(",6101.111,N,"));
+        assertTrue(str.contains(",02707.777,E,"));
+
+        Waypoint wp = rmb.getDestination();
+        assertNotNull(wp);
+        assertEquals(id, wp.getId());
+        assertEquals(lat, wp.getLatitude(), 0.0000001);
+        assertEquals(lon, wp.getLongitude(), 0.0000001);
+        assertEquals(Direction.NORTH, wp.getLatHemisphere());
+        assertEquals(Direction.EAST, wp.getLonHemisphere());
+    }
+
+    /**
      * Test method for {@link net.sf.marineapi.nmea.parser.RMBParser#getRange()}
      * .
      */
@@ -108,11 +189,33 @@ public class RMBTest {
 
     /**
      * Test method for
+     * {@link net.sf.marineapi.nmea.parser.RMBParser#setRange(double)} .
+     */
+    @Test
+    public void testSetRange() {
+        rmb.setRange(12.345);
+        assertTrue(rmb.toString().contains(",12.345,"));
+        assertEquals(12.345, rmb.getRange(), 0.001);
+    }
+
+    /**
+     * Test method for
      * {@link net.sf.marineapi.nmea.parser.RMBParser#getBearing()} .
      */
     @Test
     public void testGetBearing() {
         assertEquals(234.9, rmb.getBearing(), 0.001);
+    }
+
+    /**
+     * Test method for
+     * {@link net.sf.marineapi.nmea.parser.RMBParser#setBearing(double)} .
+     */
+    @Test
+    public void testSetBearing() {
+        rmb.setBearing(180.0);
+        assertTrue(rmb.toString().contains(",180.0,"));
+        assertEquals(180.0, rmb.getBearing(), 0.001);
     }
 
     /**
@@ -132,10 +235,39 @@ public class RMBTest {
 
     /**
      * Test method for
+     * {@link net.sf.marineapi.nmea.parser.RMBParser#setVelocity()}.
+     */
+    @Test
+    public void testSetVelocity() {
+        rmb.setVelocity(40.5);
+        assertTrue(rmb.toString().contains(",40.5,"));
+        assertEquals(40.5, rmb.getVelocity(), 0.001);
+
+        try {
+            rmb.setVelocity(-0.0001);
+            fail("Did not throw exception");
+        } catch (IllegalArgumentException e) {
+            // pass
+        } catch (Exception e) {
+            fail(e.getMessage());
+        }
+    }
+
+    /**
+     * Test method for
      * {@link net.sf.marineapi.nmea.parser.RMBParser#getArrivalStatus()}.
      */
     @Test
-    public void testGetArrivalStatus() {
+    public void testArrivalStatus() {
+
+        assertEquals(DataStatus.VALID, rmb.getArrivalStatus());
+        assertTrue(rmb.hasArrived());
+
+        rmb.setArrivalStatus(DataStatus.INVALID);
+        assertEquals(DataStatus.INVALID, rmb.getArrivalStatus());
+        assertFalse(rmb.hasArrived());
+
+        rmb.setArrivalStatus(DataStatus.VALID);
         assertEquals(DataStatus.VALID, rmb.getArrivalStatus());
         assertTrue(rmb.hasArrived());
     }

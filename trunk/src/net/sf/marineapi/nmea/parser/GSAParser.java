@@ -109,19 +109,6 @@ class GSAParser extends SentenceParser implements GSASentence {
         return getDoubleValue(VERTICAL_DOP);
     }
 
-    /**
-     * Parses the satellite IDs to String array.
-     */
-    private void parseSatellites() {
-        List<String> result = new ArrayList<String>();
-        for (int i = FIRST_SV; i <= LAST_SV; i++) {
-            if (hasValue(i)) {
-                result.add(getStringValue(i));
-            }
-        }
-        this.satellites = result.toArray(new String[result.size()]);
-    }
-
     /*
      * (non-Javadoc)
      * @see
@@ -147,7 +134,7 @@ class GSAParser extends SentenceParser implements GSASentence {
      * @see
      * net.sf.marineapi.nmea.sentence.GSASentence#setHorizontalPrecision(double)
      */
-    public void setHorizontalPrecision(double hdop) {
+    public void setHorizontalDOP(double hdop) {
         setDoubleValue(HORIZONTAL_DOP, hdop);
     }
 
@@ -185,6 +172,19 @@ class GSAParser extends SentenceParser implements GSASentence {
      */
     public void setVerticalDOP(double vdop) {
         setDoubleValue(VERTICAL_DOP, vdop);
+    }
+
+    /**
+     * Parses the satellite IDs to String array.
+     */
+    private void parseSatellites() {
+        List<String> result = new ArrayList<String>();
+        for (int i = FIRST_SV; i <= LAST_SV; i++) {
+            if (hasValue(i)) {
+                result.add(getStringValue(i));
+            }
+        }
+        this.satellites = result.toArray(new String[result.size()]);
     }
 
 }

@@ -75,7 +75,6 @@ class RMCParser extends PositionParser implements RMCSentence {
      */
     public double getCourse() {
         return getDoubleValue(COURSE);
-
     }
 
     /*
