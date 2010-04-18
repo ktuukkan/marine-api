@@ -35,6 +35,10 @@ import net.sf.marineapi.nmea.util.GpsMode;
  * @author Kimmo Tuukkanen
  * @version $Revision$
  */
+/**
+ * @author Kimmo Tuukkanen
+ * @version $Revision$
+ */
 public interface RMCSentence extends PositionSentence, TimeSentence,
         DateSentence {
 
@@ -50,18 +54,32 @@ public interface RMCSentence extends PositionSentence, TimeSentence,
     double getCorrectedCourse();
 
     /**
-     * Get true course over ground (COG), in degrees.
+     * Get true course over ground (COG).
      * 
-     * @return Course
+     * @return True course in degrees.
      */
     double getCourse();
 
     /**
-     * Gets the data status; valid or invalid.
+     * Set true course over ground (COG).
+     * 
+     * @param course True course in degrees.
+     */
+    void setCourse(double cog);
+
+    /**
+     * Gets the data status, valid or invalid.
      * 
      * @return DataStatus.VALID or DataStatus.INVALID
      */
     DataStatus getDataStatus();
+
+    /**
+     * Set the data status, valid or invalid.
+     * 
+     * @param status DataStatus.VALID or DataStatus.INVALID
+     */
+    void setDataStatus(DataStatus status);
 
     /**
      * Get the direction of magnetic variation; east or west.
@@ -71,6 +89,15 @@ public interface RMCSentence extends PositionSentence, TimeSentence,
     Direction getDirectionOfVariation();
 
     /**
+     * Set the direction of magnetic variation, east or west.
+     * 
+     * @param dir Direction.EAST or Direction.WEST
+     * @throws IllegalArgumentException If specified Direction is other than
+     *             defined as valid for param <code>dir</code>.
+     */
+    void setDirectionOfVariation(Direction dir);
+
+    /**
      * Get the GPS operating mode.
      * 
      * @return GpsMode enum
@@ -78,19 +105,39 @@ public interface RMCSentence extends PositionSentence, TimeSentence,
     GpsMode getGpsMode();
 
     /**
-     * Get speed over ground (SOG), in knots (nautical miles per hour).
+     * Set the GPS operation mode.
      * 
-     * @return Speed
+     * @param mode Mode to set
+     */
+    void setGpsMode(GpsMode mode);
+
+    /**
+     * Get current speed over ground (SOG).
+     * 
+     * @return Speed in knots (nautical miles per hour).
      */
     double getSpeed();
 
     /**
-     * Get the magnetic variation in degrees. Easterly variation subtracts from
-     * true course, and is thus returned as negative value. Otherwise, the value
-     * is positive.
+     * Set current speed over ground (SOG).
      * 
-     * @return Magnetic variation
+     * @param sog Speed in knots (nautical miles per hour).
+     */
+    void setSpeed(double sog);
+
+    /**
+     * Get the magnetic variation. Easterly variation subtracts from true
+     * course, and is thus returned as negative value. Otherwise, the value is
+     * positive.
+     * 
+     * @return Magnetic variation in degrees
      */
     double getVariation();
 
+    /**
+     * Set the magnetic variation.
+     * 
+     * @param var Magnetic variation in degrees
+     */
+    void setVariation(double var);
 }

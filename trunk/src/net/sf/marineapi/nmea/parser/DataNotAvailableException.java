@@ -33,12 +33,6 @@ public class DataNotAvailableException extends RuntimeException {
 
     /**
      * Constructor
-     */
-    public DataNotAvailableException() {
-    }
-
-    /**
-     * Constructor
      * 
      * @param msg Exception message
      */

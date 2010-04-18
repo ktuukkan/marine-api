@@ -222,6 +222,17 @@ public class Position {
                 getLongitude(), getLonHemisphere());
     }
 
+    /**
+     * Haversine formulae implementation based on example at
+     * http://www.codecodex
+     * .com/wiki/Calculate_Distance_Between_Two_Points_on_a_Globe
+     * 
+     * @param lat1 Origin latitude
+     * @param lon1 Origin longitude
+     * @param lat2 Destination latitude
+     * @param lon2 Destination longitude
+     * @return Distance in meters
+     */
     private double haversine(double lat1, double lon1, double lat2, double lon2) {
 
         // average earth radius for calculating distance between positions
@@ -242,6 +253,16 @@ public class Position {
         return result / 1000;
     }
 
+    /**
+     * Vincenty formula implementation based on example at
+     * http://www.movable-type.co.uk/scripts/latlong-vincenty.html
+     * 
+     * @param lat1 Origin latitude
+     * @param lon1 Origin longitude
+     * @param lat2 Destination latitude
+     * @param lon2 Destination longitude
+     * @return Distance in meters
+     */
     private double vincenty(double lat1, double lon1, double lat2, double lon2) {
 
         // WGS-84 ellipsoid params

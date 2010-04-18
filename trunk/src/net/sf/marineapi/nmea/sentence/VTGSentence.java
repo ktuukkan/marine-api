@@ -33,7 +33,7 @@ import net.sf.marineapi.nmea.util.GpsMode;
  * @author Kimmo Tuukkanen
  * @version $Revision$
  */
-public interface VTGSentence {
+public interface VTGSentence extends Sentence {
 
     /** Units indicator for kilometers per hour */
     public static final char KMPH = 'K';

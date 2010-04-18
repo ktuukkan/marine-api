@@ -77,7 +77,7 @@ public class RTETest {
      * {@link net.sf.marineapi.nmea.parser.RTEParser#getSentenceCount()}.
      */
     @Test
-    public void testGetNumberOfSentences() {
+    public void testGetSentenceCount() {
         assertEquals(1, rte.getSentenceCount());
     }
 
@@ -86,7 +86,7 @@ public class RTETest {
      * {@link net.sf.marineapi.nmea.parser.RTEParser#getSentenceIndex()}.
      */
     @Test
-    public void testGetSentenceNumber() {
+    public void testGetSentenceIndex() {
         assertEquals(1, rte.getSentenceIndex());
     }
 
@@ -94,7 +94,7 @@ public class RTETest {
      * Test method for {@link net.sf.marineapi.nmea.parser.RTEParser#isFirst()}.
      */
     @Test
-    public void testIsFirstInSequence() {
+    public void testIsFirst() {
         assertTrue(rte.isFirst());
     }
 
@@ -102,7 +102,7 @@ public class RTETest {
      * Test method for {@link net.sf.marineapi.nmea.parser.RTEParser#isLast()}.
      */
     @Test
-    public void testIsLastInSequence() {
+    public void testIsLast() {
         assertTrue(rte.isLast());
     }
 

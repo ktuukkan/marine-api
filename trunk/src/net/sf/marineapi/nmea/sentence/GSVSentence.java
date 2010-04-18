@@ -29,6 +29,13 @@ public interface GSVSentence extends Sentence {
     int getSatelliteCount();
 
     /**
+     * Set the number of satellites in view.
+     * 
+     * @param count Satellite count
+     */
+    void setSatelliteCount(int count);
+
+    /**
      * Get the satellites information.
      * 
      * @return List of SatelliteInfo objects.

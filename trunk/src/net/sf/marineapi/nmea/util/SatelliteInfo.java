@@ -31,9 +31,9 @@ package net.sf.marineapi.nmea.util;
 public class SatelliteInfo {
 
     private final String id;
-    private final double elevation;
-    private final double azimuth;
-    private final double noise;
+    private final int elevation;
+    private final int azimuth;
+    private final int noise;
 
     /**
      * Creates a new instance of SatelliteInfo
@@ -43,9 +43,7 @@ public class SatelliteInfo {
      * @param azimuth Current azimuth of the satellite
      * @param noise Current noise ratio of the satellite signal
      */
-    public SatelliteInfo(String id, double elevation, double azimuth,
-            double noise) {
-
+    public SatelliteInfo(String id, int elevation, int azimuth, int noise) {
         this.id = id;
         this.elevation = elevation;
         this.azimuth = azimuth;
@@ -57,8 +55,8 @@ public class SatelliteInfo {
      * 
      * @return azimuth value
      */
-    public double getAzimuth() {
-        return this.azimuth;
+    public int getAzimuth() {
+        return azimuth;
     }
 
     /**
@@ -66,8 +64,8 @@ public class SatelliteInfo {
      * 
      * @return elevation value
      */
-    public double getElevation() {
-        return this.elevation;
+    public int getElevation() {
+        return elevation;
     }
 
     /**
@@ -76,7 +74,7 @@ public class SatelliteInfo {
      * @return ID String
      */
     public String getId() {
-        return this.id;
+        return id;
     }
 
     /**
@@ -84,8 +82,8 @@ public class SatelliteInfo {
      * 
      * @return Noise ratio
      */
-    public double getNoise() {
-        return this.noise;
+    public int getNoise() {
+        return noise;
     }
 
 }

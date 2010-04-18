@@ -204,10 +204,52 @@ class RMCParser extends PositionParser implements RMCSentence {
      */
     public double getVariation() {
         double variation = getDoubleValue(MAG_VARIATION);
-        if (Direction.EAST.equals(getDirectionOfVariation())) {
+        if (Direction.EAST == getDirectionOfVariation() && variation > 0) {
             variation = -(variation);
         }
         return variation;
+    }
+
+    /*
+     * (non-Javadoc)
+     * @see net.sf.marineapi.nmea.sentence.RMCSentence#setCourse(double)
+     */
+    public void setCourse(double cog) {
+        setDoubleValue(COURSE, cog);
+    }
+
+    /*
+     * (non-Javadoc)
+     * @see
+     * net.sf.marineapi.nmea.sentence.RMCSentence#setDataStatus(net.sf.marineapi
+     * .nmea.util.DataStatus)
+     */
+    public void setDataStatus(DataStatus status) {
+        setCharValue(DATA_STATUS, status.toChar());
+    }
+
+    /*
+     * (non-Javadoc)
+     * @see
+     * net.sf.marineapi.nmea.sentence.RMCSentence#setDirectionOfVariation(net
+     * .sf.marineapi.nmea.util.Direction)
+     */
+    public void setDirectionOfVariation(Direction dir) {
+        if (dir != Direction.EAST && dir != Direction.WEST) {
+            throw new IllegalArgumentException(
+                    "Invalid variation direction, expected EAST or WEST.");
+        }
+        setCharValue(VAR_HEMISPHERE, dir.toChar());
+    }
+
+    /*
+     * (non-Javadoc)
+     * @see
+     * net.sf.marineapi.nmea.sentence.RMCSentence#setGpsMode(net.sf.marineapi
+     * .nmea.util.GpsMode)
+     */
+    public void setGpsMode(GpsMode mode) {
+        setCharValue(MODE, mode.toChar());
     }
 
     /*
@@ -221,5 +263,21 @@ class RMCParser extends PositionParser implements RMCSentence {
         setLongitude(LONGITUDE, pos.getLongitude());
         setLatHemisphere(LAT_HEMISPHERE, pos.getLatHemisphere());
         setLonHemisphere(LON_HEMISPHERE, pos.getLonHemisphere());
+    }
+
+    /*
+     * (non-Javadoc)
+     * @see net.sf.marineapi.nmea.sentence.RMCSentence#setSpeed(double)
+     */
+    public void setSpeed(double sog) {
+        setDoubleValue(SPEED, sog);
+    }
+
+    /*
+     * (non-Javadoc)
+     * @see net.sf.marineapi.nmea.sentence.RMCSentence#setVariation(double)
+     */
+    public void setVariation(double var) {
+        setDoubleValue(MAG_VARIATION, var);
     }
 }

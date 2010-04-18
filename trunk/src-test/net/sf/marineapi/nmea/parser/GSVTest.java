@@ -2,8 +2,10 @@ package net.sf.marineapi.nmea.parser;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import net.sf.marineapi.nmea.sentence.GSVSentence;
@@ -44,10 +46,22 @@ public class GSVTest {
 
     /**
      * Test method for
+     * {@link net.sf.marineapi.nmea.parser.GSVParser#setSentenceCount(int)}.
+     */
+    @Test
+    public void testSetSentenceCount() {
+        gsv.setSentenceCount(1);
+        assertEquals(1, gsv.getSentenceCount());
+        gsv.setSentenceCount(2);
+        assertEquals(2, gsv.getSentenceCount());
+    }
+
+    /**
+     * Test method for
      * {@link net.sf.marineapi.nmea.parser.GSVParser#getSentenceIndex()}.
      */
     @Test
-    public void testGetSentenceNumber() {
+    public void testGetSentenceIndex() {
         assertEquals(2, gsv.getSentenceIndex());
     }
 
@@ -55,7 +69,7 @@ public class GSVTest {
      * Test method for {@link net.sf.marineapi.nmea.parser.GSVParser#isFirst()}.
      */
     @Test
-    public void testIsFirstInSequence() {
+    public void testIsFirst() {
         assertFalse(gsv.isFirst());
     }
 
@@ -63,7 +77,7 @@ public class GSVTest {
      * Test method for {@link net.sf.marineapi.nmea.parser.GSVParser#isLast()} .
      */
     @Test
-    public void testIsLastInSequence() {
+    public void testIsLast() {
         assertFalse(gsv.isLast());
     }
 
@@ -78,6 +92,18 @@ public class GSVTest {
 
     /**
      * Test method for
+     * {@link net.sf.marineapi.nmea.parser.GSVParser#setSatelliteCount(int)}.
+     */
+    @Test
+    public void testSetSatelliteCount() {
+        gsv.setSatelliteCount(5);
+        assertEquals(5, gsv.getSatelliteCount());
+        gsv.setSatelliteCount(10);
+        assertEquals(10, gsv.getSatelliteCount());
+    }
+
+    /**
+     * Test method for
      * {@link net.sf.marineapi.nmea.parser.GSVParser#getSatelliteInfo()}.
      */
     @Test
@@ -88,6 +114,26 @@ public class GSVTest {
         testSatelliteInfo(sat.get(1), "17", 38, 163, 47);
         testSatelliteInfo(sat.get(2), "18", 63, 58, 50);
         testSatelliteInfo(sat.get(3), "21", 53, 329, 47);
+    }
+
+    /**
+     * Test method for
+     * {@link net.sf.marineapi.nmea.parser.GSVParser#getSatelliteInfo()}.
+     */
+    @Test
+    public void testSetSatelliteInfo() {
+        List<SatelliteInfo> si = new ArrayList<SatelliteInfo>();
+        si.add(new SatelliteInfo("01", 11, 12, 13));
+        si.add(new SatelliteInfo("02", 21, 22, 23));
+        si.add(new SatelliteInfo("03", 31, 32, 33));
+        gsv.setSatelliteInfo(si);
+
+        assertTrue(gsv.toString().contains(",33,,,,*"));
+        List<SatelliteInfo> sat = gsv.getSatelliteInfo();
+        assertEquals(3, sat.size());
+        testSatelliteInfo(sat.get(0), "01", 11, 12, 13);
+        testSatelliteInfo(sat.get(1), "02", 21, 22, 23);
+        testSatelliteInfo(sat.get(2), "03", 31, 32, 33);
     }
 
     /**
