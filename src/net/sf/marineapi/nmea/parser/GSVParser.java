@@ -74,9 +74,9 @@ class GSVParser extends SentenceParser implements GSVSentence {
         for (int idf : ID_FIELDS) {
             try {
                 String id = getStringValue(idf);
-                double elev = getDoubleValue(idf + ELEVATION);
-                double azm = getDoubleValue(idf + AZIMUTH);
-                double snr = getDoubleValue(idf + NOISE);
+                int elev = getIntValue(idf + ELEVATION);
+                int azm = getIntValue(idf + AZIMUTH);
+                int snr = getIntValue(idf + NOISE);
                 satellites.add(new SatelliteInfo(id, elev, azm, snr));
             } catch (DataNotAvailableException e) {
                 // nevermind missing satellite info
@@ -129,12 +129,19 @@ class GSVParser extends SentenceParser implements GSVSentence {
             throw new IllegalArgumentException("Maximum list size is 4");
         }
         int i = 0;
-        for (SatelliteInfo si : info) {
-            int idf = ID_FIELDS[i++];
-            setStringValue(idf, si.getId());
-            setStringValue(idf + ELEVATION, String.valueOf(si.getElevation()));
-            setStringValue(idf + AZIMUTH, String.valueOf(si.getAzimuth()));
-            setStringValue(idf + NOISE, String.valueOf(si.getNoise()));
+        for (int id : ID_FIELDS) {
+            if (i < info.size()) {
+                SatelliteInfo si = info.get(i++);
+                setStringValue(id, si.getId());
+                setIntValue(id + ELEVATION, si.getElevation());
+                setIntValue(id + AZIMUTH, si.getAzimuth());
+                setIntValue(id + NOISE, si.getNoise());
+            } else {
+                setStringValue(id, "");
+                setStringValue(id + ELEVATION, "");
+                setStringValue(id + AZIMUTH, "");
+                setStringValue(id + NOISE, "");
+            }
         }
     }
 
@@ -152,6 +159,10 @@ class GSVParser extends SentenceParser implements GSVSentence {
      */
     public void setSentenceIndex(int index) {
         setIntValue(SENTENCE_NUMBER, index);
+    }
+
+    public void setSatelliteCount(int count) {
+        setIntValue(SATELLITES_IN_VIEW, count);
     }
 
 }

@@ -48,6 +48,16 @@ public class RMCTest {
 
     /**
      * Test method for
+     * {@link net.sf.marineapi.nmea.parser.RMCParser#setDataStatus(DataStatus)}.
+     */
+    @Test
+    public void testSetDataStatus() {
+        rmc.setDataStatus(DataStatus.VALID);
+        assertEquals(DataStatus.VALID, rmc.getDataStatus());
+    }
+
+    /**
+     * Test method for
      * {@link net.sf.marineapi.nmea.parser.RMCParser#getGpsMode()}.
      */
     @Test
@@ -56,12 +66,34 @@ public class RMCTest {
     }
 
     /**
+     * Test method for
+     * {@link net.sf.marineapi.nmea.parser.RMCParser#setGpsMode()}.
+     */
+    @Test
+    public void testSetGpsMode() {
+        rmc.setGpsMode(GpsMode.SIMULATED);
+        assertEquals(GpsMode.SIMULATED, rmc.getGpsMode());
+        rmc.setGpsMode(GpsMode.ESTIMATED);
+        assertEquals(GpsMode.ESTIMATED, rmc.getGpsMode());
+    }
+
+    /**
      * Test method for {@link net.sf.marineapi.nmea.parser.RMCParser#getSpeed()}
      * .
      */
     @Test
-    public void testGetSpeedOverGround() {
+    public void testGetSpeed() {
         assertEquals(0.0, rmc.getSpeed(), 0.001);
+    }
+
+    /**
+     * Test method for
+     * {@link net.sf.marineapi.nmea.parser.RMCParser#setSpeed(double)} .
+     */
+    @Test
+    public void testSetSpeed() {
+        rmc.setSpeed(35.2);
+        assertEquals(35.2, rmc.getSpeed(), 0.001);
     }
 
     /**
@@ -69,8 +101,28 @@ public class RMCTest {
      * {@link net.sf.marineapi.nmea.parser.RMCParser#getCourse()} .
      */
     @Test
-    public void testGetCourseOverGround() {
+    public void testGetCourse() {
         assertEquals(360.0, rmc.getCourse(), 0.001);
+    }
+
+    /**
+     * Test method for
+     * {@link net.sf.marineapi.nmea.parser.RMCParser#setCourse(double)} .
+     */
+    @Test
+    public void testSetCourse() {
+        rmc.setCourse(180.5);
+        assertEquals(180.5, rmc.getCourse(), 0.001);
+    }
+
+    /**
+     * Test method for
+     * {@link net.sf.marineapi.nmea.parser.RMCParser#getCourse()} .
+     */
+    @Test
+    public void testGetCorrectedCourse() {
+        double expected = rmc.getCourse() + rmc.getVariation();
+        assertEquals(expected, rmc.getCorrectedCourse(), 0.001);
     }
 
     /**
@@ -84,13 +136,45 @@ public class RMCTest {
 
     /**
      * Test method for
+     * {@link net.sf.marineapi.nmea.parser.RMCParser#setVariation(double)} .
+     */
+    @Test
+    public void testSetVariation() {
+        rmc.setVariation(1.5);
+        rmc.setDirectionOfVariation(Direction.WEST);
+        assertEquals(1.5, rmc.getVariation(), 0.001);
+    }
+
+    /**
+     * Test method for
      * {@link net.sf.marineapi.nmea.parser.RMCParser#getDirectionOfVariation()}
      * .
      */
     @Test
     public void testGetDirectionOfVariation() {
-        assertEquals(Direction.EAST, rmc.getDirectionOfVariation());
         assertTrue(rmc.getVariation() < 0);
+        assertEquals(Direction.EAST, rmc.getDirectionOfVariation());
+    }
+
+    /**
+     * Test method for
+     * {@link net.sf.marineapi.nmea.parser.RMCParser#getDirectionOfVariation()}
+     * .
+     */
+    @Test
+    public void testSetDirectionOfVariation() {
+        rmc.setDirectionOfVariation(Direction.WEST);
+        assertEquals(Direction.WEST, rmc.getDirectionOfVariation());
+        rmc.setDirectionOfVariation(Direction.EAST);
+        assertEquals(Direction.EAST, rmc.getDirectionOfVariation());
+        try {
+            rmc.setDirectionOfVariation(Direction.NORTH);
+            fail("Did not throw exception");
+        } catch (IllegalArgumentException e) {
+            // pass
+        } catch (Exception e) {
+            fail(e.getMessage());
+        }
     }
 
     /**
@@ -108,6 +192,25 @@ public class RMCTest {
         assertEquals(lon, p.getLongitude(), 0.0000001);
         assertEquals(Direction.NORTH, p.getLatHemisphere());
         assertEquals(Direction.EAST, p.getLonHemisphere());
+    }
+
+    @Test
+    public void testSetPosition() {
+        final double lat = 61 + (1.111 / 60);
+        final double lon = 27 + (7.777 / 60);
+        Position p = new Position(lat, Direction.NORTH, lon, Direction.EAST);
+        rmc.setPosition(p);
+
+        String str = rmc.toString();
+        assertTrue(str.contains(",6101.111,N,"));
+        assertTrue(str.contains(",02707.777,E,"));
+
+        Position wp = rmc.getPosition();
+        assertNotNull(wp);
+        assertEquals(lat, wp.getLatitude(), 0.0000001);
+        assertEquals(lon, wp.getLongitude(), 0.0000001);
+        assertEquals(Direction.NORTH, wp.getLatHemisphere());
+        assertEquals(Direction.EAST, wp.getLonHemisphere());
     }
 
     /**

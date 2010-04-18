@@ -95,10 +95,10 @@ class GSAParser extends SentenceParser implements GSASentence {
      * @see net.sf.marineapi.nmea.sentence.GSASentence#getSatellitesIds()
      */
     public String[] getSatellitesIds() {
-        if (this.satellites == null) {
-            this.parseSatellites();
+        if (satellites == null) {
+            parseSatellites();
         }
-        return this.satellites;
+        return satellites;
     }
 
     /*

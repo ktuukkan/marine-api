@@ -216,6 +216,20 @@ public class RMBTest {
         rmb.setBearing(180.0);
         assertTrue(rmb.toString().contains(",180.0,"));
         assertEquals(180.0, rmb.getBearing(), 0.001);
+
+        try {
+            rmb.setBearing(-0.001);
+            fail("Did not throw exception");
+        } catch (IllegalArgumentException e) {
+            assertTrue(e.getMessage().contains("0..360"));
+        }
+
+        try {
+            rmb.setBearing(360.001);
+            fail("Did not throw exception");
+        } catch (IllegalArgumentException e) {
+            assertTrue(e.getMessage().contains("0..360"));
+        }
     }
 
     /**

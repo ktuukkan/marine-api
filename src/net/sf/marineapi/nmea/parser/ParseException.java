@@ -34,13 +34,6 @@ public class ParseException extends DataNotAvailableException {
     private static final long serialVersionUID = 6203761984607273569L;
 
     /**
-     * Constructor without parameters.
-     */
-    public ParseException() {
-        super();
-    }
-
-    /**
      * Constructor with description.
      * 
      * @param msg Description of the Exception

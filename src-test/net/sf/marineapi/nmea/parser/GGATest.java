@@ -37,15 +37,6 @@ public class GGATest {
         }
     }
 
-    /**
-     * 
-     */
-    @Test
-    public void testGGAParser() {
-        GGAParser instance = new GGAParser(EXAMPLE);
-        assertEquals(SentenceId.GGA, instance.getSentenceId());
-    }
-
     @Test
     public void testGetAltitude() {
         assertEquals(28.0, gga.getAltitude(), 0.001);
@@ -121,30 +112,6 @@ public class GGATest {
     }
 
     @Test
-    public void testSetPosition() {
-        final double lat = 61 + (1.111 / 60);
-        final double lon = 27 + (7.777 / 60);
-        Position p = new Position(lat, Direction.NORTH, lon, Direction.EAST);
-        gga.setPosition(p);
-
-        String str = gga.toString();
-        assertTrue(str.contains(",6101.111,N,"));
-        assertTrue(str.contains(",02707.777,E,"));
-
-        Position wp = gga.getPosition();
-        assertNotNull(wp);
-        assertEquals(lat, wp.getLatitude(), 0.0000001);
-        assertEquals(lon, wp.getLongitude(), 0.0000001);
-        assertEquals(Direction.NORTH, wp.getLatHemisphere());
-        assertEquals(Direction.EAST, wp.getLonHemisphere());
-    }
-
-    @Test
-    public void testGetUtcTime() {
-        assertEquals("120044", gga.getUtcTime());
-    }
-
-    @Test
     public void testGetUtcHours() {
         assertEquals(12, gga.getUtcHours());
     }
@@ -157,6 +124,20 @@ public class GGATest {
     @Test
     public void testGetUtcSeconds() {
         assertEquals(44, gga.getUtcSeconds(), 0.001);
+    }
+
+    @Test
+    public void testGetUtcTime() {
+        assertEquals("120044", gga.getUtcTime());
+    }
+
+    /**
+     * 
+     */
+    @Test
+    public void testGGAParser() {
+        GGAParser instance = new GGAParser(EXAMPLE);
+        assertEquals(SentenceId.GGA, instance.getSentenceId());
     }
 
     @Test
@@ -212,6 +193,25 @@ public class GGATest {
         assertEquals(2.0, gga.getHorizontalDOP(), 0.001);
         gga.setHorizontalDOP(0.025);
         assertEquals(0.025, gga.getHorizontalDOP(), 0.001);
+    }
+
+    @Test
+    public void testSetPosition() {
+        final double lat = 61 + (1.111 / 60);
+        final double lon = 27 + (7.777 / 60);
+        Position p = new Position(lat, Direction.NORTH, lon, Direction.EAST);
+        gga.setPosition(p);
+
+        String str = gga.toString();
+        assertTrue(str.contains(",6101.111,N,"));
+        assertTrue(str.contains(",02707.777,E,"));
+
+        Position wp = gga.getPosition();
+        assertNotNull(wp);
+        assertEquals(lat, wp.getLatitude(), 0.0000001);
+        assertEquals(lon, wp.getLongitude(), 0.0000001);
+        assertEquals(Direction.NORTH, wp.getLatHemisphere());
+        assertEquals(Direction.EAST, wp.getLonHemisphere());
     }
 
 }
