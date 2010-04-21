@@ -32,6 +32,7 @@ public interface GSVSentence extends Sentence {
      * Set the number of satellites in view.
      * 
      * @param count Satellite count
+     * @throws IllegalArgumentException If specified number is negative
      */
     void setSatelliteCount(int count);
 
@@ -66,18 +67,20 @@ public interface GSVSentence extends Sentence {
     boolean isFirst();
 
     /**
-     * Tells if this is the last sentence in GSV sequence.
+     * Tells if this is the last sentence in GSV sequence. This is a convenience
+     * method for comparison of
+     * <code>(@link {#getSentenceCount()} == @link{#getSentenceIndex()})</code>.
      * 
-     * @return true if first, otherwise false.
-     * @see #getSentenceCount()
-     * @see #getSentenceIndex()
+     * @return True if first, otherwise false.
      */
     boolean isLast();
 
     /**
-     * Set the satellites information.
+     * Set the satellite information.
      * 
-     * @param info List of SatelliteInfo objects
+     * @param info List of SatelliteInfo objects, size from 0 to 4.
+     * @throws IllegalArgumentException If specified list size is greater that
+     *             maximum allowed number of satellites per sentence (4).
      */
     void setSatelliteInfo(List<SatelliteInfo> info);
 
@@ -85,6 +88,7 @@ public interface GSVSentence extends Sentence {
      * Set the total number of sentences in GSV sequence.
      * 
      * @param count Number of sentences
+     * @throws IllegalArgumentException If specified count is negative
      */
     void setSentenceCount(int count);
 
@@ -92,6 +96,7 @@ public interface GSVSentence extends Sentence {
      * Set the index of this sentence in GSV sequence.
      * 
      * @param index Sentence index to set
+     * @throws IllegalArgumentException If specified index is negative
      */
     void setSentenceIndex(int index);
 

@@ -20,6 +20,7 @@
  */
 package net.sf.marineapi.nmea.sentence;
 
+import net.sf.marineapi.nmea.parser.DataNotAvailableException;
 import net.sf.marineapi.nmea.util.GpsFixQuality;
 import net.sf.marineapi.nmea.util.Units;
 
@@ -49,6 +50,8 @@ public interface GGASentence extends PositionSentence, TimeSentence {
      * Get antenna altitude above mean sea level.
      * 
      * @return Altitude value
+     * @throws DataNotAvailableException If the data is not available.
+     * @throws ParseException If the field contains unexpected or illegal value.
      */
     double getAltitude();
 
@@ -56,6 +59,8 @@ public interface GGASentence extends PositionSentence, TimeSentence {
      * Gets the altitude units, meters or feet.
      * 
      * @return Units enum
+     * @throws DataNotAvailableException If the data is not available.
+     * @throws ParseException If the field contains unexpected or illegal value.
      */
     Units getAltitudeUnits();
 
@@ -63,6 +68,8 @@ public interface GGASentence extends PositionSentence, TimeSentence {
      * Gets the age of differential GPS data (DGPS).
      * 
      * @return Seconds since last valid RTCM transmission
+     * @throws DataNotAvailableException If the data is not available.
+     * @throws ParseException If the field contains unexpected or illegal value.
      */
     double getDgpsAge();
 
@@ -70,6 +77,8 @@ public interface GGASentence extends PositionSentence, TimeSentence {
      * Gets the ID of DGPS station.
      * 
      * @return Station ID (0000-1024)
+     * @throws DataNotAvailableException If the data is not available.
+     * @throws ParseException If the field contains unexpected or illegal value.
      */
     String getDgpsStationId();
 
@@ -77,6 +86,8 @@ public interface GGASentence extends PositionSentence, TimeSentence {
      * Get the GPS fix quality.
      * 
      * @return GpsFixQuality enum
+     * @throws DataNotAvailableException If the data is not available.
+     * @throws ParseException If the field contains unexpected or illegal value.
      */
     GpsFixQuality getFixQuality();
 
@@ -86,6 +97,8 @@ public interface GGASentence extends PositionSentence, TimeSentence {
      * below WGS-84 ellipsoid.
      * 
      * @return Height value
+     * @throws DataNotAvailableException If the data is not available.
+     * @throws ParseException If the field contains unexpected or illegal value.
      */
     double getGeoidalHeight();
 
@@ -93,6 +106,8 @@ public interface GGASentence extends PositionSentence, TimeSentence {
      * Get units of height above geoid.
      * 
      * @return Units of geoidal height value
+     * @throws DataNotAvailableException If the data is not available.
+     * @throws ParseException If the field contains unexpected or illegal value.
      */
     Units getGeoidalHeightUnits();
 
@@ -101,6 +116,8 @@ public interface GGASentence extends PositionSentence, TimeSentence {
      * accuracy of horizontal position.
      * 
      * @return Horizontal dilution
+     * @throws DataNotAvailableException If the data is not available.
+     * @throws ParseException If the field contains unexpected or illegal value.
      */
     double getHorizontalDOP();
 
@@ -108,6 +125,8 @@ public interface GGASentence extends PositionSentence, TimeSentence {
      * Get the number of active satellites in use.
      * 
      * @return Number of satellites
+     * @throws DataNotAvailableException If the data is not available.
+     * @throws ParseException If the field contains unexpected or illegal value.
      */
     int getSatelliteCount();
 

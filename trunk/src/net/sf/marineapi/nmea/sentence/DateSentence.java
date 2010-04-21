@@ -22,6 +22,7 @@ package net.sf.marineapi.nmea.sentence;
 
 import java.util.Date;
 
+import net.sf.marineapi.nmea.parser.DataNotAvailableException;
 import net.sf.marineapi.nmea.parser.ParseException;
 
 /**
@@ -46,7 +47,8 @@ public interface DateSentence extends Sentence {
      * provided by some sentences, but generally the precision is by 1 second.
      * 
      * @return Date
-     * @throws ParseException If data invalid or not available
+     * @throws DataNotAvailableException If the data is not available.
+     * @throws ParseException If the field contains unexpected or illegal value.
      */
     Date getDate();
 
@@ -54,7 +56,8 @@ public interface DateSentence extends Sentence {
      * Get day of UTC date.
      * 
      * @return integer
-     * @throws ParseException If data invalid or not available
+     * @throws DataNotAvailableException If the data is not available.
+     * @throws ParseException If the field contains unexpected or illegal value.
      */
     int getUtcDay();
 
@@ -62,7 +65,8 @@ public interface DateSentence extends Sentence {
      * Get month of UTC date.
      * 
      * @return integer
-     * @throws ParseException If data invalid or not available
+     * @throws DataNotAvailableException If the data is not available.
+     * @throws ParseException If the field contains unexpected or illegal value.
      */
     int getUtcMonth();
 
@@ -74,7 +78,8 @@ public interface DateSentence extends Sentence {
      * pivot are added to 1900.
      * 
      * @return integer
-     * @throws ParseException If data invalid or not available
+     * @throws DataNotAvailableException If the data is not available.
+     * @throws ParseException If the field contains unexpected or illegal value.
      */
     int getUtcYear();
 }

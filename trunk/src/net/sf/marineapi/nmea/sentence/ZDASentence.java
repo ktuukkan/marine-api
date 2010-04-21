@@ -20,6 +20,7 @@
  */
 package net.sf.marineapi.nmea.sentence;
 
+import net.sf.marineapi.nmea.parser.DataNotAvailableException;
 import net.sf.marineapi.nmea.parser.ParseException;
 
 /**
@@ -38,7 +39,8 @@ public interface ZDASentence extends TimeSentence, DateSentence {
      * Get offset to local time zone in hours, from +/- 0 to +/- 13 hours.
      * 
      * @return Time zone offset
-     * @throws ParseException
+     * @throws DataNotAvailableException If the data is not available.
+     * @throws ParseException If the field contains unexpected or illegal value.
      */
     int getLocalZoneHours();
 
@@ -46,7 +48,8 @@ public interface ZDASentence extends TimeSentence, DateSentence {
      * Get offset to local time zone in minutes, from 0 to +/- 59.
      * 
      * @return minutes integer
-     * @throws ParseException
+     * @throws DataNotAvailableException If the data is not available.
+     * @throws ParseException If the field contains unexpected or illegal value.
      */
     int getLocalZoneMinutes();
 

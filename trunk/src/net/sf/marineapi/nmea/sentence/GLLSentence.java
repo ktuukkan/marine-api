@@ -1,7 +1,7 @@
 package net.sf.marineapi.nmea.sentence;
 
+import net.sf.marineapi.nmea.parser.DataNotAvailableException;
 import net.sf.marineapi.nmea.util.DataStatus;
-
 
 /**
  * Interface for GLL sentence type. Geographic position (latitude/longitude).
@@ -27,6 +27,8 @@ public interface GLLSentence extends PositionSentence, TimeSentence {
      * Get the data quality status, valid or invalid.
      * 
      * @return DataStatus.VALID or DataStatus.INVALID
+     * @throws DataNotAvailableException If the data is not available.
+     * @throws ParseException If the field contains unexpected or illegal value.
      */
     DataStatus getDataStatus();
 
@@ -34,6 +36,8 @@ public interface GLLSentence extends PositionSentence, TimeSentence {
      * Set the data quality status, valid or invalid.
      * 
      * @param status DataStatus to set
+     * @throws DataNotAvailableException If the data is not available.
+     * @throws ParseException If the field contains unexpected or illegal value.
      */
     void setDataStatus(DataStatus status);
 
