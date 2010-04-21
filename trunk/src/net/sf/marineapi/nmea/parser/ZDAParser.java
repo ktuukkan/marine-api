@@ -35,12 +35,12 @@ import net.sf.marineapi.nmea.sentence.ZDASentence;
 class ZDAParser extends SentenceParser implements ZDASentence {
 
     // field indices
-    private static final int UTC_TIME = 1;
-    private static final int UTC_DAY = 2;
-    private static final int UTC_MONTH = 3;
-    private static final int UTC_YEAR = 4;
-    private static final int LOCAL_ZONE_HOURS = 5;
-    private static final int LOCAL_ZONE_MINUTES = 6;
+    private static final int UTC_TIME = 0;
+    private static final int UTC_DAY = 1;
+    private static final int UTC_MONTH = 2;
+    private static final int UTC_YEAR = 3;
+    private static final int LOCAL_ZONE_HOURS = 4;
+    private static final int LOCAL_ZONE_MINUTES = 5;
 
     /**
      * Creates a new instance of ZDAParser.

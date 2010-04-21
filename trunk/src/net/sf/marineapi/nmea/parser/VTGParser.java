@@ -33,19 +33,19 @@ import net.sf.marineapi.nmea.util.GpsMode;
 class VTGParser extends SentenceParser implements VTGSentence {
 
     // field indexes
-    private static final int TRUE_COURSE = 1;
+    private static final int TRUE_COURSE = 0;
     @SuppressWarnings("unused")
-    private static final int TRUE_INDICATOR = 2;
-    private static final int MAGNETIC_COURSE = 3;
+    private static final int TRUE_INDICATOR = 1;
+    private static final int MAGNETIC_COURSE = 2;
     @SuppressWarnings("unused")
-    private static final int MAGNETIC_INDICATOR = 4;
-    private static final int SPEED_KNOTS = 5;
+    private static final int MAGNETIC_INDICATOR = 3;
+    private static final int SPEED_KNOTS = 4;
     @SuppressWarnings("unused")
-    private static final int KNOTS_INDICATOR = 6;
-    private static final int SPEED_KMPH = 7;
+    private static final int KNOTS_INDICATOR = 5;
+    private static final int SPEED_KMPH = 6;
     @SuppressWarnings("unused")
-    private static final int KMPH_INDICATOR = 8;
-    private static final int MODE = 9;
+    private static final int KMPH_INDICATOR = 7;
+    private static final int MODE = 8;
 
     /**
      * Creates a new instance of VTGParser.

@@ -20,6 +20,9 @@
  */
 package net.sf.marineapi.nmea.parser;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import net.sf.marineapi.nmea.sentence.NMEA;
 import net.sf.marineapi.nmea.sentence.Sentence;
 import net.sf.marineapi.nmea.sentence.SentenceId;
@@ -58,8 +61,8 @@ public class SentenceParser implements Sentence {
     // The next three characters after talker id.
     private final SentenceId sentenceId;
 
-    // data fields, including the address field at index 0
-    private final String[] dataFields;
+    // data fields, address and checksum fields omitted
+    private List<String> fields;
 
     /**
      * Creates a new instance of SentenceParser. Sentence type is resolved
@@ -79,12 +82,21 @@ public class SentenceParser implements Sentence {
         talkerId = parseTalkerId(nmea);
         sentenceId = parseSentenceId(nmea);
 
-        // extract data fields
-        if (nmea.contains(String.valueOf(CHECKSUM_DELIMITER))) {
-            String data = nmea.substring(0, nmea.indexOf(CHECKSUM_DELIMITER));
-            dataFields = data.split(String.valueOf(FIELD_DELIMITER), -1);
-        } else {
-            dataFields = nmea.split(String.valueOf(FIELD_DELIMITER), -1);
+        // remove address field
+        int begin = nmea.indexOf(Sentence.FIELD_DELIMITER);
+        String temp = nmea.substring(begin + 1);
+
+        // remove checksum
+        if (temp.contains(String.valueOf(CHECKSUM_DELIMITER))) {
+            int end = temp.indexOf(CHECKSUM_DELIMITER);
+            temp = temp.substring(0, end);
+        }
+
+        // copy data to fields to List
+        String[] temp2 = temp.split(String.valueOf(FIELD_DELIMITER), -1);
+        fields = new ArrayList<String>(temp2.length);
+        for (String s : temp2) {
+            fields.add(s);
         }
     }
 
@@ -107,9 +119,9 @@ public class SentenceParser implements Sentence {
             throw new IllegalArgumentException(
                     "Sentence type must be specified");
         }
-        if (!type.equals(getSentenceId())) {
-            String msg = String.format("Sentence type mismatch [%s]",
-                    getSentenceId());
+        SentenceId id = getSentenceId();
+        if (id != type) {
+            String msg = String.format("Sentence type mismatch [%s]", id);
             throw new IllegalArgumentException(msg);
         }
     }
@@ -119,21 +131,24 @@ public class SentenceParser implements Sentence {
      * 
      * @param talker Talker type Id
      * @param type Sentence type Id
-     * @param fields Number of sentence data fields, including address field
+     * @param size Number of sentence data fields, including address field
      */
-    protected SentenceParser(TalkerId talker, SentenceId type, int fields) {
+    protected SentenceParser(TalkerId talker, SentenceId type, int size) {
+        if (size < 1) {
+            throw new IllegalArgumentException("Minimum number of fields is 1");
+        }
+
         if (talker == null || type == null) {
             throw new IllegalArgumentException(
                     "Sentence and Talker IDs must be specified");
         }
-        if (fields < 1) {
-            throw new IllegalArgumentException("Minimum number of fields is 1");
-        }
-        this.sentenceId = type;
+
         this.talkerId = talker;
-        this.dataFields = new String[fields];
-        for (int i = 0; i < this.dataFields.length; i++) {
-            dataFields[i] = "";
+        this.sentenceId = type;
+
+        fields = new ArrayList<String>(size);
+        for (int i = 0; i < size; i++) {
+            fields.add("");
         }
     }
 
@@ -179,20 +194,22 @@ public class SentenceParser implements Sentence {
         sb.append(talkerId.toString());
         sb.append(sentenceId.toString());
 
-        for (int i = 1; i < dataFields.length; i++) {
+        // for (int i = 1; i < fields.size(); i++) {
+        // sb.append(FIELD_DELIMITER);
+        // sb.append(fields.get(i));
+        // }
+        for (String field : fields) {
             sb.append(FIELD_DELIMITER);
-            if (dataFields[i] != null) {
-                sb.append(dataFields[i]);
-            }
+            sb.append(field);
         }
 
         String sentence = NMEA.appendChecksum(sb.toString());
-        if (NMEA.isValid(sentence)) {
-            return sentence;
+        if (!NMEA.isValid(sentence)) {
+            String msg = String.format("Invalid result [%s]", sentence);
+            throw new IllegalStateException(msg);
         }
 
-        String msg = String.format("Invalid result [%s]", sentence);
-        throw new IllegalStateException(msg);
+        return sentence;
     }
 
     @Override
@@ -215,7 +232,7 @@ public class SentenceParser implements Sentence {
     /**
      * Parse a single character from the specified sentence field.
      * 
-     * @param index Field index in sentence
+     * @param index Data field index in sentence
      * @return Character contained in the field
      * @throws ParseException If field contains more than one character
      */
@@ -231,8 +248,8 @@ public class SentenceParser implements Sentence {
     /**
      * Parse double value from the specified sentence field.
      * 
-     * @param index Field index in sentence
-     * @return Field parsed by <code>Double.parseDouble()</code>
+     * @param index Data field index in sentence
+     * @return Field as parsed by <code>Double.parseDouble()</code>
      */
     protected final double getDoubleValue(int index) {
         double value;
@@ -251,7 +268,7 @@ public class SentenceParser implements Sentence {
      * @return The number of fields
      */
     protected final int getFieldCount() {
-        return dataFields.length;
+        return fields.size();
     }
 
     /**
@@ -271,9 +288,10 @@ public class SentenceParser implements Sentence {
     }
 
     /**
-     * Get contents of a data field as String. Field indexing starts from 0;
-     * first field is the sentence ID, followed by the actual data fields.
-     * Checksum is not considered as a data field and has no index.
+     * Get contents of a data field as a String. Field indexing is zero-based.
+     * The address field (e.g. <code>$GPGGA</code>) and checksum at the end are
+     * not considered as a data fields and cannot therefore be fetched with this
+     * method.
      * <p>
      * Field indexing, let i = 1: <br>
      * <code>$&lt;id&gt;,&lt;i&gt;,&lt;i+1&gt;,&lt;i+2&gt;,...,&lt;i+n&gt;*&lt;checksum&gt;</code>
@@ -283,7 +301,7 @@ public class SentenceParser implements Sentence {
      * @throws DataNotAvailableException If the field is empty
      */
     protected final String getStringValue(int index) {
-        String value = dataFields[index];
+        String value = fields.get(index);
         if (value == null || "".equals(value)) {
             throw new DataNotAvailableException("Data not available");
         }
@@ -344,10 +362,10 @@ public class SentenceParser implements Sentence {
      * @param value String to set, <code>null</code> converts to empty String.
      */
     protected final void setStringValue(int index, String value) {
-        if (index < 1) {
+        if (index < 0) {
             throw new IllegalArgumentException("Index must be > 1");
         }
-        dataFields[index] = value == null ? "" : value;
+        fields.set(index, value == null ? "" : value);
     }
 
     /**

@@ -36,7 +36,7 @@ public class SentenceTest {
     public void testSentence() {
 
         Sentence s = new SentenceParser(TalkerId.GP, SentenceId.GLL, 5);
-        assertEquals("$GPGLL,,,,*50", s.toString());
+        assertEquals("$GPGLL,,,,,*7C", s.toString());
 
         try {
             new SentenceParser("invalid_$GPGGA,,,,,,");
@@ -210,10 +210,13 @@ public class SentenceTest {
      */
     @Test
     public void testGetStringValue() {
-        String nmea = "$GPGLL,6011.552,N,02501.941,E,120045,A";
 
+        String nmea = "$GPGLL,6011.552,N,02501.941,E,120045,A";
         SentenceParser s = new SentenceParser(nmea);
-        String[] fields = nmea.split(",", -1);
+
+        String data = "6011.552,N,02501.941,E,120045,A";
+        String[] fields = data.split(",", -1);
+
         for (int i = 0; i < fields.length; i++) {
             assertEquals(fields[i], s.getStringValue(i));
         }
@@ -243,7 +246,7 @@ public class SentenceTest {
 
         try {
             SentenceParser s4 = new SentenceParser(nmea);
-            s4.getStringValue(3);
+            s4.getStringValue(2);
             fail("Did not throw exception");
         } catch (DataNotAvailableException ex) {
             // pass
@@ -265,8 +268,8 @@ public class SentenceTest {
         }
 
         try {
-            String id = instance.getStringValue(Sentence.ADDRESS_FIELD);
-            assertEquals("$GPRMC", id);
+            String field = instance.getStringValue(0);
+            assertEquals("120044", field);
         } catch (IndexOutOfBoundsException e) {
             fail("Unexpected IndexOutOfBoundsException");
         } catch (Exception e) {
