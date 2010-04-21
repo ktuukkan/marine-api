@@ -20,6 +20,7 @@
  */
 package net.sf.marineapi.nmea.sentence;
 
+import net.sf.marineapi.nmea.parser.DataNotAvailableException;
 import net.sf.marineapi.nmea.util.Position;
 
 /**
@@ -34,6 +35,10 @@ public interface PositionSentence extends Sentence {
      * Gets the geographic position.
      * 
      * @return Position
+     * @throws DataNotAvailableException If any of the position related fields
+     *             is empty.
+     * @throws ParseException If any of the position related fields contains
+     *             unexpected value.
      */
     Position getPosition();
 

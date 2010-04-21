@@ -150,6 +150,10 @@ class GSVParser extends SentenceParser implements GSVSentence {
      * @see net.sf.marineapi.nmea.sentence.GSVSentence#setSentenceCount(int)
      */
     public void setSentenceCount(int count) {
+        if (count < 1) {
+            throw new IllegalArgumentException(
+                    "Number of sentences cannot be negative");
+        }
         setIntValue(NUMBER_OF_SENTENCES, count);
     }
 
@@ -158,10 +162,18 @@ class GSVParser extends SentenceParser implements GSVSentence {
      * @see net.sf.marineapi.nmea.sentence.GSVSentence#setSentenceIndex(int)
      */
     public void setSentenceIndex(int index) {
+        if (index < 0) {
+            throw new IllegalArgumentException(
+                    "Sentence index cannot be negative");
+        }
         setIntValue(SENTENCE_NUMBER, index);
     }
 
     public void setSatelliteCount(int count) {
+        if (count < 0) {
+            throw new IllegalArgumentException(
+                    "Satellite count cannot be negative");
+        }
         setIntValue(SATELLITES_IN_VIEW, count);
     }
 

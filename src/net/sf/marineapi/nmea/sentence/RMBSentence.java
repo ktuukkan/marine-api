@@ -20,6 +20,7 @@
  */
 package net.sf.marineapi.nmea.sentence;
 
+import net.sf.marineapi.nmea.parser.DataNotAvailableException;
 import net.sf.marineapi.nmea.util.DataStatus;
 import net.sf.marineapi.nmea.util.Direction;
 import net.sf.marineapi.nmea.util.Waypoint;
@@ -43,20 +44,26 @@ public interface RMBSentence extends Sentence {
      * 
      * @return DataStatus.VALID or DataStatus.INVALID.
      * @see #hasArrived()
+     * @throws DataNotAvailableException If the data is not available.
+     * @throws ParseException If the field contains unexpected or illegal value.
      */
     DataStatus getArrivalStatus();
 
     /**
-     * Get true bearing to destination, in degrees.
+     * Get true bearing to destination.
      * 
-     * @return double
+     * @return True bearing in degrees.
+     * @throws DataNotAvailableException If the data is not available.
+     * @throws ParseException If the field contains unexpected or illegal value.
      */
     double getBearing();
 
     /**
-     * Get cross track error (XTE), in nautical miles.
+     * Get cross track error (XTE).
      * 
-     * @return double
+     * @return Cross track error, in nautical miles.
+     * @throws DataNotAvailableException If the data is not available.
+     * @throws ParseException If the field contains unexpected or illegal value.
      */
     double getCrossTrackError();
 
@@ -64,6 +71,8 @@ public interface RMBSentence extends Sentence {
      * Get the destination waypoint.
      * 
      * @return Waypoint
+     * @throws DataNotAvailableException If the data is not available.
+     * @throws ParseException If the field contains unexpected or illegal value.
      */
     Waypoint getDestination();
 
@@ -71,6 +80,8 @@ public interface RMBSentence extends Sentence {
      * Get the ID of origin waypoint.
      * 
      * @return Id String.
+     * @throws DataNotAvailableException If the data is not available.
+     * @throws ParseException If the field contains unexpected or illegal value.
      */
     String getOriginId();
 
@@ -78,6 +89,8 @@ public interface RMBSentence extends Sentence {
      * Get range to destination waypoint.
      * 
      * @return Range to destination, in nautical miles.
+     * @throws DataNotAvailableException If the data is not available.
+     * @throws ParseException If the field contains unexpected or illegal value.
      */
     double getRange();
 
@@ -85,6 +98,8 @@ public interface RMBSentence extends Sentence {
      * Get status of sentence data, valid or invalid.
      * 
      * @return DataStatus.VALID or DataStatus.INVALID
+     * @throws DataNotAvailableException If the data is not available.
+     * @throws ParseException If the field contains unexpected or illegal value.
      */
     DataStatus getStatus();
 
@@ -92,6 +107,8 @@ public interface RMBSentence extends Sentence {
      * Get the direction to steer to correct error (left/right).
      * 
      * @return Direction.LEFT or Direction.RIGHT
+     * @throws DataNotAvailableException If the data is not available.
+     * @throws ParseException If the field contains unexpected or illegal value.
      */
     Direction getSteerTo();
 
@@ -99,6 +116,8 @@ public interface RMBSentence extends Sentence {
      * Get velocity towards destination.
      * 
      * @return Velocity value, in knots (nautical miles per hour).
+     * @throws DataNotAvailableException If the data is not available.
+     * @throws ParseException If the field contains unexpected or illegal value.
      */
     double getVelocity();
 
@@ -106,6 +125,8 @@ public interface RMBSentence extends Sentence {
      * Tells if the destination waypoint has been reached or not.
      * 
      * @return True if has arrived to waypoint, otherwise false.
+     * @throws DataNotAvailableException If arrival status is not available.
+     * @throws ParseException If the field contains unexpected or illegal value.
      */
     boolean hasArrived();
 

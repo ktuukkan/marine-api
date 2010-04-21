@@ -20,6 +20,7 @@
  */
 package net.sf.marineapi.nmea.sentence;
 
+import net.sf.marineapi.nmea.parser.DataNotAvailableException;
 import net.sf.marineapi.nmea.parser.ParseException;
 
 /**
@@ -36,7 +37,8 @@ public interface TimeSentence extends Sentence {
      * Returns the hours of UTC time.
      * 
      * @return hours (0-23)
-     * @throws ParseException If data invalid or not available
+     * @throws DataNotAvailableException If the data is not available.
+     * @throws ParseException If the field contains unexpected or illegal value.
      */
     int getUtcHours();
 
@@ -44,7 +46,8 @@ public interface TimeSentence extends Sentence {
      * Returns the minutes of UTC time.
      * 
      * @return minutes (0-59)
-     * @throws ParseException If data invalid or not available
+     * @throws DataNotAvailableException If the data is not available.
+     * @throws ParseException If the field contains unexpected or illegal value.
      */
     int getUtcMinutes();
 
@@ -53,7 +56,8 @@ public interface TimeSentence extends Sentence {
      * fractional sub-second.
      * 
      * @return seconds (0-59)
-     * @throws ParseException If data invalid or not available
+     * @throws DataNotAvailableException If the data is not available.
+     * @throws ParseException If the field contains unexpected or illegal value.
      */
     double getUtcSeconds();
 
@@ -62,7 +66,8 @@ public interface TimeSentence extends Sentence {
      * String, for example "123456" stands for "12:34:56 UTC".
      * 
      * @return UTC String
-     * @throws ParseException If data invalid or not available
+     * @throws DataNotAvailableException If the data is not available.
+     * @throws ParseException If the field contains unexpected or illegal value.
      */
     String getUtcTime();
 }

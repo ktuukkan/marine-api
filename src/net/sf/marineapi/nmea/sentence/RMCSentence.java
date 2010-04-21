@@ -20,6 +20,7 @@
  */
 package net.sf.marineapi.nmea.sentence;
 
+import net.sf.marineapi.nmea.parser.DataNotAvailableException;
 import net.sf.marineapi.nmea.util.DataStatus;
 import net.sf.marineapi.nmea.util.Direction;
 import net.sf.marineapi.nmea.util.GpsMode;
@@ -50,29 +51,75 @@ public interface RMCSentence extends PositionSentence, TimeSentence,
      * @return Corrected true course
      * @see #getCourse()
      * @see #getVariation()
+     * @throws DataNotAvailableException If course or variation data is not
+     *             available.
+     * @throws ParseException If course or variation field contains unexpected
+     *             or illegal value.
      */
     double getCorrectedCourse();
 
     /**
      * Get true course over ground (COG).
      * 
-     * @return True course in degrees.
+     * @return True course in degrees
+     * @throws DataNotAvailableException If the data is not available.
+     * @throws ParseException If the field contains unexpected or illegal value.
      */
     double getCourse();
-
-    /**
-     * Set true course over ground (COG).
-     * 
-     * @param course True course in degrees.
-     */
-    void setCourse(double cog);
 
     /**
      * Gets the data status, valid or invalid.
      * 
      * @return DataStatus.VALID or DataStatus.INVALID
+     * @throws DataNotAvailableException If the data is not available.
+     * @throws ParseException If the field contains unexpected or illegal value.
      */
     DataStatus getDataStatus();
+
+    /**
+     * Get the direction of magnetic variation; east or west.
+     * 
+     * @return Direction.EAST or Direction.WEST
+     * @throws DataNotAvailableException If the data is not available.
+     * @throws ParseException If the field contains unexpected or illegal value.
+     */
+    Direction getDirectionOfVariation();
+
+    /**
+     * Get the GPS operating mode.
+     * 
+     * @return GpsMode enum
+     * @throws DataNotAvailableException If the data is not available.
+     * @throws ParseException If the field contains unexpected or illegal value.
+     */
+    GpsMode getGpsMode();
+
+    /**
+     * Get current speed over ground (SOG).
+     * 
+     * @return Speed in knots (nautical miles per hour).
+     * @throws DataNotAvailableException If the data is not available.
+     * @throws ParseException If the field contains unexpected or illegal value.
+     */
+    double getSpeed();
+
+    /**
+     * Get the magnetic variation. Easterly variation subtracts from true
+     * course, and is thus returned as negative value. Otherwise, the value is
+     * positive.
+     * 
+     * @return Magnetic variation in degrees
+     * @throws DataNotAvailableException If the data is not available.
+     * @throws ParseException If the field contains unexpected or illegal value.
+     */
+    double getVariation();
+
+    /**
+     * Set true course over ground (COG).
+     * 
+     * @param course True course in degrees
+     */
+    void setCourse(double cog);
 
     /**
      * Set the data status, valid or invalid.
@@ -80,13 +127,6 @@ public interface RMCSentence extends PositionSentence, TimeSentence,
      * @param status DataStatus.VALID or DataStatus.INVALID
      */
     void setDataStatus(DataStatus status);
-
-    /**
-     * Get the direction of magnetic variation; east or west.
-     * 
-     * @return Direction.EAST or Direction.WEST
-     */
-    Direction getDirectionOfVariation();
 
     /**
      * Set the direction of magnetic variation, east or west.
@@ -98,13 +138,6 @@ public interface RMCSentence extends PositionSentence, TimeSentence,
     void setDirectionOfVariation(Direction dir);
 
     /**
-     * Get the GPS operating mode.
-     * 
-     * @return GpsMode enum
-     */
-    GpsMode getGpsMode();
-
-    /**
      * Set the GPS operation mode.
      * 
      * @param mode Mode to set
@@ -112,27 +145,11 @@ public interface RMCSentence extends PositionSentence, TimeSentence,
     void setGpsMode(GpsMode mode);
 
     /**
-     * Get current speed over ground (SOG).
-     * 
-     * @return Speed in knots (nautical miles per hour).
-     */
-    double getSpeed();
-
-    /**
      * Set current speed over ground (SOG).
      * 
      * @param sog Speed in knots (nautical miles per hour).
      */
     void setSpeed(double sog);
-
-    /**
-     * Get the magnetic variation. Easterly variation subtracts from true
-     * course, and is thus returned as negative value. Otherwise, the value is
-     * positive.
-     * 
-     * @return Magnetic variation in degrees
-     */
-    double getVariation();
 
     /**
      * Set the magnetic variation.

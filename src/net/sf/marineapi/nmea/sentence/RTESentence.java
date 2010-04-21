@@ -20,6 +20,8 @@
  */
 package net.sf.marineapi.nmea.sentence;
 
+import net.sf.marineapi.nmea.parser.DataNotAvailableException;
+
 /**
  * Interface for RTE sentence type. Route data and list of waypoint IDs.
  * <p>
@@ -32,13 +34,13 @@ package net.sf.marineapi.nmea.sentence;
 public interface RTESentence extends Sentence {
 
     /**
-     * Active route: complete, all waypoints in route order.
+     * Active route indicator: complete, all waypoints in route order.
      */
     public static final char ACTIVE_ROUTE = 'c';
 
     /**
-     * Working route: the waypoint you just left, the waypoint you're heading to
-     * and then all the rest.
+     * Working route indicator: the waypoint you just left, the waypoint you're
+     * heading to and then all the rest.
      */
     public static final char WORKING_ROUTE = 'w';
 
@@ -46,6 +48,8 @@ public interface RTESentence extends Sentence {
      * Get the number or name of the route.
      * 
      * @return String
+     * @throws DataNotAvailableException If the data is not available.
+     * @throws ParseException If the field contains unexpected or illegal value.
      */
     String getRouteId();
 
@@ -54,6 +58,8 @@ public interface RTESentence extends Sentence {
      * 
      * @return integer
      * @see #getSentenceIndex()
+     * @throws DataNotAvailableException If the data is not available.
+     * @throws ParseException If the field contains unexpected or illegal value.
      */
     int getSentenceCount();
 
@@ -62,13 +68,17 @@ public interface RTESentence extends Sentence {
      * 
      * @return integer
      * @see #getSentenceCount()
+     * @throws DataNotAvailableException If the data is not available.
+     * @throws ParseException If the field contains unexpected or illegal value.
      */
     int getSentenceIndex();
 
     /**
      * Get the number of waypoints IDs in this sentence.
      * 
-     * @return integer
+     * @return Waypoint count
+     * @throws DataNotAvailableException If the data is not available.
+     * @throws ParseException If the field contains unexpected or illegal value.
      */
     int getWaypointCount();
 
@@ -76,6 +86,8 @@ public interface RTESentence extends Sentence {
      * Get the list of waypoints of route.
      * 
      * @return String array containing waypoint IDs
+     * @throws DataNotAvailableException If the data is not available.
+     * @throws ParseException If the field contains unexpected or illegal value.
      */
     String[] getWaypointIds();
 
@@ -83,6 +95,8 @@ public interface RTESentence extends Sentence {
      * Tells if the sentence holds a current active route data.
      * 
      * @return true if active route, otherwise false.
+     * @throws DataNotAvailableException If the data is not available.
+     * @throws ParseException If the field contains unexpected or illegal value.
      */
     boolean isActiveRoute();
 
@@ -90,6 +104,10 @@ public interface RTESentence extends Sentence {
      * Tells if this is the first sentence in RTE sequence.
      * 
      * @return true if there's no sentences left, otherwise false.
+     * @throws DataNotAvailableException If the sentence index or sentence count
+     *             is not available.
+     * @throws ParseException If sentence index or count fields contain
+     *             unexpected or illegal value.
      */
     boolean isFirst();
 
@@ -97,6 +115,10 @@ public interface RTESentence extends Sentence {
      * Tells if this is the last sentence in RTE sequence.
      * 
      * @return true if there's no sentences left, otherwise false.
+     * @throws DataNotAvailableException If the sentence index or sentence count
+     *             is not available.
+     * @throws ParseException If sentence index or count fields contain
+     *             unexpected or illegal value.
      */
     boolean isLast();
 
@@ -104,6 +126,8 @@ public interface RTESentence extends Sentence {
      * Tells if the sentence holds a current working route data.
      * 
      * @return true if working route, otherwise false.
+     * @throws DataNotAvailableException If the data is not available.
+     * @throws ParseException If the field contains unexpected or illegal value.
      */
     boolean isWorkingRoute();
 
