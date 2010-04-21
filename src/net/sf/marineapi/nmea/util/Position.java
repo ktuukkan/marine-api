@@ -21,7 +21,8 @@
 package net.sf.marineapi.nmea.util;
 
 /**
- * Represents a geographic position, the default/assumed datum is WGS84.
+ * Represents a geographic position. The default datum is WGS84, unless some
+ * other datum is explicitly specified.
  * 
  * @author Kimmo Tuukkanen
  * @version $Revision$
@@ -42,7 +43,8 @@ public class Position {
     private Datum datum = Datum.WGS84;
 
     /**
-     * Creates a new instance of Position
+     * Creates a new instance of Position. Notice that altitude defaults to 0.0,
+     * unless set with <code>setAltitude(int)</code> method.
      * 
      * @param lat Latitude degrees
      * @param lath Hemisphere of latitude
@@ -57,7 +59,8 @@ public class Position {
     }
 
     /**
-     * Creates new instance of Position
+     * Creates new instance of Position. Notice that altitude defaults to 0.0,
+     * unless set with <code>setAltitude(int)</code> method.
      * 
      * @param lat Latitude degrees
      * @param lath Hemisphere of latitude
@@ -115,7 +118,7 @@ public class Position {
     /**
      * Get the hemisphere of latitude (North/South).
      * 
-     * @return CompassPoint.N or CompassPoint.S
+     * @return Direction.NORTH or Direction.SOUTH
      */
     public Direction getLatHemisphere() {
         return this.lathem;
@@ -149,7 +152,7 @@ public class Position {
     }
 
     /**
-     * Sets the altitude of position above mean sea level.
+     * Sets the altitude of position above mean sea level. Defaults to zero.
      * 
      * @param altitude Altitude value to set, in meters.
      */
@@ -161,6 +164,8 @@ public class Position {
      * Set the hemisphere of latitude (North/South).
      * 
      * @param lathem The hemisphere to set
+     * @throws IllegalArgumentException If specified hemisphere is other than
+     *             NORTH or SOUTH.
      */
     public void setLatHemisphere(Direction lathem) {
         if (Direction.NORTH.equals(lathem) || Direction.SOUTH.equals(lathem)) {
@@ -175,6 +180,8 @@ public class Position {
      * Set the latitude degrees of Position
      * 
      * @param latitude the latitude to set
+     * @throws IllegalArgumentException If specified latitude value is out of
+     *             range 0..90 degrees.
      */
     public void setLatitude(double latitude) {
         if (latitude < 0 || latitude > 90) {
@@ -188,6 +195,8 @@ public class Position {
      * Set the longitude degrees of Position
      * 
      * @param longitude the longitude to set
+     * @throws IllegalArgumentException If specified longitude value is out of
+     *             range 0..180 degrees.
      */
     public void setLongitude(double longitude) {
         if (longitude < 0 || longitude > 180) {
@@ -201,6 +210,8 @@ public class Position {
      * Set the hemisphere of longitude (East/West).
      * 
      * @param lonhem The hemisphere to set
+     * @throws IllegalArgumentException If specified hemisphere is other than
+     *             EAST or WEST.
      */
     public void setLonHemisphere(Direction lonhem) {
         if (Direction.EAST.equals(lonhem) || Direction.WEST.equals(lonhem)) {

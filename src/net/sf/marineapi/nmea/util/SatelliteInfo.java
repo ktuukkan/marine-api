@@ -30,10 +30,10 @@ package net.sf.marineapi.nmea.util;
  */
 public class SatelliteInfo {
 
-    private final String id;
-    private final int elevation;
-    private final int azimuth;
-    private final int noise;
+    private String id;
+    private int elevation;
+    private int azimuth;
+    private int noise;
 
     /**
      * Creates a new instance of SatelliteInfo
@@ -84,6 +84,54 @@ public class SatelliteInfo {
      */
     public int getNoise() {
         return noise;
+    }
+
+    /**
+     * Get satellite azimuth, in degrees from true north (0..359&deg;).
+     * 
+     * @param azimuth the azimuth to set
+     * @throws IllegalArgumentException If value is out of range 0..360 deg.
+     */
+    public void setAzimuth(int azimuth) {
+        if (azimuth < 0 || azimuth > 360) {
+            throw new IllegalArgumentException("Value out of range 0..360 deg");
+        }
+        this.azimuth = azimuth;
+    }
+
+    /**
+     * Get satellite elevation, in degrees (max. 90&deg;).
+     * 
+     * @param elevation the elevation to set
+     * @throws IllegalArgumentException If value is out of range 0..90 deg.
+     */
+    public void setElevation(int elevation) {
+        if (elevation < 0 || elevation > 90) {
+            throw new IllegalArgumentException("Value out of range 0..90 deg");
+        }
+        this.elevation = elevation;
+    }
+
+    /**
+     * Get the ID of satellite vehicle, for example "05".
+     * 
+     * @param id the id to set
+     */
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    /**
+     * Get satellite the signal noise ratio, in dB (0-99 dB).
+     * 
+     * @param noise the noise to set
+     * @throws IllegalArgumentException If value is out of range 0..99 dB.
+     */
+    public void setNoise(int noise) {
+        if (noise < 0 || noise > 99) {
+            throw new IllegalArgumentException("Value out of range 0..99 dB");
+        }
+        this.noise = noise;
     }
 
 }

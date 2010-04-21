@@ -20,9 +20,12 @@
  */
 package net.sf.marineapi.nmea.parser;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import net.sf.marineapi.nmea.sentence.RTESentence;
-import net.sf.marineapi.nmea.sentence.Sentence;
 import net.sf.marineapi.nmea.sentence.SentenceId;
+import net.sf.marineapi.nmea.util.RouteType;
 
 /**
  * RTE sentence parser.
@@ -33,14 +36,11 @@ import net.sf.marineapi.nmea.sentence.SentenceId;
 class RTEParser extends SentenceParser implements RTESentence {
 
     // fields indices
-    private static final int NUMBER_OF_SENTENCES = 1;
-    private static final int SENTENCE_NUMBER = 2;
-    private static final int STATUS = 3;
-    private static final int ROUTE_ID = 4;
-    private static final int FIRST_WPT = 5;
-
-    // waypoint list
-    private String[] waypoints = null;
+    private static final int NUMBER_OF_SENTENCES = 0;
+    private static final int SENTENCE_NUMBER = 1;
+    private static final int STATUS = 2;
+    private static final int ROUTE_ID = 3;
+    private static final int FIRST_WPT = 4;
 
     /**
      * Creates a new instance of RTE parser.
@@ -88,10 +88,31 @@ class RTEParser extends SentenceParser implements RTESentence {
      * @see net.sf.marineapi.nmea.sentence.RTESentence#getWaypointIds()
      */
     public String[] getWaypointIds() {
-        if (waypoints == null) {
-            parseWaypoints();
+
+        List<String> temp = new ArrayList<String>();
+        for (int i = FIRST_WPT; i < getFieldCount(); i++) {
+            try {
+                temp.add(getStringValue(i));
+            } catch (DataNotAvailableException e) {
+                // nevermind empty fields
+            }
         }
-        return waypoints;
+
+        // int end = toString().indexOf(CHECKSUM_DELIMITER);
+        // String wp = toString().substring(0, end);
+        // if (wp == null) {
+        // throw new ParseException("Unable to parse waypoint list.");
+        // }
+        //
+        // String[] fields = wp.split(String.valueOf(Sentence.FIELD_DELIMITER));
+        // String[] waypoints = new String[(fields.length - FIRST_WPT)];
+        //
+        // int j = 0;
+        // for (int i = FIRST_WPT; i < fields.length; i++) {
+        // waypoints[j++] = fields[i];
+        // }
+
+        return temp.toArray(new String[temp.size()]);
     }
 
     /*
@@ -99,7 +120,7 @@ class RTEParser extends SentenceParser implements RTESentence {
      * @see net.sf.marineapi.nmea.sentence.RTESentence#isActiveRoute()
      */
     public boolean isActiveRoute() {
-        return getCharValue(STATUS) == ACTIVE_ROUTE;
+        return getCharValue(STATUS) == RouteType.ACTIVE.toChar();
     }
 
     /*
@@ -123,28 +144,62 @@ class RTEParser extends SentenceParser implements RTESentence {
      * @see net.sf.marineapi.nmea.sentence.RTESentence#isWorkingRoute()
      */
     public boolean isWorkingRoute() {
-        return getCharValue(STATUS) == WORKING_ROUTE;
+        return getCharValue(STATUS) == RouteType.WORKING.toChar();
     }
 
-    /**
-     * Parse waypoint IDs into String array.
+    /*
+     * (non-Javadoc)
+     * @see
+     * net.sf.marineapi.nmea.sentence.RTESentence#setRouteId(java.lang.String)
      */
-    private void parseWaypoints() {
+    public void setRouteId(String id) {
+        setStringValue(ROUTE_ID, id);
+    }
 
-        int end = toString().indexOf(CHECKSUM_DELIMITER);
-        String wp = toString().substring(0, end);
+    /*
+     * (non-Javadoc)
+     * @see
+     * net.sf.marineapi.nmea.sentence.RTESentence#setRouteType(net.sf.marineapi
+     * .nmea.util.RouteType)
+     */
+    public void setRouteType(RouteType type) {
+        setCharValue(STATUS, type.toChar());
+    }
 
-        if (wp == null) {
-            waypoints = null;
-            throw new ParseException("Unable to parse waypoint list.");
+    /*
+     * (non-Javadoc)
+     * @see net.sf.marineapi.nmea.sentence.RTESentence#setSentenceCount(int)
+     */
+    public void setSentenceCount(int count) {
+        if (count < 0) {
+            throw new IllegalArgumentException("Count cannot be negative");
         }
+        setIntValue(NUMBER_OF_SENTENCES, count);
+    }
 
-        String[] fields = wp.split(String.valueOf(Sentence.FIELD_DELIMITER));
-        waypoints = new String[(fields.length - FIRST_WPT)];
+    /*
+     * (non-Javadoc)
+     * @see net.sf.marineapi.nmea.sentence.RTESentence#setSentenceIndex(int)
+     */
+    public void setSentenceIndex(int index) {
+        if (index < 0) {
+            throw new IllegalArgumentException("Index cannot be negative");
+        }
+        setIntValue(SENTENCE_NUMBER, index);
+    }
 
-        int j = 0;
-        for (int i = FIRST_WPT; i < fields.length; i++) {
-            waypoints[j++] = fields[i];
+    /*
+     * (non-Javadoc)
+     * @see
+     * net.sf.marineapi.nmea.sentence.RTESentence#setWaypointIds(java.lang.String
+     * [])
+     */
+    public void setWaypointIds(String[] ids) {
+        // number of ID fields
+        int fields = getFieldCount() - 5;
+        for (int i = 0; i < ids.length; i++) {
+            setStringValue(FIRST_WPT + i, ids[i]);
         }
     }
+
 }

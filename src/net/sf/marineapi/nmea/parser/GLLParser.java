@@ -35,12 +35,12 @@ import net.sf.marineapi.nmea.util.Position;
 class GLLParser extends PositionParser implements GLLSentence {
 
     // field indices
-    private final static int LATITUDE = 1;
-    private final static int LAT_HEMISPHERE = 2;
-    private final static int LONGITUDE = 3;
-    private final static int LON_HEMISPHERE = 4;
-    private final static int UTC_TIME = 5;
-    private final static int DATA_STATUS = 6;
+    private final static int LATITUDE = 0;
+    private final static int LAT_HEMISPHERE = 1;
+    private final static int LONGITUDE = 2;
+    private final static int LON_HEMISPHERE = 3;
+    private final static int UTC_TIME = 4;
+    private final static int DATA_STATUS = 5;
 
     /**
      * Constructor.

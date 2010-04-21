@@ -33,14 +33,14 @@ import net.sf.marineapi.nmea.sentence.SentenceId;
 class BODParser extends SentenceParser implements BODSentence {
 
     // field indices
-    private static final int BEARING_TRUE = 1;
+    private static final int BEARING_TRUE = 0;
     @SuppressWarnings("unused")
-    private static final int TRUE_INDICATOR = 2;
-    private static final int BEARING_MAGN = 3;
+    private static final int TRUE_INDICATOR = 1;
+    private static final int BEARING_MAGN = 2;
     @SuppressWarnings("unused")
-    private static final int MAGN_INDICATOR = 4;
-    private static final int DESTINATION = 5;
-    private static final int ORIGIN = 6;
+    private static final int MAGN_INDICATOR = 3;
+    private static final int DESTINATION = 4;
+    private static final int ORIGIN = 5;
 
     /**
      * Creates a new instance of BOD parser.

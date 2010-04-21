@@ -36,20 +36,20 @@ import net.sf.marineapi.nmea.util.Units;
 class GGAParser extends PositionParser implements GGASentence {
 
     // GGA field indices
-    private final static int UTC_TIME = 1;
-    private final static int LATITUDE = 2;
-    private final static int LAT_HEMISPHERE = 3;
-    private final static int LONGITUDE = 4;
-    private final static int LON_HEMISPHERE = 5;
-    private final static int FIX_QUALITY = 6;
-    private final static int SATELLITES_IN_USE = 7;
-    private final static int HORIZONTAL_DILUTION = 8;
-    private final static int ALTITUDE = 9;
-    private final static int ALTITUDE_UNITS = 10;
-    private final static int GEOIDAL_HEIGHT = 11;
-    private final static int HEIGHT_UNITS = 12;
-    private final static int DGPS_AGE = 13;
-    private final static int DGPS_STATION_ID = 14;
+    private final static int UTC_TIME = 0;
+    private final static int LATITUDE = 1;
+    private final static int LAT_HEMISPHERE = 2;
+    private final static int LONGITUDE = 3;
+    private final static int LON_HEMISPHERE = 4;
+    private final static int FIX_QUALITY = 5;
+    private final static int SATELLITES_IN_USE = 6;
+    private final static int HORIZONTAL_DILUTION = 7;
+    private final static int ALTITUDE = 8;
+    private final static int ALTITUDE_UNITS = 9;
+    private final static int GEOIDAL_HEIGHT = 10;
+    private final static int HEIGHT_UNITS = 11;
+    private final static int DGPS_AGE = 12;
+    private final static int DGPS_STATION_ID = 13;
 
     /**
      * Creates a new instance of GGA parser.

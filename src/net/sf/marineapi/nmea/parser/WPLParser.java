@@ -34,11 +34,11 @@ import net.sf.marineapi.nmea.util.Waypoint;
 class WPLParser extends PositionParser implements WPLSentence {
 
     // field ids
-    private static final int LATITUDE = 1;
-    private static final int LAT_HEMISPHERE = 2;
-    private static final int LONGITUDE = 3;
-    private static final int LON_HEMISPHERE = 4;
-    private static final int WAYPOINT_ID = 5;
+    private static final int LATITUDE = 0;
+    private static final int LAT_HEMISPHERE = 1;
+    private static final int LONGITUDE = 2;
+    private static final int LON_HEMISPHERE = 3;
+    private static final int WAYPOINT_ID = 4;
 
     /**
      * Creates a new instance of WPLParser.

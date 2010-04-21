@@ -35,19 +35,19 @@ import net.sf.marineapi.nmea.util.Waypoint;
 class RMBParser extends PositionParser implements RMBSentence {
 
     // field indexes
-    private static final int STATUS = 1;
-    private static final int CROSS_TRACK_ERROR = 2;
-    private static final int STEER_TO = 3;
-    private static final int ORIGIN_WPT = 4;
-    private static final int DEST_WPT = 5;
-    private static final int DEST_LAT = 6;
-    private static final int DEST_LAT_HEM = 7;
-    private static final int DEST_LON = 8;
-    private static final int DEST_LON_HEM = 9;
-    private static final int RANGE_TO_DEST = 10;
-    private static final int BEARING_TO_DEST = 11;
-    private static final int VELOCITY = 12;
-    private static final int ARRIVAL_STATUS = 13;
+    private static final int STATUS = 0;
+    private static final int CROSS_TRACK_ERROR = 1;
+    private static final int STEER_TO = 2;
+    private static final int ORIGIN_WPT = 3;
+    private static final int DEST_WPT = 4;
+    private static final int DEST_LAT = 5;
+    private static final int DEST_LAT_HEM = 6;
+    private static final int DEST_LON = 7;
+    private static final int DEST_LON_HEM = 8;
+    private static final int RANGE_TO_DEST = 9;
+    private static final int BEARING_TO_DEST = 10;
+    private static final int VELOCITY = 11;
+    private static final int ARRIVAL_STATUS = 12;
 
     /**
      * Constructor.

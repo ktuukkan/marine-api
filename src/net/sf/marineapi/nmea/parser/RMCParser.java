@@ -38,18 +38,18 @@ import net.sf.marineapi.nmea.util.Position;
  */
 class RMCParser extends PositionParser implements RMCSentence {
 
-    private static final int UTC_TIME = 1;
-    private static final int DATA_STATUS = 2;
-    private static final int LATITUDE = 3;
-    private static final int LAT_HEMISPHERE = 4;
-    private static final int LONGITUDE = 5;
-    private static final int LON_HEMISPHERE = 6;
-    private static final int SPEED = 7;
-    private static final int COURSE = 8;
-    private static final int UTC_DATE = 9;
-    private static final int MAG_VARIATION = 10;
-    private static final int VAR_HEMISPHERE = 11;
-    private static final int MODE = 12;
+    private static final int UTC_TIME = 0;
+    private static final int DATA_STATUS = 1;
+    private static final int LATITUDE = 2;
+    private static final int LAT_HEMISPHERE = 3;
+    private static final int LONGITUDE = 4;
+    private static final int LON_HEMISPHERE = 5;
+    private static final int SPEED = 6;
+    private static final int COURSE = 7;
+    private static final int UTC_DATE = 8;
+    private static final int MAG_VARIATION = 9;
+    private static final int VAR_HEMISPHERE = 10;
+    private static final int MODE = 11;
 
     /**
      * Creates a new instance of RMCParser.

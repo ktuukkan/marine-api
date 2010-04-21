@@ -36,11 +36,11 @@ import net.sf.marineapi.nmea.util.SatelliteInfo;
 class GSVParser extends SentenceParser implements GSVSentence {
 
     // field indices
-    private static final int NUMBER_OF_SENTENCES = 1;
-    private static final int SENTENCE_NUMBER = 2;
-    private static final int SATELLITES_IN_VIEW = 3;
+    private static final int NUMBER_OF_SENTENCES = 0;
+    private static final int SENTENCE_NUMBER = 1;
+    private static final int SATELLITES_IN_VIEW = 2;
     // satellite id fields
-    private static final int[] ID_FIELDS = { 4, 8, 12, 16 };
+    private static final int[] ID_FIELDS = { 3, 7, 11, 15 };
     // satellite data fields, relative to each id field
     private static final int ELEVATION = 1;
     private static final int AZIMUTH = 2;

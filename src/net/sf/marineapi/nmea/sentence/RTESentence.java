@@ -21,6 +21,7 @@
 package net.sf.marineapi.nmea.sentence;
 
 import net.sf.marineapi.nmea.parser.DataNotAvailableException;
+import net.sf.marineapi.nmea.util.RouteType;
 
 /**
  * Interface for RTE sentence type. Route data and list of waypoint IDs.
@@ -34,24 +35,20 @@ import net.sf.marineapi.nmea.parser.DataNotAvailableException;
 public interface RTESentence extends Sentence {
 
     /**
-     * Active route indicator: complete, all waypoints in route order.
-     */
-    public static final char ACTIVE_ROUTE = 'c';
-
-    /**
-     * Working route indicator: the waypoint you just left, the waypoint you're
-     * heading to and then all the rest.
-     */
-    public static final char WORKING_ROUTE = 'w';
-
-    /**
      * Get the number or name of the route.
      * 
-     * @return String
+     * @return Route ID or name as String
      * @throws DataNotAvailableException If the data is not available.
      * @throws ParseException If the field contains unexpected or illegal value.
      */
     String getRouteId();
+
+    /**
+     * Set the route name or number.
+     * 
+     * @param id Route ID or name as String
+     */
+    void setRouteId(String id);
 
     /**
      * Get the number of sentences in RTE sequence.
@@ -64,6 +61,14 @@ public interface RTESentence extends Sentence {
     int getSentenceCount();
 
     /**
+     * Set the number of sentences in RTE sequence.
+     * 
+     * @param count Sentence count in sequence
+     * @throws IllegalArgumentException If the specified count is negative.
+     */
+    void setSentenceCount(int count);
+
+    /**
      * Get the index of sentence in RTE sequence.
      * 
      * @return integer
@@ -72,6 +77,14 @@ public interface RTESentence extends Sentence {
      * @throws ParseException If the field contains unexpected or illegal value.
      */
     int getSentenceIndex();
+
+    /**
+     * Set the index of sentence in RTE sequence.
+     * 
+     * @param index Sentence index in sequence
+     * @throws IllegalArgumentException If specified index is negative.
+     */
+    void setSentenceIndex(int index);
 
     /**
      * Get the number of waypoints IDs in this sentence.
@@ -83,13 +96,27 @@ public interface RTESentence extends Sentence {
     int getWaypointCount();
 
     /**
-     * Get the list of waypoints of route.
+     * Get the list of route waypoints.
      * 
-     * @return String array containing waypoint IDs
+     * @return Waypoint IDs as String array
      * @throws DataNotAvailableException If the data is not available.
      * @throws ParseException If the field contains unexpected or illegal value.
      */
     String[] getWaypointIds();
+
+    /**
+     * Set the list of route waypoints.
+     * 
+     * @param ids String array of waypoint IDs
+     */
+    void setWaypointIds(String[] ids);
+
+    /**
+     * Set the type of route.
+     * 
+     * @param type RouteType to set
+     */
+    void setRouteType(RouteType type);
 
     /**
      * Tells if the sentence holds a current active route data.
