@@ -44,13 +44,6 @@ public interface RTESentence extends Sentence {
     String getRouteId();
 
     /**
-     * Set the route name or number.
-     * 
-     * @param id Route ID or name as String
-     */
-    void setRouteId(String id);
-
-    /**
      * Get the number of sentences in RTE sequence.
      * 
      * @return integer
@@ -61,14 +54,6 @@ public interface RTESentence extends Sentence {
     int getSentenceCount();
 
     /**
-     * Set the number of sentences in RTE sequence.
-     * 
-     * @param count Sentence count in sequence
-     * @throws IllegalArgumentException If the specified count is negative.
-     */
-    void setSentenceCount(int count);
-
-    /**
      * Get the index of sentence in RTE sequence.
      * 
      * @return integer
@@ -77,14 +62,6 @@ public interface RTESentence extends Sentence {
      * @throws ParseException If the field contains unexpected or illegal value.
      */
     int getSentenceIndex();
-
-    /**
-     * Set the index of sentence in RTE sequence.
-     * 
-     * @param index Sentence index in sequence
-     * @throws IllegalArgumentException If specified index is negative.
-     */
-    void setSentenceIndex(int index);
 
     /**
      * Get the number of waypoints IDs in this sentence.
@@ -103,20 +80,6 @@ public interface RTESentence extends Sentence {
      * @throws ParseException If the field contains unexpected or illegal value.
      */
     String[] getWaypointIds();
-
-    /**
-     * Set the list of route waypoints.
-     * 
-     * @param ids String array of waypoint IDs
-     */
-    void setWaypointIds(String[] ids);
-
-    /**
-     * Set the type of route.
-     * 
-     * @param type RouteType to set
-     */
-    void setRouteType(RouteType type);
 
     /**
      * Tells if the sentence holds a current active route data.
@@ -157,5 +120,42 @@ public interface RTESentence extends Sentence {
      * @throws ParseException If the field contains unexpected or illegal value.
      */
     boolean isWorkingRoute();
+
+    /**
+     * Set the route name or number.
+     * 
+     * @param id Route ID or name as String
+     */
+    void setRouteId(String id);
+
+    /**
+     * Set the type of route.
+     * 
+     * @param type RouteType to set
+     */
+    void setRouteType(RouteType type);
+
+    /**
+     * Set the number of sentences in RTE sequence.
+     * 
+     * @param count Sentence count in sequence
+     * @throws IllegalArgumentException If the specified count is negative.
+     */
+    void setSentenceCount(int count);
+
+    /**
+     * Set the index of sentence in RTE sequence.
+     * 
+     * @param index Sentence index in sequence
+     * @throws IllegalArgumentException If specified index is negative.
+     */
+    void setSentenceIndex(int index);
+
+    /**
+     * Set the list of route waypoints.
+     * 
+     * @param ids String array of waypoint IDs
+     */
+    void setWaypointIds(String[] ids);
 
 }

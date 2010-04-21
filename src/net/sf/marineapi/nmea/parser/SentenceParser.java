@@ -152,6 +152,18 @@ public class SentenceParser implements Sentence {
         }
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (o == this) {
+            return true;
+        }
+        if (o instanceof SentenceParser) {
+            Sentence s = (Sentence) o;
+            return s.toString().equals(toString());
+        }
+        return false;
+    }
+
     /*
      * (non-Javadoc)
      * @see net.sf.marineapi.nmea.sentence.Sentence#getSentenceId()
@@ -166,6 +178,11 @@ public class SentenceParser implements Sentence {
      */
     public TalkerId getTalkerId() {
         return talkerId;
+    }
+
+    @Override
+    public int hashCode() {
+        return toString().hashCode();
     }
 
     /*
@@ -210,23 +227,6 @@ public class SentenceParser implements Sentence {
         }
 
         return sentence;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (o == this) {
-            return true;
-        }
-        if (o instanceof SentenceParser) {
-            Sentence s = (Sentence) o;
-            return s.toString().equals(toString());
-        }
-        return false;
-    }
-
-    @Override
-    public int hashCode() {
-        return toString().hashCode();
     }
 
     /**
@@ -366,6 +366,36 @@ public class SentenceParser implements Sentence {
             throw new IllegalArgumentException("Index must be > 1");
         }
         fields.set(index, value == null ? "" : value);
+    }
+
+    /**
+     * Replace multiple field values with given String array, starting at the
+     * specified index. Any existing field values after specified index are
+     * disposed, and replaced with the new values. If parameter
+     * <code>first</code> is zero, all fields are replaced. As result, the total
+     * number of fields may increase or decrease, depending on the length of
+     * specified array.
+     * 
+     * @param first Index of first field to set
+     * @param newFields Array of Strings to set
+     */
+    protected void setStringValues(int first, String[] newFields) {
+
+        List<String> temp = new ArrayList<String>();
+        for (int i = 0; i < getFieldCount(); i++) {
+            if (i < first) {
+                temp.add(fields.get(i));
+            } else {
+                break;
+            }
+        }
+
+        for (String field : newFields) {
+            temp.add(field == null ? "" : field);
+        }
+
+        fields.clear();
+        fields = temp;
     }
 
     /**
