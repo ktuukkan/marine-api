@@ -115,4 +115,22 @@ public class RTETest {
         assertEquals("0", rte.getRouteId());
     }
 
+    /**
+     * Test method for
+     * {@link net.sf.marineapi.nmea.parser.RTEParser#setWaypointIds(String[])}.
+     */
+    @Test
+    public void testSetWaypointIds() {
+
+        String[] ids = { "ONE", "TWO", "THREE", "FOUR", "FIVE" };
+        String expected = "$GPRTE,1,1,c,0,ONE,TWO,THREE,FOUR,FIVE*7F";
+
+        assertEquals(3, rte.getWaypointCount());
+
+        rte.setWaypointIds(ids);
+
+        assertEquals(5, rte.getWaypointCount());
+        assertEquals(expected, rte.toString());
+    }
+
 }

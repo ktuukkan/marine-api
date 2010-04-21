@@ -90,6 +90,7 @@ class RTEParser extends SentenceParser implements RTESentence {
     public String[] getWaypointIds() {
 
         List<String> temp = new ArrayList<String>();
+
         for (int i = FIRST_WPT; i < getFieldCount(); i++) {
             try {
                 temp.add(getStringValue(i));
@@ -97,20 +98,6 @@ class RTEParser extends SentenceParser implements RTESentence {
                 // nevermind empty fields
             }
         }
-
-        // int end = toString().indexOf(CHECKSUM_DELIMITER);
-        // String wp = toString().substring(0, end);
-        // if (wp == null) {
-        // throw new ParseException("Unable to parse waypoint list.");
-        // }
-        //
-        // String[] fields = wp.split(String.valueOf(Sentence.FIELD_DELIMITER));
-        // String[] waypoints = new String[(fields.length - FIRST_WPT)];
-        //
-        // int j = 0;
-        // for (int i = FIRST_WPT; i < fields.length; i++) {
-        // waypoints[j++] = fields[i];
-        // }
 
         return temp.toArray(new String[temp.size()]);
     }
@@ -195,11 +182,7 @@ class RTEParser extends SentenceParser implements RTESentence {
      * [])
      */
     public void setWaypointIds(String[] ids) {
-        // number of ID fields
-        int fields = getFieldCount() - 5;
-        for (int i = 0; i < ids.length; i++) {
-            setStringValue(FIRST_WPT + i, ids[i]);
-        }
+        setStringValues(FIRST_WPT, ids);
     }
 
 }
