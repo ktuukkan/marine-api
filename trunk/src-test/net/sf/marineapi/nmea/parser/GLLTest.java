@@ -48,7 +48,7 @@ public class GLLTest {
 
     /**
      * Test method for
-     * {@link net.sf.marineapi.nmea.parser.GLLParser#setDataStatus()}.
+     * {@link net.sf.marineapi.nmea.parser.GLLParser#setDataStatus(DataStatus)}.
      */
     @Test
     public void testSetDataStatus() {
@@ -95,7 +95,7 @@ public class GLLTest {
 
     /**
      * Test method for
-     * {@link net.sf.marineapi.nmea.parser.GLLParser#setPosition()}.
+     * {@link net.sf.marineapi.nmea.parser.GLLParser#setPosition(Position)}.
      */
     @Test
     public void testSetPosition() {

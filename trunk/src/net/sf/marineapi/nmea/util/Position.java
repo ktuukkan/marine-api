@@ -246,8 +246,10 @@ public class Position {
      */
     private double haversine(double lat1, double lon1, double lat2, double lon2) {
 
-        // average earth radius for calculating distance between positions
-        final double earthRadius = 6371.009;
+		// Meridional Earth radius
+		final double earthRadius = 6367.4491;
+		// a bit tweaked radius seems to produce more accurate results..?
+		// final double earthRadius = 6366.70702;
 
         double dLat = Math.toRadians(lat2 - lat1);
         double dLon = Math.toRadians(lon2 - lon1);
@@ -259,9 +261,9 @@ public class Position {
 
         double c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
 
-        double result = Math.round(earthRadius * c * 1000 * 1000);
+        double result = earthRadius * c * 1000;
 
-        return result / 1000;
+        return result;
     }
 
     /**
