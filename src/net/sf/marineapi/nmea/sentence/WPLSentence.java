@@ -46,4 +46,11 @@ public interface WPLSentence extends Sentence {
      */
     Waypoint getWaypoint();
 
+    /**
+     * Set the destination waypoint.
+     * 
+     * @param wp Waypoint to set
+     */
+    void setWaypoint(Waypoint wp);
+
 }

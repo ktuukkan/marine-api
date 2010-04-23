@@ -96,4 +96,60 @@ class VTGParser extends SentenceParser implements VTGSentence {
     public double getTrueCourse() {
         return getDoubleValue(TRUE_COURSE);
     }
+
+    /*
+     * (non-Javadoc)
+     * @see net.sf.marineapi.nmea.sentence.VTGSentence#setMagneticCourse(double)
+     */
+    public void setMagneticCourse(double mcog) {
+        if (mcog < 0 || mcog > 360) {
+            throw new IllegalArgumentException(
+                    "Course out of range 0..360 degrees");
+        }
+        setDoubleValue(MAGNETIC_COURSE, mcog);
+    }
+
+    /*
+     * (non-Javadoc)
+     * @see
+     * net.sf.marineapi.nmea.sentence.VTGSentence#setMode(net.sf.marineapi.nmea
+     * .util.GpsMode)
+     */
+    public void setMode(GpsMode mode) {
+        setCharValue(MODE, mode.toChar());
+    }
+
+    /*
+     * (non-Javadoc)
+     * @see net.sf.marineapi.nmea.sentence.VTGSentence#setSpeedKmh(double)
+     */
+    public void setSpeedKmh(double kmh) {
+        if (kmh < 0) {
+            throw new IllegalArgumentException("Speed cannot be negative");
+        }
+        setDoubleValue(SPEED_KMPH, kmh);
+    }
+
+    /*
+     * (non-Javadoc)
+     * @see net.sf.marineapi.nmea.sentence.VTGSentence#setSpeedKnots(double)
+     */
+    public void setSpeedKnots(double knots) {
+        if (knots < 0) {
+            throw new IllegalArgumentException("Speed cannot be negative");
+        }
+        setDoubleValue(SPEED_KNOTS, knots);
+    }
+
+    /*
+     * (non-Javadoc)
+     * @see net.sf.marineapi.nmea.sentence.VTGSentence#setTrueCourse(double)
+     */
+    public void setTrueCourse(double tcog) {
+        if (tcog < 0 || tcog > 360) {
+            throw new IllegalArgumentException(
+                    "Course out of range 0..360 degrees");
+        }
+        setDoubleValue(TRUE_COURSE, tcog);
+    }
 }
