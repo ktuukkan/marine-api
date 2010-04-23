@@ -55,7 +55,7 @@ public interface VTGSentence extends Sentence {
     double getMagneticCourse();
 
     /**
-     * Get the receiver operating mode. The field may not be available,
+     * Get the GPS receiver operating mode. The field may not be available,
      * depending on the NMEA version.
      * 
      * @return GpsMode or <code>null</code> if mode is not available
@@ -65,7 +65,7 @@ public interface VTGSentence extends Sentence {
     GpsMode getMode();
 
     /**
-     * Get speed over ground in kilometers per hour.
+     * Get current speed over ground, in kilometers per hour.
      * 
      * @return Speed in km/h
      * @throws DataNotAvailableException If the data is not available.
@@ -74,9 +74,9 @@ public interface VTGSentence extends Sentence {
     double getSpeedKmh();
 
     /**
-     * Get speed over ground in knots (nautical miles per hour).
+     * Get speed over ground in knots.
      * 
-     * @return Speed in knots
+     * @return Speed in knots (nautical miles per hour)
      * @throws DataNotAvailableException If the data is not available.
      * @throws ParseException If the field contains unexpected or illegal value.
      */
@@ -85,10 +85,47 @@ public interface VTGSentence extends Sentence {
     /**
      * Get the true course over ground.
      * 
-     * @return True course
+     * @return True course, in degrees
      * @throws DataNotAvailableException If the data is not available.
      * @throws ParseException If the field contains unexpected or illegal value.
      */
     double getTrueCourse();
+
+    /**
+     * Set the magnetic course over ground.
+     * 
+     * @param mcog Course in degrees.
+     */
+    void setMagneticCourse(double mcog);
+
+    /**
+     * Set the GPS receiver operating mode.
+     * 
+     * @param mode Mode to set
+     */
+    void setMode(GpsMode mode);
+
+    /**
+     * Set the current speed over ground.
+     * 
+     * @param sog Speed in km/h.
+     */
+    void setSpeedKmh(double kmh);
+
+    /**
+     * Set the speed over ground, in knots.
+     * 
+     * @param knots Speed in knots (nautical miles per hour)
+     */
+    void setSpeedKnots(double knots);
+
+    /**
+     * Set the true course over ground.
+     * 
+     * @param tcog True course, in degrees
+     * @throws IllegalArgumentException If specified course is out of range
+     *             0..360 degrees.
+     */
+    void setTrueCourse(double tcog);
 
 }

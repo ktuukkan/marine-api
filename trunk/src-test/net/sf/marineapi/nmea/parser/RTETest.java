@@ -6,6 +6,7 @@ import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 import net.sf.marineapi.nmea.sentence.RTESentence;
+import net.sf.marineapi.nmea.util.RouteType;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -50,7 +51,7 @@ public class RTETest {
      * {@link net.sf.marineapi.nmea.parser.RTEParser#getWaypointCount()}.
      */
     @Test
-    public void testGetNumberOfWaypoints() {
+    public void testGetWaypointCount() {
         assertEquals(3, rte.getWaypointCount());
     }
 
@@ -61,6 +62,21 @@ public class RTETest {
     @Test
     public void testIsActiveRoute() {
         assertTrue(rte.isActiveRoute());
+    }
+
+    /**
+     * Test method for
+     * {@link net.sf.marineapi.nmea.parser.RTEParser#isActiveRoute()}.
+     */
+    @Test
+    public void testSetRouteType() {
+        rte.setRouteType(RouteType.WORKING);
+        assertTrue(rte.isWorkingRoute());
+        assertFalse(rte.isActiveRoute());
+
+        rte.setRouteType(RouteType.ACTIVE);
+        assertTrue(rte.isActiveRoute());
+        assertFalse(rte.isWorkingRoute());
     }
 
     /**
@@ -83,11 +99,49 @@ public class RTETest {
 
     /**
      * Test method for
+     * {@link net.sf.marineapi.nmea.parser.RTEParser#setSentenceCount(int)}.
+     */
+    @Test
+    public void testSetSentenceCount() {
+        rte.setSentenceCount(3);
+        assertEquals(3, rte.getSentenceCount());
+
+        try {
+            rte.setSentenceCount(-1);
+            fail("Did not throw exception");
+        } catch (IllegalArgumentException e) {
+            assertTrue(e.getMessage().contains("cannot be negative"));
+        } catch (Exception e) {
+            fail(e.getMessage());
+        }
+    }
+
+    /**
+     * Test method for
      * {@link net.sf.marineapi.nmea.parser.RTEParser#getSentenceIndex()}.
      */
     @Test
     public void testGetSentenceIndex() {
         assertEquals(1, rte.getSentenceIndex());
+    }
+
+    /**
+     * Test method for
+     * {@link net.sf.marineapi.nmea.parser.RTEParser#setSentenceIndex(int)}.
+     */
+    @Test
+    public void testSetSentenceIndex() {
+        rte.setSentenceIndex(2);
+        assertEquals(2, rte.getSentenceIndex());
+
+        try {
+            rte.setSentenceIndex(-1);
+            fail("Did not throw exception");
+        } catch (IllegalArgumentException e) {
+            assertTrue(e.getMessage().contains("cannot be negative"));
+        } catch (Exception e) {
+            fail(e.getMessage());
+        }
     }
 
     /**
@@ -113,6 +167,16 @@ public class RTETest {
     @Test
     public void testGetRouteId() {
         assertEquals("0", rte.getRouteId());
+    }
+
+    /**
+     * Test method for
+     * {@link net.sf.marineapi.nmea.parser.RTEParser#getRouteId()}.
+     */
+    @Test
+    public void testSetRouteId() {
+        rte.setRouteId("ID");
+        assertEquals("ID", rte.getRouteId());
     }
 
     /**

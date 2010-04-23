@@ -62,4 +62,18 @@ class WPLParser extends PositionParser implements WPLSentence {
         Direction lonh = parseHemisphereLon(LON_HEMISPHERE);
         return new Waypoint(id, lat, lath, lon, lonh);
     }
+
+    /*
+     * (non-Javadoc)
+     * @see
+     * net.sf.marineapi.nmea.sentence.WPLSentence#setWaypoint(net.sf.marineapi
+     * .nmea.util.Waypoint)
+     */
+    public void setWaypoint(Waypoint wp) {
+        setStringValue(WAYPOINT_ID, wp.getId());
+        setLatitude(LATITUDE, wp.getLatitude());
+        setLongitude(LONGITUDE, wp.getLongitude());
+        setLatHemisphere(LAT_HEMISPHERE, wp.getLatHemisphere());
+        setLonHemisphere(LON_HEMISPHERE, wp.getLonHemisphere());
+    }
 }
