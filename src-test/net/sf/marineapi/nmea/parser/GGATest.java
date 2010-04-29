@@ -202,7 +202,7 @@ public class GGATest {
         Position p = new Position(lat, Direction.NORTH, lon, Direction.EAST);
         gga.setPosition(p);
 
-        String str = gga.toString();
+        final String str = gga.toString();
         assertTrue(str.contains(",6101.111,N,"));
         assertTrue(str.contains(",02707.777,E,"));
 
