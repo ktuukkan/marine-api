@@ -88,7 +88,7 @@ public class Position {
      * >codecodex.com</a>.
      * 
      * @param p Position to which the distance is calculated.
-     * @return Distance to <code>p</code>, in meters.
+     * @return Distance to <code>p</code> in meters.
      */
     public double distanceTo(Position p) {
         return haversine(getLatitude(), getLongitude(), p.getLatitude(), p
@@ -247,9 +247,9 @@ public class Position {
     private double haversine(double lat1, double lon1, double lat2, double lon2) {
 
 		// Meridional Earth radius
-		final double earthRadius = 6367.4491;
+		// final double earthRadius = 6367.4491;
 		// a bit tweaked radius seems to produce more accurate results..?
-		// final double earthRadius = 6366.70702;
+		final double earthRadius = 6366.70702;
 
         double dLat = Math.toRadians(lat2 - lat1);
         double dLon = Math.toRadians(lon2 - lon1);
@@ -267,7 +267,7 @@ public class Position {
     }
 
     /**
-     * Vincenty formula implementation based on example at
+     * Vincenty formulae implementation based on example at
      * http://www.movable-type.co.uk/scripts/latlong-vincenty.html
      * 
      * @param lat1 Origin latitude

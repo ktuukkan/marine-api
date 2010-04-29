@@ -36,13 +36,26 @@ public class PositionTest {
 		assertEquals(60.0, instance.getLatitude(), 0.0000001);
 		instance.setLatitude(65.5555);
 		assertEquals(65.5555, instance.getLatitude(), 0.0000001);
+	}
+
+	/**
+	 * Test for setLatitude()
+	 */
+	@Test
+	public void testSetLatitudeWithNegativeValue() {
 		try {
 			instance.setLatitude(-0.0001);
 			fail("Did not throw exception");
 		} catch (IllegalArgumentException e) {
 			// pass
 		}
+	}
 
+	/**
+	 * Test for setLatitude()
+	 */
+	@Test
+	public void testSetLatitudeWithValueGreaterThanAllowed() {
 		try {
 			instance.setLatitude(90.0001);
 			fail("Did not throw exception");
@@ -64,18 +77,29 @@ public class PositionTest {
 	 */
 	@Test
 	public void testSetLongitude() {
-
 		assertEquals(25.0, instance.getLongitude(), 0.0000001);
-		instance.setLongitude(0.0);
-		assertEquals(0.0, instance.getLongitude(), 0.0000001);
+		instance.setLongitude(12.34);
+		assertEquals(12.34, instance.getLongitude(), 0.0000001);
+	}
 
+	/**
+	 * Test for setLongitude()
+	 */
+	@Test
+	public void testSetLongitudeWithNegativeValue() {
 		try {
 			instance.setLongitude(-0.0001);
 			fail("Did not throw exception");
 		} catch (IllegalArgumentException e) {
 			// pass
 		}
+	}
 
+	/**
+	 * Test for setLongitude()
+	 */
+	@Test
+	public void testSetLongitudeWithValueGreaterThanAllowed() {
 		try {
 			instance.setLongitude(180.0001);
 			fail("Did not throw exception");
@@ -99,7 +123,15 @@ public class PositionTest {
 	public void testSetLatHemisphere() {
 		instance.setLatHemisphere(Direction.SOUTH);
 		assertEquals(Direction.SOUTH, instance.getLatHemisphere());
+		instance.setLatHemisphere(Direction.NORTH);
+		assertEquals(Direction.NORTH, instance.getLatHemisphere());
+	}
 
+	/**
+	 * Test for setLatHemisphere()
+	 */
+	@Test
+	public void testSetLatHemisphereEast() {
 		try {
 			instance.setLatHemisphere(Direction.EAST);
 			fail("Did not throw IllegalArgumentExcetpion");
@@ -108,7 +140,13 @@ public class PositionTest {
 		} catch (Exception e) {
 			fail(e.getMessage());
 		}
+	}
 
+	/**
+	 * Test for setLatHemisphere()
+	 */
+	@Test
+	public void testSetLatHemisphereWest() {
 		try {
 			instance.setLatHemisphere(Direction.WEST);
 			fail("Did not throw IllegalArgumentExcetpion");
@@ -134,7 +172,15 @@ public class PositionTest {
 	public void testSetLongitudeHemisphere() {
 		instance.setLonHemisphere(Direction.WEST);
 		assertEquals(Direction.WEST, instance.getLonHemisphere());
+		instance.setLonHemisphere(Direction.EAST);
+		assertEquals(Direction.EAST, instance.getLonHemisphere());
+	}
 
+	/**
+	 * Test for setLonHemisphere()
+	 */
+	@Test
+	public void testSetLongitudeHemisphereNorth() {
 		try {
 			instance.setLonHemisphere(Direction.NORTH);
 			fail("Did not throw IllegalArgumentExcetpion");
@@ -143,7 +189,13 @@ public class PositionTest {
 		} catch (Exception e) {
 			fail(e.getMessage());
 		}
+	}
 
+	/**
+	 * Test for setLonHemisphere()
+	 */
+	@Test
+	public void testSetLongitudeHemisphereSouth() {
 		try {
 			instance.setLonHemisphere(Direction.SOUTH);
 			fail("Did not throw IllegalArgumentExcetpion");
@@ -184,8 +236,9 @@ public class PositionTest {
 
 			// By definition, one degree equals 60 NM
 			double expected = (60 * n * 1852.0);
-			
-			// System.out.println(n + ": exp=" + expected + "\t dist=" + distance);
+
+			// System.out.println(n + ": exp=" + expected + "\t dist=" +
+			// distance);
 			assertEquals(expected, distance, 1.0);
 		}
 	}
@@ -195,22 +248,12 @@ public class PositionTest {
 	 */
 	@Test
 	public void testToWaypoint() {
-
-		final String id = "ID";
 		final String name = "TEST";
-		final String desc = "Description text";
 		final Waypoint wp = instance.toWaypoint(name);
-
 		assertEquals(name, wp.getId());
-		wp.setId(id);
-		assertEquals(id, wp.getId());
-
-		assertEquals("", wp.getDescription());
-		wp.setDescription(desc);
-		assertEquals(desc, wp.getDescription());
-
-		assertTrue(instance.getLatitude() == wp.getLatitude());
-		assertTrue(instance.getLongitude() == wp.getLongitude());
+		assertEquals("", wp.getDescription());		
+		assertEquals(instance.getLatitude(), wp.getLatitude(), 0.00001);
+		assertEquals(instance.getLongitude(), wp.getLongitude(), 0.00001);
 		assertEquals(instance.getLatHemisphere(), wp.getLatHemisphere());
 		assertEquals(instance.getLonHemisphere(), wp.getLonHemisphere());
 		assertEquals(instance.getDatum(), wp.getDatum());
