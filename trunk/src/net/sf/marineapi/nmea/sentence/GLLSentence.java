@@ -30,7 +30,7 @@ public interface GLLSentence extends PositionSentence, TimeSentence {
      * @throws DataNotAvailableException If the data is not available.
      * @throws ParseException If the field contains unexpected or illegal value.
      */
-    DataStatus getDataStatus();
+    DataStatus getStatus();
 
     /**
      * Set the data quality status, valid or invalid.
@@ -39,6 +39,6 @@ public interface GLLSentence extends PositionSentence, TimeSentence {
      * @throws DataNotAvailableException If the data is not available.
      * @throws ParseException If the field contains unexpected or illegal value.
      */
-    void setDataStatus(DataStatus status);
+    void setStatus(DataStatus status);
 
 }

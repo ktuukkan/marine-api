@@ -1,10 +1,13 @@
 package net.sf.marineapi.nmea.parser;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.fail;
 
 import java.util.Date;
 import java.util.GregorianCalendar;
+
+import net.sf.marineapi.nmea.util.Time;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -31,39 +34,15 @@ public class ZDATest {
     }
 
     /**
-     * Test method for
-     * {@link net.sf.marineapi.nmea.parser.ZDAParser#getUtcTime()}.
+     * Test method for {@link net.sf.marineapi.nmea.parser.ZDAParser#getTime()}.
      */
     @Test
-    public void testGetUtcTime() {
-        assertEquals("032915", zda.getUtcTime());
-    }
-
-    /**
-     * Test method for
-     * {@link net.sf.marineapi.nmea.parser.ZDAParser#getUtcHours()}.
-     */
-    @Test
-    public void testGetUtcHours() {
-        assertEquals(3, zda.getUtcHours());
-    }
-
-    /**
-     * Test method for
-     * {@link net.sf.marineapi.nmea.parser.ZDAParser#getUtcMinutes()}.
-     */
-    @Test
-    public void testGetUtcMinutes() {
-        assertEquals(29, zda.getUtcMinutes());
-    }
-
-    /**
-     * Test method for
-     * {@link net.sf.marineapi.nmea.parser.ZDAParser#getUtcSeconds()}.
-     */
-    @Test
-    public void testGetUtcSeconds() {
-        assertEquals(15, zda.getUtcSeconds(), 0.001);
+    public void testGetTime() {
+        Time t = zda.getTime();
+        assertNotNull(t);
+        assertEquals(3, t.getHour());
+        assertEquals(29, t.getMinutes());
+        assertEquals(15.0, t.getSeconds(), 0.1);
     }
 
     /**

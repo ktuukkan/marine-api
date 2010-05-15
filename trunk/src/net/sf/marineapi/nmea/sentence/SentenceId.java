@@ -20,7 +20,6 @@
  */
 package net.sf.marineapi.nmea.sentence;
 
-
 /**
  * Defines the supported NMEA 0831 sentence types. Sentence address field is a
  * combination of talker and sentence IDs, for example GPBOD, GPGGA or GPGGL.

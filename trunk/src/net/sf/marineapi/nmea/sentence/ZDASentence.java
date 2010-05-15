@@ -47,7 +47,7 @@ public interface ZDASentence extends TimeSentence, DateSentence {
     /**
      * Get offset to local time zone in minutes, from 0 to +/- 59.
      * 
-     * @return minutes integer
+     * @return Time zone offset
      * @throws DataNotAvailableException If the data is not available.
      * @throws ParseException If the field contains unexpected or illegal value.
      */

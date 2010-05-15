@@ -25,6 +25,7 @@ import java.util.GregorianCalendar;
 
 import net.sf.marineapi.nmea.sentence.SentenceId;
 import net.sf.marineapi.nmea.sentence.ZDASentence;
+import net.sf.marineapi.nmea.util.Time;
 
 /**
  * ZDA sentence parser.
@@ -57,13 +58,14 @@ class ZDAParser extends SentenceParser implements ZDASentence {
      * @see net.sf.marineapi.nmea.sentence.DateSentence#getDate()
      */
     public Date getDate() {
-        // FIXME remove duplicated code; see RMC parser
+        // FIXME remove duplicated code; see other Date/Time parsers
         int y = getUtcYear();
         int m = getUtcMonth() - 1;
         int d = getUtcDay();
-        int h = getUtcHours();
-        int mi = getUtcMinutes();
-        int s = (int) Math.floor(getUtcSeconds());
+        Time t = getTime();
+        int h = t.getHour();
+        int mi = t.getMinutes();
+        int s = (int) Math.floor(t.getSeconds());
         GregorianCalendar cal = new GregorianCalendar(y, m, d, h, mi, s);
         return cal.getTime();
     }
@@ -94,22 +96,6 @@ class ZDAParser extends SentenceParser implements ZDASentence {
 
     /*
      * (non-Javadoc)
-     * @see fi.hut.automationit.nmea.parser.TimeSentence#getUtcHours()
-     */
-    public int getUtcHours() {
-        return Integer.parseInt(getStringValue(UTC_TIME).substring(0, 2));
-    }
-
-    /*
-     * (non-Javadoc)
-     * @see fi.hut.automationit.nmea.parser.TimeSentence#getUtcMinutes()
-     */
-    public int getUtcMinutes() {
-        return Integer.parseInt(getStringValue(UTC_TIME).substring(2, 4));
-    }
-
-    /*
-     * (non-Javadoc)
      * @see fi.hut.automationit.nmea.parser.DateSentence#getUtcMonth()
      */
     public int getUtcMonth() {
@@ -118,26 +104,36 @@ class ZDAParser extends SentenceParser implements ZDASentence {
 
     /*
      * (non-Javadoc)
-     * @see fi.hut.automationit.nmea.parser.TimeSentence#getUtcSeconds()
-     */
-    public double getUtcSeconds() {
-        return Double.parseDouble(getStringValue(UTC_TIME).substring(4));
-    }
-
-    /*
-     * (non-Javadoc)
-     * @see fi.hut.automationit.nmea.parser.TimeSentence#getUtcTime()
-     */
-    public String getUtcTime() {
-        return getStringValue(UTC_TIME);
-    }
-
-    /*
-     * (non-Javadoc)
      * @see fi.hut.automationit.nmea.parser.DateSentence#getUtcYear()
      */
     public int getUtcYear() {
         return getIntValue(UTC_YEAR);
+    }
+
+    /*
+     * (non-Javadoc)
+     * @see net.sf.marineapi.nmea.sentence.TimeSentence#getTime()
+     */
+    public Time getTime() {
+        String str = getStringValue(UTC_TIME);
+        int h = Integer.parseInt(str.substring(0, 2));
+        int m = Integer.parseInt(str.substring(2, 4));
+        double s = Double.parseDouble(str.substring(4, 6));
+        return new Time(h, m, s);
+    }
+
+    /*
+     * (non-Javadoc)
+     * @see
+     * net.sf.marineapi.nmea.sentence.TimeSentence#setTime(net.sf.marineapi.
+     * nmea.util.Time)
+     */
+    public void setTime(Time t) {
+        int h = t.getHour();
+        int m = t.getMinutes();
+        int s = (int) Math.floor(t.getSeconds());
+        String time = String.format("Hms", h, m, s);
+        setStringValue(UTC_TIME, time);
     }
 
 }

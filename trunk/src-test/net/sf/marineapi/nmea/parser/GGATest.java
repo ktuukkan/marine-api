@@ -9,6 +9,7 @@ import net.sf.marineapi.nmea.util.Datum;
 import net.sf.marineapi.nmea.util.Direction;
 import net.sf.marineapi.nmea.util.GpsFixQuality;
 import net.sf.marineapi.nmea.util.Position;
+import net.sf.marineapi.nmea.util.Time;
 import net.sf.marineapi.nmea.util.Units;
 
 import org.junit.Before;
@@ -112,23 +113,12 @@ public class GGATest {
     }
 
     @Test
-    public void testGetUtcHours() {
-        assertEquals(12, gga.getUtcHours());
-    }
-
-    @Test
-    public void testGetUtcMinutes() {
-        assertEquals(0, gga.getUtcMinutes());
-    }
-
-    @Test
-    public void testGetUtcSeconds() {
-        assertEquals(44, gga.getUtcSeconds(), 0.001);
-    }
-
-    @Test
-    public void testGetUtcTime() {
-        assertEquals("120044", gga.getUtcTime());
+    public void testGetTime() {
+        Time t = gga.getTime();
+        assertNotNull(t);
+        assertEquals(12, t.getHour());
+        assertEquals(0, t.getMinutes());
+        assertEquals(44.0, t.getSeconds(), 0.1);
     }
 
     /**
