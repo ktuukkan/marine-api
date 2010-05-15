@@ -95,7 +95,7 @@ public interface RMBSentence extends Sentence {
     double getRange();
 
     /**
-     * Get status of sentence data, valid or invalid.
+     * Get the sentence data status, valid or invalid.
      * 
      * @return DataStatus.VALID or DataStatus.INVALID
      * @throws DataNotAvailableException If the data is not available.

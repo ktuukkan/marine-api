@@ -20,12 +20,11 @@
  */
 package net.sf.marineapi.nmea.sentence;
 
-import net.sf.marineapi.nmea.parser.DataNotAvailableException;
-import net.sf.marineapi.nmea.parser.ParseException;
+import net.sf.marineapi.nmea.util.Time;
 
 /**
- * Interface for sentences that provide a UTC time information. Notice that some
- * sentences may contain only UTC time, while others may provide also date.
+ * Interface for sentences that provide current UTC time. Notice that some
+ * sentences contain only UTC time, while others may provide also date.
  * 
  * @author Kimmo Tuukkanen
  * @version $Revision$
@@ -34,40 +33,16 @@ import net.sf.marineapi.nmea.parser.ParseException;
 public interface TimeSentence extends Sentence {
 
     /**
-     * Returns the hours of UTC time.
+     * Get the time of day.
      * 
-     * @return hours (0-23)
-     * @throws DataNotAvailableException If the data is not available.
-     * @throws ParseException If the field contains unexpected or illegal value.
+     * @return Time
      */
-    int getUtcHours();
+    Time getTime();
 
     /**
-     * Returns the minutes of UTC time.
+     * Set the time of day.
      * 
-     * @return minutes (0-59)
-     * @throws DataNotAvailableException If the data is not available.
-     * @throws ParseException If the field contains unexpected or illegal value.
+     * @param t Time to set
      */
-    int getUtcMinutes();
-
-    /**
-     * Returns the seconds of UTC time. Some sentences may also provide the
-     * fractional sub-second.
-     * 
-     * @return seconds (0-59)
-     * @throws DataNotAvailableException If the data is not available.
-     * @throws ParseException If the field contains unexpected or illegal value.
-     */
-    double getUtcSeconds();
-
-    /**
-     * Get the time stamp (UTC time, formerly known as GMT). Time is returned as
-     * String, for example "123456" stands for "12:34:56 UTC".
-     * 
-     * @return UTC String
-     * @throws DataNotAvailableException If the data is not available.
-     * @throws ParseException If the field contains unexpected or illegal value.
-     */
-    String getUtcTime();
+    void setTime(Time t);
 }

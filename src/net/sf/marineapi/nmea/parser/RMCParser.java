@@ -29,6 +29,7 @@ import net.sf.marineapi.nmea.util.DataStatus;
 import net.sf.marineapi.nmea.util.Direction;
 import net.sf.marineapi.nmea.util.GpsMode;
 import net.sf.marineapi.nmea.util.Position;
+import net.sf.marineapi.nmea.util.Time;
 
 /**
  * RMC sentence parser.
@@ -79,23 +80,16 @@ class RMCParser extends PositionParser implements RMCSentence {
 
     /*
      * (non-Javadoc)
-     * @see net.sf.marineapi.nmea.sentence.RMCSentence#getDataStatus()
-     */
-    public DataStatus getDataStatus() {
-        return DataStatus.valueOf(getCharValue(DATA_STATUS));
-    }
-
-    /*
-     * (non-Javadoc)
      * @see net.sf.marineapi.nmea.sentence.DateSentence#getDate()
      */
     public Date getDate() {
         int y = getUtcYear();
         int m = getUtcMonth() - 1;
         int d = getUtcDay();
-        int h = getUtcHours();
-        int mi = getUtcMinutes();
-        int s = (int) Math.floor(getUtcSeconds());
+        Time t = getTime();
+        int h = t.getHour();
+        int mi = t.getMinutes();
+        int s = (int) Math.floor(t.getSeconds());
         GregorianCalendar cal = new GregorianCalendar(y, m, d, h, mi, s);
         return cal.getTime();
     }
@@ -138,6 +132,14 @@ class RMCParser extends PositionParser implements RMCSentence {
 
     /*
      * (non-Javadoc)
+     * @see net.sf.marineapi.nmea.sentence.RMCSentence#getDataStatus()
+     */
+    public DataStatus getStatus() {
+        return DataStatus.valueOf(getCharValue(DATA_STATUS));
+    }
+
+    /*
+     * (non-Javadoc)
      * @see net.sf.marineapi.nmea.sentence.DateSentence#getUtcDay()
      */
     public int getUtcDay() {
@@ -146,34 +148,10 @@ class RMCParser extends PositionParser implements RMCSentence {
 
     /*
      * (non-Javadoc)
-     * @see net.sf.marineapi.nmea.sentence.TimeSentence#getUtcHours()
-     */
-    public int getUtcHours() {
-        return Integer.parseInt(getUtcTime().substring(0, 2));
-    }
-
-    /*
-     * (non-Javadoc)
-     * @see net.sf.marineapi.nmea.sentence.TimeSentence#getUtcMinutes()
-     */
-    public int getUtcMinutes() {
-        return Integer.parseInt(getUtcTime().substring(2, 4));
-    }
-
-    /*
-     * (non-Javadoc)
      * @see net.sf.marineapi.nmea.sentence.DateSentence#getUtcMonth()
      */
     public int getUtcMonth() {
         return Integer.parseInt(getStringValue(UTC_DATE).substring(2, 4));
-    }
-
-    /*
-     * (non-Javadoc)
-     * @see net.sf.marineapi.nmea.sentence.TimeSentence#getUtcSeconds()
-     */
-    public double getUtcSeconds() {
-        return Integer.parseInt(getUtcTime().substring(4, 6));
     }
 
     /*
@@ -216,16 +194,6 @@ class RMCParser extends PositionParser implements RMCSentence {
      */
     public void setCourse(double cog) {
         setDoubleValue(COURSE, cog);
-    }
-
-    /*
-     * (non-Javadoc)
-     * @see
-     * net.sf.marineapi.nmea.sentence.RMCSentence#setDataStatus(net.sf.marineapi
-     * .nmea.util.DataStatus)
-     */
-    public void setDataStatus(DataStatus status) {
-        setCharValue(DATA_STATUS, status.toChar());
     }
 
     /*
@@ -275,9 +243,46 @@ class RMCParser extends PositionParser implements RMCSentence {
 
     /*
      * (non-Javadoc)
+     * @see
+     * net.sf.marineapi.nmea.sentence.RMCSentence#setDataStatus(net.sf.marineapi
+     * .nmea.util.DataStatus)
+     */
+    public void setStatus(DataStatus status) {
+        setCharValue(DATA_STATUS, status.toChar());
+    }
+
+    /*
+     * (non-Javadoc)
      * @see net.sf.marineapi.nmea.sentence.RMCSentence#setVariation(double)
      */
     public void setVariation(double var) {
         setDoubleValue(MAG_VARIATION, var);
+    }
+
+    /*
+     * (non-Javadoc)
+     * @see net.sf.marineapi.nmea.sentence.TimeSentence#getTime()
+     */
+    public Time getTime() {
+        String str = getStringValue(UTC_TIME);
+        int h = Integer.parseInt(str.substring(0, 2));
+        int m = Integer.parseInt(str.substring(2, 4));
+        double s = Double.parseDouble(str.substring(4, 6));
+        return new Time(h, m, s);
+    }
+
+    /*
+     * (non-Javadoc)
+     * @see
+     * net.sf.marineapi.nmea.sentence.TimeSentence#setTime(net.sf.marineapi.
+     * nmea.util.Time)
+     */
+    public void setTime(Time t) {
+        String format = "Hms";
+        int h = t.getHour();
+        int m = t.getMinutes();
+        int s = (int) Math.floor(t.getSeconds());
+        String time = String.format(format, h, m, s);
+        setStringValue(UTC_TIME, time);
     }
 }

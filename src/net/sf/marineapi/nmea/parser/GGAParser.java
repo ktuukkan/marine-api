@@ -25,6 +25,7 @@ import net.sf.marineapi.nmea.sentence.SentenceId;
 import net.sf.marineapi.nmea.util.Direction;
 import net.sf.marineapi.nmea.util.GpsFixQuality;
 import net.sf.marineapi.nmea.util.Position;
+import net.sf.marineapi.nmea.util.Time;
 import net.sf.marineapi.nmea.util.Units;
 
 /**
@@ -153,38 +154,6 @@ class GGAParser extends PositionParser implements GGASentence {
 
     /*
      * (non-Javadoc)
-     * @see net.sf.marineapi.nmea.sentence.TimeSentence#getUtcHours()
-     */
-    public int getUtcHours() {
-        return Integer.parseInt(getUtcTime().substring(0, 2));
-    }
-
-    /*
-     * (non-Javadoc)
-     * @see net.sf.marineapi.nmea.sentence.TimeSentence#getUtcMinutes()
-     */
-    public int getUtcMinutes() {
-        return Integer.parseInt(getUtcTime().substring(2, 4));
-    }
-
-    /*
-     * (non-Javadoc)
-     * @see net.sf.marineapi.nmea.sentence.TimeSentence#getUtcSeconds()
-     */
-    public double getUtcSeconds() {
-        return Integer.parseInt(getUtcTime().substring(4, 6));
-    }
-
-    /*
-     * (non-Javadoc)
-     * @see net.sf.marineapi.nmea.sentence.TimeSentence#getUtcTime()
-     */
-    public String getUtcTime() {
-        return getStringValue(UTC_TIME);
-    }
-
-    /*
-     * (non-Javadoc)
      * @see net.sf.marineapi.nmea.sentence.GGASentence#setAltitude(double)
      */
     public void setAltitude(double alt) {
@@ -266,6 +235,33 @@ class GGAParser extends PositionParser implements GGASentence {
         setLongitude(LONGITUDE, pos.getLongitude());
         setLatHemisphere(LAT_HEMISPHERE, pos.getLatHemisphere());
         setLonHemisphere(LON_HEMISPHERE, pos.getLonHemisphere());
+    }
+
+    /*
+     * (non-Javadoc)
+     * @see net.sf.marineapi.nmea.sentence.TimeSentence#getTime()
+     */
+    public Time getTime() {
+        String str = getStringValue(UTC_TIME);
+        int h = Integer.parseInt(str.substring(0, 2));
+        int m = Integer.parseInt(str.substring(2, 4));
+        double s = Double.parseDouble(str.substring(4, 6));
+        return new Time(h, m, s);
+    }
+
+    /*
+     * (non-Javadoc)
+     * @see
+     * net.sf.marineapi.nmea.sentence.TimeSentence#setTime(net.sf.marineapi.
+     * nmea.util.Time)
+     */
+    public void setTime(Time t) {
+        String format = "Hms";
+        int h = t.getHour();
+        int m = t.getMinutes();
+        int s = (int) Math.floor(t.getSeconds());
+        String time = String.format(format, h, m, s);
+        setStringValue(UTC_TIME, time);
     }
 
 }

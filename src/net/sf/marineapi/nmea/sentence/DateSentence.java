@@ -36,9 +36,10 @@ import net.sf.marineapi.nmea.parser.ParseException;
 public interface DateSentence extends Sentence {
 
     /**
-     * Pivot year used to determine century for a two-digit year values.
-     * Two-digit values lower than or equal to pivot year are assigned to 21th
-     * century, while values greater than pivot are assigned to 20th century.
+     * A pivot year that is used to determine century for a two-digit year
+     * values. Two-digit values lower than or equal to pivot year are assigned
+     * to 21th century, while values greater than pivot are assigned to 20th
+     * century.
      */
     public static final int PIVOT_YEAR = 50;
 
@@ -77,7 +78,7 @@ public interface DateSentence extends Sentence {
      * lower than or equal to pivot are added to 2000, while values greater than
      * pivot are added to 1900.
      * 
-     * @return integer
+     * @return Four-digit year
      * @throws DataNotAvailableException If the data is not available.
      * @throws ParseException If the field contains unexpected or illegal value.
      */

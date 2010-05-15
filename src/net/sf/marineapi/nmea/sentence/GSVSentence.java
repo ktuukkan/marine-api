@@ -29,14 +29,6 @@ public interface GSVSentence extends Sentence {
     int getSatelliteCount();
 
     /**
-     * Set the number of satellites in view.
-     * 
-     * @param count Satellite count
-     * @throws IllegalArgumentException If specified number is negative
-     */
-    void setSatelliteCount(int count);
-
-    /**
      * Get the satellites information.
      * 
      * @return List of SatelliteInfo objects.
@@ -74,6 +66,14 @@ public interface GSVSentence extends Sentence {
      * @return True if first, otherwise false.
      */
     boolean isLast();
+
+    /**
+     * Set the number of satellites in view.
+     * 
+     * @param count Satellite count
+     * @throws IllegalArgumentException If specified number is negative
+     */
+    void setSatelliteCount(int count);
 
     /**
      * Set the satellite information.

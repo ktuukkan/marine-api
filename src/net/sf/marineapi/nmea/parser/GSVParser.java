@@ -118,6 +118,14 @@ class GSVParser extends SentenceParser implements GSVSentence {
         return (getSentenceIndex() == getSentenceCount());
     }
 
+    public void setSatelliteCount(int count) {
+        if (count < 0) {
+            throw new IllegalArgumentException(
+                    "Satellite count cannot be negative");
+        }
+        setIntValue(SATELLITES_IN_VIEW, count);
+    }
+
     /*
      * (non-Javadoc)
      * @see
@@ -167,14 +175,6 @@ class GSVParser extends SentenceParser implements GSVSentence {
                     "Sentence index cannot be negative");
         }
         setIntValue(SENTENCE_NUMBER, index);
-    }
-
-    public void setSatelliteCount(int count) {
-        if (count < 0) {
-            throw new IllegalArgumentException(
-                    "Satellite count cannot be negative");
-        }
-        setIntValue(SATELLITES_IN_VIEW, count);
     }
 
 }

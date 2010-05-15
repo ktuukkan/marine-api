@@ -110,6 +110,8 @@ public abstract class PositionParser extends SentenceParser {
      * 
      * @param field Field index
      * @param hem Direction.NORTH or Direction.SOUTH
+     * @throws IllegalArgumentException If specified Direction is other than
+     *             NORTH or SOUTH.
      */
     protected void setLatHemisphere(int field, Direction hem) {
         if (hem != Direction.NORTH && hem != Direction.SOUTH) {
@@ -164,6 +166,8 @@ public abstract class PositionParser extends SentenceParser {
      * 
      * @param field Field index
      * @param hem Direction.EAST or Direction.WEST
+     * @throws IllegalArgumentException If specified Direction is other than
+     *             EAST or WEST.
      */
     protected void setLonHemisphere(int field, Direction hem) {
         if (hem != Direction.EAST && hem != Direction.WEST) {

@@ -20,7 +20,6 @@
  */
 package net.sf.marineapi.nmea.sentence;
 
-
 /**
  * Base interface and constants for NMEA 0183 sentences.
  * 

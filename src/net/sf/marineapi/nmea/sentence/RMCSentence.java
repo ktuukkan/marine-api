@@ -68,15 +68,6 @@ public interface RMCSentence extends PositionSentence, TimeSentence,
     double getCourse();
 
     /**
-     * Gets the data status, valid or invalid.
-     * 
-     * @return DataStatus.VALID or DataStatus.INVALID
-     * @throws DataNotAvailableException If the data is not available.
-     * @throws ParseException If the field contains unexpected or illegal value.
-     */
-    DataStatus getDataStatus();
-
-    /**
      * Get the direction of magnetic variation; east or west.
      * 
      * @return Direction.EAST or Direction.WEST
@@ -104,6 +95,15 @@ public interface RMCSentence extends PositionSentence, TimeSentence,
     double getSpeed();
 
     /**
+     * Gets the data status, valid or invalid.
+     * 
+     * @return DataStatus.VALID or DataStatus.INVALID
+     * @throws DataNotAvailableException If the data is not available.
+     * @throws ParseException If the field contains unexpected or illegal value.
+     */
+    DataStatus getStatus();
+
+    /**
      * Get the magnetic variation. Easterly variation subtracts from true
      * course, and is thus returned as negative value. Otherwise, the value is
      * positive.
@@ -120,13 +120,6 @@ public interface RMCSentence extends PositionSentence, TimeSentence,
      * @param course True course in degrees
      */
     void setCourse(double cog);
-
-    /**
-     * Set the data status, valid or invalid.
-     * 
-     * @param status DataStatus.VALID or DataStatus.INVALID
-     */
-    void setDataStatus(DataStatus status);
 
     /**
      * Set the direction of magnetic variation, east or west.
@@ -150,6 +143,13 @@ public interface RMCSentence extends PositionSentence, TimeSentence,
      * @param sog Speed in knots (nautical miles per hour).
      */
     void setSpeed(double sog);
+
+    /**
+     * Set the data status, valid or invalid.
+     * 
+     * @param status DataStatus.VALID or DataStatus.INVALID
+     */
+    void setStatus(DataStatus status);
 
     /**
      * Set the magnetic variation.
