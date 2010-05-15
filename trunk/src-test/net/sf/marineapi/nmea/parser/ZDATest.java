@@ -2,6 +2,7 @@ package net.sf.marineapi.nmea.parser;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
 import java.util.Date;
@@ -43,6 +44,18 @@ public class ZDATest {
         assertEquals(3, t.getHour());
         assertEquals(29, t.getMinutes());
         assertEquals(15.0, t.getSeconds(), 0.1);
+    }
+
+    /**
+     * Test method for {@link net.sf.marineapi.nmea.parser.ZDAParser#getTime()}.
+     */
+    @Test
+    public void testSetTime() {
+        // 09:08:07.6
+        Time t = new Time(9, 8, 7.6);
+        zda.setTime(t);
+        System.out.println(zda.toString());
+        assertTrue(zda.toString().startsWith("$GPZDA,090807,07,"));
     }
 
     /**
