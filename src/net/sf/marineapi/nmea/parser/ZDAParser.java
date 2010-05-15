@@ -132,7 +132,7 @@ class ZDAParser extends SentenceParser implements ZDASentence {
         int h = t.getHour();
         int m = t.getMinutes();
         int s = (int) Math.floor(t.getSeconds());
-        String time = String.format("Hms", h, m, s);
+        String time = String.format("%02d%02d%02d", h, m, s);
         setStringValue(UTC_TIME, time);
     }
 
