@@ -421,13 +421,15 @@ public class SentenceParser implements Sentence {
      * @return SentenceId Sentence ID of the specified sentence
      */
     static SentenceId parseSentenceId(String nmea) {
+        SentenceId id = null;
         String sid = nmea.substring(3, 6);
         try {
-            return SentenceId.valueOf(sid);
+            id = SentenceId.valueOf(sid);
         } catch (Exception e) {
             String msg = String.format("Unsupported sentence Id [%s]", sid);
             throw new IllegalArgumentException(msg);
         }
+        return id;
     }
 
     /**

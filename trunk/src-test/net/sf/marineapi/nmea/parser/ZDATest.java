@@ -54,7 +54,6 @@ public class ZDATest {
         // 09:08:07.6
         Time t = new Time(9, 8, 7.6);
         zda.setTime(t);
-        System.out.println(zda.toString());
         assertTrue(zda.toString().startsWith("$GPZDA,090807,07,"));
     }
 

@@ -282,4 +282,14 @@ public class RMCTest {
         assertEquals(expected.getTime(), parsed.getTime());
     }
 
+    /**
+     * Test method for {@link net.sf.marineapi.nmea.parser.RMCParser#getTime()}.
+     */
+    @Test
+    public void testSetTime() {
+        Time t = new Time(1, 2, 3.4);
+        rmc.setTime(t);
+        assertTrue(rmc.toString().contains("$GPRMC,010203,A,"));
+    }
+
 }

@@ -246,10 +246,10 @@ public class Position {
      */
     private double haversine(double lat1, double lon1, double lat2, double lon2) {
 
-		// Meridional Earth radius
-		// final double earthRadius = 6367.4491;
-		// a bit tweaked radius seems to produce more accurate results..?
-		final double earthRadius = 6366.70702;
+        // Meridional Earth radius
+        // final double earthRadius = 6367.4491;
+        // a bit tweaked radius seems to produce more accurate results..?
+        final double earthRadius = 6366.70702;
 
         double dLat = Math.toRadians(lat2 - lat1);
         double dLon = Math.toRadians(lon2 - lon1);

@@ -42,54 +42,6 @@ import net.sf.marineapi.nmea.sentence.Sentence;
  */
 public class SentenceReader {
 
-    /**
-     * Reads the input stream and fires sentence events.
-     */
-    private class Worker implements Runnable {
-
-        private boolean running;
-        private BufferedReader in;
-
-        /**
-         * Constructor
-         * 
-         * @param buf BufferedReader for data input
-         */
-        public Worker(BufferedReader buf) {
-            in = buf;
-            running = true;
-        }
-
-        /**
-         * Reads the input stream and fires SentenceEvents
-         */
-        public void run() {
-            String data = null;
-            SentenceFactory factory = SentenceFactory.getInstance();
-            while (running) {
-                try {
-                    if (in.ready()) {
-                        data = in.readLine();
-                        if (NMEA.isValid(data)) {
-                            Sentence s = factory.createParser(data);
-                            fireSentenceEvent(s);
-                        }
-                    }
-                    Thread.sleep(75);
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-        }
-
-        /**
-         * Stops the run loop.
-         */
-        public void stop() {
-            this.running = false;
-        }
-    }
-
     // Vector for SentenceListeners (synchronized)
     private final List<SentenceListener> listeners = new Vector<SentenceListener>();
 
@@ -156,8 +108,58 @@ public class SentenceReader {
             try {
                 sl.sentenceRead(se);
             } catch (Exception e) {
-                // nevermind listener failures
+                // ignore listener failures
             }
+        }
+    }
+
+    /**
+     * Reads the input stream and fires sentence events.
+     */
+    private class Worker implements Runnable {
+
+        private boolean running;
+        private BufferedReader in;
+
+        /**
+         * Constructor
+         * 
+         * @param buf BufferedReader for data input
+         */
+        public Worker(BufferedReader buf) {
+            in = buf;
+            running = true;
+        }
+
+        /**
+         * Reads the input stream and fires SentenceEvents
+         */
+        public void run() {
+            String data = null;
+            SentenceFactory factory = SentenceFactory.getInstance();
+            while (running) {
+                try {
+                    if (in.ready()) {
+                        data = in.readLine();
+                        if (NMEA.isValid(data)) {
+                            Sentence s = factory.createParser(data);
+                            fireSentenceEvent(s);
+                        }
+                    }
+                    Thread.sleep(75);
+                } catch (Exception e) {
+                    // nevermind unsupported or invalid data
+
+                    System.err.println(e.getMessage());
+                }
+            }
+        }
+
+        /**
+         * Stops the run loop.
+         */
+        public void stop() {
+            this.running = false;
         }
     }
 }

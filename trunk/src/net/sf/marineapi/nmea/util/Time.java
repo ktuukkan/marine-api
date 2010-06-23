@@ -48,9 +48,9 @@ public class Time {
      * @param sec Second of minute
      */
     public Time(int hour, int min, double sec) {
-        this.hour = hour;
-        minutes = min;
-        seconds = sec;
+        setHour(hour);
+        setMinutes(min);
+        setSeconds(sec);
     }
 
     /**
@@ -98,7 +98,7 @@ public class Time {
      * Set the minute of hour.
      * 
      * @param minutes the minute to set
-     * @throws IllegalArgumentException If minute value out of range 0..59
+     * @throws IllegalArgumentException If minutes value out of range 0..59
      */
     public void setMinutes(int minutes) {
         if (minutes < 0 || minutes > 59) {
@@ -114,8 +114,8 @@ public class Time {
      * @param seconds the seconds to set
      * @throws IllegalArgumentException If seconds value out of range 0..59
      */
-    public void setSeconds(int seconds) {
-        if (seconds < 0 || seconds > 59) {
+    public void setSeconds(double seconds) {
+        if (seconds < 0 || seconds > 59.999) {
             throw new IllegalArgumentException(
                     "Invalid value for second (0..59)");
         }
@@ -149,5 +149,17 @@ public class Time {
         cal.set(Calendar.MINUTE, getMinutes());
         cal.set(Calendar.SECOND, (int) Math.floor(getSeconds()));
         return cal.getTime();
+    }
+
+    /**
+     * Get time as milliseconds since beginning of day.
+     * 
+     * @return Milliseconds
+     */
+    public long getMilliseconds() {
+        long m = (int) Math.floor(getSeconds()) * 1000;
+        m += getMinutes() * 60 * 1000;
+        m += getHour() * 3600 * 1000;
+        return m;
     }
 }
