@@ -129,4 +129,14 @@ public class GLLTest {
         assertEquals(45.0, t.getSeconds(), 0.1);
     }
 
+    /**
+     * Test method for {@link net.sf.marineapi.nmea.parser.GLLParser#setTime(Time)}.
+     */
+    @Test
+    public void testSetTime() {
+        Time t = new Time(1, 2, 3.4);
+        instance.setTime(t);
+        assertTrue(instance.toString().contains(",E,010203,A*"));
+    }
+
 }

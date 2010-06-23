@@ -117,7 +117,7 @@ public interface RTESentence extends Sentence {
      * 
      * @return true if working route, otherwise false.
      * @throws DataNotAvailableException If the data is not available.
-     * @throws ParseException If the field contains unexpected or illegal value.
+     * @throws ParseException If status field contains illegal value.
      */
     boolean isWorkingRoute();
 

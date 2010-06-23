@@ -87,7 +87,7 @@ public class SatelliteInfo {
     }
 
     /**
-     * Get satellite azimuth, in degrees from true north (0..359&deg;).
+     * Set satellite azimuth, in degrees from true north (0..359&deg;).
      * 
      * @param azimuth the azimuth to set
      * @throws IllegalArgumentException If value is out of range 0..360 deg.
@@ -100,7 +100,7 @@ public class SatelliteInfo {
     }
 
     /**
-     * Get satellite elevation, in degrees (max. 90&deg;).
+     * Set satellite elevation, in degrees (max. 90&deg;).
      * 
      * @param elevation the elevation to set
      * @throws IllegalArgumentException If value is out of range 0..90 deg.
@@ -113,7 +113,7 @@ public class SatelliteInfo {
     }
 
     /**
-     * Get the ID of satellite vehicle, for example "05".
+     * Set the ID of satellite vehicle, for example "05".
      * 
      * @param id the id to set
      */
@@ -122,7 +122,7 @@ public class SatelliteInfo {
     }
 
     /**
-     * Get satellite the signal noise ratio, in dB (0-99 dB).
+     * Set the satellite signal noise ratio, in dB (0-99 dB).
      * 
      * @param noise the noise to set
      * @throws IllegalArgumentException If value is out of range 0..99 dB.

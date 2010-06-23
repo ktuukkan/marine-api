@@ -113,7 +113,8 @@ public interface RMBSentence extends Sentence {
     Direction getSteerTo();
 
     /**
-     * Get velocity towards destination.
+     * Get velocity towards destination. Notice that returned value may also be
+     * negative if vehicle is moving away from destination.
      * 
      * @return Velocity value, in knots (nautical miles per hour).
      * @throws DataNotAvailableException If the data is not available.
@@ -195,10 +196,10 @@ public interface RMBSentence extends Sentence {
     void setSteerTo(Direction steer);
 
     /**
-     * Set velocity towards destination.
+     * Set velocity towards destination. Notice that value may also be negative
+     * if vehicle is moving away from the destination.
      * 
      * @param velocity Velocity, in knots (nautical miles per hour).
-     * @throws IllegalArgumentException If velocity value is negative.
      */
     void setVelocity(double velocity);
 

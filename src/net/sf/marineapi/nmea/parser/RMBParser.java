@@ -234,9 +234,7 @@ class RMBParser extends PositionParser implements RMBSentence {
      * @see net.sf.marineapi.nmea.sentence.RMBSentence#setVelocity(double)
      */
     public void setVelocity(double velocity) {
-        if (velocity < 0) {
-            throw new IllegalArgumentException("Velocity cannot be negative");
-        }
+        // TODO round to certain precision?
         setDoubleValue(VELOCITY, velocity);
     }
 }

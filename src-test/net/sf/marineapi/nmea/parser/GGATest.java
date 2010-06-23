@@ -204,4 +204,14 @@ public class GGATest {
         assertEquals(Direction.EAST, wp.getLonHemisphere());
     }
 
+    /**
+     * Test method for {@link net.sf.marineapi.nmea.parser.GGAParser#getTime()}.
+     */
+    @Test
+    public void testSetTime() {
+        Time t = new Time(1, 2, 3.4);
+        gga.setTime(t);
+        assertTrue(gga.toString().contains("GPGGA,010203,6011"));
+    }
+
 }
