@@ -21,7 +21,7 @@
 package net.sf.marineapi.nmea.parser;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.fail;
+import static org.junit.Assert.assertTrue;
 import net.sf.marineapi.nmea.sentence.SentenceId;
 import net.sf.marineapi.nmea.util.Direction;
 
@@ -96,7 +96,9 @@ public class PositionParserTest {
      */
     @Test
     public void testSetLatHemisphere() {
-        fail("Not yet implemented");
+        instance.setLatHemisphere(1, Direction.SOUTH);
+        assertTrue(instance.toString().contains(",S,"));
+        assertEquals(Direction.SOUTH, instance.parseHemisphereLat(1));
     }
 
     /**
@@ -106,7 +108,11 @@ public class PositionParserTest {
      */
     @Test
     public void testSetLatitude() {
-        fail("Not yet implemented");
+        // 2501.941
+        final double lat = 25 + (01.941 / 60);
+        instance.setLatitude(0, lat);
+        assertTrue(instance.toString().contains(",02501.941"));
+        assertEquals(lat, instance.parseLatitude(0), 0.000001);
     }
 
     /**
@@ -116,7 +122,11 @@ public class PositionParserTest {
      */
     @Test
     public void testSetLongitude() {
-        fail("Not yet implemented");
+        // 02801.941
+        final double lon = 28 + (01.941 / 60);
+        instance.setLongitude(2, lon);
+        assertTrue(instance.toString().contains(",02801.941"));
+        assertEquals(lon, instance.parseLongitude(2), 0.000001);
     }
 
     /**
@@ -126,7 +136,9 @@ public class PositionParserTest {
      */
     @Test
     public void testSetLonHemisphere() {
-        fail("Not yet implemented");
+        instance.setLonHemisphere(3, Direction.WEST);
+        assertTrue(instance.toString().contains(",W,"));
+        assertEquals(Direction.WEST, instance.parseHemisphereLon(3));
     }
 
 }
