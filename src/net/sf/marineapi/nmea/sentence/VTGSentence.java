@@ -108,7 +108,7 @@ public interface VTGSentence extends Sentence {
     /**
      * Set the current speed over ground.
      * 
-     * @param sog Speed in km/h.
+     * @param kmh Speed in kilometers per hour (km/h).
      */
     void setSpeedKmh(double kmh);
 
