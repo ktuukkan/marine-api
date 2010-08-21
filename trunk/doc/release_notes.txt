@@ -1,12 +1,16 @@
 Java Marine API release notes
 Version 0.1 (pre-alpha)
-<http://sourceforge.net/project/marineapi/>
+<http://sourceforge.net/projects/marineapi/>
+Copyright (C) 2010 Kimmo Tuukkanen <ktuukkan@users.sourceforge.net>
+
+Initial preview release, not to be used in production. Major changes in the API
+may occur in later versions.
 
 FEATURES
 
- * SentenceReader for reading NMEA streams
+ * SentenceReader for reading NMEA sentences from a stream
  
- * SentenceEvent/Listener for receiving Sentence updates
+ * SentenceEvent/Listener for receiving NMEA updates
  
  * SentenceFactory for creating sentence parsers
  
@@ -15,6 +19,5 @@ FEATURES
     
  
 KNOWN ISSUES
-
- * Position.distanceTo() does not produce correct results
  
+ * Position.distanceTo() may not produce correct results, to be checked.

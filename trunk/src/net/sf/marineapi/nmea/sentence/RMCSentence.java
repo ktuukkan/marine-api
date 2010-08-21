@@ -113,7 +113,7 @@ public interface RMCSentence extends PositionSentence, TimeSentence,
     /**
      * Set true course over ground (COG).
      * 
-     * @param course True course in degrees
+     * @param cog True course in degrees
      */
     void setCourse(double cog);
 
