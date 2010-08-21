@@ -1,0 +1,106 @@
+﻿<project name="Java Marine API" default="build" basedir=".">
+
+	<target name="-init">
+		<tstamp>
+			<format property="date" pattern="yyyy-MM-dd" />
+			<format property="year" pattern="yyyy" />
+		</tstamp>
+		<property name="project.name" value="marineapi" />
+		<property name="src.dir" value="src/" />
+		<property name="tests.dir" value="src-test/" />
+		<property name="reports.dir" value="reports/" />
+		<property name="doc.dir" value="doc/" />
+		<property name="build.dir" value="build/" />
+		<property name="build.dir.classes" value="build/" />
+		<property name="build.dir.tests" value="build/" />
+		<property name="build.dir.dist" value="dist/" />
+		<property name="build.dir.api" value="doc/javadoc/" />
+		<property name="releases.dir" value="releases/" />
+		<property name="manifest.file" value="${build.dir}/MANIFEST.MF" />
+		<property name="jar.file" value="${build.dir}/${project.name}.jar" />
+		<property name="release.zip" value="${releases.dir}/${project.name}-${date}.zip" />
+		<property name="javadoc.footer" value="Copyright (C) ${year} Kimmo Tuukkanen" />
+	</target>
+
+	<!-- clean up -->
+	<target name="clean" depends="-init" description="Cleans up the project">
+		<delete dir="${build.dir}" />
+		<delete dir="${build.dir.dist}" />
+		<delete dir="${build.dir.api}" />
+		<delete dir="${reports.dir}" />
+		<delete dir="${releases.dir}" />
+	</target>
+
+	<!-- compile project -->
+	<target name="compile-src" depends="-init" description="Compiles the source files">
+		<mkdir dir="build/classes/" />
+		<javac destdir="${build.dir.classes}" srcdir="${src.dir}" debug="true" includes="**/*.java" />
+	</target>
+
+	<!-- compile tests -->
+	<target name="compile-tests" depends="compile-src" description="Compiles the unit tests">
+		<mkdir dir="${build.dir.tests}" />
+		<javac destdir="${build.dir.tests}" debug="true" srcdir="${tests.dir}">
+			<classpath>
+				<pathelement path="${build.dir.classes}" />
+			</classpath>
+		</javac>
+	</target>
+
+	<!-- run all unit tests -->
+	<target name="run-tests" depends="compile-src, compile-tests" description="Runs all unit tests">
+		<mkdir dir="${reports.dir}" />
+		<junit fork="yes" maxmemory="512m" printsummary="true" haltonfailure="false">
+			<formatter type="xml" />
+			<classpath>
+				<pathelement location="${build.dir.tests}" />
+				<pathelement location="${build.dir.classes}" />
+			</classpath>
+			<batchtest fork="yes" todir="${reports.dir}" errorProperty="tests.failed" failureProperty="tests.failed">
+				<fileset dir="${tests.dir}">
+					<include name="**/*Test.java" />
+				</fileset>
+			</batchtest>
+		</junit>
+		<junitreport todir="${reports.dir}">
+			<fileset dir="${reports.dir}">
+				<include name="TEST-*.xml" />
+			</fileset>
+			<report format="noframes" todir="${reports.dir}" />
+		</junitreport>
+	</target>
+
+	<!-- create jar package -->
+	<target name="jar" depends="compile-src" description="Builds the JAR package">
+		<manifest file="${manifest.file}" />
+		<jar destfile="${jar.file}" manifest="${manifest.file}">
+			<fileset dir="${build.dir.classes}" includes="**/*.class" />
+		</jar>
+	</target>
+
+	<!-- generate javadocs -->
+	<target name="javadoc" depends="-init" description="Generates the Javadoc documentation">
+		<mkdir dir="${build.dir.api}" />
+		<javadoc sourcepath="${src.dir}" destdir="${build.dir.api}" private="false" bottom="${javadoc.footer}" windowtitle="${project.name} API" breakiterator="true" />
+	</target>
+
+	<!-- build project -->
+	<target name="build" depends="compile-src, jar" description="Compiles and builds the application" />
+
+	<!-- run unit tests -->
+	<target name="test" depends="compile-src, compile-tests" description="Runs all unit tests">
+		<fail if="tests.failed" message="One or more unit tests failed" />
+	</target>
+
+	<!-- build release package -->
+	<target name="dist" depends="build, javadoc" description="Builds the distribution package">
+		<mkdir dir="${build.dir.dist}" />
+		<mkdir dir="${releases.dir}" />
+		<copy todir="${build.dir.dist}/doc/">
+			<fileset dir="${doc.dir}" />
+		</copy>
+		<copy todir="${build.dir.dist}" file="${jar.file}" />
+		<zip destfile="${release.zip}" basedir="${build.dir.dist}" />
+	</target>
+
+</project>
