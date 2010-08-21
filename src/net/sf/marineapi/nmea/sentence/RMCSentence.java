@@ -36,10 +36,6 @@ import net.sf.marineapi.nmea.util.GpsMode;
  * @author Kimmo Tuukkanen
  * @version $Revision$
  */
-/**
- * @author Kimmo Tuukkanen
- * @version $Revision$
- */
 public interface RMCSentence extends PositionSentence, TimeSentence,
         DateSentence {
 
