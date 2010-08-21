@@ -1,0 +1,23 @@
+Java Marine API release notes
+Version 0.1 (pre-alpha)
+<http://sourceforge.net/projects/marineapi/>
+Copyright (C) 2010 Kimmo Tuukkanen <ktuukkan@users.sourceforge.net>
+
+Initial preview release, not to be used in production. Major changes in the API
+may occur in later versions.
+
+FEATURES
+
+ * SentenceReader for reading NMEA sentences from a stream
+ 
+ * SentenceEvent/Listener for receiving NMEA updates
+ 
+ * SentenceFactory for creating sentence parsers
+ 
+ * Interfaces and parsers for following sentence types:
+   BOD, GGA, GLL, GSA, GSV, RMB, RMC, RTE, VTG, WPL and ZDA
+    
+ 
+KNOWN ISSUES
+ 
+ * Position.distanceTo() may not produce correct results, to be checked.
