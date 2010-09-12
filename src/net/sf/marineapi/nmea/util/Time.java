@@ -84,7 +84,7 @@ public class Time {
      * Set the hour of day.
      * 
      * @param hour the hour to set
-     * @throws IllegalArgumentException If hour value out of range 0..23
+     * @throws IllegalArgumentException If hour value out of bounds 0..23
      */
     public void setHour(int hour) {
         if (hour < 0 || hour > 23) {
@@ -98,7 +98,7 @@ public class Time {
      * Set the minute of hour.
      * 
      * @param minutes the minute to set
-     * @throws IllegalArgumentException If minutes value out of range 0..59
+     * @throws IllegalArgumentException If minutes value out of bounds 0..59
      */
     public void setMinutes(int minutes) {
         if (minutes < 0 || minutes > 59) {
@@ -112,7 +112,7 @@ public class Time {
      * Set seconds of minute.
      * 
      * @param seconds the seconds to set
-     * @throws IllegalArgumentException If seconds value out of range 0..59
+     * @throws IllegalArgumentException If seconds value out of bounds 0..59
      */
     public void setSeconds(double seconds) {
         if (seconds < 0 || seconds > 59.999) {

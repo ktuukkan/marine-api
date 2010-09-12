@@ -123,7 +123,7 @@ public interface VTGSentence extends Sentence {
      * Set the true course over ground.
      * 
      * @param tcog True course, in degrees
-     * @throws IllegalArgumentException If specified course is out of range
+     * @throws IllegalArgumentException If specified course is out of bounds
      *             0..360 degrees.
      */
     void setTrueCourse(double tcog);

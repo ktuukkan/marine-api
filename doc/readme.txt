@@ -1,5 +1,5 @@
 Java Marine API readme
-Version 0.1 (pre-alpha)
+Version 0.2 (pre-alpha)
 <http://sourceforge.net/projects/marineapi/>
 Copyright (C) 2010 Kimmo Tuukkanen <ktuukkan@users.sourceforge.net>
 
