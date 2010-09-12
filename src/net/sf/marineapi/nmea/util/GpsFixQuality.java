@@ -68,6 +68,6 @@ public enum GpsFixQuality {
                 return gfq;
             }
         }
-        return null;
+        return valueOf(String.valueOf(val));
     }
 }

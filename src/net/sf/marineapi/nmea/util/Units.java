@@ -58,15 +58,15 @@ public enum Units {
     /**
      * Get the enum corresponding to specified char.
      * 
-     * @param c Char indicator for unit
+     * @param chs Char indicator for unit
      * @return Units enum
      */
-    public static Units valueOf(char c) {
+    public static Units valueOf(char ch) {
         for (Units u : values()) {
-            if (u.toChar() == c) {
+            if (u.toChar() == ch) {
                 return u;
             }
         }
-        return null;
+        return valueOf(String.valueOf(ch));
     }
 }

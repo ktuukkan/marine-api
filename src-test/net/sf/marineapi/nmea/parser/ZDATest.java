@@ -59,29 +59,29 @@ public class ZDATest {
 
     /**
      * Test method for
-     * {@link net.sf.marineapi.nmea.parser.ZDAParser#getUtcDay()}.
+     * {@link net.sf.marineapi.nmea.parser.ZDAParser#getDay()}.
      */
     @Test
     public void testGetUtcDay() {
-        assertEquals(7, zda.getUtcDay());
+        assertEquals(7, zda.getDay());
     }
 
     /**
      * Test method for
-     * {@link net.sf.marineapi.nmea.parser.ZDAParser#getUtcMonth()}.
+     * {@link net.sf.marineapi.nmea.parser.ZDAParser#getMonth()}.
      */
     @Test
     public void testGetUtcMonth() {
-        assertEquals(8, zda.getUtcMonth());
+        assertEquals(8, zda.getMonth());
     }
 
     /**
      * Test method for
-     * {@link net.sf.marineapi.nmea.parser.ZDAParser#getUtcYear()}.
+     * {@link net.sf.marineapi.nmea.parser.ZDAParser#getYear()}.
      */
     @Test
     public void testGetUtcYear() {
-        assertEquals(2004, zda.getUtcYear());
+        assertEquals(2004, zda.getYear());
     }
 
     /**

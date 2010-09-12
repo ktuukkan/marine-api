@@ -83,9 +83,9 @@ class RMCParser extends PositionParser implements RMCSentence {
      * @see net.sf.marineapi.nmea.sentence.DateSentence#getDate()
      */
     public Date getDate() {
-        int y = getUtcYear();
-        int m = getUtcMonth() - 1;
-        int d = getUtcDay();
+        int y = getYear();
+        int m = getMonth() - 1;
+        int d = getDay();
         Time t = getTime();
         int h = t.getHour();
         int mi = t.getMinutes();
@@ -142,7 +142,7 @@ class RMCParser extends PositionParser implements RMCSentence {
      * (non-Javadoc)
      * @see net.sf.marineapi.nmea.sentence.DateSentence#getUtcDay()
      */
-    public int getUtcDay() {
+    public int getDay() {
         return Integer.parseInt(getStringValue(UTC_DATE).substring(0, 2));
     }
 
@@ -150,7 +150,7 @@ class RMCParser extends PositionParser implements RMCSentence {
      * (non-Javadoc)
      * @see net.sf.marineapi.nmea.sentence.DateSentence#getUtcMonth()
      */
-    public int getUtcMonth() {
+    public int getMonth() {
         return Integer.parseInt(getStringValue(UTC_DATE).substring(2, 4));
     }
 
@@ -166,7 +166,7 @@ class RMCParser extends PositionParser implements RMCSentence {
      * (non-Javadoc)
      * @see net.sf.marineapi.nmea.sentence.DateSentence#getUtcYear()
      */
-    public int getUtcYear() {
+    public int getYear() {
         int y = Integer.parseInt(getStringValue(UTC_DATE).substring(4));
         if (y < 100 && y <= PIVOT_YEAR) {
             y += 2000;

@@ -245,29 +245,29 @@ public class RMCTest {
 
     /**
      * Test method for
-     * {@link net.sf.marineapi.nmea.parser.RMCParser#getUtcDay()}.
+     * {@link net.sf.marineapi.nmea.parser.RMCParser#getDay()}.
      */
     @Test
     public void testGetUtcDay() {
-        assertEquals(16, rmc.getUtcDay());
+        assertEquals(16, rmc.getDay());
     }
 
     /**
      * Test method for
-     * {@link net.sf.marineapi.nmea.parser.RMCParser#getUtcMonth()}.
+     * {@link net.sf.marineapi.nmea.parser.RMCParser#getMonth()}.
      */
     @Test
     public void testGetUtcMonth() {
-        assertEquals(7, rmc.getUtcMonth());
+        assertEquals(7, rmc.getMonth());
     }
 
     /**
      * Test method for
-     * {@link net.sf.marineapi.nmea.parser.RMCParser#getUtcYear()}.
+     * {@link net.sf.marineapi.nmea.parser.RMCParser#getYear()}.
      */
     @Test
     public void testGetUtcYear() {
-        assertEquals(2005, rmc.getUtcYear());
+        assertEquals(2005, rmc.getYear());
     }
 
     /**

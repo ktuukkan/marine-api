@@ -44,14 +44,22 @@ public interface DateSentence extends Sentence {
     public static final int PIVOT_YEAR = 50;
 
     /**
-     * Parses the date information in a Date object. Sub-second precision may be
-     * provided by some sentences, but generally the precision is by 1 second.
+     * Parses the date information and returns a java.util.Date. Sub-second
+     * precision may be provided by some sentences, but generally the precision
+     * is by 1 second.
      * 
-     * @return Date
+     * @return Date object
      * @throws DataNotAvailableException If the data is not available.
      * @throws ParseException If the field contains unexpected or illegal value.
      */
     Date getDate();
+
+    /**
+     * Set date information to sentence.
+     * 
+     * @param d
+     */
+    // void setDate(Date d);
 
     /**
      * Get day of UTC date.
@@ -60,7 +68,7 @@ public interface DateSentence extends Sentence {
      * @throws DataNotAvailableException If the data is not available.
      * @throws ParseException If the field contains unexpected or illegal value.
      */
-    int getUtcDay();
+    int getDay();
 
     /**
      * Get month of UTC date.
@@ -69,7 +77,7 @@ public interface DateSentence extends Sentence {
      * @throws DataNotAvailableException If the data is not available.
      * @throws ParseException If the field contains unexpected or illegal value.
      */
-    int getUtcMonth();
+    int getMonth();
 
     /**
      * Get year of UTC date. The date fields in NMEA 0183 may contain two-digit
@@ -82,5 +90,5 @@ public interface DateSentence extends Sentence {
      * @throws DataNotAvailableException If the data is not available.
      * @throws ParseException If the field contains unexpected or illegal value.
      */
-    int getUtcYear();
+    int getYear();
 }

@@ -59,9 +59,9 @@ class ZDAParser extends SentenceParser implements ZDASentence {
      */
     public Date getDate() {
         // FIXME remove duplicated code; see other Date/Time parsers
-        int y = getUtcYear();
-        int m = getUtcMonth() - 1;
-        int d = getUtcDay();
+        int y = getYear();
+        int m = getMonth() - 1;
+        int d = getDay();
         Time t = getTime();
         int h = t.getHour();
         int mi = t.getMinutes();
@@ -90,7 +90,7 @@ class ZDAParser extends SentenceParser implements ZDASentence {
      * (non-Javadoc)
      * @see fi.hut.automationit.nmea.parser.DateSentence#getUtcDay()
      */
-    public int getUtcDay() {
+    public int getDay() {
         return getIntValue(UTC_DAY);
     }
 
@@ -98,7 +98,7 @@ class ZDAParser extends SentenceParser implements ZDASentence {
      * (non-Javadoc)
      * @see fi.hut.automationit.nmea.parser.DateSentence#getUtcMonth()
      */
-    public int getUtcMonth() {
+    public int getMonth() {
         return getIntValue(UTC_MONTH);
     }
 
@@ -106,7 +106,7 @@ class ZDAParser extends SentenceParser implements ZDASentence {
      * (non-Javadoc)
      * @see fi.hut.automationit.nmea.parser.DateSentence#getUtcYear()
      */
-    public int getUtcYear() {
+    public int getYear() {
         return getIntValue(UTC_YEAR);
     }
 
