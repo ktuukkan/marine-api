@@ -160,7 +160,7 @@ class RMBParser extends PositionParser implements RMBSentence {
     public void setBearing(double bearing) {
         if (bearing < 0 || bearing > 360) {
             throw new IllegalArgumentException(
-                    "Bearing out of range 0..360 degrees");
+                    "Bearing out of bounds 0..360 degrees");
         }
         setDoubleValue(BEARING_TO_DEST, bearing);
     }

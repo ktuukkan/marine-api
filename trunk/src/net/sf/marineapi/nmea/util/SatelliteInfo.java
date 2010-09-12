@@ -90,11 +90,11 @@ public class SatelliteInfo {
      * Set satellite azimuth, in degrees from true north (0..359&deg;).
      * 
      * @param azimuth the azimuth to set
-     * @throws IllegalArgumentException If value is out of range 0..360 deg.
+     * @throws IllegalArgumentException If value is out of bounds 0..360 deg.
      */
     public void setAzimuth(int azimuth) {
         if (azimuth < 0 || azimuth > 360) {
-            throw new IllegalArgumentException("Value out of range 0..360 deg");
+            throw new IllegalArgumentException("Value out of bounds 0..360 deg");
         }
         this.azimuth = azimuth;
     }
@@ -103,11 +103,11 @@ public class SatelliteInfo {
      * Set satellite elevation, in degrees (max. 90&deg;).
      * 
      * @param elevation the elevation to set
-     * @throws IllegalArgumentException If value is out of range 0..90 deg.
+     * @throws IllegalArgumentException If value is out of bounds 0..90 deg.
      */
     public void setElevation(int elevation) {
         if (elevation < 0 || elevation > 90) {
-            throw new IllegalArgumentException("Value out of range 0..90 deg");
+            throw new IllegalArgumentException("Value out of bounds 0..90 deg");
         }
         this.elevation = elevation;
     }
@@ -125,11 +125,11 @@ public class SatelliteInfo {
      * Set the satellite signal noise ratio, in dB (0-99 dB).
      * 
      * @param noise the noise to set
-     * @throws IllegalArgumentException If value is out of range 0..99 dB.
+     * @throws IllegalArgumentException If value is out of bounds 0..99 dB.
      */
     public void setNoise(int noise) {
         if (noise < 0 || noise > 99) {
-            throw new IllegalArgumentException("Value out of range 0..99 dB");
+            throw new IllegalArgumentException("Value out of bounds 0..99 dB");
         }
         this.noise = noise;
     }

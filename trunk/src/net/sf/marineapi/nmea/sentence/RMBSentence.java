@@ -144,7 +144,7 @@ public interface RMBSentence extends Sentence {
      * Set true bearing to destination, in degrees.
      * 
      * @param bearing Bearing value, will be rounded to one decimal.
-     * @throws IllegalArgumentException If bearing value is out of range 0..360
+     * @throws IllegalArgumentException If bearing value is out of bounds 0..360
      *             degrees.
      */
     void setBearing(double bearing);

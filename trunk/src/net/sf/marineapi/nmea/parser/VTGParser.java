@@ -104,7 +104,7 @@ class VTGParser extends SentenceParser implements VTGSentence {
     public void setMagneticCourse(double mcog) {
         if (mcog < 0 || mcog > 360) {
             throw new IllegalArgumentException(
-                    "Course out of range 0..360 degrees");
+                    "Course out of bounds 0..360 degrees");
         }
         setDoubleValue(MAGNETIC_COURSE, mcog);
     }
@@ -148,7 +148,7 @@ class VTGParser extends SentenceParser implements VTGSentence {
     public void setTrueCourse(double tcog) {
         if (tcog < 0 || tcog > 360) {
             throw new IllegalArgumentException(
-                    "Course out of range 0..360 degrees");
+                    "Course out of bounds 0..360 degrees");
         }
         setDoubleValue(TRUE_COURSE, tcog);
     }
