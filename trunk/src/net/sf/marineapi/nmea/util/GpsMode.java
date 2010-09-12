@@ -74,6 +74,6 @@ public enum GpsMode {
                 return gm;
             }
         }
-        return null;
+        return valueOf(String.valueOf(ch));
     }
 }

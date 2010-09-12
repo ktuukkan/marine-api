@@ -55,7 +55,7 @@ public enum GpsFixStatus {
      * in the sentences.
      * 
      * @param val Fix status indentifier int
-     * @return GpsFixStatus enum or <code>null</code> if int value is invalid.
+     * @return GpsFixStatus enum
      */
     public static GpsFixStatus valueOf(int val) {
         for (GpsFixStatus st : values()) {
@@ -63,6 +63,6 @@ public enum GpsFixStatus {
                 return st;
             }
         }
-        return null;
+        return valueOf(String.valueOf(val));
     }
 }

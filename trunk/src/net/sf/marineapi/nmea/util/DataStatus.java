@@ -56,7 +56,7 @@ public enum DataStatus {
      * Returns the DataStatus enum for status char used in sentences.
      * 
      * @param ch Status char
-     * @return DataStatus or <code>null</code> if invalid char was specified.
+     * @return DataStatus
      */
     public static DataStatus valueOf(char ch) {
         for (DataStatus ds : values()) {
@@ -64,6 +64,6 @@ public enum DataStatus {
                 return ds;
             }
         }
-        return null;
+        return valueOf(String.valueOf(ch));
     }
 }

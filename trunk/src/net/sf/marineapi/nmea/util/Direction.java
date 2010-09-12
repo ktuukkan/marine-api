@@ -68,6 +68,6 @@ public enum Direction {
                 return d;
             }
         }
-        return null;
+        return valueOf(String.valueOf(c));
     }
 }
