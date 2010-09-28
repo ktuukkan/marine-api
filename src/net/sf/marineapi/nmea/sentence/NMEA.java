@@ -26,7 +26,7 @@ package net.sf.marineapi.nmea.sentence;
  * @author Kimmo Tuukkanen
  * @version $Revision$
  */
-public class NMEA {
+public final class NMEA {
 
     // no instantiation
     private NMEA() {

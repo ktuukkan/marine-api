@@ -35,6 +35,6 @@ public interface SentenceListener extends EventListener {
      * 
      * @param event SentenceEvent to dispatch
      */
-    public void sentenceRead(SentenceEvent event);
+    void sentenceRead(SentenceEvent event);
 
 }

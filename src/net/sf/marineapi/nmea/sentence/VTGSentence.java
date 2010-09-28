@@ -37,13 +37,13 @@ import net.sf.marineapi.nmea.util.GpsMode;
 public interface VTGSentence extends Sentence {
 
     /** Units indicator for kilometers per hour */
-    public static final char KMPH = 'K';
+    static final char KMPH = 'K';
     /** Units indicator for knots (nautical miles per hour) */
-    public static final char KNOT = 'N';
+    static final char KNOT = 'N';
     /** Operating in manual mode (forced 2D or 3D). */
-    public static final char MODE_MANUAL = 'M';
+    static final char MODE_MANUAL = 'M';
     /** Operating in automatic mode (2D/3D). */
-    public static final char MODE_AUTOMATIC = 'A';
+    static final char MODE_AUTOMATIC = 'A';
 
     /**
      * Get the magnetic course over ground.

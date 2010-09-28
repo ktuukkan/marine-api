@@ -29,7 +29,7 @@ import net.sf.marineapi.nmea.sentence.SentenceId;
  * @author Kimmo Tuukkanen
  * @version $Revision$
  */
-public class SentenceFactory {
+public final class SentenceFactory {
 
     // TODO Add method for creating "empty" sentences.
 
