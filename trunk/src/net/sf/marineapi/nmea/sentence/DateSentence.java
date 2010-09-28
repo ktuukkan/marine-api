@@ -41,7 +41,7 @@ public interface DateSentence extends Sentence {
      * to 21th century, while values greater than pivot are assigned to 20th
      * century.
      */
-    public static final int PIVOT_YEAR = 50;
+    static final int PIVOT_YEAR = 50;
 
     /**
      * Parses the date information and returns a java.util.Date. Sub-second
@@ -59,7 +59,7 @@ public interface DateSentence extends Sentence {
      * 
      * @param d
      */
-    // void setDate(Date d);
+    // TODO void setDate(Date d);
 
     /**
      * Get day of UTC date.

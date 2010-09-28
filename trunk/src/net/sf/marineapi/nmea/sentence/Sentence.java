@@ -31,40 +31,40 @@ public interface Sentence {
     /**
      * Address field index, the first field of all sentences.
      */
-    final static int ADDRESS_FIELD = 0;
+    static final int ADDRESS_FIELD = 0;
 
     /**
      * Sentence begin character
      */
-    final static char BEGIN_CHAR = '$';
+    static final char BEGIN_CHAR = '$';
 
     /**
      * Checksum field delimiter char
      */
-    final static char CHECKSUM_DELIMITER = '*';
+    static final char CHECKSUM_DELIMITER = '*';
 
     /**
      * Sentence data fields delimiter char
      */
-    final static char FIELD_DELIMITER = ',';
+    static final char FIELD_DELIMITER = ',';
 
     /**
      * Maximum length of NMEA 0183 sentences, including <code>BEGIN_CHAR</code>
      * and <code>TERMINATOR</code>.
      */
-    final static int MAX_LENGTH = 82;
+    static final int MAX_LENGTH = 82;
 
     /**
      * Sentence terminator (&lt;CR&gt;&lt;LF&gt;)
      */
-    final static String TERMINATOR = "\r\n";
+    static final String TERMINATOR = "\r\n";
 
     /**
      * Returns the String representation of sentence, in NMEA 0183 format.
      * 
      * @return Sentence String
      */
-    public String toString();
+    String toString();
 
     /**
      * Get the sentence ID that specifies sentence type. ID is the last three
