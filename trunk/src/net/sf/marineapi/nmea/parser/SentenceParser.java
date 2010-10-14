@@ -23,6 +23,7 @@ package net.sf.marineapi.nmea.parser;
 import java.util.ArrayList;
 import java.util.List;
 
+import net.sf.marineapi.nmea.sentence.Checksum;
 import net.sf.marineapi.nmea.sentence.NMEA;
 import net.sf.marineapi.nmea.sentence.Sentence;
 import net.sf.marineapi.nmea.sentence.SentenceId;
@@ -239,7 +240,7 @@ public class SentenceParser implements Sentence {
             sb.append(field);
         }
 
-        String sentence = NMEA.appendChecksum(sb.toString());
+        String sentence = Checksum.add(sb.toString());
 
         return sentence;
     }

@@ -33,62 +33,6 @@ public final class NMEA {
     }
 
     /**
-     * Calculate and append a checksum to sentence String. If the sentence
-     * already contains the checksum, it is replaced with a new one.
-     * <p>
-     * For example, <br>
-     * <code>$GPGLL,6011.552,N,02501.941,E,120045,A</code><br>
-     * results in <br>
-     * <code>$GPGLL,6011.552,N,02501.941,E,120045,A*26</code>
-     * <p>
-     * <code>$GPGLL,6011.552,N,02501.941,E,120045,A*00</code><br>
-     * results in <br>
-     * <code>$GPGLL,6011.552,N,02501.941,E,120045,A*26</code>
-     * 
-     * @param sentence Sentence String without checksum.
-     * @return The given String with checksum.
-     */
-    public static String appendChecksum(String sentence) {
-
-        String str = sentence;
-
-        int i = str.indexOf(Sentence.CHECKSUM_DELIMITER);
-        if (i != -1) {
-            str = str.substring(0, i);
-        }
-
-        return str + Sentence.CHECKSUM_DELIMITER + NMEA.calculateChecksum(str);
-    }
-
-    /**
-     * Calculates the checksum of sentence String. Checksum is a XOR of each
-     * character between, but not including, the $ and * characters. The
-     * resulting hex value is returned as a String in two digit format, padded
-     * with a leading zero if necessary. The method will calculate the checksum
-     * for any given String and the sentence validity is not checked.
-     * 
-     * @param nmea NMEA Sentence with or without checksum.
-     * @return Checksum String (Hex value, with leading zero if necessary)
-     */
-    public static String calculateChecksum(String nmea) {
-        char ch;
-        int sum = 0;
-        for (int i = 0; i < nmea.length(); i++) {
-            ch = nmea.charAt(i);
-            if (ch == Sentence.BEGIN_CHAR) {
-                continue;
-            } else if (ch == Sentence.CHECKSUM_DELIMITER) {
-                break;
-            } else if (sum == 0) {
-                sum = (byte) ch;
-            } else {
-                sum ^= (byte) ch;
-            }
-        }
-        return String.format("%02X", sum);
-    }
-
-    /**
      * Validates of the specified String against NMEA 0183 sentence format.
      * <p>
      * Sentence is considered valid if it (1) begins with '$' followed by 5 char
@@ -118,7 +62,7 @@ public final class NMEA {
         int start = nmea.indexOf(Sentence.CHECKSUM_DELIMITER) + 1;
         String chk = nmea.substring(start, nmea.length());
 
-        return nmea.matches(re) && chk.equals(NMEA.calculateChecksum(nmea));
+        return nmea.matches(re) && chk.equals(Checksum.calculate(nmea));
     }
 
 }
