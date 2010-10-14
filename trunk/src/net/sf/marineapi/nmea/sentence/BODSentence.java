@@ -23,9 +23,9 @@ package net.sf.marineapi.nmea.sentence;
 import net.sf.marineapi.nmea.parser.DataNotAvailableException;
 
 /**
- * Interface for BOD sentence type. True and magnetic bearing from origin to
- * destination, presented in degrees. This sentence is transmitted by a GPS in
- * the GOTO mode (with or without active route).
+ * True and magnetic bearing from origin to destination in degrees. This
+ * sentence is transmitted by a GPS in the GOTO mode (with or without active
+ * route).
  * <p>
  * Example:<br>
  * <code>$GPBOD,234.9,T,228.8,M,RUSKI,*1D</code>

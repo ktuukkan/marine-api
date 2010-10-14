@@ -25,13 +25,13 @@ import java.util.List;
 import net.sf.marineapi.nmea.util.SatelliteInfo;
 
 /**
- * Interface for GSV sentence type. Detailed satellite data; satellites in view,
- * satellite elevation, azimuth and signal noise ratio (SNR). GSV sentences are
- * transmitted typically in groups of two or three sentences, depending on the
- * number of satellites in view. Each GSV sentence may contain information about
- * up to four satellites. The last sentence in sequence may contain empty
- * satellite information fields. The empty fields may also be omitted, depending
- * on the device model and manufacturer.
+ * Detailed GPS satellite data; satellites in view, satellite elevation, azimuth
+ * and signal noise ratio (SNR). GSV sentences are transmitted typically in
+ * groups of two or three sentences, depending on the number of satellites in
+ * view. Each GSV sentence may contain information about up to four satellites.
+ * The last sentence in sequence may contain empty satellite information fields.
+ * The empty fields may also be omitted, depending on the device model and
+ * manufacturer.
  * <p>
  * Example: <br>
  * <code>$GPGSV,3,2,12,15,56,182,51,17,38,163,47,18,63,058,50,21,53,329,47*73</code>

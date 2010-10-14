@@ -24,8 +24,7 @@ import net.sf.marineapi.nmea.parser.DataNotAvailableException;
 import net.sf.marineapi.nmea.parser.ParseException;
 
 /**
- * Interface for ZDA sentence type. UTC time and date with local time zone
- * offset.
+ * UTC time and date with local time zone offset.
  * <p>
  * Example: <br>
  * <code>$GPZDA,032915,07,08,2004,00,00*4D</code>

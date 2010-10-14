@@ -24,9 +24,9 @@ import net.sf.marineapi.nmea.parser.DataNotAvailableException;
 import net.sf.marineapi.nmea.util.GpsMode;
 
 /**
- * Interface for VTG sentence type. True and magnetic course over ground (COG),
- * speed in km/h and knots (nautical miles per hour). Mode (last field, "A" in
- * example) may not always be available, depending on the NMEA version.
+ * Course and speed over the ground. True and magnetic COG, speed provided in
+ * km/h and knots. Mode (the last "A" in example sentence) was added in NMEA 2.3
+ * and may not always be available.
  * <p>
  * Example: <br>
  * <code>$GPVTG,46.96,T,,,16.89,N,31.28,K,A*43</code>

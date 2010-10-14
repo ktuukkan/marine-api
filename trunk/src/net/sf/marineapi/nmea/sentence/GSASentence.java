@@ -25,10 +25,9 @@ import net.sf.marineapi.nmea.util.GpsFixStatus;
 import net.sf.marineapi.nmea.util.GpsMode;
 
 /**
- * Interface for GSA sentence type. Precision of GPS fix and list of active
- * satellites. Dilution of precision (DOP) is an indication of the effect of
- * satellite geometry on the accuracy of the fix. It is a unitless number where
- * smaller is better.
+ * Precision of GPS fix and list of active satellites. Dilution of precision
+ * (DOP) is an indication of the effect of satellite geometry on the accuracy of
+ * the fix. It is a unitless number where smaller is better.
  * <p>
  * Example:<br>
  * <code>$GPGSA,A,3,02,,,07,,09,24,26,,,,,1.6,1.6,1.0*3D</code>

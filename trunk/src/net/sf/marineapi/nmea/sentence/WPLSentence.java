@@ -24,8 +24,8 @@ import net.sf.marineapi.nmea.parser.DataNotAvailableException;
 import net.sf.marineapi.nmea.util.Waypoint;
 
 /**
- * Interface for WPL sentence type. Waypoint location (latitude/longitude) and
- * waypoint ID. This sentence is transmitted by some GPS models in GOTO mode.
+ * Destination waypoint location and ID. This sentence is transmitted by some
+ * GPS models in GOTO mode.
  * <p>
  * Example: <br>
  * <code>$GPWPL,5536.200,N,01436.500,E,RUSKI*1F</code>
