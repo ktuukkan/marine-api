@@ -25,8 +25,8 @@ import net.sf.marineapi.nmea.util.GpsFixQuality;
 import net.sf.marineapi.nmea.util.Units;
 
 /**
- * Interface for GGA sentence type. Global Positioning System fix data; time,
- * position and other fix related data for a GPS receiver.
+ * Global Positioning System fix data. Current position, time and other fix
+ * related data for a GPS receiver.
  * <p>
  * Example:<br>
  * <code>$GPGGA,120044,6011.552,N,02501.941,E,1,00,2.0,28.0,M,19.6,M,,*79</code>

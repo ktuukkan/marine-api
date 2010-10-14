@@ -24,7 +24,7 @@ import net.sf.marineapi.nmea.parser.DataNotAvailableException;
 import net.sf.marineapi.nmea.util.Position;
 
 /**
- * Common interface for sentences that contain geographic location (lat/lon).
+ * Common interface for sentences that contain geographic position.
  * 
  * @author Kimmo Tuukkanen
  * @version $Revision$

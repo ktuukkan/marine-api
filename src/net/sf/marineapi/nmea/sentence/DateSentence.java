@@ -26,8 +26,8 @@ import net.sf.marineapi.nmea.parser.DataNotAvailableException;
 import net.sf.marineapi.nmea.parser.ParseException;
 
 /**
- * Common interface for sentences that contain UTC date information. Notice that
- * some sentences contain only time without date information.
+ * Sentences that contains date information. Notice that some sentences may
+ * contain only time without the date.
  * 
  * @author Kimmo Tuukkanen
  * @version $Revision$

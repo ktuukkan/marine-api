@@ -23,8 +23,8 @@ package net.sf.marineapi.nmea.sentence;
 import net.sf.marineapi.nmea.util.Time;
 
 /**
- * Interface for sentences that provide current UTC time. Notice that some
- * sentences contain only UTC time, while others may provide also date.
+ * Interface for sentences that provide UTC time. Notice that some sentences
+ * contain only UTC time, while others may provide also date.
  * 
  * @author Kimmo Tuukkanen
  * @version $Revision$

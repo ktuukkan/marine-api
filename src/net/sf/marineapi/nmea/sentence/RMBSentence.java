@@ -26,9 +26,8 @@ import net.sf.marineapi.nmea.util.Direction;
 import net.sf.marineapi.nmea.util.Waypoint;
 
 /**
- * Interface for RMB sentence type. Recommended minimum navigation information.
- * This sentence is transmitted by a GPS receiver when a destination waypoint is
- * active (GOTO mode).
+ * Recommended minimum navigation information. This sentence is transmitted by a
+ * GPS receiver when a destination waypoint is active (GOTO mode).
  * <p>
  * Example:<br>
  * <code>$GPRMB,A,0.00,R,,RUSKI,5536.200,N,01436.500,E,432.3,234.9,,V*58</code>

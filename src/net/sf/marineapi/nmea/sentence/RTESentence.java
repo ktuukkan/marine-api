@@ -24,7 +24,7 @@ import net.sf.marineapi.nmea.parser.DataNotAvailableException;
 import net.sf.marineapi.nmea.util.RouteType;
 
 /**
- * Interface for RTE sentence type. Route data and list of waypoint IDs.
+ * GPS route data and list of waypoints.
  * <p>
  * Example:<br>
  * <code>$GPRTE,1,1,c,0,MELIN,RUSKI,KNUDAN*25</code>

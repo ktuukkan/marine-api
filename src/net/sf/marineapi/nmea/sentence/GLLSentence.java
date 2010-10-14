@@ -24,7 +24,7 @@ import net.sf.marineapi.nmea.parser.DataNotAvailableException;
 import net.sf.marineapi.nmea.util.DataStatus;
 
 /**
- * Interface for GLL sentence type. Geographic position (latitude/longitude).
+ * Current geographic position and time.
  * <p>
  * Example: <br>
  * <code>$GPGLL,6011.552,N,02501.941,E,120045,A*26</code>
