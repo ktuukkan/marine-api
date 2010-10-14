@@ -22,7 +22,7 @@ package net.sf.marineapi.nmea.sentence;
 
 import net.sf.marineapi.nmea.parser.DataNotAvailableException;
 import net.sf.marineapi.nmea.util.DataStatus;
-import net.sf.marineapi.nmea.util.Direction;
+import net.sf.marineapi.nmea.util.CompassPoint;
 import net.sf.marineapi.nmea.util.GpsMode;
 
 /**
@@ -69,7 +69,7 @@ public interface RMCSentence extends PositionSentence, TimeSentence,
      * @throws DataNotAvailableException If the data is not available.
      * @throws ParseException If the field contains unexpected or illegal value.
      */
-    Direction getDirectionOfVariation();
+    CompassPoint getDirectionOfVariation();
 
     /**
      * Get the GPS operating mode.
@@ -123,7 +123,7 @@ public interface RMCSentence extends PositionSentence, TimeSentence,
      * @throws IllegalArgumentException If specified Direction is other than
      *             defined as valid for param <code>dir</code>.
      */
-    void setDirectionOfVariation(Direction dir);
+    void setDirectionOfVariation(CompassPoint dir);
 
     /**
      * Set the GPS operation mode.

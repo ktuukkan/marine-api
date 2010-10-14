@@ -5,7 +5,7 @@ import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 import net.sf.marineapi.nmea.util.DataStatus;
-import net.sf.marineapi.nmea.util.Direction;
+import net.sf.marineapi.nmea.util.CompassPoint;
 import net.sf.marineapi.nmea.util.Position;
 import net.sf.marineapi.nmea.util.Time;
 
@@ -71,8 +71,8 @@ public class GLLTest {
         assertNotNull(p);
         assertEquals(lat, p.getLatitude(), 0.0000001);
         assertEquals(lon, p.getLongitude(), 0.0000001);
-        assertEquals(Direction.NORTH, p.getLatHemisphere());
-        assertEquals(Direction.EAST, p.getLonHemisphere());
+        assertEquals(CompassPoint.NORTH, p.getLatHemisphere());
+        assertEquals(CompassPoint.EAST, p.getLonHemisphere());
     }
 
     /**
@@ -82,7 +82,7 @@ public class GLLTest {
     @Test
     public void testSetPositionWithZeroValues() {
 
-        Position p1 = new Position(0.0, Direction.NORTH, 0.0, Direction.EAST);
+        Position p1 = new Position(0.0, CompassPoint.NORTH, 0.0, CompassPoint.EAST);
         instance.setPosition(p1);
 
         String s1 = instance.toString();
@@ -104,7 +104,7 @@ public class GLLTest {
 
         final double lat = 60 + (11.552 / 60);
         final double lon = 25 + (1.941 / 60);
-        Position p2 = new Position(lat, Direction.SOUTH, lon, Direction.WEST);
+        Position p2 = new Position(lat, CompassPoint.SOUTH, lon, CompassPoint.WEST);
         instance.setPosition(p2);
 
         final String s2 = instance.toString();

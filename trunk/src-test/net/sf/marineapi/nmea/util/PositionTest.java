@@ -16,7 +16,7 @@ public class PositionTest {
 	 */
 	@Before
 	public void setUp() {
-		instance = new Position(60.0, Direction.NORTH, 25.0, Direction.EAST,
+		instance = new Position(60.0, CompassPoint.NORTH, 25.0, CompassPoint.EAST,
 				Datum.WGS84);
 	}
 
@@ -113,7 +113,7 @@ public class PositionTest {
 	 */
 	@Test
 	public void testGetLatHemisphere() {
-		assertEquals(Direction.NORTH, instance.getLatHemisphere());
+		assertEquals(CompassPoint.NORTH, instance.getLatHemisphere());
 	}
 
 	/**
@@ -121,10 +121,10 @@ public class PositionTest {
 	 */
 	@Test
 	public void testSetLatHemisphere() {
-		instance.setLatHemisphere(Direction.SOUTH);
-		assertEquals(Direction.SOUTH, instance.getLatHemisphere());
-		instance.setLatHemisphere(Direction.NORTH);
-		assertEquals(Direction.NORTH, instance.getLatHemisphere());
+		instance.setLatHemisphere(CompassPoint.SOUTH);
+		assertEquals(CompassPoint.SOUTH, instance.getLatHemisphere());
+		instance.setLatHemisphere(CompassPoint.NORTH);
+		assertEquals(CompassPoint.NORTH, instance.getLatHemisphere());
 	}
 
 	/**
@@ -133,7 +133,7 @@ public class PositionTest {
 	@Test
 	public void testSetLatHemisphereEast() {
 		try {
-			instance.setLatHemisphere(Direction.EAST);
+			instance.setLatHemisphere(CompassPoint.EAST);
 			fail("Did not throw IllegalArgumentExcetpion");
 		} catch (IllegalArgumentException e) {
 			// pass
@@ -148,7 +148,7 @@ public class PositionTest {
 	@Test
 	public void testSetLatHemisphereWest() {
 		try {
-			instance.setLatHemisphere(Direction.WEST);
+			instance.setLatHemisphere(CompassPoint.WEST);
 			fail("Did not throw IllegalArgumentExcetpion");
 		} catch (IllegalArgumentException e) {
 			// pass
@@ -162,7 +162,7 @@ public class PositionTest {
 	 */
 	@Test
 	public void testGetLonHemisphere() {
-		assertEquals(Direction.EAST, instance.getLonHemisphere());
+		assertEquals(CompassPoint.EAST, instance.getLonHemisphere());
 	}
 
 	/**
@@ -170,10 +170,10 @@ public class PositionTest {
 	 */
 	@Test
 	public void testSetLongitudeHemisphere() {
-		instance.setLonHemisphere(Direction.WEST);
-		assertEquals(Direction.WEST, instance.getLonHemisphere());
-		instance.setLonHemisphere(Direction.EAST);
-		assertEquals(Direction.EAST, instance.getLonHemisphere());
+		instance.setLonHemisphere(CompassPoint.WEST);
+		assertEquals(CompassPoint.WEST, instance.getLonHemisphere());
+		instance.setLonHemisphere(CompassPoint.EAST);
+		assertEquals(CompassPoint.EAST, instance.getLonHemisphere());
 	}
 
 	/**
@@ -182,7 +182,7 @@ public class PositionTest {
 	@Test
 	public void testSetLongitudeHemisphereNorth() {
 		try {
-			instance.setLonHemisphere(Direction.NORTH);
+			instance.setLonHemisphere(CompassPoint.NORTH);
 			fail("Did not throw IllegalArgumentExcetpion");
 		} catch (IllegalArgumentException e) {
 			// pass
@@ -197,7 +197,7 @@ public class PositionTest {
 	@Test
 	public void testSetLongitudeHemisphereSouth() {
 		try {
-			instance.setLonHemisphere(Direction.SOUTH);
+			instance.setLonHemisphere(CompassPoint.SOUTH);
 			fail("Did not throw IllegalArgumentExcetpion");
 		} catch (IllegalArgumentException e) {
 			// pass
@@ -220,8 +220,8 @@ public class PositionTest {
 	@Test
 	public void testDistanceTo() {
 
-		Position origin = new Position(0.123, Direction.NORTH, 25.0,
-				Direction.EAST);
+		Position origin = new Position(0.123, CompassPoint.NORTH, 25.0,
+				CompassPoint.EAST);
 
 		// distance to "here" must be zero
 		assertEquals(0.0, origin.distanceTo(origin), 0.00001);
@@ -229,8 +229,8 @@ public class PositionTest {
 		for (int n = 0; n < 90; n++) {
 
 			// 1 degree north from instance's position
-			Position destination = new Position(0.123 + n, Direction.NORTH,
-					25.0, Direction.EAST);
+			Position destination = new Position(0.123 + n, CompassPoint.NORTH,
+					25.0, CompassPoint.EAST);
 
 			double distance = origin.distanceTo(destination);
 

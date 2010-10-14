@@ -22,6 +22,7 @@ package net.sf.marineapi.nmea.parser;
 
 import net.sf.marineapi.nmea.sentence.RMBSentence;
 import net.sf.marineapi.nmea.sentence.SentenceId;
+import net.sf.marineapi.nmea.util.CompassPoint;
 import net.sf.marineapi.nmea.util.DataStatus;
 import net.sf.marineapi.nmea.util.Direction;
 import net.sf.marineapi.nmea.util.Waypoint;
@@ -90,8 +91,8 @@ class RMBParser extends PositionParser implements RMBSentence {
         String id = getStringValue(DEST_WPT);
         double lat = parseLatitude(DEST_LAT);
         double lon = parseLongitude(DEST_LON);
-        Direction lath = parseHemisphereLat(DEST_LAT_HEM);
-        Direction lonh = parseHemisphereLon(DEST_LON_HEM);
+        CompassPoint lath = parseHemisphereLat(DEST_LAT_HEM);
+        CompassPoint lonh = parseHemisphereLon(DEST_LON_HEM);
         return new Waypoint(id, lat, lath, lon, lonh);
     }
 
@@ -224,7 +225,7 @@ class RMBParser extends PositionParser implements RMBSentence {
     public void setSteerTo(Direction steer) {
         if (steer != Direction.LEFT && steer != Direction.RIGHT) {
             throw new IllegalArgumentException(
-                    "Expected steer-to direction is LEFT or RIGHT.");
+                    "Expected steer-to is LEFT or RIGHT.");
         }
         setCharValue(STEER_TO, steer.toChar());
     }

@@ -9,7 +9,7 @@ import java.util.Date;
 import java.util.GregorianCalendar;
 
 import net.sf.marineapi.nmea.util.DataStatus;
-import net.sf.marineapi.nmea.util.Direction;
+import net.sf.marineapi.nmea.util.CompassPoint;
 import net.sf.marineapi.nmea.util.GpsMode;
 import net.sf.marineapi.nmea.util.Position;
 import net.sf.marineapi.nmea.util.Time;
@@ -142,7 +142,7 @@ public class RMCTest {
     @Test
     public void testSetVariation() {
         rmc.setVariation(1.5);
-        rmc.setDirectionOfVariation(Direction.WEST);
+        rmc.setDirectionOfVariation(CompassPoint.WEST);
         assertEquals(1.5, rmc.getVariation(), 0.001);
     }
 
@@ -154,7 +154,7 @@ public class RMCTest {
     @Test
     public void testGetDirectionOfVariation() {
         assertTrue(rmc.getVariation() < 0);
-        assertEquals(Direction.EAST, rmc.getDirectionOfVariation());
+        assertEquals(CompassPoint.EAST, rmc.getDirectionOfVariation());
     }
 
     /**
@@ -164,10 +164,10 @@ public class RMCTest {
      */
     @Test
     public void testSetDirectionOfVariation() {
-        rmc.setDirectionOfVariation(Direction.WEST);
-        assertEquals(Direction.WEST, rmc.getDirectionOfVariation());
-        rmc.setDirectionOfVariation(Direction.EAST);
-        assertEquals(Direction.EAST, rmc.getDirectionOfVariation());
+        rmc.setDirectionOfVariation(CompassPoint.WEST);
+        assertEquals(CompassPoint.WEST, rmc.getDirectionOfVariation());
+        rmc.setDirectionOfVariation(CompassPoint.EAST);
+        assertEquals(CompassPoint.EAST, rmc.getDirectionOfVariation());
     }
 
     /**
@@ -178,7 +178,7 @@ public class RMCTest {
     @Test
     public void testSetDirectionOfVariationWithInvalidDirection() {
         try {
-            rmc.setDirectionOfVariation(Direction.NORTH);
+            rmc.setDirectionOfVariation(CompassPoint.NORTH);
             fail("Did not throw exception");
         } catch (IllegalArgumentException e) {
             // pass
@@ -200,15 +200,15 @@ public class RMCTest {
         assertNotNull(p);
         assertEquals(lat, p.getLatitude(), 0.0000001);
         assertEquals(lon, p.getLongitude(), 0.0000001);
-        assertEquals(Direction.NORTH, p.getLatHemisphere());
-        assertEquals(Direction.EAST, p.getLonHemisphere());
+        assertEquals(CompassPoint.NORTH, p.getLatHemisphere());
+        assertEquals(CompassPoint.EAST, p.getLonHemisphere());
     }
 
     @Test
     public void testSetPosition() {
         final double lat = 61 + (1.111 / 60);
         final double lon = 27 + (7.777 / 60);
-        Position p = new Position(lat, Direction.NORTH, lon, Direction.EAST);
+        Position p = new Position(lat, CompassPoint.NORTH, lon, CompassPoint.EAST);
         rmc.setPosition(p);
 
         String str = rmc.toString();
@@ -218,8 +218,8 @@ public class RMCTest {
         assertNotNull(wp);
         assertEquals(lat, wp.getLatitude(), 0.0000001);
         assertEquals(lon, wp.getLongitude(), 0.0000001);
-        assertEquals(Direction.NORTH, wp.getLatHemisphere());
-        assertEquals(Direction.EAST, wp.getLonHemisphere());
+        assertEquals(CompassPoint.NORTH, wp.getLatHemisphere());
+        assertEquals(CompassPoint.EAST, wp.getLonHemisphere());
     }
 
     /**

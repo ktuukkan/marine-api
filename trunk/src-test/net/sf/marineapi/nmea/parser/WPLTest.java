@@ -5,7 +5,7 @@ import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 import net.sf.marineapi.nmea.sentence.WPLSentence;
-import net.sf.marineapi.nmea.util.Direction;
+import net.sf.marineapi.nmea.util.CompassPoint;
 import net.sf.marineapi.nmea.util.Waypoint;
 
 import org.junit.Before;
@@ -45,8 +45,8 @@ public class WPLTest {
 		
 		assertNotNull(wp);
 		assertEquals("RUSKI", wp.getId());
-		assertEquals(Direction.NORTH, wp.getLatHemisphere());
-		assertEquals(Direction.EAST, wp.getLonHemisphere());
+		assertEquals(CompassPoint.NORTH, wp.getLatHemisphere());
+		assertEquals(CompassPoint.EAST, wp.getLonHemisphere());
 		assertEquals(lat, new Double(wp.getLatitude()));
 		assertEquals(lon, new Double(wp.getLongitude()));
 	}
@@ -58,8 +58,8 @@ public class WPLTest {
 	@Test
 	public void testSetWaypointWithZeroValues() {
 
-		Waypoint p1 = new Waypoint("WAYP1", 0.0, Direction.NORTH, 0.0,
-				Direction.EAST);
+		Waypoint p1 = new Waypoint("WAYP1", 0.0, CompassPoint.NORTH, 0.0,
+				CompassPoint.EAST);
 		wpl.setWaypoint(p1);
 
 		String s1 = wpl.toString();
@@ -81,8 +81,8 @@ public class WPLTest {
 		final double lat = 60 + (11.552 / 60);
 		final double lon = 25 + (1.941 / 60);
 		
-		Waypoint p2 = new Waypoint("WAYP2", lat, Direction.SOUTH, lon,
-				Direction.WEST);
+		Waypoint p2 = new Waypoint("WAYP2", lat, CompassPoint.SOUTH, lon,
+				CompassPoint.WEST);
 
 		wpl.setWaypoint(p2);
 

@@ -47,8 +47,8 @@ public class Waypoint extends Position {
      * @param lon Longitude degrees of waypoint position
      * @param lonh Hemisphere of longitude
      */
-    public Waypoint(String id, double lat, Direction lath, double lon,
-            Direction lonh) {
+    public Waypoint(String id, double lat, CompassPoint lath, double lon,
+            CompassPoint lonh) {
 
         super(lat, lath, lon, lonh);
         this.id = id;
@@ -64,8 +64,8 @@ public class Waypoint extends Position {
      * @param lonh Hemisphere of longitude
      * @param datum Position datum, i.e. the coordinate system.
      */
-    public Waypoint(String id, double lat, Direction lath, double lon,
-            Direction lonh, Datum datum) {
+    public Waypoint(String id, double lat, CompassPoint lath, double lon,
+            CompassPoint lonh, Datum datum) {
 
         super(lat, lath, lon, lonh, datum);
         this.id = id;

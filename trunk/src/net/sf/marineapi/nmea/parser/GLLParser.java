@@ -23,7 +23,7 @@ package net.sf.marineapi.nmea.parser;
 import net.sf.marineapi.nmea.sentence.GLLSentence;
 import net.sf.marineapi.nmea.sentence.SentenceId;
 import net.sf.marineapi.nmea.util.DataStatus;
-import net.sf.marineapi.nmea.util.Direction;
+import net.sf.marineapi.nmea.util.CompassPoint;
 import net.sf.marineapi.nmea.util.Position;
 import net.sf.marineapi.nmea.util.Time;
 
@@ -61,8 +61,8 @@ class GLLParser extends PositionParser implements GLLSentence {
     public Position getPosition() {
         double lat = parseLatitude(LATITUDE);
         double lon = parseLongitude(LONGITUDE);
-        Direction lath = parseHemisphereLat(LAT_HEMISPHERE);
-        Direction lonh = parseHemisphereLon(LON_HEMISPHERE);
+        CompassPoint lath = parseHemisphereLat(LAT_HEMISPHERE);
+        CompassPoint lonh = parseHemisphereLon(LON_HEMISPHERE);
         return new Position(lat, lath, lon, lonh);
     }
 

@@ -6,6 +6,7 @@ import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 import net.sf.marineapi.nmea.sentence.RMBSentence;
+import net.sf.marineapi.nmea.util.CompassPoint;
 import net.sf.marineapi.nmea.util.DataStatus;
 import net.sf.marineapi.nmea.util.Direction;
 import net.sf.marineapi.nmea.util.Waypoint;
@@ -88,7 +89,7 @@ public class RMBTest {
 
     /**
      * Test method for
-     * {@link net.sf.marineapi.nmea.parser.RMBParser#setSteerTo(Direction)}.
+     * {@link net.sf.marineapi.nmea.parser.RMBParser#setSteerTo(CompassPoint)}.
      */
     @Test
     public void testSetSteerTo() {
@@ -99,12 +100,12 @@ public class RMBTest {
 
     /**
      * Test method for
-     * {@link net.sf.marineapi.nmea.parser.RMBParser#setSteerTo(Direction)}.
+     * {@link net.sf.marineapi.nmea.parser.RMBParser#setSteerTo(CompassPoint)}.
      */
     @Test
-    public void testSetSteerToWithInvalidDirection() {
+    public void testSetSteerToWithNull() {
         try {
-            rmb.setSteerTo(Direction.NORTH);
+            rmb.setSteerTo(null);
             fail("Did not throw IllegalArgumentException");
         } catch (IllegalArgumentException e) {
             assertTrue(e.getMessage().contains("LEFT or RIGHT"));
@@ -155,8 +156,8 @@ public class RMBTest {
         assertEquals(id, wp.getId());
         assertEquals(lat, wp.getLatitude(), 0.0000001);
         assertEquals(lon, wp.getLongitude(), 0.0000001);
-        assertEquals(Direction.NORTH, wp.getLatHemisphere());
-        assertEquals(Direction.EAST, wp.getLonHemisphere());
+        assertEquals(CompassPoint.NORTH, wp.getLatHemisphere());
+        assertEquals(CompassPoint.EAST, wp.getLonHemisphere());
     }
 
     /**
@@ -169,7 +170,8 @@ public class RMBTest {
         final String id = "MYDEST";
         final double lat = 61 + (1.111 / 60);
         final double lon = 27 + (7.777 / 60);
-        Waypoint d = new Waypoint(id, lat, Direction.NORTH, lon, Direction.EAST);
+        Waypoint d = new Waypoint(id, lat, CompassPoint.NORTH, lon,
+                CompassPoint.EAST);
 
         rmb.setDestination(d);
 
@@ -181,8 +183,8 @@ public class RMBTest {
         assertEquals(id, wp.getId());
         assertEquals(lat, wp.getLatitude(), 0.0000001);
         assertEquals(lon, wp.getLongitude(), 0.0000001);
-        assertEquals(Direction.NORTH, wp.getLatHemisphere());
-        assertEquals(Direction.EAST, wp.getLonHemisphere());
+        assertEquals(CompassPoint.NORTH, wp.getLatHemisphere());
+        assertEquals(CompassPoint.EAST, wp.getLonHemisphere());
     }
 
     /**

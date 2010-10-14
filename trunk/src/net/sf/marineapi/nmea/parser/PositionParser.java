@@ -24,7 +24,7 @@ import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
 
 import net.sf.marineapi.nmea.sentence.SentenceId;
-import net.sf.marineapi.nmea.util.Direction;
+import net.sf.marineapi.nmea.util.CompassPoint;
 
 /**
  * Abstract base class for sentence parsers that provide geographic position or
@@ -35,7 +35,7 @@ import net.sf.marineapi.nmea.util.Direction;
  * @author Kimmo Tuukkanen
  * @version $Revision$
  */
-public abstract class PositionParser extends SentenceParser {
+abstract class PositionParser extends SentenceParser {
 
     /**
      * Constructor.
@@ -53,10 +53,10 @@ public abstract class PositionParser extends SentenceParser {
      * @param index Index of field that contains the latitude hemisphere value.
      * @return Hemisphere of latitude
      */
-    protected Direction parseHemisphereLat(int index) {
+    protected CompassPoint parseHemisphereLat(int index) {
         char ch = getCharValue(index);
-        Direction d = Direction.valueOf(ch);
-        if (d != Direction.NORTH && d != Direction.SOUTH) {
+        CompassPoint d = CompassPoint.valueOf(ch);
+        if (d != CompassPoint.NORTH && d != CompassPoint.SOUTH) {
             throw new ParseException("Invalid latitude hemisphere '" + ch + "'");
         }
         return d;
@@ -68,10 +68,10 @@ public abstract class PositionParser extends SentenceParser {
      * @param index Field index for longitude hemisphere indicator
      * @return Hemisphere of longitude
      */
-    protected Direction parseHemisphereLon(int index) {
+    protected CompassPoint parseHemisphereLon(int index) {
         char ch = getCharValue(index);
-        Direction d = Direction.valueOf(ch);
-        if (d != Direction.EAST && d != Direction.WEST) {
+        CompassPoint d = CompassPoint.valueOf(ch);
+        if (d != CompassPoint.EAST && d != CompassPoint.WEST) {
             throw new ParseException("Invalid longitude hemisphere " + ch + "'");
         }
         return d;
@@ -113,8 +113,8 @@ public abstract class PositionParser extends SentenceParser {
      * @throws IllegalArgumentException If specified Direction is other than
      *             NORTH or SOUTH.
      */
-    protected void setLatHemisphere(int field, Direction hem) {
-        if (hem != Direction.NORTH && hem != Direction.SOUTH) {
+    protected void setLatHemisphere(int field, CompassPoint hem) {
+        if (hem != CompassPoint.NORTH && hem != CompassPoint.SOUTH) {
             throw new IllegalArgumentException("Invalid latitude hemisphere: "
                     + hem);
         }
@@ -169,8 +169,8 @@ public abstract class PositionParser extends SentenceParser {
      * @throws IllegalArgumentException If specified Direction is other than
      *             EAST or WEST.
      */
-    protected void setLonHemisphere(int field, Direction hem) {
-        if (hem != Direction.EAST && hem != Direction.WEST) {
+    protected void setLonHemisphere(int field, CompassPoint hem) {
+        if (hem != CompassPoint.EAST && hem != CompassPoint.WEST) {
             throw new IllegalArgumentException("Invalid longitude hemisphere: "
                     + hem);
         }

@@ -34,9 +34,9 @@ public class Position {
     // longitude degrees
     private double longitude;
     // hemisphere of latitude
-    private Direction lathem;
+    private CompassPoint lathem;
     // hemisphere of longitude
-    private Direction lonhem;
+    private CompassPoint lonhem;
     // altitude
     private double altitude = -0.0;
     // datum/coordinate system
@@ -51,7 +51,7 @@ public class Position {
      * @param lon Longitude degrees
      * @param lonh Hemisphere of longitude
      */
-    public Position(double lat, Direction lath, double lon, Direction lonh) {
+    public Position(double lat, CompassPoint lath, double lon, CompassPoint lonh) {
         setLatitude(lat);
         setLongitude(lon);
         setLatHemisphere(lath);
@@ -68,7 +68,7 @@ public class Position {
      * @param lonh Hemisphere of longitude
      * @param datum Datum
      */
-    public Position(double lat, Direction lath, double lon, Direction lonh,
+    public Position(double lat, CompassPoint lath, double lon, CompassPoint lonh,
             Datum datum) {
         this(lat, lath, lon, lonh);
         this.datum = datum;
@@ -120,7 +120,7 @@ public class Position {
      * 
      * @return Direction.NORTH or Direction.SOUTH
      */
-    public Direction getLatHemisphere() {
+    public CompassPoint getLatHemisphere() {
         return this.lathem;
     }
 
@@ -147,7 +147,7 @@ public class Position {
      * 
      * @return CompassPoint.E or CompassPoint.W
      */
-    public Direction getLonHemisphere() {
+    public CompassPoint getLonHemisphere() {
         return this.lonhem;
     }
 
@@ -167,8 +167,8 @@ public class Position {
      * @throws IllegalArgumentException If specified hemisphere is other than
      *             NORTH or SOUTH.
      */
-    public void setLatHemisphere(Direction lathem) {
-        if (Direction.NORTH.equals(lathem) || Direction.SOUTH.equals(lathem)) {
+    public void setLatHemisphere(CompassPoint lathem) {
+        if (CompassPoint.NORTH.equals(lathem) || CompassPoint.SOUTH.equals(lathem)) {
             this.lathem = lathem;
         } else {
             throw new IllegalArgumentException(
@@ -213,8 +213,8 @@ public class Position {
      * @throws IllegalArgumentException If specified hemisphere is other than
      *             EAST or WEST.
      */
-    public void setLonHemisphere(Direction lonhem) {
-        if (Direction.EAST.equals(lonhem) || Direction.WEST.equals(lonhem)) {
+    public void setLonHemisphere(CompassPoint lonhem) {
+        if (CompassPoint.EAST.equals(lonhem) || CompassPoint.WEST.equals(lonhem)) {
             this.lonhem = lonhem;
         } else {
             throw new IllegalArgumentException(

@@ -26,7 +26,7 @@ import java.util.GregorianCalendar;
 import net.sf.marineapi.nmea.sentence.RMCSentence;
 import net.sf.marineapi.nmea.sentence.SentenceId;
 import net.sf.marineapi.nmea.util.DataStatus;
-import net.sf.marineapi.nmea.util.Direction;
+import net.sf.marineapi.nmea.util.CompassPoint;
 import net.sf.marineapi.nmea.util.GpsMode;
 import net.sf.marineapi.nmea.util.Position;
 import net.sf.marineapi.nmea.util.Time;
@@ -98,8 +98,8 @@ class RMCParser extends PositionParser implements RMCSentence {
      * (non-Javadoc)
      * @see net.sf.marineapi.nmea.sentence.RMCSentence#getDirectionOfVariation()
      */
-    public Direction getDirectionOfVariation() {
-        return Direction.valueOf(getCharValue(VAR_HEMISPHERE));
+    public CompassPoint getDirectionOfVariation() {
+        return CompassPoint.valueOf(getCharValue(VAR_HEMISPHERE));
     }
 
     /*
@@ -117,8 +117,8 @@ class RMCParser extends PositionParser implements RMCSentence {
     public Position getPosition() {
         double lat = parseLatitude(LATITUDE);
         double lon = parseLongitude(LONGITUDE);
-        Direction lath = parseHemisphereLat(LAT_HEMISPHERE);
-        Direction lonh = parseHemisphereLon(LON_HEMISPHERE);
+        CompassPoint lath = parseHemisphereLat(LAT_HEMISPHERE);
+        CompassPoint lonh = parseHemisphereLon(LON_HEMISPHERE);
         return new Position(lat, lath, lon, lonh);
     }
 
@@ -182,7 +182,7 @@ class RMCParser extends PositionParser implements RMCSentence {
      */
     public double getVariation() {
         double variation = getDoubleValue(MAG_VARIATION);
-        if (Direction.EAST == getDirectionOfVariation() && variation > 0) {
+        if (CompassPoint.EAST == getDirectionOfVariation() && variation > 0) {
             variation = -(variation);
         }
         return variation;
@@ -202,8 +202,8 @@ class RMCParser extends PositionParser implements RMCSentence {
      * net.sf.marineapi.nmea.sentence.RMCSentence#setDirectionOfVariation(net
      * .sf.marineapi.nmea.util.Direction)
      */
-    public void setDirectionOfVariation(Direction dir) {
-        if (dir != Direction.EAST && dir != Direction.WEST) {
+    public void setDirectionOfVariation(CompassPoint dir) {
+        if (dir != CompassPoint.EAST && dir != CompassPoint.WEST) {
             throw new IllegalArgumentException(
                     "Invalid variation direction, expected EAST or WEST.");
         }

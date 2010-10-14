@@ -149,7 +149,6 @@ public class SentenceReader {
                     Thread.sleep(75);
                 } catch (Exception e) {
                     // nevermind unsupported or invalid data
-
                     System.err.println(e.getMessage());
                 }
             }
