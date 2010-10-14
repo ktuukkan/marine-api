@@ -22,7 +22,7 @@ package net.sf.marineapi.nmea.parser;
 
 import net.sf.marineapi.nmea.sentence.GGASentence;
 import net.sf.marineapi.nmea.sentence.SentenceId;
-import net.sf.marineapi.nmea.util.Direction;
+import net.sf.marineapi.nmea.util.CompassPoint;
 import net.sf.marineapi.nmea.util.GpsFixQuality;
 import net.sf.marineapi.nmea.util.Position;
 import net.sf.marineapi.nmea.util.Time;
@@ -139,8 +139,8 @@ class GGAParser extends PositionParser implements GGASentence {
     public Position getPosition() {
         double lat = parseLatitude(LATITUDE);
         double lon = parseLongitude(LONGITUDE);
-        Direction lath = parseHemisphereLat(LAT_HEMISPHERE);
-        Direction lonh = parseHemisphereLon(LON_HEMISPHERE);
+        CompassPoint lath = parseHemisphereLat(LAT_HEMISPHERE);
+        CompassPoint lonh = parseHemisphereLon(LON_HEMISPHERE);
         return new Position(lat, lath, lon, lonh);
     }
 

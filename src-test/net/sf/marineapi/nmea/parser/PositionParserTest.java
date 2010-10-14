@@ -23,7 +23,7 @@ package net.sf.marineapi.nmea.parser;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import net.sf.marineapi.nmea.sentence.SentenceId;
-import net.sf.marineapi.nmea.util.Direction;
+import net.sf.marineapi.nmea.util.CompassPoint;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -54,7 +54,7 @@ public class PositionParserTest {
      */
     @Test
     public void testParseHemisphereLat() {
-        assertEquals(Direction.NORTH, instance.parseHemisphereLat(1));
+        assertEquals(CompassPoint.NORTH, instance.parseHemisphereLat(1));
     }
 
     /**
@@ -64,7 +64,7 @@ public class PositionParserTest {
      */
     @Test
     public void testParseHemisphereLon() {
-        assertEquals(Direction.EAST, instance.parseHemisphereLon(3));
+        assertEquals(CompassPoint.EAST, instance.parseHemisphereLon(3));
     }
 
     /**
@@ -91,14 +91,14 @@ public class PositionParserTest {
 
     /**
      * Test method for
-     * {@link net.sf.marineapi.nmea.parser.PositionParser#setLatHemisphere(int, net.sf.marineapi.nmea.util.Direction)}
+     * {@link net.sf.marineapi.nmea.parser.PositionParser#setLatHemisphere(int, net.sf.marineapi.nmea.util.CompassPoint)}
      * .
      */
     @Test
     public void testSetLatHemisphere() {
-        instance.setLatHemisphere(1, Direction.SOUTH);
+        instance.setLatHemisphere(1, CompassPoint.SOUTH);
         assertTrue(instance.toString().contains(",S,"));
-        assertEquals(Direction.SOUTH, instance.parseHemisphereLat(1));
+        assertEquals(CompassPoint.SOUTH, instance.parseHemisphereLat(1));
     }
 
     /**
@@ -131,14 +131,14 @@ public class PositionParserTest {
 
     /**
      * Test method for
-     * {@link net.sf.marineapi.nmea.parser.PositionParser#setLonHemisphere(int, net.sf.marineapi.nmea.util.Direction)}
+     * {@link net.sf.marineapi.nmea.parser.PositionParser#setLonHemisphere(int, net.sf.marineapi.nmea.util.CompassPoint)}
      * .
      */
     @Test
     public void testSetLonHemisphere() {
-        instance.setLonHemisphere(3, Direction.WEST);
+        instance.setLonHemisphere(3, CompassPoint.WEST);
         assertTrue(instance.toString().contains(",W,"));
-        assertEquals(Direction.WEST, instance.parseHemisphereLon(3));
+        assertEquals(CompassPoint.WEST, instance.parseHemisphereLon(3));
     }
 
 }

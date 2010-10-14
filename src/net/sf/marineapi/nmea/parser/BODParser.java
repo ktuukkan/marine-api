@@ -104,7 +104,7 @@ class BODParser extends SentenceParser implements BODSentence {
     public void setMagneticBearing(double bearing) {
         if (bearing < 0 || bearing > 360) {
             throw new IllegalArgumentException(
-                    "Bearing value out of bounds 0..360 degrees");
+                    "Bearing value out of bounds [0..360]");
         }
         setDoubleValue(BEARING_MAGN, bearing);
     }
@@ -126,7 +126,7 @@ class BODParser extends SentenceParser implements BODSentence {
     public void setTrueBearing(double bearing) {
         if (bearing < 0 || bearing > 360) {
             throw new IllegalArgumentException(
-                    "Bearing value out of bounds 0..360 degrees");
+                    "Bearing value out of bounds [0..360]");
         }
         setDoubleValue(BEARING_TRUE, bearing);
     }

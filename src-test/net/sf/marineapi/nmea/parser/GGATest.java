@@ -6,7 +6,7 @@ import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 import net.sf.marineapi.nmea.sentence.SentenceId;
 import net.sf.marineapi.nmea.util.Datum;
-import net.sf.marineapi.nmea.util.Direction;
+import net.sf.marineapi.nmea.util.CompassPoint;
 import net.sf.marineapi.nmea.util.GpsFixQuality;
 import net.sf.marineapi.nmea.util.Position;
 import net.sf.marineapi.nmea.util.Time;
@@ -106,9 +106,9 @@ public class GGATest {
         Position p = gga.getPosition();
         assertNotNull(p);
         assertEquals(lat, p.getLatitude(), 0.0000001);
-        assertEquals(Direction.NORTH, p.getLatHemisphere());
+        assertEquals(CompassPoint.NORTH, p.getLatHemisphere());
         assertEquals(lon, p.getLongitude(), 0.0000001);
-        assertEquals(Direction.EAST, p.getLonHemisphere());
+        assertEquals(CompassPoint.EAST, p.getLonHemisphere());
         assertEquals(Datum.WGS84, p.getDatum());
     }
 
@@ -189,7 +189,7 @@ public class GGATest {
     public void testSetPosition() {
         final double lat = 61 + (1.111 / 60);
         final double lon = 27 + (7.777 / 60);
-        Position p = new Position(lat, Direction.NORTH, lon, Direction.EAST);
+        Position p = new Position(lat, CompassPoint.NORTH, lon, CompassPoint.EAST);
         gga.setPosition(p);
 
         final String str = gga.toString();
@@ -200,8 +200,8 @@ public class GGATest {
         assertNotNull(wp);
         assertEquals(lat, wp.getLatitude(), 0.0000001);
         assertEquals(lon, wp.getLongitude(), 0.0000001);
-        assertEquals(Direction.NORTH, wp.getLatHemisphere());
-        assertEquals(Direction.EAST, wp.getLonHemisphere());
+        assertEquals(CompassPoint.NORTH, wp.getLatHemisphere());
+        assertEquals(CompassPoint.EAST, wp.getLonHemisphere());
     }
 
     /**

@@ -22,7 +22,7 @@ package net.sf.marineapi.nmea.parser;
 
 import net.sf.marineapi.nmea.sentence.SentenceId;
 import net.sf.marineapi.nmea.sentence.WPLSentence;
-import net.sf.marineapi.nmea.util.Direction;
+import net.sf.marineapi.nmea.util.CompassPoint;
 import net.sf.marineapi.nmea.util.Waypoint;
 
 /**
@@ -58,8 +58,8 @@ class WPLParser extends PositionParser implements WPLSentence {
         String id = getStringValue(WAYPOINT_ID);
         double lat = parseLatitude(LATITUDE);
         double lon = parseLongitude(LONGITUDE);
-        Direction lath = parseHemisphereLat(LAT_HEMISPHERE);
-        Direction lonh = parseHemisphereLon(LON_HEMISPHERE);
+        CompassPoint lath = parseHemisphereLat(LAT_HEMISPHERE);
+        CompassPoint lonh = parseHemisphereLon(LON_HEMISPHERE);
         return new Waypoint(id, lat, lath, lon, lonh);
     }
 

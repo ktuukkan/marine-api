@@ -21,23 +21,26 @@
 package net.sf.marineapi.nmea.util;
 
 /**
- * Defines the relative directions, e.g. "left" and "right".
+ * Defines the supported compass and relative directions.
  * 
  * @author Kimmo Tuukkanen
  * @version $Revision$
  */
-public enum Direction {
+public enum CompassPoint {
 
-    /** Left */
-    LEFT('L'),
-
-    /** Right */
-    RIGHT('R');
+    /** North */
+    NORTH('N'),
+    /** East */
+    EAST('E'),
+    /** South */
+    SOUTH('S'),
+    /** West */
+    WEST('W');
 
     private char ch;
 
-    private Direction(char c) {
-        ch = c;
+    private CompassPoint(char c) {
+        this.ch = c;
     }
 
     /**
@@ -55,8 +58,8 @@ public enum Direction {
      * @param c Char indicator for Direction
      * @return Direction
      */
-    public static Direction valueOf(char c) {
-        for (Direction d : values()) {
+    public static CompassPoint valueOf(char c) {
+        for (CompassPoint d : values()) {
             if (d.toChar() == c) {
                 return d;
             }
