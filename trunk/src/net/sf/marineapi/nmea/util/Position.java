@@ -68,8 +68,8 @@ public class Position {
      * @param lonh Hemisphere of longitude
      * @param datum Datum
      */
-    public Position(double lat, CompassPoint lath, double lon, CompassPoint lonh,
-            Datum datum) {
+    public Position(double lat, CompassPoint lath, double lon,
+            CompassPoint lonh, Datum datum) {
         this(lat, lath, lon, lonh);
         this.datum = datum;
     }
@@ -168,7 +168,8 @@ public class Position {
      *             NORTH or SOUTH.
      */
     public void setLatHemisphere(CompassPoint lathem) {
-        if (CompassPoint.NORTH.equals(lathem) || CompassPoint.SOUTH.equals(lathem)) {
+        if (CompassPoint.NORTH.equals(lathem)
+                || CompassPoint.SOUTH.equals(lathem)) {
             this.lathem = lathem;
         } else {
             throw new IllegalArgumentException(
@@ -214,7 +215,8 @@ public class Position {
      *             EAST or WEST.
      */
     public void setLonHemisphere(CompassPoint lonhem) {
-        if (CompassPoint.EAST.equals(lonhem) || CompassPoint.WEST.equals(lonhem)) {
+        if (CompassPoint.EAST.equals(lonhem)
+                || CompassPoint.WEST.equals(lonhem)) {
             this.lonhem = lonhem;
         } else {
             throw new IllegalArgumentException(
@@ -264,97 +266,5 @@ public class Position {
         double result = earthRadius * c * 1000;
 
         return result;
-    }
-
-    /**
-     * Vincenty formulae implementation based on example at
-     * http://www.movable-type.co.uk/scripts/latlong-vincenty.html
-     * 
-     * @param lat1 Origin latitude
-     * @param lon1 Origin longitude
-     * @param lat2 Destination latitude
-     * @param lon2 Destination longitude
-     * @return Distance in meters
-     */
-    private double vincenty(double lat1, double lon1, double lat2, double lon2) {
-
-        // WGS-84 ellipsoid params
-        int a = 6378137;
-        double b = 6356752.3142;
-        double f = 1 / 298.257223563;
-
-        double L = Math.toRadians(lon2 - lon1);
-        double U1 = Math.atan((1 - f) * Math.tan(Math.toRadians(lat1)));
-        double U2 = Math.atan((1 - f) * Math.tan(Math.toRadians(lat2)));
-        double sinU1 = Math.sin(U1), cosU1 = Math.cos(U1);
-        double sinU2 = Math.sin(U2), cosU2 = Math.cos(U2);
-
-        double lambda = L;
-        double lambdaP;
-        double sinSigma;
-        double cosSqAlpha;
-        double cos2SigmaM;
-        double sinAlpha;
-        double sigma;
-        double cosSigma;
-
-        int iterLimit = 100;
-
-        do {
-            double sinLambda = Math.sin(lambda), cosLambda = Math.cos(lambda);
-            sinSigma = Math.sqrt((cosU2 * sinLambda) * (cosU2 * sinLambda)
-                    + (cosU1 * sinU2 - sinU1 * cosU2 * cosLambda)
-                    * (cosU1 * sinU2 - sinU1 * cosU2 * cosLambda));
-
-            if (sinSigma == 0) {
-                // co-incident points
-                return 0;
-            }
-
-            cosSigma = sinU1 * sinU2 + cosU1 * cosU2 * cosLambda;
-            sigma = Math.atan2(sinSigma, cosSigma);
-            sinAlpha = cosU1 * cosU2 * sinLambda / sinSigma;
-            cosSqAlpha = 1 - sinAlpha * sinAlpha;
-            cos2SigmaM = cosSigma - 2 * sinU1 * sinU2 / cosSqAlpha;
-
-            if (cos2SigmaM == Double.NaN) {
-                // equatorial line: cosSqAlpha=0 (§6)
-                cos2SigmaM = 0;
-            }
-
-            double C = f / 16 * cosSqAlpha * (4 + f * (4 - 3 * cosSqAlpha));
-            lambdaP = lambda;
-            lambda = L
-                    + (1 - C)
-                    * f
-                    * sinAlpha
-                    * (sigma + C
-                            * sinSigma
-                            * (cos2SigmaM + C * cosSigma
-                                    * (-1 + 2 * cos2SigmaM * cos2SigmaM)));
-
-        } while (Math.abs(lambda - lambdaP) > 1e-12 && --iterLimit > 0);
-
-        if (iterLimit == 0) {
-            return Double.NaN; // formula failed to converge
-        }
-
-        double uSq = cosSqAlpha * (a * a - b * b) / (b * b);
-        double A = 1 + uSq / 16384
-                * (4096 + uSq * (-768 + uSq * (320 - 175 * uSq)));
-        double B = uSq / 1024 * (256 + uSq * (-128 + uSq * (74 - 47 * uSq)));
-        double deltaSigma = B
-                * sinSigma
-                * (cos2SigmaM + B
-                        / 4
-                        * (cosSigma * (-1 + 2 * cos2SigmaM * cos2SigmaM) - B
-                                / 6 * cos2SigmaM
-                                * (-3 + 4 * sinSigma * sinSigma)
-                                * (-3 + 4 * cos2SigmaM * cos2SigmaM)));
-        double s = b * A * (sigma - deltaSigma);
-
-        s = Math.round(s * 1000); // round to 1mm precision (#.###)
-
-        return s / 1000;
     }
 }
