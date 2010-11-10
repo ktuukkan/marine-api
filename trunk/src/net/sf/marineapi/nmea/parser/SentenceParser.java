@@ -24,15 +24,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 import net.sf.marineapi.nmea.sentence.Checksum;
-import net.sf.marineapi.nmea.sentence.NMEA;
 import net.sf.marineapi.nmea.sentence.Sentence;
 import net.sf.marineapi.nmea.sentence.SentenceId;
+import net.sf.marineapi.nmea.sentence.SentenceValidator;
 import net.sf.marineapi.nmea.sentence.TalkerId;
 
 /**
  * <p>
  * Base sentence parser for all NMEA sentence types. Provides general services
- * such as sentence validation, field parsing and formatting.
+ * such as sentence validation and data field setters and getters with
+ * formatting.
  * <p>
  * NMEA data is transmitted in form of ASCII Strings that are called
  * <em>sentences</em>. Each sentence starts with a '$', a two letter
@@ -64,7 +65,7 @@ public class SentenceParser implements Sentence {
     // The next three characters after talker id.
     private final SentenceId sentenceId;
 
-    // data fields, address and checksum fields omitted
+    // data fields, address and checksum omitted
     private List<String> fields;
 
     /**
@@ -76,8 +77,8 @@ public class SentenceParser implements Sentence {
      *             if sentence type is not supported.
      */
     public SentenceParser(String nmea) {
-        // check for valid sentence string
-        if (!NMEA.isValid(nmea)) {
+
+        if (!SentenceValidator.isValid(nmea)) {
             String msg = String.format("Invalid data [%s]", nmea);
             throw new IllegalArgumentException(msg);
         }
@@ -123,7 +124,7 @@ public class SentenceParser implements Sentence {
                     "Sentence type must be specified");
         }
         SentenceId id = getSentenceId();
-        if (id != type) {
+        if (!id.equals(type)) {
             String msg = String.format("Sentence type mismatch [%s]", id);
             throw new IllegalArgumentException(msg);
         }
@@ -211,7 +212,7 @@ public class SentenceParser implements Sentence {
 
         String sentence = toString();
 
-        if (!NMEA.isValid(sentence)) {
+        if (!SentenceValidator.isValid(sentence)) {
             String msg = String.format("Invalid result [%s]", sentence);
             throw new IllegalStateException(msg);
         }
