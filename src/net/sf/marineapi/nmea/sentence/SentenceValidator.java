@@ -1,5 +1,5 @@
 /* 
- * NMEA.java
+ * SentenceValidator.java
  * Copyright (C) 2010 Kimmo Tuukkanen
  * 
  * This file is part of Java Marine API.
@@ -21,28 +21,33 @@
 package net.sf.marineapi.nmea.sentence;
 
 /**
- * Utility methods for general sentence operations.
+ * <p>
+ * SentenceValidator checks any String against NMEA 0183 format.
+ * <p>
+ * Any String is considered as a valid NMEA sentence if it meets the following
+ * criteria:
+ * <ul>
+ * <li>String begins with '$' character
+ * <li>Begin character is followed by 5 upper-case chars (sentence type id)
+ * <li>String is max. 80 chars long (without &lt;CR&gt;&lt;LF&gt;)
+ * <li>String does not contain any illegal characters
+ * <li>Has a correct checksum, separated by '*' character (unless omitted)
+ * <p>
+ * Sentences without checksum are validated only by checking the general
+ * sentence characteristics.
  * 
  * @author Kimmo Tuukkanen
  * @version $Revision$
  */
-public final class NMEA {
+public final class SentenceValidator {
 
-    // no instantiation
-    private NMEA() {
+    private SentenceValidator() {
     }
 
     /**
      * Validates of the specified String against NMEA 0183 sentence format.
-     * <p>
-     * Sentence is considered valid if it (1) begins with '$' followed by 5 char
-     * ID, (2) is at most 80 characters long (without &lt;CR&gt;&lt;LF&gt;), (3)
-     * contains no illegal characters and (4) has a correct checksum.
-     * <p>
-     * Sentences without a checksum are validated by checking the general
-     * sentence characteristics.
      * 
-     * @param nmea NMEA sentence String
+     * @param nmea String to validate
      * @return <code>true</code> if valid, otherwise <code>false</code>.
      */
     public static boolean isValid(String nmea) {

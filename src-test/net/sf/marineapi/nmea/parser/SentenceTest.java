@@ -5,7 +5,7 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 import net.sf.marineapi.nmea.sentence.Checksum;
-import net.sf.marineapi.nmea.sentence.NMEA;
+import net.sf.marineapi.nmea.sentence.SentenceValidator;
 import net.sf.marineapi.nmea.sentence.Sentence;
 import net.sf.marineapi.nmea.sentence.SentenceId;
 import net.sf.marineapi.nmea.sentence.TalkerId;
@@ -272,62 +272,62 @@ public class SentenceTest {
 
     /**
      * Test method for
-     * {@link net.sf.marineapi.nmea.sentence.NMEA#isValid(java.lang.String)} .
+     * {@link net.sf.marineapi.nmea.sentence.SentenceValidator#isValid(java.lang.String)} .
      */
     @Test
     public void testIsValid() {
         String a = "$GPGGA,1,2,3,4,5,6,7,8,9";
-        assertTrue(NMEA.isValid(a));
-        assertTrue(NMEA.isValid(Checksum.add(a)));
+        assertTrue(SentenceValidator.isValid(a));
+        assertTrue(SentenceValidator.isValid(Checksum.add(a)));
 
         String b = "$GPGGA,1,TWO,three,FOUR,5,6.0,-7.0,Eigth-8,N1N3";
-        assertTrue(NMEA.isValid(b));
-        assertTrue(NMEA.isValid(Checksum.add(b)));
+        assertTrue(SentenceValidator.isValid(b));
+        assertTrue(SentenceValidator.isValid(Checksum.add(b)));
 
     }
 
     /**
      * Test method for
-     * {@link net.sf.marineapi.nmea.sentence.NMEA#isValid(java.lang.String)} .
+     * {@link net.sf.marineapi.nmea.sentence.SentenceValidator#isValid(java.lang.String)} .
      */
     @Test
     public void testIsValidWithInvalidInput() {
-        assertFalse(NMEA.isValid(null));
-        assertFalse(NMEA.isValid(""));
-        assertFalse(NMEA.isValid("$"));
-        assertFalse(NMEA.isValid("*"));
-        assertFalse(NMEA.isValid("$,*"));
-        assertFalse(NMEA.isValid("$GPGSV*"));
-        assertFalse(NMEA.isValid("foobar"));
-        assertFalse(NMEA.isValid("GPGGA,1,2,3,4,5,6,7,8,9"));
-        assertFalse(NMEA.isValid("$GpGGA,1,2,3,4,5,6,7,8,9"));
-        assertFalse(NMEA.isValid("$GPGGa,1,2,3,4,5,6,7,8,9"));
-        assertFalse(NMEA.isValid("$GPGG#,1,2,3,4,5,6,7,8,9"));
-        assertFalse(NMEA.isValid("$GPGGA,1,2,#,4,5,6,7,8,9"));
-        assertFalse(NMEA.isValid("$GPGGA,1,$,3,4,5,6,7,8,9"));
-        assertFalse(NMEA.isValid("$GPGGAA,1,2,3,4,5,6,7,8,9"));
-        assertFalse(NMEA.isValid("$GPGGA,1,2,3,4,5,6,7,8,9*00"));
+        assertFalse(SentenceValidator.isValid(null));
+        assertFalse(SentenceValidator.isValid(""));
+        assertFalse(SentenceValidator.isValid("$"));
+        assertFalse(SentenceValidator.isValid("*"));
+        assertFalse(SentenceValidator.isValid("$,*"));
+        assertFalse(SentenceValidator.isValid("$GPGSV*"));
+        assertFalse(SentenceValidator.isValid("foobar"));
+        assertFalse(SentenceValidator.isValid("GPGGA,1,2,3,4,5,6,7,8,9"));
+        assertFalse(SentenceValidator.isValid("$GpGGA,1,2,3,4,5,6,7,8,9"));
+        assertFalse(SentenceValidator.isValid("$GPGGa,1,2,3,4,5,6,7,8,9"));
+        assertFalse(SentenceValidator.isValid("$GPGG#,1,2,3,4,5,6,7,8,9"));
+        assertFalse(SentenceValidator.isValid("$GPGGA,1,2,#,4,5,6,7,8,9"));
+        assertFalse(SentenceValidator.isValid("$GPGGA,1,$,3,4,5,6,7,8,9"));
+        assertFalse(SentenceValidator.isValid("$GPGGAA,1,2,3,4,5,6,7,8,9"));
+        assertFalse(SentenceValidator.isValid("$GPGGA,1,2,3,4,5,6,7,8,9*00"));
         // invalid checksum, otherwise valid
-        assertFalse(NMEA.isValid("$GPGLL,6011.552,N,02501.941,E,120045,A*00"));
+        assertFalse(SentenceValidator.isValid("$GPGLL,6011.552,N,02501.941,E,120045,A*00"));
     }
 
     /**
      * Test method for
-     * {@link net.sf.marineapi.nmea.sentence.NMEA#isValid(java.lang.String)} .
+     * {@link net.sf.marineapi.nmea.sentence.SentenceValidator#isValid(java.lang.String)} .
      */
     @Test
     public void testIsValidWithValidInput() {
-        assertTrue(NMEA.isValid(BODTest.EXAMPLE));
-        assertTrue(NMEA.isValid(GGATest.EXAMPLE));
-        assertTrue(NMEA.isValid(GLLTest.EXAMPLE));
-        assertTrue(NMEA.isValid(GSATest.EXAMPLE));
-        assertTrue(NMEA.isValid(GSVTest.EXAMPLE));
-        assertTrue(NMEA.isValid(RMBTest.EXAMPLE));
-        assertTrue(NMEA.isValid(RMCTest.EXAMPLE));
-        assertTrue(NMEA.isValid(RTETest.EXAMPLE));
-        assertTrue(NMEA.isValid(VTGTest.EXAMPLE));
-        assertTrue(NMEA.isValid(WPLTest.EXAMPLE));
-        assertTrue(NMEA.isValid(ZDATest.EXAMPLE));
+        assertTrue(SentenceValidator.isValid(BODTest.EXAMPLE));
+        assertTrue(SentenceValidator.isValid(GGATest.EXAMPLE));
+        assertTrue(SentenceValidator.isValid(GLLTest.EXAMPLE));
+        assertTrue(SentenceValidator.isValid(GSATest.EXAMPLE));
+        assertTrue(SentenceValidator.isValid(GSVTest.EXAMPLE));
+        assertTrue(SentenceValidator.isValid(RMBTest.EXAMPLE));
+        assertTrue(SentenceValidator.isValid(RMCTest.EXAMPLE));
+        assertTrue(SentenceValidator.isValid(RTETest.EXAMPLE));
+        assertTrue(SentenceValidator.isValid(VTGTest.EXAMPLE));
+        assertTrue(SentenceValidator.isValid(WPLTest.EXAMPLE));
+        assertTrue(SentenceValidator.isValid(ZDATest.EXAMPLE));
     }
 
     /**

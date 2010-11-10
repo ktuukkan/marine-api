@@ -39,8 +39,10 @@ class GSVParser extends SentenceParser implements GSVSentence {
     private static final int NUMBER_OF_SENTENCES = 0;
     private static final int SENTENCE_NUMBER = 1;
     private static final int SATELLITES_IN_VIEW = 2;
+
     // satellite id fields
     private static final int[] ID_FIELDS = { 3, 7, 11, 15 };
+
     // satellite data fields, relative to each id field
     private static final int ELEVATION = 1;
     private static final int AZIMUTH = 2;
