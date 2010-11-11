@@ -4,6 +4,10 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
+
+import java.util.Calendar;
+import java.util.GregorianCalendar;
+
 import net.sf.marineapi.nmea.util.Date;
 import net.sf.marineapi.nmea.util.Time;
 
@@ -118,4 +122,26 @@ public class ZDATest {
         assertEquals(expected, parsed);
     }
 
+    /**
+     * Test method for {@link net.sf.marineapi.nmea.parser.ZDAParser#toDate()}.
+     */
+    @Test
+    public void testToDate() {
+
+        Date d = new Date(2010, 6, 15);
+        Time t = new Time(12, 15, 30);
+        zda.setDate(d);
+        zda.setTime(t);
+        java.util.Date date = zda.toDate();
+
+        GregorianCalendar cal = new GregorianCalendar();
+        cal.set(Calendar.YEAR, d.getYear());
+        cal.set(Calendar.MONTH, d.getMonth());
+        cal.set(Calendar.DAY_OF_MONTH, d.getDay());
+        cal.set(Calendar.HOUR_OF_DAY, t.getHour());
+        cal.set(Calendar.MINUTE, t.getMinutes());
+        cal.set(Calendar.SECOND, (int) t.getSeconds());
+
+        assertEquals(cal.getTime(), date);
+    }
 }

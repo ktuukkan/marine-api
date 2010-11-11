@@ -20,6 +20,9 @@
  */
 package net.sf.marineapi.nmea.parser;
 
+import java.util.Calendar;
+import java.util.GregorianCalendar;
+
 import net.sf.marineapi.nmea.sentence.SentenceId;
 import net.sf.marineapi.nmea.sentence.ZDASentence;
 import net.sf.marineapi.nmea.util.Date;
@@ -35,9 +38,9 @@ class ZDAParser extends SentenceParser implements ZDASentence {
 
     // field indices
     private static final int UTC_TIME = 0;
-    private static final int UTC_DAY = 1;
-    private static final int UTC_MONTH = 2;
-    private static final int UTC_YEAR = 3;
+    private static final int DAY = 1;
+    private static final int MONTH = 2;
+    private static final int YEAR = 3;
     private static final int LOCAL_ZONE_HOURS = 4;
     private static final int LOCAL_ZONE_MINUTES = 5;
 
@@ -56,9 +59,9 @@ class ZDAParser extends SentenceParser implements ZDASentence {
      * @see net.sf.marineapi.nmea.sentence.DateSentence#getDate()
      */
     public Date getDate() {
-        int y = getIntValue(UTC_YEAR);
-        int m = getIntValue(UTC_MONTH);
-        int d = getIntValue(UTC_DAY);
+        int y = getIntValue(YEAR);
+        int m = getIntValue(MONTH);
+        int d = getIntValue(DAY);
         return new Date(y, m, d);
     }
 
@@ -97,9 +100,9 @@ class ZDAParser extends SentenceParser implements ZDASentence {
      * nmea.util.Date)
      */
     public void setDate(Date date) {
-        setIntValue(UTC_YEAR, date.getYear());
-        setStringValue(UTC_MONTH, String.format("%02d", date.getMonth()));
-        setStringValue(UTC_DAY, String.format("%02d", date.getDay()));
+        setIntValue(YEAR, date.getYear());
+        setStringValue(MONTH, String.format("%02d", date.getMonth()));
+        setStringValue(DAY, String.format("%02d", date.getDay()));
     }
 
     /*
@@ -114,6 +117,23 @@ class ZDAParser extends SentenceParser implements ZDASentence {
         int s = (int) Math.floor(t.getSeconds());
         String time = String.format("%02d%02d%02d", h, m, s);
         setStringValue(UTC_TIME, time);
+    }
+
+    /*
+     * (non-Javadoc)
+     * @see net.sf.marineapi.nmea.sentence.ZDASentence#toDate()
+     */
+    public java.util.Date toDate() {
+        GregorianCalendar cal = new GregorianCalendar();
+        Date d = getDate();
+        Time t = getTime();
+        cal.set(Calendar.YEAR, d.getYear());
+        cal.set(Calendar.MONTH, d.getMonth());
+        cal.set(Calendar.DAY_OF_MONTH, d.getDay());
+        cal.set(Calendar.HOUR_OF_DAY, t.getHour());
+        cal.set(Calendar.MINUTE, t.getMinutes());
+        cal.set(Calendar.SECOND, (int) t.getSeconds());
+        return cal.getTime();
     }
 
 }
