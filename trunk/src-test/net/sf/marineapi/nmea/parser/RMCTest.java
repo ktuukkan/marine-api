@@ -4,12 +4,9 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
-
-import java.util.Date;
-import java.util.GregorianCalendar;
-
-import net.sf.marineapi.nmea.util.DataStatus;
 import net.sf.marineapi.nmea.util.CompassPoint;
+import net.sf.marineapi.nmea.util.DataStatus;
+import net.sf.marineapi.nmea.util.Date;
 import net.sf.marineapi.nmea.util.GpsMode;
 import net.sf.marineapi.nmea.util.Position;
 import net.sf.marineapi.nmea.util.Time;
@@ -208,7 +205,8 @@ public class RMCTest {
     public void testSetPosition() {
         final double lat = 61 + (1.111 / 60);
         final double lon = 27 + (7.777 / 60);
-        Position p = new Position(lat, CompassPoint.NORTH, lon, CompassPoint.EAST);
+        Position p = new Position(lat, CompassPoint.NORTH, lon,
+                CompassPoint.EAST);
         rmc.setPosition(p);
 
         String str = rmc.toString();
@@ -220,15 +218,6 @@ public class RMCTest {
         assertEquals(lon, wp.getLongitude(), 0.0000001);
         assertEquals(CompassPoint.NORTH, wp.getLatHemisphere());
         assertEquals(CompassPoint.EAST, wp.getLonHemisphere());
-    }
-
-    /**
-     * Test method for
-     * {@link net.sf.marineapi.nmea.parser.RMCParser#getUtcTime()}.
-     */
-    @Test
-    public void testGetUtcTime() {
-        assertEquals("120044", rmc.getUtcTime());
     }
 
     /**
@@ -244,30 +233,28 @@ public class RMCTest {
     }
 
     /**
-     * Test method for
-     * {@link net.sf.marineapi.nmea.parser.RMCParser#getDay()}.
+     * Test method for {@link net.sf.marineapi.nmea.parser.RMCParser#getDay()}.
      */
     @Test
-    public void testGetUtcDay() {
-        assertEquals(16, rmc.getDay());
+    public void testGetDay() {
+        assertEquals(16, rmc.getDate().getDay());
     }
 
     /**
-     * Test method for
-     * {@link net.sf.marineapi.nmea.parser.RMCParser#getMonth()}.
+     * Test method for {@link net.sf.marineapi.nmea.parser.RMCParser#getMonth()}
+     * .
      */
     @Test
-    public void testGetUtcMonth() {
-        assertEquals(7, rmc.getMonth());
+    public void testGetMonth() {
+        assertEquals(7, rmc.getDate().getMonth());
     }
 
     /**
-     * Test method for
-     * {@link net.sf.marineapi.nmea.parser.RMCParser#getYear()}.
+     * Test method for {@link net.sf.marineapi.nmea.parser.RMCParser#getYear()}.
      */
     @Test
-    public void testGetUtcYear() {
-        assertEquals(2005, rmc.getYear());
+    public void testGetYear() {
+        assertEquals(2005, rmc.getDate().getYear());
     }
 
     /**
@@ -275,11 +262,9 @@ public class RMCTest {
      */
     @Test
     public void testGetDate() {
-        GregorianCalendar cal = new GregorianCalendar(2005, 6, 16, 12, 0, 44);
-        final Date expected = cal.getTime();
+        Date expected = new Date(2005, 7, 16);
         Date parsed = rmc.getDate();
         assertEquals(expected, parsed);
-        assertEquals(expected.getTime(), parsed.getTime());
     }
 
     /**
@@ -290,6 +275,17 @@ public class RMCTest {
         Time t = new Time(1, 2, 3.4);
         rmc.setTime(t);
         assertTrue(rmc.toString().contains("$GPRMC,010203,A,"));
+    }
+
+    /**
+     * Test method for {@link net.sf.marineapi.nmea.parser.ZDAParser#getTime()}.
+     */
+    @Test
+    public void testSetDate() {
+        rmc.setDate(new Date(2010, 6, 9));
+        assertTrue(rmc.toString().contains(",360.0,090610,006.1,"));
+        rmc.setDate(new Date(2010, 11, 12));
+        assertTrue(rmc.toString().contains(",360.0,121110,006.1,"));
     }
 
 }

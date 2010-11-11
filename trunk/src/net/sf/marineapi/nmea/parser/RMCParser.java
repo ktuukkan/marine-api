@@ -20,13 +20,11 @@
  */
 package net.sf.marineapi.nmea.parser;
 
-import java.util.Date;
-import java.util.GregorianCalendar;
-
 import net.sf.marineapi.nmea.sentence.RMCSentence;
 import net.sf.marineapi.nmea.sentence.SentenceId;
-import net.sf.marineapi.nmea.util.DataStatus;
 import net.sf.marineapi.nmea.util.CompassPoint;
+import net.sf.marineapi.nmea.util.DataStatus;
+import net.sf.marineapi.nmea.util.Date;
 import net.sf.marineapi.nmea.util.GpsMode;
 import net.sf.marineapi.nmea.util.Position;
 import net.sf.marineapi.nmea.util.Time;
@@ -83,15 +81,10 @@ class RMCParser extends PositionParser implements RMCSentence {
      * @see net.sf.marineapi.nmea.sentence.DateSentence#getDate()
      */
     public Date getDate() {
-        int y = getYear();
-        int m = getMonth() - 1;
-        int d = getDay();
-        Time t = getTime();
-        int h = t.getHour();
-        int mi = t.getMinutes();
-        int s = (int) Math.floor(t.getSeconds());
-        GregorianCalendar cal = new GregorianCalendar(y, m, d, h, mi, s);
-        return cal.getTime();
+        int y = Integer.parseInt(getStringValue(UTC_DATE).substring(4));
+        int m = Integer.parseInt(getStringValue(UTC_DATE).substring(2, 4));
+        int d = Integer.parseInt(getStringValue(UTC_DATE).substring(0, 2));
+        return new Date(y, m, d);
     }
 
     /*
@@ -136,44 +129,6 @@ class RMCParser extends PositionParser implements RMCSentence {
      */
     public DataStatus getStatus() {
         return DataStatus.valueOf(getCharValue(DATA_STATUS));
-    }
-
-    /*
-     * (non-Javadoc)
-     * @see net.sf.marineapi.nmea.sentence.DateSentence#getUtcDay()
-     */
-    public int getDay() {
-        return Integer.parseInt(getStringValue(UTC_DATE).substring(0, 2));
-    }
-
-    /*
-     * (non-Javadoc)
-     * @see net.sf.marineapi.nmea.sentence.DateSentence#getUtcMonth()
-     */
-    public int getMonth() {
-        return Integer.parseInt(getStringValue(UTC_DATE).substring(2, 4));
-    }
-
-    /*
-     * (non-Javadoc)
-     * @see net.sf.marineapi.nmea.sentence.TimeSentence#getUtcTime()
-     */
-    public String getUtcTime() {
-        return getStringValue(UTC_TIME);
-    }
-
-    /*
-     * (non-Javadoc)
-     * @see net.sf.marineapi.nmea.sentence.DateSentence#getUtcYear()
-     */
-    public int getYear() {
-        int y = Integer.parseInt(getStringValue(UTC_DATE).substring(4));
-        if (y < 100 && y <= PIVOT_YEAR) {
-            y += 2000;
-        } else if (y < 100) {
-            y += 1900;
-        }
-        return y;
     }
 
     /*
@@ -283,5 +238,27 @@ class RMCParser extends PositionParser implements RMCSentence {
         int s = (int) Math.floor(t.getSeconds());
         String time = String.format("%02d%02d%02d", h, m, s);
         setStringValue(UTC_TIME, time);
+    }
+
+    /*
+     * (non-Javadoc)
+     * @see
+     * net.sf.marineapi.nmea.sentence.DateSentence#setDate(net.sf.marineapi.
+     * nmea.util.Date)
+     */
+    public void setDate(Date date) {
+
+        int y = date.getYear();
+        int m = date.getMonth();
+        int d = date.getDay();
+
+        if (y < 2000) {
+            y -= 1900;
+        } else if (y >= 2000) {
+            y -= 2000;
+        }
+
+        String time = String.format("%02d%02d%02d", d, m, y);
+        setStringValue(UTC_DATE, time);
     }
 }
