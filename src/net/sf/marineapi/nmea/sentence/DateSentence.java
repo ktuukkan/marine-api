@@ -20,10 +20,9 @@
  */
 package net.sf.marineapi.nmea.sentence;
 
-import java.util.Date;
-
 import net.sf.marineapi.nmea.parser.DataNotAvailableException;
 import net.sf.marineapi.nmea.parser.ParseException;
+import net.sf.marineapi.nmea.util.Date;
 
 /**
  * Sentences that contains date information. Notice that some sentences may
@@ -36,17 +35,8 @@ import net.sf.marineapi.nmea.parser.ParseException;
 public interface DateSentence extends Sentence {
 
     /**
-     * A pivot year that is used to determine century for a two-digit year
-     * values. Two-digit values lower than or equal to pivot year are assigned
-     * to 21th century, while values greater than pivot are assigned to 20th
-     * century.
-     */
-    static final int PIVOT_YEAR = 50;
-
-    /**
-     * Parses the date information and returns a java.util.Date. Sub-second
-     * precision may be provided by some sentences, but generally the precision
-     * is by 1 second.
+     * Parses the date information from sentence fields and returns a
+     * <code>net.sf.marineapi.nmea.util.Date</code>.
      * 
      * @return Date object
      * @throws DataNotAvailableException If the data is not available.
@@ -55,40 +45,11 @@ public interface DateSentence extends Sentence {
     Date getDate();
 
     /**
-     * Set date information to sentence.
+     * Set date. Depending on the sentence type, the values may be inserted to
+     * multiple fields or combined into one. Four-digit year value may also be
+     * reduced into two-digit format.
      * 
-     * @param d
+     * @param date <code>net.sf.marineapi.nmea.util.Date</code>
      */
-    // TODO void setDate(Date d);
-
-    /**
-     * Get day of UTC date.
-     * 
-     * @return integer
-     * @throws DataNotAvailableException If the data is not available.
-     * @throws ParseException If the field contains unexpected or illegal value.
-     */
-    int getDay();
-
-    /**
-     * Get month of UTC date.
-     * 
-     * @return integer
-     * @throws DataNotAvailableException If the data is not available.
-     * @throws ParseException If the field contains unexpected or illegal value.
-     */
-    int getMonth();
-
-    /**
-     * Get year of UTC date. The date fields in NMEA 0183 may contain two-digit
-     * value for year. If this is the case, then the century is determined by
-     * comparing the two-digit value against <code>PIVOT_YEAR</code>. Values
-     * lower than or equal to pivot are added to 2000, while values greater than
-     * pivot are added to 1900.
-     * 
-     * @return Four-digit year
-     * @throws DataNotAvailableException If the data is not available.
-     * @throws ParseException If the field contains unexpected or illegal value.
-     */
-    int getYear();
+    void setDate(Date date);
 }

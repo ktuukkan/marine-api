@@ -4,10 +4,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
-
-import java.util.Date;
-import java.util.GregorianCalendar;
-
+import net.sf.marineapi.nmea.util.Date;
 import net.sf.marineapi.nmea.util.Time;
 
 import org.junit.Before;
@@ -58,30 +55,39 @@ public class ZDATest {
     }
 
     /**
-     * Test method for
-     * {@link net.sf.marineapi.nmea.parser.ZDAParser#getDay()}.
+     * Test method for {@link net.sf.marineapi.nmea.parser.ZDAParser#getTime()}.
      */
     @Test
-    public void testGetUtcDay() {
-        assertEquals(7, zda.getDay());
+    public void testSetDate() {
+        zda.setDate(new Date(10, 6, 9));
+        assertTrue(zda.toString().contains(",032915,09,06,2010,00,"));
+        zda.setDate(new Date(85, 12, 11));
+        assertTrue(zda.toString().contains(",032915,11,12,1985,00,"));
     }
 
     /**
-     * Test method for
-     * {@link net.sf.marineapi.nmea.parser.ZDAParser#getMonth()}.
+     * Test method for {@link net.sf.marineapi.nmea.parser.ZDAParser#getDay()}.
      */
     @Test
-    public void testGetUtcMonth() {
-        assertEquals(8, zda.getMonth());
+    public void testGetDay() {
+        assertEquals(7, zda.getDate().getDay());
     }
 
     /**
-     * Test method for
-     * {@link net.sf.marineapi.nmea.parser.ZDAParser#getYear()}.
+     * Test method for {@link net.sf.marineapi.nmea.parser.ZDAParser#getMonth()}
+     * .
      */
     @Test
-    public void testGetUtcYear() {
-        assertEquals(2004, zda.getYear());
+    public void testGetMonth() {
+        assertEquals(8, zda.getDate().getMonth());
+    }
+
+    /**
+     * Test method for {@link net.sf.marineapi.nmea.parser.ZDAParser#getYear()}.
+     */
+    @Test
+    public void testGetYear() {
+        assertEquals(2004, zda.getDate().getYear());
     }
 
     /**
@@ -107,11 +113,9 @@ public class ZDATest {
      */
     @Test
     public void testGetDate() {
-        GregorianCalendar cal = new GregorianCalendar(2004, 7, 7, 3, 29, 15);
-        final Date expected = cal.getTime();
+        Date expected = new Date(2004, 8, 7);
         Date parsed = zda.getDate();
         assertEquals(expected, parsed);
-        assertEquals(expected.getTime(), parsed.getTime());
     }
 
 }

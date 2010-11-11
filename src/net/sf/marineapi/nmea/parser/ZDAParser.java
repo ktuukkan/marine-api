@@ -20,11 +20,9 @@
  */
 package net.sf.marineapi.nmea.parser;
 
-import java.util.Date;
-import java.util.GregorianCalendar;
-
 import net.sf.marineapi.nmea.sentence.SentenceId;
 import net.sf.marineapi.nmea.sentence.ZDASentence;
+import net.sf.marineapi.nmea.util.Date;
 import net.sf.marineapi.nmea.util.Time;
 
 /**
@@ -58,16 +56,10 @@ class ZDAParser extends SentenceParser implements ZDASentence {
      * @see net.sf.marineapi.nmea.sentence.DateSentence#getDate()
      */
     public Date getDate() {
-        // FIXME remove duplicated code; see other Date/Time parsers
-        int y = getYear();
-        int m = getMonth() - 1;
-        int d = getDay();
-        Time t = getTime();
-        int h = t.getHour();
-        int mi = t.getMinutes();
-        int s = (int) Math.floor(t.getSeconds());
-        GregorianCalendar cal = new GregorianCalendar(y, m, d, h, mi, s);
-        return cal.getTime();
+        int y = getIntValue(UTC_YEAR);
+        int m = getIntValue(UTC_MONTH);
+        int d = getIntValue(UTC_DAY);
+        return new Date(y, m, d);
     }
 
     /*
@@ -88,30 +80,6 @@ class ZDAParser extends SentenceParser implements ZDASentence {
 
     /*
      * (non-Javadoc)
-     * @see fi.hut.automationit.nmea.parser.DateSentence#getUtcDay()
-     */
-    public int getDay() {
-        return getIntValue(UTC_DAY);
-    }
-
-    /*
-     * (non-Javadoc)
-     * @see fi.hut.automationit.nmea.parser.DateSentence#getUtcMonth()
-     */
-    public int getMonth() {
-        return getIntValue(UTC_MONTH);
-    }
-
-    /*
-     * (non-Javadoc)
-     * @see fi.hut.automationit.nmea.parser.DateSentence#getUtcYear()
-     */
-    public int getYear() {
-        return getIntValue(UTC_YEAR);
-    }
-
-    /*
-     * (non-Javadoc)
      * @see net.sf.marineapi.nmea.sentence.TimeSentence#getTime()
      */
     public Time getTime() {
@@ -120,6 +88,18 @@ class ZDAParser extends SentenceParser implements ZDASentence {
         int m = Integer.parseInt(str.substring(2, 4));
         double s = Double.parseDouble(str.substring(4, 6));
         return new Time(h, m, s);
+    }
+
+    /*
+     * (non-Javadoc)
+     * @see
+     * net.sf.marineapi.nmea.sentence.DateSentence#setDate(net.sf.marineapi.
+     * nmea.util.Date)
+     */
+    public void setDate(Date date) {
+        setIntValue(UTC_YEAR, date.getYear());
+        setStringValue(UTC_MONTH, String.format("%02d", date.getMonth()));
+        setStringValue(UTC_DAY, String.format("%02d", date.getDay()));
     }
 
     /*
