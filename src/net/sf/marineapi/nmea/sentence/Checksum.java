@@ -67,7 +67,7 @@ public final class Checksum {
      * for any given String and the sentence validity is not checked.
      * 
      * @param nmea NMEA Sentence with or without checksum.
-     * @return Checksum String (Hex value, with leading zero if necessary)
+     * @return Checksum hex value, padded with leading zero if necessary.
      */
     public static String calculate(String nmea) {
         char ch;

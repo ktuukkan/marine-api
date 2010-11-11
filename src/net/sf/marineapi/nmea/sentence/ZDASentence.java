@@ -20,6 +20,8 @@
  */
 package net.sf.marineapi.nmea.sentence;
 
+import java.util.Date;
+
 import net.sf.marineapi.nmea.parser.DataNotAvailableException;
 import net.sf.marineapi.nmea.parser.ParseException;
 
@@ -52,4 +54,14 @@ public interface ZDASentence extends TimeSentence, DateSentence {
      */
     int getLocalZoneMinutes();
 
+    /**
+     * Get date and time as <code>java.util.Date</code>.
+     * 
+     * @return <code>java.util.Date</code>
+     * @throws DataNotAvailableException If any of the date/time values is not
+     *             available.
+     * @throws ParseException If the any of the date/time fields contains
+     *             invalid value.
+     */
+    Date toDate();
 }
