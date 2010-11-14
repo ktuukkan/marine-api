@@ -37,13 +37,13 @@ import net.sf.marineapi.nmea.util.GpsMode;
 class GSAParser extends SentenceParser implements GSASentence {
 
     // field indices
-    private final static int GPS_MODE = 0;
-    private final static int FIX_MODE = 1;
-    private final static int FIRST_SV = 2;
-    private final static int LAST_SV = 13;
-    private final static int POSITION_DOP = 14;
-    private final static int HORIZONTAL_DOP = 15;
-    private final static int VERTICAL_DOP = 16;
+    private static final int GPS_MODE = 0;
+    private static final int FIX_MODE = 1;
+    private static final int FIRST_SV = 2;
+    private static final int LAST_SV = 13;
+    private static final int POSITION_DOP = 14;
+    private static final int HORIZONTAL_DOP = 15;
+    private static final int VERTICAL_DOP = 16;
 
     // satellite ids array
     private String[] satellites = null;
