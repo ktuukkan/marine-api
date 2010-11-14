@@ -247,18 +247,11 @@ class RMCParser extends PositionParser implements RMCSentence {
      * nmea.util.Date)
      */
     public void setDate(Date date) {
-
         int y = date.getYear();
         int m = date.getMonth();
         int d = date.getDay();
-
-        if (y < 2000) {
-            y -= 1900;
-        } else if (y >= 2000) {
-            y -= 2000;
-        }
-
-        String time = String.format("%02d%02d%02d", d, m, y);
+        String year = String.valueOf(y).substring(2);
+        String time = String.format("%02d%02d%s", d, m, year);
         setStringValue(UTC_DATE, time);
     }
 }
