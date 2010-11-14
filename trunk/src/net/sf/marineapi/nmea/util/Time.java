@@ -25,20 +25,28 @@ import java.util.Date;
 import java.util.GregorianCalendar;
 
 /**
- * Represents a time of day in 24-hour clock, i.e. UTC time as used as default
- * in NMEA 0183.
+ * Represents a time of day in 24-hour clock, i.e. the UTC time used as default
+ * in NMEA 0183. Transmitted by <code>TimeSentence</code>.
  * 
  * @author Kimmo Tuukkanen
  * @version $Revision$
+ * @see net.sf.marineapi.nmea.sentence.TimeSentence
+ * @see net.sf.marineapi.nmea.Date
  */
 public class Time {
 
     // hour of day
-    private int hour;
+    private int hour = 0;
     // minute of hour
-    private int minutes;
+    private int minutes = 0;
     // seconds of a minute, may include decimal sub-second in some sentences
-    private double seconds;
+    private double seconds = 0.0;
+
+    /**
+     * Default constructor, initializes Time to midnight (00:00:00.0).
+     */
+    public Time() {
+    }
 
     /**
      * Creates a new instance of Time.
@@ -157,7 +165,7 @@ public class Time {
      * @return Milliseconds
      */
     public long getMilliseconds() {
-        long m = (int) Math.floor(getSeconds()) * 1000;
+        long m = (long) Math.floor(getSeconds()) * 1000;
         m += getMinutes() * 60 * 1000;
         m += getHour() * 3600 * 1000;
         return m;

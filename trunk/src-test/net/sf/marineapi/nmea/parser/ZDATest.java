@@ -129,10 +129,9 @@ public class ZDATest {
     public void testToDate() {
 
         Date d = new Date(2010, 6, 15);
-        Time t = new Time(12, 15, 30);
+        Time t = new Time(12, 15, 30.0);
         zda.setDate(d);
         zda.setTime(t);
-        java.util.Date date = zda.toDate();
 
         GregorianCalendar cal = new GregorianCalendar();
         cal.set(Calendar.YEAR, d.getYear());
@@ -140,8 +139,11 @@ public class ZDATest {
         cal.set(Calendar.DAY_OF_MONTH, d.getDay());
         cal.set(Calendar.HOUR_OF_DAY, t.getHour());
         cal.set(Calendar.MINUTE, t.getMinutes());
-        cal.set(Calendar.SECOND, (int) t.getSeconds());
+        cal.set(Calendar.SECOND, (int) Math.floor(t.getSeconds()));
 
-        assertEquals(cal.getTime(), date);
+        GregorianCalendar result = new GregorianCalendar();
+        result.setTime(zda.toDate());
+
+        assertEquals(cal, result);
     }
 }

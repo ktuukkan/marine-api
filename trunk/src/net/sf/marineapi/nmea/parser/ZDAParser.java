@@ -124,15 +124,15 @@ class ZDAParser extends SentenceParser implements ZDASentence {
      * @see net.sf.marineapi.nmea.sentence.ZDASentence#toDate()
      */
     public java.util.Date toDate() {
-        GregorianCalendar cal = new GregorianCalendar();
         Date d = getDate();
         Time t = getTime();
+        GregorianCalendar cal = new GregorianCalendar();
         cal.set(Calendar.YEAR, d.getYear());
         cal.set(Calendar.MONTH, d.getMonth());
         cal.set(Calendar.DAY_OF_MONTH, d.getDay());
         cal.set(Calendar.HOUR_OF_DAY, t.getHour());
         cal.set(Calendar.MINUTE, t.getMinutes());
-        cal.set(Calendar.SECOND, (int) t.getSeconds());
+        cal.set(Calendar.SECOND, (int) Math.floor(t.getSeconds()));
         return cal.getTime();
     }
 

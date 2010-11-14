@@ -21,21 +21,28 @@
 package net.sf.marineapi.nmea.util;
 
 /**
+ * Represents a calendar date information (day-month-year) that is transmitted
+ * in DateSentences.
+ * 
  * @author Kimmo Tuukkanen
  * @version $Revision$
+ * @see net.sf.marineapi.nmea.sentence.DateSentence
+ * @see net.sf.marineapi.nmea.util.Time
  */
 public class Date {
 
     /**
-     * A pivot value that is used to determine century of the two-digit year
-     * values. Two-digit values lower than or equal to pivot year are assigned
-     * to 21th century, while values greater than pivot are assigned to 20th
-     * century.
+     * A pivot value that is used to determine century of two-digit year values.
+     * Two-digit values lower than or equal to pivot are assigned to 21th
+     * century, while greater values are assigned to 20th century.
      */
     public static final int PIVOT_YEAR = 50;
 
+    // day of month 1..31
     private int day;
+    // month 1..12
     private int month;
+    // four-digit year
     private int year;
 
     /**
