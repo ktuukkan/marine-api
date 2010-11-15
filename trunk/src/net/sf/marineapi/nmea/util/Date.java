@@ -70,6 +70,25 @@ public class Date {
         setDay(day);
     }
 
+    /*
+     * (non-Javadoc)
+     * @see java.lang.Object#equals(java.lang.Object)
+     */
+    @Override
+    public boolean equals(final Object obj) {
+        if (obj == this) {
+            return true;
+        }
+        if (obj instanceof Date) {
+            Date d = (Date) obj;
+            if (d.getDay() == this.day && d.getMonth() == this.month
+                    && d.getYear() == this.year) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     /**
      * Get day of month.
      * 
@@ -77,6 +96,30 @@ public class Date {
      */
     public int getDay() {
         return day;
+    }
+
+    /**
+     * Get month, valid values are 1-12 where 1 denotes January, 2 denotes
+     * February etc.
+     * 
+     * @return the month
+     */
+    public int getMonth() {
+        return month;
+    }
+
+    /**
+     * Get year. The date fields in NMEA 0183 may present year by using either
+     * two or four digits. In case of only two digits, the century is determined
+     * by comparing the value against <code>#PIVOT_YEAR</code>. Values lower
+     * than or equal to pivot are added to 2000, while values greater than pivot
+     * are added to 1900.
+     * 
+     * @return The four-digit year
+     * @see #PIVOT_YEAR
+     */
+    public int getYear() {
+        return year;
     }
 
     /**
@@ -95,16 +138,6 @@ public class Date {
      * Get month, valid values are 1-12 where 1 denotes January, 2 denotes
      * February etc.
      * 
-     * @return the month
-     */
-    public int getMonth() {
-        return month;
-    }
-
-    /**
-     * Get month, valid values are 1-12 where 1 denotes January, 2 denotes
-     * February etc.
-     * 
      * @param month the month to set
      * @throws IllegalArgumentException If specified value is out of bounds
      *             [1..12]
@@ -115,20 +148,6 @@ public class Date {
                     "Month value out of bounds [1..12]");
         }
         this.month = month;
-    }
-
-    /**
-     * Get year. The date fields in NMEA 0183 may present year by using either
-     * two or four digits. In case of only two digits, the century is determined
-     * by comparing the value against <code>#PIVOT_YEAR</code>. Values lower
-     * than or equal to pivot are added to 2000, while values greater than pivot
-     * are added to 1900.
-     * 
-     * @return The four-digit year
-     * @see #PIVOT_YEAR
-     */
-    public int getYear() {
-        return year;
     }
 
     /**
@@ -154,24 +173,5 @@ public class Date {
         } else {
             this.year = year;
         }
-    }
-
-    /*
-     * (non-Javadoc)
-     * @see java.lang.Object#equals(java.lang.Object)
-     */
-    @Override
-    public boolean equals(final Object obj) {
-        if (obj == this) {
-            return true;
-        }
-        if (obj instanceof Date) {
-            Date d = (Date) obj;
-            if (d.getDay() == this.day && d.getMonth() == this.month
-                    && d.getYear() == this.year) {
-                return true;
-            }
-        }
-        return false;
     }
 }

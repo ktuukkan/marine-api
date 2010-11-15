@@ -46,17 +46,6 @@ public class WaypointTest {
 
     /**
      * Test method for
-     * {@link net.sf.marineapi.nmea.util.Waypoint#setId(java.lang.String)}.
-     */
-    @Test
-    public void testId() {
-        assertEquals(id1, point.getId());
-        point.setId(id2);
-        assertEquals(id2, point.getId());
-    }
-
-    /**
-     * Test method for
      * {@link net.sf.marineapi.nmea.util.Waypoint#setDescription(java.lang.String)}
      * .
      */
@@ -65,6 +54,17 @@ public class WaypointTest {
         assertEquals("", point.getDescription());
         point.setDescription(desc);
         assertEquals(desc, point.getDescription());
+    }
+
+    /**
+     * Test method for
+     * {@link net.sf.marineapi.nmea.util.Waypoint#setId(java.lang.String)}.
+     */
+    @Test
+    public void testId() {
+        assertEquals(id1, point.getId());
+        point.setId(id2);
+        assertEquals(id2, point.getId());
     }
 
 }

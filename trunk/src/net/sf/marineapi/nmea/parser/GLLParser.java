@@ -22,8 +22,8 @@ package net.sf.marineapi.nmea.parser;
 
 import net.sf.marineapi.nmea.sentence.GLLSentence;
 import net.sf.marineapi.nmea.sentence.SentenceId;
-import net.sf.marineapi.nmea.util.DataStatus;
 import net.sf.marineapi.nmea.util.CompassPoint;
+import net.sf.marineapi.nmea.util.DataStatus;
 import net.sf.marineapi.nmea.util.Position;
 import net.sf.marineapi.nmea.util.Time;
 
@@ -76,6 +76,18 @@ class GLLParser extends PositionParser implements GLLSentence {
 
     /*
      * (non-Javadoc)
+     * @see net.sf.marineapi.nmea.sentence.TimeSentence#getTime()
+     */
+    public Time getTime() {
+        String str = getStringValue(UTC_TIME);
+        int h = Integer.parseInt(str.substring(0, 2));
+        int m = Integer.parseInt(str.substring(2, 4));
+        double s = Double.parseDouble(str.substring(4, 6));
+        return new Time(h, m, s);
+    }
+
+    /*
+     * (non-Javadoc)
      * @see
      * net.sf.marineapi.nmea.sentence.PositionSentence#setPosition(net.sf.marineapi
      * .nmea.util.Position)
@@ -95,18 +107,6 @@ class GLLParser extends PositionParser implements GLLSentence {
      */
     public void setStatus(DataStatus status) {
         setCharValue(DATA_STATUS, status.toChar());
-    }
-
-    /*
-     * (non-Javadoc)
-     * @see net.sf.marineapi.nmea.sentence.TimeSentence#getTime()
-     */
-    public Time getTime() {
-        String str = getStringValue(UTC_TIME);
-        int h = Integer.parseInt(str.substring(0, 2));
-        int m = Integer.parseInt(str.substring(2, 4));
-        double s = Double.parseDouble(str.substring(4, 6));
-        return new Time(h, m, s);
     }
 
     /*

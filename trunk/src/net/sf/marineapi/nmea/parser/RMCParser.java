@@ -133,6 +133,18 @@ class RMCParser extends PositionParser implements RMCSentence {
 
     /*
      * (non-Javadoc)
+     * @see net.sf.marineapi.nmea.sentence.TimeSentence#getTime()
+     */
+    public Time getTime() {
+        String str = getStringValue(UTC_TIME);
+        int h = Integer.parseInt(str.substring(0, 2));
+        int m = Integer.parseInt(str.substring(2, 4));
+        double s = Double.parseDouble(str.substring(4, 6));
+        return new Time(h, m, s);
+    }
+
+    /*
+     * (non-Javadoc)
      * @see net.sf.marineapi.nmea.sentence.RMCSentence#getVariation()
      */
     public double getVariation() {
@@ -149,6 +161,21 @@ class RMCParser extends PositionParser implements RMCSentence {
      */
     public void setCourse(double cog) {
         setDoubleValue(COURSE, cog);
+    }
+
+    /*
+     * (non-Javadoc)
+     * @see
+     * net.sf.marineapi.nmea.sentence.DateSentence#setDate(net.sf.marineapi.
+     * nmea.util.Date)
+     */
+    public void setDate(Date date) {
+        int y = date.getYear();
+        int m = date.getMonth();
+        int d = date.getDay();
+        String year = String.valueOf(y).substring(2);
+        String time = String.format("%02d%02d%s", d, m, year);
+        setStringValue(UTC_DATE, time);
     }
 
     /*
@@ -208,26 +235,6 @@ class RMCParser extends PositionParser implements RMCSentence {
 
     /*
      * (non-Javadoc)
-     * @see net.sf.marineapi.nmea.sentence.RMCSentence#setVariation(double)
-     */
-    public void setVariation(double var) {
-        setDoubleValue(MAG_VARIATION, var);
-    }
-
-    /*
-     * (non-Javadoc)
-     * @see net.sf.marineapi.nmea.sentence.TimeSentence#getTime()
-     */
-    public Time getTime() {
-        String str = getStringValue(UTC_TIME);
-        int h = Integer.parseInt(str.substring(0, 2));
-        int m = Integer.parseInt(str.substring(2, 4));
-        double s = Double.parseDouble(str.substring(4, 6));
-        return new Time(h, m, s);
-    }
-
-    /*
-     * (non-Javadoc)
      * @see
      * net.sf.marineapi.nmea.sentence.TimeSentence#setTime(net.sf.marineapi.
      * nmea.util.Time)
@@ -242,16 +249,9 @@ class RMCParser extends PositionParser implements RMCSentence {
 
     /*
      * (non-Javadoc)
-     * @see
-     * net.sf.marineapi.nmea.sentence.DateSentence#setDate(net.sf.marineapi.
-     * nmea.util.Date)
+     * @see net.sf.marineapi.nmea.sentence.RMCSentence#setVariation(double)
      */
-    public void setDate(Date date) {
-        int y = date.getYear();
-        int m = date.getMonth();
-        int d = date.getDay();
-        String year = String.valueOf(y).substring(2);
-        String time = String.format("%02d%02d%s", d, m, year);
-        setStringValue(UTC_DATE, time);
+    public void setVariation(double var) {
+        setDoubleValue(MAG_VARIATION, var);
     }
 }

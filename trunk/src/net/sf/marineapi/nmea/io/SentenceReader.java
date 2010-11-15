@@ -45,6 +45,57 @@ import net.sf.marineapi.nmea.sentence.SentenceValidator;
  */
 public class SentenceReader {
 
+    /**
+     * Reads the input stream and fires sentence events.
+     */
+    private class StreamReader implements Runnable {
+
+        private boolean running;
+        private BufferedReader input;
+
+        /**
+         * Constructor
+         * 
+         * @param reader BufferedReader for data input
+         */
+        public StreamReader(BufferedReader reader) {
+            input = reader;
+            running = true;
+        }
+
+        /**
+         * Reads the input stream and fires SentenceEvents
+         */
+        public void run() {
+
+            String data = null;
+            SentenceFactory factory = SentenceFactory.getInstance();
+
+            while (running) {
+                try {
+                    if (input.ready()) {
+                        data = input.readLine();
+                        if (SentenceValidator.isValid(data)) {
+                            Sentence s = factory.createParser(data);
+                            fireSentenceEvent(s);
+                        }
+                    }
+                    Thread.sleep(75);
+                } catch (Exception e) {
+                    // nevermind unsupported or invalid data
+                    // e.printStackTrace();
+                }
+            }
+        }
+
+        /**
+         * Stops the run loop.
+         */
+        public void stop() {
+            this.running = false;
+        }
+    }
+
     // hash map key for listeners that listen for any kind of sentences, type
     // specific listeners are registered with sentence type String
     private static final String DISPATCH_ALL = "DISPATCH_ALL";
@@ -87,22 +138,6 @@ public class SentenceReader {
      */
     public void addSentenceListener(SentenceListener sl, SentenceId type) {
         registerListener(type.toString(), sl);
-    }
-
-    /**
-     * Registers a SentenceListener to hash map with given key.
-     * 
-     * @param type Sentence type to register for
-     * @param sl SentenceListener to register
-     */
-    private void registerListener(String type, SentenceListener sl) {
-        if (listeners.get(type) == null) {
-            List<SentenceListener> list = new Vector<SentenceListener>();
-            list.add(sl);
-            listeners.put(type, list);
-        } else {
-            listeners.get(type).add(sl);
-        }
     }
 
     /**
@@ -158,53 +193,18 @@ public class SentenceReader {
     }
 
     /**
-     * Reads the input stream and fires sentence events.
+     * Registers a SentenceListener to hash map with given key.
+     * 
+     * @param type Sentence type to register for
+     * @param sl SentenceListener to register
      */
-    private class StreamReader implements Runnable {
-
-        private boolean running;
-        private BufferedReader input;
-
-        /**
-         * Constructor
-         * 
-         * @param reader BufferedReader for data input
-         */
-        public StreamReader(BufferedReader reader) {
-            input = reader;
-            running = true;
-        }
-
-        /**
-         * Reads the input stream and fires SentenceEvents
-         */
-        public void run() {
-
-            String data = null;
-            SentenceFactory factory = SentenceFactory.getInstance();
-
-            while (running) {
-                try {
-                    if (input.ready()) {
-                        data = input.readLine();
-                        if (SentenceValidator.isValid(data)) {
-                            Sentence s = factory.createParser(data);
-                            fireSentenceEvent(s);
-                        }
-                    }
-                    Thread.sleep(75);
-                } catch (Exception e) {
-                    // nevermind unsupported or invalid data
-                    // e.printStackTrace();
-                }
-            }
-        }
-
-        /**
-         * Stops the run loop.
-         */
-        public void stop() {
-            this.running = false;
+    private void registerListener(String type, SentenceListener sl) {
+        if (listeners.get(type) == null) {
+            List<SentenceListener> list = new Vector<SentenceListener>();
+            list.add(sl);
+            listeners.put(type, list);
+        } else {
+            listeners.get(type).add(sl);
         }
     }
 }

@@ -67,11 +67,88 @@ public class DateTest {
     }
 
     /**
+     * Test method for
+     * {@link net.sf.marineapi.nmea.util.Date#equals(java.lang.Object)}.
+     */
+    @Test
+    public void testEqualsAfterInit() {
+        Date d = new Date();
+        assertTrue(d.equals(instance));
+        Date one = new Date(2010, 6, 15);
+        Date two = new Date(2010, 6, 15);
+        assertTrue(one.equals(two));
+    }
+
+    /**
+     * Test method for
+     * {@link net.sf.marineapi.nmea.util.Date#equals(java.lang.Object)}.
+     */
+    @Test
+    public void testEqualsItself() {
+        assertTrue(instance.equals(instance));
+    }
+
+    /**
+     * Test method for
+     * {@link net.sf.marineapi.nmea.util.Date#equals(java.lang.Object)}.
+     */
+    @Test
+    public void testEqualsWhenChanged() {
+
+        Date d = new Date();
+        d.setDay(15);
+        assertFalse(d.equals(instance));
+
+        instance.setDay(15);
+        assertTrue(d.equals(instance));
+
+        d.setMonth(6);
+        assertFalse(d.equals(instance));
+
+        instance.setMonth(6);
+        assertTrue(d.equals(instance));
+
+        d.setYear(10);
+        assertFalse(d.equals(instance));
+
+        instance.setYear(10);
+        assertTrue(d.equals(instance));
+    }
+
+    /**
+     * Test method for
+     * {@link net.sf.marineapi.nmea.util.Date#equals(java.lang.Object)}.
+     */
+    @Test
+    public void testEqualsWrongType() {
+        Object str = new String("foobar");
+        Object dbl = new Double(123);
+        assertFalse(instance.equals(str));
+        assertFalse(instance.equals(dbl));
+    }
+
+    /**
      * Test method for {@link net.sf.marineapi.nmea.util.Date#getDay()}.
      */
     @Test
     public void testGetDay() {
         assertEquals(1, instance.getDay());
+    }
+
+    /**
+     * Test method for {@link net.sf.marineapi.nmea.util.Date#getMonth()}.
+     */
+    @Test
+    public void testGetMonth() {
+        assertEquals(1, instance.getMonth());
+    }
+
+    /**
+     * Test method for {@link net.sf.marineapi.nmea.util.Date#getYear()}.
+     */
+    @Test
+    public void testGetYear() {
+        assertEquals(1970, instance.getYear());
     }
 
     /**
@@ -107,14 +184,6 @@ public class DateTest {
     }
 
     /**
-     * Test method for {@link net.sf.marineapi.nmea.util.Date#getMonth()}.
-     */
-    @Test
-    public void testGetMonth() {
-        assertEquals(1, instance.getMonth());
-    }
-
-    /**
      * Test method for {@link net.sf.marineapi.nmea.util.Date#setMonth(int)}.
      */
     @Test
@@ -147,25 +216,15 @@ public class DateTest {
     }
 
     /**
-     * Test method for {@link net.sf.marineapi.nmea.util.Date#getYear()}.
-     */
-    @Test
-    public void testGetYear() {
-        assertEquals(1970, instance.getYear());
-    }
-
-    /**
      * Test method for {@link net.sf.marineapi.nmea.util.Date#setYear(int)}.
      */
     @Test
-    public void testSetYearTwoDigit() {
-        int century = 2000;
-        for (int year = 0; year < 100; year++) {
-            instance.setYear(year);
-            assertEquals((century + year), instance.getYear());
-            if (year == Date.PIVOT_YEAR) {
-                century = 1900;
-            }
+    public void testSetYearFiveDigits() {
+        try {
+            instance.setYear(10000);
+            fail("Did not throw IllegalArgumentException");
+        } catch (IllegalArgumentException e) {
+            // pass
         }
     }
 
@@ -177,6 +236,19 @@ public class DateTest {
         for (int year = 1000; year < 10000; year++) {
             instance.setYear(year);
             assertEquals(year, instance.getYear());
+        }
+    }
+
+    /**
+     * Test method for {@link net.sf.marineapi.nmea.util.Date#setYear(int)}.
+     */
+    @Test
+    public void testSetYearNegative() {
+        try {
+            instance.setYear(-1);
+            fail("Did not throw IllegalArgumentException");
+        } catch (IllegalArgumentException e) {
+            // pass
         }
     }
 
@@ -204,87 +276,15 @@ public class DateTest {
      * Test method for {@link net.sf.marineapi.nmea.util.Date#setYear(int)}.
      */
     @Test
-    public void testSetYearNegative() {
-        try {
-            instance.setYear(-1);
-            fail("Did not throw IllegalArgumentException");
-        } catch (IllegalArgumentException e) {
-            // pass
+    public void testSetYearTwoDigit() {
+        int century = 2000;
+        for (int year = 0; year < 100; year++) {
+            instance.setYear(year);
+            assertEquals((century + year), instance.getYear());
+            if (year == Date.PIVOT_YEAR) {
+                century = 1900;
+            }
         }
-    }
-
-    /**
-     * Test method for {@link net.sf.marineapi.nmea.util.Date#setYear(int)}.
-     */
-    @Test
-    public void testSetYearFiveDigits() {
-        try {
-            instance.setYear(10000);
-            fail("Did not throw IllegalArgumentException");
-        } catch (IllegalArgumentException e) {
-            // pass
-        }
-    }
-
-    /**
-     * Test method for
-     * {@link net.sf.marineapi.nmea.util.Date#equals(java.lang.Object)}.
-     */
-    @Test
-    public void testEqualsItself() {
-        assertTrue(instance.equals(instance));
-    }
-
-    /**
-     * Test method for
-     * {@link net.sf.marineapi.nmea.util.Date#equals(java.lang.Object)}.
-     */
-    @Test
-    public void testEqualsWrongType() {
-        Object str = new String("foobar");
-        Object dbl = new Double(123);
-        assertFalse(instance.equals(str));
-        assertFalse(instance.equals(dbl));
-    }
-
-    /**
-     * Test method for
-     * {@link net.sf.marineapi.nmea.util.Date#equals(java.lang.Object)}.
-     */
-    @Test
-    public void testEqualsAfterInit() {
-        Date d = new Date();
-        assertTrue(d.equals(instance));
-        Date one = new Date(2010, 6, 15);
-        Date two = new Date(2010, 6, 15);
-        assertTrue(one.equals(two));
-    }
-
-    /**
-     * Test method for
-     * {@link net.sf.marineapi.nmea.util.Date#equals(java.lang.Object)}.
-     */
-    @Test
-    public void testEqualsWhenChanged() {
-
-        Date d = new Date();
-        d.setDay(15);
-        assertFalse(d.equals(instance));
-
-        instance.setDay(15);
-        assertTrue(d.equals(instance));
-
-        d.setMonth(6);
-        assertFalse(d.equals(instance));
-
-        instance.setMonth(6);
-        assertTrue(d.equals(instance));
-
-        d.setYear(10);
-        assertFalse(d.equals(instance));
-
-        instance.setYear(10);
-        assertTrue(d.equals(instance));
     }
 
 }

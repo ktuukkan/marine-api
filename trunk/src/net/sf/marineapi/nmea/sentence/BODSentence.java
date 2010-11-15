@@ -21,6 +21,7 @@
 package net.sf.marineapi.nmea.sentence;
 
 import net.sf.marineapi.nmea.parser.DataNotAvailableException;
+import net.sf.marineapi.nmea.parser.ParseException;
 
 /**
  * True and magnetic bearing from origin to destination in degrees. This
