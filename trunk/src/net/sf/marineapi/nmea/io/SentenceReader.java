@@ -83,7 +83,6 @@ public class SentenceReader {
                     Thread.sleep(75);
                 } catch (Exception e) {
                     // nevermind unsupported or invalid data
-                    // e.printStackTrace();
                 }
             }
         }
@@ -154,6 +153,10 @@ public class SentenceReader {
         }
     }
 
+    /*
+     * (non-Javadoc)
+     * @see java.lang.Object#finalize()
+     */
     @Override
     protected void finalize() throws Throwable {
         streamReader.stop();
@@ -187,7 +190,6 @@ public class SentenceReader {
                 sl.sentenceRead(se);
             } catch (Exception e) {
                 // ignore listener failures
-                e.printStackTrace();
             }
         }
     }

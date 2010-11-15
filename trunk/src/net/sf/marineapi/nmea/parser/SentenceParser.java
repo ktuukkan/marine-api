@@ -427,9 +427,9 @@ public class SentenceParser implements Sentence {
         String sid = nmea.substring(3, 6);
         try {
             id = SentenceId.valueOf(sid);
-        } catch (Exception e) {
+        } catch (Exception ex) {
             String msg = String.format("Unsupported sentence Id [%s]", sid);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException(msg, ex);
         }
         return id;
     }
@@ -444,9 +444,9 @@ public class SentenceParser implements Sentence {
         String tid = nmea.substring(1, 3);
         try {
             return TalkerId.valueOf(tid);
-        } catch (Exception e) {
+        } catch (Exception ex) {
             String msg = String.format("Unsupported talker Id [%s]", tid);
-            throw new IllegalArgumentException(msg);
+            throw new IllegalArgumentException(msg, ex);
         }
     }
 }
