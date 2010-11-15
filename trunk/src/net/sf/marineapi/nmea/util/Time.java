@@ -170,4 +170,33 @@ public class Time {
         cal.set(Calendar.SECOND, (int) Math.floor(getSeconds()));
         return cal.getTime();
     }
+
+    /*
+     * (non-Javadoc)
+     * @see java.lang.Object#hashCode()
+     */
+    @Override
+    public int hashCode() {
+        String s = String.format("%02d%02d%02f", hour, minutes, seconds);
+        return s.hashCode();
+    }
+
+    /*
+     * (non-Javadoc)
+     * @see java.lang.Object#equals(java.lang.Object)
+     */
+    @Override
+    public boolean equals(final Object obj) {
+        if (obj == this) {
+            return true;
+        }
+        if (obj instanceof Time) {
+            Time d = (Time) obj;
+            if (d.getHour() == this.hour && d.getMinutes() == this.minutes
+                    && d.getSeconds() == this.seconds) {
+                return true;
+            }
+        }
+        return false;
+    }
 }
