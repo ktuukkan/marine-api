@@ -18,9 +18,17 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Java Marine API. If not, see <http://www.gnu.org/licenses/>.
  */
-package net.sf.marineapi.nmea.parser;
+package net.sf.marineapi.nmea.util;
 
 import static org.junit.Assert.assertEquals;
+import net.sf.marineapi.nmea.parser.BODTest;
+import net.sf.marineapi.nmea.parser.GGATest;
+import net.sf.marineapi.nmea.parser.GLLTest;
+import net.sf.marineapi.nmea.parser.GSATest;
+import net.sf.marineapi.nmea.parser.GSVTest;
+import net.sf.marineapi.nmea.parser.RMBTest;
+import net.sf.marineapi.nmea.parser.RMCTest;
+import net.sf.marineapi.nmea.parser.RTETest;
 import net.sf.marineapi.nmea.sentence.Checksum;
 
 import org.junit.Test;
