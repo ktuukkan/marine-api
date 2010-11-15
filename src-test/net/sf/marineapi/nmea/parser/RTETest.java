@@ -37,6 +37,42 @@ public class RTETest {
 
 	/**
 	 * Test method for
+	 * {@link net.sf.marineapi.nmea.parser.RTEParser#getRouteId()}.
+	 */
+	@Test
+	public void testGetRouteId() {
+		assertEquals("0", rte.getRouteId());
+	}
+
+	/**
+	 * Test method for
+	 * {@link net.sf.marineapi.nmea.parser.RTEParser#getSentenceCount()}.
+	 */
+	@Test
+	public void testGetSentenceCount() {
+		assertEquals(1, rte.getSentenceCount());
+	}
+
+	/**
+	 * Test method for
+	 * {@link net.sf.marineapi.nmea.parser.RTEParser#getSentenceIndex()}.
+	 */
+	@Test
+	public void testGetSentenceIndex() {
+		assertEquals(1, rte.getSentenceIndex());
+	}
+
+	/**
+	 * Test method for
+	 * {@link net.sf.marineapi.nmea.parser.RTEParser#getWaypointCount()}.
+	 */
+	@Test
+	public void testGetWaypointCount() {
+		assertEquals(3, rte.getWaypointCount());
+	}
+
+	/**
+	 * Test method for
 	 * {@link net.sf.marineapi.nmea.parser.RTEParser#getWaypointIds()}.
 	 */
 	@Test
@@ -51,15 +87,6 @@ public class RTETest {
 
 	/**
 	 * Test method for
-	 * {@link net.sf.marineapi.nmea.parser.RTEParser#getWaypointCount()}.
-	 */
-	@Test
-	public void testGetWaypointCount() {
-		assertEquals(3, rte.getWaypointCount());
-	}
-
-	/**
-	 * Test method for
 	 * {@link net.sf.marineapi.nmea.parser.RTEParser#isActiveRoute()}.
 	 */
 	@Test
@@ -68,15 +95,38 @@ public class RTETest {
 	}
 
 	/**
-	 * Test method for
-	 * {@link net.sf.marineapi.nmea.parser.RTEParser#isActiveRoute()}.
+	 * Test method for {@link net.sf.marineapi.nmea.parser.RTEParser#isFirst()}.
 	 */
 	@Test
-	public void testSetRouteTypeWorking() {
-		rte.setRouteType(RouteType.WORKING);
-		assertTrue(rte.isWorkingRoute());
-		assertFalse(rte.isActiveRoute());
+	public void testIsFirst() {
+		assertTrue(rte.isFirst());
+	}
 
+	/**
+	 * Test method for {@link net.sf.marineapi.nmea.parser.RTEParser#isLast()}.
+	 */
+	@Test
+	public void testIsLast() {
+		assertTrue(rte.isLast());
+	}
+
+	/**
+	 * Test method for
+	 * {@link net.sf.marineapi.nmea.parser.RTEParser#isWorkingRoute()}.
+	 */
+	@Test
+	public void testIsWorkingRoute() {
+		assertFalse(rte.isWorkingRoute());
+	}
+
+	/**
+	 * Test method for
+	 * {@link net.sf.marineapi.nmea.parser.RTEParser#getRouteId()}.
+	 */
+	@Test
+	public void testSetRouteId() {
+		rte.setRouteId("ID");
+		assertEquals("ID", rte.getRouteId());
 	}
 
 	/**
@@ -92,20 +142,14 @@ public class RTETest {
 
 	/**
 	 * Test method for
-	 * {@link net.sf.marineapi.nmea.parser.RTEParser#isWorkingRoute()}.
+	 * {@link net.sf.marineapi.nmea.parser.RTEParser#isActiveRoute()}.
 	 */
 	@Test
-	public void testIsWorkingRoute() {
-		assertFalse(rte.isWorkingRoute());
-	}
+	public void testSetRouteTypeWorking() {
+		rte.setRouteType(RouteType.WORKING);
+		assertTrue(rte.isWorkingRoute());
+		assertFalse(rte.isActiveRoute());
 
-	/**
-	 * Test method for
-	 * {@link net.sf.marineapi.nmea.parser.RTEParser#getSentenceCount()}.
-	 */
-	@Test
-	public void testGetSentenceCount() {
-		assertEquals(1, rte.getSentenceCount());
 	}
 
 	/**
@@ -136,15 +180,6 @@ public class RTETest {
 
 	/**
 	 * Test method for
-	 * {@link net.sf.marineapi.nmea.parser.RTEParser#getSentenceIndex()}.
-	 */
-	@Test
-	public void testGetSentenceIndex() {
-		assertEquals(1, rte.getSentenceIndex());
-	}
-
-	/**
-	 * Test method for
 	 * {@link net.sf.marineapi.nmea.parser.RTEParser#setSentenceIndex(int)}.
 	 */
 	@Test
@@ -167,41 +202,6 @@ public class RTETest {
 		} catch (Exception e) {
 			fail(e.getMessage());
 		}
-	}
-
-	/**
-	 * Test method for {@link net.sf.marineapi.nmea.parser.RTEParser#isFirst()}.
-	 */
-	@Test
-	public void testIsFirst() {
-		assertTrue(rte.isFirst());
-	}
-
-	/**
-	 * Test method for {@link net.sf.marineapi.nmea.parser.RTEParser#isLast()}.
-	 */
-	@Test
-	public void testIsLast() {
-		assertTrue(rte.isLast());
-	}
-
-	/**
-	 * Test method for
-	 * {@link net.sf.marineapi.nmea.parser.RTEParser#getRouteId()}.
-	 */
-	@Test
-	public void testGetRouteId() {
-		assertEquals("0", rte.getRouteId());
-	}
-
-	/**
-	 * Test method for
-	 * {@link net.sf.marineapi.nmea.parser.RTEParser#getRouteId()}.
-	 */
-	@Test
-	public void testSetRouteId() {
-		rte.setRouteId("ID");
-		assertEquals("ID", rte.getRouteId());
 	}
 
 	/**

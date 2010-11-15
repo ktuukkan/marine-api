@@ -56,26 +56,6 @@ public class WPLTest {
 	 * {@link net.sf.marineapi.nmea.parser.WPLParser#setWaypoint(Waypoint)}.
 	 */
 	@Test
-	public void testSetWaypointWithZeroValues() {
-
-		Waypoint p1 = new Waypoint("WAYP1", 0.0, CompassPoint.NORTH, 0.0,
-				CompassPoint.EAST);
-		wpl.setWaypoint(p1);
-
-		String s1 = wpl.toString();
-		assertTrue(s1.contains(",0000.000,N,00000.000,E,WAYP1*"));
-
-		Waypoint p = wpl.getWaypoint();
-		assertNotNull(p);
-		assertEquals(0.0, p.getLatitude(), 0.0000001);
-		assertEquals(0.0, p.getLongitude(), 0.0000001);
-	}
-
-	/**
-	 * Test method for
-	 * {@link net.sf.marineapi.nmea.parser.WPLParser#setWaypoint(Waypoint)}.
-	 */
-	@Test
 	public void testSetWaypointWithNonZeroValues() {
 		
 		final double lat = 60 + (11.552 / 60);
@@ -93,5 +73,25 @@ public class WPLTest {
 		assertNotNull(p);
 		assertEquals(lat, p.getLatitude(), 0.0000001);
 		assertEquals(lon, p.getLongitude(), 0.0000001);
+	}
+
+	/**
+	 * Test method for
+	 * {@link net.sf.marineapi.nmea.parser.WPLParser#setWaypoint(Waypoint)}.
+	 */
+	@Test
+	public void testSetWaypointWithZeroValues() {
+
+		Waypoint p1 = new Waypoint("WAYP1", 0.0, CompassPoint.NORTH, 0.0,
+				CompassPoint.EAST);
+		wpl.setWaypoint(p1);
+
+		String s1 = wpl.toString();
+		assertTrue(s1.contains(",0000.000,N,00000.000,E,WAYP1*"));
+
+		Waypoint p = wpl.getWaypoint();
+		assertNotNull(p);
+		assertEquals(0.0, p.getLatitude(), 0.0000001);
+		assertEquals(0.0, p.getLongitude(), 0.0000001);
 	}
 }

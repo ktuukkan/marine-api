@@ -37,23 +37,34 @@ public class GSVTest {
 
     /**
      * Test method for
+     * {@link net.sf.marineapi.nmea.parser.GSVParser#getSatelliteCount()}.
+     */
+    @Test
+    public void testGetSatelliteCount() {
+        assertEquals(12, gsv.getSatelliteCount());
+    }
+
+    /**
+     * Test method for
+     * {@link net.sf.marineapi.nmea.parser.GSVParser#getSatelliteInfo()}.
+     */
+    @Test
+    public void testGetSatelliteInfo() {
+        List<SatelliteInfo> sat = gsv.getSatelliteInfo();
+        assertEquals(4, sat.size());
+        testSatelliteInfo(sat.get(0), "15", 56, 182, 51);
+        testSatelliteInfo(sat.get(1), "17", 38, 163, 47);
+        testSatelliteInfo(sat.get(2), "18", 63, 58, 50);
+        testSatelliteInfo(sat.get(3), "21", 53, 329, 47);
+    }
+
+    /**
+     * Test method for
      * {@link net.sf.marineapi.nmea.parser.GSVParser#getSentenceCount()}.
      */
     @Test
     public void testGetSentenceCount() {
         assertEquals(3, gsv.getSentenceCount());
-    }
-
-    /**
-     * Test method for
-     * {@link net.sf.marineapi.nmea.parser.GSVParser#setSentenceCount(int)}.
-     */
-    @Test
-    public void testSetSentenceCount() {
-        gsv.setSentenceCount(1);
-        assertEquals(1, gsv.getSentenceCount());
-        gsv.setSentenceCount(2);
-        assertEquals(2, gsv.getSentenceCount());
     }
 
     /**
@@ -83,15 +94,6 @@ public class GSVTest {
 
     /**
      * Test method for
-     * {@link net.sf.marineapi.nmea.parser.GSVParser#getSatelliteCount()}.
-     */
-    @Test
-    public void testGetSatelliteCount() {
-        assertEquals(12, gsv.getSatelliteCount());
-    }
-
-    /**
-     * Test method for
      * {@link net.sf.marineapi.nmea.parser.GSVParser#setSatelliteCount(int)}.
      */
     @Test
@@ -100,20 +102,6 @@ public class GSVTest {
         assertEquals(5, gsv.getSatelliteCount());
         gsv.setSatelliteCount(10);
         assertEquals(10, gsv.getSatelliteCount());
-    }
-
-    /**
-     * Test method for
-     * {@link net.sf.marineapi.nmea.parser.GSVParser#getSatelliteInfo()}.
-     */
-    @Test
-    public void testGetSatelliteInfo() {
-        List<SatelliteInfo> sat = gsv.getSatelliteInfo();
-        assertEquals(4, sat.size());
-        testSatelliteInfo(sat.get(0), "15", 56, 182, 51);
-        testSatelliteInfo(sat.get(1), "17", 38, 163, 47);
-        testSatelliteInfo(sat.get(2), "18", 63, 58, 50);
-        testSatelliteInfo(sat.get(3), "21", 53, 329, 47);
     }
 
     /**
@@ -134,6 +122,18 @@ public class GSVTest {
         testSatelliteInfo(sat.get(0), "01", 11, 12, 13);
         testSatelliteInfo(sat.get(1), "02", 21, 22, 23);
         testSatelliteInfo(sat.get(2), "03", 31, 32, 33);
+    }
+
+    /**
+     * Test method for
+     * {@link net.sf.marineapi.nmea.parser.GSVParser#setSentenceCount(int)}.
+     */
+    @Test
+    public void testSetSentenceCount() {
+        gsv.setSentenceCount(1);
+        assertEquals(1, gsv.getSentenceCount());
+        gsv.setSentenceCount(2);
+        assertEquals(2, gsv.getSentenceCount());
     }
 
     /**

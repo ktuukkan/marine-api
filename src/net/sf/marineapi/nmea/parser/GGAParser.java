@@ -154,6 +154,18 @@ class GGAParser extends PositionParser implements GGASentence {
 
     /*
      * (non-Javadoc)
+     * @see net.sf.marineapi.nmea.sentence.TimeSentence#getTime()
+     */
+    public Time getTime() {
+        String str = getStringValue(UTC_TIME);
+        int h = Integer.parseInt(str.substring(0, 2));
+        int m = Integer.parseInt(str.substring(2, 4));
+        double s = Double.parseDouble(str.substring(4, 6));
+        return new Time(h, m, s);
+    }
+
+    /*
+     * (non-Javadoc)
      * @see net.sf.marineapi.nmea.sentence.GGASentence#setAltitude(double)
      */
     public void setAltitude(double alt) {
@@ -235,18 +247,6 @@ class GGAParser extends PositionParser implements GGASentence {
         setLongitude(LONGITUDE, pos.getLongitude());
         setLatHemisphere(LAT_HEMISPHERE, pos.getLatHemisphere());
         setLonHemisphere(LON_HEMISPHERE, pos.getLonHemisphere());
-    }
-
-    /*
-     * (non-Javadoc)
-     * @see net.sf.marineapi.nmea.sentence.TimeSentence#getTime()
-     */
-    public Time getTime() {
-        String str = getStringValue(UTC_TIME);
-        int h = Integer.parseInt(str.substring(0, 2));
-        int m = Integer.parseInt(str.substring(2, 4));
-        double s = Double.parseDouble(str.substring(4, 6));
-        return new Time(h, m, s);
     }
 
     /*

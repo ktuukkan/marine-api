@@ -71,6 +71,18 @@ public class Time {
     }
 
     /**
+     * Get time as milliseconds since beginning of day.
+     * 
+     * @return Milliseconds
+     */
+    public long getMilliseconds() {
+        long m = (long) Math.floor(getSeconds()) * 1000;
+        m += getMinutes() * 60 * 1000;
+        m += getHour() * 3600 * 1000;
+        return m;
+    }
+
+    /**
      * Get the minute of hour.
      * 
      * @return the minute
@@ -157,17 +169,5 @@ public class Time {
         cal.set(Calendar.MINUTE, getMinutes());
         cal.set(Calendar.SECOND, (int) Math.floor(getSeconds()));
         return cal.getTime();
-    }
-
-    /**
-     * Get time as milliseconds since beginning of day.
-     * 
-     * @return Milliseconds
-     */
-    public long getMilliseconds() {
-        long m = (long) Math.floor(getSeconds()) * 1000;
-        m += getMinutes() * 60 * 1000;
-        m += getHour() * 3600 * 1000;
-        return m;
     }
 }

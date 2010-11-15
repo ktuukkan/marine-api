@@ -36,37 +36,13 @@ public class ZDATest {
     }
 
     /**
-     * Test method for {@link net.sf.marineapi.nmea.parser.ZDAParser#getTime()}.
+     * Test method for {@link net.sf.marineapi.nmea.parser.ZDAParser#getDate()}.
      */
     @Test
-    public void testGetTime() {
-        Time t = zda.getTime();
-        assertNotNull(t);
-        assertEquals(3, t.getHour());
-        assertEquals(29, t.getMinutes());
-        assertEquals(15.0, t.getSeconds(), 0.1);
-    }
-
-    /**
-     * Test method for {@link net.sf.marineapi.nmea.parser.ZDAParser#getTime()}.
-     */
-    @Test
-    public void testSetTime() {
-        // 09:08:07.6
-        Time t = new Time(9, 8, 7.6);
-        zda.setTime(t);
-        assertTrue(zda.toString().startsWith("$GPZDA,090807,07,"));
-    }
-
-    /**
-     * Test method for {@link net.sf.marineapi.nmea.parser.ZDAParser#getTime()}.
-     */
-    @Test
-    public void testSetDate() {
-        zda.setDate(new Date(10, 6, 9));
-        assertTrue(zda.toString().contains(",032915,09,06,2010,00,"));
-        zda.setDate(new Date(85, 12, 11));
-        assertTrue(zda.toString().contains(",032915,11,12,1985,00,"));
+    public void testGetDate() {
+        Date expected = new Date(2004, 8, 7);
+        Date parsed = zda.getDate();
+        assertEquals(expected, parsed);
     }
 
     /**
@@ -75,23 +51,6 @@ public class ZDATest {
     @Test
     public void testGetDay() {
         assertEquals(7, zda.getDate().getDay());
-    }
-
-    /**
-     * Test method for {@link net.sf.marineapi.nmea.parser.ZDAParser#getMonth()}
-     * .
-     */
-    @Test
-    public void testGetMonth() {
-        assertEquals(8, zda.getDate().getMonth());
-    }
-
-    /**
-     * Test method for {@link net.sf.marineapi.nmea.parser.ZDAParser#getYear()}.
-     */
-    @Test
-    public void testGetYear() {
-        assertEquals(2004, zda.getDate().getYear());
     }
 
     /**
@@ -113,13 +72,54 @@ public class ZDATest {
     }
 
     /**
-     * Test method for {@link net.sf.marineapi.nmea.parser.ZDAParser#getDate()}.
+     * Test method for {@link net.sf.marineapi.nmea.parser.ZDAParser#getMonth()}
+     * .
      */
     @Test
-    public void testGetDate() {
-        Date expected = new Date(2004, 8, 7);
-        Date parsed = zda.getDate();
-        assertEquals(expected, parsed);
+    public void testGetMonth() {
+        assertEquals(8, zda.getDate().getMonth());
+    }
+
+    /**
+     * Test method for {@link net.sf.marineapi.nmea.parser.ZDAParser#getTime()}.
+     */
+    @Test
+    public void testGetTime() {
+        Time t = zda.getTime();
+        assertNotNull(t);
+        assertEquals(3, t.getHour());
+        assertEquals(29, t.getMinutes());
+        assertEquals(15.0, t.getSeconds(), 0.1);
+    }
+
+    /**
+     * Test method for {@link net.sf.marineapi.nmea.parser.ZDAParser#getYear()}.
+     */
+    @Test
+    public void testGetYear() {
+        assertEquals(2004, zda.getDate().getYear());
+    }
+
+    /**
+     * Test method for {@link net.sf.marineapi.nmea.parser.ZDAParser#getTime()}.
+     */
+    @Test
+    public void testSetDate() {
+        zda.setDate(new Date(10, 6, 9));
+        assertTrue(zda.toString().contains(",032915,09,06,2010,00,"));
+        zda.setDate(new Date(85, 12, 11));
+        assertTrue(zda.toString().contains(",032915,11,12,1985,00,"));
+    }
+
+    /**
+     * Test method for {@link net.sf.marineapi.nmea.parser.ZDAParser#getTime()}.
+     */
+    @Test
+    public void testSetTime() {
+        // 09:08:07.6
+        Time t = new Time(9, 8, 7.6);
+        zda.setTime(t);
+        assertTrue(zda.toString().startsWith("$GPZDA,090807,07,"));
     }
 
     /**

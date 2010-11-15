@@ -5,9 +5,9 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 import net.sf.marineapi.nmea.sentence.Checksum;
-import net.sf.marineapi.nmea.sentence.SentenceValidator;
 import net.sf.marineapi.nmea.sentence.Sentence;
 import net.sf.marineapi.nmea.sentence.SentenceId;
+import net.sf.marineapi.nmea.sentence.SentenceValidator;
 import net.sf.marineapi.nmea.sentence.TalkerId;
 
 import org.junit.Before;

@@ -4,8 +4,8 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
-import net.sf.marineapi.nmea.util.DataStatus;
 import net.sf.marineapi.nmea.util.CompassPoint;
+import net.sf.marineapi.nmea.util.DataStatus;
 import net.sf.marineapi.nmea.util.Position;
 import net.sf.marineapi.nmea.util.Time;
 
@@ -49,17 +49,6 @@ public class GLLTest {
 
     /**
      * Test method for
-     * {@link net.sf.marineapi.nmea.parser.GLLParser#setDataStatus(DataStatus)}.
-     */
-    @Test
-    public void testSetDataStatus() {
-        assertEquals(DataStatus.INVALID, instance.getStatus());
-        instance.setStatus(DataStatus.VALID);
-        assertEquals(DataStatus.VALID, instance.getStatus());
-    }
-
-    /**
-     * Test method for
      * {@link net.sf.marineapi.nmea.parser.GLLParser#getPosition()}.
      */
     @Test
@@ -76,23 +65,26 @@ public class GLLTest {
     }
 
     /**
-     * Test method for
-     * {@link net.sf.marineapi.nmea.parser.GLLParser#setPosition(Position)}.
+     * Test method for {@link net.sf.marineapi.nmea.parser.GLLParser#getTime()}.
      */
     @Test
-    public void testSetPositionWithZeroValues() {
+    public void testGetTime() {
+        Time t = instance.getTime();
+        assertNotNull(t);
+        assertEquals(12, t.getHour());
+        assertEquals(0, t.getMinutes());
+        assertEquals(45.0, t.getSeconds(), 0.1);
+    }
 
-        Position p1 = new Position(0.0, CompassPoint.NORTH, 0.0, CompassPoint.EAST);
-        instance.setPosition(p1);
-
-        String s1 = instance.toString();
-        Position p = instance.getPosition();
-
-        assertTrue(s1.contains(",0000.000,N,"));
-        assertTrue(s1.contains(",00000.000,E,"));
-        assertNotNull(p);
-        assertEquals(0.0, p.getLatitude(), 0.0000001);
-        assertEquals(0.0, p.getLongitude(), 0.0000001);
+    /**
+     * Test method for
+     * {@link net.sf.marineapi.nmea.parser.GLLParser#setDataStatus(DataStatus)}.
+     */
+    @Test
+    public void testSetDataStatus() {
+        assertEquals(DataStatus.INVALID, instance.getStatus());
+        instance.setStatus(DataStatus.VALID);
+        assertEquals(DataStatus.VALID, instance.getStatus());
     }
 
     /**
@@ -118,15 +110,23 @@ public class GLLTest {
     }
 
     /**
-     * Test method for {@link net.sf.marineapi.nmea.parser.GLLParser#getTime()}.
+     * Test method for
+     * {@link net.sf.marineapi.nmea.parser.GLLParser#setPosition(Position)}.
      */
     @Test
-    public void testGetTime() {
-        Time t = instance.getTime();
-        assertNotNull(t);
-        assertEquals(12, t.getHour());
-        assertEquals(0, t.getMinutes());
-        assertEquals(45.0, t.getSeconds(), 0.1);
+    public void testSetPositionWithZeroValues() {
+
+        Position p1 = new Position(0.0, CompassPoint.NORTH, 0.0, CompassPoint.EAST);
+        instance.setPosition(p1);
+
+        String s1 = instance.toString();
+        Position p = instance.getPosition();
+
+        assertTrue(s1.contains(",0000.000,N,"));
+        assertTrue(s1.contains(",00000.000,E,"));
+        assertNotNull(p);
+        assertEquals(0.0, p.getLatitude(), 0.0000001);
+        assertEquals(0.0, p.getLongitude(), 0.0000001);
     }
 
     /**

@@ -21,8 +21,8 @@
 package net.sf.marineapi.nmea.sentence;
 
 import net.sf.marineapi.nmea.parser.DataNotAvailableException;
-import net.sf.marineapi.nmea.util.DataStatus;
 import net.sf.marineapi.nmea.util.CompassPoint;
+import net.sf.marineapi.nmea.util.DataStatus;
 import net.sf.marineapi.nmea.util.GpsMode;
 
 /**
