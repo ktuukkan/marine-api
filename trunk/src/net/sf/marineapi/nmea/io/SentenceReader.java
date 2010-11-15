@@ -201,12 +201,12 @@ public class SentenceReader {
      * @param sl SentenceListener to register
      */
     private void registerListener(String type, SentenceListener sl) {
-        if (listeners.get(type) == null) {
+        if (listeners.containsKey(type)) {
+            listeners.get(type).add(sl);
+        } else {
             List<SentenceListener> list = new Vector<SentenceListener>();
             list.add(sl);
             listeners.put(type, list);
-        } else {
-            listeners.get(type).add(sl);
         }
     }
 }
