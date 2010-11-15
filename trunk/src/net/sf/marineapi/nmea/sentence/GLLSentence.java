@@ -37,11 +37,11 @@ public interface GLLSentence extends PositionSentence, TimeSentence {
     /**
      * Data status; char indicator for "valid".
      */
-    static final char STATUS_VALID = 'A';
+    char STATUS_VALID = 'A';
     /**
      * Data status; char indicator for "invalid".
      */
-    static final char STATUS_INVALID = 'V';
+    char STATUS_INVALID = 'V';
 
     /**
      * Get the data quality status, valid or invalid.

@@ -21,6 +21,7 @@
 package net.sf.marineapi.nmea.sentence;
 
 import net.sf.marineapi.nmea.parser.DataNotAvailableException;
+import net.sf.marineapi.nmea.parser.ParseException;
 import net.sf.marineapi.nmea.util.GpsFixQuality;
 import net.sf.marineapi.nmea.util.Units;
 
@@ -39,12 +40,12 @@ public interface GGASentence extends PositionSentence, TimeSentence {
     /**
      * Altitude presented in meters.
      */
-    static final char ALT_UNIT_METERS = 'M';
+    char ALT_UNIT_METERS = 'M';
 
     /**
      * Altitude presented in feet.
      */
-    static final char ALT_UNIT_FEET = 'f';
+    char ALT_UNIT_FEET = 'f';
 
     /**
      * Get antenna altitude above mean sea level.
