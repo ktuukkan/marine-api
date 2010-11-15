@@ -31,7 +31,7 @@ import net.sf.marineapi.nmea.sentence.SentenceId;
  */
 public final class SentenceFactory {
 
-    private static SentenceFactory instance;
+    private static volatile SentenceFactory instance;
 
     private SentenceFactory() {
     }
