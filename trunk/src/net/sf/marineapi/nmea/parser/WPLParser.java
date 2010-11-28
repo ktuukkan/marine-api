@@ -21,6 +21,7 @@
 package net.sf.marineapi.nmea.parser;
 
 import net.sf.marineapi.nmea.sentence.SentenceId;
+import net.sf.marineapi.nmea.sentence.TalkerId;
 import net.sf.marineapi.nmea.sentence.WPLSentence;
 import net.sf.marineapi.nmea.util.CompassPoint;
 import net.sf.marineapi.nmea.util.Waypoint;
@@ -44,7 +45,7 @@ class WPLParser extends PositionParser implements WPLSentence {
      * Creates WPL parser with empty sentence.
      */
     public WPLParser() {
-        this("$GPWPL,,,,,");
+        super(TalkerId.GP, SentenceId.WPL, 5);
     }
 
     /**

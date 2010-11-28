@@ -36,6 +36,10 @@ import net.sf.marineapi.nmea.util.GpsMode;
  */
 public interface VTGSentence extends Sentence {
 
+    /** Char indicator for "true" */
+    char TRUE = 'T';
+    /** Char indicator for "magnetic" */
+    char MAGNETIC = 'M';
     /** Units indicator for kilometers per hour */
     char KMPH = 'K';
     /** Units indicator for knots (nautical miles per hour) */

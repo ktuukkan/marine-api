@@ -25,6 +25,7 @@ import java.util.List;
 
 import net.sf.marineapi.nmea.sentence.GSASentence;
 import net.sf.marineapi.nmea.sentence.SentenceId;
+import net.sf.marineapi.nmea.sentence.TalkerId;
 import net.sf.marineapi.nmea.util.GpsFixStatus;
 import net.sf.marineapi.nmea.util.GpsMode;
 
@@ -52,7 +53,7 @@ class GSAParser extends SentenceParser implements GSASentence {
      * Creates GSA parser with empty sentence.
      */
     public GSAParser() {
-        this("$GPGSA,,,,,,,,,,,,,,,,,");
+        super(TalkerId.GP, SentenceId.GSA, 17);
     }
 
     /**

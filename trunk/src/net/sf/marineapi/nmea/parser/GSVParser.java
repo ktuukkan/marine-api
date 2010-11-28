@@ -25,6 +25,7 @@ import java.util.List;
 
 import net.sf.marineapi.nmea.sentence.GSVSentence;
 import net.sf.marineapi.nmea.sentence.SentenceId;
+import net.sf.marineapi.nmea.sentence.TalkerId;
 import net.sf.marineapi.nmea.util.SatelliteInfo;
 
 /**
@@ -52,7 +53,7 @@ class GSVParser extends SentenceParser implements GSVSentence {
      * Creates an GSV parser with empty sentence.
      */
     public GSVParser() {
-        this("$GPGSV,,,,,,,,,,,,,,,,,,,");
+        super(TalkerId.GP, SentenceId.GSV, 19);
     }
 
     /**

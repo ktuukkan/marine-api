@@ -22,6 +22,7 @@ package net.sf.marineapi.nmea.parser;
 
 import net.sf.marineapi.nmea.sentence.BODSentence;
 import net.sf.marineapi.nmea.sentence.SentenceId;
+import net.sf.marineapi.nmea.sentence.TalkerId;
 
 /**
  * BOD sentence parser.
@@ -46,7 +47,7 @@ class BODParser extends SentenceParser implements BODSentence {
      * Creates GSA parser with empty sentence.
      */
     public BODParser() {
-        this("$GPBOD,,T,,M,,");
+        super(TalkerId.GP, SentenceId.BOD, 6);
     }
 
     /**
