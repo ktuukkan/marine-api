@@ -22,6 +22,7 @@ package net.sf.marineapi.nmea.parser;
 
 import net.sf.marineapi.nmea.sentence.RMCSentence;
 import net.sf.marineapi.nmea.sentence.SentenceId;
+import net.sf.marineapi.nmea.sentence.TalkerId;
 import net.sf.marineapi.nmea.util.CompassPoint;
 import net.sf.marineapi.nmea.util.DataStatus;
 import net.sf.marineapi.nmea.util.Date;
@@ -54,7 +55,7 @@ class RMCParser extends PositionParser implements RMCSentence {
      * Creates a ZDA parser with empty sentence.
      */
     public RMCParser() {
-        this("$GPRMC,,,,,,,,,,,,,");
+        super(TalkerId.GP, SentenceId.RMC, 12);
     }
 
     /**

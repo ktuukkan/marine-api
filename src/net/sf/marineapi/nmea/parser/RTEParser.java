@@ -25,6 +25,7 @@ import java.util.List;
 
 import net.sf.marineapi.nmea.sentence.RTESentence;
 import net.sf.marineapi.nmea.sentence.SentenceId;
+import net.sf.marineapi.nmea.sentence.TalkerId;
 import net.sf.marineapi.nmea.util.RouteType;
 
 /**
@@ -47,7 +48,7 @@ class RTEParser extends SentenceParser implements RTESentence {
      * none waypoint ID fields.
      */
     public RTEParser() {
-        this("$GPRTE,,,,");
+        super(TalkerId.GP, SentenceId.RTE, 4);
     }
 
     /**

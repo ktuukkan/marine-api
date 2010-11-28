@@ -21,6 +21,7 @@
 package net.sf.marineapi.nmea.parser;
 
 import net.sf.marineapi.nmea.sentence.SentenceId;
+import net.sf.marineapi.nmea.sentence.TalkerId;
 import net.sf.marineapi.nmea.sentence.VTGSentence;
 import net.sf.marineapi.nmea.util.GpsMode;
 
@@ -32,18 +33,13 @@ import net.sf.marineapi.nmea.util.GpsMode;
  */
 class VTGParser extends SentenceParser implements VTGSentence {
 
-    // field indexes
     private static final int TRUE_COURSE = 0;
-    @SuppressWarnings("unused")
     private static final int TRUE_INDICATOR = 1;
     private static final int MAGNETIC_COURSE = 2;
-    @SuppressWarnings("unused")
     private static final int MAGNETIC_INDICATOR = 3;
     private static final int SPEED_KNOTS = 4;
-    @SuppressWarnings("unused")
     private static final int KNOTS_INDICATOR = 5;
     private static final int SPEED_KMPH = 6;
-    @SuppressWarnings("unused")
     private static final int KMPH_INDICATOR = 7;
     private static final int MODE = 8;
 
@@ -51,7 +47,11 @@ class VTGParser extends SentenceParser implements VTGSentence {
      * Creates RTE parser with empty sentence.
      */
     public VTGParser() {
-        this("$GPVTG,,T,,M,,N,,K,");
+        super(TalkerId.GP, SentenceId.VTG, 9);
+        setCharValue(TRUE_INDICATOR, VTGSentence.TRUE);
+        setCharValue(MAGNETIC_INDICATOR, VTGSentence.MAGNETIC);
+        setCharValue(KNOTS_INDICATOR, VTGSentence.KNOT);
+        setCharValue(KMPH_INDICATOR, VTGSentence.KMPH);
     }
 
     /**

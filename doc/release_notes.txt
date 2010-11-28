@@ -10,6 +10,7 @@ CHANGES
 
  * Checksum class for calculating sentence checksums (extracted from NMEA.java)
  * SentenceValidator class for validating sentences (extracted from NMEA.java)
+ * PositionParser is no longer public
  * Various small improvements and fixes
 
 NEW FEATURES

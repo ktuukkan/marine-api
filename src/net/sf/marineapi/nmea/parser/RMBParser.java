@@ -22,6 +22,7 @@ package net.sf.marineapi.nmea.parser;
 
 import net.sf.marineapi.nmea.sentence.RMBSentence;
 import net.sf.marineapi.nmea.sentence.SentenceId;
+import net.sf.marineapi.nmea.sentence.TalkerId;
 import net.sf.marineapi.nmea.util.CompassPoint;
 import net.sf.marineapi.nmea.util.DataStatus;
 import net.sf.marineapi.nmea.util.Direction;
@@ -54,7 +55,7 @@ class RMBParser extends PositionParser implements RMBSentence {
      * Creates RMB parser with empty sentence.
      */
     public RMBParser() {
-        this("$GPRMB,,,,,,,,,,,,,");
+        super(TalkerId.GP, SentenceId.RMB, 13);
     }
 
     /**

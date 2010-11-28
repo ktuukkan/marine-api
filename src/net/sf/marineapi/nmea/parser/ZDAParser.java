@@ -24,6 +24,7 @@ import java.util.Calendar;
 import java.util.GregorianCalendar;
 
 import net.sf.marineapi.nmea.sentence.SentenceId;
+import net.sf.marineapi.nmea.sentence.TalkerId;
 import net.sf.marineapi.nmea.sentence.ZDASentence;
 import net.sf.marineapi.nmea.util.Date;
 import net.sf.marineapi.nmea.util.Time;
@@ -48,7 +49,7 @@ class ZDAParser extends SentenceParser implements ZDASentence {
      * Creates WPL parser with empty sentence.
      */
     public ZDAParser() {
-        this("$GPZDA,,,,,,");
+        super(TalkerId.GP, SentenceId.ZDA, 6);
     }
 
     /**

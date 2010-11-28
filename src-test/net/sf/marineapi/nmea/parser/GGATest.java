@@ -27,9 +27,6 @@ public class GGATest {
     private GGAParser gga;
     private GGAParser empty;
 
-    /**
-     * setUp
-     */
     @Before
     public void setUp() {
         try {
@@ -42,7 +39,7 @@ public class GGATest {
 
     @Test
     public void testConstructor() {
-        assertEquals(13, empty.getFieldCount());
+        assertEquals(14, empty.getFieldCount());
     }
 
     @Test

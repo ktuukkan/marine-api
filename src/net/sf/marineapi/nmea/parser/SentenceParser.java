@@ -180,7 +180,7 @@ public class SentenceParser implements Sentence {
      * (non-Javadoc)
      * @see net.sf.marineapi.nmea.sentence.Sentence#getSentenceId()
      */
-    public SentenceId getSentenceId() {
+    public final SentenceId getSentenceId() {
         return sentenceId;
     }
 
@@ -188,7 +188,7 @@ public class SentenceParser implements Sentence {
      * (non-Javadoc)
      * @see net.sf.marineapi.nmea.sentence.Sentence#getTalkerId()
      */
-    public TalkerId getTalkerId() {
+    public final TalkerId getTalkerId() {
         return talkerId;
     }
 
@@ -203,7 +203,7 @@ public class SentenceParser implements Sentence {
      * net.sf.marineapi.nmea.sentence.Sentence#setTalkerId(net.sf.marineapi.
      * nmea.util.TalkerId)
      */
-    public void setTalkerId(TalkerId id) {
+    public final void setTalkerId(TalkerId id) {
         this.talkerId = id;
     }
 
@@ -216,7 +216,7 @@ public class SentenceParser implements Sentence {
      * @return A valid NMEA sentence String
      * @throws IllegalStateException If formatting results in invalid sentence.
      */
-    public String toSentence() {
+    public final String toSentence() {
 
         String sentence = toString();
 
@@ -396,7 +396,7 @@ public class SentenceParser implements Sentence {
      * @param first Index of first field to set
      * @param newFields Array of Strings to set
      */
-    protected void setStringValues(int first, String[] newFields) {
+    protected final void setStringValues(int first, String[] newFields) {
 
         List<String> temp = new ArrayList<String>();
         for (int i = 0; i < getFieldCount(); i++) {

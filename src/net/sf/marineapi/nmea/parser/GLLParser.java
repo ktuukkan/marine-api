@@ -22,6 +22,7 @@ package net.sf.marineapi.nmea.parser;
 
 import net.sf.marineapi.nmea.sentence.GLLSentence;
 import net.sf.marineapi.nmea.sentence.SentenceId;
+import net.sf.marineapi.nmea.sentence.TalkerId;
 import net.sf.marineapi.nmea.util.CompassPoint;
 import net.sf.marineapi.nmea.util.DataStatus;
 import net.sf.marineapi.nmea.util.Position;
@@ -47,7 +48,7 @@ class GLLParser extends PositionParser implements GLLSentence {
      * Creates GSA parser with empty sentence.
      */
     public GLLParser() {
-        this("$GPGLL,,,,,,");
+        super(TalkerId.GP, SentenceId.GLL, 6);
     }
 
     /**

@@ -24,6 +24,7 @@ import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
 
 import net.sf.marineapi.nmea.sentence.SentenceId;
+import net.sf.marineapi.nmea.sentence.TalkerId;
 import net.sf.marineapi.nmea.util.CompassPoint;
 
 /**
@@ -38,13 +39,17 @@ import net.sf.marineapi.nmea.util.CompassPoint;
 abstract class PositionParser extends SentenceParser {
 
     /**
-     * Constructor.
-     * 
-     * @param nmea NMEA 0183 sentence
-     * @param type Assumed type of sentence in <code>nmea</code>
+     * @see SentenceParser#SentenceParser(String, SentenceId)
      */
     protected PositionParser(String nmea, SentenceId type) {
         super(nmea, type);
+    }
+
+    /**
+     * @see SentenceParser#SentenceParser(TalkerId, SentenceId, int)
+     */
+    protected PositionParser(TalkerId talker, SentenceId type, int size) {
+        super(talker, type, size);
     }
 
     /**

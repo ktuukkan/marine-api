@@ -22,6 +22,7 @@ package net.sf.marineapi.nmea.parser;
 
 import net.sf.marineapi.nmea.sentence.GGASentence;
 import net.sf.marineapi.nmea.sentence.SentenceId;
+import net.sf.marineapi.nmea.sentence.TalkerId;
 import net.sf.marineapi.nmea.util.CompassPoint;
 import net.sf.marineapi.nmea.util.GpsFixQuality;
 import net.sf.marineapi.nmea.util.Position;
@@ -56,7 +57,7 @@ class GGAParser extends PositionParser implements GGASentence {
      * Creates GSA parser with empty sentence.
      */
     public GGAParser() {
-        this("$GPGGA,,,,,,,,,,,,,");
+        super(TalkerId.GP, SentenceId.GGA, 14);
     }
 
     /**
