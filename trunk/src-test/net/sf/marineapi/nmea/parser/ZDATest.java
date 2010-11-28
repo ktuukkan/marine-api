@@ -24,15 +24,22 @@ public class ZDATest {
     /** Example sentence */
     public static final String EXAMPLE = "$GPZDA,032915,07,08,2004,00,00*4D";
 
+    private ZDAParser empty;
     private ZDAParser zda;
 
     @Before
     public void setUp() {
         try {
+            empty = new ZDAParser();
             zda = new ZDAParser(EXAMPLE);
         } catch (Exception e) {
             fail(e.getMessage());
         }
+    }
+
+    @Test
+    public void testConstructor() {
+        assertEquals(6, empty.getFieldCount());
     }
 
     /**

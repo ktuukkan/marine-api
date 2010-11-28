@@ -60,6 +60,14 @@ public interface Sentence {
     String TERMINATOR = "\r\n";
 
     /**
+     * Returns the current number of data fields in sentence, excluding ID field
+     * and checksum.
+     * 
+     * @return Data field count
+     */
+    int getFieldCount();
+
+    /**
      * Get the sentence ID that specifies sentence type. ID is the last three
      * characters in address field. For example, in case of <code>$GPGGA</code>
      * the method returns <code>SentenceId.GGA</code>.

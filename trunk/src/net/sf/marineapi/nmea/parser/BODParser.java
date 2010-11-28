@@ -43,6 +43,13 @@ class BODParser extends SentenceParser implements BODSentence {
     private static final int ORIGIN = 5;
 
     /**
+     * Creates GSA parser with empty sentence.
+     */
+    public BODParser() {
+        this("$GPBOD,,T,,M,,");
+    }
+
+    /**
      * Creates a new instance of BOD parser.
      * 
      * @param nmea BOD sentence String

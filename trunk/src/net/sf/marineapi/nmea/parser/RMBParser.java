@@ -51,6 +51,13 @@ class RMBParser extends PositionParser implements RMBSentence {
     private static final int ARRIVAL_STATUS = 12;
 
     /**
+     * Creates RMB parser with empty sentence.
+     */
+    public RMBParser() {
+        this("$GPRMB,,,,,,,,,,,,,");
+    }
+
+    /**
      * Constructor.
      * 
      * @param nmea RMB sentence string

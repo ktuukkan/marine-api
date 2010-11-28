@@ -24,15 +24,22 @@ public class RMCTest {
     /** Example sentence */
     public static final String EXAMPLE = "$GPRMC,120044,A,6011.552,N,02501.941,E,000.0,360.0,160705,006.1,E,A*11";
 
+    RMCParser empty;
     RMCParser rmc;
 
     @Before
     public void setUp() {
         try {
+            empty = new RMCParser(EXAMPLE);
             rmc = new RMCParser(EXAMPLE);
         } catch (Exception e) {
             fail(e.getMessage());
         }
+    }
+
+    @Test
+    public void testConstructor() {
+        assertEquals(12, empty.getFieldCount());
     }
 
     /**

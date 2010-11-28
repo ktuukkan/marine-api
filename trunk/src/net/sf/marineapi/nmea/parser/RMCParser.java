@@ -51,6 +51,13 @@ class RMCParser extends PositionParser implements RMCSentence {
     private static final int MODE = 11;
 
     /**
+     * Creates a ZDA parser with empty sentence.
+     */
+    public RMCParser() {
+        this("$GPRMC,,,,,,,,,,,,,");
+    }
+
+    /**
      * Creates a new instance of RMCParser.
      * 
      * @param nmea RMC sentence String.

@@ -41,6 +41,13 @@ class WPLParser extends PositionParser implements WPLSentence {
     private static final int WAYPOINT_ID = 4;
 
     /**
+     * Creates WPL parser with empty sentence.
+     */
+    public WPLParser() {
+        this("$GPWPL,,,,,");
+    }
+
+    /**
      * Creates a new instance of WPLParser.
      * 
      * @param nmea WPL sentence String.

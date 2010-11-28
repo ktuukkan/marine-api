@@ -170,6 +170,14 @@ public class SentenceParser implements Sentence {
 
     /*
      * (non-Javadoc)
+     * @see net.sf.marineapi.nmea.sentence.Sentence#getFieldCount()
+     */
+    public final int getFieldCount() {
+        return fields.size();
+    }
+
+    /*
+     * (non-Javadoc)
      * @see net.sf.marineapi.nmea.sentence.Sentence#getSentenceId()
      */
     public SentenceId getSentenceId() {
@@ -279,16 +287,6 @@ public class SentenceParser implements Sentence {
     }
 
     /**
-     * Returns the number of data fields in sentence, including the address
-     * field and excluding checksum.
-     * 
-     * @return The number of fields
-     */
-    protected final int getFieldCount() {
-        return fields.size();
-    }
-
-    /**
      * Parse integer value from the specified sentence field.
      * 
      * @param index Field index in sentence
@@ -392,7 +390,8 @@ public class SentenceParser implements Sentence {
      * accordingly. As the result, total number of fields may increase or
      * decrease. Thus, if the sentence field count must not change, you may need
      * to add empty Strings to <code>newFields</code> in order to preserve the
-     * original number of fields.
+     * original number of fields. Also, all existing values after
+     * <code>first</code> are lost.
      * 
      * @param first Index of first field to set
      * @param newFields Array of Strings to set

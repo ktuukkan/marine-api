@@ -20,15 +20,22 @@ public class GSATest {
     /** Example sentence */
     public static final String EXAMPLE = "$GPGSA,A,3,02,,,07,,09,24,26,,,,,1.6,1.6,1.0*3D";
 
+    private GSASentence empty;
     private GSASentence instance;
 
     @Before
     public void setUp() {
         try {
+            empty = new GSAParser();
             instance = new GSAParser(EXAMPLE);
         } catch (Exception e) {
             fail(e.getMessage());
         }
+    }
+
+    @Test
+    public void testConstructor() {
+        assertEquals(17, empty.getFieldCount());
     }
 
     /**

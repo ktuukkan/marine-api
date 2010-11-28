@@ -53,6 +53,13 @@ class GGAParser extends PositionParser implements GGASentence {
     private static final int DGPS_STATION_ID = 13;
 
     /**
+     * Creates GSA parser with empty sentence.
+     */
+    public GGAParser() {
+        this("$GPGGA,,,,,,,,,,,,,");
+    }
+
+    /**
      * Creates a new instance of GGA parser.
      * 
      * @param nmea GGA sentence String.
@@ -78,8 +85,8 @@ class GGAParser extends PositionParser implements GGASentence {
     public Units getAltitudeUnits() {
         char ch = getCharValue(ALTITUDE_UNITS);
         if (ch != ALT_UNIT_METERS && ch != ALT_UNIT_FEET) {
-            throw new ParseException("Invalid altitude unit indicator (" + ch
-                    + ").");
+            String msg = "Invalid altitude unit indicator: %s";
+            throw new ParseException(String.format(msg, ch));
         }
         return Units.valueOf(ch);
     }

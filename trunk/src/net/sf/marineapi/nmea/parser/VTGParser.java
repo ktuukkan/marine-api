@@ -48,6 +48,13 @@ class VTGParser extends SentenceParser implements VTGSentence {
     private static final int MODE = 8;
 
     /**
+     * Creates RTE parser with empty sentence.
+     */
+    public VTGParser() {
+        this("$GPVTG,,T,,M,,N,,K,");
+    }
+
+    /**
      * Creates a new instance of VTGParser.
      * 
      * @param nmea VTG sentence String

@@ -3,12 +3,26 @@ Version 0.2 (pre-alpha)
 <http://sourceforge.net/projects/marineapi/>
 Copyright (C) 2010 Kimmo Tuukkanen <ktuukkan@users.sourceforge.net>
 
-Second preview release, released on 2010-mm-dd. Not to be used in production,
+Second preview release, released on 2010-11-28. Not to be used in production,
 major changes in the API may occur in later versions.
 
+CHANGES 
+
+ * Checksum class for calculating sentence checksums (extracted from NMEA.java)
+ * SentenceValidator class for validating sentences (extracted from NMEA.java)
+ * Various small improvements and fixes
+
 NEW FEATURES
-    
- 
+
+ * SentenceReader; SentenceListeners can subscribe for specific sentence type
+ * Sentence interface; Added getFieldCount() method.
+ * RTESentence interface; Added addWaypointId() method.
+ * Date class for handling date information
+ * ZDASentence; Added toDate() method.
+
 KNOWN ISSUES
+  
+ * Position.distanceTo() may not produce correct results.
+ * In practice it is not possible to extend SentenceParser class and create
+   custom parsers due to internal checking of supported Sentence types.
  
- * Position.distanceTo() may not produce correct results, to be checked.
