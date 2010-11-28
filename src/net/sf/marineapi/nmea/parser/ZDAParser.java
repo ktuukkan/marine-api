@@ -45,6 +45,13 @@ class ZDAParser extends SentenceParser implements ZDASentence {
     private static final int LOCAL_ZONE_MINUTES = 5;
 
     /**
+     * Creates WPL parser with empty sentence.
+     */
+    public ZDAParser() {
+        this("$GPZDA,,,,,,");
+    }
+
+    /**
      * Creates a new instance of ZDAParser.
      * 
      * @param nmea ZDA sentence String

@@ -24,15 +24,22 @@ public class GSVTest {
     /** Example sentence */
     public static final String EXAMPLE = "$GPGSV,3,2,12,15,56,182,51,17,38,163,47,18,63,058,50,21,53,329,47*73";
 
+    private GSVSentence empty;
     private GSVSentence gsv;
 
     @Before
     public void setUp() {
         try {
+            empty = new GSVParser();
             gsv = new GSVParser(EXAMPLE);
         } catch (Exception e) {
             fail(e.getMessage());
         }
+    }
+
+    @Test
+    public void testConstructor() {
+        assertEquals(19, empty.getFieldCount());
     }
 
     /**

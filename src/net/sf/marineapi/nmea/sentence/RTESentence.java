@@ -36,6 +36,15 @@ import net.sf.marineapi.nmea.util.RouteType;
 public interface RTESentence extends Sentence {
 
     /**
+     * Add a waypoint ID at the end of waypoint list. The number of waypoint id
+     * fields is increased by one on each addition.
+     * 
+     * @param id Waypoint ID to add.
+     * @return The total number of waypoint IDs after addition.
+     */
+    public int addWaypointId(String id);
+
+    /**
      * Get the number or name of the route.
      * 
      * @return Route ID or name as String

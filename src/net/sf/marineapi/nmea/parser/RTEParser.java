@@ -43,12 +43,39 @@ class RTEParser extends SentenceParser implements RTESentence {
     private static final int FIRST_WPT = 4;
 
     /**
+     * Creates RTE parser with empty sentence. The created RTE sentence contains
+     * none waypoint ID fields.
+     */
+    public RTEParser() {
+        this("$GPRTE,,,,");
+    }
+
+    /**
      * Creates a new instance of RTE parser.
      * 
      * @param nmea RTE sentence string.
      */
     public RTEParser(String nmea) {
         super(nmea, SentenceId.RTE);
+    }
+
+    /*
+     * (non-Javadoc)
+     * @see
+     * net.sf.marineapi.nmea.sentence.RTESentence#addWaypointId(java.lang.String
+     * )
+     */
+    public int addWaypointId(String id) {
+        String[] ids = getWaypointIds();
+        String[] newIds = new String[ids.length + 1];
+
+        for (int i = 0; i < ids.length; i++) {
+            newIds[i] = ids[i];
+        }
+        newIds[newIds.length - 1] = id;
+
+        setStringValues(FIRST_WPT, newIds);
+        return newIds.length;
     }
 
     /*

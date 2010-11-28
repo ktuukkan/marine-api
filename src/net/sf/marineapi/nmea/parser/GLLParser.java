@@ -44,7 +44,14 @@ class GLLParser extends PositionParser implements GLLSentence {
     private static final int DATA_STATUS = 5;
 
     /**
-     * Constructor.
+     * Creates GSA parser with empty sentence.
+     */
+    public GLLParser() {
+        this("$GPGLL,,,,,,");
+    }
+
+    /**
+     * Creates a new instance of GLLParser.
      * 
      * @param nmea GLL sentence String.
      * @throws IllegalArgumentException If the given sentence is invalid or does

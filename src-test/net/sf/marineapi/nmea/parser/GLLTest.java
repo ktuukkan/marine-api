@@ -24,6 +24,7 @@ public class GLLTest {
      */
     public static final String EXAMPLE = "$GPGLL,6011.552,N,02501.941,E,120045,A*26";
 
+    private GLLParser empty;
     private GLLParser instance;
 
     /**
@@ -32,10 +33,16 @@ public class GLLTest {
     @Before
     public void setUp() {
         try {
+            empty = new GLLParser();
             instance = new GLLParser(EXAMPLE);
         } catch (Exception e) {
             fail(e.getMessage());
         }
+    }
+
+    @Test
+    public void testConstructor() {
+        assertEquals(6, empty.getFieldCount());
     }
 
     /**
@@ -96,7 +103,8 @@ public class GLLTest {
 
         final double lat = 60 + (11.552 / 60);
         final double lon = 25 + (1.941 / 60);
-        Position p2 = new Position(lat, CompassPoint.SOUTH, lon, CompassPoint.WEST);
+        Position p2 = new Position(lat, CompassPoint.SOUTH, lon,
+                CompassPoint.WEST);
         instance.setPosition(p2);
 
         final String s2 = instance.toString();
@@ -116,7 +124,8 @@ public class GLLTest {
     @Test
     public void testSetPositionWithZeroValues() {
 
-        Position p1 = new Position(0.0, CompassPoint.NORTH, 0.0, CompassPoint.EAST);
+        Position p1 = new Position(0.0, CompassPoint.NORTH, 0.0,
+                CompassPoint.EAST);
         instance.setPosition(p1);
 
         String s1 = instance.toString();
@@ -130,7 +139,8 @@ public class GLLTest {
     }
 
     /**
-     * Test method for {@link net.sf.marineapi.nmea.parser.GLLParser#setTime(Time)}.
+     * Test method for
+     * {@link net.sf.marineapi.nmea.parser.GLLParser#setTime(Time)}.
      */
     @Test
     public void testSetTime() {

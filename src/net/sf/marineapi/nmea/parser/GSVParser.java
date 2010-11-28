@@ -49,6 +49,13 @@ class GSVParser extends SentenceParser implements GSVSentence {
     private static final int NOISE = 3;
 
     /**
+     * Creates an GSV parser with empty sentence.
+     */
+    public GSVParser() {
+        this("$GPGSV,,,,,,,,,,,,,,,,,,,");
+    }
+
+    /**
      * Constructor.
      * 
      * @param nmea GSV Sentence

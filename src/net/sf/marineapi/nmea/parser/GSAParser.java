@@ -49,6 +49,13 @@ class GSAParser extends SentenceParser implements GSASentence {
     private String[] satellites = null;
 
     /**
+     * Creates GSA parser with empty sentence.
+     */
+    public GSAParser() {
+        this("$GPGSA,,,,,,,,,,,,,,,,,");
+    }
+
+    /**
      * Creates a new instance of GSA parser.
      * 
      * @param nmea GSA sentence String

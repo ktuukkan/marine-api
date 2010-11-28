@@ -25,6 +25,7 @@ public class GGATest {
     public static final String EXAMPLE = "$GPGGA,120044,6011.552,N,02501.941,E,1,00,2.0,28.0,M,19.6,M,,*79";
 
     private GGAParser gga;
+    private GGAParser empty;
 
     /**
      * setUp
@@ -32,10 +33,16 @@ public class GGATest {
     @Before
     public void setUp() {
         try {
+            empty = new GGAParser();
             gga = new GGAParser(EXAMPLE);
         } catch (Exception e) {
             fail(e.getMessage());
         }
+    }
+
+    @Test
+    public void testConstructor() {
+        assertEquals(13, empty.getFieldCount());
     }
 
     @Test
@@ -189,7 +196,8 @@ public class GGATest {
     public void testSetPosition() {
         final double lat = 61 + (1.111 / 60);
         final double lon = 27 + (7.777 / 60);
-        Position p = new Position(lat, CompassPoint.NORTH, lon, CompassPoint.EAST);
+        Position p = new Position(lat, CompassPoint.NORTH, lon,
+                CompassPoint.EAST);
         gga.setPosition(p);
 
         final String str = gga.toString();

@@ -24,6 +24,7 @@ public class RMBTest {
     /** Example sentence */
     public static final String EXAMPLE = "$GPRMB,A,0.00,R,,RUSKI,5536.200,N,01436.500,E,432.3,234.9,,V*58";
 
+    private RMBSentence empty;
     private RMBSentence rmb;
 
     /**
@@ -32,10 +33,16 @@ public class RMBTest {
     @Before
     public void setUp() {
         try {
+            empty = new RMBParser();
             rmb = new RMBParser(EXAMPLE);
         } catch (Exception e) {
             fail(e.getMessage());
         }
+    }
+
+    @Test
+    public void testConstructor() {
+        assertEquals(13, empty.getFieldCount());
     }
 
     /**
