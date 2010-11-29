@@ -207,24 +207,16 @@ public class SentenceParser implements Sentence {
         this.talkerId = id;
     }
 
-    /**
-     * Formats and validates the String representation of the sentence (without
-     * the line terminator CR/LF). If formatting results in invalid sentence,
-     * e.g. 82 character limit exceeds due too long values set in fields, an
-     * exception is thrown.
-     * 
-     * @return A valid NMEA sentence String
-     * @throws IllegalStateException If formatting results in invalid sentence.
+    /*
+     * (non-Javadoc)
+     * @see net.sf.marineapi.nmea.sentence.Sentence#toSentence()
      */
     public final String toSentence() {
-
         String sentence = toString();
-
         if (!SentenceValidator.isValid(sentence)) {
             String msg = String.format("Invalid result [%s]", sentence);
             throw new IllegalStateException(msg);
         }
-
         return sentence;
     }
 
