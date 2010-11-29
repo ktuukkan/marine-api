@@ -99,4 +99,16 @@ public interface Sentence {
      * @return Sentence String
      */
     String toString();
+
+    /**
+     * Formats and validates the String representation of the sentence (without
+     * the line terminator CR/LF). If formatting results in invalid sentence,
+     * e.g. 82 character limit exceeds due too long values set in fields, an
+     * exception is thrown.
+     * 
+     * @see #toString()
+     * @return A valid NMEA sentence String
+     * @throws IllegalStateException If formatting results in invalid sentence.
+     */
+    String toSentence();
 }
