@@ -5,9 +5,9 @@ $Revision$
 -->
 <project name="Java Marine API" default="build" basedir=".">
 
-	<target name="-init">
+	<target name="init">
 		<tstamp>
-			<format property="date" pattern="yyyy-MM-dd" />
+			<format property="timestamp" pattern="yyyyMMddHHmm" />
 			<format property="year" pattern="yyyy" />
 		</tstamp>
 		<property name="project.name" value="marineapi" />
@@ -19,25 +19,25 @@ $Revision$
 		<property name="build.dir.classes" value="bin/" />
 		<property name="build.dir.tests" value="bin/" />
 		<property name="build.dir.dist" value="dist/" />
-		<property name="build.dir.api" value="doc/javadoc/" />
+		<property name="build.dir.api" value="${doc.dir}/javadoc/" />
 		<property name="releases.dir" value="releases/" />
 		<property name="manifest.file" value="${build.dir}/MANIFEST.MF" />
 		<property name="jar.file" value="${build.dir}/${project.name}.jar" />
 		<property name="release.zip"
-			value="${releases.dir}/${project.name}-${date}.zip" />
+			value="${releases.dir}/${project.name}-${timestamp}.zip" />
 		<property name="javadoc.footer"
 			value="Copyright (C) ${year} Java Marine API authors" />
 	</target>
 
 	<!-- compile project -->
-	<target name="-compile-src" depends="-init">
+	<target name="compile-src" depends="init">
 		<mkdir dir="${build.dir.classes}" />
 		<javac destdir="${build.dir.classes}" srcdir="${src.dir}" debug="true"
 			includes="**/*.java" includeantruntime="true"/>
 	</target>
 
 	<!-- compile tests -->
-	<target name="-compile-tests" depends="-compile-src">
+	<target name="compile-tests" depends="compile-src">
 		<mkdir dir="${build.dir.tests}" />
 		<javac destdir="${build.dir.tests}" debug="true" srcdir="${tests.dir}"
 			includeantruntime="true">
@@ -48,7 +48,7 @@ $Revision$
 	</target>
 
 	<!-- clean up -->
-	<target name="clean" depends="-init" description="Cleans up the project">
+	<target name="clean" depends="init" description="Cleans up the project">
 		<delete dir="${build.dir}" />
 		<delete dir="${build.dir.dist}" />
 		<delete dir="${build.dir.api}" />
@@ -57,11 +57,11 @@ $Revision$
 	</target>
 	
 	<!-- build project -->
-	<target name="build" depends="-compile-src, jar"
+	<target name="build" depends="compile-src, jar"
 		description="Compiles the project and builds JAR archive" />
 	
 	<!-- create jar package -->
-	<target name="jar" depends="-compile-src">
+	<target name="jar" depends="compile-src">
 		<manifest file="${manifest.file}" />
 		<jar destfile="${jar.file}" manifest="${manifest.file}">
 			<fileset dir="${build.dir.classes}" includes="**/*.class" />
@@ -69,7 +69,7 @@ $Revision$
 	</target>
 		
 	<!-- run all unit tests -->
-	<target name="test" depends="-compile-src, -compile-tests"
+	<target name="test" depends="compile-src, compile-tests"
 		description="Run all unit tests">
 		<mkdir dir="${reports.dir}" />
 		<junit fork="yes" maxmemory="512m" printsummary="true"
@@ -96,7 +96,7 @@ $Revision$
 	</target>
 
 	<!-- generate javadocs -->
-	<target name="javadoc" depends="-init"
+	<target name="javadoc" depends="init"
 		description="Generates the Javadoc documentation">
 		<mkdir dir="${build.dir.api}" />
 		<javadoc sourcepath="${src.dir}" destdir="${build.dir.api}"
@@ -113,7 +113,10 @@ $Revision$
 			<fileset dir="${doc.dir}" />
 		</copy>
 		<copy todir="${build.dir.dist}" file="${jar.file}" />
-		<zip destfile="${release.zip}" basedir="${build.dir.dist}" />
+		<zip destfile="${release.zip}">
+			<zipfileset dir="${build.dir.dist}"
+				includes="**/*" prefix="${project.name}/"/>
+		</zip>
 	</target>
 
 </project>
