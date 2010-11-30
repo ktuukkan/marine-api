@@ -31,7 +31,7 @@ import java.util.GregorianCalendar;
  * @author Kimmo Tuukkanen
  * @version $Revision$
  * @see net.sf.marineapi.nmea.sentence.TimeSentence
- * @see net.sf.marineapi.nmea.Date
+ * @see net.sf.marineapi.nmea.util.Date
  */
 public class Time {
 

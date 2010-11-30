@@ -21,7 +21,6 @@
 package net.sf.marineapi.nmea.sentence;
 
 import net.sf.marineapi.nmea.parser.DataNotAvailableException;
-import net.sf.marineapi.nmea.util.CompassPoint;
 import net.sf.marineapi.nmea.util.DataStatus;
 import net.sf.marineapi.nmea.util.Direction;
 import net.sf.marineapi.nmea.util.Waypoint;
@@ -154,7 +153,7 @@ public interface RMBSentence extends Sentence {
      * translated to positive, set Steer-To to indicate the direction of error.
      * 
      * @param xte Cross track error value, will be rounded to one decimal.
-     * @see #setSteerTo(CompassPoint)
+     * @see #setSteerTo(Direction)
      */
     void setCrossTrackError(double xte);
 
