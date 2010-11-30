@@ -45,65 +45,16 @@ import net.sf.marineapi.nmea.sentence.SentenceValidator;
  */
 public class SentenceReader {
 
-    /**
-     * Reads the input stream and fires sentence events.
-     */
-    private class StreamReader implements Runnable {
-
-        private boolean running;
-        private BufferedReader input;
-
-        /**
-         * Constructor
-         * 
-         * @param reader BufferedReader for data input
-         */
-        public StreamReader(BufferedReader reader) {
-            input = reader;
-            running = true;
-        }
-
-        /**
-         * Reads the input stream and fires SentenceEvents
-         */
-        public void run() {
-
-            String data = null;
-            SentenceFactory factory = SentenceFactory.getInstance();
-
-            while (running) {
-                try {
-                    if (input.ready()) {
-                        data = input.readLine();
-                        if (SentenceValidator.isValid(data)) {
-                            Sentence s = factory.createParser(data);
-                            fireSentenceEvent(s);
-                        }
-                    }
-                    Thread.sleep(75);
-                } catch (Exception e) {
-                    // nevermind unsupported or invalid data
-                }
-            }
-        }
-
-        /**
-         * Stops the run loop.
-         */
-        public void stop() {
-            this.running = false;
-        }
-    }
-
-    // hash map key for listeners that listen for any kind of sentences, type
+    // Hash map key for listeners that listen any kind of sentences, type
     // specific listeners are registered with sentence type String
     private static final String DISPATCH_ALL = "DISPATCH_ALL";
 
+    // Thread for running the worker
+    private Thread thread;
+    // worker that reads the input stream
+    private StreamReader reader;
     // map of sentence listeners
     private ConcurrentMap<String, List<SentenceListener>> listeners = new ConcurrentHashMap<String, List<SentenceListener>>();
-
-    // worker that reads the input stream
-    private StreamReader streamReader;
 
     /**
      * Creates a new instance of SentenceReader.
@@ -111,9 +62,7 @@ public class SentenceReader {
      * @param source Stream from which to read NMEA data
      */
     public SentenceReader(InputStream source) {
-        streamReader = new StreamReader(new BufferedReader(
-                new InputStreamReader(source)));
-        new Thread(streamReader).start();
+        reader = new StreamReader(source);
     }
 
     /**
@@ -153,13 +102,48 @@ public class SentenceReader {
         }
     }
 
+    /**
+     * Sets the input stream from which to read NMEA data. If reader is running,
+     * it is first stopped and you must call {@link #start()} to resume reading.
+     * 
+     * @param stream New input stream to set.
+     */
+    public void setInputStream(InputStream stream) {
+        boolean isRunning = reader.isRunning();
+        if (isRunning) {
+            stop();
+        }
+        reader = new StreamReader(stream);
+    }
+
+    /**
+     * Starts reading the input stream and dispatching events.
+     */
+    public void start() {
+        if (thread != null && thread.isAlive() && reader != null
+                && reader.isRunning()) {
+            throw new IllegalStateException("Reader is already running");
+        }
+        thread = new Thread(reader);
+        thread.start();
+    }
+
+    /**
+     * Stops the reader and event dispatching.
+     */
+    public void stop() {
+        if (reader != null && reader.isRunning()) {
+            reader.stop();
+        }
+    }
+
     /*
      * (non-Javadoc)
      * @see java.lang.Object#finalize()
      */
     @Override
     protected void finalize() throws Throwable {
-        streamReader.stop();
+        reader.stop();
         super.finalize();
     }
 
@@ -170,21 +154,21 @@ public class SentenceReader {
      */
     private void fireSentenceEvent(Sentence sentence) {
 
-        SentenceEvent se = new SentenceEvent(this, sentence);
+        String type = sentence.getSentenceId().toString();
 
         List<SentenceListener> list = new ArrayList<SentenceListener>();
-        List<SentenceListener> all = listeners.get(DISPATCH_ALL);
-        List<SentenceListener> forType = listeners.get(sentence.getSentenceId()
-                .toString());
+        List<SentenceListener> temp1 = listeners.get(DISPATCH_ALL);
+        List<SentenceListener> temp2 = listeners.get(type);
 
-        if (all != null) {
-            list.addAll(all);
+        if (temp1 != null) {
+            list.addAll(temp1);
         }
 
-        if (forType != null) {
-            list.addAll(forType);
+        if (temp2 != null) {
+            list.addAll(temp2);
         }
 
+        SentenceEvent se = new SentenceEvent(this, sentence);
         for (SentenceListener sl : list) {
             try {
                 sl.sentenceRead(se);
@@ -209,4 +193,68 @@ public class SentenceReader {
             listeners.put(type, list);
         }
     }
+
+    /**
+     * Worker that reads the input stream and fires sentence events.
+     */
+    private class StreamReader implements Runnable {
+
+        private BufferedReader input;
+        private volatile boolean isRunning = false;
+
+        /**
+         * Creates a new instance of StreamReader.
+         * 
+         * @param source InputStream from where to read data.
+         */
+        public StreamReader(InputStream source) {
+            InputStreamReader isr = new InputStreamReader(source);
+            input = new BufferedReader(isr);
+        }
+
+        /**
+         * Tells if the reader is currently running, i.e. actively scanning the
+         * input stream for new data.
+         * 
+         * @return <code>true</code> if running, otherwise <code>false</code>.
+         */
+        public boolean isRunning() {
+            return isRunning;
+        }
+
+        /**
+         * Reads the input stream and fires SentenceEvents
+         */
+        public void run() {
+
+            this.isRunning = true;
+            SentenceFactory factory = SentenceFactory.getInstance();
+
+            while (isRunning) {
+                String data;
+                try {
+                    if (input.ready()) {
+                        data = input.readLine();
+                        if (SentenceValidator.isValid(data)) {
+                            Sentence s = factory.createParser(data);
+                            fireSentenceEvent(s);
+                        }
+                    }
+                    Thread.sleep(75);
+                } catch (Exception e) {
+                    // nevermind unsupported or invalid data
+                }
+            }
+
+            isRunning = false;
+        }
+
+        /**
+         * Stops the run loop.
+         */
+        public void stop() {
+            this.isRunning = false;
+        }
+    }
+
 }
