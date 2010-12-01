@@ -7,26 +7,36 @@ $Revision$
 
 	<target name="init">
 		<tstamp>
-			<format property="timestamp" pattern="yyyyMMddHHmm" />
+			<format property="build.id" pattern="yyyyMMddHHmmss" />
+			<format property="date" pattern="yyyy-MM-dd" />
 			<format property="year" pattern="yyyy" />
 		</tstamp>
-		<property name="project.name" value="marineapi" />
+		
+		<property name="project.id" value="marineapi" />
+		<property name="version" value="0.2dev" />
 		<property name="src.dir" value="src/" />
 		<property name="tests.dir" value="src-test/" />
 		<property name="reports.dir" value="reports/" />
 		<property name="doc.dir" value="doc/" />
+		<property name="releases.dir" value="releases/" />
+				
 		<property name="build.dir" value="bin/" />
 		<property name="build.dir.classes" value="bin/" />
 		<property name="build.dir.tests" value="bin/" />
 		<property name="build.dir.dist" value="dist/" />
 		<property name="build.dir.api" value="${doc.dir}/javadoc/" />
-		<property name="releases.dir" value="releases/" />
+		
 		<property name="manifest.file" value="${build.dir}/MANIFEST.MF" />
-		<property name="jar.file" value="${build.dir}/${project.name}.jar" />
+		<property name="jar.file" value="${build.dir}/${project.id}.jar" />
+		
 		<property name="release.zip"
-			value="${releases.dir}/${project.name}-${timestamp}.zip" />
+			value="${releases.dir}/${project.id}-${version}.zip" />
+
+		<property name="javadoc.title"
+			value="${ant.project.name} v${version} (build ${build.id})" />
+		
 		<property name="javadoc.footer"
-			value="Copyright (C) ${year} Java Marine API authors" />
+			value="Copyright (C) ${year} ${ant.project.name} author(s). All Rights Reserved." />
 	</target>
 
 	<!-- compile project -->
@@ -100,22 +110,36 @@ $Revision$
 		description="Generates the Javadoc documentation">
 		<mkdir dir="${build.dir.api}" />
 		<javadoc sourcepath="${src.dir}" destdir="${build.dir.api}"
-			private="false" bottom="${javadoc.footer}"
-			windowtitle="${project.name}" breakiterator="true" />
+			private="false" windowtitle="${javadoc.title}" 
+			bottom="${javadoc.footer}" breakiterator="true" />
 	</target>
 
 	<!-- build release package -->
-	<target name="dist" depends="build, javadoc"
+	<target name="dist" depends="clean, build, javadoc"
 		description="Builds a distribution package">
 		<mkdir dir="${build.dir.dist}" />
 		<mkdir dir="${releases.dir}" />
+		
+		<copy todir="${build.dir.dist}" file="${jar.file}" />
 		<copy todir="${build.dir.dist}/doc/">
 			<fileset dir="${doc.dir}" />
 		</copy>
-		<copy todir="${build.dir.dist}" file="${jar.file}" />
+		
+		<replace token="@VERSION@" value="${version}" 
+			file="${build.dir.dist}/doc/readme.txt" />
+		<replace token="@BUILD_ID@" value="${build.id}" 
+			file="${build.dir.dist}/doc/readme.txt" />
+		
+		<replace token="@VERSION@" value="${version}" 
+			file="${build.dir.dist}/doc/release_notes.txt" />
+		<replace token="@BUILD_ID@" value="${build.id}" 
+			file="${build.dir.dist}/doc/release_notes.txt" />
+		<replace token="@RELEASE_DATE@" value="${date}" 
+			file="${build.dir.dist}/doc/release_notes.txt" />
+			
 		<zip destfile="${release.zip}">
 			<zipfileset dir="${build.dir.dist}"
-				includes="**/*" prefix="${project.name}/"/>
+				includes="**/*" prefix="${project.id}-${version}/"/>
 		</zip>
 	</target>
 

@@ -1,10 +1,10 @@
 Java Marine API release notes
-Version 0.2 (pre-alpha)
-<http://sourceforge.net/projects/marineapi/>
+Version @VERSION@ pre-alpha (build @BUILD_ID@)
+<http://marineapi.sourceforge.net/>
 Copyright (C) 2010 Kimmo Tuukkanen <ktuukkan@users.sourceforge.net>
 
-Second preview release, released on 2010-11-30. Not to be used in production,
-major changes in the API may occur in later versions.
+Second preview release, not to be used in production. Major API changes may be
+introduced in future versions. Released on @RELEASE_DATE@.
 
 CHANGES 
 
