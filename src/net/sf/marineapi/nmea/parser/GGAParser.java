@@ -149,7 +149,17 @@ class GGAParser extends PositionParser implements GGASentence {
         double lon = parseLongitude(LONGITUDE);
         CompassPoint lath = parseHemisphereLat(LAT_HEMISPHERE);
         CompassPoint lonh = parseHemisphereLon(LON_HEMISPHERE);
-        return new Position(lat, lath, lon, lonh);
+        Position pos = new Position(lat, lath, lon, lonh);
+        try {
+            double alt = getAltitude();
+            if(getAltitudeUnits().equals(Units.FEET)) {
+            	alt = (alt / 0.3048);
+            }
+            pos.setAltitude(alt);
+        } catch (DataNotAvailableException e) {
+        	// alt not available, nevermind
+        }
+        return pos;
     }
 
     /*
@@ -255,6 +265,7 @@ class GGAParser extends PositionParser implements GGASentence {
         setLongitude(LONGITUDE, pos.getLongitude());
         setLatHemisphere(LAT_HEMISPHERE, pos.getLatHemisphere());
         setLonHemisphere(LON_HEMISPHERE, pos.getLonHemisphere());
+        setAltitude(pos.getAltitude());
     }
 
     /*

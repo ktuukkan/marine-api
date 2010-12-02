@@ -106,6 +106,7 @@ public class GGATest {
         // expected lat/lon values
         final double lat = 60 + (11.552 / 60);
         final double lon = 25 + (1.941 / 60);
+        final double alt = 28.0;
 
         Position p = gga.getPosition();
         assertNotNull(p);
@@ -114,6 +115,7 @@ public class GGATest {
         assertEquals(lon, p.getLongitude(), 0.0000001);
         assertEquals(CompassPoint.EAST, p.getLonHemisphere());
         assertEquals(Datum.WGS84, p.getDatum());
+        assertEquals(alt, p.getAltitude(), 0.01);
     }
 
     @Test
@@ -193,8 +195,10 @@ public class GGATest {
     public void testSetPosition() {
         final double lat = 61 + (1.111 / 60);
         final double lon = 27 + (7.777 / 60);
+        final double alt = 11.1;
         Position p = new Position(lat, CompassPoint.NORTH, lon,
                 CompassPoint.EAST);
+        p.setAltitude(alt);
         gga.setPosition(p);
 
         final String str = gga.toString();
@@ -207,6 +211,7 @@ public class GGATest {
         assertEquals(lon, wp.getLongitude(), 0.0000001);
         assertEquals(CompassPoint.NORTH, wp.getLatHemisphere());
         assertEquals(CompassPoint.EAST, wp.getLonHemisphere());
+        assertEquals(alt, wp.getAltitude(), 0.01);
     }
 
     /**
