@@ -51,7 +51,7 @@ public class GLLTest {
      */
     @Test
     public void testGetDataStatus() {
-        assertEquals(DataStatus.INVALID, instance.getStatus());
+        assertEquals(DataStatus.ACTIVE, instance.getStatus());
     }
 
     /**
@@ -89,9 +89,9 @@ public class GLLTest {
      */
     @Test
     public void testSetDataStatus() {
-        assertEquals(DataStatus.INVALID, instance.getStatus());
-        instance.setStatus(DataStatus.VALID);
-        assertEquals(DataStatus.VALID, instance.getStatus());
+        assertEquals(DataStatus.ACTIVE, instance.getStatus());
+        instance.setStatus(DataStatus.VOID);
+        assertEquals(DataStatus.VOID, instance.getStatus());
     }
 
     /**
