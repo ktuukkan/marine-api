@@ -12,10 +12,11 @@ CHANGES
  * SentenceValidator class for validating sentences (extracted from NMEA.java)
  * Removed NMEA.java as obsolete
  * PositionParser is no longer public (unlikely to have any use)
+ * SentenceReader does not start automatically anymore. Instead, start() and
+   stop() methods are used to control reader.
+ * GpsFixQuality enum; added RTK, FRTK, ESTIMATED, MANUAL and SIMULATED. 
  * Various small improvements and fixes
- * SentenceReader does automatically start anymore. Instead, start() and stop()
-   methods are used to control reading.
- 
+  
 NEW FEATURES
 
  * SentenceReader; SentenceListeners can be registered for specific sentence

@@ -28,7 +28,10 @@ package net.sf.marineapi.nmea.util;
  */
 public enum GpsFixQuality {
 
-    /** Normal GPS fix or standard position service (SPS) */
+    /** No GPS fix acquired. */
+    INVALID(0),
+
+    /** Normal GPS fix, Standard Position Service (SPS). */
     NORMAL(1),
 
     /** Differential GPS fix. */
@@ -37,8 +40,20 @@ public enum GpsFixQuality {
     /** Precise Positioning Service fix. */
     PPS(3),
 
-    /** No GPS fix acquired. */
-    INVALID(0);
+    /** Real Time Kinematic */
+    RTK(4),
+
+    /** Float RTK */
+    FRTK(5),
+
+    /** Estimated, dead reckoning (2.3 feature) */
+    ESTIMATED(6),
+
+    /** Manual input mode */
+    MANUAL(7),
+
+    /** Simulation mode */
+    SIMULATED(8);
 
     private final int value;
 
