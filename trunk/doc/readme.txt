@@ -42,7 +42,7 @@ follow the standard accurately.
 ACKNOWLEDGEMENTS
 
 The NMEA information for Java Marine API has been collected mainly from the
-following resources (in random order, last checked on 2010-03-06):
+following resources (in random order, availability checked on 2010-12-02):
 
  * Wikipedia's NMEA article
    <http://en.wikipedia.org/wiki/NMEA>

@@ -52,16 +52,16 @@ public class RMBTest {
     @Test
     public void testArrivalStatus() {
 
-        assertEquals(DataStatus.VALID, rmb.getArrivalStatus());
-        assertTrue(rmb.hasArrived());
-
-        rmb.setArrivalStatus(DataStatus.INVALID);
-        assertEquals(DataStatus.INVALID, rmb.getArrivalStatus());
+        assertEquals(DataStatus.VOID, rmb.getArrivalStatus());
         assertFalse(rmb.hasArrived());
 
-        rmb.setArrivalStatus(DataStatus.VALID);
-        assertEquals(DataStatus.VALID, rmb.getArrivalStatus());
+        rmb.setArrivalStatus(DataStatus.ACTIVE);
+        assertEquals(DataStatus.ACTIVE, rmb.getArrivalStatus());
         assertTrue(rmb.hasArrived());
+
+        rmb.setArrivalStatus(DataStatus.VOID);
+        assertEquals(DataStatus.VOID, rmb.getArrivalStatus());
+        assertFalse(rmb.hasArrived());
     }
 
     /**
@@ -131,7 +131,7 @@ public class RMBTest {
      */
     @Test
     public void testGetStatus() {
-        assertEquals(DataStatus.INVALID, rmb.getStatus());
+        assertEquals(DataStatus.ACTIVE, rmb.getStatus());
     }
 
     /**
@@ -264,8 +264,8 @@ public class RMBTest {
      */
     @Test
     public void testSetStatus() {
-        rmb.setStatus(DataStatus.VALID);
-        assertEquals(DataStatus.VALID, rmb.getStatus());
+        rmb.setStatus(DataStatus.ACTIVE);
+        assertEquals(DataStatus.ACTIVE, rmb.getStatus());
     }
 
     /**

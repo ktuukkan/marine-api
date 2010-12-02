@@ -67,7 +67,7 @@ public class RMCTest {
      */
     @Test
     public void testGetDataStatus() {
-        assertEquals(DataStatus.INVALID, rmc.getStatus());
+        assertEquals(DataStatus.ACTIVE, rmc.getStatus());
     }
 
     /**
@@ -188,8 +188,8 @@ public class RMCTest {
      */
     @Test
     public void testSetDataStatus() {
-        rmc.setStatus(DataStatus.VALID);
-        assertEquals(DataStatus.VALID, rmc.getStatus());
+        rmc.setStatus(DataStatus.ACTIVE);
+        assertEquals(DataStatus.ACTIVE, rmc.getStatus());
     }
 
     /**

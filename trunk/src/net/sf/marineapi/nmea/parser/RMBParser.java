@@ -149,7 +149,7 @@ class RMBParser extends PositionParser implements RMBSentence {
      * @see net.sf.marineapi.nmea.sentence.RMBSentence#hasArrived()
      */
     public boolean hasArrived() {
-        return DataStatus.VALID.equals(getArrivalStatus());
+        return DataStatus.ACTIVE.equals(getArrivalStatus());
     }
 
     /*
