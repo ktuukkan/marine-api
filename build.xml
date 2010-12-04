@@ -13,7 +13,7 @@ $Revision$
 		</tstamp>
 		
 		<property name="project.id" value="marineapi" />
-		<property name="version" value="0.2dev" />
+		<property name="version" value="0.2-nb" />
 		<property name="src.dir" value="src/" />
 		<property name="tests.dir" value="src-test/" />
 		<property name="reports.dir" value="reports/" />
@@ -72,7 +72,12 @@ $Revision$
 	
 	<!-- create jar package -->
 	<target name="jar" depends="compile-src">
-		<manifest file="${manifest.file}" />
+		<manifest file="${manifest.file}">
+			<attribute name="Specification-Title" value="${ant.project.name}" />
+			<attribute name="Specification-Version" value="${version}" />
+			<attribute name="Implementation-Title" value="net.sf.marineapi" />
+			<attribute name="Implementation-Version" value="b${build.id}" />
+		</manifest>
 		<jar destfile="${jar.file}" manifest="${manifest.file}">
 			<fileset dir="${build.dir.classes}" includes="**/*.class" />
 		</jar>
