@@ -1,10 +1,10 @@
 Java Marine API readme
-Version @VERSION@ pre-alpha (build @BUILD_ID@)
+Version @VERSION@ pre-alpha (b@BUILD_ID@)
 <http://marineapi.sourceforge.net/>
 Copyright (C) 2010 Kimmo Tuukkanen <ktuukkan@users.sourceforge.net>
 
-Java Marine API is an NMEA 0183 library that enables easy access to data
-provided by marine instruments such as GPS, sonar or autopilot.
+Java Marine API is an NMEA 0183 library for accessing the data provided by 
+electronic marine instruments, such as GPS, sonar or autopilot.
 
 SYSTEM REQUIREMENTS
  

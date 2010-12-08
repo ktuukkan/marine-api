@@ -25,6 +25,9 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
+import java.util.Calendar;
+import java.util.GregorianCalendar;
+
 import org.junit.Before;
 import org.junit.Test;
 
@@ -36,22 +39,25 @@ public class DateTest {
 
     private Date instance;
 
+    private GregorianCalendar cal;
+
     /**
      * @throws java.lang.Exception
      */
     @Before
     public void setUp() throws Exception {
         instance = new Date();
+        cal = new GregorianCalendar();
     }
 
     /**
      * Test method for {@link net.sf.marineapi.nmea.util.Date#Date()}.
      */
     @Test
-    public void testDate() {
-        assertEquals(1970, instance.getYear());
-        assertEquals(1, instance.getMonth());
-        assertEquals(1, instance.getDay());
+    public void testConstructor() {
+        assertEquals(cal.get(Calendar.YEAR), instance.getYear());
+        assertEquals(cal.get(Calendar.MONTH), instance.getMonth());
+        assertEquals(cal.get(Calendar.DAY_OF_MONTH), instance.getDay());
     }
 
     /**
@@ -59,7 +65,7 @@ public class DateTest {
      * {@link net.sf.marineapi.nmea.util.Date#Date(int, int, int)}.
      */
     @Test
-    public void testDateIntIntInt() {
+    public void testConstructorWithValues() {
         Date d = new Date(2010, 6, 15);
         assertEquals(2010, d.getYear());
         assertEquals(6, d.getMonth());
@@ -108,10 +114,10 @@ public class DateTest {
         instance.setMonth(6);
         assertTrue(d.equals(instance));
 
-        d.setYear(10);
+        d.setYear(cal.get(Calendar.YEAR) - 1);
         assertFalse(d.equals(instance));
 
-        instance.setYear(10);
+        instance.setYear(cal.get(Calendar.YEAR) - 1);
         assertTrue(d.equals(instance));
     }
 
@@ -132,7 +138,7 @@ public class DateTest {
      */
     @Test
     public void testGetDay() {
-        assertEquals(1, instance.getDay());
+        assertEquals(cal.get(Calendar.DAY_OF_MONTH), instance.getDay());
     }
 
     /**
@@ -140,7 +146,7 @@ public class DateTest {
      */
     @Test
     public void testGetMonth() {
-        assertEquals(1, instance.getMonth());
+        assertEquals(cal.get(Calendar.MONTH), instance.getMonth());
     }
 
     /**
@@ -148,7 +154,7 @@ public class DateTest {
      */
     @Test
     public void testGetYear() {
-        assertEquals(1970, instance.getYear());
+        assertEquals(cal.get(Calendar.YEAR), instance.getYear());
     }
 
     /**

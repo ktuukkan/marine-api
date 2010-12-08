@@ -20,9 +20,14 @@
  */
 package net.sf.marineapi.nmea.util;
 
+import java.util.Calendar;
+import java.util.GregorianCalendar;
+
+import net.sf.marineapi.nmea.sentence.DateSentence;
+
 /**
- * Represents a calendar date information (day-month-year) that is transmitted
- * in DateSentences.
+ * Represents a calendar date (day-month-year) transmitted in sentences that
+ * implement {@link DateSentence}.
  * 
  * @author Kimmo Tuukkanen
  * @version $Revision$
@@ -46,19 +51,19 @@ public class Date {
     private int year;
 
     /**
-     * Default constructor, initializes the date to January 1st, 1970
-     * (1970-01-01).
+     * Creates a new instance of <code>Date</code> using the current date.
      */
     public Date() {
-        this.year = 1970;
-        this.month = 1;
-        this.day = 1;
+        GregorianCalendar c = new GregorianCalendar();
+        this.year = c.get(Calendar.YEAR);
+        this.month = c.get(Calendar.MONTH);
+        this.day = c.get(Calendar.DAY_OF_MONTH);
     }
 
     /**
      * Constructor with date values.
      * 
-     * @param year Year, two or four digit value [0..99] or [1000..]
+     * @param year Year, two or four digit value [0..99] or [1000..9999]
      * @param month Month [1..12]
      * @param day Day [1..31]
      * @throws IllegalArgumentException If any of the parameter is out of

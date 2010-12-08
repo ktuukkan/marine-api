@@ -6,6 +6,7 @@ $Revision$
 <project name="Java Marine API" default="build" basedir=".">
 
 	<target name="init">
+		<echo message="Java version: ${ant.java.version}" />
 		<tstamp>
 			<format property="build.id" pattern="yyyyMMddHHmmss" />
 			<format property="date" pattern="yyyy-MM-dd" />
@@ -13,7 +14,7 @@ $Revision$
 		</tstamp>
 		
 		<property name="project.id" value="marineapi" />
-		<property name="version" value="0.2-nb" />
+		<property name="version" value="0.2" />
 		<property name="src.dir" value="src/" />
 		<property name="tests.dir" value="src-test/" />
 		<property name="reports.dir" value="reports/" />
@@ -33,7 +34,7 @@ $Revision$
 			value="${releases.dir}/${project.id}-${version}.zip" />
 
 		<property name="javadoc.title"
-			value="${ant.project.name} v${version} (build ${build.id})" />
+			value="${ant.project.name} v${version} (b${build.id})" />
 		
 		<property name="javadoc.footer"
 			value="Copyright (C) ${year} ${ant.project.name} author(s). All Rights Reserved." />
