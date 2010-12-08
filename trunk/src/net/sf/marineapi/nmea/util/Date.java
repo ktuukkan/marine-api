@@ -37,9 +37,9 @@ import net.sf.marineapi.nmea.sentence.DateSentence;
 public class Date {
 
     /**
-     * A pivot value that is used to determine century of two-digit year values.
-     * Two-digit values lower than or equal to pivot are assigned to 21th
-     * century, while greater values are assigned to 20th century.
+     * A pivot value that is used to determine century for two-digit year
+     * values. Two-digit values lower than or equal to pivot are assigned to
+     * 21th century, while greater values are assigned to 20th century.
      */
     public static final int PIVOT_YEAR = 50;
 
