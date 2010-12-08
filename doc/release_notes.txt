@@ -18,7 +18,7 @@ CHANGES
    actual char values 'A' and 'V'.
  * Sentence interface; added getFieldCount() method.
  * Position class; added toString() method.
- * RTESentence interface; added addWaypointId() method.´
+ * RTESentence interface; added addWaypointId() method.
  * ZDASentence; added toDate() method.
  * Various small improvements and bug fixes
   
