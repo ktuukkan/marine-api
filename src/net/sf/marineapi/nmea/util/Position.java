@@ -236,9 +236,9 @@ public class Position {
     }
 
     /**
-     * Haversine formulae implementation based on example at
-     * http://www.codecodex
-     * .com/wiki/Calculate_Distance_Between_Two_Points_on_a_Globe
+     * Haversine formulae, implementation based on example at <a href=
+     * "http://www.codecodex.com/wiki/Calculate_Distance_Between_Two_Points_on_a_Globe"
+     * >codecodex</a>.
      * 
      * @param lat1 Origin latitude
      * @param lon1 Origin longitude
@@ -266,5 +266,26 @@ public class Position {
         double result = earthRadius * c * 1000;
 
         return result;
+    }
+
+    /*
+     * (non-Javadoc)
+     * @see java.lang.Object#toString()
+     */
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("[");
+        sb.append(getLatitude());
+        sb.append(" ");
+        sb.append(getLatHemisphere().toChar());
+        sb.append(", ");
+        sb.append(getLongitude());
+        sb.append(" ");
+        sb.append(getLonHemisphere().toChar());
+        sb.append(", ");
+        sb.append(getAltitude());
+        sb.append(" m]");
+        return sb.toString();
     }
 }
