@@ -6,21 +6,23 @@ Copyright (C) 2010 Kimmo Tuukkanen <ktuukkan@users.sourceforge.net>
 Second preview release, not to be used in production. Major API changes may be
 introduced in future versions. Released on @RELEASE_DATE@.
 
-CHANGES 
+CHANGES
 
- * Checksum class for calculating sentence checksums (extracted from NMEA.java)
- * SentenceValidator class for validating sentences (extracted from NMEA.java)
- * Removed NMEA.java as obsolete
+ * SentenceReader does not start automatically anymore. Use start() and stop()
+   methods to control reader.
+ * Removed NMEA class; moved checksum calculation to class Checksum and sentence
+   validation to class SentenceValidator.
  * PositionParser is no longer public (unlikely to have any use)
- * SentenceReader does not start automatically anymore. Instead, start() and
-   stop() methods are used to control reader.
- * GpsFixQuality enum; added RTK, FRTK, ESTIMATED, MANUAL and SIMULATED. 
- * Various small improvements and fixes
+ * GpsFixQuality enum; added RTK, FRTK, ESTIMATED, MANUAL and SIMULATED.
+ * DataStatus enum; renamed VALID/INVALID to ACTIVE/VOID (corresponds the actual
+   char values 'A' and 'V').
+ * Added toString() to Position class.
+ * Various small improvements and bug fixes
   
 NEW FEATURES
 
  * SentenceReader; SentenceListeners can be registered for specific sentence
-   type, new InputStream may be set afterwards.
+   type. Added setter for changing the input stream.
  * Sentence interface; Added getFieldCount() method.
  * RTESentence interface; Added addWaypointId() method.
  * Date class for handling date information
@@ -29,6 +31,6 @@ NEW FEATURES
 KNOWN ISSUES
   
  * Position.distanceTo() may not produce correct results.
- * In practice it is not possible to extend SentenceParser class and create
+ * In practice, it is not possible to extend SentenceParser class and create
    custom parsers due to internal checking of supported Sentence types.
  
