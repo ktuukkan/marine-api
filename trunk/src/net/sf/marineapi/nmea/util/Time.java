@@ -43,9 +43,13 @@ public class Time {
     private double seconds = 0.0;
 
     /**
-     * Default constructor, initializes Time to midnight (00:00:00.0).
+     * Creates a new instance of <code>Time</code> using the current time.
      */
     public Time() {
+        GregorianCalendar c = new GregorianCalendar();
+        this.hour = c.get(Calendar.HOUR);
+        this.minutes = c.get(Calendar.MINUTE);
+        this.seconds = c.get(Calendar.SECOND);
     }
 
     /**
