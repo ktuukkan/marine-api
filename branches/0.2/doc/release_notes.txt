@@ -1,0 +1,36 @@
+Java Marine API release notes
+Version @VERSION@ pre-alpha (b@BUILD_ID@)
+<http://marineapi.sourceforge.net/>
+Copyright (C) 2010 Kimmo Tuukkanen <ktuukkan@users.sourceforge.net>
+
+Second preview release, not to be used in production. Major API changes may be
+introduced in future versions. Released on @RELEASE_DATE@.
+
+CHANGES
+
+ * SentenceReader does not start automatically anymore. Use start() and stop()
+   methods to control reader.
+ * Removed NMEA class; moved checksum calculation to Checksum class and sentence
+   validation to SentenceValidator class.
+ * PositionParser is no longer public (unlikely to have any use).
+ * GpsFixQuality enum; added RTK, FRTK, ESTIMATED, MANUAL and SIMULATED.
+ * DataStatus enum; renamed VALID/INVALID to ACTIVE/VOID to better reflect the
+   actual char values 'A' and 'V'.
+ * Sentence interface; added getFieldCount() method.
+ * Position class; added toString() method.
+ * RTESentence interface; added addWaypointId() method.
+ * ZDASentence; added toDate() method.
+ * Various small improvements and bug fixes
+  
+NEW FEATURES
+
+ * SentenceReader; SentenceListeners can be registered for specific sentence
+   type. Added setter for changing the input stream.
+ * Date class for handling date information
+
+KNOWN ISSUES
+  
+ * Position.distanceTo() may not produce correct results.
+ * In practice, it is not possible to extend SentenceParser class and create
+   custom parsers due to internal checking of supported Sentence types.
+ 
