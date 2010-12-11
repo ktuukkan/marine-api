@@ -150,7 +150,7 @@ public class SentenceReader {
     /**
      * Dispatch data to all listeners.
      * 
-     * @param nmea sentence string.
+     * @param sentence sentence string.
      */
     private void fireSentenceEvent(Sentence sentence) {
 

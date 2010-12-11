@@ -35,15 +35,6 @@ import net.sf.marineapi.nmea.util.DataStatus;
 public interface GLLSentence extends PositionSentence, TimeSentence {
 
     /**
-     * Data status; char indicator for "valid".
-     */
-    char STATUS_VALID = 'A';
-    /**
-     * Data status; char indicator for "invalid".
-     */
-    char STATUS_INVALID = 'V';
-
-    /**
      * Get the data quality status, valid or invalid.
      * 
      * @return DataStatus.VALID or DataStatus.INVALID
