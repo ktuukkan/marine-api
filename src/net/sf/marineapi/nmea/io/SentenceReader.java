@@ -97,7 +97,7 @@ public class SentenceReader {
     public void removeSentenceListener(SentenceListener sl) {
         for (List<SentenceListener> list : listeners.values()) {
             if (list.contains(sl)) {
-                listeners.remove(sl);
+                list.remove(sl);
             }
         }
     }
@@ -109,8 +109,7 @@ public class SentenceReader {
      * @param stream New input stream to set.
      */
     public void setInputStream(InputStream stream) {
-        boolean isRunning = reader.isRunning();
-        if (isRunning) {
+        if (reader.isRunning()) {
             stop();
         }
         reader = new StreamReader(stream);
@@ -155,17 +154,13 @@ public class SentenceReader {
     private void fireSentenceEvent(Sentence sentence) {
 
         String type = sentence.getSentenceId().toString();
-
         List<SentenceListener> list = new ArrayList<SentenceListener>();
-        List<SentenceListener> temp1 = listeners.get(DISPATCH_ALL);
-        List<SentenceListener> temp2 = listeners.get(type);
 
-        if (temp1 != null) {
-            list.addAll(temp1);
+        if (listeners.containsKey(type)) {
+            list.addAll(listeners.get(type));
         }
-
-        if (temp2 != null) {
-            list.addAll(temp2);
+        if (listeners.containsKey(DISPATCH_ALL)) {
+            list.addAll(listeners.get(DISPATCH_ALL));
         }
 
         SentenceEvent se = new SentenceEvent(this, sentence);
