@@ -52,4 +52,16 @@ public enum SentenceId {
     WPL,
     /** UTC time and date with local time zone offset */
     ZDA;
+    
+    
+    /**
+     * Parses the sentence id from specified sentence String.
+     * 
+     * @param nmea Sentence String
+     * @return SentenceId enum
+     */
+    public static SentenceId parse(String nmea) {
+        String sid = nmea.substring(3, 6);
+        return SentenceId.valueOf(sid);  	
+    }
 }
