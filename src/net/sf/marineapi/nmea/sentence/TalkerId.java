@@ -66,5 +66,15 @@ public enum TalkerId {
     /** Velocity Sensor, Speed Log, Water, Mechanical */
     VW,
     /** Weather Instruments */
-    WI
+    WI;
+    
+    /**
+     * Parses the talker id from specified sentence String.
+     * @param nmea Sentence String
+     * @return TalkerId enum
+     */
+    public static TalkerId parse(String nmea) {
+    	String tid = nmea.substring(1, 3);
+    	return TalkerId.valueOf(tid);
+    }
 }

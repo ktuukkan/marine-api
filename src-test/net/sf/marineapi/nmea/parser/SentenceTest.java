@@ -92,7 +92,7 @@ public class SentenceTest {
             new SentenceParser("$XZGGA,VALID,BUT,TALKER,NOT,SUPPORTED");
             fail("Did not throw exception");
         } catch (IllegalArgumentException se) {
-            assertTrue(se.getMessage().contains("[XZ]"));
+            assertTrue(se.getMessage().endsWith(".TalkerId.XZ"));
         } catch (Exception e) {
             fail(e.getMessage());
         }
@@ -107,7 +107,7 @@ public class SentenceTest {
             new SentenceParser("$GPXYZ,VALID,BUT,TYPE,NOT,SUPPORTED");
             fail("Did not throw exception");
         } catch (IllegalArgumentException se) {
-            assertTrue(se.getMessage().contains("[XYZ]"));
+            assertTrue(se.getMessage().endsWith(".SentenceId.XYZ"));
         } catch (Exception e) {
             fail(e.getMessage());
         }

@@ -83,8 +83,8 @@ public class SentenceParser implements Sentence {
             throw new IllegalArgumentException(msg);
         }
 
-        talkerId = parseTalkerId(nmea);
-        sentenceId = parseSentenceId(nmea);
+        talkerId = TalkerId.parse(nmea);
+        sentenceId = SentenceId.parse(nmea);
 
         // remove address field
         int begin = nmea.indexOf(Sentence.FIELD_DELIMITER);
@@ -96,7 +96,7 @@ public class SentenceParser implements Sentence {
             temp = temp.substring(0, end);
         }
 
-        // copy data to fields List
+        // copy data fields to list
         String[] temp2 = temp.split(String.valueOf(FIELD_DELIMITER), -1);
         fields = new ArrayList<String>(temp2.length);
         for (String s : temp2) {
@@ -141,15 +141,15 @@ public class SentenceParser implements Sentence {
         if (size < 1) {
             throw new IllegalArgumentException("Minimum number of fields is 1");
         }
-
-        if (talker == null || type == null) {
-            throw new IllegalArgumentException(
-                    "Sentence and Talker IDs must be specified");
+        if (talker == null) {
+            throw new IllegalArgumentException("Talker ID must be specified");
+        }       
+        if (type == null) {
+            throw new IllegalArgumentException("Sentence ID must be specified");
         }
 
-        this.talkerId = talker;
-        this.sentenceId = type;
-
+        talkerId = talker;
+        sentenceId = type;
         fields = new ArrayList<String>(size);
         for (int i = 0; i < size; i++) {
             fields.add("");
@@ -407,37 +407,37 @@ public class SentenceParser implements Sentence {
         fields = temp;
     }
 
-    /**
-     * Parses the sentence Id of specified NMEA sentence.
-     * 
-     * @param nmea NMEA 0183 sentence String
-     * @return SentenceId Sentence ID of the specified sentence
-     */
-    static SentenceId parseSentenceId(String nmea) {
-        SentenceId id = null;
-        String sid = nmea.substring(3, 6);
-        try {
-            id = SentenceId.valueOf(sid);
-        } catch (Exception ex) {
-            String msg = String.format("Unsupported sentence Id [%s]", sid);
-            throw new IllegalArgumentException(msg, ex);
-        }
-        return id;
-    }
-
-    /**
-     * Parses the talker Id of specified NMEA sentence.
-     * 
-     * @param nmea NMEA 0183 sentence String
-     * @return TalkerId Talker ID of the specified sentence
-     */
-    static TalkerId parseTalkerId(String nmea) {
-        String tid = nmea.substring(1, 3);
-        try {
-            return TalkerId.valueOf(tid);
-        } catch (Exception ex) {
-            String msg = String.format("Unsupported talker Id [%s]", tid);
-            throw new IllegalArgumentException(msg, ex);
-        }
-    }
+//    /**
+//     * Parses the sentence Id of specified NMEA sentence.
+//     * 
+//     * @param nmea NMEA 0183 sentence String
+//     * @return SentenceId Sentence ID of the specified sentence
+//     */
+//    static SentenceId parseSentenceId(String nmea) {
+//        SentenceId id = null;
+//        String sid = nmea.substring(3, 6);
+//        try {
+//            id = SentenceId.valueOf(sid);
+//        } catch (Exception ex) {
+//            String msg = String.format("Unsupported sentence Id [%s]", sid);
+//            throw new IllegalArgumentException(msg, ex);
+//        }
+//        return id;
+//    }
+//
+//    /**
+//     * Parses the talker Id of specified NMEA sentence.
+//     * 
+//     * @param nmea NMEA 0183 sentence String
+//     * @return TalkerId Talker ID of the specified sentence
+//     */
+//    static TalkerId parseTalkerId(String nmea) {
+//        String tid = nmea.substring(1, 3);
+//        try {
+//            return TalkerId.valueOf(tid);
+//        } catch (Exception ex) {
+//            String msg = String.format("Unsupported talker Id [%s]", tid);
+//            throw new IllegalArgumentException(msg, ex);
+//        }
+//    }
 }

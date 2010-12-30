@@ -45,7 +45,7 @@ public final class SentenceFactory {
     public Sentence createParser(String nmea) {
 
         Sentence s = null;
-        SentenceId type = SentenceParser.parseSentenceId(nmea);
+        SentenceId type = SentenceId.parse(nmea);
 
         switch (type) {
             case BOD:
