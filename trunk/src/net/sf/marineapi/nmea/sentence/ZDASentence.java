@@ -55,9 +55,9 @@ public interface ZDASentence extends TimeSentence, DateSentence {
     int getLocalZoneMinutes();
 
     /**
-     * Get date and time as <code>java.util.Date</code>.
+     * Get date and time as {@link java.util.Date}.
      * 
-     * @return <code>java.util.Date</code>
+     * @return {@link java.util.Date}
      * @throws DataNotAvailableException If any of the date/time values is not
      *             available.
      * @throws ParseException If the any of the date/time fields contains

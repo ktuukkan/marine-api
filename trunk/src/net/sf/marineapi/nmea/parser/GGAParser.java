@@ -152,12 +152,12 @@ class GGAParser extends PositionParser implements GGASentence {
         Position pos = new Position(lat, lath, lon, lonh);
         try {
             double alt = getAltitude();
-            if(getAltitudeUnits().equals(Units.FEET)) {
-            	alt = (alt / 0.3048);
+            if (getAltitudeUnits().equals(Units.FEET)) {
+                alt = (alt / 0.3048);
             }
             pos.setAltitude(alt);
         } catch (DataNotAvailableException e) {
-        	// alt not available, nevermind
+            // alt not available, nevermind
         }
         return pos;
     }

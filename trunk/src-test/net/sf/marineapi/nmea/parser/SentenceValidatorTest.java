@@ -27,7 +27,6 @@ import net.sf.marineapi.nmea.sentence.SentenceValidator;
 
 import org.junit.Test;
 
-
 /**
  * @author Kimmo Tuukkanen
  * @version $Revision$
@@ -36,23 +35,25 @@ public class SentenceValidatorTest {
 
     /**
      * Test method for
-     * {@link net.sf.marineapi.nmea.sentence.SentenceValidator#isValid(java.lang.String)} .
+     * {@link net.sf.marineapi.nmea.sentence.SentenceValidator#isValid(java.lang.String)}
+     * .
      */
     @Test
     public void testIsValid() {
         String a = "$GPGGA,1,2,3,4,5,6,7,8,9";
         assertTrue(SentenceValidator.isValid(a));
         assertTrue(SentenceValidator.isValid(Checksum.add(a)));
-    
+
         String b = "$GPGGA,1,TWO,three,FOUR,5,6.0,-7.0,Eigth-8,N1N3";
         assertTrue(SentenceValidator.isValid(b));
         assertTrue(SentenceValidator.isValid(Checksum.add(b)));
-    
+
     }
 
     /**
      * Test method for
-     * {@link net.sf.marineapi.nmea.sentence.SentenceValidator#isValid(java.lang.String)} .
+     * {@link net.sf.marineapi.nmea.sentence.SentenceValidator#isValid(java.lang.String)}
+     * .
      */
     @Test
     public void testIsValidWithInvalidInput() {
@@ -72,12 +73,14 @@ public class SentenceValidatorTest {
         assertFalse(SentenceValidator.isValid("$GPGGAA,1,2,3,4,5,6,7,8,9"));
         assertFalse(SentenceValidator.isValid("$GPGGA,1,2,3,4,5,6,7,8,9*00"));
         // invalid checksum, otherwise valid
-        assertFalse(SentenceValidator.isValid("$GPGLL,6011.552,N,02501.941,E,120045,A*00"));
+        assertFalse(SentenceValidator
+                .isValid("$GPGLL,6011.552,N,02501.941,E,120045,A*00"));
     }
 
     /**
      * Test method for
-     * {@link net.sf.marineapi.nmea.sentence.SentenceValidator#isValid(java.lang.String)} .
+     * {@link net.sf.marineapi.nmea.sentence.SentenceValidator#isValid(java.lang.String)}
+     * .
      */
     @Test
     public void testIsValidWithValidInput() {

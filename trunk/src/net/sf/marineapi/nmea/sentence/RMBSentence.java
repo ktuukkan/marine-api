@@ -38,10 +38,11 @@ import net.sf.marineapi.nmea.util.Waypoint;
 public interface RMBSentence extends Sentence {
 
     /**
-     * Get the arrival to waypoint status. Status is <code>INVALID</code> while
-     * not arrived at destination, otherwise <code>VALID</code>.
+     * Get the arrival to waypoint status. Status is {@link DataStatus#VOID}
+     * (false) while not arrived at destination, otherwise
+     * {@link DataStatus#ACTIVE} (true).
      * 
-     * @return DataStatus.VALID or DataStatus.INVALID.
+     * @return {@link DataStatus#ACTIVE} or {@link DataStatus#VOID}
      * @see #hasArrived()
      * @throws DataNotAvailableException If the data is not available.
      * @throws ParseException If the field contains unexpected or illegal value.
@@ -96,7 +97,7 @@ public interface RMBSentence extends Sentence {
     /**
      * Get the sentence data status, valid or invalid.
      * 
-     * @return DataStatus.VALID or DataStatus.INVALID
+     * @return {@link DataStatus#ACTIVE} or {@link DataStatus#VOID}
      * @throws DataNotAvailableException If the data is not available.
      * @throws ParseException If the field contains unexpected or illegal value.
      */
@@ -131,10 +132,10 @@ public interface RMBSentence extends Sentence {
     boolean hasArrived();
 
     /**
-     * Set the arrival to waypoint status.
+     * Set the arrival to waypoint status. Set {@link DataStatus#VOID} if not
+     * arrived at destination, otherwise {@link DataStatus#ACTIVE}.
      * 
-     * @param status <code>DataStatus.INVALID</code> if not arrived at
-     *            destination, otherwise <code>VALID</code>.
+     * @param status {@link DataStatus#VOID} or {@link DataStatus#ACTIVE}.
      * @throws IllegalArgumentException If status is <code>null</code>.
      */
     void setArrivalStatus(DataStatus status);
@@ -181,14 +182,14 @@ public interface RMBSentence extends Sentence {
     /**
      * Set status of sentence data, valid or invalid.
      * 
-     * @param status DataStatus.VALID or DataStatus.INVALID
+     * @param status {@link DataStatus#ACTIVE} or {@link DataStatus#VOID}
      */
     void setStatus(DataStatus status);
 
     /**
      * Set the direction to steer to correct error (left/right).
      * 
-     * @param steerTo Direction.LEFT or Direction.RIGHT
+     * @param steerTo {@link Direction#LEFT} or {@link Direction#RIGHT}
      * @throws IllegalArgumentException If specified direction is any other than
      *             defined valid for param <code>steer</code>.
      */

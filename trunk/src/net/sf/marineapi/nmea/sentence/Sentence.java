@@ -70,7 +70,7 @@ public interface Sentence {
     /**
      * Get the sentence ID that specifies sentence type. ID is the last three
      * characters in address field. For example, in case of <code>$GPGGA</code>
-     * the method returns <code>SentenceId.GGA</code>.
+     * the method returns {@link SentenceId#GGA}.
      * 
      * @return SentenceId enum
      */
@@ -79,9 +79,9 @@ public interface Sentence {
     /**
      * Gets the talker ID of the sentence. Talker ID is the next two characters
      * after <code>$</code> in sentence address field. For example, in case of
-     * <code>$GPGGA</code>, the method returns <code>TalkerId.GP</code>.
+     * <code>$GPGGA</code>, the method returns {@link TalkerId#GP}.
      * 
-     * @return Talker id String.
+     * @return Talker id enum.
      */
     TalkerId getTalkerId();
 

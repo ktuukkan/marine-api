@@ -166,8 +166,8 @@ class GSAParser extends SentenceParser implements GSASentence {
         }
         int j = 0;
         for (int i = FIRST_SV; i <= LAST_SV; i++) {
-        	String id = (j < ids.length) ? ids[j++] : "";
-        	setStringValue(i, id);
+            String id = (j < ids.length) ? ids[j++] : "";
+            setStringValue(i, id);
         }
     }
 

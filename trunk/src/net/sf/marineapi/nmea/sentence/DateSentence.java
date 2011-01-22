@@ -36,7 +36,7 @@ public interface DateSentence extends Sentence {
 
     /**
      * Parses the date information from sentence fields and returns a
-     * <code>net.sf.marineapi.nmea.util.Date</code>.
+     * {@link Date}.
      * 
      * @return Date object
      * @throws DataNotAvailableException If the data is not available.
@@ -49,7 +49,7 @@ public interface DateSentence extends Sentence {
      * multiple fields or combined into one. Four-digit year value may also be
      * reduced into two-digit format.
      * 
-     * @param date <code>net.sf.marineapi.nmea.util.Date</code>
+     * @param date {@link Date}
      */
     void setDate(Date date);
 }

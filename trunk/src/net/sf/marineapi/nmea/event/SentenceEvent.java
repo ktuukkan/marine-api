@@ -31,6 +31,7 @@ import net.sf.marineapi.nmea.sentence.Sentence;
  * 
  * @author Kimmo Tuukkanen
  * @version $Revision$
+ * @see SentenceListener
  */
 public class SentenceEvent extends EventObject {
 
@@ -41,7 +42,7 @@ public class SentenceEvent extends EventObject {
     /**
      * Creates a new SentenceEvent object.
      * 
-     * @param src <code>Object</code> that fired the event
+     * @param src Object that fired the event
      * @param s Sentence that triggered the event
      * @throws IllegalArgumentException If specified sentence is
      *             <code>null</code>

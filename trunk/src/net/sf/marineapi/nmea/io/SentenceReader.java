@@ -42,6 +42,8 @@ import net.sf.marineapi.nmea.sentence.SentenceValidator;
  * 
  * @author Kimmo Tuukkanen
  * @version $Revision$
+ * @see SentenceListener
+ * @see SentenceEvent
  */
 public class SentenceReader {
 
@@ -66,10 +68,10 @@ public class SentenceReader {
     }
 
     /**
-     * Adds a <code>SentenceListener</code> that wants to receive all sentences
-     * read by the reader.
+     * Adds a {@link SentenceListener} that wants to receive all sentences read
+     * by the reader.
      * 
-     * @param listener <code>SentenceListener</code> to be registered.
+     * @param listener {@link SentenceListener} to be registered.
      * @see net.sf.marineapi.nmea.event.SentenceListener
      */
     public void addSentenceListener(SentenceListener listener) {
@@ -77,7 +79,7 @@ public class SentenceReader {
     }
 
     /**
-     * Adds a <code>SentenceListener</code> that is interested in receiving only
+     * Adds a {@link SentenceListener} that is interested in receiving only
      * sentences of certain type.
      * 
      * @param sl SentenceListener to add
@@ -92,7 +94,7 @@ public class SentenceReader {
      * Remove a listener from reader. When removed, listener will not receive
      * any events from the reader.
      * 
-     * @param sl <code>SentenceListener</code> to be removed.
+     * @param sl {@link SentenceListener} to be removed.
      */
     public void removeSentenceListener(SentenceListener sl) {
         for (List<SentenceListener> list : listeners.values()) {
