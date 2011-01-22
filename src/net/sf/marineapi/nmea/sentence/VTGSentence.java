@@ -62,7 +62,7 @@ public interface VTGSentence extends Sentence {
      * Get the GPS receiver operating mode. The field may not be available,
      * depending on the NMEA version.
      * 
-     * @return GpsMode or <code>null</code> if mode is not available
+     * @return {@link GpsMode} enum
      * @throws DataNotAvailableException If the data is not available.
      * @throws ParseException If the field contains unexpected or illegal value.
      */

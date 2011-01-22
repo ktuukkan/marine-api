@@ -24,9 +24,11 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 
+import net.sf.marineapi.nmea.sentence.TimeSentence;
+
 /**
  * Represents a time of day in 24-hour clock, i.e. the UTC time used as default
- * in NMEA 0183. Transmitted by <code>TimeSentence</code>.
+ * in NMEA 0183. Transmitted by {@link TimeSentence}.
  * 
  * @author Kimmo Tuukkanen
  * @version $Revision$
@@ -43,7 +45,8 @@ public class Time {
     private double seconds = 0.0;
 
     /**
-     * Creates a new instance of <code>Time</code> using the current time.
+     * Creates a new instance of <code>Time</code> using the current system
+     * time.
      */
     public Time() {
         GregorianCalendar c = new GregorianCalendar();
@@ -147,7 +150,7 @@ public class Time {
     }
 
     /**
-     * Set the time values from specified <code>java.util.Date</code>. The date
+     * Set the time values from specified {@link java.util.Date}. The date
      * information of is ignored, only hours, minutes and seconds are relevant.
      * 
      * @param d Date
@@ -161,7 +164,7 @@ public class Time {
     }
 
     /**
-     * Convert to <code>java.util.Date</code>.
+     * Convert to {@link java.util.Date}.
      * 
      * @param d Date that defines year, month and day for time.
      * @return A Date that is combination of specified Date and Time

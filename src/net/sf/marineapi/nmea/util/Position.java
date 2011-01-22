@@ -44,7 +44,7 @@ public class Position {
 
     /**
      * Creates a new instance of Position. Notice that altitude defaults to 0.0,
-     * unless set with <code>setAltitude(int)</code> method.
+     * unless set with {@link #setAltitude(double)} method.
      * 
      * @param lat Latitude degrees
      * @param lath Hemisphere of latitude
@@ -60,7 +60,7 @@ public class Position {
 
     /**
      * Creates new instance of Position. Notice that altitude defaults to 0.0,
-     * unless set with <code>setAltitude(int)</code> method.
+     * unless set with {@link #setAltitude(double)} method.
      * 
      * @param lat Latitude degrees
      * @param lath Hemisphere of latitude
@@ -87,11 +87,11 @@ public class Position {
      * "http://www.codecodex.com/wiki/Calculate_Distance_Between_Two_Points_on_a_Globe"
      * >codecodex.com</a>.
      * 
-     * @param p Position to which the distance is calculated.
-     * @return Distance to <code>p</code> in meters.
+     * @param pos Position to which the distance is calculated.
+     * @return Distance to po<code>pos</code> in meters.
      */
-    public double distanceTo(Position p) {
-        return haversine(getLatitude(), getLongitude(), p.getLatitude(), p
+    public double distanceTo(Position pos) {
+        return haversine(getLatitude(), getLongitude(), pos.getLatitude(), pos
                 .getLongitude());
     }
 
@@ -106,8 +106,8 @@ public class Position {
 
     /**
      * Gets the datum, i.e. the coordinate system used to define geographic
-     * position. Default is <code>Datum.WGS84</code>, unless datum is specified
-     * in the constructor. Notice also that datum cannot be set afterwards.
+     * position. Default is {@link Datum#WGS84}, unless datum is specified in
+     * the constructor. Notice also that datum cannot be set afterwards.
      * 
      * @return Datum enum
      */

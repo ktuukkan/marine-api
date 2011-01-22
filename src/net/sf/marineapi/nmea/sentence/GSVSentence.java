@@ -83,7 +83,7 @@ public interface GSVSentence extends Sentence {
      * method for comparison of
      * <code>(@link {#getSentenceCount()} == @link{#getSentenceIndex()})</code>.
      * 
-     * @return True if first, otherwise false.
+     * @return <code>true</code> if first, otherwise <code>false</code>.
      */
     boolean isLast();
 

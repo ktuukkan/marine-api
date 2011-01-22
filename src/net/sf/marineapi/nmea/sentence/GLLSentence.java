@@ -37,7 +37,7 @@ public interface GLLSentence extends PositionSentence, TimeSentence {
     /**
      * Get the data quality status, valid or invalid.
      * 
-     * @return DataStatus.VALID or DataStatus.INVALID
+     * @return {@link DataStatus#ACTIVE} or {@link DataStatus#VOID}
      * @throws DataNotAvailableException If the data is not available.
      * @throws ParseException If the field contains unexpected or illegal value.
      */

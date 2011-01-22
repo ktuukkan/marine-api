@@ -92,7 +92,7 @@ public interface RMCSentence extends PositionSentence, TimeSentence,
     /**
      * Gets the data status, valid or invalid.
      * 
-     * @return DataStatus.VALID or DataStatus.INVALID
+     * @return {@link DataStatus#ACTIVE} or {@link DataStatus#VOID}
      * @throws DataNotAvailableException If the data is not available.
      * @throws ParseException If the field contains unexpected or illegal value.
      */
@@ -119,7 +119,7 @@ public interface RMCSentence extends PositionSentence, TimeSentence,
     /**
      * Set the direction of magnetic variation, east or west.
      * 
-     * @param dir Direction.EAST or Direction.WEST
+     * @param dir {@link CompassPoint#EAST} or {@link CompassPoint#WEST}
      * @throws IllegalArgumentException If specified Direction is other than
      *             defined as valid for param <code>dir</code>.
      */
@@ -142,7 +142,7 @@ public interface RMCSentence extends PositionSentence, TimeSentence,
     /**
      * Set the data status, valid or invalid.
      * 
-     * @param status DataStatus.VALID or DataStatus.INVALID
+     * @param status {@link DataStatus#ACTIVE} or {@link DataStatus#VOID}
      */
     void setStatus(DataStatus status);
 

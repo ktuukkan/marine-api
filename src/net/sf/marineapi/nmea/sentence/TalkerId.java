@@ -67,14 +67,15 @@ public enum TalkerId {
     VW,
     /** Weather Instruments */
     WI;
-    
+
     /**
      * Parses the talker id from specified sentence String.
+     * 
      * @param nmea Sentence String
      * @return TalkerId enum
      */
     public static TalkerId parse(String nmea) {
-    	String tid = nmea.substring(1, 3);
-    	return TalkerId.valueOf(tid);
+        String tid = nmea.substring(1, 3);
+        return TalkerId.valueOf(tid);
     }
 }

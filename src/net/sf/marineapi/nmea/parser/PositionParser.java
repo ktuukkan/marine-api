@@ -23,6 +23,7 @@ package net.sf.marineapi.nmea.parser;
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
 
+import net.sf.marineapi.nmea.sentence.PositionSentence;
 import net.sf.marineapi.nmea.sentence.SentenceId;
 import net.sf.marineapi.nmea.sentence.TalkerId;
 import net.sf.marineapi.nmea.util.CompassPoint;
@@ -30,8 +31,8 @@ import net.sf.marineapi.nmea.util.CompassPoint;
 /**
  * Abstract base class for sentence parsers that provide geographic position or
  * waypoint data, and thus need to parse lat/lon values. However, notice that
- * <code>PositionParser</code> does not implement <code>PositionSentence</code>
- * interface because the extending parser may not provide current location.
+ * {@link PositionSentence} interface is not implemented by this parser because
+ * the extending parser may not always provide current location.
  * 
  * @author Kimmo Tuukkanen
  * @version $Revision$

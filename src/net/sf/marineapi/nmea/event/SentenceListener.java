@@ -27,6 +27,7 @@ import java.util.EventListener;
  * 
  * @author Kimmo Tuukkanen
  * @version $Revision$
+ * @see SentenceEvent
  */
 public interface SentenceListener extends EventListener {
 

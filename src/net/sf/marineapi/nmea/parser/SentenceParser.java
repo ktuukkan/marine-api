@@ -110,9 +110,9 @@ public class SentenceParser implements Sentence {
      * of the specified <code>type</code>.
      * <p>
      * For example, GGAParser class should specify the type
-     * <code>SentenceId.GGA</code> as <code>type</code> to succeed.
+     * {@link SentenceId#GGA} as <code>type</code> to succeed.
      * 
-     * @param nmea NMEA sentence <code>String</code>
+     * @param nmea NMEA sentence string
      * @param type Type of the sentence in <code>nmea</code> parameter
      * @throws IllegalArgumentException If the given String is not a valid NMEA
      *             0831 sentence or does not match the specified type.
@@ -143,7 +143,7 @@ public class SentenceParser implements Sentence {
         }
         if (talker == null) {
             throw new IllegalArgumentException("Talker ID must be specified");
-        }       
+        }
         if (type == null) {
             throw new IllegalArgumentException("Sentence ID must be specified");
         }
@@ -266,7 +266,7 @@ public class SentenceParser implements Sentence {
      * Parse double value from the specified sentence field.
      * 
      * @param index Data field index in sentence
-     * @return Field as parsed by <code>Double.parseDouble()</code>
+     * @return Field as parsed by {@link Double#parseDouble()}
      */
     protected final double getDoubleValue(int index) {
         double value;
@@ -282,7 +282,7 @@ public class SentenceParser implements Sentence {
      * Parse integer value from the specified sentence field.
      * 
      * @param index Field index in sentence
-     * @return Field parsed by <code>Integer.parseInt()</code>
+     * @return Field parsed by {@link Integer#parseInt()}
      */
     protected final int getIntValue(int index) {
         int value;
@@ -407,37 +407,37 @@ public class SentenceParser implements Sentence {
         fields = temp;
     }
 
-//    /**
-//     * Parses the sentence Id of specified NMEA sentence.
-//     * 
-//     * @param nmea NMEA 0183 sentence String
-//     * @return SentenceId Sentence ID of the specified sentence
-//     */
-//    static SentenceId parseSentenceId(String nmea) {
-//        SentenceId id = null;
-//        String sid = nmea.substring(3, 6);
-//        try {
-//            id = SentenceId.valueOf(sid);
-//        } catch (Exception ex) {
-//            String msg = String.format("Unsupported sentence Id [%s]", sid);
-//            throw new IllegalArgumentException(msg, ex);
-//        }
-//        return id;
-//    }
-//
-//    /**
-//     * Parses the talker Id of specified NMEA sentence.
-//     * 
-//     * @param nmea NMEA 0183 sentence String
-//     * @return TalkerId Talker ID of the specified sentence
-//     */
-//    static TalkerId parseTalkerId(String nmea) {
-//        String tid = nmea.substring(1, 3);
-//        try {
-//            return TalkerId.valueOf(tid);
-//        } catch (Exception ex) {
-//            String msg = String.format("Unsupported talker Id [%s]", tid);
-//            throw new IllegalArgumentException(msg, ex);
-//        }
-//    }
+    // /**
+    // * Parses the sentence Id of specified NMEA sentence.
+    // *
+    // * @param nmea NMEA 0183 sentence String
+    // * @return SentenceId Sentence ID of the specified sentence
+    // */
+    // static SentenceId parseSentenceId(String nmea) {
+    // SentenceId id = null;
+    // String sid = nmea.substring(3, 6);
+    // try {
+    // id = SentenceId.valueOf(sid);
+    // } catch (Exception ex) {
+    // String msg = String.format("Unsupported sentence Id [%s]", sid);
+    // throw new IllegalArgumentException(msg, ex);
+    // }
+    // return id;
+    // }
+    //
+    // /**
+    // * Parses the talker Id of specified NMEA sentence.
+    // *
+    // * @param nmea NMEA 0183 sentence String
+    // * @return TalkerId Talker ID of the specified sentence
+    // */
+    // static TalkerId parseTalkerId(String nmea) {
+    // String tid = nmea.substring(1, 3);
+    // try {
+    // return TalkerId.valueOf(tid);
+    // } catch (Exception ex) {
+    // String msg = String.format("Unsupported talker Id [%s]", tid);
+    // throw new IllegalArgumentException(msg, ex);
+    // }
+    // }
 }
