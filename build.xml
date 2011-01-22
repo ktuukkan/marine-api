@@ -44,7 +44,7 @@ $Revision$
 	<target name="compile-src" depends="init">
 		<mkdir dir="${build.dir.classes}" />
 		<javac destdir="${build.dir.classes}" srcdir="${src.dir}" debug="true"
-			includes="**/*.java" includeantruntime="true"/>
+			includes="**/*.java" includeantruntime="true" source="1.5" target="1.5" />
 	</target>
 
 	<!-- compile tests -->
@@ -116,8 +116,10 @@ $Revision$
 		description="Generates the Javadoc documentation">
 		<mkdir dir="${build.dir.api}" />
 		<javadoc sourcepath="${src.dir}" destdir="${build.dir.api}"
-			private="false" windowtitle="${javadoc.title}" 
-			bottom="${javadoc.footer}" breakiterator="true" />
+			private="false" windowtitle="${javadoc.title}"
+			bottom="${javadoc.footer}" breakiterator="true">
+		    <link href="http://download.oracle.com/javase/5/docs/api/" />
+		</javadoc>
 	</target>
 
 	<!-- build release package -->
