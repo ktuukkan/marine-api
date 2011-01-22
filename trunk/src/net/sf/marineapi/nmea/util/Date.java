@@ -168,9 +168,9 @@ public class Date {
     /**
      * Set year. The date fields in NMEA 0183 may present year by using either
      * two or four digits. In case of only two digits, the century is determined
-     * by comparing the value against <code>#PIVOT_YEAR</code>. Values lower
-     * than or equal to pivot are added to 2000, while values greater than pivot
-     * are added to 1900.
+     * by comparing the value against {link #PIVOT_YEAR}. Values lower than or
+     * equal to pivot are added to 2000, while values greater than pivot are
+     * added to 1900.
      * 
      * @param year Year to set, two or four digit value.
      * @throws IllegalArgumentException If specified value is negative or

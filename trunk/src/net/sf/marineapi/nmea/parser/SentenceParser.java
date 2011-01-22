@@ -65,7 +65,7 @@ public class SentenceParser implements Sentence {
     // The next three characters after talker id.
     private final SentenceId sentenceId;
 
-    // data fields, address and checksum omitted
+    // actual data fields (address and checksum omitted)
     private List<String> fields;
 
     /**
@@ -135,7 +135,7 @@ public class SentenceParser implements Sentence {
      * 
      * @param talker Talker type Id
      * @param type Sentence type Id
-     * @param size Number of sentence data fields, including address field
+     * @param size Number of data fields
      */
     protected SentenceParser(TalkerId talker, SentenceId type, int size) {
         if (size < 1) {
@@ -266,7 +266,7 @@ public class SentenceParser implements Sentence {
      * Parse double value from the specified sentence field.
      * 
      * @param index Data field index in sentence
-     * @return Field as parsed by {@link Double#parseDouble()}
+     * @return Field as parsed by {@link java.lang.Double#parseDouble(String)}
      */
     protected final double getDoubleValue(int index) {
         double value;
@@ -282,7 +282,7 @@ public class SentenceParser implements Sentence {
      * Parse integer value from the specified sentence field.
      * 
      * @param index Field index in sentence
-     * @return Field parsed by {@link Integer#parseInt()}
+     * @return Field parsed by {@link java.lang.Integer#parseInt(String)}
      */
     protected final int getIntValue(int index) {
         int value;
