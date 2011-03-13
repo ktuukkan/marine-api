@@ -133,7 +133,8 @@ public class GGATest {
     @Test
     public void testGGAParser() {
         GGAParser instance = new GGAParser(EXAMPLE);
-        assertEquals(SentenceId.GGA, instance.getSentenceId());
+        SentenceId sid = SentenceId.valueOf(instance.getSentenceId());
+        assertEquals(SentenceId.GGA, sid);
     }
 
     @Test

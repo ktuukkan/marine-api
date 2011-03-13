@@ -55,6 +55,8 @@ public enum TalkerId {
     HE,
     /** Heading - Non North Seeking Gyro */
     HN,
+    /** Proprietary sentence format */
+    P,
     /** RADAR and/or ARPA */
     RA,
     /** Depth - Sounder */

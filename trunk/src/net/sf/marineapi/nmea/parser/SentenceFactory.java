@@ -20,76 +20,135 @@
  */
 package net.sf.marineapi.nmea.parser;
 
+import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationTargetException;
+import java.util.HashMap;
+import java.util.Map;
+
 import net.sf.marineapi.nmea.sentence.Sentence;
 import net.sf.marineapi.nmea.sentence.SentenceId;
 
 /**
- * Factory for creating sentence parsers.
+ * Factory for creating sentence parsers. Custom parsers may be registered using
+ * the {@link #registerParser(String, Class)} method.
  * 
  * @author Kimmo Tuukkanen
  * @version $Revision$
  */
 public final class SentenceFactory {
 
+    // map that holds registered sentence types and parser classes
+    private static Map<String, Class<? extends SentenceParser>> parsers = new HashMap<String, Class<? extends SentenceParser>>();
+
+    // singleton factory instance
     private static volatile SentenceFactory instance;
 
+    /**
+     * Constructor.
+     */
     private SentenceFactory() {
+        // GPS sentences
+        registerParser("BOD", BODParser.class);
+        registerParser("GGA", GGAParser.class);
+        registerParser("GLL", GLLParser.class);
+        registerParser("GSA", GSAParser.class);
+        registerParser("GSV", GSVParser.class);
+        registerParser("RMB", RMBParser.class);
+        registerParser("RMC", RMCParser.class);
+        registerParser("RTE", RTEParser.class);
+        registerParser("VTG", VTGParser.class);
+        registerParser("WPL", WPLParser.class);
+        registerParser("ZDA", ZDAParser.class);
     }
 
     /**
-     * Creates a parser for specified NMEA sentence String.
+     * Creates a parser for specified NMEA sentence String. The parser
+     * implementation is selected by the sentence id
      * 
-     * @param nmea NMEA 0183 sentence
-     * @return Sentence parser
+     * @param nmea NMEA 0183 sentence String
+     * @return Sentence parser instance for specified sentence
+     * @throws IllegalArgumentException If there is no parser registered for the
+     *             given sentence type
+     * @throws IllegalStateException If parser is found, but it does not
+     *             implement expected constructor with single String parameter.
+     * @throws RuntimeException If unable to find or access the parser.
      */
     public Sentence createParser(String nmea) {
 
-        Sentence s = null;
-        SentenceId type = SentenceId.parse(nmea);
+        Sentence parser = null;
+        String sid = SentenceId.parseStr(nmea);
 
-        switch (type) {
-            case BOD:
-                s = new BODParser(nmea);
-                break;
-            case GGA:
-                s = new GGAParser(nmea);
-                break;
-            case GLL:
-                s = new GLLParser(nmea);
-                break;
-            case GSA:
-                s = new GSAParser(nmea);
-                break;
-            case GSV:
-                s = new GSVParser(nmea);
-                break;
-            case RMB:
-                s = new RMBParser(nmea);
-                break;
-            case RMC:
-                s = new RMCParser(nmea);
-                break;
-            case RTE:
-                s = new RTEParser(nmea);
-                break;
-            case VTG:
-                s = new VTGParser(nmea);
-                break;
-            case WPL:
-                s = new WPLParser(nmea);
-                break;
-            case ZDA:
-                s = new ZDAParser(nmea);
-                break;
-            default:
-                s = new SentenceParser(nmea);
+        if (!hasParser(sid.toString())) {
+            String msg = String.format("Parser for type '%s' not found", sid);
+            throw new IllegalArgumentException(msg);
         }
 
-        return s;
+        try {
+            Class<? extends SentenceParser> c = parsers.get(sid);
+            Constructor<? extends SentenceParser> co = c
+                    .getConstructor(String.class);
+            parser = co.newInstance(nmea);
+
+        } catch (NoSuchMethodException e) {
+            String msg = "Constructor with single String parameter not found";
+            throw new IllegalStateException(msg, e);
+
+        } catch (InstantiationException e) {
+            throw new RuntimeException(
+                    "Parser found, but unable to instantiate", e);
+
+        } catch (IllegalAccessException e) {
+            throw new RuntimeException("Parser found, but unaccessible", e);
+
+        } catch (InvocationTargetException e) {
+            throw new RuntimeException(
+                    "Parser found, but unable to invoke constructor", e);
+        }
+
+        return parser;
     }
 
     /**
-     * Returns the singleton instance of SentenceFactory.
+     * Register a sentence parser to factory. After registration,
+     * {@link #createParser(String)} method can be used to obtain parsers for
+     * registered type. All sentences supported by the library are registered by
+     * default, and this method is provided mainly for registering custom
+     * parsers that can be created by extending the {@link SentenceParser}
+     * class.
+     * 
+     * @param type Sentence type id, e.g. "GGA" or "GLL".
+     * @param parser Parser implementation class for <code>type</code>.
+     */
+    public void registerParser(String type,
+            Class<? extends SentenceParser> parser) {
+
+        try {
+            parser.getConstructor(String.class);
+        } catch (SecurityException e) {
+            String msg = "Unable to register parser due security violation";
+            throw new IllegalArgumentException(msg, e);
+        } catch (NoSuchMethodException e) {
+            String msg = "Parser must implement constructor with String param";
+            throw new IllegalArgumentException(msg, e);
+        }
+
+        parsers.put(type, parser);
+    }
+
+    /**
+     * Tells if the factory is able to create parser for specified sentence
+     * type. All {@link SentenceId} enum values should result returning
+     * <code>true</code> at all times.
+     * 
+     * @param type Sentence type id, e.g. "GLL" or "GGA".
+     * @return true if type is supported, otherwise false.
+     */
+    public boolean hasParser(String type) {
+        return parsers.containsKey(type);
+    }
+
+    /**
+     * Returns the singleton instance of <code>SentenceFactory</code>.
      * 
      * @return SentenceFactory instance
      */
