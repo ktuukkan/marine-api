@@ -37,6 +37,28 @@ public class SentenceTest {
     }
 
     /**
+     * Test method for SentenceParser constructors called from derived custom
+     * parsers.
+     */
+    @Test
+    public void testConstructorWithCustomParser() {
+
+        final String foo = "FOO";
+        SentenceFactory sf = SentenceFactory.getInstance();
+        sf.registerParser(foo, FOOParser.class);
+
+        final String fooSentence = "$GPFOO,B,A,R";
+        final FOOParser fp = new FOOParser(fooSentence);
+        final Sentence s = sf.createParser(fooSentence);
+
+        assertTrue(s instanceof SentenceParser);
+        assertTrue(s instanceof FOOParser);
+        assertEquals(foo, s.getSentenceId());
+        assertEquals(TalkerId.GP, s.getTalkerId());
+        assertEquals(s, fp);
+    }
+
+    /**
      * Test method for SenteceParser constructor.
      */
     @Test
@@ -58,7 +80,7 @@ public class SentenceTest {
     @Test
     public void testConstructorWithNulls() {
         try {
-            new SentenceParser(null, null);
+            new SentenceParser((String) null, (String) null);
             fail("Did not throw exception");
         } catch (IllegalArgumentException iae) {
             // OK
@@ -74,7 +96,7 @@ public class SentenceTest {
     public void testConstructorWithNullType() {
 
         try {
-            new SentenceParser(RMCTest.EXAMPLE, null);
+            new SentenceParser(RMCTest.EXAMPLE, (String) null);
             fail("Did not throw exception");
         } catch (IllegalArgumentException iae) {
             // OK
@@ -102,24 +124,9 @@ public class SentenceTest {
      * Test method for SenteceParser constructor.
      */
     @Test
-    public void testConstructorWithUnsupportedType() {
-        try {
-            new SentenceParser("$GPXYZ,VALID,BUT,TYPE,NOT,SUPPORTED");
-            fail("Did not throw exception");
-        } catch (IllegalArgumentException se) {
-            assertTrue(se.getMessage().endsWith(".SentenceId.XYZ"));
-        } catch (Exception e) {
-            fail(e.getMessage());
-        }
-    }
-
-    /**
-     * Test method for SenteceParser constructor.
-     */
-    @Test
     public void testConstructorWithWrongType() {
         try {
-            new SentenceParser(BODTest.EXAMPLE, SentenceId.GLL);
+            new SentenceParser(BODTest.EXAMPLE, SentenceId.GLL.toString());
             fail("Did not throw exception");
         } catch (IllegalArgumentException iae) {
             // OK
@@ -170,7 +177,8 @@ public class SentenceTest {
      */
     @Test
     public void testGetSentenceId() {
-        assertEquals(SentenceId.RMC, instance.getSentenceId());
+        SentenceId sid = SentenceId.valueOf(instance.getSentenceId());
+        assertEquals(SentenceId.RMC, sid);
     }
 
     /**

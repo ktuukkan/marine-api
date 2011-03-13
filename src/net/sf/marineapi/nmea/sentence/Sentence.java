@@ -68,13 +68,14 @@ public interface Sentence {
     int getFieldCount();
 
     /**
-     * Get the sentence ID that specifies sentence type. ID is the last three
-     * characters in address field. For example, in case of <code>$GPGGA</code>
-     * the method returns {@link SentenceId#GGA}.
+     * Get the sentence ID that specifies the sentence type and data it holds.
+     * ID is the last three characters in address field. For example, in case of
+     * <code>$GPGGA</code> the method returns {@link SentenceId#GGA}.
      * 
-     * @return SentenceId enum
+     * @return Sentence id String, e.g. "GLL" or "GGA".
+     * @see {@link SentenceId}
      */
-    SentenceId getSentenceId();
+    String getSentenceId();
 
     /**
      * Gets the talker ID of the sentence. Talker ID is the next two characters

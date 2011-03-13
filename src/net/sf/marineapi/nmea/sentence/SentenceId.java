@@ -54,13 +54,25 @@ public enum SentenceId {
     ZDA;
 
     /**
-     * Parses the sentence id from specified sentence String.
+     * Parses the sentence id from specified sentence String and returns a
+     * corresponding <code>SentenceId</code> enum (assuming it exists).
      * 
      * @param nmea Sentence String
      * @return SentenceId enum
      */
     public static SentenceId parse(String nmea) {
-        String sid = nmea.substring(3, 6);
+        String sid = parseStr(nmea);
         return SentenceId.valueOf(sid);
+    }
+
+    /**
+     * Parses the sentence id from sepecifed sentence String and returns it as
+     * String.
+     * 
+     * @param nmea Sentence String
+     * @return Sentence Id, e.g. "GGA" or "GLL"
+     */
+    public static String parseStr(String nmea) {
+        return nmea.substring(3, 6);
     }
 }

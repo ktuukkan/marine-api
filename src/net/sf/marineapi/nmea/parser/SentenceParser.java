@@ -63,7 +63,7 @@ public class SentenceParser implements Sentence {
     private TalkerId talkerId;
 
     // The next three characters after talker id.
-    private final SentenceId sentenceId;
+    private final String sentenceId;
 
     // actual data fields (address and checksum omitted)
     private List<String> fields;
@@ -84,7 +84,7 @@ public class SentenceParser implements Sentence {
         }
 
         talkerId = TalkerId.parse(nmea);
-        sentenceId = SentenceId.parse(nmea);
+        sentenceId = SentenceId.parseStr(nmea);
 
         // remove address field
         int begin = nmea.indexOf(Sentence.FIELD_DELIMITER);
@@ -105,27 +105,27 @@ public class SentenceParser implements Sentence {
     }
 
     /**
-     * Creates a new instance of SentenceParser. Sentence may be constructed
-     * only if parameter <code>nmea</code> contains a valid NMEA 0183 sentence
-     * of the specified <code>type</code>.
+     * Creates a new instance of SentenceParser. Parser may be constructed only
+     * if parameter <code>nmea</code> contains a valid NMEA 0183 sentence of the
+     * specified <code>type</code>.
      * <p>
-     * For example, GGAParser class should specify the type
-     * {@link SentenceId#GGA} as <code>type</code> to succeed.
+     * For example, GGA sentence parser should specify "GGA" as the type.
      * 
-     * @param nmea NMEA sentence string
-     * @param type Type of the sentence in <code>nmea</code> parameter
-     * @throws IllegalArgumentException If the given String is not a valid NMEA
-     *             0831 sentence or does not match the specified type.
+     * @param nmea NMEA 0183 sentence String
+     * @param type Expected type of the sentence in <code>nmea</code> parameter
+     * @throws IllegalArgumentException If the specified sentence is not a valid
+     *             or is not of expected type.
      */
-    protected SentenceParser(String nmea, SentenceId type) {
+    protected SentenceParser(String nmea, String type) {
         this(nmea);
-        if (type == null) {
+        if (type == null || "".equals(type)) {
             throw new IllegalArgumentException(
-                    "Sentence type must be specified");
+                    "Sentence type must be specified.");
         }
-        SentenceId id = getSentenceId();
-        if (!id.equals(type)) {
-            String msg = String.format("Sentence type mismatch [%s]", id);
+        String sid = getSentenceId();
+        if (!sid.equals(type)) {
+            String ptrn = "Sentence id mismatch; expected [%s], found [%s].";
+            String msg = String.format(ptrn, type, sid);
             throw new IllegalArgumentException(msg);
         }
     }
@@ -133,18 +133,18 @@ public class SentenceParser implements Sentence {
     /**
      * Creates a new empty sentence with specified talker and sentence IDs.
      * 
-     * @param talker Talker type Id
-     * @param type Sentence type Id
+     * @param talker Talker type Id, e.g. "GP" or "LC".
+     * @param type Sentence type Id, e.g. "GGA or "GLL".
      * @param size Number of data fields
      */
-    protected SentenceParser(TalkerId talker, SentenceId type, int size) {
+    protected SentenceParser(TalkerId talker, String type, int size) {
         if (size < 1) {
             throw new IllegalArgumentException("Minimum number of fields is 1");
         }
         if (talker == null) {
             throw new IllegalArgumentException("Talker ID must be specified");
         }
-        if (type == null) {
+        if (type == null || "".equals(type)) {
             throw new IllegalArgumentException("Sentence ID must be specified");
         }
 
@@ -154,6 +154,29 @@ public class SentenceParser implements Sentence {
         for (int i = 0; i < size; i++) {
             fields.add("");
         }
+    }
+
+    /**
+     * Creates a new instance of SentenceParser with specified sentence data.
+     * Type of the sentence is checked against the specified expected sentence
+     * type id.
+     * 
+     * @param nmea Sentence String
+     * @param type Sentence type enum
+     */
+    SentenceParser(String nmea, SentenceId type) {
+        this(nmea, type.toString());
+    }
+
+    /**
+     * Creates a new instance of SentenceParser without any data.
+     * 
+     * @param tid Talker id to set in sentence
+     * @param sid Sentence id to set in sentence
+     * @param size Number of data fields following the sentence id field
+     */
+    SentenceParser(TalkerId tid, SentenceId sid, int size) {
+        this(tid, sid.toString(), size);
     }
 
     @Override
@@ -180,7 +203,7 @@ public class SentenceParser implements Sentence {
      * (non-Javadoc)
      * @see net.sf.marineapi.nmea.sentence.Sentence#getSentenceId()
      */
-    public final SentenceId getSentenceId() {
+    public final String getSentenceId() {
         return sentenceId;
     }
 
@@ -234,7 +257,7 @@ public class SentenceParser implements Sentence {
         StringBuilder sb = new StringBuilder(MAX_LENGTH);
         sb.append(BEGIN_CHAR);
         sb.append(talkerId.toString());
-        sb.append(sentenceId.toString());
+        sb.append(sentenceId);
 
         for (String field : fields) {
             sb.append(FIELD_DELIMITER);
