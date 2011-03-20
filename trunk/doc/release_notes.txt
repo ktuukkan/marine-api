@@ -1,20 +1,31 @@
 Java Marine API release notes
 Version @VERSION@ pre-alpha (b@BUILD_ID@)
 <http://marineapi.sourceforge.net/>
-Copyright (C) 2010 Kimmo Tuukkanen <ktuukkan@users.sourceforge.net>
+Copyright (C) 2010-@YEAR@ Kimmo Tuukkanen <ktuukkan@users.sourceforge.net>
 
 Third preview release, not to be used in production. Major API changes may be
 introduced in future versions. Released on @RELEASE_DATE@.
 
 CHANGES
 
+ * Refactored and moved sentence and talker id parsing to correspondign enums.
+ 
+ * Refactored satellite data parsing in GSA parser. Before the values were
+   parsed once and cached, which resulted in inconsistency if setters had been
+   used. Now, all values are parsed for each getter call.
+      
+ * SentenceParser no longer uses SentenceId enum to identify different sentence
+   types. Plain Strings are used instead, e.g. "GGA" or "GLL", which enables
+   extending the SentenceParser and thus creating custom parsers for unsupported
+   sentence types.
+   
+ * Various small improvements and bug fixes.
   
 NEW FEATURES
 
+* 
 
 KNOWN ISSUES
   
  * Position.distanceTo() may not produce correct results.
- * In practice, it is not possible to extend SentenceParser class and create
-   custom parsers due to internal checking of supported Sentence types.
  

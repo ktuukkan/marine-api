@@ -73,7 +73,7 @@ public interface Sentence {
      * <code>$GPGGA</code> the method returns {@link SentenceId#GGA}.
      * 
      * @return Sentence id String, e.g. "GLL" or "GGA".
-     * @see {@link SentenceId}
+     * @see SentenceId
      */
     String getSentenceId();
 
