@@ -1,14 +1,14 @@
 Java Marine API readme
 Version @VERSION@ pre-alpha (b@BUILD_ID@)
 <http://marineapi.sourceforge.net/>
-Copyright (C) 2010 Kimmo Tuukkanen <ktuukkan@users.sourceforge.net>
+Copyright (C) 2010-@YEAR@ Kimmo Tuukkanen <ktuukkan@users.sourceforge.net>
 
 Java Marine API is an NMEA 0183 library for accessing the data provided by 
 electronic marine instruments, such as GPS, sonar or autopilot.
 
 SYSTEM REQUIREMENTS
  
- * Java JRE/JDK 1.5 or later
+ * Java JRE/JDK 1.5 or newer
  
 LICENSING
 
@@ -28,8 +28,13 @@ along with Java Marine API. If not, see <http://www.gnu.org/licenses/>.
 SOURCE CODE
 
 The source code for Java Marine API is freely available in project's SVN
-repository. See project page at SourceForge.net to obtain a working copy and
-more instructions.
+repository. See URLs below and project page at SourceForge.net for more info.
+
+SVN browsing and GNU tarball downloads:
+<http://marineapi.svn.sourceforge.net/viewvc/marineapi/>
+
+SVN checkout (no login required):
+svn co https://marineapi.svn.sourceforge.net/svnroot/marineapi marineapi 
 
 NOTICE
 
@@ -59,7 +64,7 @@ following resources (in random order, availability checked on 2010-12-02):
  * NMEA Revealed by Eric S. Raymond
    <http://gpsd.berlios.de/NMEA.txt>
 
-Thanks to all above authors for providing the information. All disclaimers and 
-warnings concerning the accuracy of information in the above documents apply
-equally to Java Marine API. Upon noticing or suspecting any errors, please
-contact the project author <ktuukkan@users.sourceforge.net>.
+Thanks to all above authors for making the information available. All
+disclaimers and warnings concerning the accuracy of information in the above
+documents apply equally to Java Marine API. When noticing or suspecting any
+errors, please contact project author.
