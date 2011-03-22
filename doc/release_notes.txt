@@ -23,7 +23,7 @@ CHANGES
   
 NEW FEATURES
 
-* 
+ * Support for DPT and DBT sentences, i.e. depth of water.
 
 KNOWN ISSUES
   

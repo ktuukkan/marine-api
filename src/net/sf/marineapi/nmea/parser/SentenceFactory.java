@@ -59,6 +59,8 @@ public final class SentenceFactory {
         registerParser("VTG", VTGParser.class);
         registerParser("WPL", WPLParser.class);
         registerParser("ZDA", ZDAParser.class);
+        // Water
+        registerParser("DBT", DBTParser.class);
     }
 
     /**

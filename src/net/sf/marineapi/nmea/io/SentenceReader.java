@@ -86,6 +86,18 @@ public class SentenceReader {
      * @param type Sentence type for which the listener is registered.
      * @see net.sf.marineapi.nmea.event.SentenceListener
      */
+    public void addSentenceListener(SentenceListener sl, String type) {
+        registerListener(type, sl);
+    }
+
+    /**
+     * Adds a {@link SentenceListener} that is interested in receiving only
+     * sentences of certain type.
+     * 
+     * @param sl SentenceListener to add
+     * @param type Sentence type for which the listener is registered.
+     * @see net.sf.marineapi.nmea.event.SentenceListener
+     */
     public void addSentenceListener(SentenceListener sl, SentenceId type) {
         registerListener(type.toString(), sl);
     }

@@ -28,8 +28,8 @@ package net.sf.marineapi.nmea.util;
  */
 public enum Units {
 
-    /** Length in meter */
-    METER('M'),
+    /** Depth in fathoms */
+    FATHOMS('F'),
 
     /** Length in feet */
     FEET('f'),
@@ -38,7 +38,10 @@ public enum Units {
     KMH('K'),
 
     /** Speed in knots (nautical miles per hour) */
-    KNOT('N');
+    KNOT('N'),
+
+    /** Length in meter */
+    METER('M');
 
     private char ch;
 
