@@ -32,6 +32,10 @@ public enum SentenceId {
 
     /** Bearing Origin to Destination */
     BOD,
+    /** Depth below transducer, in meters and feet */
+    DBT,
+    /** Depth below transducer, in meters. */
+    DPT,
     /** Global Positioning System fix data */
     GGA,
     /** Geographic position (latitude/longitude) */
