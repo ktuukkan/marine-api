@@ -32,9 +32,9 @@ public enum SentenceId {
 
     /** Bearing Origin to Destination */
     BOD,
-    /** Depth below transducer, in meters and feet */
+    /** Depth of water below transducer; in meters, feet and fathoms */
     DBT,
-    /** Depth below transducer, in meters. */
+    /** Depth of water below transducer; in meters. */
     DPT,
     /** Global Positioning System fix data */
     GGA,
@@ -70,13 +70,19 @@ public enum SentenceId {
     }
 
     /**
-     * Parses the sentence id from sepecifed sentence String and returns it as
+     * Parses the sentence id from specified sentence String and returns it as
      * String.
      * 
      * @param nmea Sentence String
      * @return Sentence Id, e.g. "GGA" or "GLL"
      */
     public static String parseStr(String nmea) {
-        return nmea.substring(3, 6);
+        String id = null;
+        if (nmea.startsWith("$P")) {
+            id = nmea.substring(2, 6);
+        } else {
+            id = nmea.substring(3, 6);
+        }
+        return id;
     }
 }
