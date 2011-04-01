@@ -29,6 +29,7 @@ package net.sf.marineapi.nmea.sentence;
  * @see net.sf.marineapi.nmea.sentence.SentenceId
  */
 public enum TalkerId {
+
     /** Autopilot - General */
     AG,
     /** Autopilot - Magnetic */
@@ -77,7 +78,12 @@ public enum TalkerId {
      * @return TalkerId enum
      */
     public static TalkerId parse(String nmea) {
-        String tid = nmea.substring(1, 3);
+        String tid = "";
+        if (nmea.startsWith("$P")) {
+            tid = "P";
+        } else {
+            tid = nmea.substring(1, 3);
+        }
         return TalkerId.valueOf(tid);
     }
 }
