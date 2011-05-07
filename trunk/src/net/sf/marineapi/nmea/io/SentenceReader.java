@@ -57,6 +57,8 @@ public class SentenceReader {
     private StreamReader reader;
     // map of sentence listeners
     private ConcurrentMap<String, List<SentenceListener>> listeners = new ConcurrentHashMap<String, List<SentenceListener>>();
+    // time of latest sentence event
+    private long lastFired = 0;
 
     /**
      * Creates a new instance of SentenceReader.
@@ -161,13 +163,43 @@ public class SentenceReader {
     }
 
     /**
+     * Notifies all listeners that data reading is about to start.
+     */
+    private void fireReadingStarted() {
+        for (String key : listeners.keySet()) {
+            for (SentenceListener listener : listeners.get(key)) {
+                try {
+                    listener.readingStarted();
+                } catch (Exception e) {
+                    // nevermind
+                }
+            }
+        }
+    }
+
+    /**
+     * Notifies all listeners that data reading has stopped.
+     */
+    private void fireReadingStopped() {
+        for (String key : listeners.keySet()) {
+            for (SentenceListener listener : listeners.get(key)) {
+                try {
+                    listener.readingStopped();
+                } catch (Exception e) {
+                    // nevermind
+                }
+            }
+        }
+    }
+
+    /**
      * Dispatch data to all listeners.
      * 
      * @param sentence sentence string.
      */
     private void fireSentenceEvent(Sentence sentence) {
 
-        String type = sentence.getSentenceId().toString();
+        String type = sentence.getSentenceId();
         List<SentenceListener> list = new ArrayList<SentenceListener>();
 
         if (listeners.containsKey(type)) {
@@ -208,6 +240,7 @@ public class SentenceReader {
      */
     private class StreamReader implements Runnable {
 
+        private WatchDog watcher;
         private BufferedReader input;
         private volatile boolean isRunning = false;
 
@@ -236,26 +269,38 @@ public class SentenceReader {
          */
         public void run() {
 
-            this.isRunning = true;
+            lastFired = 0;
+            isRunning = true;
+            watcher = new WatchDog();
+            Thread t = new Thread(watcher);
+            t.start();
             SentenceFactory factory = SentenceFactory.getInstance();
 
             while (isRunning) {
                 String data;
                 try {
                     if (input.ready()) {
+
                         data = input.readLine();
+
                         if (SentenceValidator.isValid(data)) {
+                            if (lastFired == 0) {
+                                fireReadingStarted();
+                            }
                             Sentence s = factory.createParser(data);
                             fireSentenceEvent(s);
+                            lastFired = System.currentTimeMillis();
                         }
                     }
-                    Thread.sleep(75);
+                    Thread.sleep(50);
                 } catch (Exception e) {
+                    e.printStackTrace();
                     // nevermind unsupported or invalid data
                 }
             }
 
             isRunning = false;
+            fireReadingStopped();
         }
 
         /**
@@ -266,4 +311,29 @@ public class SentenceReader {
         }
     }
 
+    /**
+     * Watch dog for firing started/stopped events.
+     */
+    private class WatchDog implements Runnable {
+
+        /*
+         * (non-Javadoc)
+         * @see java.lang.Runnable#run()
+         */
+        public void run() {
+            while (reader.isRunning()) {
+                try {
+                    Thread.sleep(1000);
+                    long now = System.currentTimeMillis();
+                    long elapsed = now - lastFired;
+                    if (elapsed > 5000 && elapsed < 6000) {
+                        lastFired = 0;
+                        fireReadingStopped();
+                    }
+                } catch (InterruptedException e) {
+                    // nevermind
+                }
+            }
+        }
+    }
 }

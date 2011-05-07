@@ -32,6 +32,19 @@ import java.util.EventListener;
 public interface SentenceListener extends EventListener {
 
     /**
+     * Called when NMEA data is found in stream and reader starts dispatching
+     * SentenceEvents. Also, this notification occurs when events dispatching
+     * continues after <code>readingStopped()</code> has occurred.
+     */
+    void readingStarted();
+
+    /**
+     * Called when SentenceReader has not received any new data within last 5
+     * seconds.
+     */
+    void readingStopped();
+
+    /**
      * Invoked when a valid NMEA 0183 sentence has been read.
      * 
      * @param event SentenceEvent to dispatch
