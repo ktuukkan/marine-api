@@ -23,6 +23,7 @@ package net.sf.marineapi.nmea.event;
 import java.util.Date;
 import java.util.EventObject;
 
+import net.sf.marineapi.nmea.io.SentenceReader;
 import net.sf.marineapi.nmea.sentence.Sentence;
 
 /**
@@ -32,6 +33,7 @@ import net.sf.marineapi.nmea.sentence.Sentence;
  * @author Kimmo Tuukkanen
  * @version $Revision$
  * @see SentenceListener
+ * @see SentenceReader
  */
 public class SentenceEvent extends EventObject {
 

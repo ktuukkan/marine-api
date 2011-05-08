@@ -14,7 +14,7 @@ $Revision$
 		</tstamp>
 		
 		<property name="project.id" value="marineapi" />
-		<property name="version" value="0.3-dev" />
+		<property name="version" value="0.3" />
 		<property name="src.dir" value="src/" />
 		<property name="tests.dir" value="src-test/" />
 		<property name="reports.dir" value="reports/" />

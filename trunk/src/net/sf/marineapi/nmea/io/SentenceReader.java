@@ -58,7 +58,7 @@ public class SentenceReader {
     // map of sentence listeners
     private ConcurrentMap<String, List<SentenceListener>> listeners = new ConcurrentHashMap<String, List<SentenceListener>>();
     // time of latest sentence event
-    private long lastFired = 0;
+    private volatile long lastFired = 0;
 
     /**
      * Creates a new instance of SentenceReader.
@@ -269,7 +269,7 @@ public class SentenceReader {
          */
         public void run() {
 
-            lastFired = 0;
+            lastFired = -1;
             isRunning = true;
             watcher = new WatchDog();
             Thread t = new Thread(watcher);
@@ -284,7 +284,7 @@ public class SentenceReader {
                         data = input.readLine();
 
                         if (SentenceValidator.isValid(data)) {
-                            if (lastFired == 0) {
+                            if (lastFired < 0) {
                                 fireReadingStarted();
                             }
                             Sentence s = factory.createParser(data);
@@ -312,7 +312,7 @@ public class SentenceReader {
     }
 
     /**
-     * Watch dog for firing started/stopped events.
+     * Watch dog for sending start/stop notifications.
      */
     private class WatchDog implements Runnable {
 
@@ -323,11 +323,11 @@ public class SentenceReader {
         public void run() {
             while (reader.isRunning()) {
                 try {
-                    Thread.sleep(1000);
+                    Thread.sleep(500);
                     long now = System.currentTimeMillis();
                     long elapsed = now - lastFired;
                     if (elapsed > 5000 && elapsed < 6000) {
-                        lastFired = 0;
+                        lastFired = -1;
                         fireReadingStopped();
                     }
                 } catch (InterruptedException e) {
