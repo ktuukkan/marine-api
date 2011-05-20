@@ -8,9 +8,12 @@ be introduced in future versions. Released on @RELEASE_DATE@.
 
 CHANGES
 
+ * Bugfix in SentenceFactory, DPT parser was not automatically registered. 
+ * Parsing methods in SentenceId now validate the given String before parsing the id.
   
 NEW FEATURES
  
+ * Added method for unregistering parsers in SentenceFactory.
 
 KNOWN ISSUES
   

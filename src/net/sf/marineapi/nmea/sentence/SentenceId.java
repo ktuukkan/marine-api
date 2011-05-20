@@ -63,6 +63,7 @@ public enum SentenceId {
      * 
      * @param nmea Sentence String
      * @return SentenceId enum
+     * @throws IllegalArgumentException If specified String is not valid sentence
      */
     public static SentenceId parse(String nmea) {
         String sid = parseStr(nmea);
@@ -75,8 +76,14 @@ public enum SentenceId {
      * 
      * @param nmea Sentence String
      * @return Sentence Id, e.g. "GGA" or "GLL"
+     * @throws IllegalArgumentException If specified String is not valid sentence
      */
     public static String parseStr(String nmea) {
+
+    	if(!SentenceValidator.isValid(nmea)) {
+    		throw new IllegalArgumentException("String is not valid sentence");
+    	}
+    	
         String id = null;
         if (nmea.startsWith("$P")) {
             id = nmea.substring(2, 6);
