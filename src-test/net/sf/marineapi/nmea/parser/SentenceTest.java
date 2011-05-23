@@ -325,10 +325,10 @@ public class SentenceTest {
     public void testSetIntValueWithLeading() {
     	
     	instance.setIntValue(0, 0, 0);
-        assertEquals("1", instance.getStringValue(0));
+        assertEquals("0", instance.getStringValue(0));
     	
-        instance.setIntValue(0, 1, 1);
-        assertEquals("1", instance.getStringValue(0));
+        instance.setIntValue(0, 0, 1);
+        assertEquals("0", instance.getStringValue(0));
         
         instance.setIntValue(0, 1, 2);
         assertEquals("01", instance.getStringValue(0));
