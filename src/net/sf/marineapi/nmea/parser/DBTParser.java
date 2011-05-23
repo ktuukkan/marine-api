@@ -90,7 +90,7 @@ class DBTParser extends SentenceParser implements DBTSentence {
      * @see net.sf.marineapi.nmea.sentence.DBTSentence#setMeters(double)
      */
     public void setDepth(double depth) {
-        setDoubleValue(DEPTH_METERS, depth);
+        setDoubleValue(DEPTH_METERS, depth, 1, 1);
     }
 
     /*
@@ -98,7 +98,7 @@ class DBTParser extends SentenceParser implements DBTSentence {
      * @see net.sf.marineapi.nmea.sentence.DBTSentence#setFathoms(double)
      */
     public void setFathoms(double depth) {
-        setDoubleValue(DEPTH_FATHOMS, depth);
+        setDoubleValue(DEPTH_FATHOMS, depth, 1, 1);
     }
 
     /*
@@ -106,6 +106,6 @@ class DBTParser extends SentenceParser implements DBTSentence {
      * @see net.sf.marineapi.nmea.sentence.DBTSentence#setFeet(double)
      */
     public void setFeet(double depth) {
-        setDoubleValue(DEPTH_FEET, depth);
+        setDoubleValue(DEPTH_FEET, depth, 1, 1);
     }
 }

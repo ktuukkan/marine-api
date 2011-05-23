@@ -72,7 +72,7 @@ class DPTParser extends SentenceParser implements DPTSentence {
      * @see net.sf.marineapi.nmea.sentence.DepthSentence#setDepth(double)
      */
     public void setDepth(double depth) {
-        setDoubleValue(DEPTH, depth);
+        setDoubleValue(DEPTH, depth, 1, 1);
     }
 
     /*
@@ -80,7 +80,7 @@ class DPTParser extends SentenceParser implements DPTSentence {
      * @see net.sf.marineapi.nmea.sentence.DPTSentence#setOffset(double)
      */
     public void setOffset(double offset) {
-        setDoubleValue(OFFSET, offset);
+        setDoubleValue(OFFSET, offset, 1, 1);
     }
 
 }

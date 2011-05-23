@@ -123,7 +123,7 @@ public class GSVTest {
         si.add(new SatelliteInfo("03", 31, 32, 33));
         gsv.setSatelliteInfo(si);
 
-        assertTrue(gsv.toString().contains(",33,,,,*"));
+        assertTrue(gsv.toString().contains(",03,31,032,33,,,,*"));
         List<SatelliteInfo> sat = gsv.getSatelliteInfo();
         assertEquals(3, sat.size());
         testSatelliteInfo(sat.get(0), "01", 11, 12, 13);
@@ -149,8 +149,8 @@ public class GSVTest {
     private void testSatelliteInfo(SatelliteInfo si, String id, int elevation,
             int azimuth, int noise) {
         assertEquals(id, si.getId());
-        assertEquals(elevation, si.getElevation(), 0.001);
-        assertEquals(azimuth, si.getAzimuth(), 0.001);
-        assertEquals(noise, si.getNoise(), 0.001);
+        assertEquals(elevation, si.getElevation(), 0.1);
+        assertEquals(azimuth, si.getAzimuth(), 0.1);
+        assertEquals(noise, si.getNoise(), 0.1);
     }
 }

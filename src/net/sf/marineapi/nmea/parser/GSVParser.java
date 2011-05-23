@@ -152,7 +152,7 @@ class GSVParser extends SentenceParser implements GSVSentence {
                 SatelliteInfo si = info.get(i++);
                 setStringValue(id, si.getId());
                 setIntValue(id + ELEVATION, si.getElevation());
-                setIntValue(id + AZIMUTH, si.getAzimuth());
+                setIntValue(id + AZIMUTH, si.getAzimuth(), 3);
                 setIntValue(id + NOISE, si.getNoise());
             } else {
                 setStringValue(id, "");

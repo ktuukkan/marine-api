@@ -87,10 +87,10 @@ public class VTGTest {
      */
     @Test
     public void testSetMagneticCourse() {
-        vtg.setMagneticCourse(0.0);
-        assertEquals(0.0, vtg.getMagneticCourse(), 0.001);
-        vtg.setMagneticCourse(360.0);
-        assertEquals(360.0, vtg.getMagneticCourse(), 0.001);
+        final double mcog = 95.56789;
+        vtg.setMagneticCourse(mcog);
+        assertTrue(vtg.toString().contains(",095.6,M,"));
+        assertEquals(mcog, vtg.getMagneticCourse(), 0.1);
     }
 
     /**
@@ -143,10 +143,10 @@ public class VTGTest {
      */
     @Test
     public void testSetSpeedKmh() {
-        vtg.setSpeedKmh(0.0);
-        assertEquals(0.0, vtg.getSpeedKmh(), 0.001);
-        vtg.setSpeedKmh(12.3);
-        assertEquals(12.3, vtg.getSpeedKmh(), 0.001);
+        final double kmh = 12.56789;
+        vtg.setSpeedKmh(kmh);
+        assertTrue(vtg.toString().contains(",12.57,K,"));
+        assertEquals(kmh, vtg.getSpeedKmh(), 0.01);
     }
 
     /**
@@ -168,10 +168,10 @@ public class VTGTest {
      */
     @Test
     public void testSetSpeedKnots() {
-        vtg.setSpeedKnots(0.0);
-        assertEquals(0.0, vtg.getSpeedKnots(), 0.001);
-        vtg.setSpeedKnots(12.3);
-        assertEquals(12.3, vtg.getSpeedKnots(), 0.001);
+        final double kn = 11.6789;
+        vtg.setSpeedKnots(kn);
+        assertTrue(vtg.toString().contains(",11.68,N,"));
+        assertEquals(kn, vtg.getSpeedKnots(), 0.01);
     }
 
     /**
@@ -193,12 +193,10 @@ public class VTGTest {
      */
     @Test
     public void testSetTrueCourse() {
-
-        vtg.setTrueCourse(0.0);
-        assertEquals(0.0, vtg.getTrueCourse(), 0.001);
-
-        vtg.setTrueCourse(360.0);
-        assertEquals(360.0, vtg.getTrueCourse(), 0.001);
+        final double tcog = 90.56789;
+        vtg.setTrueCourse(tcog);
+        assertTrue(vtg.toString().contains(",090.6,T,"));
+        assertEquals(tcog, vtg.getTrueCourse(), 0.1);
     }
 
     /**

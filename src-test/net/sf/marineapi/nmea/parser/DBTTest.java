@@ -43,20 +43,20 @@ public class DBTTest {
 
     @Test
     public void testSetFathoms() {
-        empty.setFathoms(7.3);
-        assertEquals(7.3, empty.getFathoms(), 0.001);
+        empty.setFathoms(7.33333);
+        assertEquals(7.3, empty.getFathoms(), 0.1);
     }
 
     @Test
     public void testSetFeet() {
-        empty.setFeet(12.3);
-        assertEquals(12.3, empty.getFeet(), 0.001);
+        empty.setFeet(12.33333);
+        assertEquals(12.3, empty.getFeet(), 0.1);
     }
 
     @Test
     public void testSetMeters() {
-        empty.setDepth(23.4);
-        assertEquals(23.4, empty.getDepth(), 0.001);
+        empty.setDepth(23.654321);
+        assertEquals(23.7, empty.getDepth(), 0.1);
     }
 
 }

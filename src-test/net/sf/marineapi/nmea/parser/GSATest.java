@@ -142,10 +142,9 @@ public class GSATest {
      */
     @Test
     public void testSetHorizontalDOP() {
-        instance.setHorizontalDOP(0.1);
-        assertEquals(0.1, instance.getHorizontalDOP(), 0.001);
-        instance.setHorizontalDOP(1.2);
-        assertEquals(1.2, instance.getHorizontalDOP(), 0.001);
+        final double hdop = 1.98765;
+        instance.setHorizontalDOP(hdop);
+        assertEquals(hdop, instance.getHorizontalDOP(), 0.1);
     }
 
     /**
@@ -154,10 +153,9 @@ public class GSATest {
      */
     @Test
     public void testSetPositionDOP() {
-        instance.setPositionDOP(0.0);
-        assertEquals(0.0, instance.getPositionDOP(), 0.001);
-        instance.setPositionDOP(1.1);
-        assertEquals(1.1, instance.getPositionDOP(), 0.001);
+        final double pdop = 1.56788;
+        instance.setPositionDOP(pdop);
+        assertEquals(pdop, instance.getPositionDOP(), 0.1);
     }
 
     /**
@@ -186,9 +184,8 @@ public class GSATest {
      */
     @Test
     public void testSetVerticalDOP() {
-        instance.setVerticalDOP(0.3);
-        assertEquals(0.3, instance.getVerticalDOP(), 0.001);
-        instance.setVerticalDOP(1.3);
-        assertEquals(1.3, instance.getVerticalDOP(), 0.001);
+        final double vdop = 1.56789;
+        instance.setVerticalDOP(vdop);
+        assertEquals(vdop, instance.getVerticalDOP(), 0.1);
     }
 }

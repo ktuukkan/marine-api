@@ -187,7 +187,7 @@ class GGAParser extends PositionParser implements GGASentence {
      * @see net.sf.marineapi.nmea.sentence.GGASentence#setAltitude(double)
      */
     public void setAltitude(double alt) {
-        setDoubleValue(ALTITUDE, alt);
+        setDoubleValue(ALTITUDE, alt, 1, 1);
     }
 
     /*
@@ -205,7 +205,7 @@ class GGAParser extends PositionParser implements GGASentence {
      * @see net.sf.marineapi.nmea.sentence.GGASentence#setDgpsAge(int)
      */
     public void setDgpsAge(double age) {
-        setDoubleValue(DGPS_AGE, age);
+        setDoubleValue(DGPS_AGE, age, 1, 1);
     }
 
     /*
@@ -233,7 +233,7 @@ class GGAParser extends PositionParser implements GGASentence {
      * @see net.sf.marineapi.nmea.sentence.GGASentence#setGeoidalHeight(double)
      */
     public void setGeoidalHeight(double height) {
-        setDoubleValue(GEOIDAL_HEIGHT, height);
+        setDoubleValue(GEOIDAL_HEIGHT, height, 1, 1);
     }
 
     /*
@@ -251,7 +251,7 @@ class GGAParser extends PositionParser implements GGASentence {
      * @see net.sf.marineapi.nmea.sentence.GGASentence#setHorizontalDOP(double)
      */
     public void setHorizontalDOP(double hdop) {
-        setDoubleValue(HORIZONTAL_DILUTION, hdop);
+        setDoubleValue(HORIZONTAL_DILUTION, hdop, 1, 1);
     }
 
     /*

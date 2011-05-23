@@ -164,9 +164,10 @@ public class RMBTest {
      */
     @Test
     public void testSetBearing() {
-        rmb.setBearing(180.0);
-        assertTrue(rmb.toString().contains(",180.0,"));
-        assertEquals(180.0, rmb.getBearing(), 0.001);
+        final double brg = 90.56789;
+        rmb.setBearing(brg);
+        assertTrue(rmb.toString().contains(",090.6,"));
+        assertEquals(brg, rmb.getBearing(), 0.1);
     }
 
     /**
@@ -204,9 +205,10 @@ public class RMBTest {
      */
     @Test
     public void testSetCrossTrackError() {
-        rmb.setCrossTrackError(1.111);
-        assertTrue(rmb.toString().contains(",1.111,"));
-        assertEquals(1.111, rmb.getCrossTrackError(), 0.001);
+        final double xte = 2.56789;
+        rmb.setCrossTrackError(xte);
+        assertTrue(rmb.toString().contains(",2.57,"));
+        assertEquals(xte, rmb.getCrossTrackError(), 0.2);
     }
 
     /**
@@ -253,9 +255,10 @@ public class RMBTest {
      */
     @Test
     public void testSetRange() {
-        rmb.setRange(12.345);
-        assertTrue(rmb.toString().contains(",12.345,"));
-        assertEquals(12.345, rmb.getRange(), 0.001);
+        final double range = 12.3456;
+        rmb.setRange(range);
+        assertTrue(rmb.toString().contains(",12.3,"));
+        assertEquals(range, rmb.getRange(), 0.1);
     }
 
     /**
@@ -302,9 +305,10 @@ public class RMBTest {
      */
     @Test
     public void testSetVelocity() {
-        rmb.setVelocity(40.5);
-        assertTrue(rmb.toString().contains(",40.5,"));
-        assertEquals(40.5, rmb.getVelocity(), 0.001);
+        final double v = 40.66666;
+        rmb.setVelocity(v);
+        assertTrue(rmb.toString().contains(",40.7,"));
+        assertEquals(v, rmb.getVelocity(), 0.1);
     }
 
     /**
@@ -315,8 +319,8 @@ public class RMBTest {
     public void testSetVelocityWithNegativeValue() {
         final double v = -0.123;
         rmb.setVelocity(v);
-        assertTrue(rmb.toString().contains("," + v + ","));
-        assertEquals(v, rmb.getVelocity(), 0.01);
+        assertTrue(rmb.toString().contains(",-0.1,"));
+        assertEquals(v, rmb.getVelocity(), 0.1);
     }
 
 }

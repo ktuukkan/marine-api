@@ -222,6 +222,22 @@ public class BODTest extends TestCase {
      * {@link net.sf.marineapi.nmea.parser.BODParser#getMagneticBearing()}.
      */
     @Test
+    public void testSetMagneticBearingWithRounding() {
+        final double bearing = 65.654321;
+        try {
+            bod.setMagneticBearing(bearing);
+            assertTrue(bod.toString().contains(",065.7,"));
+            assertEquals(bearing, bod.getMagneticBearing(), 0.1);
+        } catch (Exception e) {
+            fail(e.getMessage());
+        }
+    }
+
+    /**
+     * Test method for
+     * {@link net.sf.marineapi.nmea.parser.BODParser#getMagneticBearing()}.
+     */
+    @Test
     public void testSetMagneticBearingWithGreaterThanAllowed() {
         try {
             bod.setMagneticBearing(360.01);
@@ -269,6 +285,22 @@ public class BODTest extends TestCase {
         try {
             bod.setTrueBearing(bearing);
             assertEquals(bearing, bod.getTrueBearing());
+        } catch (Exception e) {
+            fail(e.getMessage());
+        }
+    }
+
+    /**
+     * Test method for
+     * {@link net.sf.marineapi.nmea.parser.BODParser#getTrueBearing()}.
+     */
+    @Test
+    public void testSetTrueBearingWithRounding() {
+        final double bearing = 90.654321;
+        try {
+            bod.setTrueBearing(bearing);
+            assertTrue(bod.toString().contains(",090.7,"));
+            assertEquals(bearing, bod.getTrueBearing(), 0.1);
         } catch (Exception e) {
             fail(e.getMessage());
         }

@@ -71,11 +71,35 @@ public class ZDATest {
 
     /**
      * Test method for
+     * {@link net.sf.marineapi.nmea.parser.ZDAParser#setLocalZoneHours()}.
+     */
+    @Test
+    public void testSetLocalZoneHours() {
+        final int hours = 7;
+        zda.setLocalZoneHours(hours);
+        assertTrue(zda.toString().contains(",2004,07,00*"));
+        assertEquals(hours, zda.getLocalZoneHours());
+    }
+
+    /**
+     * Test method for
      * {@link net.sf.marineapi.nmea.parser.ZDAParser#getLocalZoneMinutes()}.
      */
     @Test
     public void testGetLocalZoneMinutes() {
         assertEquals(0, zda.getLocalZoneMinutes());
+    }
+
+    /**
+     * Test method for
+     * {@link net.sf.marineapi.nmea.parser.ZDAParser#setLocalZoneMinutes()}.
+     */
+    @Test
+    public void testSetLocalZoneMinutes() {
+        final int min = 9;
+        zda.setLocalZoneMinutes(min);
+        assertTrue(zda.toString().contains(",2004,00,09*"));
+        assertEquals(min, zda.getLocalZoneMinutes());
     }
 
     /**

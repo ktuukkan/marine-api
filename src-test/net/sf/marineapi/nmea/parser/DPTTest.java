@@ -46,14 +46,16 @@ public class DPTTest {
 
     @Test
     public void testSetDepth() {
-        empty.setDepth(1.23);
-        assertEquals(1.23, empty.getDepth(), 0.001);
+        final double depth = 1.2333333;
+        empty.setDepth(depth);
+        assertEquals(depth, empty.getDepth(), 0.1);
     }
 
     @Test
     public void testSetOffset() {
-        empty.setOffset(1.5);
-        assertEquals(1.5, empty.getOffset(), 0.01);
+        final double offset = 1.555555;
+        empty.setOffset(offset);
+        assertEquals(offset, empty.getOffset(), 0.1);
     }
 
 }

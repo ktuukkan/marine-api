@@ -137,20 +137,21 @@ public final class SentenceFactory {
 
         parsers.put(type, parser);
     }
-    
+
     /**
-     * Unregisters a parser class, regardless of sentence type(s) it is registered for.
+     * Unregisters a parser class, regardless of sentence type(s) it is
+     * registered for.
      * 
      * @param parser Parser implementation class for <code>type</code>.
      * @see #registerParser(String, Class)
      */
     public void unregisterParser(Class<? extends SentenceParser> parser) {
-    	for(String key : parsers.keySet()) {
-    		if(parsers.get(key) == parser) {
-    			parsers.remove(key);
-    			break;
-    		}
-    	}
+        for (String key : parsers.keySet()) {
+            if (parsers.get(key) == parser) {
+                parsers.remove(key);
+                break;
+            }
+        }
     }
 
     /**
