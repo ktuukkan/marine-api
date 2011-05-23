@@ -35,10 +35,8 @@ class BODParser extends SentenceParser implements BODSentence {
 
     // field indices
     private static final int BEARING_TRUE = 0;
-    @SuppressWarnings("unused")
     private static final int TRUE_INDICATOR = 1;
     private static final int BEARING_MAGN = 2;
-    @SuppressWarnings("unused")
     private static final int MAGN_INDICATOR = 3;
     private static final int DESTINATION = 4;
     private static final int ORIGIN = 5;
@@ -48,6 +46,8 @@ class BODParser extends SentenceParser implements BODSentence {
      */
     public BODParser() {
         super(TalkerId.GP, SentenceId.BOD, 6);
+        setCharValue(TRUE_INDICATOR, 'T');
+        setCharValue(MAGN_INDICATOR, 'M');
     }
 
     /**
@@ -114,7 +114,7 @@ class BODParser extends SentenceParser implements BODSentence {
             throw new IllegalArgumentException(
                     "Bearing value out of bounds [0..360]");
         }
-        setDoubleValue(BEARING_MAGN, bearing);
+        setDoubleValue(BEARING_MAGN, bearing, 3, 1);
     }
 
     /*
@@ -136,6 +136,6 @@ class BODParser extends SentenceParser implements BODSentence {
             throw new IllegalArgumentException(
                     "Bearing value out of bounds [0..360]");
         }
-        setDoubleValue(BEARING_TRUE, bearing);
+        setDoubleValue(BEARING_TRUE, bearing, 3, 1);
     }
 }

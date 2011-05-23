@@ -178,8 +178,10 @@ public class RMCTest {
      */
     @Test
     public void testSetCourse() {
-        rmc.setCourse(180.5);
-        assertEquals(180.5, rmc.getCourse(), 0.001);
+        final double cog = 90.55555;
+        rmc.setCourse(cog);
+        assertTrue(rmc.toString().contains(",090.6,"));
+        assertEquals(cog, rmc.getCourse(), 0.1);
     }
 
     /**
@@ -270,8 +272,10 @@ public class RMCTest {
      */
     @Test
     public void testSetSpeed() {
-        rmc.setSpeed(35.2);
-        assertEquals(35.2, rmc.getSpeed(), 0.001);
+        final double sog = 35.23456;
+        rmc.setSpeed(sog);
+        assertTrue(rmc.toString().contains(",35.2,"));
+        assertEquals(sog, rmc.getSpeed(), 0.1);
     }
 
     /**
@@ -290,9 +294,11 @@ public class RMCTest {
      */
     @Test
     public void testSetVariation() {
-        rmc.setVariation(1.5);
+        final double var = 1.55555;
+        rmc.setVariation(var);
         rmc.setDirectionOfVariation(CompassPoint.WEST);
-        assertEquals(1.5, rmc.getVariation(), 0.001);
+        assertTrue(rmc.toString().contains(",001.6,W,"));
+        assertEquals(var, rmc.getVariation(), 0.1);
+        assertEquals(CompassPoint.WEST, rmc.getDirectionOfVariation());
     }
-
 }

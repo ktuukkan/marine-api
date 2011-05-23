@@ -171,7 +171,7 @@ class RMBParser extends PositionParser implements RMBSentence {
             throw new IllegalArgumentException(
                     "Bearing out of bounds 0..360 degrees");
         }
-        setDoubleValue(BEARING_TO_DEST, bearing);
+        setDoubleValue(BEARING_TO_DEST, bearing, 3, 1);
     }
 
     /*
@@ -180,7 +180,7 @@ class RMBParser extends PositionParser implements RMBSentence {
      * net.sf.marineapi.nmea.sentence.RMBSentence#setCrossTrackError(double)
      */
     public void setCrossTrackError(double xte) {
-        setDoubleValue(CROSS_TRACK_ERROR, xte);
+        setDoubleValue(CROSS_TRACK_ERROR, xte, 1, 2);
     }
 
     /*
@@ -211,7 +211,7 @@ class RMBParser extends PositionParser implements RMBSentence {
      * @see net.sf.marineapi.nmea.sentence.RMBSentence#setRange(double)
      */
     public void setRange(double range) {
-        setDoubleValue(RANGE_TO_DEST, range);
+        setDoubleValue(RANGE_TO_DEST, range, 1, 1);
     }
 
     /*
@@ -243,7 +243,6 @@ class RMBParser extends PositionParser implements RMBSentence {
      * @see net.sf.marineapi.nmea.sentence.RMBSentence#setVelocity(double)
      */
     public void setVelocity(double velocity) {
-        // TODO round to certain precision?
-        setDoubleValue(VELOCITY, velocity);
+        setDoubleValue(VELOCITY, velocity, 1, 1);
     }
 }

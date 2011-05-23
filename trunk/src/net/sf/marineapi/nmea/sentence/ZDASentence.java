@@ -55,6 +55,20 @@ public interface ZDASentence extends TimeSentence, DateSentence {
     int getLocalZoneMinutes();
 
     /**
+     * Set offset to local time zone in hours.
+     * 
+     * @param hours Offset, from 0 to +/- 13 hours.
+     */
+    void setLocalZoneHours(int hours);
+
+    /**
+     * Set offset to local time zone in minutes.
+     * 
+     * @param minutes Offset, from 0 to +/- 59 minutes.
+     */
+    void setLocalZoneMinutes(int minutes);
+
+    /**
      * Get date and time as {@link java.util.Date}.
      * 
      * @return {@link java.util.Date}

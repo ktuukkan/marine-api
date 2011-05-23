@@ -113,7 +113,7 @@ class VTGParser extends SentenceParser implements VTGSentence {
             throw new IllegalArgumentException(
                     "Course out of bounds 0..360 degrees");
         }
-        setDoubleValue(MAGNETIC_COURSE, mcog);
+        setDoubleValue(MAGNETIC_COURSE, mcog, 3, 1);
     }
 
     /*
@@ -134,7 +134,7 @@ class VTGParser extends SentenceParser implements VTGSentence {
         if (kmh < 0) {
             throw new IllegalArgumentException("Speed cannot be negative");
         }
-        setDoubleValue(SPEED_KMPH, kmh);
+        setDoubleValue(SPEED_KMPH, kmh, 1, 2);
     }
 
     /*
@@ -145,7 +145,7 @@ class VTGParser extends SentenceParser implements VTGSentence {
         if (knots < 0) {
             throw new IllegalArgumentException("Speed cannot be negative");
         }
-        setDoubleValue(SPEED_KNOTS, knots);
+        setDoubleValue(SPEED_KNOTS, knots, 1, 2);
     }
 
     /*
@@ -157,6 +157,6 @@ class VTGParser extends SentenceParser implements VTGSentence {
             throw new IllegalArgumentException(
                     "Course out of bounds 0..360 degrees");
         }
-        setDoubleValue(TRUE_COURSE, tcog);
+        setDoubleValue(TRUE_COURSE, tcog, 3, 1);
     }
 }

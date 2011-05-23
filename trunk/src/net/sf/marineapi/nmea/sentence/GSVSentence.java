@@ -81,7 +81,8 @@ public interface GSVSentence extends Sentence {
     /**
      * Tells if this is the last sentence in GSV sequence. This is a convenience
      * method for comparison of
-     * <code>({@link #getSentenceCount()} == {@link #getSentenceIndex()})</code>.
+     * <code>({@link #getSentenceCount()} == {@link #getSentenceIndex()})</code>
+     * .
      * 
      * @return <code>true</code> if first, otherwise <code>false</code>.
      */

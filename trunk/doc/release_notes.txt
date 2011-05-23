@@ -12,6 +12,9 @@ CHANGES
   
  * Parsing methods in SentenceId now validates the given String before parsing
    the id.
+   
+ * Double values are now rounded to certain decimal precision by setters. Also,
+   course and bearing values are padded with leading zeros.
   
 NEW FEATURES
  

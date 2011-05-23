@@ -143,7 +143,7 @@ class GSAParser extends SentenceParser implements GSASentence {
      * net.sf.marineapi.nmea.sentence.GSASentence#setHorizontalPrecision(double)
      */
     public void setHorizontalDOP(double hdop) {
-        setDoubleValue(HORIZONTAL_DOP, hdop);
+        setDoubleValue(HORIZONTAL_DOP, hdop, 1, 1);
     }
 
     /*
@@ -151,7 +151,7 @@ class GSAParser extends SentenceParser implements GSASentence {
      * @see net.sf.marineapi.nmea.sentence.GSASentence#setPositionDOP(double)
      */
     public void setPositionDOP(double pdop) {
-        setDoubleValue(POSITION_DOP, pdop);
+        setDoubleValue(POSITION_DOP, pdop, 1, 1);
     }
 
     /*
@@ -176,7 +176,7 @@ class GSAParser extends SentenceParser implements GSASentence {
      * @see net.sf.marineapi.nmea.sentence.GSASentence#setVerticalDOP(double)
      */
     public void setVerticalDOP(double vdop) {
-        setDoubleValue(VERTICAL_DOP, vdop);
+        setDoubleValue(VERTICAL_DOP, vdop, 1, 1);
     }
 
 }

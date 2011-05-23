@@ -139,9 +139,9 @@ public class GGATest {
 
     @Test
     public void testSetAltitude() {
-        final double alt = 11.111;
+        final double alt = 11.11111;
         gga.setAltitude(alt);
-        assertEquals(alt, gga.getAltitude(), 0.0001);
+        assertEquals(alt, gga.getAltitude(), 0.1);
     }
 
     @Test
@@ -153,9 +153,9 @@ public class GGATest {
 
     @Test
     public void testSetDgpsAge() {
-        final double age = 33.3;
+        final double age = 33.333333;
         gga.setDgpsAge(age);
-        assertEquals(age, gga.getDgpsAge(), 0.001);
+        assertEquals(age, gga.getDgpsAge(), 0.1);
     }
 
     @Test
@@ -173,9 +173,9 @@ public class GGATest {
 
     @Test
     public void testSetGeoidalHeight() {
-        gga.setGeoidalHeight(3.14);
-        assertEquals(3.14, gga.getGeoidalHeight(), 0.0001);
-
+        final double height = 3.987654;
+        gga.setGeoidalHeight(height);
+        assertEquals(height, gga.getGeoidalHeight(), 0.1);
     }
 
     @Test
@@ -187,9 +187,9 @@ public class GGATest {
 
     @Test
     public void testSetHorizontalDOP() {
-        assertEquals(2.0, gga.getHorizontalDOP(), 0.001);
-        gga.setHorizontalDOP(0.025);
-        assertEquals(0.025, gga.getHorizontalDOP(), 0.001);
+        final double hdop = 0.123456;
+        gga.setHorizontalDOP(hdop);
+        assertEquals(hdop, gga.getHorizontalDOP(), 0.1);
     }
 
     @Test

@@ -367,8 +367,8 @@ public class SentenceParser implements Sentence {
     }
 
     /**
-     * Set double value in specified field. Value is set "as-is" without any formatting
-     * or rounding.
+     * Set double value in specified field. Value is set "as-is" without any
+     * formatting or rounding.
      * 
      * @param index Field index
      * @param value Value to set
@@ -377,11 +377,12 @@ public class SentenceParser implements Sentence {
     protected final void setDoubleValue(int index, double value) {
         setStringValue(index, String.valueOf(value));
     }
-    
+
     /**
-     * Set double value in specified field, with given number of digits before and after
-     * the decimal separator ('.'). When necessary, the value is padded with leading zeros
-     * and/or rounded to meet the requested number of digits.
+     * Set double value in specified field, with given number of digits before
+     * and after the decimal separator ('.'). When necessary, the value is
+     * padded with leading zeros and/or rounded to meet the requested number of
+     * digits.
      * 
      * @param index Field index
      * @param value Value to set
@@ -389,27 +390,28 @@ public class SentenceParser implements Sentence {
      * @param decimals Maximum number of digits after decimal separator
      * @see #setDoubleValue(int, double)
      */
-    protected final void setDoubleValue(int index, double value, int leading, int decimals) {
-    	
-    	StringBuilder pattern = new StringBuilder();
-    	for(int i=0; i < leading; i++) {
-    		pattern.append('0');
-    	}
-    	if(decimals > 0) {
-    		pattern.append('.');
-    		for(int i=0; i < decimals; i++) {
-    			pattern.append('0');
-    		}
-    	}
-    	if(pattern.length() == 0) {
-    		pattern.append('0');
-    	}
-    	
-    	DecimalFormat nf = new DecimalFormat(pattern.toString());
+    protected final void setDoubleValue(int index, double value, int leading,
+            int decimals) {
+
+        StringBuilder pattern = new StringBuilder();
+        for (int i = 0; i < leading; i++) {
+            pattern.append('0');
+        }
+        if (decimals > 0) {
+            pattern.append('.');
+            for (int i = 0; i < decimals; i++) {
+                pattern.append('0');
+            }
+        }
+        if (pattern.length() == 0) {
+            pattern.append('0');
+        }
+
+        DecimalFormat nf = new DecimalFormat(pattern.toString());
         DecimalFormatSymbols dfs = new DecimalFormatSymbols();
         dfs.setDecimalSeparator('.');
         nf.setDecimalFormatSymbols(dfs);
-        
+
         setStringValue(index, nf.format(value));
     }
 
@@ -422,7 +424,7 @@ public class SentenceParser implements Sentence {
     protected final void setIntValue(int index, int value) {
         setStringValue(index, String.valueOf(value));
     }
-    
+
     /**
      * Set integer value in specified field, with specified minimum number of
      * digits. Leading zeros are added to value if when necessary.
@@ -432,10 +434,10 @@ public class SentenceParser implements Sentence {
      * @param leading Number of digits to use.
      */
     protected final void setIntValue(int index, int value, int leading) {
-    	String pattern = "%d";
-    	if(leading > 0) {
-    		pattern = "%0" + leading + "d";
-    	}
+        String pattern = "%d";
+        if (leading > 0) {
+            pattern = "%0" + leading + "d";
+        }
         setStringValue(index, String.format(pattern, value));
     }
 

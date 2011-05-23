@@ -109,8 +109,32 @@ class ZDAParser extends SentenceParser implements ZDASentence {
      */
     public void setDate(Date date) {
         setIntValue(YEAR, date.getYear());
-        setStringValue(MONTH, String.format("%02d", date.getMonth()));
-        setStringValue(DAY, String.format("%02d", date.getDay()));
+        setIntValue(MONTH, date.getMonth(), 2);
+        setIntValue(DAY, date.getDay(), 2);
+    }
+
+    /*
+     * (non-Javadoc)
+     * @see net.sf.marineapi.nmea.sentence.ZDASentence#setLocalZoneHours(int)
+     */
+    public void setLocalZoneHours(int hours) {
+        if (hours < -13 || hours > 13) {
+            throw new IllegalArgumentException(
+                    "Value must be within range -13..13");
+        }
+        setIntValue(LOCAL_ZONE_HOURS, hours, 2);
+    }
+
+    /*
+     * (non-Javadoc)
+     * @see net.sf.marineapi.nmea.sentence.ZDASentence#setLocalZoneMinutes()
+     */
+    public void setLocalZoneMinutes(int minutes) {
+        if (minutes < -59 || minutes > 59) {
+            throw new IllegalArgumentException(
+                    "Value must be within range -59..59");
+        }
+        setIntValue(LOCAL_ZONE_MINUTES, minutes, 2);
     }
 
     /*
@@ -143,5 +167,4 @@ class ZDAParser extends SentenceParser implements ZDASentence {
         cal.set(Calendar.SECOND, (int) Math.floor(t.getSeconds()));
         return cal.getTime();
     }
-
 }
