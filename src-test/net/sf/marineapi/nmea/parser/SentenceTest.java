@@ -68,7 +68,7 @@ public class SentenceTest {
             new SentenceParser(sent);
             fail("Did not throw exception");
         } catch (IllegalArgumentException se) {
-            assertTrue(se.getMessage().contains(""));
+            // pass
         } catch (Exception e) {
             fail(e.getMessage());
         }
@@ -283,5 +283,69 @@ public class SentenceTest {
     public void testToString() {
         assertEquals(RMCTest.EXAMPLE, instance.toString());
         assertEquals(instance.toString(), instance.toSentence());
+    }
+    
+    /**
+     * Test method for
+     * {@link net.sf.marineapi.nmea.parser.SentenceParser#setDoubleValue(int, double, int, int)}.
+     */
+    @Test
+    public void testSetDoubleValueWithPrecision() {
+    	
+    	instance.setDoubleValue(0, 3.14, 0, 0);
+        assertEquals("3", instance.getStringValue(0));
+        
+        instance.setDoubleValue(0, 3.14, 2, 0);
+        assertEquals("03", instance.getStringValue(0));
+
+        instance.setDoubleValue(0, 678.910, 3, 3);
+        assertEquals("678.910", instance.getStringValue(0));
+
+        instance.setDoubleValue(0, 123.456, 4, 1);
+        assertEquals("0123.5", instance.getStringValue(0));
+                
+        instance.setDoubleValue(0, 78.910, 1, 1);
+        assertEquals("78.9", instance.getStringValue(0));
+
+        instance.setDoubleValue(0, 0.910, 0, 3);
+        assertEquals(".910", instance.getStringValue(0));
+        
+        instance.setDoubleValue(0, 0.910, 3, 2);
+        assertEquals("000.91", instance.getStringValue(0));
+        
+        instance.setDoubleValue(0, 0.910, 0, 2);
+        assertEquals(".91", instance.getStringValue(0));
+    }
+    
+    /**
+     * Test method for
+     * {@link net.sf.marineapi.nmea.parser.SentenceParser#setIntValue(int, int, int)}.
+     */
+    @Test
+    public void testSetIntValueWithLeading() {
+    	
+    	instance.setIntValue(0, 0, 0);
+        assertEquals("1", instance.getStringValue(0));
+    	
+        instance.setIntValue(0, 1, 1);
+        assertEquals("1", instance.getStringValue(0));
+        
+        instance.setIntValue(0, 1, 2);
+        assertEquals("01", instance.getStringValue(0));
+        
+        instance.setIntValue(0, 1, 3);
+        assertEquals("001", instance.getStringValue(0));
+        
+        instance.setIntValue(0, 12, 1);
+        assertEquals("12", instance.getStringValue(0));
+        
+        instance.setIntValue(0, 12, 2);
+        assertEquals("12", instance.getStringValue(0));
+        
+        instance.setIntValue(0, 12, 3);
+        assertEquals("012", instance.getStringValue(0));
+        
+        instance.setIntValue(0, -1, 3);
+        assertEquals("-01", instance.getStringValue(0));
     }
 }
