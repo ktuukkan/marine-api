@@ -15,13 +15,20 @@ CHANGES
    
  * Double values are now rounded to certain decimal precision by setters. Also,
    course and bearing values are padded with leading zeros.
-  
+ 
+ * SentenceReader; reader now invokes SentenceLister.readingPaused() when data
+   flow is paused, but reader is still running. The readingStopped() is now
+   called only when reader has permanently stopped. Pause timeout can be set 
+   using the SentenceReader.setPauseTimeout() method.
+   
 NEW FEATURES
  
  * Added method for unregistering parsers in SentenceFactory.
  
  * SentenceParser; added methods for setting double and integer values with
    leading zeros. Double values can also be rounded to certain precision.
+   
+ * SentenceListener; added readingPaused() notification.
 
 KNOWN ISSUES
   

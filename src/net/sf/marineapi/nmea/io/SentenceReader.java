@@ -54,11 +54,13 @@ public class SentenceReader {
     // Thread for running the worker
     private Thread thread;
     // worker that reads the input stream
-    private StreamReader reader;
+    private DataReader reader;
     // map of sentence listeners
     private ConcurrentMap<String, List<SentenceListener>> listeners = new ConcurrentHashMap<String, List<SentenceListener>>();
     // time of latest sentence event
-    private volatile long lastFired = 0;
+    private volatile long lastFired = -1;
+    // timeout for "reading paused" in ms
+    private volatile int pauseTimeout = 5000;
 
     /**
      * Creates a new instance of SentenceReader.
@@ -66,7 +68,7 @@ public class SentenceReader {
      * @param source Stream from which to read NMEA data
      */
     public SentenceReader(InputStream source) {
-        reader = new StreamReader(source);
+        reader = new DataReader(source);
     }
 
     /**
@@ -128,7 +130,26 @@ public class SentenceReader {
         if (reader.isRunning()) {
             stop();
         }
-        reader = new StreamReader(stream);
+        reader = new DataReader(stream);
+    }
+    
+    /**
+     * Set timeout time for reading paused events. Default is 5000 ms.
+     * 
+     * @param millis Timeout in milliseconds.
+     */
+    public void setPauseTimeout(int millis) {
+    	this.pauseTimeout = millis;
+    }
+    
+    /**
+     * Returns the current reading paused timeout.
+     * 
+     * @return Timeout limit in milliseconds.
+     * @see #setPauseTimeout(int)
+     */
+    public int getPauseTimeout() {
+    	return this.pauseTimeout;
     }
 
     /**
@@ -139,6 +160,7 @@ public class SentenceReader {
                 && reader.isRunning()) {
             throw new IllegalStateException("Reader is already running");
         }
+        lastFired = -1;
         thread = new Thread(reader);
         thread.start();
     }
@@ -176,6 +198,21 @@ public class SentenceReader {
             }
         }
     }
+    
+    /**
+     * Notifies all listeners that data reading has stopped.
+     */
+    private void fireReadingPaused() {
+    	for (String key : listeners.keySet()) {
+            for (SentenceListener listener : listeners.get(key)) {
+                try {
+                    listener.readingPaused();
+                } catch (Exception e) {
+                    // nevermind
+                }
+            }
+        }
+    }
 
     /**
      * Notifies all listeners that data reading has stopped.
@@ -199,6 +236,10 @@ public class SentenceReader {
      */
     private void fireSentenceEvent(Sentence sentence) {
 
+        if (lastFired < 0) {
+            fireReadingStarted();
+        }
+    	
         String type = sentence.getSentenceId();
         List<SentenceListener> list = new ArrayList<SentenceListener>();
 
@@ -217,6 +258,7 @@ public class SentenceReader {
                 // ignore listener failures
             }
         }
+        lastFired = System.currentTimeMillis();
     }
 
     /**
@@ -238,18 +280,19 @@ public class SentenceReader {
     /**
      * Worker that reads the input stream and fires sentence events.
      */
-    private class StreamReader implements Runnable {
+    private class DataReader implements Runnable {
 
-        private WatchDog watcher;
+        private PauseMonitor monitor;
+        private Thread monitorThread;
         private BufferedReader input;
-        private volatile boolean isRunning = false;
+        private volatile boolean isRunning = true;
 
         /**
          * Creates a new instance of StreamReader.
          * 
          * @param source InputStream from where to read data.
          */
-        public StreamReader(InputStream source) {
+        public DataReader(InputStream source) {
             InputStreamReader isr = new InputStreamReader(source);
             input = new BufferedReader(isr);
         }
@@ -269,37 +312,28 @@ public class SentenceReader {
          */
         public void run() {
 
-            lastFired = -1;
-            isRunning = true;
-            watcher = new WatchDog();
-            Thread t = new Thread(watcher);
-            t.start();
+            monitor = new PauseMonitor(DataReader.this);
+            monitorThread = new Thread(monitor);
+            monitorThread.start();
+            
             SentenceFactory factory = SentenceFactory.getInstance();
 
             while (isRunning) {
-                String data;
                 try {
-                    if (input.ready()) {
-
-                        data = input.readLine();
-
-                        if (SentenceValidator.isValid(data)) {
-                            if (lastFired < 0) {
-                                fireReadingStarted();
-                            }
-                            Sentence s = factory.createParser(data);
-                            fireSentenceEvent(s);
-                            lastFired = System.currentTimeMillis();
-                        }
+                    if (!input.ready()) {
+                    	continue;
+                    }
+                    
+                    String data = input.readLine();
+                    if (SentenceValidator.isValid(data)) {
+                        Sentence s = factory.createParser(data);
+                        fireSentenceEvent(s);
                     }
                     Thread.sleep(50);
                 } catch (Exception e) {
-                    e.printStackTrace();
-                    // nevermind unsupported or invalid data
+                    // nevermind, keep trying..
                 }
             }
-
-            isRunning = false;
             fireReadingStopped();
         }
 
@@ -307,29 +341,36 @@ public class SentenceReader {
          * Stops the run loop.
          */
         public void stop() {
-            this.isRunning = false;
+            isRunning = false;
+            monitorThread.interrupt();
         }
     }
 
     /**
-     * Watch dog for sending start/stop notifications.
+     * Watch dog for sending start/paused notifications.
      */
-    private class WatchDog implements Runnable {
-
-        /*
-         * (non-Javadoc)
-         * @see java.lang.Runnable#run()
-         */
+    private class PauseMonitor implements Runnable {
+    	
+    	private DataReader parent;
+    	
+    	public PauseMonitor(DataReader parent) {
+    		this.parent = parent;
+    	}
+		
         public void run() {
-            while (reader.isRunning()) {
+            while (parent.isRunning()) {
                 try {
-                    Thread.sleep(500);
-                    long now = System.currentTimeMillis();
-                    long elapsed = now - lastFired;
-                    if (elapsed > 5000 && elapsed < 6000) {
+                    int min = pauseTimeout;
+                    int max = pauseTimeout + 1000;
+                    long elapsed = System.currentTimeMillis() - lastFired;
+                    
+                    if (elapsed > min && elapsed < max) {
                         lastFired = -1;
-                        fireReadingStopped();
+                        fireReadingPaused();
                     }
+                    
+                	int sleep = (int) Math.round(pauseTimeout / 4);
+                    Thread.sleep(sleep);
                 } catch (InterruptedException e) {
                     // nevermind
                 }
