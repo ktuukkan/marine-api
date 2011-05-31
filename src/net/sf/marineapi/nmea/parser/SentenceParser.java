@@ -107,6 +107,18 @@ public class SentenceParser implements Sentence {
     }
 
     /**
+     * Creates a new instance of SentenceParser with specified sentence data.
+     * Type of the sentence is checked against the specified expected sentence
+     * type id.
+     * 
+     * @param nmea Sentence String
+     * @param type Sentence type enum
+     */
+    SentenceParser(String nmea, SentenceId type) {
+        this(nmea, type.toString());
+    }
+
+    /**
      * Creates a new instance of SentenceParser. Parser may be constructed only
      * if parameter <code>nmea</code> contains a valid NMEA 0183 sentence of the
      * specified <code>type</code>.
@@ -130,6 +142,17 @@ public class SentenceParser implements Sentence {
             String msg = String.format(ptrn, type, sid);
             throw new IllegalArgumentException(msg);
         }
+    }
+
+    /**
+     * Creates a new instance of SentenceParser without any data.
+     * 
+     * @param tid Talker id to set in sentence
+     * @param sid Sentence id to set in sentence
+     * @param size Number of data fields following the sentence id field
+     */
+    SentenceParser(TalkerId tid, SentenceId sid, int size) {
+        this(tid, sid.toString(), size);
     }
 
     /**
@@ -158,117 +181,21 @@ public class SentenceParser implements Sentence {
         }
     }
 
-    /**
-     * Creates a new instance of SentenceParser with specified sentence data.
-     * Type of the sentence is checked against the specified expected sentence
-     * type id.
-     * 
-     * @param nmea Sentence String
-     * @param type Sentence type enum
-     */
-    SentenceParser(String nmea, SentenceId type) {
-        this(nmea, type.toString());
-    }
-
-    /**
-     * Creates a new instance of SentenceParser without any data.
-     * 
-     * @param tid Talker id to set in sentence
-     * @param sid Sentence id to set in sentence
-     * @param size Number of data fields following the sentence id field
-     */
-    SentenceParser(TalkerId tid, SentenceId sid, int size) {
-        this(tid, sid.toString(), size);
-    }
-
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see java.lang.Object#equals(java.lang.Object)
+	 */
     @Override
-    public boolean equals(Object o) {
-        if (o == this) {
+    public boolean equals(Object obj) {
+        if (obj == this) {
             return true;
         }
-        if (o instanceof SentenceParser) {
-            Sentence s = (Sentence) o;
-            return s.toString().equals(toString());
+        if (obj instanceof SentenceParser) {
+			SentenceParser sp = (SentenceParser) obj;
+			return sp.toString().equals(toString());
         }
         return false;
-    }
-
-    /*
-     * (non-Javadoc)
-     * @see net.sf.marineapi.nmea.sentence.Sentence#getFieldCount()
-     */
-    public final int getFieldCount() {
-        return fields.size();
-    }
-
-    /*
-     * (non-Javadoc)
-     * @see net.sf.marineapi.nmea.sentence.Sentence#getSentenceId()
-     */
-    public final String getSentenceId() {
-        return sentenceId;
-    }
-
-    /*
-     * (non-Javadoc)
-     * @see net.sf.marineapi.nmea.sentence.Sentence#getTalkerId()
-     */
-    public final TalkerId getTalkerId() {
-        return talkerId;
-    }
-
-    @Override
-    public int hashCode() {
-        return toString().hashCode();
-    }
-
-    /*
-     * (non-Javadoc)
-     * @see
-     * net.sf.marineapi.nmea.sentence.Sentence#setTalkerId(net.sf.marineapi.
-     * nmea.util.TalkerId)
-     */
-    public final void setTalkerId(TalkerId id) {
-        this.talkerId = id;
-    }
-
-    /*
-     * (non-Javadoc)
-     * @see net.sf.marineapi.nmea.sentence.Sentence#toSentence()
-     */
-    public final String toSentence() {
-        String sentence = toString();
-        if (!SentenceValidator.isValid(sentence)) {
-            String msg = String.format("Invalid result [%s]", sentence);
-            throw new IllegalStateException(msg);
-        }
-        return sentence;
-    }
-
-    /**
-     * Returns the String representation of the sentence (without line
-     * terminator CR/LR). Checksum is calculated and appended at the end of the
-     * sentence, but no validation is done. Use {@link #toSentence()} to also
-     * validate the result.
-     * 
-     * @return String representation of sentence
-     */
-    @Override
-    public String toString() {
-
-        StringBuilder sb = new StringBuilder(MAX_LENGTH);
-        sb.append(BEGIN_CHAR);
-        sb.append(talkerId.toString());
-        sb.append(sentenceId);
-
-        for (String field : fields) {
-            sb.append(FIELD_DELIMITER);
-            sb.append(field);
-        }
-
-        String sentence = Checksum.add(sb.toString());
-
-        return sentence;
     }
 
     /**
@@ -303,6 +230,14 @@ public class SentenceParser implements Sentence {
         return value;
     }
 
+    /*
+     * (non-Javadoc)
+     * @see net.sf.marineapi.nmea.sentence.Sentence#getFieldCount()
+     */
+    public final int getFieldCount() {
+        return fields.size();
+    }
+
     /**
      * Parse integer value from the specified sentence field.
      * 
@@ -317,6 +252,14 @@ public class SentenceParser implements Sentence {
             throw new ParseException("Field does not contain integer value", ex);
         }
         return value;
+    }
+
+    /*
+     * (non-Javadoc)
+     * @see net.sf.marineapi.nmea.sentence.Sentence#getSentenceId()
+     */
+    public final String getSentenceId() {
+        return sentenceId;
     }
 
     /**
@@ -340,6 +283,24 @@ public class SentenceParser implements Sentence {
         return value;
     }
 
+    /*
+     * (non-Javadoc)
+     * @see net.sf.marineapi.nmea.sentence.Sentence#getTalkerId()
+     */
+    public final TalkerId getTalkerId() {
+        return talkerId;
+    }
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see java.lang.Object#hashCode()
+	 */
+    @Override
+    public int hashCode() {
+        return toString().hashCode();
+    }
+
     /**
      * Tells is if the field specified by the given index contains a value.
      * 
@@ -355,6 +316,24 @@ public class SentenceParser implements Sentence {
         }
         return result;
     }
+
+    /*
+	 * (non-Javadoc)
+	 * 
+	 * @see net.sf.marineapi.nmea.sentence.Sentence#isProprietary()
+	 */
+	public boolean isProprietary() {
+		return TalkerId.P.equals(getTalkerId());
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see net.sf.marineapi.nmea.sentence.Sentence#isValid()
+	 */
+	public boolean isValid() {
+		return SentenceValidator.isValid(toString());
+	}
 
     /**
      * Set a character in specified field.
@@ -484,5 +463,53 @@ public class SentenceParser implements Sentence {
 
         fields.clear();
         fields = temp;
+    }
+
+    /*
+     * (non-Javadoc)
+     * @see
+     * net.sf.marineapi.nmea.sentence.Sentence#setTalkerId(net.sf.marineapi.
+     * nmea.util.TalkerId)
+     */
+    public final void setTalkerId(TalkerId id) {
+        this.talkerId = id;
+    }
+
+    /*
+     * (non-Javadoc)
+     * @see net.sf.marineapi.nmea.sentence.Sentence#toSentence()
+     */
+    public final String toSentence() {
+		if (!isValid()) {
+			String msg = String.format("Invalid result [%s]", toString());
+            throw new IllegalStateException(msg);
+        }
+		return toString();
+    }
+
+	/**
+     * Returns the String representation of the sentence (without line
+     * terminator CR/LR). Checksum is calculated and appended at the end of the
+     * sentence, but no validation is done. Use {@link #toSentence()} to also
+     * validate the result.
+     * 
+     * @return String representation of sentence
+     */
+    @Override
+    public String toString() {
+
+        StringBuilder sb = new StringBuilder(MAX_LENGTH);
+        sb.append(BEGIN_CHAR);
+        sb.append(talkerId.toString());
+        sb.append(sentenceId);
+
+        for (String field : fields) {
+            sb.append(FIELD_DELIMITER);
+            sb.append(field);
+        }
+
+        String sentence = Checksum.add(sb.toString());
+
+        return sentence;
     }
 }

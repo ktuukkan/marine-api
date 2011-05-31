@@ -8,7 +8,7 @@ be introduced in future versions. Released on @RELEASE_DATE@.
 
 CHANGES
 
- * Bugfix in SentenceFactory, DPT parser was not automatically registered.
+ * SentenceFactory; DPT parser was not automatically registered, fixed.
   
  * Parsing methods in SentenceId now validates the given String before parsing
    the id.
@@ -21,6 +21,11 @@ CHANGES
    called only when reader has permanently stopped. Pause timeout can be set 
    using the SentenceReader.setPauseTimeout() method.
    
+ * SentenceValidator; fixed regular expressions to match all printable ASCII
+   characters. Added also '!' as acceptable begin character.
+   
+ * TalkerId; Added more complete list of talker ids.
+      
 NEW FEATURES
  
  * Added method for unregistering parsers in SentenceFactory.
@@ -29,6 +34,8 @@ NEW FEATURES
    leading zeros. Double values can also be rounded to certain precision.
    
  * SentenceListener; added readingPaused() notification.
+ 
+ * Sentence; added convenience methods isValid() and isProprietary().
 
 KNOWN ISSUES
   

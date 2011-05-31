@@ -40,14 +40,20 @@ public class SentenceValidatorTest {
      */
     @Test
     public void testIsValid() {
-        String a = "$GPGGA,1,2,3,4,5,6,7,8,9";
+
+		// "normal"
+		String a = "$ABCDE,1,2,3,4,5,6,7,8,9";
         assertTrue(SentenceValidator.isValid(a));
         assertTrue(SentenceValidator.isValid(Checksum.add(a)));
 
-        String b = "$GPGGA,1,TWO,three,FOUR,5,6.0,-7.0,Eigth-8,N1N3";
-        assertTrue(SentenceValidator.isValid(b));
-        assertTrue(SentenceValidator.isValid(Checksum.add(b)));
+		// '!' as begin char
+		String b = "!ABCDE,1,2,3,4,5,6,7,8,9";
+		assertTrue(SentenceValidator.isValid(b));
+		assertTrue(SentenceValidator.isValid(Checksum.add(b)));
 
+		String c = "$ABCDE,1,TWO,three,FOUR?,5,6.0,-7.0,Eigth-8,N1N3,#T3n";
+		assertTrue(SentenceValidator.isValid(c));
+		assertTrue(SentenceValidator.isValid(Checksum.add(c)));
     }
 
     /**
@@ -57,6 +63,9 @@ public class SentenceValidatorTest {
      */
     @Test
     public void testIsValidWithInvalidInput() {
+		// invalid checksum, otherwise valid
+		assertFalse(SentenceValidator.isValid("$ABCDE,1,2,3,4,5,6,7,8,9*00"));
+		// something weird
         assertFalse(SentenceValidator.isValid(null));
         assertFalse(SentenceValidator.isValid(""));
         assertFalse(SentenceValidator.isValid("$"));
@@ -68,13 +77,9 @@ public class SentenceValidatorTest {
         assertFalse(SentenceValidator.isValid("$GpGGA,1,2,3,4,5,6,7,8,9"));
         assertFalse(SentenceValidator.isValid("$GPGGa,1,2,3,4,5,6,7,8,9"));
         assertFalse(SentenceValidator.isValid("$GPGG#,1,2,3,4,5,6,7,8,9"));
-        assertFalse(SentenceValidator.isValid("$GPGGA,1,2,#,4,5,6,7,8,9"));
-        assertFalse(SentenceValidator.isValid("$GPGGA,1,$,3,4,5,6,7,8,9"));
+		assertFalse(SentenceValidator.isValid("$GPGG,1,2,3,4,5,6,7,8,9"));
         assertFalse(SentenceValidator.isValid("$GPGGAA,1,2,3,4,5,6,7,8,9"));
-        assertFalse(SentenceValidator.isValid("$GPGGA,1,2,3,4,5,6,7,8,9*00"));
-        // invalid checksum, otherwise valid
-        assertFalse(SentenceValidator
-                .isValid("$GPGLL,6011.552,N,02501.941,E,120045,A*00"));
+		assertFalse(SentenceValidator.isValid("$GPGGA,1,2,3,4,5,6,7,8,9*00"));
     }
 
     /**
