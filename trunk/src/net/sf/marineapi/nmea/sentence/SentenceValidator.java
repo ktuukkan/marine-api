@@ -32,6 +32,7 @@ package net.sf.marineapi.nmea.sentence;
  * <li>String is max. 80 chars long (without &lt;CR&gt;&lt;LF&gt;)
  * <li>String does not contain any illegal characters
  * <li>Has a correct checksum, separated by '*' character (unless omitted)
+ * </ul>
  * <p>
  * Sentences without checksum are validated only by checking the general
  * sentence characteristics.
@@ -58,12 +59,14 @@ public final class SentenceValidator {
         final String re;
         int chkd = nmea.indexOf(String.valueOf(Sentence.CHECKSUM_DELIMITER));
 
+		// printable ASCII chars 0x20 to 0x7E
+
         if (chkd < 0) {
-            re = "^[$]{1}[A-Z0-9]{5}[,][A-Za-z0-9,. -]{0,73}$";
+			re = "^[$|!]{1}[A-Z0-9]{5}[,][\\x20-\\x7F]{0,75}$";
             return nmea.matches(re);
         }
 
-        re = "^[$]{1}[A-Z0-9]{5}[,][A-Za-z0-9,. -]{0,70}[*][A-F0-9]{2}$";
+		re = "^[$|!]{1}[A-Z0-9]{5}[,][\\x20-\\x7F]{0,72}[*][A-F0-9]{2}$";
         int start = nmea.indexOf(Sentence.CHECKSUM_DELIMITER) + 1;
         String chk = nmea.substring(start, nmea.length());
 

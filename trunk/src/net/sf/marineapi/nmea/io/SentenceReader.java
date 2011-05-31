@@ -39,6 +39,9 @@ import net.sf.marineapi.nmea.sentence.SentenceValidator;
 /**
  * Sentence provider reads NMEA sentences from the specified InputStream and
  * dispatches them to listeners as SentenceEvents.
+ * <p>
+ * The sentence parsers dispatched by reader are created using the
+ * {@link SentenceFactory} where you can also register your own custom parsers.
  * 
  * @author Kimmo Tuukkanen
  * @version $Revision$
