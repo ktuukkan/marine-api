@@ -309,6 +309,9 @@ public class SentenceTest {
 		instance.setDoubleValue(0, 3.14, 2, 0);
 		assertEquals("03", instance.getStringValue(0));
 
+		instance.setDoubleValue(0, 3.14, 1, 4);
+		assertEquals("3.1400", instance.getStringValue(0));
+
 		instance.setDoubleValue(0, 678.910, 3, 3);
 		assertEquals("678.910", instance.getStringValue(0));
 
