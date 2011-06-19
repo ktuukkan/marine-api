@@ -25,6 +25,8 @@ CHANGES
    characters. Added also '!' as acceptable begin character.
    
  * TalkerId; Added more complete list of talker ids.
+ 
+ * SentenceEvent; creation time stamp is now returned as plain long value.
       
 NEW FEATURES
  
@@ -36,6 +38,9 @@ NEW FEATURES
  * SentenceListener; added readingPaused() notification.
  
  * Sentence; added convenience methods isValid() and isProprietary().
+ 
+ * Added TPVProvider that provides time/position/velocity reports from GPS by
+   capturing the required data from several different sentences.
 
 KNOWN ISSUES
   
