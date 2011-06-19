@@ -134,42 +134,42 @@ public class TPVProvider implements SentenceListener {
     }
 
     /**
-     * @return
+     * Creates a TPVEvent based on captured sentences.
      */
     private TPVEvent createTPVEvent() {
-
         Position p = null;
         Double sog = null;
         Double cog = null;
         Date d = null;
         Time t = null;
+        GpsMode mode = null;
+        GpsFixQuality fix = null;
 
         for (SentenceEvent se : events) {
             Sentence s = se.getSentence();
-
             if (s instanceof RMCSentence) {
                 RMCSentence rmc = (RMCSentence) s;
                 sog = rmc.getSpeed();
                 cog = rmc.getCourse();
                 d = rmc.getDate();
                 t = rmc.getTime();
+                mode = rmc.getGpsMode();
                 if (p == null) {
                     p = rmc.getPosition();
                 }
-
             } else if (s instanceof GGASentence) {
                 // Using GGA as primary position source as it contains both
                 // position and altitude
                 GGASentence gga = (GGASentence) s;
                 p = gga.getPosition();
-
+                fix = gga.getFixQuality();
             } else if (s instanceof GLLSentence && p == null) {
                 GLLSentence gll = (GLLSentence) s;
                 p = gll.getPosition();
             }
         }
 
-        return new TPVEvent(this, p, sog, cog, d, t);
+        return new TPVEvent(this, p, sog, cog, d, t, mode, fix);
     }
 
     /**
@@ -220,7 +220,7 @@ public class TPVProvider implements SentenceListener {
     private void fireTPVEvent(TPVEvent event) {
         System.out.println("firing TPV");
         for (TPVListener listener : listeners) {
-            listener.tpvUpdated(event.clone());
+            listener.tpvUpdate(event.clone());
         }
     }
 

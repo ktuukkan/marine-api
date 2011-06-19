@@ -25,7 +25,7 @@ import java.util.EventListener;
 import net.sf.marineapi.provider.TPVProvider;
 
 /**
- * Listener interface for time/position/velocity report from GPS.
+ * Listener interface for GPS time/position/velocity events.
  * 
  * @author Kimmo Tuukkanen
  * @version $Revision$
@@ -37,5 +37,5 @@ public interface TPVListener extends EventListener {
     /**
      * @param evt
      */
-    void tpvUpdated(TPVEvent evt);
+    void tpvUpdate(TPVEvent evt);
 }
