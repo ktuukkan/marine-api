@@ -206,4 +206,14 @@ public class Time {
         }
         return false;
     }
+
+    /*
+     * (non-Javadoc)
+     * @see java.lang.Object#toString()
+     */
+    @Override
+    public String toString() {
+        String ptr = "%02d%02d%02f";
+        return String.format(ptr, getHour(), getMinutes(), getSeconds());
+    }
 }

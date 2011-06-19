@@ -189,4 +189,14 @@ public class Date {
             this.year = year;
         }
     }
+
+    /*
+     * (non-Javadoc)
+     * @see java.lang.Object#toString()
+     */
+    @Override
+    public String toString() {
+        String ptr = "%04d%02d%02d";
+        return String.format(ptr, getYear(), getMonth(), getDay());
+    }
 }
