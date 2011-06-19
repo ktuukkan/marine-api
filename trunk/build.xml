@@ -19,6 +19,7 @@ $Revision$
 		<property name="tests.dir" value="src-test/" />
 		<property name="reports.dir" value="reports/" />
 		<property name="doc.dir" value="doc/" />
+		<property name="data.dir" value="data/" />
 		<property name="releases.dir" value="releases/" />
 				
 		<property name="build.dir" value="bin/" />
@@ -32,6 +33,9 @@ $Revision$
 		
 		<property name="release.zip"
 			value="${releases.dir}/${project.id}-${version}.zip" />
+
+		<property name="examples.zip"
+			value="${releases.dir}/${project.id}-examples-${version}.zip" />
 
 		<property name="javadoc.title"
 			value="${ant.project.name} v${version} (b${build.id})" />
@@ -80,7 +84,8 @@ $Revision$
 			<attribute name="Implementation-Version" value="b${build.id}" />
 		</manifest>
 		<jar destfile="${jar.file}" manifest="${manifest.file}">
-			<fileset dir="${build.dir.classes}" includes="**/*.class" />
+			<fileset dir="${build.dir.classes}" includes="**/*.class"
+				excludes="**/example/*" />
 		</jar>
 	</target>
 		
@@ -117,7 +122,8 @@ $Revision$
 		<mkdir dir="${build.dir.api}" />
 		<javadoc sourcepath="${src.dir}" destdir="${build.dir.api}"
 			private="false" windowtitle="${javadoc.title}"
-			bottom="${javadoc.footer}" breakiterator="true">
+			bottom="${javadoc.footer}" breakiterator="true"
+			excludepackagenames="net.sf.marineapi.example">
 		    <link href="http://download.oracle.com/javase/5/docs/api/" />
 		</javadoc>
 	</target>
@@ -125,12 +131,23 @@ $Revision$
 	<!-- build release package -->
 	<target name="dist" depends="clean, build, javadoc"
 		description="Builds a distribution package">
+		
 		<mkdir dir="${build.dir.dist}" />
+		<mkdir dir="${build.dir.dist}/examples" />
 		<mkdir dir="${releases.dir}" />
 		
 		<copy todir="${build.dir.dist}" file="${jar.file}" />
 		<copy todir="${build.dir.dist}/doc/">
 			<fileset dir="${doc.dir}" />
+		</copy>
+		
+		<copy todir="${build.dir.dist}/examples/src">
+			<fileset dir="${src.dir}" includes="**/example/*.java" />
+			<fileset dir="${build.dir}" includes="**/example/*.class" />
+		</copy>
+		
+		<copy todir="${build.dir.dist}/examples/data">
+			<fileset dir="${data.dir}" includes="*.txt,*.log" />
 		</copy>
 		
 		<replace token="@VERSION@" value="${version}" 
