@@ -20,7 +20,6 @@
  */
 package net.sf.marineapi.nmea.event;
 
-import java.util.Date;
 import java.util.EventObject;
 
 import net.sf.marineapi.nmea.io.SentenceReader;
@@ -67,11 +66,11 @@ public class SentenceEvent extends EventObject {
     }
 
     /**
-     * Get time stamp when this event was created.
+     * Get system time when this event was created.
      * 
-     * @return Date
+     * @return Milliseconds timestamp
      */
-    public Date getTimeStamp() {
-        return new Date(timestamp);
+    public long getTimeStamp() {
+        return timestamp;
     }
 }

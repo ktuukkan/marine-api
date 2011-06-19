@@ -23,8 +23,9 @@ package net.sf.marineapi.nmea.io;
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.Vector;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
@@ -135,16 +136,16 @@ public class SentenceReader {
         }
         reader = new DataReader(stream);
     }
-    
+
     /**
      * Set timeout time for reading paused events. Default is 5000 ms.
      * 
      * @param millis Timeout in milliseconds.
      */
     public void setPauseTimeout(int millis) {
-    	this.pauseTimeout = millis;
+        this.pauseTimeout = millis;
     }
-    
+
     /**
      * Returns the current reading paused timeout.
      * 
@@ -152,7 +153,7 @@ public class SentenceReader {
      * @see #setPauseTimeout(int)
      */
     public int getPauseTimeout() {
-    	return this.pauseTimeout;
+        return this.pauseTimeout;
     }
 
     /**
@@ -201,12 +202,12 @@ public class SentenceReader {
             }
         }
     }
-    
+
     /**
      * Notifies all listeners that data reading has stopped.
      */
     private void fireReadingPaused() {
-    	for (String key : listeners.keySet()) {
+        for (String key : listeners.keySet()) {
             for (SentenceListener listener : listeners.get(key)) {
                 try {
                     listener.readingPaused();
@@ -242,9 +243,9 @@ public class SentenceReader {
         if (lastFired < 0) {
             fireReadingStarted();
         }
-    	
+
         String type = sentence.getSentenceId();
-        List<SentenceListener> list = new ArrayList<SentenceListener>();
+        Set<SentenceListener> list = new HashSet<SentenceListener>();
 
         if (listeners.containsKey(type)) {
             list.addAll(listeners.get(type));
@@ -253,9 +254,9 @@ public class SentenceReader {
             list.addAll(listeners.get(DISPATCH_ALL));
         }
 
-        SentenceEvent se = new SentenceEvent(this, sentence);
         for (SentenceListener sl : list) {
             try {
+                SentenceEvent se = new SentenceEvent(this, sentence);
                 sl.sentenceRead(se);
             } catch (Exception e) {
                 // ignore listener failures
@@ -318,15 +319,15 @@ public class SentenceReader {
             monitor = new PauseMonitor(DataReader.this);
             monitorThread = new Thread(monitor);
             monitorThread.start();
-            
+
             SentenceFactory factory = SentenceFactory.getInstance();
 
             while (isRunning) {
                 try {
                     if (!input.ready()) {
-                    	continue;
+                        continue;
                     }
-                    
+
                     String data = input.readLine();
                     if (SentenceValidator.isValid(data)) {
                         Sentence s = factory.createParser(data);
@@ -353,26 +354,26 @@ public class SentenceReader {
      * Watch dog for sending start/paused notifications.
      */
     private class PauseMonitor implements Runnable {
-    	
-    	private DataReader parent;
-    	
-    	public PauseMonitor(DataReader parent) {
-    		this.parent = parent;
-    	}
-		
+
+        private DataReader parent;
+
+        public PauseMonitor(DataReader parent) {
+            this.parent = parent;
+        }
+
         public void run() {
             while (parent.isRunning()) {
                 try {
                     int min = pauseTimeout;
                     int max = pauseTimeout + 1000;
                     long elapsed = System.currentTimeMillis() - lastFired;
-                    
+
                     if (elapsed > min && elapsed < max) {
                         lastFired = -1;
                         fireReadingPaused();
                     }
-                    
-                	int sleep = (int) Math.round(pauseTimeout / 4);
+
+                    int sleep = (int) Math.round(pauseTimeout / 4);
                     Thread.sleep(sleep);
                 } catch (InterruptedException e) {
                     // nevermind
