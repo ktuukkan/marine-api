@@ -2,6 +2,7 @@ package net.sf.marineapi.example;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 
@@ -20,21 +21,12 @@ public class TPVProviderExample implements TPVListener {
 
     TPVProvider provider;
 
-    public TPVProviderExample() {
-        init();
-    }
-
-    private void init() {
-        try {
-            File f = new File("data/Garmin-GPS76.log");
-            InputStream is = new FileInputStream(f);
-            SentenceReader sr = new SentenceReader(is);
-            provider = new TPVProvider(sr);
-            provider.addListener(this);
-            sr.start();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+    public TPVProviderExample(File f) throws FileNotFoundException {
+        InputStream is = new FileInputStream(f);
+        SentenceReader sr = new SentenceReader(is);
+        provider = new TPVProvider(sr);
+        provider.addListener(this);
+        sr.start();
     }
 
     /*
@@ -54,7 +46,18 @@ public class TPVProviderExample implements TPVListener {
      * @param args None
      */
     public static void main(String[] args) {
-        new TPVProviderExample();
-    }
 
+        if (args.length != 1) {
+            System.out.println("Usage:\njava TPVProviderExample nmea.log");
+            System.exit(1);
+        }
+
+        try {
+            new TPVProviderExample(new File(args[0]));
+            System.out.println("Running, press CTRL-C to stop..");
+        } catch (IOException e) {
+            e.printStackTrace();
+            System.exit(1);
+        }
+    }
 }
