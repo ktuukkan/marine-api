@@ -114,18 +114,12 @@ public class TPVProvider implements SentenceListener {
 
         Sentence s = event.getSentence();
 
-        if (s instanceof RMCSentence || s instanceof PositionSentence) {
-
-            System.out.println("capturing; " + s.toString());
+        if (s instanceof PositionSentence) {
 
             events.add(event);
 
-            System.out.println("size=" + events.size());
-
             if (isReady()) {
-                System.out.println("required data captured");
                 if (isValid()) {
-                    System.out.println("data is valid");
                     fireTPVEvent(createTPVEvent());
                 }
                 reset();
@@ -183,9 +177,7 @@ public class TPVProvider implements SentenceListener {
         for (SentenceEvent se : events) {
 
             long age = now - se.getTimeStamp();
-            System.out.println("age=" + age);
             if (age > 1000) {
-                System.out.println("invalid; too old");
                 return false;
             }
 
@@ -218,7 +210,6 @@ public class TPVProvider implements SentenceListener {
      * @param event TPVUpdateEvent to dispatch
      */
     private void fireTPVEvent(TPVEvent event) {
-        System.out.println("firing TPV");
         for (TPVListener listener : listeners) {
             listener.tpvUpdate(event.clone());
         }
@@ -228,7 +219,6 @@ public class TPVProvider implements SentenceListener {
      * Clears the list of collected events.
      */
     private void reset() {
-        System.out.println("reset");
         events.clear();
     }
 
@@ -265,7 +255,7 @@ public class TPVProvider implements SentenceListener {
     }
 
     /**
-     * Removes a listener from provider.
+     * Removes the specified listener from provider.
      * 
      * @param listener Listener to remove
      */
