@@ -27,11 +27,18 @@ CHANGES
  * TalkerId; Added more complete list of talker ids.
  
  * SentenceEvent; creation time stamp is now returned as plain long value.
-      
+ 
+ * Date; constructor was setting month off by one, fixed.
+  
 NEW FEATURES
  
  * Added method for unregistering parsers in SentenceFactory.
  
+ * Added TPVProvider that reports time, position, altitude, velocity and course
+   from GPS in a single event. Report is constructed by capturing the required
+   data from several sentences. This is also the initial implementation and
+   preview of high level APIs that focus on actual data instead of sentences.
+   
  * SentenceParser; added methods for setting double and integer values with
    leading zeros. Double values can also be rounded to certain precision.
    
@@ -39,9 +46,6 @@ NEW FEATURES
  
  * Sentence; added convenience methods isValid() and isProprietary().
  
- * Added TPVProvider that provides time/position/velocity reports from GPS by
-   capturing the required data from several different sentences.
-
 KNOWN ISSUES
   
  * Position.distanceTo() may not produce correct results.
