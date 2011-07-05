@@ -80,6 +80,15 @@ public class TPVProvider implements SentenceListener {
         reader.addSentenceListener(this, SentenceId.GLL);
     }
 
+    /**
+     * Inserts a listener to provider.
+     * 
+     * @param listener Listener to add
+     */
+    public void addListener(TPVListener listener) {
+        listeners.add(listener);
+    }
+
     /*
      * (non-Javadoc)
      * @see net.sf.marineapi.nmea.event.SentenceListener#readingPaused()
@@ -102,6 +111,15 @@ public class TPVProvider implements SentenceListener {
     public void readingStopped() {
         reset();
         reader.removeSentenceListener(this);
+    }
+
+    /**
+     * Removes the specified listener from provider.
+     * 
+     * @param listener Listener to remove
+     */
+    public void removeListener(TPVListener listener) {
+        listeners.remove(listener);
     }
 
     /*
@@ -167,6 +185,40 @@ public class TPVProvider implements SentenceListener {
     }
 
     /**
+     * Dispatch the TPV event to all listeners.
+     * 
+     * @param event TPVUpdateEvent to dispatch
+     */
+    private void fireTPVEvent(TPVEvent event) {
+        for (TPVListener listener : listeners) {
+            listener.tpvUpdate(event.clone());
+        }
+    }
+
+    /**
+     * Tells if the needed data has been captured.
+     */
+    private boolean isReady() {
+
+        boolean hasRmc = false;
+        boolean hasGga = false;
+        boolean hasGll = false;
+
+        for (SentenceEvent se : events) {
+            Sentence s = se.getSentence();
+            if (s instanceof RMCSentence) {
+                hasRmc = true;
+            } else if (s instanceof GGASentence) {
+                hasGga = true;
+            } else if (s instanceof GLLSentence) {
+                hasGll = true;
+            }
+        }
+
+        return hasRmc && (hasGga || hasGll);
+    }
+
+    /**
      * Tells if the captured events are from within the last 1000 milliseconds
      * and contain valid data.
      */
@@ -205,61 +257,9 @@ public class TPVProvider implements SentenceListener {
     }
 
     /**
-     * Dispatch the TPV event to all listeners.
-     * 
-     * @param event TPVUpdateEvent to dispatch
-     */
-    private void fireTPVEvent(TPVEvent event) {
-        for (TPVListener listener : listeners) {
-            listener.tpvUpdate(event.clone());
-        }
-    }
-
-    /**
      * Clears the list of collected events.
      */
     private void reset() {
         events.clear();
-    }
-
-    /**
-     * Tells if the needed data has been captured.
-     */
-    private boolean isReady() {
-
-        boolean hasRmc = false;
-        boolean hasGga = false;
-        boolean hasGll = false;
-
-        for (SentenceEvent se : events) {
-            Sentence s = se.getSentence();
-            if (s instanceof RMCSentence) {
-                hasRmc = true;
-            } else if (s instanceof GGASentence) {
-                hasGga = true;
-            } else if (s instanceof GLLSentence) {
-                hasGll = true;
-            }
-        }
-
-        return hasRmc && (hasGga || hasGll);
-    }
-
-    /**
-     * Inserts a listener to provider.
-     * 
-     * @param listener Listener to add
-     */
-    public void addListener(TPVListener listener) {
-        listeners.add(listener);
-    }
-
-    /**
-     * Removes the specified listener from provider.
-     * 
-     * @param listener Listener to remove
-     */
-    public void removeListener(TPVListener listener) {
-        listeners.remove(listener);
     }
 }

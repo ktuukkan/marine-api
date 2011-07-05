@@ -59,14 +59,14 @@ public final class SentenceValidator {
         final String re;
         int chkd = nmea.indexOf(String.valueOf(Sentence.CHECKSUM_DELIMITER));
 
-		// printable ASCII chars 0x20 to 0x7E
+        // printable ASCII chars 0x20 to 0x7E
 
         if (chkd < 0) {
-			re = "^[$|!]{1}[A-Z0-9]{5}[,][\\x20-\\x7F]{0,75}$";
+            re = "^[$|!]{1}[A-Z0-9]{5}[,][\\x20-\\x7F]{0,75}$";
             return nmea.matches(re);
         }
 
-		re = "^[$|!]{1}[A-Z0-9]{5}[,][\\x20-\\x7F]{0,72}[*][A-F0-9]{2}$";
+        re = "^[$|!]{1}[A-Z0-9]{5}[,][\\x20-\\x7F]{0,72}[*][A-F0-9]{2}$";
         int start = nmea.indexOf(Sentence.CHECKSUM_DELIMITER) + 1;
         String chk = nmea.substring(start, nmea.length());
 

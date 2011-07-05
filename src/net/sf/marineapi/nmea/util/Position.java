@@ -224,6 +224,27 @@ public class Position {
         }
     }
 
+    /*
+     * (non-Javadoc)
+     * @see java.lang.Object#toString()
+     */
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("[");
+        sb.append(getLatitude());
+        sb.append(" ");
+        sb.append(getLatHemisphere().toChar());
+        sb.append(", ");
+        sb.append(getLongitude());
+        sb.append(" ");
+        sb.append(getLonHemisphere().toChar());
+        sb.append(", ");
+        sb.append(getAltitude());
+        sb.append(" m]");
+        return sb.toString();
+    }
+
     /**
      * Convenience method for creating a waypoint based in the Position.
      * 
@@ -266,26 +287,5 @@ public class Position {
         double result = earthRadius * c * 1000;
 
         return result;
-    }
-
-    /*
-     * (non-Javadoc)
-     * @see java.lang.Object#toString()
-     */
-    @Override
-    public String toString() {
-        StringBuilder sb = new StringBuilder();
-        sb.append("[");
-        sb.append(getLatitude());
-        sb.append(" ");
-        sb.append(getLatHemisphere().toChar());
-        sb.append(", ");
-        sb.append(getLongitude());
-        sb.append(" ");
-        sb.append(getLonHemisphere().toChar());
-        sb.append(", ");
-        sb.append(getAltitude());
-        sb.append(" m]");
-        return sb.toString();
     }
 }
