@@ -56,7 +56,7 @@ public class Date {
     public Date() {
         GregorianCalendar c = new GregorianCalendar();
         this.year = c.get(Calendar.YEAR);
-        this.month = c.get(Calendar.MONTH);
+        this.month = c.get(Calendar.MONTH) + 1;
         this.day = c.get(Calendar.DAY_OF_MONTH);
     }
 
