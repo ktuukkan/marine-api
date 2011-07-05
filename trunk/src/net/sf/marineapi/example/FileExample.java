@@ -37,6 +37,30 @@ public class FileExample implements SentenceListener {
         reader.start();
     }
 
+    /*
+     * (non-Javadoc)
+     * @see net.sf.marineapi.nmea.event.SentenceListener#readingPaused()
+     */
+    public void readingPaused() {
+        System.out.println("-- Paused --");
+    }
+
+    /*
+     * (non-Javadoc)
+     * @see net.sf.marineapi.nmea.event.SentenceListener#readingStarted()
+     */
+    public void readingStarted() {
+        System.out.println("-- Started --");
+    }
+
+    /*
+     * (non-Javadoc)
+     * @see net.sf.marineapi.nmea.event.SentenceListener#readingStopped()
+     */
+    public void readingStopped() {
+        System.out.println("-- Stopped --");
+    }
+
     /**
      * Implements SentenceReader interface for receiving NMEA updates from
      * SentenceReader.
@@ -51,30 +75,6 @@ public class FileExample implements SentenceListener {
 
         // do something with sentence data..
         System.out.println(s.getPosition());
-    }
-
-    /*
-     * (non-Javadoc)
-     * @see net.sf.marineapi.nmea.event.SentenceListener#readingStarted()
-     */
-    public void readingStarted() {
-        System.out.println("-- Started --");
-    }
-
-    /*
-     * (non-Javadoc)
-     * @see net.sf.marineapi.nmea.event.SentenceListener#readingPaused()
-     */
-    public void readingPaused() {
-        System.out.println("-- Paused --");
-    }
-
-    /*
-     * (non-Javadoc)
-     * @see net.sf.marineapi.nmea.event.SentenceListener#readingStopped()
-     */
-    public void readingStopped() {
-        System.out.println("-- Stopped --");
     }
 
     /**

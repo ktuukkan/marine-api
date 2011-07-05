@@ -94,8 +94,8 @@ public class SentenceReader {
      * @param type Sentence type for which the listener is registered.
      * @see net.sf.marineapi.nmea.event.SentenceListener
      */
-    public void addSentenceListener(SentenceListener sl, String type) {
-        registerListener(type, sl);
+    public void addSentenceListener(SentenceListener sl, SentenceId type) {
+        registerListener(type.toString(), sl);
     }
 
     /**
@@ -106,8 +106,18 @@ public class SentenceReader {
      * @param type Sentence type for which the listener is registered.
      * @see net.sf.marineapi.nmea.event.SentenceListener
      */
-    public void addSentenceListener(SentenceListener sl, SentenceId type) {
-        registerListener(type.toString(), sl);
+    public void addSentenceListener(SentenceListener sl, String type) {
+        registerListener(type, sl);
+    }
+
+    /**
+     * Returns the current reading paused timeout.
+     * 
+     * @return Timeout limit in milliseconds.
+     * @see #setPauseTimeout(int)
+     */
+    public int getPauseTimeout() {
+        return this.pauseTimeout;
     }
 
     /**
@@ -147,16 +157,6 @@ public class SentenceReader {
     }
 
     /**
-     * Returns the current reading paused timeout.
-     * 
-     * @return Timeout limit in milliseconds.
-     * @see #setPauseTimeout(int)
-     */
-    public int getPauseTimeout() {
-        return this.pauseTimeout;
-    }
-
-    /**
      * Starts reading the input stream and dispatching events.
      */
     public void start() {
@@ -189,13 +189,13 @@ public class SentenceReader {
     }
 
     /**
-     * Notifies all listeners that data reading is about to start.
+     * Notifies all listeners that data reading has stopped.
      */
-    private void fireReadingStarted() {
+    private void fireReadingPaused() {
         for (String key : listeners.keySet()) {
             for (SentenceListener listener : listeners.get(key)) {
                 try {
-                    listener.readingStarted();
+                    listener.readingPaused();
                 } catch (Exception e) {
                     // nevermind
                 }
@@ -204,13 +204,13 @@ public class SentenceReader {
     }
 
     /**
-     * Notifies all listeners that data reading has stopped.
+     * Notifies all listeners that data reading is about to start.
      */
-    private void fireReadingPaused() {
+    private void fireReadingStarted() {
         for (String key : listeners.keySet()) {
             for (SentenceListener listener : listeners.get(key)) {
                 try {
-                    listener.readingPaused();
+                    listener.readingStarted();
                 } catch (Exception e) {
                     // nevermind
                 }

@@ -130,6 +130,18 @@ public final class SentenceFactory {
     }
 
     /**
+     * Tells if the factory is able to create parser for specified sentence
+     * type. All {@link SentenceId} enum values should result returning
+     * <code>true</code> at all times.
+     * 
+     * @param type Sentence type id, e.g. "GLL" or "GGA".
+     * @return true if type is supported, otherwise false.
+     */
+    public boolean hasParser(String type) {
+        return parsers.containsKey(type);
+    }
+
+    /**
      * Register a sentence parser to factory. After registration,
      * {@link #createParser(String)} method can be used to obtain parsers for
      * registered type. All sentences supported by the library are registered by
@@ -170,18 +182,6 @@ public final class SentenceFactory {
                 break;
             }
         }
-    }
-
-    /**
-     * Tells if the factory is able to create parser for specified sentence
-     * type. All {@link SentenceId} enum values should result returning
-     * <code>true</code> at all times.
-     * 
-     * @param type Sentence type id, e.g. "GLL" or "GGA".
-     * @return true if type is supported, otherwise false.
-     */
-    public boolean hasParser(String type) {
-        return parsers.containsKey(type);
     }
 
     /**

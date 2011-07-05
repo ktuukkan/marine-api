@@ -41,20 +41,36 @@ public class SerialPortExample implements SentenceListener {
         init();
     }
 
-    private void init() {
-        try {
-            SerialPort sp = getSerialPort();
+    public void readingPaused() {
+        // TODO Auto-generated method stub
 
-            if (sp != null) {
-                InputStream is = sp.getInputStream();
-                SentenceReader sr = new SentenceReader(is);
-                sr.addSentenceListener(this);
-                sr.start();
-            }
+    }
 
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+    /*
+     * (non-Javadoc)
+     * @see net.sf.marineapi.nmea.event.SentenceListener#readingStarted()
+     */
+    public void readingStarted() {
+        System.out.println("-- Start --");
+    }
+
+    /*
+     * (non-Javadoc)
+     * @see net.sf.marineapi.nmea.event.SentenceListener#readingStopped()
+     */
+    public void readingStopped() {
+        System.out.println("-- Stop --");
+    }
+
+    /*
+     * (non-Javadoc)
+     * @see
+     * net.sf.marineapi.nmea.event.SentenceListener#sentenceRead(net.sf.marineapi
+     * .nmea.event.SentenceEvent)
+     */
+    public void sentenceRead(SentenceEvent event) {
+        // here we receive each sentence read from the port
+        System.out.println(event.getSentence());
     }
 
     /**
@@ -109,31 +125,20 @@ public class SerialPortExample implements SentenceListener {
         return null;
     }
 
-    /*
-     * (non-Javadoc)
-     * @see
-     * net.sf.marineapi.nmea.event.SentenceListener#sentenceRead(net.sf.marineapi
-     * .nmea.event.SentenceEvent)
-     */
-    public void sentenceRead(SentenceEvent event) {
-        // here we receive each sentence read from the port
-        System.out.println(event.getSentence());
-    }
+    private void init() {
+        try {
+            SerialPort sp = getSerialPort();
 
-    /*
-     * (non-Javadoc)
-     * @see net.sf.marineapi.nmea.event.SentenceListener#readingStarted()
-     */
-    public void readingStarted() {
-        System.out.println("-- Start --");
-    }
+            if (sp != null) {
+                InputStream is = sp.getInputStream();
+                SentenceReader sr = new SentenceReader(is);
+                sr.addSentenceListener(this);
+                sr.start();
+            }
 
-    /*
-     * (non-Javadoc)
-     * @see net.sf.marineapi.nmea.event.SentenceListener#readingStopped()
-     */
-    public void readingStopped() {
-        System.out.println("-- Stop --");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     /**
@@ -143,10 +148,5 @@ public class SerialPortExample implements SentenceListener {
      */
     public static void main(String[] args) {
         new SerialPortExample();
-    }
-
-    public void readingPaused() {
-        // TODO Auto-generated method stub
-
     }
 }

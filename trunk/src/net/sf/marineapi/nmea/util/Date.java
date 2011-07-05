@@ -77,16 +77,6 @@ public class Date {
 
     /*
      * (non-Javadoc)
-     * @see java.lang.Object#hashCode()
-     */
-    @Override
-    public int hashCode() {
-        String s = String.format("%d%02d%02d", year, month, day);
-        return s.hashCode();
-    }
-
-    /*
-     * (non-Javadoc)
      * @see java.lang.Object#equals(java.lang.Object)
      */
     @Override
@@ -135,6 +125,16 @@ public class Date {
      */
     public int getYear() {
         return year;
+    }
+
+    /*
+     * (non-Javadoc)
+     * @see java.lang.Object#hashCode()
+     */
+    @Override
+    public int hashCode() {
+        String s = String.format("%d%02d%02d", year, month, day);
+        return s.hashCode();
     }
 
     /**

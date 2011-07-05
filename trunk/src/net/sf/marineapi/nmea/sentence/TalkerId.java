@@ -30,135 +30,134 @@ package net.sf.marineapi.nmea.sentence;
  */
 public enum TalkerId {
 
-	/** Autopilot - General */
-	AG,
-	/** Autopilot - Magnetic */
-	AP,
-	/** Computer - Programmed Calculator (obsolete) */
-	@Deprecated
-	CC,
-	/** Communications - Digital Selective Calling (DSC) */
-	CD,
-	/** Computer - Memory Data (obsolete) */
-	CM,
-	/** Communications - Satellite */
-	CS,
-	/** Communications - Radio-Telephone (MF/HF) */
-	CT,
-	/** Communications - Radio-Telephone (VHF) */
-	CV,
-	/** Communications - Scanning Receiver */
-	CX,
-	/** DECCA Navigation (obsolete) */
-	@Deprecated
-	DE,
-	/** Direction Finder */
-	DF,
-	/** Velocity Sensor, Speed Log, Water, Magnetic */
-	DM,
-	/** Electronic Chart Display & Information System (ECDIS) */
-	EC,
-	/** Emergency Position Indicating Beacon (EPIRB) */
-	EP,
-	/** Engine Room Monitoring Systems */
-	ER,
-	/** Global Positioning System (GPS) */
-	GP,
-	/** Heading - Magnetic Compass */
-	HC,
-	/** Heading - North Seeking Gyro */
-	HE,
-	/** Heading - Non North Seeking Gyro */
-	HN,
-	/** Integrated Instrumentation */
-	II,
-	/** Integrated Navigation */
-	IN,
-	/** Loran A (obsolete) */
-	@Deprecated
-	LA,
-	/** Loran C (obsolete) */
-	@Deprecated
-	LC,
-	/** Microwave Positioning System (obsolete) */
-	@Deprecated
-	MP,
-	/** OMEGA Navigation System (obsolete) */
-	@Deprecated
-	OM,
-	/** Distress Alarm System (obsolete) */
-	@Deprecated
-	OS,
-	/** Proprietary sentence format (does not define the talker device). */
-	P,
-	/** RADAR and/or ARPA */
-	RA,
-	/** Sounder, Depth */
-	SD,
-	/** Electronic Positioning System, other/general */
-	SN,
-	/** Sounder, Scanning */
-	SS,
-	/** Turn Rate Indicator */
-	TI,
-	/** TRANSIT Navigation System */
-	TR,
-	/** Velocity Sensor, Doppler, other/general */
-	VD,
-	/** Velocity Sensor, Speed Log, Water, Mechanical */
-	VW,
-	/** Weather Instruments */
-	WI,
-	/** Transducer - Temperature (obsolete) */
-	@Deprecated
-	YC,
-	/** Transducer - Displacement, Angular or Linear (obsolete) */
-	@Deprecated
-	YD,
-	/** Transducer - Frequency (obsolete) */
-	@Deprecated
-	YF,
-	/** Transducer - Level (obsolete) */
-	@Deprecated
-	YL,
-	/** Transducer - Pressure (obsolete) */
-	@Deprecated
-	YP,
-	/** Transducer - Flow Rate (obsolete) */
-	@Deprecated
-	YR,
-	/** Transducer - Tachometer (obsolete) */
-	@Deprecated
-	YT,
-	/** Transducer - Volume (obsolete) */
-	@Deprecated
-	YV,
-	/** Transducer */
-	YX,
-	/** Timekeeper - Atomic Clock */
-	ZA,
-	/** Timekeeper - Chronometer */
-	ZC,
-	/** Timekeeper - Quartz */
-	ZQ,
-	/** Timekeeper - Radio Update, WWV or WWVH */
-	ZV;
+    /** Autopilot - General */
+    AG,
+    /** Autopilot - Magnetic */
+    AP,
+    /** Computer - Programmed Calculator (obsolete) */
+    @Deprecated
+    CC,
+    /** Communications - Digital Selective Calling (DSC) */
+    CD,
+    /** Computer - Memory Data (obsolete) */
+    CM,
+    /** Communications - Satellite */
+    CS,
+    /** Communications - Radio-Telephone (MF/HF) */
+    CT,
+    /** Communications - Radio-Telephone (VHF) */
+    CV,
+    /** Communications - Scanning Receiver */
+    CX,
+    /** DECCA Navigation (obsolete) */
+    @Deprecated
+    DE,
+    /** Direction Finder */
+    DF,
+    /** Velocity Sensor, Speed Log, Water, Magnetic */
+    DM,
+    /** Electronic Chart Display & Information System (ECDIS) */
+    EC,
+    /** Emergency Position Indicating Beacon (EPIRB) */
+    EP,
+    /** Engine Room Monitoring Systems */
+    ER,
+    /** Global Positioning System (GPS) */
+    GP,
+    /** Heading - Magnetic Compass */
+    HC,
+    /** Heading - North Seeking Gyro */
+    HE,
+    /** Heading - Non North Seeking Gyro */
+    HN,
+    /** Integrated Instrumentation */
+    II,
+    /** Integrated Navigation */
+    IN,
+    /** Loran A (obsolete) */
+    @Deprecated
+    LA,
+    /** Loran C (obsolete) */
+    @Deprecated
+    LC,
+    /** Microwave Positioning System (obsolete) */
+    @Deprecated
+    MP,
+    /** OMEGA Navigation System (obsolete) */
+    @Deprecated
+    OM,
+    /** Distress Alarm System (obsolete) */
+    @Deprecated
+    OS,
+    /** Proprietary sentence format (does not define the talker device). */
+    P,
+    /** RADAR and/or ARPA */
+    RA,
+    /** Sounder, Depth */
+    SD,
+    /** Electronic Positioning System, other/general */
+    SN,
+    /** Sounder, Scanning */
+    SS,
+    /** Turn Rate Indicator */
+    TI,
+    /** TRANSIT Navigation System */
+    TR,
+    /** Velocity Sensor, Doppler, other/general */
+    VD,
+    /** Velocity Sensor, Speed Log, Water, Mechanical */
+    VW,
+    /** Weather Instruments */
+    WI,
+    /** Transducer - Temperature (obsolete) */
+    @Deprecated
+    YC,
+    /** Transducer - Displacement, Angular or Linear (obsolete) */
+    @Deprecated
+    YD,
+    /** Transducer - Frequency (obsolete) */
+    @Deprecated
+    YF,
+    /** Transducer - Level (obsolete) */
+    @Deprecated
+    YL,
+    /** Transducer - Pressure (obsolete) */
+    @Deprecated
+    YP,
+    /** Transducer - Flow Rate (obsolete) */
+    @Deprecated
+    YR,
+    /** Transducer - Tachometer (obsolete) */
+    @Deprecated
+    YT,
+    /** Transducer - Volume (obsolete) */
+    @Deprecated
+    YV,
+    /** Transducer */
+    YX,
+    /** Timekeeper - Atomic Clock */
+    ZA,
+    /** Timekeeper - Chronometer */
+    ZC,
+    /** Timekeeper - Quartz */
+    ZQ,
+    /** Timekeeper - Radio Update, WWV or WWVH */
+    ZV;
 
-	/**
-	 * Parses the talker id from specified sentence String and returns the
-	 * corresponding TalkerId enum using the {@link #valueOf(String)} method.
-	 * 
-	 * @param nmea
-	 *            Sentence String
-	 * @return TalkerId enum
-	 */
-	public static TalkerId parse(String nmea) {
-		String tid = "";
-		if (nmea.startsWith("$P")) {
-			tid = "P";
-		} else {
-			tid = nmea.substring(1, 3);
-		}
-		return TalkerId.valueOf(tid);
-	}
+    /**
+     * Parses the talker id from specified sentence String and returns the
+     * corresponding TalkerId enum using the {@link #valueOf(String)} method.
+     * 
+     * @param nmea Sentence String
+     * @return TalkerId enum
+     */
+    public static TalkerId parse(String nmea) {
+        String tid = "";
+        if (nmea.startsWith("$P")) {
+            tid = "P";
+        } else {
+            tid = nmea.substring(1, 3);
+        }
+        return TalkerId.valueOf(tid);
+    }
 }
