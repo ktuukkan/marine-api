@@ -213,7 +213,7 @@ public class Time {
      */
     @Override
     public String toString() {
-        String ptr = "%02d%02d%02f";
+        String ptr = "%02d:%02d:%02.03f";
         return String.format(ptr, getHour(), getMinutes(), getSeconds());
     }
 }

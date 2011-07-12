@@ -232,11 +232,11 @@ public class Position {
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("[");
-        sb.append(getLatitude());
+        sb.append(String.format("%02.04f", getLatitude()));
         sb.append(" ");
         sb.append(getLatHemisphere().toChar());
         sb.append(", ");
-        sb.append(getLongitude());
+        sb.append(String.format("%03.04f", getLongitude()));
         sb.append(" ");
         sb.append(getLonHemisphere().toChar());
         sb.append(", ");
