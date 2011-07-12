@@ -147,7 +147,7 @@ public class TPVEvent extends EventObject {
      */
     @Override
     public String toString() {
-        String ptr = "time[%s, %s] pos%s velocity[%f, %f] ";
+        String ptr = "t[%s %s] p%s v[%.01f, %.01f]";
         return String.format(ptr, date, time, position, speed, course);
     }
 }

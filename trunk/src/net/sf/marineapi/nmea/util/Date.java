@@ -196,7 +196,7 @@ public class Date {
      */
     @Override
     public String toString() {
-        String ptr = "%04d%02d%02d";
+        String ptr = "%04d-%02d-%02d";
         return String.format(ptr, getYear(), getMonth(), getDay());
     }
 }
