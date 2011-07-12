@@ -35,7 +35,10 @@ import net.sf.marineapi.provider.TPVProvider;
 public interface TPVListener extends EventListener {
 
     /**
-     * @param evt
+     * Invoked when fresh time/position/velocity report is available, typically
+     * once per second.
+     * 
+     * @param evt TPVEvent
      */
     void tpvUpdate(TPVEvent evt);
 }

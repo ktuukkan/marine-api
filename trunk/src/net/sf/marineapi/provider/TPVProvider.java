@@ -43,18 +43,16 @@ import net.sf.marineapi.provider.event.TPVListener;
 
 /**
  * <p>
- * Provides a time/position/velocity report from GPS.
- * <p>
- * Provider assumes that RMC, GGA and/or GLL sentences are being dispatched by
- * provided {@link SentenceReader}. Uses RMC for date/time, speed and course,
- * and favors GGA for position as it contains the altitude. When GGA is not
- * available, position may be taken from GLL or RMC. If this is the case, there
- * is no altitude included in the {@linkplain Position}.
+ * Provides a time/position/velocity report from GPS. Data is captured from RMC
+ * and GGA or GLL sentences. RMC is used for date/time, speed and course. GGA is
+ * used as primary source for position as it contains also the altitude. When
+ * GGA is not available, position may be taken from GLL or RMC. If this is the
+ * case, there is no altitude included in the {@linkplain Position}. GPS data
+ * statuses are also captured and events are dispatched only when sentences
+ * report {@link DataStatus#ACTIVE}.
  * <p>
  * When constructing the {@link TPVEvent}, captured sentences must be from
- * within the last 1000 milliseconds (i.e. standard NMEA update rate, 1/s). If
- * required sentences are not present in current NMEA stream, TPVEvents will not
- * be fired.
+ * within the last 1000 milliseconds (i.e. standard NMEA update rate, 1/s).
  * 
  * @author Kimmo Tuukkanen
  * @version $Revision$
