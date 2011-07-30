@@ -10,6 +10,14 @@ SYSTEM REQUIREMENTS
  
  * Java JRE/JDK 1.5 or newer
  
+ For serial port communication (choose one):
+ 
+ * Java Communications API
+   <http://www.oracle.com/technetwork/java/index-jsp-141752.html>
+ 
+ * RXTX library
+   <http://rxtx.qbang.org/>
+
 LICENSING
 
 Java Marine API is free software: you can redistribute it and/or modify it
