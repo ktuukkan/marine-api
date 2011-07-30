@@ -3,7 +3,7 @@ Java Marine API build script
 <http://sourceforge.net/projects/marineapi/>
 $Revision$
 -->
-<project name="Java Marine API" default="build" basedir=".">
+<project name="${app.name}" default="build" basedir=".">
 
 	<target name="init">
 		<echo message="Java version: ${ant.java.version}" />
@@ -13,8 +13,9 @@ $Revision$
 			<format property="year" pattern="yyyy" />
 		</tstamp>
 		
-		<property name="project.id" value="marineapi" />
-		<property name="version" value="0.4" />
+        <property file="build.properties" />
+		<property name="project.id" value="${app.id}" />
+		<property name="version" value="${app.version}" />
 		<property name="src.dir" value="src/" />
 		<property name="tests.dir" value="src-test/" />
 		<property name="reports.dir" value="reports/" />
