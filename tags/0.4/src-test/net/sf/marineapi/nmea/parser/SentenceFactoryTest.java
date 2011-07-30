@@ -1,0 +1,168 @@
+/**
+ * 
+ */
+package net.sf.marineapi.nmea.parser;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
+import net.sf.marineapi.nmea.sentence.BODSentence;
+import net.sf.marineapi.nmea.sentence.Sentence;
+import net.sf.marineapi.nmea.sentence.SentenceId;
+
+import org.junit.Before;
+import org.junit.Test;
+
+/**
+ * @author ktuu
+ */
+public class SentenceFactoryTest {
+
+	private SentenceFactory instance;
+
+	/**
+	 * @throws java.lang.Exception
+	 */
+	@Before
+	public void setUp() throws Exception {
+		instance = SentenceFactory.getInstance();
+	}
+
+	/**
+	 * Test method for
+	 * {@link net.sf.marineapi.nmea.parser.SentenceFactory#createParser(java.lang.String)}
+	 * .
+	 */
+	@Test
+	public void testSupportedTypesRegistered() {
+		for (SentenceId id : SentenceId.values()) {
+			assertTrue("Parser not registered " + id, instance.hasParser(id.toString()));
+		}
+	}
+
+	/**
+	 * Test method for
+	 * {@link net.sf.marineapi.nmea.parser.SentenceFactory#createParser(java.lang.String)}
+	 * .
+	 */
+	@Test
+	public void testCreateParser() {
+		Sentence bod = instance.createParser(BODTest.EXAMPLE);
+		assertNotNull(bod);
+		assertTrue(bod instanceof Sentence);
+		assertTrue(bod instanceof BODSentence);
+		assertTrue(bod instanceof BODParser);
+	}
+
+	/**
+	 * Test method for
+	 * {@link net.sf.marineapi.nmea.parser.SentenceFactory#createParser(java.lang.String)}
+	 * .
+	 */
+	@Test
+	public void testCreateParserWithEmptyString() {
+		try {
+			Sentence s = instance.createParser("");
+			fail("Did not throw exception");
+		} catch (IllegalArgumentException e) {
+			// pass
+		}
+	}
+
+	/**
+	 * Test method for
+	 * {@link net.sf.marineapi.nmea.parser.SentenceFactory#createParser(java.lang.String)}
+	 * .
+	 */
+	@Test
+	public void testCreateParserWithNull() {
+		try {
+			Sentence s = instance.createParser(null);
+			fail("Did not throw exception");
+		} catch (IllegalArgumentException e) {
+			// pass
+		}
+	}
+
+	/**
+	 * Test method for
+	 * {@link net.sf.marineapi.nmea.parser.SentenceFactory#createParser(java.lang.String)}
+	 * .
+	 */
+	@Test
+	public void testCreateParserWithRandom() {
+		try {
+			Sentence s = instance.createParser("asdqas,dwersa,dsdfas,das");
+			fail("Did not throw exception");
+		} catch (IllegalArgumentException e) {
+			// pass
+		}
+	}
+
+	/**
+	 * Test method for
+	 * {@link net.sf.marineapi.nmea.parser.SentenceFactory#createParser(java.lang.String)}
+	 * .
+	 */
+	@Test
+	public void testCreateParserWithUnregistered() {
+		try {
+			Sentence s = instance.createParser("$GPXYZ,1,2,3,4,5,6,7,8");
+			fail("Did not throw exception");
+		} catch (IllegalArgumentException e) {
+			// pass
+		}
+	}
+
+	/**
+	 * Test method for
+	 * {@link net.sf.marineapi.nmea.parser.SentenceFactory#registerParser(java.lang.String, java.lang.Class)}
+	 * .
+	 */
+	@Test
+	public void testRegisterParser() {
+		instance.registerParser("FOO", FOOParser.class);
+		assertTrue(instance.hasParser("FOO"));
+		Sentence s = instance.createParser("$IIFOO,1,2,3");
+		assertNotNull(s);
+		assertTrue(s instanceof Sentence);
+		assertTrue(s instanceof SentenceParser);
+		assertTrue(s instanceof FOOParser);
+	}
+
+	/**
+	 * Test method for
+	 * {@link net.sf.marineapi.nmea.parser.SentenceFactory#registerParser(java.lang.String, java.lang.Class)}
+	 * .
+	 */
+	@Test
+	public void testUnregisterParser() {
+		assertTrue(instance.hasParser("FOO"));
+		instance.unregisterParser(FOOParser.class);
+		assertFalse(instance.hasParser("FOO"));
+	}
+
+	/**
+	 * Test method for
+	 * {@link net.sf.marineapi.nmea.parser.SentenceFactory#hasParser(java.lang.String)}
+	 * .
+	 */
+	@Test
+	public void testHasParser() {
+		assertTrue(instance.hasParser("GLL"));
+		assertFalse(instance.hasParser("ABC"));
+	}
+
+	/**
+	 * Test method for
+	 * {@link net.sf.marineapi.nmea.parser.SentenceFactory#getInstance()}.
+	 */
+	@Test
+	public void testGetInstance() {
+		assertNotNull(instance);
+		assertEquals(instance, SentenceFactory.getInstance());
+	}
+
+}
