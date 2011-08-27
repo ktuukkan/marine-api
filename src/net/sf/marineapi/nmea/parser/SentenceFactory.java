@@ -34,14 +34,15 @@ import net.sf.marineapi.nmea.sentence.SentenceId;
  * <p>
  * How-to create and register custom parsers:
  * <ol>
- * <li>First, define the sentence interface (e.g. <code>XYZSentence</code>).
+ * <li>First, define the sentence interface by extending the {@link Sentence}
+ * interface (e.g. <code>XYZSentence</code>).
  * <li>Implement the interface in a class that extends {@link SentenceParser},
  * (e.g. <code>XYZParser</code>).
  * <li>Use the protected get/set methods in <code>SentenceParser</code> to read
- * and write sentence fields.
- * <li>Make sure your parser has a constructor with single String parameter,
- * i.e. the sentence to be parsed. Pass this parameter to
- * {@link SentenceParser#SentenceParser(String, String)} together with assumed
+ * and write sentence data fields.
+ * <li>Write a constructor with single String parameter, i.e. the sentence to be
+ * parsed. Pass this parameter to
+ * {@link SentenceParser#SentenceParser(String, String)} together with expected
  * sentence id (e.g. <code>"XYZ"</code>).
  * <li>Register your parser class in <code>SentenceFactory</code> using the
  * {@link #registerParser(String, Class)} method.
