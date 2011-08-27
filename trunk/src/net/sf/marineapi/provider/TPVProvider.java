@@ -43,16 +43,17 @@ import net.sf.marineapi.provider.event.TPVListener;
 
 /**
  * <p>
- * Provides a time/position/velocity report from GPS. Data is captured from RMC
- * and GGA or GLL sentences. RMC is used for date/time, speed and course. GGA is
- * used as primary source for position as it contains also the altitude. When
- * GGA is not available, position may be taken from GLL or RMC. If this is the
- * case, there is no altitude included in the {@linkplain Position}. GPS data
- * statuses are also captured and events are dispatched only when sentences
+ * Provides TPV (time, position & velocity) reports from GPS. Data is captured
+ * from RMC, GGA and GLL sentences. RMC is used for date/time, speed and course.
+ * GGA is used as primary source for position as it contains also the altitude.
+ * When GGA is not available, position may be taken from GLL or RMC. If this is
+ * the case, there is no altitude included in the {@linkplain Position}. GPS
+ * data statuses are also captured and events are dispatched only when sentences
  * report {@link DataStatus#ACTIVE}.
  * <p>
- * When constructing the {@link TPVEvent}, captured sentences must be from
- * within the last 1000 milliseconds (i.e. standard NMEA update rate, 1/s).
+ * When constructing {@link TPVEvent}, the maximum age of captured sentences is
+ * 1000 ms, i.e. all sentences are from within the default NMEA update rate
+ * (1/s).
  * 
  * @author Kimmo Tuukkanen
  * @version $Revision$
@@ -66,13 +67,14 @@ public class TPVProvider implements SentenceListener {
     private List<SentenceEvent> events = new ArrayList<SentenceEvent>();
     private List<TPVListener> listeners = new ArrayList<TPVListener>();
 
-    /**
-     * Creates a new instance of GPSProvider.
-     * 
-     * @param reader SentenceReader to be used as the data source.
-     */
-    public TPVProvider(SentenceReader reader) {
-        this.reader = reader;
+	/**
+	 * Creates a new instance of TPVProvider.
+	 * 
+	 * @param reader
+	 *            SentenceReader which provides the required sentences.
+	 */
+	public TPVProvider(SentenceReader reader) {
+		this.reader = reader;
         reader.addSentenceListener(this, SentenceId.RMC);
         reader.addSentenceListener(this, SentenceId.GGA);
         reader.addSentenceListener(this, SentenceId.GLL);
