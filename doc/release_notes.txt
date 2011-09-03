@@ -7,10 +7,11 @@ Pre-alpha preview release, not to be used in production. Major API changes may
 be introduced in future versions. Released on @RELEASE_DATE@.
 
 CHANGES
-  
+
 NEW FEATURES
 
-* Added parser for HDM sentences, i.e. vessel's magnetic heading report.
+* Added parser for HDM and HDT sentences, i.e. the vessel's magnetic and true 
+  heading reports.
  
 KNOWN ISSUES
   

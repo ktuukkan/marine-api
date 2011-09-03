@@ -46,6 +46,8 @@ public enum SentenceId {
     GSV,
     /** Vessel heading in degrees with respect to true north. */
     HDM,
+    /** Vessel heading in degrees true */
+    HDT,
     /** Recommended minimum navigation information */
     RMB,
     /** Recommended minimum specific GPS/TRANSIT data */
