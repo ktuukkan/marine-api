@@ -66,21 +66,20 @@ public final class SentenceFactory {
      * Constructor.
      */
     private SentenceFactory() {
-        // GPS sentences
         registerParser("BOD", BODParser.class);
+        registerParser("DBT", DBTParser.class);
+        registerParser("DPT", DBTParser.class);
         registerParser("GGA", GGAParser.class);
         registerParser("GLL", GLLParser.class);
         registerParser("GSA", GSAParser.class);
         registerParser("GSV", GSVParser.class);
+        registerParser("HDM", HDMParser.class);
         registerParser("RMB", RMBParser.class);
         registerParser("RMC", RMCParser.class);
         registerParser("RTE", RTEParser.class);
         registerParser("VTG", VTGParser.class);
         registerParser("WPL", WPLParser.class);
         registerParser("ZDA", ZDAParser.class);
-        // Water
-        registerParser("DBT", DBTParser.class);
-        registerParser("DPT", DBTParser.class);
     }
 
     /**

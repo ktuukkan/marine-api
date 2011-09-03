@@ -44,6 +44,8 @@ public enum SentenceId {
     GSA,
     /** Detailed satellite data */
     GSV,
+    /** Vessel heading in degrees with respect to true north. */
+    HDM,
     /** Recommended minimum navigation information */
     RMB,
     /** Recommended minimum specific GPS/TRANSIT data */

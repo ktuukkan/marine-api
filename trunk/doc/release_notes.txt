@@ -9,6 +9,8 @@ be introduced in future versions. Released on @RELEASE_DATE@.
 CHANGES
   
 NEW FEATURES
+
+* Added parser for HDM sentences, i.e. vessel's magnetic heading report.
  
 KNOWN ISSUES
   
