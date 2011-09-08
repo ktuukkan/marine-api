@@ -37,7 +37,7 @@ public interface HDTSentence extends Sentence {
     double getHeading();
 
     /**
-     * - * Sets the heading value.
+     * Sets the true heading value.
      * 
      * @param hdt True heading in degrees
      * @throws IllegalArgumentException If heading value out of range [0..360]
