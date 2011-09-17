@@ -26,6 +26,8 @@ import net.sf.marineapi.nmea.sentence.TalkerId;
 import net.sf.marineapi.nmea.util.CompassPoint;
 
 /**
+ * HDG sentence parser.
+ * 
  * @author Kimmo Tuukkanen
  * @version $Revision$
  */

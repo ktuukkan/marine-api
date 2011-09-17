@@ -25,6 +25,8 @@ import net.sf.marineapi.nmea.sentence.SentenceId;
 import net.sf.marineapi.nmea.sentence.TalkerId;
 
 /**
+ * HDT sentence parser.
+ * 
  * @author Kimmo Tuukkanen
  * @version $Revision$
  */
