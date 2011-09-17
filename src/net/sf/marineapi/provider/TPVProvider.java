@@ -67,14 +67,13 @@ public class TPVProvider implements SentenceListener {
     private List<SentenceEvent> events = new ArrayList<SentenceEvent>();
     private List<TPVListener> listeners = new ArrayList<TPVListener>();
 
-	/**
-	 * Creates a new instance of TPVProvider.
-	 * 
-	 * @param reader
-	 *            SentenceReader which provides the required sentences.
-	 */
-	public TPVProvider(SentenceReader reader) {
-		this.reader = reader;
+    /**
+     * Creates a new instance of TPVProvider.
+     * 
+     * @param reader SentenceReader which provides the required sentences.
+     */
+    public TPVProvider(SentenceReader reader) {
+        this.reader = reader;
         reader.addSentenceListener(this, SentenceId.RMC);
         reader.addSentenceListener(this, SentenceId.GGA);
         reader.addSentenceListener(this, SentenceId.GLL);
