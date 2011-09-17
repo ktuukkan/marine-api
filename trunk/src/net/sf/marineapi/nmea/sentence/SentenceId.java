@@ -44,6 +44,8 @@ public enum SentenceId {
     GSA,
     /** Detailed satellite data */
     GSV,
+    /** Vessel heading in degrees with magnetic variation and deviation. */
+    HDG,
     /** Vessel heading in degrees with respect to true north. */
     HDM,
     /** Vessel heading in degrees true */

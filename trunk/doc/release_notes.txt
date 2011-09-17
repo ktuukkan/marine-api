@@ -10,8 +10,10 @@ CHANGES
 
 NEW FEATURES
 
-* Added parser for HDM and HDT sentences, i.e. the vessel's magnetic and true 
-  heading reports.
+* Support for HDG, HDM and HDT sentences; the vessel's magnetic/true heading
+  and magnetic variation/deviation.
+
+* Suppport for MWV sentences; wind speed and angle.
  
 KNOWN ISSUES
   
