@@ -1,5 +1,5 @@
 /* 
- * HDTSentence.java
+ * HeadingSentence.java
  * Copyright (C) 2010-2011 Kimmo Tuukkanen
  * 
  * This file is part of Java Marine API.
@@ -21,11 +21,33 @@
 package net.sf.marineapi.nmea.sentence;
 
 /**
- * Actual vessel heading in degrees true produced by any device or system
- * producing true heading.
+ * Interface for sentences that provide vessel's true or magnetic heading.
  * 
  * @author Kimmo Tuukkanen
  * @version $Revision$
  */
-public interface HDTSentence extends HeadingSentence {
+public interface HeadingSentence extends Sentence {
+
+    /**
+     * Returns the vessel's current heading.
+     * 
+     * @return Heading, in degrees.
+     */
+    double getHeading();
+
+    /**
+     * Sets the heading value.
+     * 
+     * @param hdt Heading in degrees
+     * @throws IllegalArgumentException If heading value out of range [0..360]
+     */
+    void setHeading(double hdt);
+
+    /**
+     * Tells if the sentence holds true heading.
+     * 
+     * @return <code>true</code> if true heading, otherwise <code>false</code>
+     *         for magnetic heading.
+     */
+    boolean isTrue();
 }

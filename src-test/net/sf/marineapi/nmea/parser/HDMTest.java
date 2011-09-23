@@ -21,8 +21,11 @@
 package net.sf.marineapi.nmea.parser;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.fail;
 import net.sf.marineapi.nmea.sentence.HDMSentence;
+import net.sf.marineapi.nmea.sentence.SentenceId;
+import net.sf.marineapi.nmea.sentence.TalkerId;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -45,6 +48,31 @@ public class HDMTest {
     @Before
     public void setUp() throws Exception {
         hdm = new HDMParser(EXAMPLE);
+    }
+
+    /**
+     * Test method for {@link net.sf.marineapi.nmea.parser.HDMParser(TalkerId)}.
+     */
+    @Test
+    public void testConstructor() {
+        HDMSentence empty = new HDMParser(TalkerId.HC);
+        assertEquals(TalkerId.HC, empty.getTalkerId());
+        assertEquals(SentenceId.HDM.toString(), empty.getSentenceId());
+        try {
+            empty.getHeading();
+        } catch (DataNotAvailableException e) {
+            // pass
+        } catch (Exception e) {
+            fail(e.getMessage());
+        }
+    }
+
+    /**
+     * Test method for {@link net.sf.marineapi.nmea.parser.HDTParser#isTrue()}.
+     */
+    @Test
+    public void testIsTrue() {
+        assertFalse(hdm.isTrue());
     }
 
     /**

@@ -56,20 +56,12 @@ class HDTParser extends SentenceParser implements HDTSentence {
 
     /*
      * (non-Javadoc)
-     * @see net.sf.marineapi.nmea.sentence.HDTSentence#getHeading()
-     */
-    /*
-     * (non-Javadoc)
      * @see net.sf.marineapi.nmea.parser.HeadingSentence#getHeading()
      */
     public double getHeading() {
         return getDoubleValue(HEADING);
     }
 
-    /*
-     * (non-Javadoc)
-     * @see net.sf.marineapi.nmea.sentence.HDTSentence#setHeading(double)
-     */
     /*
      * (non-Javadoc)
      * @see net.sf.marineapi.nmea.parser.HeadingSentence#setHeading(double)
@@ -79,5 +71,13 @@ class HDTParser extends SentenceParser implements HDTSentence {
             throw new IllegalArgumentException("Heading out of range [0..360]");
         }
         setDoubleValue(HEADING, hdt, 3, 1);
+    }
+
+    /*
+     * (non-Javadoc)
+     * @see net.sf.marineapi.nmea.sentence.HeadingSentence#isTrue()
+     */
+    public boolean isTrue() {
+        return true;
     }
 }

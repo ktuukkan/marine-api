@@ -72,4 +72,12 @@ class HDMParser extends SentenceParser implements HDMSentence {
         }
         setDoubleValue(HEADING, hdm, 3, 1);
     }
+
+    /*
+     * (non-Javadoc)
+     * @see net.sf.marineapi.nmea.sentence.HeadingSentence#isTrue()
+     */
+    public boolean isTrue() {
+        return false;
+    }
 }

@@ -137,4 +137,12 @@ public class HDGParser extends SentenceParser implements HDGSentence {
         }
         setDoubleValue(VARIATION, Math.abs(variation), 3, 1);
     }
+
+    /*
+     * (non-Javadoc)
+     * @see net.sf.marineapi.nmea.sentence.HeadingSentence#isTrue()
+     */
+    public boolean isTrue() {
+        return false;
+    }
 }

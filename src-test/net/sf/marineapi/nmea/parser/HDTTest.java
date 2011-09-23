@@ -21,8 +21,11 @@
 package net.sf.marineapi.nmea.parser;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 import net.sf.marineapi.nmea.sentence.HDTSentence;
+import net.sf.marineapi.nmea.sentence.SentenceId;
+import net.sf.marineapi.nmea.sentence.TalkerId;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -42,6 +45,31 @@ public class HDTTest {
     @Before
     public void setUp() throws Exception {
         hdt = new HDTParser(EXAMPLE);
+    }
+
+    /**
+     * Test method for {@link net.sf.marineapi.nmea.parser.HDTParser(TalkerId)}.
+     */
+    @Test
+    public void testConstructor() {
+        HDTSentence empty = new HDTParser(TalkerId.HE);
+        assertEquals(TalkerId.HE, empty.getTalkerId());
+        assertEquals(SentenceId.HDT.toString(), empty.getSentenceId());
+        try {
+            empty.getHeading();
+        } catch (DataNotAvailableException e) {
+            // pass
+        } catch (Exception e) {
+            fail(e.getMessage());
+        }
+    }
+
+    /**
+     * Test method for {@link net.sf.marineapi.nmea.parser.HDTParser#isTrue()}.
+     */
+    @Test
+    public void testIsTrue() {
+        assertTrue(hdt.isTrue());
     }
 
     /**
