@@ -26,19 +26,5 @@ package net.sf.marineapi.nmea.sentence;
  * @author Kimmo Tuukkanen
  * @version $Revision$
  */
-public interface HDMSentence extends Sentence {
-
-    /**
-     * Returns the magnetic heading.
-     * 
-     * @return Heading value, in degrees.
-     */
-    double getHeading();
-
-    /**
-     * Sets the magnetic heading value.
-     * 
-     * @param hdm Magnetic heading, in degrees.
-     */
-    void setHeading(double hdm);
+public interface HDMSentence extends HeadingSentence {
 }

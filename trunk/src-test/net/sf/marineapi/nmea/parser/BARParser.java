@@ -1,5 +1,5 @@
 /* 
- * HDTSentence.java
+ * BARParser.java
  * Copyright (C) 2010-2011 Kimmo Tuukkanen
  * 
  * This file is part of Java Marine API.
@@ -18,14 +18,23 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Java Marine API. If not, see <http://www.gnu.org/licenses/>.
  */
-package net.sf.marineapi.nmea.sentence;
+package net.sf.marineapi.nmea.parser;
+
+import net.sf.marineapi.nmea.sentence.TalkerId;
 
 /**
- * Actual vessel heading in degrees true produced by any device or system
- * producing true heading.
+ * Invalid parser implementation, no constructor with String param.
  * 
  * @author Kimmo Tuukkanen
  * @version $Revision$
  */
-public interface HDTSentence extends HeadingSentence {
+public class BARParser extends SentenceParser {
+
+    /**
+     * Constructor
+     */
+    public BARParser() {
+        super(TalkerId.GP, "BAR", 5);
+    }
+
 }

@@ -26,7 +26,7 @@ package net.sf.marineapi.nmea.sentence;
  * @author Kimmo Tuukkanen
  * @version $Revision$
  */
-public interface HDGSentence extends Sentence {
+public interface HDGSentence extends HeadingSentence {
 
     /**
      * Get magnetic deviation.
@@ -34,13 +34,6 @@ public interface HDGSentence extends Sentence {
      * @return Deviation, in degrees.
      */
     double getDeviation();
-
-    /**
-     * Get vessel heading.
-     * 
-     * @return Heading, in degrees.
-     */
-    double getHeading();
 
     /**
      * Get magnetic variation. Returns negative values for easterly variation
@@ -59,14 +52,6 @@ public interface HDGSentence extends Sentence {
      * @throws IllegalArgumentException If value is out of range [-180..180].
      */
     void setDeviation(double deviation);
-
-    /**
-     * Set vessel heading.
-     * 
-     * @param heading Heading to set, in degrees.
-     * @throws IllegalArgumentException If heading out of range [0..360].
-     */
-    void setHeading(double heading);
 
     /**
      * Set magnetic variation. Provide negative values to set easterly variation
