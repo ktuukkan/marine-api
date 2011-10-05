@@ -26,7 +26,7 @@ import net.sf.marineapi.nmea.sentence.TalkerId;
 import net.sf.marineapi.nmea.util.CompassPoint;
 import net.sf.marineapi.nmea.util.DataStatus;
 import net.sf.marineapi.nmea.util.Date;
-import net.sf.marineapi.nmea.util.GpsMode;
+import net.sf.marineapi.nmea.util.FaaMode;
 import net.sf.marineapi.nmea.util.Position;
 import net.sf.marineapi.nmea.util.Time;
 
@@ -105,10 +105,10 @@ class RMCParser extends PositionParser implements RMCSentence {
 
     /*
      * (non-Javadoc)
-     * @see net.sf.marineapi.nmea.sentence.RMCSentence#getGpsMode()
+     * @see net.sf.marineapi.nmea.sentence.RMCSentence#getFaaMode()
      */
-    public GpsMode getGpsMode() {
-        return GpsMode.valueOf(getCharValue(MODE));
+    public FaaMode getMode() {
+        return FaaMode.valueOf(getCharValue(MODE));
     }
 
     /*
@@ -203,10 +203,10 @@ class RMCParser extends PositionParser implements RMCSentence {
     /*
      * (non-Javadoc)
      * @see
-     * net.sf.marineapi.nmea.sentence.RMCSentence#setGpsMode(net.sf.marineapi
-     * .nmea.util.GpsMode)
+     * net.sf.marineapi.nmea.sentence.RMCSentence#setFaaMode(net.sf.marineapi
+     * .nmea.util.FaaMode)
      */
-    public void setGpsMode(GpsMode mode) {
+    public void setMode(FaaMode mode) {
         setCharValue(MODE, mode.toChar());
     }
 

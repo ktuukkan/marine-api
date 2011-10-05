@@ -8,12 +8,14 @@ be introduced in future versions. Released on @RELEASE_DATE@.
 
 CHANGES
 
+* Renamed GpsMode enum to FaaMode
+
 NEW FEATURES
 
 * Support for HDG, HDM and HDT sentences; the vessel's magnetic/true heading
   and magnetic variation/deviation.
   
-* Common interface HeadingSentence for sentences that provide heading.
+* HeadingSentence interface for sentences that provide heading.
 
 * Suppport for MWV sentences; wind speed and angle.
  

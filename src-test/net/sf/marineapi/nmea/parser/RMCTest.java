@@ -8,7 +8,7 @@ import net.sf.marineapi.nmea.sentence.TalkerId;
 import net.sf.marineapi.nmea.util.CompassPoint;
 import net.sf.marineapi.nmea.util.DataStatus;
 import net.sf.marineapi.nmea.util.Date;
-import net.sf.marineapi.nmea.util.GpsMode;
+import net.sf.marineapi.nmea.util.FaaMode;
 import net.sf.marineapi.nmea.util.Position;
 import net.sf.marineapi.nmea.util.Time;
 
@@ -102,11 +102,11 @@ public class RMCTest {
 
     /**
      * Test method for
-     * {@link net.sf.marineapi.nmea.parser.RMCParser#getGpsMode()}.
+     * {@link net.sf.marineapi.nmea.parser.RMCParser#getMode()}.
      */
     @Test
-    public void testGetGpsMode() {
-        assertEquals(GpsMode.AUTOMATIC, rmc.getGpsMode());
+    public void testGetFaaMode() {
+        assertEquals(FaaMode.AUTOMATIC, rmc.getMode());
     }
 
     /**
@@ -238,14 +238,14 @@ public class RMCTest {
 
     /**
      * Test method for
-     * {@link net.sf.marineapi.nmea.parser.RMCParser#setGpsMode()}.
+     * {@link net.sf.marineapi.nmea.parser.RMCParser#setFaaMode()}.
      */
     @Test
-    public void testSetGpsMode() {
-        rmc.setGpsMode(GpsMode.SIMULATED);
-        assertEquals(GpsMode.SIMULATED, rmc.getGpsMode());
-        rmc.setGpsMode(GpsMode.ESTIMATED);
-        assertEquals(GpsMode.ESTIMATED, rmc.getGpsMode());
+    public void testSetFaaMode() {
+        rmc.setMode(FaaMode.SIMULATED);
+        assertEquals(FaaMode.SIMULATED, rmc.getMode());
+        rmc.setMode(FaaMode.ESTIMATED);
+        assertEquals(FaaMode.ESTIMATED, rmc.getMode());
     }
 
     @Test

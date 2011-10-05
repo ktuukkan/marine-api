@@ -21,7 +21,7 @@
 package net.sf.marineapi.nmea.sentence;
 
 import net.sf.marineapi.nmea.parser.DataNotAvailableException;
-import net.sf.marineapi.nmea.util.GpsMode;
+import net.sf.marineapi.nmea.util.FaaMode;
 
 /**
  * Course and speed over the ground. True and magnetic COG, speed provided in
@@ -59,14 +59,15 @@ public interface VTGSentence extends Sentence {
     double getMagneticCourse();
 
     /**
-     * Get the GPS receiver operating mode. The field may not be available,
-     * depending on the NMEA version.
+     * Get the FAA operating mode of GPS receiver. The field may not be
+     * available, depending on the NMEA version.
      * 
-     * @return {@link GpsMode} enum
+     * @since NMEA 2.3
+     * @return {@link FaaMode} enum
      * @throws DataNotAvailableException If the data is not available.
      * @throws ParseException If the field contains unexpected or illegal value.
      */
-    GpsMode getMode();
+    FaaMode getMode();
 
     /**
      * Get current speed over ground, in kilometers per hour.
@@ -103,11 +104,12 @@ public interface VTGSentence extends Sentence {
     void setMagneticCourse(double mcog);
 
     /**
-     * Set the GPS receiver operating mode.
+     * Set the FAA operating mode of GPS receiver.
      * 
      * @param mode Mode to set
+     * @since NMEA 2.3
      */
-    void setMode(GpsMode mode);
+    void setMode(FaaMode mode);
 
     /**
      * Set the current speed over ground.

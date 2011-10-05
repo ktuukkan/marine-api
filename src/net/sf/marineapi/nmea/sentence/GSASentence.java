@@ -21,8 +21,8 @@
 package net.sf.marineapi.nmea.sentence;
 
 import net.sf.marineapi.nmea.parser.DataNotAvailableException;
+import net.sf.marineapi.nmea.util.FaaMode;
 import net.sf.marineapi.nmea.util.GpsFixStatus;
-import net.sf.marineapi.nmea.util.GpsMode;
 
 /**
  * Precision of GPS fix and list of active satellites. Dilution of precision
@@ -47,13 +47,13 @@ public interface GSASentence extends Sentence {
     GpsFixStatus getFixStatus();
 
     /**
-     * Get the GPS operation mode.
+     * Get the FAA operation mode of GPS.
      * 
-     * @return GpsMode enum
+     * @return FaaMode enum
      * @throws DataNotAvailableException If the data is not available.
      * @throws ParseException If the field contains unexpected or illegal value.
      */
-    GpsMode getGpsMode();
+    FaaMode getMode();
 
     /**
      * Get the horizontal dilution Of precision (HDOP).
@@ -99,11 +99,11 @@ public interface GSASentence extends Sentence {
     void setFixStatus(GpsFixStatus status);
 
     /**
-     * Set the GPS operation mode.
+     * Set the FAA operation mode of GPS.
      * 
      * @param mode Mode to set
      */
-    void setGpsMode(GpsMode mode);
+    void setMode(FaaMode mode);
 
     /**
      * Set the horizontal dilution of precision (HDOP).
