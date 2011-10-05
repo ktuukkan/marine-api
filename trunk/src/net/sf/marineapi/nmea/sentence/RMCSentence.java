@@ -23,7 +23,7 @@ package net.sf.marineapi.nmea.sentence;
 import net.sf.marineapi.nmea.parser.DataNotAvailableException;
 import net.sf.marineapi.nmea.util.CompassPoint;
 import net.sf.marineapi.nmea.util.DataStatus;
-import net.sf.marineapi.nmea.util.GpsMode;
+import net.sf.marineapi.nmea.util.FaaMode;
 
 /**
  * Recommended minimum navigation information type C. Current time and date,
@@ -72,13 +72,13 @@ public interface RMCSentence extends PositionSentence, TimeSentence,
     CompassPoint getDirectionOfVariation();
 
     /**
-     * Get the GPS operating mode.
+     * Get the FAA operating mode for GPS.
      * 
-     * @return GpsMode enum
+     * @return FaaMode enum
      * @throws DataNotAvailableException If the data is not available.
      * @throws ParseException If the field contains unexpected or illegal value.
      */
-    GpsMode getGpsMode();
+    FaaMode getMode();
 
     /**
      * Get current speed over ground (SOG).
@@ -126,11 +126,11 @@ public interface RMCSentence extends PositionSentence, TimeSentence,
     void setDirectionOfVariation(CompassPoint dir);
 
     /**
-     * Set the GPS operation mode.
+     * Set the FAA operation mode of GPS.
      * 
      * @param mode Mode to set
      */
-    void setGpsMode(GpsMode mode);
+    void setMode(FaaMode mode);
 
     /**
      * Set current speed over ground (SOG).

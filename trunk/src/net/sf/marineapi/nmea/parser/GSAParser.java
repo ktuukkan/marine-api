@@ -26,8 +26,8 @@ import java.util.List;
 import net.sf.marineapi.nmea.sentence.GSASentence;
 import net.sf.marineapi.nmea.sentence.SentenceId;
 import net.sf.marineapi.nmea.sentence.TalkerId;
+import net.sf.marineapi.nmea.util.FaaMode;
 import net.sf.marineapi.nmea.util.GpsFixStatus;
-import net.sf.marineapi.nmea.util.GpsMode;
 
 /**
  * GSA sentence parser.
@@ -73,10 +73,10 @@ class GSAParser extends SentenceParser implements GSASentence {
 
     /*
      * (non-Javadoc)
-     * @see net.sf.marineapi.nmea.sentence.GSASentence#getGpsMode()
+     * @see net.sf.marineapi.nmea.sentence.GSASentence#getMode()
      */
-    public GpsMode getGpsMode() {
-        return GpsMode.valueOf(getCharValue(GPS_MODE));
+    public FaaMode getMode() {
+        return FaaMode.valueOf(getCharValue(GPS_MODE));
     }
 
     /*
@@ -130,10 +130,10 @@ class GSAParser extends SentenceParser implements GSASentence {
     /*
      * (non-Javadoc)
      * @see
-     * net.sf.marineapi.nmea.sentence.GSASentence#setGpsMode(net.sf.marineapi
-     * .nmea.util.GpsMode)
+     * net.sf.marineapi.nmea.sentence.GSASentence#setFaaMode(net.sf.marineapi
+     * .nmea.util.FaaMode)
      */
-    public void setGpsMode(GpsMode mode) {
+    public void setMode(FaaMode mode) {
         setCharValue(GPS_MODE, mode.toChar());
     }
 

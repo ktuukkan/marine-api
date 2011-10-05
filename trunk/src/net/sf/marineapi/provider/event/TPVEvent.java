@@ -24,8 +24,8 @@ import java.util.EventObject;
 
 import net.sf.marineapi.nmea.sentence.GGASentence;
 import net.sf.marineapi.nmea.util.Date;
+import net.sf.marineapi.nmea.util.FaaMode;
 import net.sf.marineapi.nmea.util.GpsFixQuality;
-import net.sf.marineapi.nmea.util.GpsMode;
 import net.sf.marineapi.nmea.util.Position;
 import net.sf.marineapi.nmea.util.Time;
 import net.sf.marineapi.provider.TPVProvider;
@@ -48,7 +48,7 @@ public class TPVEvent extends EventObject {
     private Position position;
     private Double speed;
     private Time time;
-    private GpsMode mode;
+    private FaaMode mode;
     private GpsFixQuality fix;
 
     /**
@@ -57,7 +57,7 @@ public class TPVEvent extends EventObject {
      * @param source Source object of event
      */
     public TPVEvent(Object source, Position p, double sog, double cog, Date d,
-            Time t, GpsMode m, GpsFixQuality fq) {
+            Time t, FaaMode m, GpsFixQuality fq) {
         super(source);
         position = p;
         speed = sog;
@@ -106,11 +106,11 @@ public class TPVEvent extends EventObject {
     }
 
     /**
-     * Returns the current GPS operating mode.
+     * Returns the current FAA operating mode of GPS receiver.
      * 
-     * @return GpsMode
+     * @return FaaMode
      */
-    public GpsMode getGpsMode() {
+    public FaaMode getMode() {
         return mode;
     }
 

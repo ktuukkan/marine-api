@@ -35,7 +35,7 @@ import net.sf.marineapi.nmea.sentence.SentenceId;
 import net.sf.marineapi.nmea.util.DataStatus;
 import net.sf.marineapi.nmea.util.Date;
 import net.sf.marineapi.nmea.util.GpsFixQuality;
-import net.sf.marineapi.nmea.util.GpsMode;
+import net.sf.marineapi.nmea.util.FaaMode;
 import net.sf.marineapi.nmea.util.Position;
 import net.sf.marineapi.nmea.util.Time;
 import net.sf.marineapi.provider.event.TPVEvent;
@@ -153,7 +153,7 @@ public class TPVProvider implements SentenceListener {
         Double cog = null;
         Date d = null;
         Time t = null;
-        GpsMode mode = null;
+        FaaMode mode = null;
         GpsFixQuality fix = null;
 
         for (SentenceEvent se : events) {
@@ -164,7 +164,7 @@ public class TPVProvider implements SentenceListener {
                 cog = rmc.getCourse();
                 d = rmc.getDate();
                 t = rmc.getTime();
-                mode = rmc.getGpsMode();
+                mode = rmc.getMode();
                 if (p == null) {
                     p = rmc.getPosition();
                 }
@@ -235,8 +235,8 @@ public class TPVProvider implements SentenceListener {
             Sentence s = se.getSentence();
             if (s instanceof RMCSentence) {
                 DataStatus ds = ((RMCSentence) s).getStatus();
-                GpsMode gm = ((RMCSentence) s).getGpsMode();
-                if (DataStatus.VOID.equals(ds) || GpsMode.NONE.equals(gm)) {
+                FaaMode gm = ((RMCSentence) s).getMode();
+                if (DataStatus.VOID.equals(ds) || FaaMode.NONE.equals(gm)) {
                     return false;
                 }
             } else if (s instanceof GGASentence) {

@@ -1,5 +1,5 @@
 /* 
- * GpsMode.java
+ * FaaMode.java
  * Copyright (C) 2010 Kimmo Tuukkanen
  * 
  * This file is part of Java Marine API.
@@ -21,12 +21,17 @@
 package net.sf.marineapi.nmea.util;
 
 /**
- * GpsMode defines the supported GPS operating modes.
+ * FaaMode defines the FAA operating modes, reported by APB, BWC, BWR, GLL, RMA,
+ * RMB, RMC, VTG, WCV, and XTE sentences since NMEA 2.3. Also, the mode field in
+ * GGA was extended to contain these statuses.
  * 
  * @author Kimmo Tuukkanen
  * @version $Revision$
+ * @see GpsFixQuality
+ * @see GpsFixStatus
+ * @see DataStatus
  */
-public enum GpsMode {
+public enum FaaMode {
 
     /** Operating in autonomous mode (automatic 2D/3D). */
     AUTOMATIC('A'),
@@ -48,7 +53,7 @@ public enum GpsMode {
 
     private final char mode;
 
-    GpsMode(char modeCh) {
+    FaaMode(char modeCh) {
         mode = modeCh;
     }
 
@@ -62,14 +67,14 @@ public enum GpsMode {
     }
 
     /**
-     * Returns the GpsMode enum corresponding the actual char indicator used in
+     * Returns the FaaMode enum corresponding the actual char indicator used in
      * the sentencess.
      * 
      * @param ch Char mode indicator
-     * @return GpsMode enum
+     * @return FaaMode enum
      */
-    public static GpsMode valueOf(char ch) {
-        for (GpsMode gm : values()) {
+    public static FaaMode valueOf(char ch) {
+        for (FaaMode gm : values()) {
             if (gm.toChar() == ch) {
                 return gm;
             }

@@ -5,7 +5,7 @@ import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 import net.sf.marineapi.nmea.sentence.GSASentence;
 import net.sf.marineapi.nmea.util.GpsFixStatus;
-import net.sf.marineapi.nmea.util.GpsMode;
+import net.sf.marineapi.nmea.util.FaaMode;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -49,11 +49,11 @@ public class GSATest {
 
     /**
      * Test method for
-     * {@link net.sf.marineapi.nmea.parser.GSAParser#getGpsMode()}.
+     * {@link net.sf.marineapi.nmea.parser.GSAParser#getMode()}.
      */
     @Test
-    public void testGetGpsMode() {
-        assertEquals(GpsMode.AUTOMATIC, instance.getGpsMode());
+    public void testGetFaaMode() {
+        assertEquals(FaaMode.AUTOMATIC, instance.getMode());
     }
 
     /**
@@ -123,17 +123,17 @@ public class GSATest {
 
     /**
      * Test method for
-     * {@link net.sf.marineapi.nmea.parser.GSAParser#setGpsMode(GpsMode)}.
+     * {@link net.sf.marineapi.nmea.parser.GSAParser#setMode(FaaMode)}.
      */
     @Test
-    public void testSetGpsMode() {
-        instance.setGpsMode(GpsMode.DGPS);
+    public void testSetFaaMode() {
+        instance.setMode(FaaMode.DGPS);
         assertTrue(instance.toString().contains(",D,"));
-        assertEquals(GpsMode.DGPS, instance.getGpsMode());
+        assertEquals(FaaMode.DGPS, instance.getMode());
 
-        instance.setGpsMode(GpsMode.SIMULATED);
+        instance.setMode(FaaMode.SIMULATED);
         assertTrue(instance.toString().contains(",S,"));
-        assertEquals(GpsMode.SIMULATED, instance.getGpsMode());
+        assertEquals(FaaMode.SIMULATED, instance.getMode());
     }
 
     /**

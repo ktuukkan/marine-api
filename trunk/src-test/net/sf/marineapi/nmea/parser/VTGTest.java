@@ -4,7 +4,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 import net.sf.marineapi.nmea.sentence.VTGSentence;
-import net.sf.marineapi.nmea.util.GpsMode;
+import net.sf.marineapi.nmea.util.FaaMode;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -51,7 +51,7 @@ public class VTGTest {
      */
     @Test
     public void testGetMode() {
-        assertEquals(GpsMode.AUTOMATIC, vtg.getMode());
+        assertEquals(FaaMode.AUTOMATIC, vtg.getMode());
     }
 
     /**
@@ -127,14 +127,14 @@ public class VTGTest {
 
     /**
      * Test method for
-     * {@link net.sf.marineapi.nmea.parser.VTGParser#setMode(GpsMode)}.
+     * {@link net.sf.marineapi.nmea.parser.VTGParser#setMode(FaaMode)}.
      */
     @Test
     public void testSetMode() {
-        vtg.setMode(GpsMode.MANUAL);
-        assertEquals(GpsMode.MANUAL, vtg.getMode());
-        vtg.setMode(GpsMode.SIMULATED);
-        assertEquals(GpsMode.SIMULATED, vtg.getMode());
+        vtg.setMode(FaaMode.MANUAL);
+        assertEquals(FaaMode.MANUAL, vtg.getMode());
+        vtg.setMode(FaaMode.SIMULATED);
+        assertEquals(FaaMode.SIMULATED, vtg.getMode());
     }
 
     /**

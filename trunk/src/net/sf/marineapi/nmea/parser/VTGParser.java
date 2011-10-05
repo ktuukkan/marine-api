@@ -23,7 +23,7 @@ package net.sf.marineapi.nmea.parser;
 import net.sf.marineapi.nmea.sentence.SentenceId;
 import net.sf.marineapi.nmea.sentence.TalkerId;
 import net.sf.marineapi.nmea.sentence.VTGSentence;
-import net.sf.marineapi.nmea.util.GpsMode;
+import net.sf.marineapi.nmea.util.FaaMode;
 
 /**
  * VTG sentence parser.
@@ -76,8 +76,8 @@ class VTGParser extends SentenceParser implements VTGSentence {
      * (non-Javadoc)
      * @see net.sf.marineapi.nmea.sentence.VTGSentence#getMode()
      */
-    public GpsMode getMode() {
-        return GpsMode.valueOf(getCharValue(MODE));
+    public FaaMode getMode() {
+        return FaaMode.valueOf(getCharValue(MODE));
     }
 
     /*
@@ -120,9 +120,9 @@ class VTGParser extends SentenceParser implements VTGSentence {
      * (non-Javadoc)
      * @see
      * net.sf.marineapi.nmea.sentence.VTGSentence#setMode(net.sf.marineapi.nmea
-     * .util.GpsMode)
+     * .util.FaaMode)
      */
-    public void setMode(GpsMode mode) {
+    public void setMode(FaaMode mode) {
         setCharValue(MODE, mode.toChar());
     }
 

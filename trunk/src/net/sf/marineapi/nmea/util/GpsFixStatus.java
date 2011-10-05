@@ -25,6 +25,9 @@ package net.sf.marineapi.nmea.util;
  * 
  * @author Kimmo Tuukkanen
  * @version $Revision$
+ * @see FaaMode
+ * @see GpsFixQuality
+ * @see DataStatus
  */
 public enum GpsFixStatus {
 
