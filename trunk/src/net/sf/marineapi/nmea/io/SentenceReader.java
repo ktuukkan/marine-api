@@ -38,16 +38,19 @@ import net.sf.marineapi.nmea.sentence.SentenceId;
 import net.sf.marineapi.nmea.sentence.SentenceValidator;
 
 /**
- * Sentence provider reads NMEA sentences from the specified InputStream and
- * dispatches them to listeners as SentenceEvents.
+ * Sentence reader detects supported NMEA sentences from the specified
+ * <code>InputStream</code> and dispatches them to listeners as
+ * {@link SentenceEvents}.
  * <p>
- * The sentence parsers dispatched by reader are created using the
- * {@link SentenceFactory} where you can also register your own custom parsers.
+ * The sentence parsers dispatched by reader are created using
+ * {@link SentenceFactory} class, where you can also register your own custom
+ * parsers.
  * 
  * @author Kimmo Tuukkanen
  * @version $Revision$
  * @see SentenceListener
  * @see SentenceEvent
+ * @see SentenceFactory
  */
 public class SentenceReader {
 
@@ -189,7 +192,7 @@ public class SentenceReader {
     }
 
     /**
-     * Notifies all listeners that data reading has stopped.
+     * Notifies all listeners that reader has paused due to timeout.
      */
     private void fireReadingPaused() {
         for (String key : listeners.keySet()) {
@@ -204,7 +207,8 @@ public class SentenceReader {
     }
 
     /**
-     * Notifies all listeners that data reading is about to start.
+     * Notifies all listeners that NMEA data has been detected in the stream and
+     * events will be dispatched until stopped or timeout occurs.
      */
     private void fireReadingStarted() {
         for (String key : listeners.keySet()) {
