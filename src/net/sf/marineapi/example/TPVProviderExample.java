@@ -61,9 +61,9 @@ public class TPVProviderExample implements TPVListener {
     }
 
     /**
-     * Startup method, no arguments required.
+     * Startup method.
      * 
-     * @param args None
+     * @param args NMEA log file
      */
     public static void main(String[] args) {
 
