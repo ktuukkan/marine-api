@@ -61,9 +61,12 @@ public class SerialPortExample implements SentenceListener {
         init();
     }
 
+    /*
+     * (non-Javadoc)
+     * @see net.sf.marineapi.nmea.event.SentenceListener#readingPaused()
+     */
     public void readingPaused() {
-        // TODO Auto-generated method stub
-
+        System.out.println("-- Paused --");
     }
 
     /*
@@ -71,7 +74,7 @@ public class SerialPortExample implements SentenceListener {
      * @see net.sf.marineapi.nmea.event.SentenceListener#readingStarted()
      */
     public void readingStarted() {
-        System.out.println("-- Start --");
+        System.out.println("-- Started --");
     }
 
     /*
@@ -79,7 +82,7 @@ public class SerialPortExample implements SentenceListener {
      * @see net.sf.marineapi.nmea.event.SentenceListener#readingStopped()
      */
     public void readingStopped() {
-        System.out.println("-- Stop --");
+        System.out.println("-- Stopped --");
     }
 
     /*
