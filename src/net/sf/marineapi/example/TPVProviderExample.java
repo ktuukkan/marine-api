@@ -42,11 +42,11 @@ public class TPVProviderExample implements TPVListener {
     TPVProvider provider;
 
     public TPVProviderExample(File f) throws FileNotFoundException {
-        InputStream is = new FileInputStream(f);
-        SentenceReader sr = new SentenceReader(is);
-        provider = new TPVProvider(sr);
+        InputStream stream = new FileInputStream(f);
+        SentenceReader reader = new SentenceReader(stream);
+        provider = new TPVProvider(reader);
         provider.addListener(this);
-        sr.start();
+        reader.start();
     }
 
     /*

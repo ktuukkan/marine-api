@@ -57,6 +57,9 @@ import net.sf.marineapi.nmea.sentence.SentenceValidator;
  */
 public class SerialPortExample implements SentenceListener {
 
+    /**
+     * Constructor
+     */
     public SerialPortExample() {
         init();
     }
@@ -148,6 +151,9 @@ public class SerialPortExample implements SentenceListener {
         return null;
     }
 
+    /**
+     * Init serial port and reader.
+     */
     private void init() {
         try {
             SerialPort sp = getSerialPort();
