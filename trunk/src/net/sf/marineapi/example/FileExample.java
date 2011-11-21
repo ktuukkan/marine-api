@@ -81,19 +81,21 @@ public class FileExample implements SentenceListener {
         System.out.println("-- Stopped --");
     }
 
-    /**
-     * Implements SentenceReader interface for receiving NMEA updates from
-     * SentenceReader.
+    /*
+     * (non-Javadoc)
+     * @see
+     * net.sf.marineapi.nmea.event.SentenceListener#sentenceRead(net.sf.marineapi
+     * .nmea.event.SentenceEvent)
      */
     public void sentenceRead(SentenceEvent event) {
 
-        // Safe to cast as we are registered only for GGA updates, could
-        // also cast to PositionSentence if interested only in position.
-        // If you receiving all sentences without filtering, check the sentence
-        // type before casting (e.g. with Sentence.getSentenceId()).
+        // Safe to cast as we are registered only for GGA updates. Could
+        // also cast to PositionSentence if interested only in position data.
+        // When receiving all sentences without filtering, you should check the
+        // sentence type before casting (e.g. with Sentence.getSentenceId()).
         GGASentence s = (GGASentence) event.getSentence();
 
-        // do something with sentence data..
+        // Do something with sentence data..
         System.out.println(s.getPosition());
     }
 

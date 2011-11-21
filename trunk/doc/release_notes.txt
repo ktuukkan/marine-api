@@ -17,9 +17,11 @@ NEW FEATURES
   
 * HeadingSentence interface for sentences that provide heading.
 
-* Suppport for MWV sentences; wind speed and angle.
+* Support for MWV sentences; wind speed and angle.
  
 KNOWN ISSUES
   
  * Position.distanceTo() may not produce correct results.
+ 
+ * It is impossible to instantiate sentence parsers without sentence data
  
