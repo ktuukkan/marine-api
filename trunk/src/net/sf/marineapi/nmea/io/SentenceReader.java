@@ -38,13 +38,12 @@ import net.sf.marineapi.nmea.sentence.SentenceId;
 import net.sf.marineapi.nmea.sentence.SentenceValidator;
 
 /**
- * Sentence reader detects supported NMEA sentences from the specified
- * <code>InputStream</code> and dispatches them to listeners as
- * {@link SentenceEvents}.
+ * Sentence reader detects supported NMEA 0183 sentences from the specified
+ * <code>InputStream</code> and dispatches them to registered listeners as
+ * sentence events. Each event contains a parser for the read sentence.
  * <p>
- * The sentence parsers dispatched by reader are created using
- * {@link SentenceFactory} class, where you can also register your own custom
- * parsers.
+ * Parsers dispatched by reader are created using {@link SentenceFactory} class,
+ * where you can also register your own custom parsers.
  * 
  * @author Kimmo Tuukkanen
  * @version $Revision$

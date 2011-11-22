@@ -32,23 +32,23 @@ import net.sf.marineapi.nmea.sentence.SentenceId;
  * Factory for creating sentence parsers. Custom parsers may be registered using
  * the {@link #registerParser(String, Class)} method.
  * <p>
- * How-to create and register custom parsers:
+ * To create and register a custom parser:
  * <ol>
- * <li>First, define the sentence interface by extending the {@link Sentence}
- * interface (e.g. <code>XYZSentence</code>).
+ * <li>Define the sentence interface by extending the {@link Sentence} interface
+ * (e.g. <code>XYZSentence</code>).
  * <li>Implement the interface in a class that extends {@link SentenceParser},
  * (e.g. <code>XYZParser</code>).
- * <li>Use the protected get/set methods in <code>SentenceParser</code> to read
- * and write sentence data fields.
+ * <li>Use the protected getters and setters in <code>SentenceParser</code> to
+ * read and write sentence data.
  * <li>Write a constructor with single String parameter, i.e. the sentence to be
- * parsed. Pass this parameter to
+ * parsed by the parser. Pass this parameter to
  * {@link SentenceParser#SentenceParser(String, String)} together with expected
  * sentence id (e.g. <code>"XYZ"</code>).
  * <li>Register your parser class in <code>SentenceFactory</code> using the
  * {@link #registerParser(String, Class)} method.
  * <li>Finally, feed the {@link SentenceFactory#createParser(String)} with
- * <code>XYZ</code> sentence String and you should get an instance of
- * <code>XYZSentence</code> interface.
+ * <code>XYZ</code> sentence String and you should get an instance of your
+ * parser in form of <code>XYZSentence</code> interface.
  * </ol>
  * 
  * @author Kimmo Tuukkanen
