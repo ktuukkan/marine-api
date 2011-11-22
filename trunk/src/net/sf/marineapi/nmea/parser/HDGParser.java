@@ -31,7 +31,7 @@ import net.sf.marineapi.nmea.util.CompassPoint;
  * @author Kimmo Tuukkanen
  * @version $Revision$
  */
-public class HDGParser extends SentenceParser implements HDGSentence {
+class HDGParser extends SentenceParser implements HDGSentence {
 
     private static final int HEADING = 0;
     private static final int DEVIATION = 1;
