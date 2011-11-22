@@ -4,11 +4,11 @@ Version @VERSION@ pre-alpha (b@BUILD_ID@)
 Copyright (C) 2010-@YEAR@ Kimmo Tuukkanen <ktuukkan@users.sourceforge.net>
 
 Java Marine API is an NMEA 0183 library for accessing the data provided by 
-electronic marine instruments, such as GPS, sonar or autopilot.
+electronic marine instruments such as GPS, sonar or autopilot.
 
 SYSTEM REQUIREMENTS
  
- * Java JRE/JDK 1.5 or newer
+ * Java 2 SE JRE/JDK 1.5 (1.6+ recommended)
  
  For serial port communication (choose one):
  
@@ -35,8 +35,8 @@ along with Java Marine API. If not, see <http://www.gnu.org/licenses/>.
 
 SOURCE CODE
 
-The source code for Java Marine API is freely available in project's SVN
-repository. See URLs below and project page at SourceForge.net for more info.
+Java Marine API source code is freely available in project's SVN repository.
+See below URLs and project homepage at SourceForge.net for more info.
 
 SVN browsing and GNU tarball downloads:
 <http://marineapi.svn.sourceforge.net/viewvc/marineapi/>
@@ -44,33 +44,34 @@ SVN browsing and GNU tarball downloads:
 SVN checkout (no login required):
 svn co https://marineapi.svn.sourceforge.net/svnroot/marineapi marineapi 
 
-NOTICE
+DISCLAIMER
 
 Java Marine API is not official NMEA software or related to National Marine
 Electronics Association <http://www.nmea.org/>. The interpretation of NMEA
 sentences for this library is based entirely on freely available resources in
-the internet. Thus, it is NOT guaranteed that the library would conform and
+the Internet. Thus, it is NOT guaranteed that the library would conform and
 follow the standard accurately.
 
 ACKNOWLEDGEMENTS
 
 The NMEA information for Java Marine API has been collected mainly from the
-following resources (in random order, availability checked on 2010-12-02):
+following resources (availability checked on 2011-11-22):
 
- * Wikipedia's NMEA article
-   <http://en.wikipedia.org/wiki/NMEA>
+ * NMEA Revealed by Eric S. Raymond
+   <http://catb.org/gpsd/NMEA.html> (latest version)
+   <http://gpsd.berlios.de/NMEA.txt> (previous version)
+ 
+ * The NMEA FAQ by Peter Bennett
+   <http://vancouver-webpages.com/peter/nmeafaq.txt>
  
  * NMEA Sentence Information by Glenn Baddeley
    <http://home.mira.net/~gnb/gps/nmea.html>
  
  * NMEA Data by Dale DePriest
    <http://www.gpsinformation.org/dale/nmea.htm>
- 
- * The NMEA FAQ by Peter Bennett
-   <http://vancouver-webpages.com/peter/nmeafaq.txt>
- 
- * NMEA Revealed by Eric S. Raymond
-   <http://gpsd.berlios.de/NMEA.txt>
+  
+ * Wikipedia's NMEA article
+   <http://en.wikipedia.org/wiki/NMEA>
 
 Thanks to all above authors for making the information available. All
 disclaimers and warnings concerning the accuracy of information in the above

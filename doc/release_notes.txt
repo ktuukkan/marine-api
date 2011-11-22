@@ -3,8 +3,8 @@ Version @VERSION@ (b@BUILD_ID@)
 <http://marineapi.sourceforge.net/>
 Copyright (C) 2010-@YEAR@ Kimmo Tuukkanen <ktuukkan@users.sourceforge.net>
 
-Pre-alpha preview release, not to be used in production. Major API changes may
-be introduced in future versions. Released on @RELEASE_DATE@.
+This is a pre-alpha preview release. Major API changes may be introduced in
+future versions. Released on @RELEASE_DATE@.
 
 CHANGES
 
@@ -23,5 +23,5 @@ KNOWN ISSUES
   
  * Position.distanceTo() may not produce correct results.
  
- * It is impossible to instantiate sentence parsers without sentence data
+ * Currently it is not possible to instantiate parsers without sentence data.
  
