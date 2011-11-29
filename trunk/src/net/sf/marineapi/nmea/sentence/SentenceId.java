@@ -89,8 +89,8 @@ public enum SentenceId {
      */
     public static String parseStr(String nmea) {
 
-        if (!SentenceValidator.isValid(nmea)) {
-            throw new IllegalArgumentException("String is not valid sentence");
+        if (!SentenceValidator.isSentence(nmea)) {
+            throw new IllegalArgumentException("String is not a sentence");
         }
 
         String id = null;

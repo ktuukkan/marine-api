@@ -10,6 +10,9 @@ CHANGES
 
 * Renamed GpsMode enum to FaaMode
 
+* SentenceValidator; separated sentence format validation and checksum checking
+  in different methods by adding isSentence(String) method.
+
 NEW FEATURES
 
 * Support for HDG, HDM and HDT sentences; the vessel's magnetic/true heading
