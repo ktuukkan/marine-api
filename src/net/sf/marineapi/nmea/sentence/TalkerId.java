@@ -150,8 +150,14 @@ public enum TalkerId {
      * 
      * @param nmea Sentence String
      * @return TalkerId enum
+     * @throws IllegalArgumentException If specified String is not valid
      */
     public static TalkerId parse(String nmea) {
+
+        if (!SentenceValidator.isSentence(nmea)) {
+            throw new IllegalArgumentException("String is not a sentence");
+        }
+
         String tid = "";
         if (nmea.startsWith("$P")) {
             tid = "P";
