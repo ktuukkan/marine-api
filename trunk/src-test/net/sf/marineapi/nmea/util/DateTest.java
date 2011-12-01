@@ -101,25 +101,29 @@ public class DateTest {
     @Test
     public void testEqualsWhenChanged() {
 
-        Date d = new Date();
+    	final int y = 2011;
+    	final int m = 6;
+    	final int d = 15;
+        final Date a = new Date(y, m, d);
+        final Date b = new Date(y, m, d);
+        
+        a.setDay(b.getDay() - 1);
+        assertFalse(a.equals(b));
 
-        d.setDay(instance.getDay() - 1);
-        assertFalse(d.equals(instance));
+        b.setDay(a.getDay());
+        assertTrue(a.equals(b));
 
-        instance.setDay(d.getDay());
-        assertTrue(d.equals(instance));
+        a.setMonth(b.getMonth() - 1);
+        assertFalse(a.equals(b));
 
-        d.setMonth(instance.getMonth() - 1);
-        assertFalse(d.equals(instance));
+        b.setMonth(a.getMonth());
+        assertTrue(a.equals(b));
 
-        instance.setMonth(d.getMonth());
-        assertTrue(d.equals(instance));
+        a.setYear(b.getYear() - 1);
+        assertFalse(a.equals(b));
 
-        d.setYear(instance.getYear() - 1);
-        assertFalse(d.equals(instance));
-
-        instance.setYear(d.getYear());
-        assertTrue(d.equals(instance));
+        b.setYear(a.getYear());
+        assertTrue(a.equals(b));
     }
 
     /**
