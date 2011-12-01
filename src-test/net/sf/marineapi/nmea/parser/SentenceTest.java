@@ -291,7 +291,7 @@ public class SentenceTest {
 	@Test
 	public void testIsValid() {
 		assertTrue(instance.isValid());
-		instance.setStringValue(0, "ä");
+		instance.setStringValue(0, "\t");
 		assertFalse(instance.isValid());
 	}
 
