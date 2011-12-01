@@ -158,6 +158,7 @@ class ZDAParser extends SentenceParser implements ZDASentence {
     public java.util.Date toDate() {
         Date d = getDate();
         Time t = getTime();
+
         GregorianCalendar cal = new GregorianCalendar();
         cal.set(Calendar.YEAR, d.getYear());
         cal.set(Calendar.MONTH, d.getMonth());
@@ -165,6 +166,8 @@ class ZDAParser extends SentenceParser implements ZDASentence {
         cal.set(Calendar.HOUR_OF_DAY, t.getHour());
         cal.set(Calendar.MINUTE, t.getMinutes());
         cal.set(Calendar.SECOND, (int) Math.floor(t.getSeconds()));
-        return cal.getTime();
+		cal.set(Calendar.MILLISECOND, 0); // precision is 1s
+
+		return cal.getTime();
     }
 }

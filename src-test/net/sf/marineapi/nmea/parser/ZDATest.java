@@ -160,7 +160,7 @@ public class ZDATest {
     public void testToDate() {
 
         Date d = new Date(2010, 6, 15);
-        Time t = new Time(12, 15, 30.0);
+		Time t = new Time(12, 15, 30.5);
         zda.setDate(d);
         zda.setTime(t);
 
@@ -170,7 +170,8 @@ public class ZDATest {
         cal.set(Calendar.DAY_OF_MONTH, d.getDay());
         cal.set(Calendar.HOUR_OF_DAY, t.getHour());
         cal.set(Calendar.MINUTE, t.getMinutes());
-        cal.set(Calendar.SECOND, (int) Math.floor(t.getSeconds()));
+		cal.set(Calendar.SECOND, (int) Math.floor(t.getSeconds()));
+		cal.set(Calendar.MILLISECOND, 0); // ZDA precision is 1s
 
         GregorianCalendar result = new GregorianCalendar();
         result.setTime(zda.toDate());
