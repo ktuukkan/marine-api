@@ -52,10 +52,10 @@ public class TPVProviderExample implements TPVListener {
     /*
      * (non-Javadoc)
      * @see
-     * net.sf.marineapi.provider.event.TPVListener#gpsUpdated(net.sf.marineapi
-     * .provider.event.TPVUpdateEvent)
+     * net.sf.marineapi.provider.event.TPVListener#providerUpdate(net.sf.marineapi
+     * .provider.event.TPVEvent)
      */
-    public void tpvUpdate(TPVEvent evt) {
+    public void providerUpdate(TPVEvent evt) {
         // do something with the data..
         System.out.println("TPV: " + evt.toString());
     }

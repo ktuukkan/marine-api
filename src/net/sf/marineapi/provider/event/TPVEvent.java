@@ -1,6 +1,6 @@
 /* 
- * GPSUpdateEvent.java
- * Copyright (C) 2010-2011 Kimmo Tuukkanen
+ * TPVEvent.java
+ * Copyright (C) 2011 Kimmo Tuukkanen
  * 
  * This file is part of Java Marine API.
  * <http://sourceforge.net/projects/marineapi/>
@@ -20,8 +20,6 @@
  */
 package net.sf.marineapi.provider.event;
 
-import java.util.EventObject;
-
 import net.sf.marineapi.nmea.sentence.GGASentence;
 import net.sf.marineapi.nmea.util.Date;
 import net.sf.marineapi.nmea.util.FaaMode;
@@ -40,7 +38,7 @@ import net.sf.marineapi.provider.TPVProvider;
  * @see TPVProvider
  * @see TPVListener
  */
-public class TPVEvent extends EventObject {
+public class TPVEvent extends ProviderEvent {
 
     private static final long serialVersionUID = 1L;
     private Double course;

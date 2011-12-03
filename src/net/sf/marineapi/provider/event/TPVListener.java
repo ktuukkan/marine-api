@@ -1,6 +1,6 @@
 /* 
  * TPVListener.java
- * Copyright (C) 2010-2011 Kimmo Tuukkanen
+ * Copyright (C) 2011 Kimmo Tuukkanen
  * 
  * This file is part of Java Marine API.
  * <http://sourceforge.net/projects/marineapi/>
@@ -20,8 +20,6 @@
  */
 package net.sf.marineapi.provider.event;
 
-import java.util.EventListener;
-
 import net.sf.marineapi.provider.TPVProvider;
 
 /**
@@ -32,7 +30,7 @@ import net.sf.marineapi.provider.TPVProvider;
  * @see TPVProvider
  * @see TPVEvent
  */
-public interface TPVListener extends EventListener {
+public interface TPVListener extends ProviderListener<TPVEvent> {
 
     /**
      * Invoked when fresh time/position/velocity report is available, typically
@@ -40,5 +38,5 @@ public interface TPVListener extends EventListener {
      * 
      * @param evt TPVEvent
      */
-    void tpvUpdate(TPVEvent evt);
+    public void providerUpdate(TPVEvent evt);
 }
