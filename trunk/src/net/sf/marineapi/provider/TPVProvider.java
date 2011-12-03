@@ -1,6 +1,6 @@
 /* 
  * TPVProvider.java
- * Copyright (C) 2010-2011 Kimmo Tuukkanen
+ * Copyright (C) 2011 Kimmo Tuukkanen
  * 
  * This file is part of Java Marine API.
  * <http://sourceforge.net/projects/marineapi/>
@@ -20,22 +20,17 @@
  */
 package net.sf.marineapi.provider;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import net.sf.marineapi.nmea.event.SentenceEvent;
-import net.sf.marineapi.nmea.event.SentenceListener;
 import net.sf.marineapi.nmea.io.SentenceReader;
 import net.sf.marineapi.nmea.sentence.GGASentence;
 import net.sf.marineapi.nmea.sentence.GLLSentence;
-import net.sf.marineapi.nmea.sentence.PositionSentence;
 import net.sf.marineapi.nmea.sentence.RMCSentence;
 import net.sf.marineapi.nmea.sentence.Sentence;
 import net.sf.marineapi.nmea.sentence.SentenceId;
 import net.sf.marineapi.nmea.util.DataStatus;
 import net.sf.marineapi.nmea.util.Date;
-import net.sf.marineapi.nmea.util.GpsFixQuality;
 import net.sf.marineapi.nmea.util.FaaMode;
+import net.sf.marineapi.nmea.util.GpsFixQuality;
 import net.sf.marineapi.nmea.util.Position;
 import net.sf.marineapi.nmea.util.Time;
 import net.sf.marineapi.provider.event.TPVEvent;
@@ -61,11 +56,7 @@ import net.sf.marineapi.provider.event.TPVListener;
  * @see TPVEvent
  * @see SentenceReader
  */
-public class TPVProvider implements SentenceListener {
-
-    private SentenceReader reader;
-    private List<SentenceEvent> events = new ArrayList<SentenceEvent>();
-    private List<TPVListener> listeners = new ArrayList<TPVListener>();
+public class TPVProvider extends AbstractProvider<TPVEvent> {
 
     /**
      * Creates a new instance of TPVProvider.
@@ -73,81 +64,14 @@ public class TPVProvider implements SentenceListener {
      * @param reader SentenceReader which provides the required sentences.
      */
     public TPVProvider(SentenceReader reader) {
-        this.reader = reader;
-        reader.addSentenceListener(this, SentenceId.RMC);
-        reader.addSentenceListener(this, SentenceId.GGA);
-        reader.addSentenceListener(this, SentenceId.GLL);
-    }
-
-    /**
-     * Inserts a listener to provider.
-     * 
-     * @param listener Listener to add
-     */
-    public void addListener(TPVListener listener) {
-        listeners.add(listener);
-    }
-
-    /*
-     * (non-Javadoc)
-     * @see net.sf.marineapi.nmea.event.SentenceListener#readingPaused()
-     */
-    public void readingPaused() {
-    }
-
-    /*
-     * (non-Javadoc)
-     * @see net.sf.marineapi.nmea.event.SentenceListener#readingStarted()
-     */
-    public void readingStarted() {
-        reset();
-    }
-
-    /*
-     * (non-Javadoc)
-     * @see net.sf.marineapi.nmea.event.SentenceListener#readingStopped()
-     */
-    public void readingStopped() {
-        reset();
-        reader.removeSentenceListener(this);
-    }
-
-    /**
-     * Removes the specified listener from provider.
-     * 
-     * @param listener Listener to remove
-     */
-    public void removeListener(TPVListener listener) {
-        listeners.remove(listener);
-    }
-
-    /*
-     * (non-Javadoc)
-     * @see
-     * net.sf.marineapi.nmea.event.SentenceListener#sentenceRead(net.sf.marineapi
-     * .nmea.event.SentenceEvent)
-     */
-    public void sentenceRead(SentenceEvent event) {
-
-        Sentence s = event.getSentence();
-
-        if (s instanceof PositionSentence) {
-
-            events.add(event);
-
-            if (isReady()) {
-                if (isValid()) {
-                    fireTPVEvent(createTPVEvent());
-                }
-                reset();
-            }
-        }
+        super(reader, SentenceId.RMC, SentenceId.GGA, SentenceId.GLL);
     }
 
     /**
      * Creates a TPVEvent based on captured sentences.
      */
-    private TPVEvent createTPVEvent() {
+    @Override
+    TPVEvent createEvent() {
         Position p = null;
         Double sog = null;
         Double cog = null;
@@ -184,20 +108,10 @@ public class TPVProvider implements SentenceListener {
     }
 
     /**
-     * Dispatch the TPV event to all listeners.
-     * 
-     * @param event TPVUpdateEvent to dispatch
-     */
-    private void fireTPVEvent(TPVEvent event) {
-        for (TPVListener listener : listeners) {
-            listener.tpvUpdate(event.clone());
-        }
-    }
-
-    /**
      * Tells if the needed data has been captured.
      */
-    private boolean isReady() {
+    @Override
+    boolean isReady() {
 
         boolean hasRmc = false;
         boolean hasGga = false;
@@ -221,7 +135,8 @@ public class TPVProvider implements SentenceListener {
      * Tells if the captured events are from within the last 1000 milliseconds
      * and contain valid data.
      */
-    private boolean isValid() {
+    @Override
+    boolean isValid() {
 
         long now = System.currentTimeMillis();
 
@@ -253,12 +168,5 @@ public class TPVProvider implements SentenceListener {
         }
 
         return true;
-    }
-
-    /**
-     * Clears the list of collected events.
-     */
-    private void reset() {
-        events.clear();
     }
 }

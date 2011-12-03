@@ -1,6 +1,6 @@
 /* 
  * MWVSentence.java
- * Copyright (C) 2010-2011 Kimmo Tuukkanen
+ * Copyright (C) 2011 Kimmo Tuukkanen
  * 
  * This file is part of Java Marine API.
  * <http://sourceforge.net/projects/marineapi/>

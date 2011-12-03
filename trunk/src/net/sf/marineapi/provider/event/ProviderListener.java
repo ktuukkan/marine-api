@@ -1,5 +1,5 @@
 /* 
- * BARParser.java
+ * ProviderListener.java
  * Copyright (C) 2011 Kimmo Tuukkanen
  * 
  * This file is part of Java Marine API.
@@ -18,23 +18,24 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Java Marine API. If not, see <http://www.gnu.org/licenses/>.
  */
-package net.sf.marineapi.nmea.parser;
+package net.sf.marineapi.provider.event;
 
-import net.sf.marineapi.nmea.sentence.TalkerId;
+import java.util.EventListener;
 
 /**
- * Invalid parser implementation, no constructor with String param.
+ * Base interface for provider listeners.
  * 
  * @author Kimmo Tuukkanen
  * @version $Revision$
  */
-public class BARParser extends SentenceParser {
+public abstract interface ProviderListener<T extends ProviderEvent> extends
+        EventListener {
 
     /**
-     * Constructor
+     * Invoked when provider has new data available.
+     * 
+     * @param evt ProviderEvent object
      */
-    public BARParser() {
-        super(TalkerId.GP, "BAR", 5);
-    }
+    void providerUpdate(T evt);
 
 }
