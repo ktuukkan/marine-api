@@ -150,7 +150,8 @@ public enum TalkerId {
      * 
      * @param nmea Sentence String
      * @return TalkerId enum
-     * @throws IllegalArgumentException If specified String is not valid
+     * @throws IllegalArgumentException If specified String is not recognized as
+     *             NMEA sentence
      */
     public static TalkerId parse(String nmea) {
 

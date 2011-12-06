@@ -138,7 +138,7 @@ public abstract class AbstractProvider<T extends ProviderEvent> implements
     /**
      * Clears the list of collected events.
      */
-    private void reset() {
+    protected void reset() {
         events.clear();
     }
 
@@ -147,15 +147,15 @@ public abstract class AbstractProvider<T extends ProviderEvent> implements
      * 
      * @return Created event, or null if failed.
      */
-    abstract T createEvent();
+    protected abstract T createEvent();
 
     /**
-     * Tells if provider has captured sufficient sentence events for creating a
-     * new ProviderEvent.
+     * Tells if provider has captured the required sentences for creating new
+     * ProviderEvent.
      * 
      * @return true if ready to create ProviderEvent, otherwise false.
      */
-    abstract boolean isReady();
+    protected abstract boolean isReady();
 
     /**
      * Tells if the captured sentence events contain valid data to be dispatched
@@ -163,5 +163,5 @@ public abstract class AbstractProvider<T extends ProviderEvent> implements
      * 
      * @return true if valid, otherwise false.
      */
-    abstract boolean isValid();
+    protected abstract boolean isValid();
 }

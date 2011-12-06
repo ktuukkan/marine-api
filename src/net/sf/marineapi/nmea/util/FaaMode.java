@@ -21,7 +21,7 @@
 package net.sf.marineapi.nmea.util;
 
 /**
- * FaaMode defines the FAA operating modes, reported by APB, BWC, BWR, GLL, RMA,
+ * FaaMode defines the FAA operating modes reported by APB, BWC, BWR, GLL, RMA,
  * RMB, RMC, VTG, WCV, and XTE sentences since NMEA 2.3. Also, the mode field in
  * GGA was extended to contain these statuses.
  * <p>
@@ -34,7 +34,6 @@ package net.sf.marineapi.nmea.util;
  * @see GpsFixQuality
  * @see GpsFixStatus
  * @see DataStatus
- * @since NMEA 2.3
  */
 public enum FaaMode {
 

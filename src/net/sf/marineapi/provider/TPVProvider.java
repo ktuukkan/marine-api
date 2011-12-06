@@ -38,12 +38,12 @@ import net.sf.marineapi.provider.event.TPVListener;
 
 /**
  * <p>
- * Provides TPV (time, position & velocity) reports from GPS. Data is captured
- * from RMC, GGA and GLL sentences. RMC is used for date/time, speed and course.
- * GGA is used as primary source for position as it contains also the altitude.
- * When GGA is not available, position may be taken from GLL or RMC. If this is
- * the case, there is no altitude included in the {@linkplain Position}. GPS
- * data statuses are also captured and events are dispatched only when sentences
+ * Provides Time, Position & Velocity reports from GPS. Data is captured from
+ * RMC, GGA and GLL sentences. RMC is used for date/time, speed and course. GGA
+ * is used as primary source for position as it contains also the altitude. When
+ * GGA is not available, position may be taken from GLL or RMC. If this is the
+ * case, there is no altitude included in the {@linkplain Position}. GPS data
+ * statuses are also captured and events are dispatched only when sentences
  * report {@link DataStatus#ACTIVE}.
  * <p>
  * When constructing {@link TPVEvent}, the maximum age of captured sentences is
@@ -71,7 +71,7 @@ public class TPVProvider extends AbstractProvider<TPVEvent> {
      * Creates a TPVEvent based on captured sentences.
      */
     @Override
-    TPVEvent createEvent() {
+    protected TPVEvent createEvent() {
         Position p = null;
         Double sog = null;
         Double cog = null;
@@ -111,7 +111,7 @@ public class TPVProvider extends AbstractProvider<TPVEvent> {
      * Tells if the needed data has been captured.
      */
     @Override
-    boolean isReady() {
+    protected boolean isReady() {
 
         boolean hasRmc = false;
         boolean hasGga = false;
@@ -136,7 +136,7 @@ public class TPVProvider extends AbstractProvider<TPVEvent> {
      * and contain valid data.
      */
     @Override
-    boolean isValid() {
+    protected boolean isValid() {
 
         long now = System.currentTimeMillis();
 
