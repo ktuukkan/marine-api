@@ -85,7 +85,8 @@ public enum SentenceId {
      * 
      * @param nmea Sentence String
      * @return Sentence Id, e.g. "GGA" or "GLL"
-     * @throws IllegalArgumentException If specified String is not valid
+     * @throws IllegalArgumentException If specified String is not recognized as
+     *             NMEA sentence
      */
     public static String parseStr(String nmea) {
 
