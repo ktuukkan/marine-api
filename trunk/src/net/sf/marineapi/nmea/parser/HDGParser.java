@@ -114,10 +114,7 @@ class HDGParser extends SentenceParser implements HDGSentence {
      * @see net.sf.marineapi.nmea.sentence.HDGSentence#setHeading(double)
      */
     public void setHeading(double heading) {
-        if (heading < 0 || heading > 360) {
-            throw new IllegalArgumentException("Value out of range [0..360]");
-        }
-        setDoubleValue(HEADING, heading, 3, 1);
+		setDegreesValue(HEADING, heading);
     }
 
     /*

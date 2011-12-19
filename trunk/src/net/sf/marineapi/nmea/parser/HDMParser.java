@@ -67,10 +67,7 @@ class HDMParser extends SentenceParser implements HDMSentence {
      * @see net.sf.marineapi.nmea.sentence.HDMSentence#setHeading(double)
      */
     public void setHeading(double hdm) {
-        if (hdm < 0 || hdm > 360) {
-            throw new IllegalArgumentException("Heading out of range [0..360]");
-        }
-        setDoubleValue(HEADING, hdm, 3, 1);
+		setDegreesValue(HEADING, hdm);
     }
 
     /*
