@@ -109,11 +109,7 @@ class VTGParser extends SentenceParser implements VTGSentence {
      * @see net.sf.marineapi.nmea.sentence.VTGSentence#setMagneticCourse(double)
      */
     public void setMagneticCourse(double mcog) {
-        if (mcog < 0 || mcog > 360) {
-            throw new IllegalArgumentException(
-                    "Course out of bounds 0..360 degrees");
-        }
-        setDoubleValue(MAGNETIC_COURSE, mcog, 3, 1);
+		setDegreesValue(MAGNETIC_COURSE, mcog);
     }
 
     /*
@@ -153,10 +149,6 @@ class VTGParser extends SentenceParser implements VTGSentence {
      * @see net.sf.marineapi.nmea.sentence.VTGSentence#setTrueCourse(double)
      */
     public void setTrueCourse(double tcog) {
-        if (tcog < 0 || tcog > 360) {
-            throw new IllegalArgumentException(
-                    "Course out of bounds 0..360 degrees");
-        }
-        setDoubleValue(TRUE_COURSE, tcog, 3, 1);
+		setDegreesValue(TRUE_COURSE, tcog);
     }
 }

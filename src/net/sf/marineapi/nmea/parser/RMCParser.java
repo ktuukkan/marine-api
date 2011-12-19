@@ -168,7 +168,7 @@ class RMCParser extends PositionParser implements RMCSentence {
      * @see net.sf.marineapi.nmea.sentence.RMCSentence#setCourse(double)
      */
     public void setCourse(double cog) {
-        setDoubleValue(COURSE, cog, 3, 1);
+		setDegreesValue(COURSE, cog);
     }
 
     /*
@@ -260,6 +260,6 @@ class RMCParser extends PositionParser implements RMCSentence {
      * @see net.sf.marineapi.nmea.sentence.RMCSentence#setVariation(double)
      */
     public void setVariation(double var) {
-        setDoubleValue(MAG_VARIATION, var, 3, 1);
+		setDegreesValue(MAG_VARIATION, var);
     }
 }

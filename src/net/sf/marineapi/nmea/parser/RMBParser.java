@@ -167,11 +167,7 @@ class RMBParser extends PositionParser implements RMBSentence {
      * @see net.sf.marineapi.nmea.sentence.RMBSentence#setBearing(double)
      */
     public void setBearing(double bearing) {
-        if (bearing < 0 || bearing > 360) {
-            throw new IllegalArgumentException(
-                    "Bearing out of bounds 0..360 degrees");
-        }
-        setDoubleValue(BEARING_TO_DEST, bearing, 3, 1);
+		setDegreesValue(BEARING_TO_DEST, bearing);
     }
 
     /*

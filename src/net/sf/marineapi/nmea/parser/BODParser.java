@@ -110,11 +110,7 @@ class BODParser extends SentenceParser implements BODSentence {
      * net.sf.marineapi.nmea.sentence.BODSentence#setMagneticBearing(double)
      */
     public void setMagneticBearing(double bearing) {
-        if (bearing < 0 || bearing > 360) {
-            throw new IllegalArgumentException(
-                    "Bearing value out of bounds [0..360]");
-        }
-        setDoubleValue(BEARING_MAGN, bearing, 3, 1);
+		setDegreesValue(BEARING_MAGN, bearing);
     }
 
     /*
@@ -132,10 +128,6 @@ class BODParser extends SentenceParser implements BODSentence {
      * @see net.sf.marineapi.nmea.sentence.BODSentence#setTrueBearing(double)
      */
     public void setTrueBearing(double bearing) {
-        if (bearing < 0 || bearing > 360) {
-            throw new IllegalArgumentException(
-                    "Bearing value out of bounds [0..360]");
-        }
-        setDoubleValue(BEARING_TRUE, bearing, 3, 1);
+		setDegreesValue(BEARING_TRUE, bearing);
     }
 }
