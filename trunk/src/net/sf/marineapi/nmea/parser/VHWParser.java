@@ -26,7 +26,7 @@ import net.sf.marineapi.nmea.sentence.VHWSentence;
  * @author Warren Zahra
  * @version $Revision$
  */
-public class VHWParser extends SentenceParser implements VHWSentence {
+class VHWParser extends SentenceParser implements VHWSentence {
 
     private static final int TRUE = 0;
     private static final int DEGREES_TRUE = 1;
