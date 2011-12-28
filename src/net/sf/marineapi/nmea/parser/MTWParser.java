@@ -26,7 +26,7 @@ import net.sf.marineapi.nmea.sentence.MTWSentence;
  * @author Warren Zahra
  * @version $Revision$
  */
-public class MTWParser extends SentenceParser implements MTWSentence {
+class MTWParser extends SentenceParser implements MTWSentence {
 
     private static final int TEMPERATURE = 0;
 
