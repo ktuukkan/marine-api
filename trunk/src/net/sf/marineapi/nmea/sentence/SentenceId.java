@@ -50,6 +50,8 @@ public enum SentenceId {
     HDM,
     /** Vessel heading in degrees true */
     HDT,
+    /** Water temperature in degrees centigrade (Celcius). */
+    MTW,
     /** Wind speed and angle */
     MWV,
     /** Recommended minimum navigation information */
