@@ -21,11 +21,24 @@
 package net.sf.marineapi.nmea.sentence;
 
 /**
- * @author Warren Zahra
+ * Water temperature in degrees Celcius.
+ * 
+ * @author Warren Zahra, Kimmo Tuukkanen
  * @version $Revision$
  */
-public interface MTWSentence {
+public interface MTWSentence extends Sentence {
 
+    /**
+     * Get the water temperature.
+     * 
+     * @return Temperature in degrees Celcius.
+     */
     public double getTemperature();
 
+    /**
+     * Set the water temperature.
+     * 
+     * @param temp Water temperature in degrees Celcius.
+     */
+    public void setTemperature(double temp);
 }

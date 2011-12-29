@@ -28,6 +28,9 @@ package net.sf.marineapi.nmea.util;
  */
 public enum Units {
 
+    /** Temperature in degrees Celcius (centigrade) */
+    CELCIUS('C'),
+
     /** Depth in fathoms */
     FATHOMS('F'),
 
