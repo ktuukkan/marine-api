@@ -21,17 +21,71 @@
 package net.sf.marineapi.nmea.sentence;
 
 /**
- * @author Warren Zahra
+ * Water speed and heading in respect to true and magnetic north.
+ * 
+ * @author Warren Zahra, Kimmo Tuukkanen
  * @version $Revision$
  */
-public interface VHWSentence {
+public interface VHWSentence extends HeadingSentence {
 
-    public double getDegreesTrue();
+    /**
+     * Returns the true heading.
+     * 
+     * @return Heading in degrees true.
+     * @deprecated Use {@link HeadingSentence#getHeading()} instead.
+     */
+    @Deprecated
+    double getDegreesTrue();
 
-    public double getDegreesMagnetic();
+    /**
+     * Returns the magnetic heading.
+     * 
+     * @return Heading in degrees magnetic.
+     * @deprecated Use {@link #getMagneticHeading() } instead.
+     */
+    @Deprecated
+    double getDegreesMagnetic();
 
-    public double getSpeedKnots();
+    /**
+     * Returns the current heading.
+     * 
+     * @return Heading in degrees magnetic.
+     */
+    double getMagneticHeading();
 
-    public double getSpeedKilometres();
+    /**
+     * Sets the magnetic heading.
+     * 
+     * @param hdg Heading in degrees magnetic.
+     * @throws IllegalArgumentException If value is out of bounds [0..360]
+     */
+    void setMagneticHeading(double hdg);
 
+    /**
+     * Returns the current water speed.
+     * 
+     * @return Speed in knots (nautical miles per hour)
+     */
+    double getSpeedKnots();
+
+    /**
+     * Sets the water speed in knots.
+     * 
+     * @param knots Speed in knots (nautical miles per hour)
+     */
+    void setSpeedKnots(double knots);
+
+    /**
+     * Returns the current water speed.
+     * 
+     * @return Speed in km/h (kilmetres per hour)
+     */
+    double getSpeedKilometres();
+
+    /**
+     * Sets the water speed in km/h.
+     * 
+     * @param kmh Speed in kilmetres per hour.
+     */
+    void setSpeedKmh(double kmh);
 }

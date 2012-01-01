@@ -62,6 +62,8 @@ public enum SentenceId {
     RTE,
     /** Track made good and ground speed */
     VTG,
+    /** Water speed and heading */
+    VHW,
     /** Waypoint location (latitude/longitude) */
     WPL,
     /** UTC time and date with local time zone offset */
