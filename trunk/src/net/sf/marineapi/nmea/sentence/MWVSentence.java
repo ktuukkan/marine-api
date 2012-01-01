@@ -24,8 +24,8 @@ import net.sf.marineapi.nmea.util.DataStatus;
 import net.sf.marineapi.nmea.util.Units;
 
 /**
- * Wind speed and angle. Speed in km/h, m/s, or knots, angle in degrees relative
- * to bow or true north.
+ * Wind speed and angle. Speed in km/h, m/s, or knots. Wind angle is given in
+ * degrees relative to bow or true north.
  * 
  * @author Kimmo Tuukkanen
  * @version $Revision$
@@ -49,7 +49,7 @@ public interface MWVSentence extends Sentence {
     /**
      * Tells if the angle is relative or true.
      * 
-     * @return True is true angle, otherwise false (relative to bow)
+     * @return True if relative to true north, otherwise false (relative to bow)
      */
     boolean isTrue();
 

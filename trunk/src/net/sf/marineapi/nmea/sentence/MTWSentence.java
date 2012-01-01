@@ -33,12 +33,12 @@ public interface MTWSentence extends Sentence {
      * 
      * @return Temperature in degrees Celcius.
      */
-    public double getTemperature();
+    double getTemperature();
 
     /**
      * Set the water temperature.
      * 
      * @param temp Water temperature in degrees Celcius.
      */
-    public void setTemperature(double temp);
+    void setTemperature(double temp);
 }
