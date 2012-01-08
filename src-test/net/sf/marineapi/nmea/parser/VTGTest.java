@@ -3,6 +3,7 @@ package net.sf.marineapi.nmea.parser;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
+import net.sf.marineapi.nmea.sentence.TalkerId;
 import net.sf.marineapi.nmea.sentence.VTGSentence;
 import net.sf.marineapi.nmea.util.FaaMode;
 
@@ -25,7 +26,7 @@ public class VTGTest {
     @Before
     public void setUp() {
         try {
-            empty = new VTGParser();
+            empty = new VTGParser(TalkerId.GP);
             vtg = new VTGParser(EXAMPLE);
         } catch (Exception e) {
             fail(e.getMessage());

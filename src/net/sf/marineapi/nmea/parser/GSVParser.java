@@ -51,9 +51,10 @@ class GSVParser extends SentenceParser implements GSVSentence {
 
     /**
      * Creates an GSV parser with empty sentence.
+     * @param talker TalkerId to set
      */
-    public GSVParser() {
-        super(TalkerId.GP, SentenceId.GSV, 19);
+    public GSVParser(TalkerId talker) {
+        super(talker, SentenceId.GSV, 19);
     }
 
     /**

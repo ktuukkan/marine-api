@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import net.sf.marineapi.nmea.sentence.GSVSentence;
+import net.sf.marineapi.nmea.sentence.TalkerId;
 import net.sf.marineapi.nmea.util.SatelliteInfo;
 
 import org.junit.Before;
@@ -30,7 +31,7 @@ public class GSVTest {
     @Before
     public void setUp() {
         try {
-            empty = new GSVParser();
+            empty = new GSVParser(TalkerId.GP);
             gsv = new GSVParser(EXAMPLE);
         } catch (Exception e) {
             fail(e.getMessage());

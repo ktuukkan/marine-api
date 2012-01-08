@@ -2,6 +2,7 @@ package net.sf.marineapi.nmea.parser;
 
 import junit.framework.TestCase;
 import net.sf.marineapi.nmea.sentence.BODSentence;
+import net.sf.marineapi.nmea.sentence.TalkerId;
 
 import org.junit.After;
 import org.junit.Before;
@@ -26,7 +27,7 @@ public class BODTest extends TestCase {
     @Before
     public void setUp() throws Exception {
         try {
-            empty = new BODParser();
+            empty = new BODParser(TalkerId.GP);
             bod = new BODParser(EXAMPLE);
         } catch (Exception e) {
             fail(e.getMessage());
@@ -72,9 +73,25 @@ public class BODTest extends TestCase {
      * .
      */
     @Test
-    public void testConstructorWithNull() {
+    public void testConstructorWithNullString() {
         try {
-            new BODParser(null);
+            new BODParser((String)null);
+        } catch (IllegalArgumentException e) {
+            // OK
+        } catch (Exception e) {
+            fail(e.getMessage());
+        }
+    }
+    
+    /**
+     * Test method for
+     * {@link net.sf.marineapi.nmea.parser.BODParser#BODParser(java.lang.String)}
+     * .
+     */
+    @Test
+    public void testConstructorWithNullTalkerId() {
+        try {
+            new BODParser((TalkerId)null);
         } catch (IllegalArgumentException e) {
             // OK
         } catch (Exception e) {

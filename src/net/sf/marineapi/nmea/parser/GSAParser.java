@@ -48,9 +48,10 @@ class GSAParser extends SentenceParser implements GSASentence {
 
     /**
      * Creates GSA parser with empty sentence.
+     * @param talker TalkerId to set
      */
-    public GSAParser() {
-        super(TalkerId.GP, SentenceId.GSA, 17);
+    public GSAParser(TalkerId talker) {
+        super(talker, SentenceId.GSA, 17);
     }
 
     /**

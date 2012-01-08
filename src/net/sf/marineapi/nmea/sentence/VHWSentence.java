@@ -80,7 +80,7 @@ public interface VHWSentence extends HeadingSentence {
      * 
      * @return Speed in km/h (kilmetres per hour)
      */
-    double getSpeedKilometres();
+    double getSpeedKmh();
 
     /**
      * Sets the water speed in km/h.

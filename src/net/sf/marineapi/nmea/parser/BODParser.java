@@ -43,9 +43,10 @@ class BODParser extends SentenceParser implements BODSentence {
 
     /**
      * Creates GSA parser with empty sentence.
+     * @param talker TalkerId to set
      */
-    public BODParser() {
-        super(TalkerId.GP, SentenceId.BOD, 6);
+    public BODParser(TalkerId talker) {
+        super(talker, SentenceId.BOD, 6);
         setCharValue(TRUE_INDICATOR, 'T');
         setCharValue(MAGN_INDICATOR, 'M');
     }

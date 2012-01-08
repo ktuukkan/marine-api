@@ -11,6 +11,7 @@ import static org.junit.Assert.fail;
 import net.sf.marineapi.nmea.sentence.BODSentence;
 import net.sf.marineapi.nmea.sentence.Sentence;
 import net.sf.marineapi.nmea.sentence.SentenceId;
+import net.sf.marineapi.nmea.sentence.TalkerId;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -38,7 +39,7 @@ public class SentenceFactoryTest {
     @Test
     public void testSupportedTypesRegistered() {
         for (SentenceId id : SentenceId.values()) {
-            assertTrue("Parser not registered " + id, instance.hasParser(id
+            assertTrue("Parser not registered: " + id, instance.hasParser(id
                     .toString()));
         }
     }
@@ -55,6 +56,21 @@ public class SentenceFactoryTest {
         assertTrue(bod instanceof Sentence);
         assertTrue(bod instanceof BODSentence);
         assertTrue(bod instanceof BODParser);
+    }
+    
+    /**
+     * Test method for
+     * {@link net.sf.marineapi.nmea.parser.SentenceFactory#createParser(java.lang.String)}
+     * .
+     */
+    @Test
+    public void testCreateEmptyParser() {
+    	for(SentenceId id : SentenceId.values()) {
+    		Sentence s = instance.createParser(TalkerId.II, id.name());
+    		assertNotNull(s);
+    		assertTrue(s instanceof Sentence);
+    		assertTrue(s instanceof SentenceParser);
+    	}
     }
 
     /**

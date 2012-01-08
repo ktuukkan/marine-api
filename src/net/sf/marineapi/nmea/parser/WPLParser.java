@@ -43,9 +43,10 @@ class WPLParser extends PositionParser implements WPLSentence {
 
     /**
      * Creates WPL parser with empty sentence.
+     * @param talker TalkerId to set
      */
-    public WPLParser() {
-        super(TalkerId.GP, SentenceId.WPL, 5);
+    public WPLParser(TalkerId talker) {
+        super(talker, SentenceId.WPL, 5);
     }
 
     /**

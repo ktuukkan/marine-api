@@ -15,7 +15,7 @@ public class DBTTest {
 
     @Before
     public void setUp() throws Exception {
-        empty = new DBTParser();
+        empty = new DBTParser(TalkerId.II);
         dbt = new DBTParser(EXAMPLE);
     }
 

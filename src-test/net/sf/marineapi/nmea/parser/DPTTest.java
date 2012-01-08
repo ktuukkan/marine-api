@@ -15,7 +15,7 @@ public class DPTTest {
 
     @Before
     public void setUp() throws Exception {
-        empty = new DPTParser();
+        empty = new DPTParser(TalkerId.II);
         dpt = new DPTParser(EXAMPLE);
     }
 

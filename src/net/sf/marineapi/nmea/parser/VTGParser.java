@@ -44,10 +44,11 @@ class VTGParser extends SentenceParser implements VTGSentence {
     private static final int MODE = 8;
 
     /**
-     * Creates RTE parser with empty sentence.
+     * Creates VTG parser with empty sentence.
+     * @param talker TalkerId to set
      */
-    public VTGParser() {
-        super(TalkerId.GP, SentenceId.VTG, 9);
+    public VTGParser(TalkerId talker) {
+        super(talker, SentenceId.VTG, 9);
         setCharValue(TRUE_INDICATOR, VTGSentence.TRUE);
         setCharValue(MAGNETIC_INDICATOR, VTGSentence.MAGNETIC);
         setCharValue(KNOTS_INDICATOR, VTGSentence.KNOT);
