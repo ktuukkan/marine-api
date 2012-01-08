@@ -53,6 +53,7 @@ class RMCParser extends PositionParser implements RMCSentence {
 
     /**
      * Creates a ZDA parser with empty sentence.
+     * @param talker TalkerId to set
      */
     public RMCParser(TalkerId talker) {
         super(talker, SentenceId.RMC, 12);

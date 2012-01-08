@@ -6,6 +6,7 @@ import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 import net.sf.marineapi.nmea.sentence.RMBSentence;
+import net.sf.marineapi.nmea.sentence.TalkerId;
 import net.sf.marineapi.nmea.util.CompassPoint;
 import net.sf.marineapi.nmea.util.DataStatus;
 import net.sf.marineapi.nmea.util.Direction;
@@ -33,7 +34,7 @@ public class RMBTest {
     @Before
     public void setUp() {
         try {
-            empty = new RMBParser();
+            empty = new RMBParser(TalkerId.GP);
             rmb = new RMBParser(EXAMPLE);
         } catch (Exception e) {
             fail(e.getMessage());

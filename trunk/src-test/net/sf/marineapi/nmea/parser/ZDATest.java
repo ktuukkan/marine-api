@@ -8,6 +8,7 @@ import static org.junit.Assert.fail;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
+import net.sf.marineapi.nmea.sentence.TalkerId;
 import net.sf.marineapi.nmea.util.Date;
 import net.sf.marineapi.nmea.util.Time;
 
@@ -30,7 +31,7 @@ public class ZDATest {
     @Before
     public void setUp() {
         try {
-            empty = new ZDAParser();
+            empty = new ZDAParser(TalkerId.GP);
             zda = new ZDAParser(EXAMPLE);
         } catch (Exception e) {
             fail(e.getMessage());

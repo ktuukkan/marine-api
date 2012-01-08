@@ -94,11 +94,11 @@ public class VHWTest {
 
     /**
      * Test method for
-     * {@link net.sf.marineapi.nmea.parser.VHWParser#getSpeedKilometres()}.
+     * {@link net.sf.marineapi.nmea.parser.VHWParser#getSpeedKmh()}.
      */
     @Test
     public void testGetSpeedKilometres() {
-        assertEquals(1.85, vhw.getSpeedKilometres(), 0.01);
+        assertEquals(1.85, vhw.getSpeedKmh(), 0.01);
     }
 
     /**
@@ -146,7 +146,7 @@ public class VHWTest {
     @Test
     public void testSetSpeedKilometres() {
         vhw.setSpeedKmh(5.5555);
-        assertEquals(5.6, vhw.getSpeedKilometres(), 0.1);
+        assertEquals(5.6, vhw.getSpeedKmh(), 0.1);
     }
 
     /**

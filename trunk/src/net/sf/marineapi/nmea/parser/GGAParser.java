@@ -55,9 +55,10 @@ class GGAParser extends PositionParser implements GGASentence {
 
     /**
      * Creates GSA parser with empty sentence.
+     * @param talker TalkerId to set
      */
-    public GGAParser() {
-        super(TalkerId.GP, SentenceId.GGA, 14);
+    public GGAParser(TalkerId talker) {
+        super(talker, SentenceId.GGA, 14);
     }
 
     /**

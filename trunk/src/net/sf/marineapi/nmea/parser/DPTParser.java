@@ -37,9 +37,10 @@ class DPTParser extends SentenceParser implements DPTSentence {
 
     /**
      * Creates a new instance of DPTParser with empty data fields.
+     * @param talker TalkerId to set
      */
-    public DPTParser() {
-        super(TalkerId.II, SentenceId.DPT, 2);
+    public DPTParser(TalkerId talker) {
+        super(talker, SentenceId.DPT, 2);
     }
 
     /**

@@ -47,9 +47,10 @@ class ZDAParser extends SentenceParser implements ZDASentence {
 
     /**
      * Creates WPL parser with empty sentence.
+     * @param talker TalkerId to set
      */
-    public ZDAParser() {
-        super(TalkerId.GP, SentenceId.ZDA, 6);
+    public ZDAParser(TalkerId talker) {
+        super(talker, SentenceId.ZDA, 6);
     }
 
     /**

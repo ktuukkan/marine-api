@@ -53,9 +53,10 @@ class RMBParser extends PositionParser implements RMBSentence {
 
     /**
      * Creates RMB parser with empty sentence.
+     * @param talker TalkerId to set
      */
-    public RMBParser() {
-        super(TalkerId.GP, SentenceId.RMB, 13);
+    public RMBParser(TalkerId talker) {
+        super(talker, SentenceId.RMB, 13);
     }
 
     /**

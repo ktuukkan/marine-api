@@ -44,9 +44,10 @@ class DBTParser extends SentenceParser implements DBTSentence {
 
     /**
      * Creates a new instance of DBTParser with empty data fields.
+     * @param talker TalkerId to set
      */
-    public DBTParser() {
-        super(TalkerId.II, SentenceId.DBT, 6);
+    public DBTParser(TalkerId talker) {
+        super(talker, SentenceId.DBT, 6);
         setCharValue(FEET, Units.FEET.toChar());
         setCharValue(METERS, Units.METER.toChar());
         setCharValue(FATHOMS, Units.FATHOMS.toChar());

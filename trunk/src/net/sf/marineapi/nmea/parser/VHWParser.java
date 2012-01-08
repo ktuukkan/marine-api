@@ -99,7 +99,7 @@ class VHWParser extends SentenceParser implements VHWSentence {
      * (non-Javadoc)
      * @see net.sf.marineapi.nmea.sentence.VHWSentence#getSpeedKilometres()
      */
-    public double getSpeedKilometres() {
+    public double getSpeedKmh() {
         return getDoubleValue(SPEED_KMH);
     }
 
