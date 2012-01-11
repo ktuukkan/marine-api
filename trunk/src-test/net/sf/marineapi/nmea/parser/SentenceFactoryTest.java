@@ -29,6 +29,8 @@ public class SentenceFactoryTest {
     @Before
     public void setUp() throws Exception {
         instance = SentenceFactory.getInstance();
+        instance.registerParser("FOO", FOOParser.class);
+        assertTrue(instance.hasParser("FOO"));
     }
 
     /**
@@ -72,7 +74,21 @@ public class SentenceFactoryTest {
     		assertTrue(s instanceof SentenceParser);
     	}
     }
-
+    
+    /**
+     * Test method for
+     * {@link net.sf.marineapi.nmea.parser.SentenceFactory#createParser(java.lang.String)}
+     * .
+     */
+    @Test
+    public void testCreateEmptyCustomParser() {
+		Sentence s = instance.createParser(TalkerId.II, "FOO");
+		assertNotNull(s);
+		assertTrue(s instanceof Sentence);
+		assertTrue(s instanceof SentenceParser);
+		assertTrue(s instanceof FOOParser);
+    }
+    
     /**
      * Test method for
      * {@link net.sf.marineapi.nmea.parser.SentenceFactory#createParser(java.lang.String)}
@@ -140,8 +156,6 @@ public class SentenceFactoryTest {
      */
     @Test
     public void testRegisterParser() {
-        instance.registerParser("FOO", FOOParser.class);
-        assertTrue(instance.hasParser("FOO"));
         Sentence s = instance.createParser("$IIFOO,1,2,3");
         assertNotNull(s);
         assertTrue(s instanceof Sentence);

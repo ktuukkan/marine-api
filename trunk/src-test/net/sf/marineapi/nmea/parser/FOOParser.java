@@ -12,8 +12,8 @@ public class FOOParser extends SentenceParser {
         super(s, "FOO");
     }
 
-    public FOOParser() {
-        super(TalkerId.GP, "FOO", 3);
+    public FOOParser(TalkerId tid) {
+        super(tid, "FOO", 3);
     }
 
     public String getValueA() {
