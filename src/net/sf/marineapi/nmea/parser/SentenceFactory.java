@@ -45,7 +45,7 @@ import net.sf.marineapi.nmea.sentence.TalkerId;
  * to be parsed by the parser. Pass this parameter to
  * {@link SentenceParser#SentenceParser(String, String)} together with expected
  * sentence id (e.g. <code>"XYZ"</code>).</li>
- * <li>Add another constructor with {@link TalkerId}�parameter. Pass this
+ * <li>Add another constructor with {@link TalkerId} parameter. Pass this
  * parameter to {@link SentenceParser#SentenceParser(TalkerId, String, int)}
  * along with parser type and number of sentence fields.</li>
  * <li>Register your parser class in <code>SentenceFactory</code> using the
