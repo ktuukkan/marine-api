@@ -64,17 +64,17 @@ class HDTParser extends SentenceParser implements HDTSentence {
 
     /*
      * (non-Javadoc)
-     * @see net.sf.marineapi.nmea.parser.HeadingSentence#setHeading(double)
-     */
-    public void setHeading(double hdt) {
-		setDegreesValue(HEADING, hdt);
-    }
-
-    /*
-     * (non-Javadoc)
      * @see net.sf.marineapi.nmea.sentence.HeadingSentence#isTrue()
      */
     public boolean isTrue() {
         return true;
+    }
+
+    /*
+     * (non-Javadoc)
+     * @see net.sf.marineapi.nmea.parser.HeadingSentence#setHeading(double)
+     */
+    public void setHeading(double hdt) {
+        setDegreesValue(HEADING, hdt);
     }
 }

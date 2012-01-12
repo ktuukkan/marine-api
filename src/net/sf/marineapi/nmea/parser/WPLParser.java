@@ -42,14 +42,6 @@ class WPLParser extends PositionParser implements WPLSentence {
     private static final int WAYPOINT_ID = 4;
 
     /**
-     * Creates WPL parser with empty sentence.
-     * @param talker TalkerId to set
-     */
-    public WPLParser(TalkerId talker) {
-        super(talker, SentenceId.WPL, 5);
-    }
-
-    /**
      * Creates a new instance of WPLParser.
      * 
      * @param nmea WPL sentence String.
@@ -57,6 +49,15 @@ class WPLParser extends PositionParser implements WPLSentence {
      */
     public WPLParser(String nmea) {
         super(nmea, SentenceId.WPL);
+    }
+
+    /**
+     * Creates WPL parser with empty sentence.
+     * 
+     * @param talker TalkerId to set
+     */
+    public WPLParser(TalkerId talker) {
+        super(talker, SentenceId.WPL, 5);
     }
 
     /*

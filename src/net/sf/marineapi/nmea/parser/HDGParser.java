@@ -93,6 +93,14 @@ class HDGParser extends SentenceParser implements HDGSentence {
 
     /*
      * (non-Javadoc)
+     * @see net.sf.marineapi.nmea.sentence.HeadingSentence#isTrue()
+     */
+    public boolean isTrue() {
+        return false;
+    }
+
+    /*
+     * (non-Javadoc)
      * @see net.sf.marineapi.nmea.sentence.HDGSentence#setDeviation(double)
      */
     public void setDeviation(double deviation) {
@@ -114,7 +122,7 @@ class HDGParser extends SentenceParser implements HDGSentence {
      * @see net.sf.marineapi.nmea.sentence.HDGSentence#setHeading(double)
      */
     public void setHeading(double heading) {
-		setDegreesValue(HEADING, heading);
+        setDegreesValue(HEADING, heading);
     }
 
     /*
@@ -133,13 +141,5 @@ class HDGParser extends SentenceParser implements HDGSentence {
             setStringValue(VAR_DIRECTION, "");
         }
         setDoubleValue(VARIATION, Math.abs(variation), 3, 1);
-    }
-
-    /*
-     * (non-Javadoc)
-     * @see net.sf.marineapi.nmea.sentence.HeadingSentence#isTrue()
-     */
-    public boolean isTrue() {
-        return false;
     }
 }

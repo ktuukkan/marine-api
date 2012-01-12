@@ -45,14 +45,6 @@ class GLLParser extends PositionParser implements GLLSentence {
     private static final int DATA_STATUS = 5;
 
     /**
-     * Creates GSA parser with empty sentence.
-     * @param talker TalkerId to set
-     */
-    public GLLParser(TalkerId talker) {
-        super(talker, SentenceId.GLL, 6);
-    }
-
-    /**
      * Creates a new instance of GLLParser.
      * 
      * @param nmea GLL sentence String.
@@ -61,6 +53,15 @@ class GLLParser extends PositionParser implements GLLSentence {
      */
     public GLLParser(String nmea) {
         super(nmea, SentenceId.GLL);
+    }
+
+    /**
+     * Creates GSA parser with empty sentence.
+     * 
+     * @param talker TalkerId to set
+     */
+    public GLLParser(TalkerId talker) {
+        super(talker, SentenceId.GLL, 6);
     }
 
     /*

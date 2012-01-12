@@ -43,7 +43,17 @@ class DBTParser extends SentenceParser implements DBTSentence {
     private static final int FATHOMS = 5;
 
     /**
+     * Creates a new instance of DBTParser.
+     * 
+     * @param nmea
+     */
+    public DBTParser(String nmea) {
+        super(nmea, SentenceId.DBT);
+    }
+
+    /**
      * Creates a new instance of DBTParser with empty data fields.
+     * 
      * @param talker TalkerId to set
      */
     public DBTParser(TalkerId talker) {
@@ -51,15 +61,6 @@ class DBTParser extends SentenceParser implements DBTSentence {
         setCharValue(FEET, Units.FEET.toChar());
         setCharValue(METERS, Units.METER.toChar());
         setCharValue(FATHOMS, Units.FATHOMS.toChar());
-    }
-
-    /**
-     * Creates a new instance of DBTParser.
-     * 
-     * @param nmea
-     */
-    public DBTParser(String nmea) {
-        super(nmea, SentenceId.DBT);
     }
 
     /*

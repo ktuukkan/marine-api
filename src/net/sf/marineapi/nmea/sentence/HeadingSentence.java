@@ -37,15 +37,6 @@ public interface HeadingSentence extends Sentence {
     double getHeading();
 
     /**
-     * Sets the heading value.
-     * 
-     * @param hdt Heading in degrees
-     * @see #isTrue()
-     * @throws IllegalArgumentException If heading value out of range [0..360]
-     */
-    void setHeading(double hdt);
-
-    /**
      * Tells if the heading returned and set by {@link #getHeading()} and
      * {@link #setHeading(double)} methods is <em>true</em> or <em>magnetic</em>
      * .
@@ -54,4 +45,13 @@ public interface HeadingSentence extends Sentence {
      *         for magnetic heading.
      */
     boolean isTrue();
+
+    /**
+     * Sets the heading value.
+     * 
+     * @param hdt Heading in degrees
+     * @see #isTrue()
+     * @throws IllegalArgumentException If heading value out of range [0..360]
+     */
+    void setHeading(double hdt);
 }

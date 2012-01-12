@@ -389,22 +389,19 @@ public class SentenceParser implements Sentence {
         setStringValue(index, String.valueOf(value));
     }
 
-	/**
-	 * Set degrees value, e.g. course or heading.
-	 * 
-	 * @param index
-	 *            Field index where to insert value
-	 * @param deg
-	 *            The degrees value to set
-	 * @throws IllegalArgumentException
-	 *             If degrees value out of range [0..360]
-	 */
-	protected final void setDegreesValue(int index, double deg) {
-		if (deg < 0 || deg > 360) {
-			throw new IllegalArgumentException("Value out of bounds [0..360]");
-		}
-		setDoubleValue(index, deg, 3, 1);
-	}
+    /**
+     * Set degrees value, e.g. course or heading.
+     * 
+     * @param index Field index where to insert value
+     * @param deg The degrees value to set
+     * @throws IllegalArgumentException If degrees value out of range [0..360]
+     */
+    protected final void setDegreesValue(int index, double deg) {
+        if (deg < 0 || deg > 360) {
+            throw new IllegalArgumentException("Value out of bounds [0..360]");
+        }
+        setDoubleValue(index, deg, 3, 1);
+    }
 
     /**
      * Set double value in specified field. Value is set "as-is" without any

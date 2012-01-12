@@ -105,7 +105,7 @@ class MWVParser extends SentenceParser implements MWVSentence {
      * @see net.sf.marineapi.nmea.sentence.MWVSentence#setAngle(double)
      */
     public void setAngle(double angle) {
-		setDegreesValue(WIND_ANGLE, angle);
+        setDegreesValue(WIND_ANGLE, angle);
     }
 
     /*

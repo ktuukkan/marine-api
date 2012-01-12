@@ -47,14 +47,6 @@ class GSAParser extends SentenceParser implements GSASentence {
     private static final int VERTICAL_DOP = 16;
 
     /**
-     * Creates GSA parser with empty sentence.
-     * @param talker TalkerId to set
-     */
-    public GSAParser(TalkerId talker) {
-        super(talker, SentenceId.GSA, 17);
-    }
-
-    /**
      * Creates a new instance of GSA parser.
      * 
      * @param nmea GSA sentence String
@@ -62,6 +54,15 @@ class GSAParser extends SentenceParser implements GSASentence {
      */
     public GSAParser(String nmea) {
         super(nmea, SentenceId.GSA);
+    }
+
+    /**
+     * Creates GSA parser with empty sentence.
+     * 
+     * @param talker TalkerId to set
+     */
+    public GSAParser(TalkerId talker) {
+        super(talker, SentenceId.GSA, 17);
     }
 
     /*
@@ -74,18 +75,18 @@ class GSAParser extends SentenceParser implements GSASentence {
 
     /*
      * (non-Javadoc)
-     * @see net.sf.marineapi.nmea.sentence.GSASentence#getMode()
-     */
-    public FaaMode getMode() {
-        return FaaMode.valueOf(getCharValue(GPS_MODE));
-    }
-
-    /*
-     * (non-Javadoc)
      * @see net.sf.marineapi.nmea.sentence.GSASentence#getHorizontalDOP()
      */
     public double getHorizontalDOP() {
         return getDoubleValue(HORIZONTAL_DOP);
+    }
+
+    /*
+     * (non-Javadoc)
+     * @see net.sf.marineapi.nmea.sentence.GSASentence#getMode()
+     */
+    public FaaMode getMode() {
+        return FaaMode.valueOf(getCharValue(GPS_MODE));
     }
 
     /*
@@ -131,20 +132,20 @@ class GSAParser extends SentenceParser implements GSASentence {
     /*
      * (non-Javadoc)
      * @see
-     * net.sf.marineapi.nmea.sentence.GSASentence#setFaaMode(net.sf.marineapi
-     * .nmea.util.FaaMode)
+     * net.sf.marineapi.nmea.sentence.GSASentence#setHorizontalPrecision(double)
      */
-    public void setMode(FaaMode mode) {
-        setCharValue(GPS_MODE, mode.toChar());
+    public void setHorizontalDOP(double hdop) {
+        setDoubleValue(HORIZONTAL_DOP, hdop, 1, 1);
     }
 
     /*
      * (non-Javadoc)
      * @see
-     * net.sf.marineapi.nmea.sentence.GSASentence#setHorizontalPrecision(double)
+     * net.sf.marineapi.nmea.sentence.GSASentence#setFaaMode(net.sf.marineapi
+     * .nmea.util.FaaMode)
      */
-    public void setHorizontalDOP(double hdop) {
-        setDoubleValue(HORIZONTAL_DOP, hdop, 1, 1);
+    public void setMode(FaaMode mode) {
+        setCharValue(GPS_MODE, mode.toChar());
     }
 
     /*

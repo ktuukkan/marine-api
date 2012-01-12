@@ -46,14 +46,6 @@ class ZDAParser extends SentenceParser implements ZDASentence {
     private static final int LOCAL_ZONE_MINUTES = 5;
 
     /**
-     * Creates WPL parser with empty sentence.
-     * @param talker TalkerId to set
-     */
-    public ZDAParser(TalkerId talker) {
-        super(talker, SentenceId.ZDA, 6);
-    }
-
-    /**
      * Creates a new instance of ZDAParser.
      * 
      * @param nmea ZDA sentence String
@@ -61,6 +53,15 @@ class ZDAParser extends SentenceParser implements ZDASentence {
      */
     public ZDAParser(String nmea) {
         super(nmea, SentenceId.ZDA);
+    }
+
+    /**
+     * Creates WPL parser with empty sentence.
+     * 
+     * @param talker TalkerId to set
+     */
+    public ZDAParser(TalkerId talker) {
+        super(talker, SentenceId.ZDA, 6);
     }
 
     /*
@@ -167,8 +168,8 @@ class ZDAParser extends SentenceParser implements ZDASentence {
         cal.set(Calendar.HOUR_OF_DAY, t.getHour());
         cal.set(Calendar.MINUTE, t.getMinutes());
         cal.set(Calendar.SECOND, (int) Math.floor(t.getSeconds()));
-		cal.set(Calendar.MILLISECOND, 0); // precision is 1s
+        cal.set(Calendar.MILLISECOND, 0); // precision is 1s
 
-		return cal.getTime();
+        return cal.getTime();
     }
 }

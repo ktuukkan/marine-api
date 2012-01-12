@@ -1,6 +1,6 @@
 /* 
  * VHWSentence.java
- * Copyright (C) 2011 Warren Zahra
+ * Copyright (C) 2011 Warren Zahra, Kimmo Tuukkanen
  * 
  * This file is part of Java Marine API.
  * <http://sourceforge.net/projects/marineapi/>
@@ -29,15 +29,6 @@ package net.sf.marineapi.nmea.sentence;
 public interface VHWSentence extends HeadingSentence {
 
     /**
-     * Returns the true heading.
-     * 
-     * @return Heading in degrees true.
-     * @deprecated Use {@link HeadingSentence#getHeading()} instead.
-     */
-    @Deprecated
-    double getDegreesTrue();
-
-    /**
      * Returns the magnetic heading.
      * 
      * @return Heading in degrees magnetic.
@@ -47,11 +38,34 @@ public interface VHWSentence extends HeadingSentence {
     double getDegreesMagnetic();
 
     /**
+     * Returns the true heading.
+     * 
+     * @return Heading in degrees true.
+     * @deprecated Use {@link HeadingSentence#getHeading()} instead.
+     */
+    @Deprecated
+    double getDegreesTrue();
+
+    /**
      * Returns the current heading.
      * 
      * @return Heading in degrees magnetic.
      */
     double getMagneticHeading();
+
+    /**
+     * Returns the current water speed.
+     * 
+     * @return Speed in km/h (kilmetres per hour)
+     */
+    double getSpeedKmh();
+
+    /**
+     * Returns the current water speed.
+     * 
+     * @return Speed in knots (nautical miles per hour)
+     */
+    double getSpeedKnots();
 
     /**
      * Sets the magnetic heading.
@@ -62,11 +76,11 @@ public interface VHWSentence extends HeadingSentence {
     void setMagneticHeading(double hdg);
 
     /**
-     * Returns the current water speed.
+     * Sets the water speed in km/h.
      * 
-     * @return Speed in knots (nautical miles per hour)
+     * @param kmh Speed in kilmetres per hour.
      */
-    double getSpeedKnots();
+    void setSpeedKmh(double kmh);
 
     /**
      * Sets the water speed in knots.
@@ -74,18 +88,4 @@ public interface VHWSentence extends HeadingSentence {
      * @param knots Speed in knots (nautical miles per hour)
      */
     void setSpeedKnots(double knots);
-
-    /**
-     * Returns the current water speed.
-     * 
-     * @return Speed in km/h (kilmetres per hour)
-     */
-    double getSpeedKmh();
-
-    /**
-     * Sets the water speed in km/h.
-     * 
-     * @param kmh Speed in kilmetres per hour.
-     */
-    void setSpeedKmh(double kmh);
 }

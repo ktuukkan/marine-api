@@ -40,11 +40,26 @@ public interface MWVSentence extends Sentence {
     double getAngle();
 
     /**
-     * Set wind angle.
+     * Returns the wind speed.
      * 
-     * @param angle Wind angle in degrees.
+     * @return Wind speed value
      */
-    void setAngle(double angle);
+    double getSpeed();
+
+    /**
+     * Returns the wind speed unit.
+     * 
+     * @return {@link Units#METER} for meters per second, {@link Units#KMH} for
+     *         kilometers per hour and {@link Units#KNOT} for knots.
+     */
+    Units getSpeedUnit();
+
+    /**
+     * Get data validity status.
+     * 
+     * @return Data status
+     */
+    DataStatus getStatus();
 
     /**
      * Tells if the angle is relative or true.
@@ -54,18 +69,11 @@ public interface MWVSentence extends Sentence {
     boolean isTrue();
 
     /**
-     * Set angle to relative or true.
+     * Set wind angle.
      * 
-     * @param isTrue True for true angle, false for relative to bow.
+     * @param angle Wind angle in degrees.
      */
-    void setTrue(boolean isTrue);
-
-    /**
-     * Returns the wind speed.
-     * 
-     * @return Wind speed value
-     */
-    double getSpeed();
+    void setAngle(double angle);
 
     /**
      * Set the wind speed value.
@@ -73,14 +81,6 @@ public interface MWVSentence extends Sentence {
      * @param speed Wind speed to set.
      */
     void setSpeed(double speed);
-
-    /**
-     * Returns the wind speed unit.
-     * 
-     * @return {@link Units#METER} for meters per second, {@link Units#KMH} for
-     *         kilometers per hour and {@link Units#KNOT} for knots.
-     */
-    Units getSpeedUnit();
 
     /**
      * Set wind speed unit.
@@ -92,16 +92,16 @@ public interface MWVSentence extends Sentence {
     void setSpeedUnit(Units unit);
 
     /**
-     * Get data validity status.
-     * 
-     * @return Data status
-     */
-    DataStatus getStatus();
-
-    /**
      * Set data validity status.
      * 
      * @param status Data status to set.
      */
     void setStatus(DataStatus status);
+
+    /**
+     * Set angle to relative or true.
+     * 
+     * @param isTrue True for true angle, false for relative to bow.
+     */
+    void setTrue(boolean isTrue);
 }
