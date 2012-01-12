@@ -1,7 +1,6 @@
 Java Marine API readme
 Version @VERSION@ pre-alpha (b@BUILD_ID@)
 <http://marineapi.sourceforge.net/>
-Copyright (C) 2010-@YEAR@ Kimmo Tuukkanen <ktuukkan@users.sourceforge.net>
 
 Java Marine API is an NMEA 0183 library for accessing the data provided by 
 electronic marine instruments such as GPS, sonar or autopilot.
@@ -33,17 +32,6 @@ for more details.
 You should have received a copy of the GNU Lesser General Public License
 along with Java Marine API. If not, see <http://www.gnu.org/licenses/>.
 
-SOURCE CODE
-
-Java Marine API source code is freely available in project's SVN repository.
-See below URLs and project homepage at SourceForge.net for more info.
-
-SVN browsing and GNU tarball downloads:
-<http://marineapi.svn.sourceforge.net/viewvc/marineapi/>
-
-SVN checkout (no login required):
-svn co https://marineapi.svn.sourceforge.net/svnroot/marineapi marineapi 
-
 DISCLAIMER
 
 Java Marine API is not official NMEA software or related to National Marine
@@ -52,7 +40,26 @@ sentences for this library is based entirely on freely available resources in
 the Internet. Thus, it is NOT guaranteed that the library would conform and
 follow the standard accurately.
 
-ACKNOWLEDGEMENTS
+SOURCE CODE
+
+The source code is freely available in project's SVN repository. See below URLs
+and project homepage at SourceForge.net for more info.
+
+SVN browsing and GNU tarball downloads:
+<http://marineapi.svn.sourceforge.net/viewvc/marineapi/>
+
+SVN checkout (no login required):
+svn co https://marineapi.svn.sourceforge.net/svnroot/marineapi marineapi 
+
+CONTRIBUTORS
+
+* Kimmo Tuukkanen <ktuukkan@users.sourceforge.net>
+  - project admin, lead developer
+
+* Warren Zahra
+  - developer, collaboration with marssa.org
+  
+REFERENCES
 
 The NMEA information for Java Marine API has been collected mainly from the
 following resources (availability checked on 2011-11-22):
@@ -72,8 +79,11 @@ following resources (availability checked on 2011-11-22):
   
  * Wikipedia's NMEA article
    <http://en.wikipedia.org/wiki/NMEA>
+   
+ * The NMEA Information Sheet (issue 3, 25th Feb 2011) by Actisense
+   <http://www.actisense.com/Downloads/TechTalk/NMEA%200183/The%20NMEA%200183%20Information%20Sheet.pdf>
 
 Thanks to all above authors for making the information available. All
 disclaimers and warnings concerning the accuracy of information in the above
 documents apply equally to Java Marine API. When noticing or suspecting any
-errors, please contact project author.
+errors, please contact project author(s).
