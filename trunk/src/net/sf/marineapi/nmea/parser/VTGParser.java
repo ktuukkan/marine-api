@@ -44,7 +44,18 @@ class VTGParser extends SentenceParser implements VTGSentence {
     private static final int MODE = 8;
 
     /**
+     * Creates a new instance of VTGParser.
+     * 
+     * @param nmea VTG sentence String
+     * @throws IllegalArgumentException If specified sentence is invalid
+     */
+    public VTGParser(String nmea) {
+        super(nmea, SentenceId.VTG);
+    }
+
+    /**
      * Creates VTG parser with empty sentence.
+     * 
      * @param talker TalkerId to set
      */
     public VTGParser(TalkerId talker) {
@@ -53,16 +64,6 @@ class VTGParser extends SentenceParser implements VTGSentence {
         setCharValue(MAGNETIC_INDICATOR, VTGSentence.MAGNETIC);
         setCharValue(KNOTS_INDICATOR, VTGSentence.KNOT);
         setCharValue(KMPH_INDICATOR, VTGSentence.KMPH);
-    }
-
-    /**
-     * Creates a new instance of VTGParser.
-     * 
-     * @param nmea VTG sentence String
-     * @throws IllegalArgumentException If specified sentence is invalid
-     */
-    public VTGParser(String nmea) {
-        super(nmea, SentenceId.VTG);
     }
 
     /*
@@ -110,7 +111,7 @@ class VTGParser extends SentenceParser implements VTGSentence {
      * @see net.sf.marineapi.nmea.sentence.VTGSentence#setMagneticCourse(double)
      */
     public void setMagneticCourse(double mcog) {
-		setDegreesValue(MAGNETIC_COURSE, mcog);
+        setDegreesValue(MAGNETIC_COURSE, mcog);
     }
 
     /*
@@ -150,6 +151,6 @@ class VTGParser extends SentenceParser implements VTGSentence {
      * @see net.sf.marineapi.nmea.sentence.VTGSentence#setTrueCourse(double)
      */
     public void setTrueCourse(double tcog) {
-		setDegreesValue(TRUE_COURSE, tcog);
+        setDegreesValue(TRUE_COURSE, tcog);
     }
 }

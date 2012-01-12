@@ -52,14 +52,6 @@ class RMCParser extends PositionParser implements RMCSentence {
     private static final int MODE = 11;
 
     /**
-     * Creates a ZDA parser with empty sentence.
-     * @param talker TalkerId to set
-     */
-    public RMCParser(TalkerId talker) {
-        super(talker, SentenceId.RMC, 12);
-    }
-
-    /**
      * Creates a new instance of RMCParser.
      * 
      * @param nmea RMC sentence String.
@@ -67,6 +59,15 @@ class RMCParser extends PositionParser implements RMCSentence {
      */
     public RMCParser(String nmea) {
         super(nmea, SentenceId.RMC);
+    }
+
+    /**
+     * Creates a ZDA parser with empty sentence.
+     * 
+     * @param talker TalkerId to set
+     */
+    public RMCParser(TalkerId talker) {
+        super(talker, SentenceId.RMC, 12);
     }
 
     /*
@@ -169,7 +170,7 @@ class RMCParser extends PositionParser implements RMCSentence {
      * @see net.sf.marineapi.nmea.sentence.RMCSentence#setCourse(double)
      */
     public void setCourse(double cog) {
-		setDegreesValue(COURSE, cog);
+        setDegreesValue(COURSE, cog);
     }
 
     /*
@@ -261,6 +262,6 @@ class RMCParser extends PositionParser implements RMCSentence {
      * @see net.sf.marineapi.nmea.sentence.RMCSentence#setVariation(double)
      */
     public void setVariation(double var) {
-		setDegreesValue(MAG_VARIATION, var);
+        setDegreesValue(MAG_VARIATION, var);
     }
 }

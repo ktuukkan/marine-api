@@ -52,20 +52,21 @@ class RMBParser extends PositionParser implements RMBSentence {
     private static final int ARRIVAL_STATUS = 12;
 
     /**
-     * Creates RMB parser with empty sentence.
-     * @param talker TalkerId to set
-     */
-    public RMBParser(TalkerId talker) {
-        super(talker, SentenceId.RMB, 13);
-    }
-
-    /**
      * Constructor.
      * 
      * @param nmea RMB sentence string
      */
     public RMBParser(String nmea) {
         super(nmea, SentenceId.RMB);
+    }
+
+    /**
+     * Creates RMB parser with empty sentence.
+     * 
+     * @param talker TalkerId to set
+     */
+    public RMBParser(TalkerId talker) {
+        super(talker, SentenceId.RMB, 13);
     }
 
     /*
@@ -168,7 +169,7 @@ class RMBParser extends PositionParser implements RMBSentence {
      * @see net.sf.marineapi.nmea.sentence.RMBSentence#setBearing(double)
      */
     public void setBearing(double bearing) {
-		setDegreesValue(BEARING_TO_DEST, bearing);
+        setDegreesValue(BEARING_TO_DEST, bearing);
     }
 
     /*

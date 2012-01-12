@@ -42,16 +42,6 @@ class BODParser extends SentenceParser implements BODSentence {
     private static final int ORIGIN = 5;
 
     /**
-     * Creates GSA parser with empty sentence.
-     * @param talker TalkerId to set
-     */
-    public BODParser(TalkerId talker) {
-        super(talker, SentenceId.BOD, 6);
-        setCharValue(TRUE_INDICATOR, 'T');
-        setCharValue(MAGN_INDICATOR, 'M');
-    }
-
-    /**
      * Creates a new instance of BOD parser.
      * 
      * @param nmea BOD sentence String
@@ -60,6 +50,17 @@ class BODParser extends SentenceParser implements BODSentence {
      */
     public BODParser(String nmea) {
         super(nmea, SentenceId.BOD);
+    }
+
+    /**
+     * Creates GSA parser with empty sentence.
+     * 
+     * @param talker TalkerId to set
+     */
+    public BODParser(TalkerId talker) {
+        super(talker, SentenceId.BOD, 6);
+        setCharValue(TRUE_INDICATOR, 'T');
+        setCharValue(MAGN_INDICATOR, 'M');
     }
 
     /*
@@ -111,7 +112,7 @@ class BODParser extends SentenceParser implements BODSentence {
      * net.sf.marineapi.nmea.sentence.BODSentence#setMagneticBearing(double)
      */
     public void setMagneticBearing(double bearing) {
-		setDegreesValue(BEARING_MAGN, bearing);
+        setDegreesValue(BEARING_MAGN, bearing);
     }
 
     /*
@@ -129,6 +130,6 @@ class BODParser extends SentenceParser implements BODSentence {
      * @see net.sf.marineapi.nmea.sentence.BODSentence#setTrueBearing(double)
      */
     public void setTrueBearing(double bearing) {
-		setDegreesValue(BEARING_TRUE, bearing);
+        setDegreesValue(BEARING_TRUE, bearing);
     }
 }

@@ -44,21 +44,22 @@ class RTEParser extends SentenceParser implements RTESentence {
     private static final int FIRST_WPT = 4;
 
     /**
-     * Creates RTE parser with empty sentence. The created RTE sentence contains
-     * none waypoint ID fields.
-     * @param talker TalkerId to set
-     */
-    public RTEParser(TalkerId talker) {
-        super(talker, SentenceId.RTE, 4);
-    }
-
-    /**
      * Creates a new instance of RTE parser.
      * 
      * @param nmea RTE sentence string.
      */
     public RTEParser(String nmea) {
         super(nmea, SentenceId.RTE);
+    }
+
+    /**
+     * Creates RTE parser with empty sentence. The created RTE sentence contains
+     * none waypoint ID fields.
+     * 
+     * @param talker TalkerId to set
+     */
+    public RTEParser(TalkerId talker) {
+        super(talker, SentenceId.RTE, 4);
     }
 
     /*

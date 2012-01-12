@@ -54,14 +54,6 @@ class GGAParser extends PositionParser implements GGASentence {
     private static final int DGPS_STATION_ID = 13;
 
     /**
-     * Creates GSA parser with empty sentence.
-     * @param talker TalkerId to set
-     */
-    public GGAParser(TalkerId talker) {
-        super(talker, SentenceId.GGA, 14);
-    }
-
-    /**
      * Creates a new instance of GGA parser.
      * 
      * @param nmea GGA sentence String.
@@ -70,6 +62,15 @@ class GGAParser extends PositionParser implements GGASentence {
      */
     public GGAParser(String nmea) {
         super(nmea, SentenceId.GGA);
+    }
+
+    /**
+     * Creates GSA parser with empty sentence.
+     * 
+     * @param talker TalkerId to set
+     */
+    public GGAParser(TalkerId talker) {
+        super(talker, SentenceId.GGA, 14);
     }
 
     /*

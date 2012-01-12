@@ -36,20 +36,21 @@ class DPTParser extends SentenceParser implements DPTSentence {
     private static final int OFFSET = 1;
 
     /**
-     * Creates a new instance of DPTParser with empty data fields.
-     * @param talker TalkerId to set
-     */
-    public DPTParser(TalkerId talker) {
-        super(talker, SentenceId.DPT, 2);
-    }
-
-    /**
      * Creates a new instance of DPTParser.
      * 
      * @param nmea DPT sentence String
      */
     public DPTParser(String nmea) {
         super(nmea, SentenceId.DPT);
+    }
+
+    /**
+     * Creates a new instance of DPTParser with empty data fields.
+     * 
+     * @param talker TalkerId to set
+     */
+    public DPTParser(TalkerId talker) {
+        super(talker, SentenceId.DPT, 2);
     }
 
     /*

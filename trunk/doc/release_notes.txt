@@ -22,11 +22,11 @@ NEW FEATURES
 
 * Support for MTW sentences; water temperature.
 
-* Support for HDG sentences; current true heading. 
+* Support for HDT sentences; current true heading.
 
 * Support for HDM sentences; current magnetic heading.
 
-* Support for HDT sentences; current heading with magnetic variation/deviation.
+* Support for HDG sentences; current magnetic heading with variation/deviation.
 
 * Support for VHW sentences; water speed and heading.
 

@@ -47,15 +47,6 @@ public interface GSASentence extends Sentence {
     GpsFixStatus getFixStatus();
 
     /**
-     * Get the FAA operation mode of GPS.
-     * 
-     * @return FaaMode enum
-     * @throws DataNotAvailableException If the data is not available.
-     * @throws ParseException If the field contains unexpected or illegal value.
-     */
-    FaaMode getMode();
-
-    /**
      * Get the horizontal dilution Of precision (HDOP).
      * 
      * @return double
@@ -63,6 +54,15 @@ public interface GSASentence extends Sentence {
      * @throws ParseException If the field contains unexpected or illegal value.
      */
     double getHorizontalDOP();
+
+    /**
+     * Get the FAA operation mode of GPS.
+     * 
+     * @return FaaMode enum
+     * @throws DataNotAvailableException If the data is not available.
+     * @throws ParseException If the field contains unexpected or illegal value.
+     */
+    FaaMode getMode();
 
     /**
      * Get the dilution of precision (PDOP) for position.
@@ -99,18 +99,18 @@ public interface GSASentence extends Sentence {
     void setFixStatus(GpsFixStatus status);
 
     /**
-     * Set the FAA operation mode of GPS.
-     * 
-     * @param mode Mode to set
-     */
-    void setMode(FaaMode mode);
-
-    /**
      * Set the horizontal dilution of precision (HDOP).
      * 
      * @param hdop Precision value to set
      */
     void setHorizontalDOP(double hdop);
+
+    /**
+     * Set the FAA operation mode of GPS.
+     * 
+     * @param mode Mode to set
+     */
+    void setMode(FaaMode mode);
 
     /**
      * Set the dilution of precision for position.

@@ -125,24 +125,6 @@ public abstract class AbstractProvider<T extends ProviderEvent> implements
     }
 
     /**
-     * Dispatch the TPV event to all listeners.
-     * 
-     * @param event TPVUpdateEvent to dispatch
-     */
-    private void fireProviderEvent(T event) {
-        for (ProviderListener<T> listener : listeners) {
-            listener.providerUpdate(event);
-        }
-    }
-
-    /**
-     * Clears the list of collected events.
-     */
-    protected void reset() {
-        events.clear();
-    }
-
-    /**
      * Creates a ProviderEvent of type T.
      * 
      * @return Created event, or null if failed.
@@ -164,4 +146,22 @@ public abstract class AbstractProvider<T extends ProviderEvent> implements
      * @return true if valid, otherwise false.
      */
     protected abstract boolean isValid();
+
+    /**
+     * Clears the list of collected events.
+     */
+    protected void reset() {
+        events.clear();
+    }
+
+    /**
+     * Dispatch the TPV event to all listeners.
+     * 
+     * @param event TPVUpdateEvent to dispatch
+     */
+    private void fireProviderEvent(T event) {
+        for (ProviderListener<T> listener : listeners) {
+            listener.providerUpdate(event);
+        }
+    }
 }
