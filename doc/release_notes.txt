@@ -1,34 +1,44 @@
 Java Marine API release notes
 Version @VERSION@ (b@BUILD_ID@)
 <http://marineapi.sourceforge.net/>
-Copyright (C) 2010-@YEAR@ Kimmo Tuukkanen <ktuukkan@users.sourceforge.net>
 
-This is a pre-alpha preview release. Major API changes may be introduced in
-future versions. Released on @RELEASE_DATE@.
+This is a pre-alpha release, major API changes may be introduced in future
+versions. Released on @RELEASE_DATE@.
 
 CHANGES
 
-* Renamed GpsMode enum to FaaMode
+* GpsMode enum; renamed to FaaMode
 
 * SentenceValidator; separated sentence format validation and checksum checking
   in different methods by adding isSentence(String) method.
 
-* All degrees values are set with SentenceParser.setDegreesValue() method.
+* SentenceParser; setDegreesValue() for degrees formatting and validation.
+
+* SentenceFactory; DBT parser was not registered correctly, fixed.
 
 NEW FEATURES
 
-* Support for HDG, HDM and HDT sentences; the vessel's magnetic/true heading
-  and magnetic variation/deviation.
-  
-* HeadingSentence interface for sentences that provide heading.
-
 * Support for MWV sentences; wind speed and angle.
 
-* SentenceParser; setDegreesValue() for bearing, course etc, validates the value
-  to be within the range of 0..360 degrees.
+* Support for MTW sentences; water temperature.
+
+* Support for HDG sentences; current true heading. 
+
+* Support for HDM sentences; current magnetic heading.
+
+* Support for HDT sentences; current heading with magnetic variation/deviation.
+
+* Support for VHW sentences; water speed and heading.
+
+* HeadingSentence interface for sentences providing current heading.
   
 * SentenceFactory; added method for creating parsers without input data.
+
+* SentenceParser; setDegreesValue() method for bearing, course etc, validates
+  the value to be within the range of 0..360 degrees.
   
 KNOWN ISSUES
   
 * Position.distanceTo() may not produce correct results.
+ 
+* Proprietary sentences with ID longer than five characters are not supported.
