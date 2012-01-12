@@ -20,7 +20,7 @@ along with Java Marine API. If not, see <http://www.gnu.org/licenses/>.
 
 $Revision$
 -->
-<project name="${app.name}" default="build" basedir=".">
+<project name="Java Marine API" default="build" basedir=".">
 
 	<target name="init">
 		<echo message="Java version: ${ant.java.version}" />
@@ -56,10 +56,10 @@ $Revision$
 			value="${releases.dir}/${project.id}-examples-${version}.zip" />
 
 		<property name="javadoc.title"
-			value="${ant.project.name} v${version} (b${build.id})" />
+			value="${app.name} v${version} (b${build.id})" />
 		
 		<property name="javadoc.footer"
-			value="Copyright (C) 2010-${year} ${ant.project.name} author(s). All Rights Reserved." />
+			value="Copyright (C) 2010-${year} ${app.name} author(s). All Rights Reserved." />
 	</target>
 
 	<!-- compile project -->

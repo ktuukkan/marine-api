@@ -94,15 +94,15 @@ public final class SentenceFactory {
 
     /**
      * Creates a parser for specified NMEA sentence String. The parser
-     * implementation is selected by the sentence id
+     * implementation is selected from the list of registered parsers according
+     * to sentence type.
      * 
      * @param nmea NMEA 0183 sentence String
      * @return Sentence parser instance for specified sentence
      * @throws IllegalArgumentException If there is no parser registered for the
      *             given sentence type
      * @throws IllegalStateException If parser is found, but it does not
-     *             implement expected constructor with single String parameter.
-     * @throws RuntimeException If unable to find or access the parser.
+     *             implement expected constructors or is otherwise unusable.
      */
     public Sentence createParser(String nmea) {
         String sid = SentenceId.parseStr(nmea);
@@ -116,8 +116,10 @@ public final class SentenceFactory {
      * @param talker Talker ID to use in parser
      * @param type Type of the parser to create
      * @return Sentence instance
+     * @throws IllegalArgumentException If talker id is null or if there is no
+     *             parser registered for given sentence type.
      * @throws IllegalStateException If parser is found, but it does not
-     *             implement expected constructor with single String parameter.
+     *             implement expected constructors or is otherwise unusable.
      */
     public Sentence createParser(TalkerId talker, String type) {
         if (talker == null) {
