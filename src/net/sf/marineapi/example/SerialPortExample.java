@@ -107,7 +107,7 @@ public class SerialPortExample implements SentenceListener {
      */
     private SerialPort getSerialPort() {
         try {
-            Enumeration e = CommPortIdentifier.getPortIdentifiers();
+            Enumeration<?> e = CommPortIdentifier.getPortIdentifiers();
 
             while (e.hasMoreElements()) {
                 CommPortIdentifier id = (CommPortIdentifier) e.nextElement();
