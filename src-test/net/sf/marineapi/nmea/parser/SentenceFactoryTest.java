@@ -1,6 +1,3 @@
-/**
- * 
- */
 package net.sf.marineapi.nmea.parser;
 
 import static org.junit.Assert.assertEquals;
@@ -17,7 +14,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 /**
- * @author ktuu
+ * @author Kimmo Tuukkanen
  */
 public class SentenceFactoryTest {
 
@@ -97,7 +94,7 @@ public class SentenceFactoryTest {
     @Test
     public void testCreateParserWithEmptyString() {
         try {
-            Sentence s = instance.createParser("");
+            instance.createParser("");
             fail("Did not throw exception");
         } catch (IllegalArgumentException e) {
             // pass
@@ -112,7 +109,7 @@ public class SentenceFactoryTest {
     @Test
     public void testCreateParserWithNull() {
         try {
-            Sentence s = instance.createParser(null);
+            instance.createParser(null);
             fail("Did not throw exception");
         } catch (IllegalArgumentException e) {
             // pass
@@ -127,7 +124,7 @@ public class SentenceFactoryTest {
     @Test
     public void testCreateParserWithRandom() {
         try {
-            Sentence s = instance.createParser("asdqas,dwersa,dsdfas,das");
+            instance.createParser("asdqas,dwersa,dsdfas,das");
             fail("Did not throw exception");
         } catch (IllegalArgumentException e) {
             // pass
@@ -142,7 +139,7 @@ public class SentenceFactoryTest {
     @Test
     public void testCreateParserWithUnregistered() {
         try {
-            Sentence s = instance.createParser("$GPXYZ,1,2,3,4,5,6,7,8");
+            instance.createParser("$GPXYZ,1,2,3,4,5,6,7,8");
             fail("Did not throw exception");
         } catch (IllegalArgumentException e) {
             // pass
