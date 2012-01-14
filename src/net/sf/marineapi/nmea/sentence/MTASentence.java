@@ -1,6 +1,6 @@
 /* 
- * TPVListener.java
- * Copyright (C) 2011 Kimmo Tuukkanen
+ * MTASentence.java
+ * Copyright (C) 2012 Kimmo Tuukkanen
  * 
  * This file is part of Java Marine API.
  * <http://sourceforge.net/projects/marineapi/>
@@ -18,25 +18,29 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Java Marine API. If not, see <http://www.gnu.org/licenses/>.
  */
-package net.sf.marineapi.provider.event;
-
-import net.sf.marineapi.provider.TPVProvider;
+package net.sf.marineapi.nmea.sentence;
 
 /**
- * Listener interface for GPS time/position/velocity events.
+ * Air temperature in degrees Celcius.
  * 
  * @author Kimmo Tuukkanen
  * @version $Revision$
- * @see TPVProvider
- * @see TPVEvent
  */
-public interface TPVListener extends ProviderListener<TPVEvent> {
+public interface MTASentence extends Sentence {
 
-    /**
-     * Invoked when fresh time/position/velocity report is available, typically
-     * once per second.
-     * 
-     * @param evt TPVEvent
-     */
-    void providerUpdate(TPVEvent evt);
+	
+	/**
+	 * Returns the air temperature.
+	 * 
+	 * @return Temperature in degrees Celcius.
+	 */
+	public double getTemperature();
+	
+	/**
+	 * Sets the air temperature.
+	 * 
+	 * @param temp Temperature in degrees Celcius.
+	 */
+	public void setTemperature(double temp);
+	
 }

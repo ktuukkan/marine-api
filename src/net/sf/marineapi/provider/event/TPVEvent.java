@@ -38,7 +38,7 @@ import net.sf.marineapi.provider.TPVProvider;
  * @see TPVProvider
  * @see TPVListener
  */
-public class TPVEvent extends ProviderEvent {
+public class TPVEvent extends ProviderEvent implements Cloneable {
 
     private static final long serialVersionUID = 1L;
     private Double course;
