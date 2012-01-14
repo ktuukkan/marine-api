@@ -42,7 +42,7 @@ public interface RTESentence extends Sentence {
      * @param id Waypoint ID to add.
      * @return The total number of waypoint IDs after addition.
      */
-    public int addWaypointId(String id);
+    int addWaypointId(String id);
 
     /**
      * Get the number or name of the route.

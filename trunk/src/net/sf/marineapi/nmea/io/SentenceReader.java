@@ -53,7 +53,7 @@ import net.sf.marineapi.nmea.sentence.SentenceValidator;
  */
 public class SentenceReader {
 
-    // Hash map key for listeners that listen any kind of sentences, type
+    // Map key for listeners that listen any kind of sentences, type
     // specific listeners are registered with sentence type String
     private static final String DISPATCH_ALL = "DISPATCH_ALL";
 
@@ -160,6 +160,8 @@ public class SentenceReader {
 
     /**
      * Starts reading the input stream and dispatching events.
+     * 
+     * @throws IllegalStateException If reader is already running.
      */
     public void start() {
         if (thread != null && thread.isAlive() && reader != null
@@ -185,9 +187,12 @@ public class SentenceReader {
      * @see java.lang.Object#finalize()
      */
     @Override
-    protected void finalize() throws Throwable {
-        reader.stop();
-        super.finalize();
+    protected void finalize() {
+    	reader.stop();
+        try {
+			super.finalize();
+		} catch (Throwable e) {
+		}
     }
 
     /**
