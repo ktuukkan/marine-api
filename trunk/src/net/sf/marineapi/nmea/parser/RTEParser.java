@@ -69,14 +69,13 @@ class RTEParser extends SentenceParser implements RTESentence {
      * )
      */
     public int addWaypointId(String id) {
+    	
         String[] ids = getWaypointIds();
-        String[] newIds = new String[ids.length + 1];
-
-        for (int i = 0; i < ids.length; i++) {
-            newIds[i] = ids[i];
-        }
+        String[] newIds = new String[ids.length + 1];                
+        
+        System.arraycopy(ids, 0, newIds, 0, ids.length);
         newIds[newIds.length - 1] = id;
-
+        
         setStringValues(FIRST_WPT, newIds);
         return newIds.length;
     }

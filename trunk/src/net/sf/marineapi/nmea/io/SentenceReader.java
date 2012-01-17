@@ -182,19 +182,6 @@ public class SentenceReader {
         }
     }
 
-    /*
-     * (non-Javadoc)
-     * @see java.lang.Object#finalize()
-     */
-    @Override
-    protected void finalize() {
-    	reader.stop();
-        try {
-			super.finalize();
-		} catch (Throwable e) {
-		}
-    }
-
     /**
      * Notifies all listeners that reader has paused due to timeout.
      */
