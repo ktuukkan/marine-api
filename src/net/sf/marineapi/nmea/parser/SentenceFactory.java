@@ -80,7 +80,7 @@ public final class SentenceFactory {
         registerParser("GSV", GSVParser.class);
         registerParser("HDG", HDGParser.class);
         registerParser("HDM", HDMParser.class);
-        registerParser("HDT", HDMParser.class);
+        registerParser("HDT", HDTParser.class);
         registerParser("MTA", MTAParser.class);
         registerParser("MTW", MTWParser.class);
         registerParser("MWV", MWVParser.class);
@@ -196,7 +196,7 @@ public final class SentenceFactory {
     private Sentence createParserImpl(String sid, Class<?> paramClass,
             Object param) {
 
-        if (!hasParser(sid.toString())) {
+        if (!hasParser(sid)) {
             String msg = String.format("Parser for type '%s' not found", sid);
             throw new IllegalArgumentException(msg);
         }
@@ -205,8 +205,7 @@ public final class SentenceFactory {
 
         try {
             Class<? extends SentenceParser> c = parsers.get(sid);
-            Constructor<? extends SentenceParser> co = c
-                    .getConstructor(paramClass);
+            Constructor<? extends SentenceParser> co = c.getConstructor(paramClass);
             parser = co.newInstance(param);
 
         } catch (NoSuchMethodException e) {

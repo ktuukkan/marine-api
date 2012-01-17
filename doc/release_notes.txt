@@ -14,11 +14,13 @@ CHANGES
 
 * SentenceParser; setDegreesValue() for degrees formatting and validation.
 
-* SentenceFactory; DBT parser was not registered correctly, fixed.
+* SentenceFactory; DBT and HDT parsers were registered incorrectly, fixed.
 
 NEW FEATURES
 
 * Support for MWV sentences; wind speed and angle.
+
+* Support for MTA sentences; air temperature.
 
 * Support for MTW sentences; water temperature.
 
