@@ -20,7 +20,6 @@
  */
 package net.sf.marineapi.nmea.sentence;
 
-import net.sf.marineapi.nmea.parser.DataNotAvailableException;
 import net.sf.marineapi.nmea.util.CompassPoint;
 import net.sf.marineapi.nmea.util.DataStatus;
 import net.sf.marineapi.nmea.util.FaaMode;
@@ -46,9 +45,9 @@ public interface RMCSentence extends PositionSentence, TimeSentence,
      * @return Corrected true course
      * @see #getCourse()
      * @see #getVariation()
-     * @throws DataNotAvailableException If course or variation data is not
+     * @throws net.sf.marineapi.parser.DataNotAvailableException If course or variation data is not
      *             available.
-     * @throws ParseException If course or variation field contains unexpected
+     * @throws net.sf.marineapi.parser.ParseException If course or variation field contains unexpected
      *             or illegal value.
      */
     double getCorrectedCourse();
@@ -57,8 +56,8 @@ public interface RMCSentence extends PositionSentence, TimeSentence,
      * Get true course over ground (COG).
      * 
      * @return True course in degrees
-     * @throws DataNotAvailableException If the data is not available.
-     * @throws ParseException If the field contains unexpected or illegal value.
+     * @throws net.sf.marineapi.parser.DataNotAvailableException If the data is not available.
+     * @throws net.sf.marineapi.parser.ParseException If the field contains unexpected or illegal value.
      */
     double getCourse();
 
@@ -66,8 +65,8 @@ public interface RMCSentence extends PositionSentence, TimeSentence,
      * Get the direction of magnetic variation; east or west.
      * 
      * @return Direction.EAST or Direction.WEST
-     * @throws DataNotAvailableException If the data is not available.
-     * @throws ParseException If the field contains unexpected or illegal value.
+     * @throws net.sf.marineapi.parser.DataNotAvailableException If the data is not available.
+     * @throws net.sf.marineapi.parser.ParseException If the field contains unexpected or illegal value.
      */
     CompassPoint getDirectionOfVariation();
 
@@ -75,8 +74,8 @@ public interface RMCSentence extends PositionSentence, TimeSentence,
      * Get the FAA operating mode for GPS.
      * 
      * @return FaaMode enum
-     * @throws DataNotAvailableException If the data is not available.
-     * @throws ParseException If the field contains unexpected or illegal value.
+     * @throws net.sf.marineapi.parser.DataNotAvailableException If the data is not available.
+     * @throws net.sf.marineapi.parser.ParseException If the field contains unexpected or illegal value.
      */
     FaaMode getMode();
 
@@ -84,8 +83,8 @@ public interface RMCSentence extends PositionSentence, TimeSentence,
      * Get current speed over ground (SOG).
      * 
      * @return Speed in knots (nautical miles per hour).
-     * @throws DataNotAvailableException If the data is not available.
-     * @throws ParseException If the field contains unexpected or illegal value.
+     * @throws net.sf.marineapi.parser.DataNotAvailableException If the data is not available.
+     * @throws net.sf.marineapi.parser.ParseException If the field contains unexpected or illegal value.
      */
     double getSpeed();
 
@@ -93,8 +92,8 @@ public interface RMCSentence extends PositionSentence, TimeSentence,
      * Gets the data status, valid or invalid.
      * 
      * @return {@link DataStatus#ACTIVE} or {@link DataStatus#VOID}
-     * @throws DataNotAvailableException If the data is not available.
-     * @throws ParseException If the field contains unexpected or illegal value.
+     * @throws net.sf.marineapi.parser.DataNotAvailableException If the data is not available.
+     * @throws net.sf.marineapi.parser.ParseException If the field contains unexpected or illegal value.
      */
     DataStatus getStatus();
 
@@ -104,8 +103,8 @@ public interface RMCSentence extends PositionSentence, TimeSentence,
      * positive.
      * 
      * @return Magnetic variation in degrees
-     * @throws DataNotAvailableException If the data is not available.
-     * @throws ParseException If the field contains unexpected or illegal value.
+     * @throws net.sf.marineapi.parser.DataNotAvailableException If the data is not available.
+     * @throws net.sf.marineapi.parser.ParseException If the field contains unexpected or illegal value.
      */
     double getVariation();
 

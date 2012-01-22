@@ -20,9 +20,6 @@
  */
 package net.sf.marineapi.nmea.sentence;
 
-import net.sf.marineapi.nmea.parser.DataNotAvailableException;
-import net.sf.marineapi.nmea.parser.ParseException;
-
 /**
  * True and magnetic bearing from origin to destination in degrees. This
  * sentence is transmitted by a GPS in the GOTO mode (with or without active
@@ -41,8 +38,8 @@ public interface BODSentence extends Sentence {
      * in GOTO mode.
      * 
      * @return waypoint id
-     * @throws DataNotAvailableException If the data is not available.
-     * @throws ParseException If the field contains unexpected or illegal value.
+     * @throws net.sf.marineapi.parser.DataNotAvailableException If the data is not available.
+     * @throws net.sf.marineapi.parser.ParseException If the field contains unexpected or illegal value.
      */
     String getDestinationWaypointId();
 
@@ -53,8 +50,8 @@ public interface BODSentence extends Sentence {
      * activated and it is <b>not</b> updated dynamically.</i>
      * 
      * @return magnetic bearing value
-     * @throws DataNotAvailableException If the data is not available.
-     * @throws ParseException If the field contains unexpected or illegal value.
+     * @throws net.sf.marineapi.parser.DataNotAvailableException If the data is not available.
+     * @throws net.sf.marineapi.parser.ParseException If the field contains unexpected or illegal value.
      */
     double getMagneticBearing();
 
@@ -63,8 +60,8 @@ public interface BODSentence extends Sentence {
      * active.
      * 
      * @return waypoint id
-     * @throws DataNotAvailableException If the data is not available.
-     * @throws ParseException If the field contains unexpected or illegal value.
+     * @throws net.sf.marineapi.parser.DataNotAvailableException If the data is not available.
+     * @throws net.sf.marineapi.parser.ParseException If the field contains unexpected or illegal value.
      */
     String getOriginWaypointId();
 
@@ -75,8 +72,8 @@ public interface BODSentence extends Sentence {
      * activated and it is <strong>not</strong> updated dynamically.</i>
      * 
      * @return True bearing
-     * @throws DataNotAvailableException If the data is not available.
-     * @throws ParseException If the field contains unexpected or illegal value.
+     * @throws net.sf.marineapi.parser.DataNotAvailableException If the data is not available.
+     * @throws net.sf.marineapi.parser.ParseException If the field contains unexpected or illegal value.
      */
     double getTrueBearing();
 

@@ -20,7 +20,6 @@
  */
 package net.sf.marineapi.nmea.sentence;
 
-import net.sf.marineapi.nmea.parser.DataNotAvailableException;
 import net.sf.marineapi.nmea.util.DataStatus;
 
 /**
@@ -38,8 +37,8 @@ public interface GLLSentence extends PositionSentence, TimeSentence {
      * Get the data quality status, valid or invalid.
      * 
      * @return {@link DataStatus#ACTIVE} or {@link DataStatus#VOID}
-     * @throws DataNotAvailableException If the data is not available.
-     * @throws ParseException If the field contains unexpected or illegal value.
+     * @throws net.sf.marineapi.parser.DataNotAvailableException If the data is not available.
+     * @throws net.sf.marineapi.parser.ParseException If the field contains unexpected or illegal value.
      */
     DataStatus getStatus();
 
@@ -47,8 +46,8 @@ public interface GLLSentence extends PositionSentence, TimeSentence {
      * Set the data quality status, valid or invalid.
      * 
      * @param status DataStatus to set
-     * @throws DataNotAvailableException If the data is not available.
-     * @throws ParseException If the field contains unexpected or illegal value.
+     * @throws net.sf.marineapi.parser.DataNotAvailableException If the data is not available.
+     * @throws net.sf.marineapi.parser.ParseException If the field contains unexpected or illegal value.
      */
     void setStatus(DataStatus status);
 

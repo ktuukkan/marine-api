@@ -20,7 +20,6 @@
  */
 package net.sf.marineapi.nmea.sentence;
 
-import net.sf.marineapi.nmea.parser.DataNotAvailableException;
 import net.sf.marineapi.nmea.util.FaaMode;
 import net.sf.marineapi.nmea.util.GpsFixStatus;
 
@@ -41,8 +40,8 @@ public interface GSASentence extends Sentence {
      * Get the GPS fix mode; 2D, 3D or no fix.
      * 
      * @return GpsFixStatus enum
-     * @throws DataNotAvailableException If the data is not available.
-     * @throws ParseException If the field contains unexpected or illegal value.
+     * @throws net.sf.marineapi.parser.DataNotAvailableException If the data is not available.
+     * @throws net.sf.marineapi.parser.ParseException If the field contains unexpected or illegal value.
      */
     GpsFixStatus getFixStatus();
 
@@ -50,8 +49,8 @@ public interface GSASentence extends Sentence {
      * Get the horizontal dilution Of precision (HDOP).
      * 
      * @return double
-     * @throws DataNotAvailableException If the data is not available.
-     * @throws ParseException If the field contains unexpected or illegal value.
+     * @throws net.sf.marineapi.parser.DataNotAvailableException If the data is not available.
+     * @throws net.sf.marineapi.parser.ParseException If the field contains unexpected or illegal value.
      */
     double getHorizontalDOP();
 
@@ -59,8 +58,8 @@ public interface GSASentence extends Sentence {
      * Get the FAA operation mode of GPS.
      * 
      * @return FaaMode enum
-     * @throws DataNotAvailableException If the data is not available.
-     * @throws ParseException If the field contains unexpected or illegal value.
+     * @throws net.sf.marineapi.parser.DataNotAvailableException If the data is not available.
+     * @throws net.sf.marineapi.parser.ParseException If the field contains unexpected or illegal value.
      */
     FaaMode getMode();
 
@@ -68,8 +67,8 @@ public interface GSASentence extends Sentence {
      * Get the dilution of precision (PDOP) for position.
      * 
      * @return double
-     * @throws DataNotAvailableException If the data is not available.
-     * @throws ParseException If the field contains unexpected or illegal value.
+     * @throws net.sf.marineapi.parser.DataNotAvailableException If the data is not available.
+     * @throws net.sf.marineapi.parser.ParseException If the field contains unexpected or illegal value.
      */
     double getPositionDOP();
 
@@ -77,8 +76,8 @@ public interface GSASentence extends Sentence {
      * Get list of satellites used for acquiring the GPS fix.
      * 
      * @return String array containing satellite IDs.
-     * @throws DataNotAvailableException If the data is not available.
-     * @throws ParseException If the field contains unexpected or illegal value.
+     * @throws net.sf.marineapi.parser.DataNotAvailableException If the data is not available.
+     * @throws net.sf.marineapi.parser.ParseException If the field contains unexpected or illegal value.
      */
     String[] getSatellitesIds();
 
@@ -86,8 +85,8 @@ public interface GSASentence extends Sentence {
      * Get the vertical dilution of precision (VDOP).
      * 
      * @return double
-     * @throws DataNotAvailableException If the data is not available.
-     * @throws ParseException If the field contains unexpected or illegal value.
+     * @throws net.sf.marineapi.parser.DataNotAvailableException If the data is not available.
+     * @throws net.sf.marineapi.parser.ParseException If the field contains unexpected or illegal value.
      */
     double getVerticalDOP();
 

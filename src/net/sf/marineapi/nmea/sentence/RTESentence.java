@@ -20,8 +20,6 @@
  */
 package net.sf.marineapi.nmea.sentence;
 
-import net.sf.marineapi.nmea.parser.DataNotAvailableException;
-import net.sf.marineapi.nmea.parser.ParseException;
 import net.sf.marineapi.nmea.util.RouteType;
 
 /**
@@ -48,8 +46,8 @@ public interface RTESentence extends Sentence {
      * Get the number or name of the route.
      * 
      * @return Route ID or name as String
-     * @throws DataNotAvailableException If the data is not available.
-     * @throws ParseException If the field contains unexpected or illegal value.
+     * @throws net.sf.marineapi.parser.DataNotAvailableException If the data is not available.
+     * @throws net.sf.marineapi.parser.ParseException If the field contains unexpected or illegal value.
      */
     String getRouteId();
 
@@ -58,8 +56,8 @@ public interface RTESentence extends Sentence {
      * 
      * @return integer
      * @see #getSentenceIndex()
-     * @throws DataNotAvailableException If the data is not available.
-     * @throws ParseException If the field contains unexpected or illegal value.
+     * @throws net.sf.marineapi.parser.DataNotAvailableException If the data is not available.
+     * @throws net.sf.marineapi.parser.ParseException If the field contains unexpected or illegal value.
      */
     int getSentenceCount();
 
@@ -68,8 +66,8 @@ public interface RTESentence extends Sentence {
      * 
      * @return integer
      * @see #getSentenceCount()
-     * @throws DataNotAvailableException If the data is not available.
-     * @throws ParseException If the field contains unexpected or illegal value.
+     * @throws net.sf.marineapi.parser.DataNotAvailableException If the data is not available.
+     * @throws net.sf.marineapi.parser.ParseException If the field contains unexpected or illegal value.
      */
     int getSentenceIndex();
 
@@ -77,8 +75,8 @@ public interface RTESentence extends Sentence {
      * Get the number of waypoints IDs in this sentence.
      * 
      * @return Waypoint count
-     * @throws DataNotAvailableException If the data is not available.
-     * @throws ParseException If the field contains unexpected or illegal value.
+     * @throws net.sf.marineapi.parser.DataNotAvailableException If the data is not available.
+     * @throws net.sf.marineapi.parser.ParseException If the field contains unexpected or illegal value.
      */
     int getWaypointCount();
 
@@ -86,8 +84,8 @@ public interface RTESentence extends Sentence {
      * Get the list of route waypoints.
      * 
      * @return Waypoint IDs as String array
-     * @throws DataNotAvailableException If the data is not available.
-     * @throws ParseException If the field contains unexpected or illegal value.
+     * @throws net.sf.marineapi.parser.DataNotAvailableException If the data is not available.
+     * @throws net.sf.marineapi.parser.ParseException If the field contains unexpected or illegal value.
      */
     String[] getWaypointIds();
 
@@ -95,8 +93,8 @@ public interface RTESentence extends Sentence {
      * Tells if the sentence holds a current active route data.
      * 
      * @return true if active route, otherwise false.
-     * @throws DataNotAvailableException If the data is not available.
-     * @throws ParseException If the field contains unexpected or illegal value.
+     * @throws net.sf.marineapi.parser.DataNotAvailableException If the data is not available.
+     * @throws net.sf.marineapi.parser.ParseException If the field contains unexpected or illegal value.
      */
     boolean isActiveRoute();
 
@@ -104,9 +102,9 @@ public interface RTESentence extends Sentence {
      * Tells if this is the first sentence in RTE sequence.
      * 
      * @return true if there's no sentences left, otherwise false.
-     * @throws DataNotAvailableException If the sentence index or sentence count
+     * @throws net.sf.marineapi.parser.DataNotAvailableException If the sentence index or sentence count
      *             is not available.
-     * @throws ParseException If sentence index or count fields contain
+     * @throws net.sf.marineapi.parser.ParseException If sentence index or count fields contain
      *             unexpected or illegal value.
      */
     boolean isFirst();
@@ -115,9 +113,9 @@ public interface RTESentence extends Sentence {
      * Tells if this is the last sentence in RTE sequence.
      * 
      * @return true if there's no sentences left, otherwise false.
-     * @throws DataNotAvailableException If the sentence index or sentence count
+     * @throws net.sf.marineapi.parser.DataNotAvailableException If the sentence index or sentence count
      *             is not available.
-     * @throws ParseException If sentence index or count fields contain
+     * @throws net.sf.marineapi.parser.ParseException If sentence index or count fields contain
      *             unexpected or illegal value.
      */
     boolean isLast();
@@ -126,8 +124,8 @@ public interface RTESentence extends Sentence {
      * Tells if the sentence holds a current working route data.
      * 
      * @return true if working route, otherwise false.
-     * @throws DataNotAvailableException If the data is not available.
-     * @throws ParseException If status field contains illegal value.
+     * @throws net.sf.marineapi.parser.DataNotAvailableException If the data is not available.
+     * @throws net.sf.marineapi.parser.ParseException If status field contains illegal value.
      */
     boolean isWorkingRoute();
 
