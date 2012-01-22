@@ -20,7 +20,6 @@
  */
 package net.sf.marineapi.nmea.sentence;
 
-import net.sf.marineapi.nmea.parser.DataNotAvailableException;
 import net.sf.marineapi.nmea.util.FaaMode;
 
 /**
@@ -53,8 +52,8 @@ public interface VTGSentence extends Sentence {
      * Get the magnetic course over ground.
      * 
      * @return Magnetic course
-     * @throws DataNotAvailableException If the data is not available.
-     * @throws ParseException If the field contains unexpected or illegal value.
+     * @throws net.sf.marineapi.parser.DataNotAvailableException If the data is not available.
+     * @throws net.sf.marineapi.parser.ParseException If the field contains unexpected or illegal value.
      */
     double getMagneticCourse();
 
@@ -64,8 +63,8 @@ public interface VTGSentence extends Sentence {
      * 
      * @since NMEA 2.3
      * @return {@link FaaMode} enum
-     * @throws DataNotAvailableException If the data is not available.
-     * @throws ParseException If the field contains unexpected or illegal value.
+     * @throws net.sf.marineapi.parser.DataNotAvailableException If the data is not available.
+     * @throws net.sf.marineapi.parser.ParseException If the field contains unexpected or illegal value.
      */
     FaaMode getMode();
 
@@ -73,8 +72,8 @@ public interface VTGSentence extends Sentence {
      * Get current speed over ground, in kilometers per hour.
      * 
      * @return Speed in km/h
-     * @throws DataNotAvailableException If the data is not available.
-     * @throws ParseException If the field contains unexpected or illegal value.
+     * @throws net.sf.marineapi.parser.DataNotAvailableException If the data is not available.
+     * @throws net.sf.marineapi.parser.ParseException If the field contains unexpected or illegal value.
      */
     double getSpeedKmh();
 
@@ -82,8 +81,8 @@ public interface VTGSentence extends Sentence {
      * Get speed over ground in knots.
      * 
      * @return Speed in knots (nautical miles per hour)
-     * @throws DataNotAvailableException If the data is not available.
-     * @throws ParseException If the field contains unexpected or illegal value.
+     * @throws net.sf.marineapi.parser.DataNotAvailableException If the data is not available.
+     * @throws net.sf.marineapi.parser.ParseException If the field contains unexpected or illegal value.
      */
     double getSpeedKnots();
 
@@ -91,8 +90,8 @@ public interface VTGSentence extends Sentence {
      * Get the true course over ground.
      * 
      * @return True course, in degrees
-     * @throws DataNotAvailableException If the data is not available.
-     * @throws ParseException If the field contains unexpected or illegal value.
+     * @throws net.sf.marineapi.parser.DataNotAvailableException If the data is not available.
+     * @throws net.sf.marineapi.parser.ParseException If the field contains unexpected or illegal value.
      */
     double getTrueCourse();
 

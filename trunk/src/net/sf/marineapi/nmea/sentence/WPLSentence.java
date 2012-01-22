@@ -20,7 +20,6 @@
  */
 package net.sf.marineapi.nmea.sentence;
 
-import net.sf.marineapi.nmea.parser.DataNotAvailableException;
 import net.sf.marineapi.nmea.util.Waypoint;
 
 /**
@@ -39,9 +38,9 @@ public interface WPLSentence extends Sentence {
      * Get the destination waypoint.
      * 
      * @return Waypoint
-     * @throws DataNotAvailableException If any of the waypoint related data is
+     * @throws net.sf.marineapi.parser.DataNotAvailableException If any of the waypoint related data is
      *             not available.
-     * @throws ParseException If any of the waypoint related fields contain
+     * @throws net.sf.marineapi.parser.ParseException If any of the waypoint related fields contain
      *             unexpected or illegal value.
      */
     Waypoint getWaypoint();

@@ -20,8 +20,6 @@
  */
 package net.sf.marineapi.nmea.sentence;
 
-import net.sf.marineapi.nmea.parser.DataNotAvailableException;
-import net.sf.marineapi.nmea.parser.ParseException;
 import net.sf.marineapi.nmea.util.Date;
 
 /**
@@ -39,8 +37,8 @@ public interface DateSentence extends Sentence {
      * {@link Date}.
      * 
      * @return Date object
-     * @throws DataNotAvailableException If the data is not available.
-     * @throws ParseException If the field contains unexpected or illegal value.
+     * @throws net.sf.marineapi.parser.DataNotAvailableException If the data is not available.
+     * @throws net.sf.marineapi.parser.ParseException If the field contains unexpected or illegal value.
      */
     Date getDate();
 

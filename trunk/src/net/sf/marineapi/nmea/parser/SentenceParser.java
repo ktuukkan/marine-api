@@ -299,7 +299,7 @@ public class SentenceParser implements Sentence {
      * 
      * @param index Data field index in sentence
      * @return Character contained in the field
-     * @throws ParseException If field contains more than one character
+     * @throws net.sf.marineapi.parser.ParseException If field contains more than one character
      */
     protected final char getCharValue(int index) {
         String val = getStringValue(index);
@@ -353,7 +353,7 @@ public class SentenceParser implements Sentence {
      * 
      * @param index Field index
      * @return Field value as String
-     * @throws DataNotAvailableException If the field is empty
+     * @throws net.sf.marineapi.parser.DataNotAvailableException If the field is empty
      */
     protected final String getStringValue(int index) {
         String value = fields.get(index);
