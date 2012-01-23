@@ -34,13 +34,13 @@ public interface MTASentence extends Sentence {
 	 * 
 	 * @return Temperature in degrees Celcius.
 	 */
-	public double getTemperature();
+	double getTemperature();
 	
 	/**
 	 * Sets the air temperature.
 	 * 
 	 * @param temp Temperature in degrees Celcius.
 	 */
-	public void setTemperature(double temp);
+	void setTemperature(double temp);
 	
 }
