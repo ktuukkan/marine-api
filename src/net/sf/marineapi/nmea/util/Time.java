@@ -24,11 +24,9 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 
-import net.sf.marineapi.nmea.sentence.TimeSentence;
-
 /**
  * Represents a time of day in 24-hour clock, i.e. the UTC time used as default
- * in NMEA 0183. Transmitted by {@link TimeSentence}.
+ * in NMEA 0183. Transmitted by {@link net.sf.marineapi.nmea.util.TimeSentence}.
  * 
  * @author Kimmo Tuukkanen
  * @version $Revision$

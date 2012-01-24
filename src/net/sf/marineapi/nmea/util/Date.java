@@ -23,11 +23,9 @@ package net.sf.marineapi.nmea.util;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
-import net.sf.marineapi.nmea.sentence.DateSentence;
-
 /**
  * Represents a calendar date (day-month-year) transmitted in sentences that
- * implement {@link DateSentence}.
+ * implement {@link net.sf.marineapi.nmea.sentence.DateSentence}.
  * 
  * @author Kimmo Tuukkanen
  * @version $Revision$

@@ -22,14 +22,12 @@ package net.sf.marineapi.nmea.event;
 
 import java.util.EventListener;
 
-import net.sf.marineapi.nmea.io.SentenceReader;
-
 /**
  * Base interface for listening to SentenceEvents.
  * 
  * @author Kimmo Tuukkanen
  * @version $Revision$
- * @see SentenceReader
+ * @see net.sf.marineapi.nmea.io.SentenceReader
  * @see SentenceEvent
  */
 public interface SentenceListener extends EventListener {
@@ -52,7 +50,7 @@ public interface SentenceListener extends EventListener {
     /**
      * Invoked after <code>SentenceReader</code> has stopped reading the input
      * stream, either due to error or explicit request by calling
-     * {@link SentenceReader#stop()}.
+     * {@link net.sf.marineapi.nmea.io.SentenceReader#stop()}.
      */
     void readingStopped();
 

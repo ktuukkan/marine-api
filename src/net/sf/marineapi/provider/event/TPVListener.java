@@ -20,15 +20,13 @@
  */
 package net.sf.marineapi.provider.event;
 
-import net.sf.marineapi.provider.TPVProvider;
-
 /**
  * Listener interface for GPS time/position/velocity events.
  * 
  * @author Kimmo Tuukkanen
  * @version $Revision$
- * @see TPVProvider
- * @see TPVEvent
+ * @see net.sf.marineapi.provider.TPVProvider
+ * @see net.sf.marineapi.provider.event.TPVEvent
  */
 public interface TPVListener extends ProviderListener<TPVEvent> {
 

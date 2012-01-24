@@ -34,7 +34,6 @@ import net.sf.marineapi.nmea.util.GpsFixQuality;
 import net.sf.marineapi.nmea.util.Position;
 import net.sf.marineapi.nmea.util.Time;
 import net.sf.marineapi.provider.event.TPVEvent;
-import net.sf.marineapi.provider.event.TPVListener;
 
 /**
  * <p>
@@ -42,19 +41,20 @@ import net.sf.marineapi.provider.event.TPVListener;
  * RMC, GGA and GLL sentences. RMC is used for date/time, speed and course. GGA
  * is used as primary source for position as it contains also the altitude. When
  * GGA is not available, position may be taken from GLL or RMC. If this is the
- * case, there is no altitude included in the {@linkplain Position}. GPS data
- * statuses are also captured and events are dispatched only when sentences
- * report {@link DataStatus#ACTIVE}.
+ * case, there is no altitude included in the
+ * {@link net.sf.marineapi.nmea.util.Position}. GPS data statuses are also
+ * captured and events are dispatched only when sentences report
+ * {@link net.sf.marineapi.nmea.util.DataStatus#ACTIVE}.
  * <p>
- * When constructing {@link TPVEvent}, the maximum age of captured sentences is
- * 1000 ms, i.e. all sentences are from within the default NMEA update rate
- * (1/s).
+ * When constructing {@link net.sf.marineapi.provider.event.TPVEvent}, the
+ * maximum age of captured sentences is 1000 ms, i.e. all sentences are from
+ * within the default NMEA update rate (1/s).
  * 
  * @author Kimmo Tuukkanen
  * @version $Revision$
- * @see TPVListener
- * @see TPVEvent
- * @see SentenceReader
+ * @see net.sf.marineapi.provider.event.TPVListener
+ * @see net.sf.marineapi.provider.event.TPVEvent
+ * @see net.sf.marineapi.nmea.io.SentenceReader
  */
 public class TPVProvider extends AbstractProvider<TPVEvent> {
 
