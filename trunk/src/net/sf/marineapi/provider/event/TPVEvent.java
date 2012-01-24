@@ -20,23 +20,22 @@
  */
 package net.sf.marineapi.provider.event;
 
-import net.sf.marineapi.nmea.sentence.GGASentence;
 import net.sf.marineapi.nmea.util.Date;
 import net.sf.marineapi.nmea.util.FaaMode;
 import net.sf.marineapi.nmea.util.GpsFixQuality;
 import net.sf.marineapi.nmea.util.Position;
 import net.sf.marineapi.nmea.util.Time;
-import net.sf.marineapi.provider.TPVProvider;
 
 /**
  * GPS time/position/velocity report with current position, altitude, speed,
  * course and a time stamp. Notice that altitude may be missing, depending on
- * the source sentence of position (only {@link GGASentence} contains altitude).
+ * the source sentence of position (only
+ * {@link net.sf.marineapi.nmea.sentence.GGASentence} contains altitude).
  * 
  * @author Kimmo Tuukkanen
  * @version $Revision$
- * @see TPVProvider
- * @see TPVListener
+ * @see net.sf.marineapi.provider.TPVProvider
+ * @see net.sf.marineapi.provider.event.TPVListener
  */
 public class TPVEvent extends ProviderEvent implements Cloneable {
 

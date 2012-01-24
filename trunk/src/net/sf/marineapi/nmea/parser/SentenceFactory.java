@@ -25,7 +25,6 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.HashMap;
 import java.util.Map;
 
-import net.sf.marineapi.nmea.io.SentenceReader;
 import net.sf.marineapi.nmea.sentence.Sentence;
 import net.sf.marineapi.nmea.sentence.SentenceId;
 import net.sf.marineapi.nmea.sentence.TalkerId;
@@ -52,8 +51,9 @@ import net.sf.marineapi.nmea.sentence.TalkerId;
  * {@link #registerParser(String, Class)} method.</li>
  * <li>Use {@link SentenceFactory#createParser(String)} or
  * {@link SentenceFactory#createParser(TalkerId, String)} to obtain an instance
- * of your parser. Also, {@link SentenceReader} will now dispatch instances of
- * it whenever the corresponding sentence is read from input stream.</li>
+ * of your parser. Also, {@link net.sf.marineapi.nmea.io.SentenceReader} will
+ * now dispatch instances of it whenever the corresponding sentence is read from
+ * input stream.</li>
  * </ol>
  * 
  * @author Kimmo Tuukkanen
@@ -205,7 +205,8 @@ public final class SentenceFactory {
 
         try {
             Class<? extends SentenceParser> c = parsers.get(sid);
-            Constructor<? extends SentenceParser> co = c.getConstructor(paramClass);
+            Constructor<? extends SentenceParser> co = c
+                    .getConstructor(paramClass);
             parser = co.newInstance(param);
 
         } catch (NoSuchMethodException e) {
