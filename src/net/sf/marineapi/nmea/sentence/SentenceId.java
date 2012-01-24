@@ -50,9 +50,9 @@ public enum SentenceId {
     HDM,
     /** Vessel heading in degrees true */
     HDT,
-    /** Air temperature in degrees centigrade (Celcius). */
+    /** Air temperature in degrees centigrade (Celsius). */
     MTA,
-    /** Water temperature in degrees centigrade (Celcius). */
+    /** Water temperature in degrees centigrade (Celsius). */
     MTW,
     /** Wind speed and angle */
     MWV,

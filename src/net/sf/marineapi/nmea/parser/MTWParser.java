@@ -52,7 +52,7 @@ class MTWParser extends SentenceParser implements MTWSentence {
      */
     public MTWParser(TalkerId tid) {
         super(tid, SentenceId.MTW, 2);
-        setCharValue(UNIT_INDICATOR, Units.CELCIUS.toChar());
+        setCharValue(UNIT_INDICATOR, Units.CELSIUS.toChar());
     }
 
     /*
