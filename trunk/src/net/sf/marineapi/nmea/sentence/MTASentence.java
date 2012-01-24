@@ -21,7 +21,7 @@
 package net.sf.marineapi.nmea.sentence;
 
 /**
- * Air temperature in degrees Celcius.
+ * Air temperature in degrees Celsius.
  * 
  * @author Kimmo Tuukkanen
  * @version $Revision$
@@ -32,14 +32,14 @@ public interface MTASentence extends Sentence {
 	/**
 	 * Returns the air temperature.
 	 * 
-	 * @return Temperature in degrees Celcius.
+	 * @return Temperature in degrees Celsius.
 	 */
 	double getTemperature();
 	
 	/**
 	 * Sets the air temperature.
 	 * 
-	 * @param temp Temperature in degrees Celcius.
+	 * @param temp Temperature in degrees Celsius.
 	 */
 	void setTemperature(double temp);
 	

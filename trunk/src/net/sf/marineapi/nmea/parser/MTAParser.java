@@ -48,7 +48,7 @@ public class MTAParser extends SentenceParser implements MTASentence {
 	 */
 	public MTAParser(TalkerId talker) {
 		super(talker, SentenceId.MTA, 2);
-		setCharValue(UNIT_INDICATOR, Units.CELCIUS.toChar());
+		setCharValue(UNIT_INDICATOR, Units.CELSIUS.toChar());
 	}
 
 	/*
