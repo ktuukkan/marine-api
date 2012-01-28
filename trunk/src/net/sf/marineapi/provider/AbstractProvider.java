@@ -21,19 +21,21 @@
 package net.sf.marineapi.provider;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import net.sf.marineapi.nmea.event.SentenceEvent;
 import net.sf.marineapi.nmea.event.SentenceListener;
 import net.sf.marineapi.nmea.io.SentenceReader;
-import net.sf.marineapi.nmea.sentence.PositionSentence;
 import net.sf.marineapi.nmea.sentence.Sentence;
 import net.sf.marineapi.nmea.sentence.SentenceId;
 import net.sf.marineapi.provider.event.ProviderEvent;
 import net.sf.marineapi.provider.event.ProviderListener;
 
 /**
- * Abstract base class for providers.
+ * Abstract base class for providers. Defines methods that all providers must
+ * implement and provides general services for capturing and validating the
+ * required sentences. 
  * 
  * @author Kimmo Tuukkanen
  * @version $Revision$
@@ -41,8 +43,8 @@ import net.sf.marineapi.provider.event.ProviderListener;
 public abstract class AbstractProvider<T extends ProviderEvent> implements
         SentenceListener {
 
-    protected SentenceReader reader;
-    protected List<SentenceEvent> events = new ArrayList<SentenceEvent>();
+    private SentenceReader reader;
+    private List<SentenceEvent> events = new ArrayList<SentenceEvent>();
     private List<ProviderListener<T>> listeners = new ArrayList<ProviderListener<T>>();
 
     /**
@@ -67,69 +69,69 @@ public abstract class AbstractProvider<T extends ProviderEvent> implements
         listeners.add(listener);
     }
 
-    /*
-     * (non-Javadoc)
-     * @see net.sf.marineapi.nmea.event.SentenceListener#readingPaused()
-     */
-    public void readingPaused() {
-        // nothing
-    }
-
-    /*
-     * (non-Javadoc)
-     * @see net.sf.marineapi.nmea.event.SentenceListener#readingStarted()
-     */
-    public void readingStarted() {
-        reset();
-    }
-
-    /*
-     * (non-Javadoc)
-     * @see net.sf.marineapi.nmea.event.SentenceListener#readingStopped()
-     */
-    public void readingStopped() {
-        reset();
-        reader.removeSentenceListener(this);
-    }
-
-    /**
-     * Removes the specified listener from provider.
-     * 
-     * @param listener Listener to remove
-     */
-    public void removeListener(ProviderListener<T> listener) {
-        listeners.remove(listener);
-    }
-
-    /*
-     * (non-Javadoc)
-     * @see
-     * net.sf.marineapi.nmea.event.SentenceListener#sentenceRead(net.sf.marineapi
-     * .nmea.event.SentenceEvent)
-     */
-    public void sentenceRead(SentenceEvent event) {
-
-        Sentence s = event.getSentence();
-
-        if (s instanceof PositionSentence) {
-
-            events.add(event);
-
-            if (isReady()) {
-                if (isValid()) {
-                    fireProviderEvent(createEvent());
-                }
-                reset();
-            }
-        }
-    }
-
     /**
      * Creates a ProviderEvent of type T.
      * 
      * @return Created event, or null if failed.
      */
-    protected abstract T createEvent();
+    protected abstract T createProviderEvent();
+
+    /**
+     * Dispatch the TPV event to all listeners.
+     * 
+     * @param event TPVUpdateEvent to dispatch
+     */
+    private void fireProviderEvent(T event) {
+        for (ProviderListener<T> listener : listeners) {
+            listener.providerUpdate(event);
+        }
+    }
+
+    /**
+     * Returns the collected sentences.
+     * 
+     * @return List of sentences.
+     */
+    protected final List<Sentence> getSentences() {
+    	List<Sentence> s = new ArrayList<Sentence>();
+    	for(SentenceEvent e : events) {
+    		s.add(e.getSentence());
+    	}
+    	return s;
+    }
+
+    /**
+     * Tells if the provider has captured all the specified sentences.
+     * 
+     * @param id Sentence type IDs to look for.
+     * @return True if all specified IDs match the captured sentences.
+     */
+    protected boolean hasAll(String... id) {
+    	for(String s : id) {
+    		if(!hasOne(s)) {
+    			return false;
+    		}
+    	}
+    	return true;
+    }
+
+    /**
+     * Tells if the provider has captured at least one of the specified
+     * sentences.
+     * 
+     * @param id Sentence type IDs to look for, in prioritized order.
+     * @return True if any of the specified IDs matches the type of at least 
+     * 		one captured sentences.
+     */
+    protected boolean hasOne(String... id) {
+    	List<String> ids = Arrays.asList(id);
+    	for(Sentence s : getSentences()) {
+    		if(ids.contains(s.getSentenceId())) {
+    			return true;
+    		}
+    	}
+    	return false;
+    }
 
     /**
      * Tells if provider has captured the required sentences for creating new
@@ -147,21 +149,80 @@ public abstract class AbstractProvider<T extends ProviderEvent> implements
      */
     protected abstract boolean isValid();
 
+    /*
+     * (non-Javadoc)
+     * @see net.sf.marineapi.nmea.event.SentenceListener#readingPaused()
+     */
+    public void readingPaused() {
+        // nothing
+    }
+
+    
+    /*
+     * (non-Javadoc)
+     * @see net.sf.marineapi.nmea.event.SentenceListener#readingStarted()
+     */
+    public void readingStarted() {
+        reset();
+    }
+    
+    /*
+     * (non-Javadoc)
+     * @see net.sf.marineapi.nmea.event.SentenceListener#readingStopped()
+     */
+    public void readingStopped() {
+        reset();
+        reader.removeSentenceListener(this);
+    }
+    
+    /**
+     * Removes the specified listener from provider.
+     * 
+     * @param listener Listener to remove
+     */
+    public void removeListener(ProviderListener<T> listener) {
+        listeners.remove(listener);
+    }
+    
+    
     /**
      * Clears the list of collected events.
      */
-    protected void reset() {
+    private void reset() {
         events.clear();
+    }
+    
+    /*
+     * (non-Javadoc)
+     * @see
+     * net.sf.marineapi.nmea.event.SentenceListener#sentenceRead(net.sf.marineapi
+     * .nmea.event.SentenceEvent)
+     */
+    public void sentenceRead(SentenceEvent event) {
+        events.add(event);
+        if (isReady()) {
+            if (validate()) {
+            	T pEvent = createProviderEvent();
+                fireProviderEvent(pEvent);
+            }
+            reset();
+        }
     }
 
     /**
-     * Dispatch the TPV event to all listeners.
+     * Validates the collected sentences by checking the ages of each sentence
+     * and calling the isValid()
      * 
-     * @param event TPVUpdateEvent to dispatch
+     * @return true if valid, otherwise false
      */
-    private void fireProviderEvent(T event) {
-        for (ProviderListener<T> listener : listeners) {
-            listener.providerUpdate(event);
-        }
+    private boolean validate() {
+    	long now = System.currentTimeMillis();
+    	for(SentenceEvent se : events) {
+    		long age = now - se.getTimeStamp();
+    		if(age > 1000) {
+    			return false;
+    		}
+    	}
+    	return isValid();    	
     }
 }
