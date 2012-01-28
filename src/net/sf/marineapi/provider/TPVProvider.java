@@ -20,7 +20,6 @@
  */
 package net.sf.marineapi.provider;
 
-import net.sf.marineapi.nmea.event.SentenceEvent;
 import net.sf.marineapi.nmea.io.SentenceReader;
 import net.sf.marineapi.nmea.sentence.GGASentence;
 import net.sf.marineapi.nmea.sentence.GLLSentence;
@@ -71,7 +70,7 @@ public class TPVProvider extends AbstractProvider<TPVEvent> {
      * Creates a TPVEvent based on captured sentences.
      */
     @Override
-    protected TPVEvent createEvent() {
+    protected TPVEvent createProviderEvent() {
         Position p = null;
         Double sog = null;
         Double cog = null;
@@ -80,8 +79,7 @@ public class TPVProvider extends AbstractProvider<TPVEvent> {
         FaaMode mode = null;
         GpsFixQuality fix = null;
 
-        for (SentenceEvent se : events) {
-            Sentence s = se.getSentence();
+        for (Sentence s : getSentences()) {
             if (s instanceof RMCSentence) {
                 RMCSentence rmc = (RMCSentence) s;
                 sog = rmc.getSpeed();
@@ -111,24 +109,8 @@ public class TPVProvider extends AbstractProvider<TPVEvent> {
      * Tells if the needed data has been captured.
      */
     @Override
-    protected boolean isReady() {
-
-        boolean hasRmc = false;
-        boolean hasGga = false;
-        boolean hasGll = false;
-
-        for (SentenceEvent se : events) {
-            Sentence s = se.getSentence();
-            if (s instanceof RMCSentence) {
-                hasRmc = true;
-            } else if (s instanceof GGASentence) {
-                hasGga = true;
-            } else if (s instanceof GLLSentence) {
-                hasGll = true;
-            }
-        }
-
-        return hasRmc && (hasGga || hasGll);
+    protected boolean isReady() {   
+        return hasAll("RMC") && hasOne("GGA", "GLL");
     }
 
     /**
@@ -138,16 +120,8 @@ public class TPVProvider extends AbstractProvider<TPVEvent> {
     @Override
     protected boolean isValid() {
 
-        long now = System.currentTimeMillis();
+        for (Sentence s : getSentences()) {
 
-        for (SentenceEvent se : events) {
-
-            long age = now - se.getTimeStamp();
-            if (age > 1000) {
-                return false;
-            }
-
-            Sentence s = se.getSentence();
             if (s instanceof RMCSentence) {
                 DataStatus ds = ((RMCSentence) s).getStatus();
                 FaaMode gm = ((RMCSentence) s).getMode();
