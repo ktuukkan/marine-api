@@ -70,7 +70,7 @@ public abstract class AbstractProvider<T extends ProviderEvent> implements
     }
 
     /**
-     * Creates a ProviderEvent of type T.
+     * Creates a <code>ProviderEvent</code> of type <code>T</code>.
      * 
      * @return Created event, or null if failed.
      */
@@ -194,9 +194,8 @@ public abstract class AbstractProvider<T extends ProviderEvent> implements
     
     /*
      * (non-Javadoc)
-     * @see
-     * net.sf.marineapi.nmea.event.SentenceListener#sentenceRead(net.sf.marineapi
-     * .nmea.event.SentenceEvent)
+     * @see net.sf.marineapi.nmea.event.SentenceListener#sentenceRead(
+     * 	net.sf.marineapi.nmea.event.SentenceEvent)
      */
     public void sentenceRead(SentenceEvent event) {
         events.add(event);
