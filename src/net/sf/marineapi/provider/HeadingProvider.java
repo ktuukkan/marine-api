@@ -31,7 +31,6 @@ public class HeadingProvider extends AbstractProvider<HeadingEvent> {
 
 	/*
 	 * (non-Javadoc)
-	 * 
 	 * @see net.sf.marineapi.provider.AbstractProvider#createEvent()
 	 */
 	@Override
@@ -46,7 +45,6 @@ public class HeadingProvider extends AbstractProvider<HeadingEvent> {
 
 	/*
 	 * (non-Javadoc)
-	 * 
 	 * @see net.sf.marineapi.provider.AbstractProvider#isReady()
 	 */
 	@Override
@@ -56,7 +54,6 @@ public class HeadingProvider extends AbstractProvider<HeadingEvent> {
 
 	/*
 	 * (non-Javadoc)
-	 * 
 	 * @see net.sf.marineapi.provider.AbstractProvider#isValid()
 	 */
 	@Override

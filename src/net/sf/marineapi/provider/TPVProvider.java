@@ -60,14 +60,15 @@ public class TPVProvider extends AbstractProvider<TPVEvent> {
     /**
      * Creates a new instance of TPVProvider.
      * 
-     * @param reader SentenceReader which provides the required sentences.
+     * @param reader SentenceReader that provides the required sentences.
      */
     public TPVProvider(SentenceReader reader) {
         super(reader, SentenceId.RMC, SentenceId.GGA, SentenceId.GLL);
     }
 
-    /**
-     * Creates a TPVEvent based on captured sentences.
+    /* 
+     * (non-Javadoc)
+     * @see net.sf.marineapi.provider.AbstractProvider#createProviderEvent()
      */
     @Override
     protected TPVEvent createProviderEvent() {
@@ -105,17 +106,19 @@ public class TPVProvider extends AbstractProvider<TPVEvent> {
         return new TPVEvent(this, p, sog, cog, d, t, mode, fix);
     }
 
-    /**
-     * Tells if the needed data has been captured.
+    /* 
+     * (non-Javadoc)
+     * @see net.sf.marineapi.provider.AbstractProvider#isReady()
      */
     @Override
-    protected boolean isReady() {   
-        return hasAll("RMC") && hasOne("GGA", "GLL");
+    protected boolean isReady() {
+        return hasOne("RMC") && hasOne("GGA", "GLL");
     }
 
-    /**
-     * Tells if the captured events are from within the last 1000 milliseconds
-     * and contain valid data.
+
+    /* 
+     * (non-Javadoc)
+     * @see net.sf.marineapi.provider.AbstractProvider#isValid()
      */
     @Override
     protected boolean isValid() {
