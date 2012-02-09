@@ -9,7 +9,7 @@ import org.junit.Test;
 
 public class DPTTest {
 
-    public static final String EXAMPLE = "$IIDPT,012.6,-1.0,*45";
+    public static final String EXAMPLE = "$IIDPT,012.6,-1.0,100";
     DPTSentence empty;
     DPTSentence dpt;
 
@@ -23,7 +23,7 @@ public class DPTTest {
     public void testDPTParser() {
         assertEquals(TalkerId.II, empty.getTalkerId());
         assertEquals("DPT", empty.getSentenceId());
-        assertEquals(2, empty.getFieldCount());
+        assertEquals(3, empty.getFieldCount());
 
     }
 
@@ -56,6 +56,18 @@ public class DPTTest {
         final double offset = 1.555555;
         empty.setOffset(offset);
         assertEquals(offset, empty.getOffset(), 0.1);
+    }
+
+    @Test
+    public void testGetMaximum() {
+        assertEquals(100, dpt.getMaximum(), 1);
+    }
+
+    @Test
+    public void testSetMaximum() {
+        final int max = 123;
+        dpt.setMaximum(max);
+        assertEquals(max, dpt.getMaximum(), 1);
     }
 
 }
