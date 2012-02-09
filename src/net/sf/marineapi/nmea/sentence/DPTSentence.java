@@ -21,9 +21,10 @@
 package net.sf.marineapi.nmea.sentence;
 
 /**
- * Depth of water, in meters. Includes offset to transducer, positive values for
- * distance from transducer to water line and negative values for distance from
- * transducer to keel.
+ * Depth of water, measured in meters. Includes offset to transducer, positive
+ * values for distance from transducer to water line and negative values for
+ * distance from transducer to keel. The maximum value is included since NMEA
+ * v3.0, and may thus be missing.
  * 
  * @author Kimmo Tuukkanen
  * @version $Revision$
@@ -43,4 +44,18 @@ public interface DPTSentence extends DepthSentence {
      * @param offset Offset in meters
      */
     void setOffset(double offset);
+
+    /**
+     * Get maximum depth value the sounder can detect.
+     * 
+     * @return Maximum depth, in meters.
+     */
+    int getMaximum();
+
+    /**
+     * Get maximum depth value the sounder can detect.
+     * 
+     * @param max Maximum depth, in meters.
+     */
+    void setMaximum(int max);
 }

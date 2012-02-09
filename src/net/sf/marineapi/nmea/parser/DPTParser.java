@@ -34,6 +34,7 @@ class DPTParser extends SentenceParser implements DPTSentence {
 
     private static final int DEPTH = 0;
     private static final int OFFSET = 1;
+    private static final int MAXIMUM = 2;
 
     /**
      * Creates a new instance of DPTParser.
@@ -50,7 +51,7 @@ class DPTParser extends SentenceParser implements DPTSentence {
      * @param talker TalkerId to set
      */
     public DPTParser(TalkerId talker) {
-        super(talker, SentenceId.DPT, 2);
+        super(talker, SentenceId.DPT, 3);
     }
 
     /*
@@ -83,6 +84,22 @@ class DPTParser extends SentenceParser implements DPTSentence {
      */
     public void setOffset(double offset) {
         setDoubleValue(OFFSET, offset, 1, 1);
+    }
+
+    /*
+     * (non-Javadoc)
+     * @see net.sf.marineapi.nmea.sentence.DPTSentence#getMaximum()
+     */
+    public int getMaximum() {
+        return getIntValue(MAXIMUM);
+    }
+
+    /*
+     * (non-Javadoc)
+     * @see net.sf.marineapi.nmea.sentence.DPTSentence#setMaximum(int)
+     */
+    public void setMaximum(int max) {
+        setIntValue(MAXIMUM, max);
     }
 
 }
