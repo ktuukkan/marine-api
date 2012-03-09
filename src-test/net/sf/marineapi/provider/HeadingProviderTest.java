@@ -2,6 +2,8 @@ package net.sf.marineapi.provider;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 
 import java.io.File;
@@ -36,11 +38,14 @@ public class HeadingProviderTest implements HeadingListener {
      */
     @Before
     public void setUp() throws Exception {
+    	
         FileInputStream str = new FileInputStream(new File("data/sample1.txt"));
         SentenceReader r = new SentenceReader(str);
         instance = new HeadingProvider(r);
         instance.addListener(this);
         r.start();
+        
+        event = null;
     }
 
     @After
@@ -55,11 +60,14 @@ public class HeadingProviderTest implements HeadingListener {
      */
     @Test
     public void testHDMSentenceRead() {
+    	
         SentenceFactory sf = SentenceFactory.getInstance();
-
         Sentence s = sf.createParser(HDMTest.EXAMPLE);
+        
+        assertNull(event);
         instance.sentenceRead(new SentenceEvent(this, s));
-
+        assertNotNull(event);
+        
         assertEquals(90.0, event.getHeading(), 0.1);
         assertFalse(event.isTrue());
     }
@@ -71,11 +79,14 @@ public class HeadingProviderTest implements HeadingListener {
      */
     @Test
     public void testHDTSentenceRead() {
+    	
         SentenceFactory sf = SentenceFactory.getInstance();
-
         Sentence s = sf.createParser(HDTTest.EXAMPLE);
+        
+        assertNull(event);
         instance.sentenceRead(new SentenceEvent(this, s));
-
+        assertNotNull(event);
+        
         assertEquals(90.1, event.getHeading(), 0.1);
         assertTrue(event.isTrue());
     }
@@ -87,11 +98,14 @@ public class HeadingProviderTest implements HeadingListener {
      */
     @Test
     public void testHDGSentenceRead() {
+    	
         SentenceFactory sf = SentenceFactory.getInstance();
-
         Sentence s = sf.createParser(HDGTest.EXAMPLE);
+        
+        assertNull(event);
         instance.sentenceRead(new SentenceEvent(this, s));
-
+        assertNotNull(event);
+        
         assertEquals(123.4, event.getHeading(), 0.1);
         assertFalse(event.isTrue());
     }

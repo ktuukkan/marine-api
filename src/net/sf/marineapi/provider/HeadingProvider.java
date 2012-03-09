@@ -16,6 +16,7 @@ import net.sf.marineapi.provider.event.HeadingEvent;
  * @author Kimmo Tuukkanen
  * @version $Revision$
  * @see net.sf.marineapi.provider.event.HeadingEvent
+ * @see net.sf.marineapi.provider.event.HeadingListener
  */
 public class HeadingProvider extends AbstractProvider<HeadingEvent> {
 
