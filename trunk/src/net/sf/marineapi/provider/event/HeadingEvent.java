@@ -33,15 +33,16 @@ import net.sf.marineapi.nmea.sentence.HeadingSentence;
 public class HeadingEvent extends ProviderEvent {
 
 	private static final long serialVersionUID = 5706774741081575448L;
-
-	HeadingSentence s;
+	private double heading;
+	private boolean isTrue;
 
 	/**
 	 * @param source
 	 */
 	public HeadingEvent(Object source, HeadingSentence s) {
 		super(source);
-		this.s = s;
+		heading = s.getHeading();
+		isTrue= s.isTrue();
 	}
 
 	/**
@@ -50,7 +51,7 @@ public class HeadingEvent extends ProviderEvent {
 	 * @return Heading in degrees.
 	 */
 	public double getHeading() {
-		return s.getHeading();
+		return heading;
 	}
 
 	/**
@@ -59,6 +60,14 @@ public class HeadingEvent extends ProviderEvent {
 	 * @return true if true heading, otherwise false (magnetic).
 	 */
 	public boolean isTrue() {
-		return s.isTrue();
+		return isTrue;
+	}
+	
+	/* 
+	 * (non-Javadoc)
+	 * @see java.util.EventObject#toString()
+	 */
+	public String toString() {
+		return "[" + getHeading() + ", " + (isTrue() ? "T" : "M") + "]";
 	}
 }

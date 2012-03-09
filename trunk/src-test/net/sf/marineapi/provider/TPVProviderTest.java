@@ -79,12 +79,15 @@ public class TPVProviderTest implements TPVListener {
     public void testSentenceReadWithGGA() {
 
         SentenceFactory sf = SentenceFactory.getInstance();
-
         Sentence gga = sf.createParser(GGATest.EXAMPLE);
+        
+        assertNull(event);
         instance.sentenceRead(new SentenceEvent(this, gga));
         assertNull(event);
-
+        
         Sentence rmc = sf.createParser(RMCTest.EXAMPLE);
+        
+        assertNull(event);
         instance.sentenceRead(new SentenceEvent(this, rmc));
         assertNotNull(event);
 
@@ -99,8 +102,9 @@ public class TPVProviderTest implements TPVListener {
     public void testSentenceReadWithGLL() {
 
         SentenceFactory sf = SentenceFactory.getInstance();
-
         Sentence gll = sf.createParser(GLLTest.EXAMPLE);
+        
+        assertNull(event);
         instance.sentenceRead(new SentenceEvent(this, gll));
         assertNull(event);
 
