@@ -368,7 +368,7 @@ public class SentenceReader {
                         fireReadingPaused();
                     }
 
-                    int sleep = (int) Math.round(pauseTimeout / 4);
+                    int sleep = Math.round(pauseTimeout / 4);
                     Thread.sleep(sleep);
                 } catch (InterruptedException e) {
                     // nevermind

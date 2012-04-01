@@ -16,6 +16,10 @@ CHANGES
 
 * SentenceFactory; DBT and HDT parsers were registered incorrectly, fixed.
 
+* Extracted AbstractProvider base class from TPVProvider, may be used to
+  implement custom providers. Added also, base classes for provider events and
+  listeners.
+
 NEW FEATURES
 
 * Support for MWV sentences; wind speed and angle.
@@ -33,6 +37,8 @@ NEW FEATURES
 * Support for VHW sentences; water speed and heading.
 
 * HeadingSentence interface for sentences providing current heading.
+
+* HeadingProvider class, dispatches heading events.
   
 * SentenceFactory; added method for creating parsers without input data.
 
