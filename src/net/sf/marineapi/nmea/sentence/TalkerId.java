@@ -30,6 +30,8 @@ package net.sf.marineapi.nmea.sentence;
  */
 public enum TalkerId {
 
+    /** AIS */
+    AI,
     /** Autopilot - General */
     AG,
     /** Autopilot - Magnetic */

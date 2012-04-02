@@ -61,13 +61,16 @@ import net.sf.marineapi.nmea.sentence.TalkerId;
  */
 public class SentenceParser implements Sentence {
 
+    // The first character which will be '$' most of the times but could be '!'.
+    private char beginChar;
+
     // The first two characters after '$'.
     private TalkerId talkerId;
 
     // The next three characters after talker id.
     private final String sentenceId;
 
-    // actual data fields (address and checksum omitted)
+    // actual data fields (sentence id and checksum omitted)
     private List<String> fields;
 
     /**
@@ -85,6 +88,7 @@ public class SentenceParser implements Sentence {
             throw new IllegalArgumentException(msg);
         }
 
+        beginChar = nmea.charAt(0);
         talkerId = TalkerId.parse(nmea);
         sentenceId = SentenceId.parseStr(nmea);
 
@@ -133,13 +137,15 @@ public class SentenceParser implements Sentence {
     }
 
     /**
-     * Creates a new empty sentence with specified talker and sentence IDs.
+     * Creates a new empty sentence with specified begin character, talker and
+     * sentence IDs.
      * 
+     * @param begin The begin character, e.g. '$' or '!'
      * @param talker Talker type Id, e.g. "GP" or "LC".
      * @param type Sentence type Id, e.g. "GGA or "GLL".
      * @param size Number of data fields
      */
-    protected SentenceParser(TalkerId talker, String type, int size) {
+    protected SentenceParser(char begin, TalkerId talker, String type, int size) {
         if (size < 1) {
             throw new IllegalArgumentException("Minimum number of fields is 1");
         }
@@ -150,12 +156,24 @@ public class SentenceParser implements Sentence {
             throw new IllegalArgumentException("Sentence ID must be specified");
         }
 
+        beginChar = begin;
         talkerId = talker;
         sentenceId = type;
         fields = new ArrayList<String>(size);
         for (int i = 0; i < size; i++) {
             fields.add("");
         }
+    }
+
+    /**
+     * Creates a new empty sentence with specified talker and sentence IDs.
+     * 
+     * @param talker Talker type Id, e.g. "GP" or "LC".
+     * @param type Sentence type Id, e.g. "GGA or "GLL".
+     * @param size Number of data fields
+     */
+    protected SentenceParser(TalkerId talker, String type, int size) {
+        this(Sentence.BEGIN_CHAR, talker, type, size);
     }
 
     /**
@@ -203,6 +221,14 @@ public class SentenceParser implements Sentence {
      */
     public final int getFieldCount() {
         return fields.size();
+    }
+
+    /*
+     * (non-Javadoc)
+     * @see net.sf.marineapi.nmea.sentence.Sentence#getBeginChar()
+     */
+    public final char getBeginChar() {
+        return beginChar;
     }
 
     /*
@@ -280,7 +306,7 @@ public class SentenceParser implements Sentence {
     public String toString() {
 
         StringBuilder sb = new StringBuilder(MAX_LENGTH);
-        sb.append(BEGIN_CHAR);
+        sb.append(beginChar);
         sb.append(talkerId.toString());
         sb.append(sentenceId);
 
@@ -299,7 +325,8 @@ public class SentenceParser implements Sentence {
      * 
      * @param index Data field index in sentence
      * @return Character contained in the field
-     * @throws net.sf.marineapi.parser.ParseException If field contains more than one character
+     * @throws net.sf.marineapi.parser.ParseException If field contains more
+     *             than one character
      */
     protected final char getCharValue(int index) {
         String val = getStringValue(index);
@@ -353,7 +380,8 @@ public class SentenceParser implements Sentence {
      * 
      * @param index Field index
      * @return Field value as String
-     * @throws net.sf.marineapi.parser.DataNotAvailableException If the field is empty
+     * @throws net.sf.marineapi.parser.DataNotAvailableException If the field is
+     *             empty
      */
     protected final String getStringValue(int index) {
         String value = fields.get(index);
@@ -521,5 +549,17 @@ public class SentenceParser implements Sentence {
 
         fields.clear();
         fields = temp;
+    }
+
+    /*
+     * (non-Javadoc)
+     * @see net.sf.marineapi.nmea.sentence.Sentence#setBeginChar(char)
+     */
+    public void setBeginChar(char ch) {
+        if (ch != BEGIN_CHAR || ch != ALTERNATIVE_BEGIN_CHAR) {
+            String msg = "Invalid begin char; expected '$' or '!'";
+            throw new IllegalArgumentException(msg);
+        }
+        beginChar = ch;
     }
 }

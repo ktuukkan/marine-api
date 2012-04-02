@@ -74,7 +74,7 @@ public final class Checksum {
         int sum = 0;
         for (int i = 0; i < nmea.length(); i++) {
             ch = nmea.charAt(i);
-            if (ch == Sentence.BEGIN_CHAR) {
+            if (i == 0 && (ch == Sentence.BEGIN_CHAR || ch == Sentence.ALTERNATIVE_BEGIN_CHAR)) {
                 continue;
             } else if (ch == Sentence.CHECKSUM_DELIMITER) {
                 break;
