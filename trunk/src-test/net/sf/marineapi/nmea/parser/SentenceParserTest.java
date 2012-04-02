@@ -18,6 +18,9 @@ import org.junit.Test;
  */
 public class SentenceParserTest {
 
+    public static final String VDO_EXAMPLE = "!AIVDO,1,1,,,13:r`R5P1orpG60JeHgRSj4l0000,0*56";
+    public static final String VDM_EXAMPLE = "!AIVDM,1,1,,B,177KQJ5000G?tO`K>RA1wUbN0TKH,0*5C";
+
     private SentenceParser instance;
 
     /**
@@ -73,6 +76,30 @@ public class SentenceParserTest {
         } catch (Exception e) {
             fail(e.getMessage());
         }
+    }
+
+    /**
+     * Test method for SenteceParser constructor.
+     */
+    @Test
+    public void testConstructorWithAIVDO() {
+        Sentence s = new SentenceParser(VDO_EXAMPLE);
+        assertTrue(s.isValid());
+        assertFalse(s.isProprietary());
+        assertEquals(Sentence.ALTERNATIVE_BEGIN_CHAR, s.getBeginChar());
+        assertEquals(VDO_EXAMPLE, s.toString());
+    }
+
+    /**
+     * Test method for SenteceParser constructor.
+     */
+    @Test
+    public void testConstructorWithAIVDM() {
+        Sentence s = new SentenceParser(VDM_EXAMPLE);
+        assertTrue(s.isValid());
+        assertFalse(s.isProprietary());
+        assertEquals(Sentence.ALTERNATIVE_BEGIN_CHAR, s.getBeginChar());
+        assertEquals(VDM_EXAMPLE, s.toString());
     }
 
     /**
@@ -282,6 +309,16 @@ public class SentenceParserTest {
      */
     public void testIsProprietary() {
         assertFalse(instance.isProprietary());
+    }
+
+    /**
+     * Test method for
+     * {@link net.sf.marineapi.nmea.parser.SentenceParser#setBeginChar()}.
+     */
+    public void testSetBeginChar() {
+        assertEquals(Sentence.BEGIN_CHAR, instance.getBeginChar());
+        instance.setBeginChar(Sentence.ALTERNATIVE_BEGIN_CHAR);
+        assertEquals(Sentence.ALTERNATIVE_BEGIN_CHAR, instance.getBeginChar());
     }
 
     /**

@@ -39,6 +39,11 @@ public interface Sentence {
     char BEGIN_CHAR = '$';
 
     /**
+     * Alternative sentence begin character used in VDO and VDM sentences.
+     */
+    char ALTERNATIVE_BEGIN_CHAR = '!';
+
+    /**
      * Checksum field delimiter char
      */
     char CHECKSUM_DELIMITER = '*';
@@ -66,6 +71,14 @@ public interface Sentence {
      * @return Data field count
      */
     int getFieldCount();
+
+    /**
+     * Get the sentence begin character. Although most of the sentences start
+     * with '$', some of them use '!' as begin character.
+     * 
+     * @return Sentence begin char, e.g. "$" or "!".
+     */
+    char getBeginChar();
 
     /**
      * Get the sentence ID that specifies the sentence type and data it holds.
@@ -99,6 +112,16 @@ public interface Sentence {
      * @return True if validly formatted, otherwise false.
      */
     boolean isValid();
+
+    /**
+     * Set the sentence begin character. Although most of the sentences start
+     * with '$', some of them use '!' as begin character.
+     * 
+     * @param ch Sentence begin char to set ('$' or '!')
+     * @see Sentence#BEGIN_CHAR
+     * @see Sentence#ALTERNATIVE_BEGIN_CHAR
+     */
+    void setBeginChar(char ch);
 
     /**
      * Set the talker ID of the sentence. Typically, the ID might be changed if
