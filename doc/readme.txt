@@ -56,18 +56,14 @@ CONTRIBUTORS
 * Kimmo Tuukkanen <ktuukkan@users.sourceforge.net>
   - project admin, lead developer
 
-* Warren Zahra
-  - developer, collaboration with marssa.org
-  
 REFERENCES
 
 The NMEA information for Java Marine API has been collected mainly from the
 following resources (availability checked on 2011-11-22):
 
  * NMEA Revealed by Eric S. Raymond
-   <http://catb.org/gpsd/NMEA.html> (latest version)
-   <http://gpsd.berlios.de/NMEA.txt> (previous version)
- 
+   <http://catb.org/gpsd/NMEA.html>
+    
  * The NMEA FAQ by Peter Bennett
    <http://vancouver-webpages.com/peter/nmeafaq.txt>
  
