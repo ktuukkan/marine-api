@@ -29,24 +29,6 @@ package net.sf.marineapi.nmea.sentence;
 public interface VHWSentence extends HeadingSentence {
 
     /**
-     * Returns the magnetic heading.
-     * 
-     * @return Heading in degrees magnetic.
-     * @deprecated Use {@link #getMagneticHeading() } instead.
-     */
-    @Deprecated
-    double getDegreesMagnetic();
-
-    /**
-     * Returns the true heading.
-     * 
-     * @return Heading in degrees true.
-     * @deprecated Use {@link HeadingSentence#getHeading()} instead.
-     */
-    @Deprecated
-    double getDegreesTrue();
-
-    /**
      * Returns the current heading.
      * 
      * @return Heading in degrees magnetic.
