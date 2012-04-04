@@ -12,13 +12,20 @@ CHANGES
 * SentenceValidator; separated sentence format validation and checksum checking
   in different methods by adding isSentence(String) method.
 
-* SentenceParser; setDegreesValue() for degrees formatting and validation.
-
 * SentenceFactory; DBT and HDT parsers were registered incorrectly, fixed.
+
+* DPTSentence; added maximum depth setter/getter.
 
 * Extracted AbstractProvider base class from TPVProvider, may be used to
   implement custom providers. Added also base classes for provider events and
   listeners.
+  
+* SentenceParser/SentenceValidator; added support for alternative begin 
+  character '!' to enable parsing AIS sentences.
+    
+* Fixed a precision problem in ZDA parser.
+
+* Improvements and fixes in Javadocs.
 
 NEW FEATURES
 
@@ -41,16 +48,20 @@ NEW FEATURES
 * HeadingProvider class, dispatches heading events.
   
 * SentenceFactory; added method for creating parsers without input data.
-
-* SentenceParser; setDegreesValue() method for bearing, course etc, validates
-  the value to be within the range of 0..360 degrees.
+  
+* SentenceParser; setDegreesValue(double) method for bearing, course etc,
+  validates the value to be within 0..360 degrees.
 
 KNOWN ISSUES
-  
+
 * Position.distanceTo() may not produce correct results.
  
 * Proprietary sentences with ID longer than five characters are not supported.
 
+* Not all AIS sentences are supported, TalkerId enum contains only "AI".
+
 ACKNOWLEDGEMENTS
 
 * Thanks to Warren Zahra/marssa.org for contribution in VHW and MTW parsers.
+
+* Thanks to Josué Alcalde González for patch to add support for '!' begin char.
