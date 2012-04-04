@@ -65,22 +65,6 @@ class VHWParser extends SentenceParser implements VHWSentence {
 
     /*
      * (non-Javadoc)
-     * @see net.sf.marineapi.nmea.sentence.VHWSentence#getDegreesMagnetic()
-     */
-    public double getDegreesMagnetic() {
-        return getMagneticHeading();
-    }
-
-    /*
-     * (non-Javadoc)
-     * @see net.sf.marineapi.nmea.sentence.VHWSentence#getDegreesTrue()
-     */
-    public double getDegreesTrue() {
-        return getHeading();
-    }
-
-    /*
-     * (non-Javadoc)
      * @see net.sf.marineapi.nmea.sentence.HeadingSentence#getHeading()
      */
     public double getHeading() {
