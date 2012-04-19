@@ -71,8 +71,9 @@ stream, e.g. serial port, file, TCP/IP socket etc. The plain ASCII data is
 converted to events that can be listened in your application. Library provides
 interfaces and parser implementations for selected sentences and you can also
 implement and integrate your own parsers by extending the provided base parser.
+</p>
 <p>
-Currently the following sentences are supported:
+Currently the following sentences are supported:</p>
 <ul>
     <li>BOD - Bearing from origin to destination</li>
 	<li>DBT - Water depth below transducer in meters, feet and fathoms.</li>
@@ -81,36 +82,46 @@ Currently the following sentences are supported:
 	<li>GLL - Current geographic position and time</li>
 	<li>GSA - Precision of GPS fix</li>
 	<li>GSV - Detailed GPS satellite data</li>
+	<li>HDG - Heading with magnetic deviation and variation</li>
+	<li>HDM - Magnetic heading in degrees</li>
+	<li>HDT - True heading in degrees</li>
+	<li>MTA - Air temperature in degrees Celcius</li>
+	<li>MTW - Water temperature in degrees Celcius</li>
+	<li>MWV - Wind speed and angle</li>
 	<li>RMB - Recommended minimum navigation information "type B"</li>
 	<li>RMC - Recommended minimum navigation information "type C"</li>
 	<li>RTE - GPS route data with list of waypoints</li>
+	<li>VHW - Water speed and heading</li>
 	<li>VTG - Course and speed over ground</li>
 	<li>WPL - Destination waypoint location and ID</li>
 	<li>ZDA - UTC time and date with local time offset</li>
 </ul>
+
 <p>
 In addition to data reading, the library also supports modifying the sentence
 contents and provides data field formatting and validation.
+</p>
 
-<h2>Licencing</h2>
+<h2>Licensing</h2>
 <p>
 Java Marine API is open source software and licensed under the 
 <a href="http://www.gnu.org/licenses/lgpl-3.0-standalone.html">GNU Lesser
-General Public Licence</a>. The source code is freely available in the project's 
+General Public License</a>. The source code is freely available in the project's 
 <a href="http://marineapi.svn.sourceforge.net/viewvc/marineapi/">SVN
 repository</a>. See latest distribution package and readme.txt within it for
 more information.
+</p>
 
 <h2>Releases</h2>
 
 <h3>Latest</h3>
-<p>v0.4 pre-alpha, released on 2011-07-12:</p>
+<p>v0.5 pre-alpha, released on 2012-04-19:</p>
 <ul>
 	<li><a href="https://sourceforge.net/projects/marineapi/files/Releases/">Download</a></li>
-	<li><a href="0.4/javadoc/">Javadoc</a></li>
-	<li><a href="0.4/readme.txt">Readme</a></li>
-	<li><a href="0.4/release_notes.txt">Release notes</a></li>
-	<li>Test <a href="0.4/junit-noframes.html">results</a> and <a href="0.4/coverage.html">coverage</a></li>
+	<li><a href="0.5/javadoc/">Javadoc</a></li>
+	<li><a href="0.5/readme.txt">Readme</a></li>
+	<li><a href="0.5/release_notes.txt">Release notes</a></li>
+	<li>Test <a href="0.5/junit-noframes.html">results</a> and <a href="0.5/coverage.html">coverage</a></li>
 </ul>
 
 <p>
@@ -120,6 +131,15 @@ older versions.
 </p>
 
 <div id="oldReleases">
+
+<p>v0.4 pre-alpha, released on 2011-07-12:</p>
+<ul>
+	<li><a href="https://sourceforge.net/projects/marineapi/files/Releases/">Download</a></li>
+	<li><a href="0.4/javadoc/">Javadoc</a></li>
+	<li><a href="0.4/readme.txt">Readme</a></li>
+	<li><a href="0.4/release_notes.txt">Release notes</a></li>
+	<li>Test <a href="0.4/junit-noframes.html">results</a> and <a href="0.4/coverage.html">coverage</a></li>
+</ul>
 
 <p>v0.3 pre-alpha, released on 2011-05-08:</p>
 <ul>
@@ -139,8 +159,7 @@ older versions.
 	<li>Test <a href="0.2/junit-noframes.html">results</a> and <a href="0.2/coverage.html">coverage</a></li>
 </ul>
 
-
-<p>v0.1 pre-alpha, released on 2010-08-21:
+<p>v0.1 pre-alpha, released on 2010-08-21:</p>
 <ul>
 	<li><a href="http://sourceforge.net/projects/marineapi/files/">Download</a></li>
 	<li><a href="0.1/javadoc/">Javadoc</a></li>
@@ -154,7 +173,7 @@ older versions.
 <h2>Examples and sample data</h2>
 <p>
 Check out the files section at Sourceforge. Also included in the distribution
-package since v0.4.
+package since v0.4.</p>
 <ul>
 	<li><a href="https://sourceforge.net/projects/marineapi/files/Examples/">Examples</a></li>
 	<li><a href="https://sourceforge.net/projects/marineapi/files/Sample%20data/">Sample data</a></li>
@@ -164,8 +183,7 @@ package since v0.4.
 <p>
 Please visit the <a href="http://sourceforge.net/projects/marineapi/">project
 page</a> at SourceForge.net for contact and support. Any kind of feedback or
-contribution is welcome.
-
+contribution is welcome.</p>
 
 <p id="footer">
 Copyright &copy; 2010-2012 Kimmo Tuukkanen</p>
