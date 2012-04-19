@@ -21,10 +21,9 @@
 package net.sf.marineapi.nmea.sentence;
 
 /**
- * The enumeration of NMEA Talker IDs, i.e. the first two characters in
- * sentence's address field. For example, <code>GP</code> in <code>$GPGGA</code>
- * . Notice that proprietary sentences are identified by single character
- * {@link #P}.
+ * The enumeration of Talker IDs, i.e. the first two characters in sentence's
+ * address field. For example, <code>GP</code> in <code>$GPGGA</code>. Notice
+ * that proprietary sentences are identified by single character {@link #P}.
  * <p>
  * This enum contains also non-NMEA IDs to enable parsing AIS messages;
  * {@link #AI}, {@link #AB} and {@link #BS}. However, the correct meaning of
