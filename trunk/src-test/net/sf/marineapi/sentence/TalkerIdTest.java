@@ -1,4 +1,5 @@
 package net.sf.marineapi.sentence;
+
 /* 
  * TalkerIdTest.java
  * Copyright (C) 2011 Kimmo Tuukkanen
@@ -55,7 +56,7 @@ public class TalkerIdTest {
         assertEquals(TalkerId.P, c);
 
         try {
-            TalkerId.parse("$ABCDE,,,,,,");
+            TalkerId.parse("$XXXXX,,,,,,");
             fail("Did not throw exception");
         } catch (Exception e) {
             // pass
