@@ -22,7 +22,13 @@ package net.sf.marineapi.nmea.sentence;
 
 /**
  * The enumeration of NMEA Talker IDs, i.e. the first two characters in
- * sentence's address field. For example, "GP" in "$GPGGA".
+ * sentence's address field. For example, <code>GP</code> in <code>$GPGGA</code>
+ * . Notice that proprietary sentences are identified by single character
+ * {@link #P}.
+ * <p>
+ * This enum contains also non-NMEA IDs to enable parsing AIS messages;
+ * {@link #AI}, {@link #AB} and {@link #BS}. However, the correct meaning of
+ * these are still unconfirmed.
  * 
  * @author Kimmo Tuukkanen
  * @version $Revision$
@@ -30,8 +36,12 @@ package net.sf.marineapi.nmea.sentence;
  */
 public enum TalkerId {
 
-    /** AIS */
+    /** AIS (to support <code>AIVDM</code> and <code>AIVDO</code>) */
     AI,
+    /** AIS "Broadcast" message (to support <code>ABVDM</code>) */
+    AB,
+    /** AIS "Base Station" message (to support <code>BSVDM</code>) */
+    BS,
     /** Autopilot - General */
     AG,
     /** Autopilot - Magnetic */
@@ -42,6 +52,7 @@ public enum TalkerId {
     /** Communications - Digital Selective Calling (DSC) */
     CD,
     /** Computer - Memory Data (obsolete) */
+    @Deprecated
     CM,
     /** Communications - Satellite */
     CS,
