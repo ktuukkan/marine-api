@@ -23,6 +23,8 @@ CHANGES
 * SentenceParser/SentenceValidator; added support for alternative begin 
   character '!' to enable parsing AIS sentences.
     
+* Added new ids AI, AB and BS in TalkerId enum to support parsing AIS messages.
+
 * Fixed a precision problem in ZDA parser.
 
 * Improvements and fixes in Javadocs.
@@ -45,7 +47,7 @@ NEW FEATURES
 
 * HeadingSentence interface for sentences providing current heading.
 
-* HeadingProvider class, dispatches heading events.
+* HeadingProvider that reports current heading.
   
 * SentenceFactory; added method for creating parsers without input data.
   
