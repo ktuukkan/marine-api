@@ -73,7 +73,7 @@ $Revision$
 	<target name="compile-tests" depends="compile-src">
 		<mkdir dir="${build.dir.tests}" />
 		<javac destdir="${build.dir.tests}" debug="true" srcdir="${tests.dir}"
-			includeantruntime="true">
+			includeantruntime="true" excludes="**/example/*">
 			<classpath>
 				<pathelement path="${build.dir.classes}" />
 			</classpath>
@@ -156,7 +156,7 @@ $Revision$
 		
 		<copy todir="${build.dir.dist}" file="${jar.file}" />
 		<copy todir="${build.dir.dist}/doc/">
-			<fileset dir="${doc.dir}" />
+			<fileset dir="${doc.dir}" excludes="**/html/**" />
 		</copy>
 		
 		<copy todir="${build.dir.dist}/examples/src">
