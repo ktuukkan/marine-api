@@ -39,7 +39,7 @@ public class HeadingProviderTest implements HeadingListener {
     @Before
     public void setUp() throws Exception {
     	
-        FileInputStream str = new FileInputStream(new File("data/sample1.txt"));
+        FileInputStream str = new FileInputStream(new File("target/test-classes/data/sample1.txt"));
         SentenceReader r = new SentenceReader(str);
         instance = new HeadingProvider(r);
         instance.addListener(this);

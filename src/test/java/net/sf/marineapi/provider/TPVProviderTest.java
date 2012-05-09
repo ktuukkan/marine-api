@@ -54,7 +54,7 @@ public class TPVProviderTest implements TPVListener {
      */
     @Before
     public void setUp() throws Exception {
-        File f = new File("data/Navibe-GM720.txt");
+        File f = new File("target/test-classes/data/Navibe-GM720.txt");
         FileInputStream str = new FileInputStream(f);
         SentenceReader r = new SentenceReader(str);
         instance = new TPVProvider(r);
