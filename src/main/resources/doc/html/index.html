@@ -1,0 +1,195 @@
+<html>
+<head>
+    <title>Java Marine API - NMEA 0183 library for Java</title>
+	<link href="marineapi.css" type="text/css" rel="stylesheet" media="screen" />
+	<meta name="description" content="Java Marine API - Open-source NMEA 0183 parser libary for Java 1.5 and later." />
+	<meta name="keywords" content="Java, NMEA, 0183, API, parser, library, LGPL, Java NMEA API, Java NMEA library, Java NMEA parser" /> 
+</head>
+
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-27677286-1']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+
+<script type="text/javascript" src="jquery-1.4.4.min.js"><!-- empty --></script>
+<script type="text/javascript">
+//<![CDATA[
+ 
+$(function()
+{
+ 
+$("#open").click(function(event) {
+	event.preventDefault();
+	$("#oldReleases").slideDown();
+	$("#open").hide();
+	$("#close").show();
+});
+ 
+$("#close").click(function(event) {
+	event.preventDefault();
+	$("#oldReleases").slideUp();
+	$("#open").show();
+	$("#close").hide();
+});
+
+});
+//]]>
+</script>
+
+<body>
+
+<div id="frame">
+<div id="content">
+
+<div style="float: right">
+<p style="margin: 0; padding: 0;">
+<a href="http://sourceforge.net/projects/marineapi">
+<img src="http://sflogo.sourceforge.net/sflogo.php?group_id=307087&amp;type=13" width="120" height="30" border="0" alt="Get Java Marine API at SourceForge.net. Fast, secure and Free Open Source software downloads" />
+</a>
+</div>
+
+<h1>Java Marine API</h1>
+
+<h2>About</h2>
+<p>
+Java Marine API is an
+<a href="http://www.nmea.org/content/nmea_standards/nmea_083_v_400.asp">NMEA
+0183</a> parser library for <a href="http://www.oracle.com/technetwork/java/">Java
+1.5</a> and newer. The goal of the project is to enable easy access to data
+provided by various marine instruments, such as GPS, sonar or autopilot. The
+library reads NMEA sentences from any source that can be accessed through input
+stream, e.g. serial port, file, TCP/IP socket etc. The plain ASCII data is
+converted to events that can be listened in your application. Library provides
+interfaces and parser implementations for selected sentences and you can also
+implement and integrate your own parsers by extending the provided base parser.
+</p>
+<p>
+Currently the following sentences are supported:</p>
+<ul>
+    <li>BOD - Bearing from origin to destination</li>
+	<li>DBT - Water depth below transducer in meters, feet and fathoms.</li>
+	<li>DPT - Water depth in meters with offset to transducer.</li>
+	<li>GGA - GPS fix data</li>
+	<li>GLL - Current geographic position and time</li>
+	<li>GSA - Precision of GPS fix</li>
+	<li>GSV - Detailed GPS satellite data</li>
+	<li>HDG - Heading with magnetic deviation and variation</li>
+	<li>HDM - Magnetic heading in degrees</li>
+	<li>HDT - True heading in degrees</li>
+	<li>MTA - Air temperature in degrees Celcius</li>
+	<li>MTW - Water temperature in degrees Celcius</li>
+	<li>MWV - Wind speed and angle</li>
+	<li>RMB - Recommended minimum navigation information "type B"</li>
+	<li>RMC - Recommended minimum navigation information "type C"</li>
+	<li>RTE - GPS route data with list of waypoints</li>
+	<li>VHW - Water speed and heading</li>
+	<li>VTG - Course and speed over ground</li>
+	<li>WPL - Destination waypoint location and ID</li>
+	<li>ZDA - UTC time and date with local time offset</li>
+</ul>
+
+<p>
+In addition to data reading, the library also supports modifying the sentence
+contents and provides data field formatting and validation.
+</p>
+
+<h2>Licensing</h2>
+<p>
+Java Marine API is open source software and licensed under the 
+<a href="http://www.gnu.org/licenses/lgpl-3.0-standalone.html">GNU Lesser
+General Public License</a>. The source code is freely available in the project's 
+<a href="http://marineapi.svn.sourceforge.net/viewvc/marineapi/">SVN
+repository</a>. See latest distribution package and readme.txt within it for
+more information.
+</p>
+
+<h2>Releases</h2>
+
+<h3>Latest</h3>
+<p>v0.5 pre-alpha, released on 2012-04-19:</p>
+<ul>
+	<li><a href="https://sourceforge.net/projects/marineapi/files/Releases/">Download</a></li>
+	<li><a href="0.5/javadoc/">Javadoc</a></li>
+	<li><a href="0.5/readme.txt">Readme</a></li>
+	<li><a href="0.5/release_notes.txt">Release notes</a></li>
+	<li>Test <a href="0.5/tests/">results</a> and <a href="0.5/coverage/">coverage</a></li>
+</ul>
+
+<p>
+<a href="#" id="open">Show</a>
+<a href="#" id="close">Hide</a>
+older versions.
+</p>
+
+<div id="oldReleases">
+
+<p>v0.4 pre-alpha, released on 2011-07-12:</p>
+<ul>
+	<li><a href="https://sourceforge.net/projects/marineapi/files/Releases/">Download</a></li>
+	<li><a href="0.4/javadoc/">Javadoc</a></li>
+	<li><a href="0.4/readme.txt">Readme</a></li>
+	<li><a href="0.4/release_notes.txt">Release notes</a></li>
+	<li>Test <a href="0.4/junit-noframes.html">results</a> and <a href="0.4/coverage.html">coverage</a></li>
+</ul>
+
+<p>v0.3 pre-alpha, released on 2011-05-08:</p>
+<ul>
+	<li><a href="https://sourceforge.net/projects/marineapi/files/Releases/">Download</a></li>
+	<li><a href="0.3/javadoc/">Javadoc</a></li>
+	<li><a href="0.3/readme.txt">Readme</a></li>
+	<li><a href="0.3/release_notes.txt">Release notes</a></li>
+	<li>Test <a href="0.3/junit-noframes.html">results</a> and <a href="0.3/coverage.html">coverage</a></li>
+</ul>
+
+<p>v0.2 pre-alpha, released on 2010-12-08:</p>
+<ul>
+	<li><a href="http://sourceforge.net/projects/marineapi/files/">Download</a></li>
+	<li><a href="0.2/javadoc/">Javadoc</a></li>
+	<li><a href="0.2/readme.txt">Readme</a></li>
+	<li><a href="0.2/release_notes.txt">Release notes</a></li>
+	<li>Test <a href="0.2/junit-noframes.html">results</a> and <a href="0.2/coverage.html">coverage</a></li>
+</ul>
+
+<p>v0.1 pre-alpha, released on 2010-08-21:</p>
+<ul>
+	<li><a href="http://sourceforge.net/projects/marineapi/files/">Download</a></li>
+	<li><a href="0.1/javadoc/">Javadoc</a></li>
+	<li><a href="0.1/readme.txt">Readme</a></li>
+	<li><a href="0.1/release_notes.txt">Release notes</a></li>
+	<li>Test <a href="0.1/junit-noframes.html">results</a> and <a href="0.1/coverage.html">coverage</a></li>
+</ul>
+
+</div>
+
+<h2>Examples and sample data</h2>
+<p>
+Check out the files section at Sourceforge. Also included in the distribution
+package since v0.4.</p>
+<ul>
+	<li><a href="https://sourceforge.net/projects/marineapi/files/Examples/">Examples</a></li>
+	<li><a href="https://sourceforge.net/projects/marineapi/files/Sample%20data/">Sample data</a></li>
+</ul>
+
+<h2>Contact</h2>
+<p>
+Please visit the <a href="http://sourceforge.net/projects/marineapi/">project
+page</a> at SourceForge.net for contact and support. Any kind of feedback or
+contribution is welcome.</p>
+
+<p id="footer">
+Copyright &copy; 2010-2012 Kimmo Tuukkanen</p>
+
+</div>
+</div>
+
+</body>
+</html>
