@@ -3,16 +3,29 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>net.sf.marineapi</groupId>
 	<artifactId>marineapi</artifactId>
-	<version>0.5.176</version>
+	<version>0.5.185-SNAPSHOT</version>
 	<packaging>jar</packaging>
 
 	<name>Java Marine API</name>
 	<url>http://marineapi.sourceforge.net/</url>
 	<description>Java Marine API is an NMEA 0183 library for Java 1.5 and newer. The goal of the project is to enable easy access to data provided by electronic marine instruments such as GPS, sonar or autopilot. Detects and reads NMEA sentences from any input stream, e.g. from file, serial port, tcp/ip socket etc. Interfaces and parsers for selected sentences are provided and you can also integrate your own parsers by extending the base parser. See project web or files section for more info, javadocs and examples.</description>
 
+	<licenses>
+		<license>
+			<name>LGPL 3.0 license</name>
+			<url>http://www.opensource.org/licenses/lgpl-3.0.html</url>
+		</license>
+	</licenses>
+
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
+
+	<parent>
+		<groupId>org.sonatype.oss</groupId>
+		<artifactId>oss-parent</artifactId>
+		<version>7</version>
+	</parent>
 
 	<organization>
 		<name>Kimmo Tuukkanen</name>
@@ -20,11 +33,33 @@
 	</organization>
 
 	<scm>
-		<url>https://marineapi.svn.sourceforge.net/svnroot/marineapi </url>
-		<connection>https</connection>
-		<developerConnection>Kimmo Tuukkanen</developerConnection>
+		<connection>scm:svn:http://marineapi.svn.sourceforge.net/svnroot/marineapi</connection>
+		<developerConnection>scm:svn:https://marineapi.svn.sourceforge.net/svnroot/marineapi</developerConnection>
+		<url>http://marineapi.svn.sourceforge.net/svnroot/marineapi</url>
 		<tag>trunk</tag>
 	</scm>
+
+	<developers>
+		<developer>
+			<id>ktuukkan</id>
+			<name>Kimmo Tuukkanen</name>
+			<email>ktuukkan at users.sourceforge.net</email>
+		</developer>
+	</developers>
+
+	<distributionManagement>
+		<repository>
+			<id>sonatype-nexus-staging</id>
+			<name>Sonatype Staging Repository</name>
+			<url>http://oss.sonatype.org/service/local/staging/deploy/maven2</url>
+		</repository>
+
+		<snapshotRepository>
+			<id>sonatype-nexus-snapshots</id>
+			<name>Sonatype Nexus Snapshots</name>
+			<url>http://oss.sonatype.org/content/repositories/snapshots</url>
+		</snapshotRepository>
+	</distributionManagement>
 
 	<dependencies>
 		<dependency>
@@ -41,31 +76,7 @@
 		</dependency>
 	</dependencies>
 
-	<profiles>
-		<profile>
-			<id>gpg-sign</id>
-			<build>
-				<plugins>
-					<plugin>
-						<groupId>org.apache.maven.plugins</groupId>
-						<artifactId>maven-gpg-plugin</artifactId>
-						<version>1.4</version>
-						<executions>
-							<execution>
-								<id>sign-artifacts</id>
-								<goals>
-									<goal>sign</goal>
-								</goals>
-							</execution>
-						</executions>
-					</plugin>
-				</plugins>
-			</build>
-		</profile>
-
-	</profiles>
 	<build>
-
 		<plugins>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
@@ -116,4 +127,27 @@
 			</plugin>
 		</plugins>
 	</build>
+
+	<profiles>
+		<profile>
+			<id>gpg-sign</id>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-gpg-plugin</artifactId>
+						<version>1.4</version>
+						<executions>
+							<execution>
+								<id>sign-artifacts</id>
+								<goals>
+									<goal>sign</goal>
+								</goals>
+							</execution>
+						</executions>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+	</profiles>
 </project>
