@@ -1,9 +1,8 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>net.sf.marineapi</groupId>
 	<artifactId>marineapi</artifactId>
-	<version>0.5.185-SNAPSHOT</version>
+	<version>0.5.1</version>
 	<packaging>jar</packaging>
 
 	<name>Java Marine API</name>
@@ -33,9 +32,9 @@
 	</organization>
 
 	<scm>
-		<connection>scm:svn:http://marineapi.svn.sourceforge.net/svnroot/marineapi</connection>
-		<developerConnection>scm:svn:https://marineapi.svn.sourceforge.net/svnroot/marineapi</developerConnection>
-		<url>http://marineapi.svn.sourceforge.net/svnroot/marineapi</url>
+		<connection>scm:svn:http://marineapi.svn.sourceforge.net/svnroot/marineapi/tags/0.5.1</connection>
+		<developerConnection>scm:svn:https://marineapi.svn.sourceforge.net/svnroot/marineapi/tags/0.5.1</developerConnection>
+		<url>http://marineapi.svn.sourceforge.net/svnroot/marineapi/tags/0.5.1</url>
 		<tag>trunk</tag>
 	</scm>
 
