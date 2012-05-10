@@ -33,27 +33,24 @@ $Revision$
         <property file="build.properties" />
 		<property name="project.id" value="${app.id}" />
 		<property name="version" value="${app.version}" />
-		<property name="src.dir" value="src/" />
-		<property name="tests.dir" value="src-test/" />
-		<property name="reports.dir" value="reports/" />
-		<property name="doc.dir" value="doc/" />
-		<property name="data.dir" value="data/" />
-		<property name="releases.dir" value="releases/" />
+		<property name="src.dir" value="src/main/java" />
+		<property name="tests.dir" value="src/test/java" />
+		<property name="resources.dir" value="src/main/resources" />
+		<property name="doc.dir" value="${resources.dir}/doc/" />
+		<property name="data.dir" value="src/test/resources/data/" />
 				
-		<property name="build.dir" value="bin/" />
-		<property name="build.dir.classes" value="bin/" />
-		<property name="build.dir.tests" value="bin/" />
-		<property name="build.dir.dist" value="dist/" />
-		<property name="build.dir.api" value="${doc.dir}/javadoc/" />
+		<property name="build.dir" value="target/" />
+		<property name="build.dir.classes" value="${build.dir}/classes" />
+		<property name="build.dir.tests" value="${build.dir}/test-classes" />
+		<property name="build.dir.dist" value="${build.dir}/dist/" />
+		<property name="build.dir.javadoc" value="${build.dir}/javadoc/" />
+		<property name="build.dir.reports" value="${build.dir}/reports/" />
 		
 		<property name="manifest.file" value="${build.dir}/MANIFEST.MF" />
 		<property name="jar.file" value="${build.dir}/${project.id}.jar" />
 		
 		<property name="release.zip"
-			value="${releases.dir}/${project.id}-${version}.zip" />
-
-		<property name="examples.zip"
-			value="${releases.dir}/${project.id}-examples-${version}.zip" />
+			value="${build.dir}/${project.id}-${version}.zip" />
 
 		<property name="javadoc.title"
 			value="${app.name} v${version} (b${build.id})" />
@@ -66,7 +63,8 @@ $Revision$
 	<target name="compile-src" depends="init">
 		<mkdir dir="${build.dir.classes}" />
 		<javac destdir="${build.dir.classes}" srcdir="${src.dir}" debug="true"
-			includes="**/*.java" includeantruntime="true" source="1.5" target="1.5" />
+			includes="**/*.java" excludes="**/example/**" includeantruntime="true"
+			source="1.5" target="1.5" />
 	</target>
 
 	<!-- compile tests -->
@@ -83,10 +81,7 @@ $Revision$
 	<!-- clean up -->
 	<target name="clean" depends="init" description="Cleans up the project">
 		<delete dir="${build.dir}" />
-		<delete dir="${build.dir.dist}" />
-		<delete dir="${build.dir.api}" />
-		<delete dir="${reports.dir}" />
-		<delete dir="${releases.dir}" />
+		<delete dir="${builld.dir.release}" />
 	</target>
 	
 	<!-- build project -->
@@ -110,7 +105,10 @@ $Revision$
 	<!-- run all unit tests -->
 	<target name="test" depends="compile-src, compile-tests"
 		description="Run all unit tests">
-		<mkdir dir="${reports.dir}" />
+		<mkdir dir="${build.dir.reports}" />
+		<copy todir="${build.dir.tests}/data">
+			<fileset dir="${data.dir}" />
+		</copy>
 		<junit fork="yes" maxmemory="512m" printsummary="true"
 			haltonfailure="false">
 			<formatter type="xml" />
@@ -118,18 +116,18 @@ $Revision$
 				<pathelement location="${build.dir.tests}" />
 				<pathelement location="${build.dir.classes}" />
 			</classpath>
-			<batchtest fork="no" todir="${reports.dir}"
+			<batchtest fork="no" todir="${build.dir.reports}"
 				errorProperty="tests.failed" failureProperty="tests.failed">
 				<fileset dir="${tests.dir}">
 					<include name="**/*Test.java" />
 				</fileset>
 			</batchtest>
 		</junit>
-		<junitreport todir="${reports.dir}">
-			<fileset dir="${reports.dir}">
+		<junitreport todir="${build.dir.reports}">
+			<fileset dir="${build.dir.reports}">
 				<include name="TEST-*.xml" />
 			</fileset>
-			<report format="noframes" todir="${reports.dir}" />
+			<report format="noframes" todir="${build.dir.reports}" />
 		</junitreport>
 		<fail if="tests.failed" message="One or more unit tests failed" />
 	</target>
@@ -137,8 +135,8 @@ $Revision$
 	<!-- generate javadocs -->
 	<target name="javadoc" depends="init"
 		description="Generates the Javadoc documentation">
-		<mkdir dir="${build.dir.api}" />
-		<javadoc sourcepath="${src.dir}" destdir="${build.dir.api}"
+		<mkdir dir="${build.dir.javadoc}" />
+		<javadoc sourcepath="${src.dir}" destdir="${build.dir.javadoc}"
 			private="false" windowtitle="${javadoc.title}"
 			bottom="${javadoc.footer}" breakiterator="true"
 			excludepackagenames="net.sf.marineapi.example">
@@ -152,11 +150,13 @@ $Revision$
 		
 		<mkdir dir="${build.dir.dist}" />
 		<mkdir dir="${build.dir.dist}/examples" />
-		<mkdir dir="${releases.dir}" />
 		
 		<copy todir="${build.dir.dist}" file="${jar.file}" />
 		<copy todir="${build.dir.dist}/doc/">
 			<fileset dir="${doc.dir}" excludes="**/html/**" />
+		</copy>
+		<copy todir="${build.dir.dist}/doc/javadoc">
+			<fileset dir="${build.dir.javadoc}" />
 		</copy>
 		
 		<copy todir="${build.dir.dist}/examples/src">
