@@ -1,0 +1,26 @@
+Java Marine API release notes
+Version @VERSION@ (b@BUILD_ID@)
+<http://marineapi.sourceforge.net/>
+
+This is a pre-alpha release, major API changes may be introduced in future
+versions. Released on @RELEASE_DATE@.
+
+CHANGES
+
+ * TBD
+
+NEW FEATURES
+
+ * TBD
+
+KNOWN ISSUES
+
+ * Position.distanceTo() may not produce correct results.
+ 
+ * Proprietary sentences with ID longer than five characters are not supported.
+
+ * All AIS sentences may not be supported, TalkerId contains only AI, AB and BS.
+
+ACKNOWLEDGEMENTS
+
+ * Thanks to Amanda Fenech/Marssa.org for migrating the project in Maven layout.
