@@ -32,9 +32,9 @@
 	</organization>
 
 	<scm>
-		<connection>scm:svn:http://marineapi.svn.sourceforge.net/svnroot/marineapi</connection>
-		<developerConnection>scm:svn:https://marineapi.svn.sourceforge.net/svnroot/marineapi</developerConnection>
-		<url>http://marineapi.svn.sourceforge.net/svnroot/marineapi</url>
+		<connection>scm:svn:http://marineapi.svn.sourceforge.net/svnroot/marineapi/trunk</connection>
+		<developerConnection>scm:svn:https://marineapi.svn.sourceforge.net/svnroot/marineapi/trunk</developerConnection>
+		<url>http://marineapi.svn.sourceforge.net/svnroot/marineapi/trunk</url>
 	</scm>
 
 	<developers>
