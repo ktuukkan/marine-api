@@ -51,7 +51,10 @@ SVN browsing and GNU tarball downloads:
 SVN checkout (no login required):
 svn co https://marineapi.svn.sourceforge.net/svnroot/marineapi marineapi 
 
-CONTRIBUTORS
+If you wish to contribute by adding new code or bug fixes, you may request for
+SVN write access or provide patch file(s) via e-mail.
+
+DEVELOPERS
 
 * Kimmo Tuukkanen <ktuukkan@users.sourceforge.net>
   - project admin, lead developer
