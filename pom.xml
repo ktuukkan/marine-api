@@ -7,7 +7,15 @@
 
 	<name>Java Marine API</name>
 	<url>http://marineapi.sourceforge.net/</url>
-	<description>Java Marine API is an NMEA 0183 library for Java 1.5 and newer. The goal of the project is to enable easy access to data provided by electronic marine instruments such as GPS, sonar or autopilot. Detects and reads NMEA sentences from any input stream, e.g. from file, serial port, tcp/ip socket etc. Interfaces and parsers for selected sentences are provided and you can also integrate your own parsers by extending the base parser. See project web or files section for more info, javadocs and examples.</description>
+	<description>
+		Java Marine API is an NMEA 0183 library for Java 1.5 and newer. The goal
+		of the project is to enable easy access to data provided by electronic
+		marine instruments such as GPS, sonar or autopilot. Detects and reads
+		NMEA sentences from any input stream, e.g. from file, serial port,
+		tcp/ip socket etc. Interfaces and parsers for selected sentences are
+		provided and you can also integrate your own parsers by extending the
+		base parser.
+	</description>
 
 	<licenses>
 		<license>
