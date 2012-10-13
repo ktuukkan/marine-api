@@ -1,5 +1,3 @@
-package net.sf.marineapi.nmea.io;
-
 /* 
  * UDPSentenceReader.java
  * Copyright (C) 2010-2012 Kimmo Tuukkanen, Ludovic Drouineau
@@ -20,6 +18,8 @@ package net.sf.marineapi.nmea.io;
  * You should have received a copy of the GNU Lesser General Public License
  * along with Java Marine API. If not, see <http://www.gnu.org/licenses/>.
  */
+package net.sf.marineapi.nmea.io;
+
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 import java.util.HashSet;
