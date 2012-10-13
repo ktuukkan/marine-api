@@ -1,4 +1,4 @@
-Java Marine API release notes
+Java Marine API - RELEASE NOTES
 Version @VERSION@ (b@BUILD_ID@)
 <http://marineapi.sourceforge.net/>
 
@@ -11,7 +11,7 @@ CHANGES
 
 NEW FEATURES
 
- * TBD
+ * SentenceReader now supports UDP sockets.
 
 KNOWN ISSUES
 
@@ -24,3 +24,6 @@ KNOWN ISSUES
 ACKNOWLEDGEMENTS
 
  * Thanks to Amanda Fenech/Marssa.org for migrating the project in Maven layout.
+ 
+ * Thanks to Ludovic Drouineau for providing the UDP implementation for
+   SentenceReader.

@@ -1,4 +1,4 @@
-Java Marine API readme
+Java Marine API - README
 Version @VERSION@ pre-alpha (b@BUILD_ID@)
 <http://marineapi.sourceforge.net/>
 
@@ -45,11 +45,11 @@ SOURCE CODE
 The source code is freely available in project's SVN repository. See below URLs
 and project homepage at SourceForge.net for more info.
 
-SVN browsing and GNU tarball downloads:
-<http://marineapi.svn.sourceforge.net/viewvc/marineapi/>
+Browse at sf.net:
+<http://sourceforge.net/p/marineapi/svn/>
 
 SVN checkout (no login required):
-svn co https://marineapi.svn.sourceforge.net/svnroot/marineapi marineapi 
+svn checkout svn://svn.code.sf.net/p/marineapi/svn/trunk marine-api 
 
 If you wish to contribute by adding new code or bug fixes, you may request for
 SVN write access or provide patch file(s) via e-mail.
