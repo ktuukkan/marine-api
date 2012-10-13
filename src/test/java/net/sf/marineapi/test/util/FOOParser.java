@@ -1,5 +1,6 @@
-package net.sf.marineapi.nmea.parser;
+package net.sf.marineapi.test.util;
 
+import net.sf.marineapi.nmea.parser.SentenceParser;
 import net.sf.marineapi.nmea.sentence.TalkerId;
 
 /**
