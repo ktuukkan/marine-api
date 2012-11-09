@@ -11,6 +11,7 @@ import net.sf.marineapi.nmea.sentence.SentenceId;
 import net.sf.marineapi.nmea.sentence.TalkerId;
 import net.sf.marineapi.test.util.BARParser;
 import net.sf.marineapi.test.util.FOOParser;
+import net.sf.marineapi.test.util.VDMParser;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -28,8 +29,6 @@ public class SentenceFactoryTest {
     @Before
     public void setUp() throws Exception {
         instance = SentenceFactory.getInstance();
-        instance.registerParser("FOO", FOOParser.class);
-        assertTrue(instance.hasParser("FOO"));
     }
 
     /**
@@ -40,8 +39,8 @@ public class SentenceFactoryTest {
     @Test
     public void testSupportedTypesRegistered() {
         for (SentenceId id : SentenceId.values()) {
-            assertTrue("Parser not registered: " + id, instance.hasParser(id
-                    .toString()));
+            String msg = "Parser not registered: " + id;
+            assertTrue(msg, instance.hasParser(id.toString()));
         }
     }
 
@@ -81,6 +80,14 @@ public class SentenceFactoryTest {
      */
     @Test
     public void testCreateEmptyCustomParser() {
+
+        try {
+            instance.registerParser("FOO", FOOParser.class);
+            assertTrue(instance.hasParser("FOO"));
+        } catch (Exception e) {
+            fail("parser registering failed");
+        }
+
 		Sentence s = instance.createParser(TalkerId.II, "FOO");
 		assertNotNull(s);
 		assertTrue(s instanceof Sentence);
@@ -155,6 +162,14 @@ public class SentenceFactoryTest {
      */
     @Test
     public void testRegisterParser() {
+
+        try {
+            instance.registerParser("FOO", FOOParser.class);
+            assertTrue(instance.hasParser("FOO"));
+        } catch (Exception e) {
+            fail("parser registering failed");
+        }
+
         Sentence s = instance.createParser("$IIFOO,1,2,3");
         assertNotNull(s);
         assertTrue(s instanceof Sentence);
@@ -168,9 +183,32 @@ public class SentenceFactoryTest {
      * .
      */
     @Test
+    public void testRegisterParserWithAlternativeBeginChar() {
+
+        try {
+            instance.registerParser("VDM", VDMParser.class);
+            assertTrue(instance.hasParser("VDM"));
+        } catch (Exception e) {
+            fail("parser registering failed");
+        }
+
+        Sentence s = instance.createParser("!AIVDM,1,2,3");
+        assertNotNull(s);
+        assertTrue(s instanceof Sentence);
+        assertTrue(s instanceof SentenceParser);
+        assertTrue(s instanceof VDMParser);
+    }
+
+    /**
+     * Test method for
+     * {@link net.sf.marineapi.nmea.parser.SentenceFactory#registerParser(java.lang.String, java.lang.Class)}
+     * .
+     */
+    @Test
     public void testRegisterInvalidParser() {
         try {
             instance.registerParser("BAR", BARParser.class);
+            fail("did not throw exception");
         } catch (IllegalArgumentException iae) {
             // pass
         } catch (Exception e) {
@@ -185,6 +223,7 @@ public class SentenceFactoryTest {
      */
     @Test
     public void testUnregisterParser() {
+        instance.registerParser("FOO", FOOParser.class);
         assertTrue(instance.hasParser("FOO"));
         instance.unregisterParser(FOOParser.class);
         assertFalse(instance.hasParser("FOO"));

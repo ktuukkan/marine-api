@@ -26,6 +26,6 @@ public class FOOParser extends SentenceParser {
     }
 
     public String getValueC() {
-        return getStringValue(1);
+        return getStringValue(2);
     }
 }
