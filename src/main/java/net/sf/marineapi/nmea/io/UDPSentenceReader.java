@@ -50,6 +50,7 @@ import net.sf.marineapi.nmea.sentence.SentenceValidator;
  * @see SentenceEvent
  * @see SentenceFactory
  */
+@Deprecated
 public class UDPSentenceReader {
 
     // Map key for listeners that listen any kind of sentences, type

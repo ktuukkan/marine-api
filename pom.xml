@@ -1,4 +1,27 @@
+<!--
+Apache Maven script for Java Marine API
+Copyright (C) 2012 Amanda Fenech, Kimmo Tuukkanen
+
+This file is part of Java Marine API.
+<http://sourceforge.net/projects/marineapi/>
+
+Java Marine API is free software: you can redistribute it and/or modify it
+under the terms of the GNU Lesser General Public License as published by the
+Free Software Foundation, either version 3 of the License, or (at your
+option) any later version.
+
+Java Marine API is distributed in the hope that it will be useful, but
+WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License
+for more details.
+
+You should have received a copy of the GNU Lesser General Public License
+along with Java Marine API. If not, see <http://www.gnu.org/licenses/>.
+
+$Revision$
+-->
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>net.sf.marineapi</groupId>
 	<artifactId>marineapi</artifactId>
@@ -8,13 +31,7 @@
 	<name>Java Marine API</name>
 	<url>http://marineapi.sourceforge.net/</url>
 	<description>
-		Java Marine API is an NMEA 0183 library for Java 1.5 and newer. The goal
-		of the project is to enable easy access to data provided by electronic
-		marine instruments such as GPS, sonar or autopilot. Detects and reads
-		NMEA sentences from any input stream, e.g. from file, serial port,
-		tcp/ip socket etc. Interfaces and parsers for selected sentences are
-		provided and you can also integrate your own parsers by extending the
-		base parser.
+		Java Marine API is an NMEA 0183 library for Java 1.5 and newer. The goal of the project is to enable easy access to data provided by electronic marine instruments such as GPS, sonar or autopilot. Detects and reads NMEA sentences from any input stream, e.g. from file, serial port, tcp/ip socket etc. Interfaces and parsers for selected sentences are provided and you can also integrate your own parsers by extending the base parser.
 	</description>
 
 	<licenses>
@@ -79,6 +96,11 @@
 			<artifactId>junit</artifactId>
 			<version>4.10</version>
 			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>maven-plugins</groupId>
+			<artifactId>maven-cobertura-plugin</artifactId>
+			<version>1.4</version>
 		</dependency>
 	</dependencies>
 

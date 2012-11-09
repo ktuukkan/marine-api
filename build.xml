@@ -1,6 +1,6 @@
 ﻿<!--
-build.xml - Java Marine API build script
-Copyright (C) 2010-2011 Kimmo Tuukkanen
+Apache Ant build script for Java Marine API
+Copyright (C) 2010-2012 Kimmo Tuukkanen
 
 This file is part of Java Marine API.
 <http://sourceforge.net/projects/marineapi/>
@@ -29,7 +29,7 @@ $Revision$
 			<format property="date" pattern="yyyy-MM-dd" />
 			<format property="year" pattern="yyyy" />
 		</tstamp>
-		
+
         <property file="build.properties" />
 		<property name="project.id" value="${app.id}" />
 		<property name="version" value="${app.version}" />
@@ -38,23 +38,23 @@ $Revision$
 		<property name="resources.dir" value="src/main/resources" />
 		<property name="doc.dir" value="${resources.dir}/doc/" />
 		<property name="data.dir" value="src/test/resources/data/" />
-				
+
 		<property name="build.dir" value="target/" />
 		<property name="build.dir.classes" value="${build.dir}/classes" />
 		<property name="build.dir.tests" value="${build.dir}/test-classes" />
 		<property name="build.dir.dist" value="${build.dir}/dist/" />
 		<property name="build.dir.javadoc" value="${build.dir}/javadoc/" />
 		<property name="build.dir.reports" value="${build.dir}/reports/" />
-		
+
 		<property name="manifest.file" value="${build.dir}/MANIFEST.MF" />
 		<property name="jar.file" value="${build.dir}/${project.id}.jar" />
-		
+
 		<property name="release.zip"
 			value="${build.dir}/${project.id}-${version}.zip" />
 
 		<property name="javadoc.title"
 			value="${app.name} v${version} (b${build.id})" />
-		
+
 		<property name="javadoc.footer"
 			value="Copyright (C) 2010-${year} ${app.name} author(s). All Rights Reserved." />
 	</target>
@@ -83,11 +83,11 @@ $Revision$
 		<delete dir="${build.dir}" />
 		<delete dir="${builld.dir.release}" />
 	</target>
-	
+
 	<!-- build project -->
 	<target name="build" depends="compile-src, jar"
 		description="Compiles the project and builds JAR archive" />
-	
+
 	<!-- create jar package -->
 	<target name="jar" depends="compile-src">
 		<manifest file="${manifest.file}">
@@ -101,7 +101,7 @@ $Revision$
 				excludes="**/example/*" />
 		</jar>
 	</target>
-		
+
 	<!-- run all unit tests -->
 	<target name="test" depends="compile-src, compile-tests"
 		description="Run all unit tests">
@@ -147,10 +147,10 @@ $Revision$
 	<!-- build release package -->
 	<target name="dist" depends="clean, build, javadoc"
 		description="Builds a distribution package">
-		
+
 		<mkdir dir="${build.dir.dist}" />
 		<mkdir dir="${build.dir.dist}/examples" />
-		
+
 		<copy todir="${build.dir.dist}" file="${jar.file}" />
 		<copy todir="${build.dir.dist}/doc/">
 			<fileset dir="${doc.dir}" excludes="**/html/**" />
@@ -158,33 +158,33 @@ $Revision$
 		<copy todir="${build.dir.dist}/doc/javadoc">
 			<fileset dir="${build.dir.javadoc}" />
 		</copy>
-		
+
 		<copy todir="${build.dir.dist}/examples/src">
 			<fileset dir="${src.dir}" includes="**/example/*.java" />
 			<fileset dir="${build.dir}" includes="**/example/*.class" />
 		</copy>
-		
+
 		<copy todir="${build.dir.dist}/examples/data">
 			<fileset dir="${data.dir}" includes="*.txt,*.log" />
 		</copy>
-		
-		<replace token="@VERSION@" value="${version}" 
+
+		<replace token="@VERSION@" value="${version}"
 			file="${build.dir.dist}/doc/readme.txt" />
-		<replace token="@BUILD_ID@" value="${build.id}" 
+		<replace token="@BUILD_ID@" value="${build.id}"
 			file="${build.dir.dist}/doc/readme.txt" />
-		<replace token="@YEAR@" value="${year}" 
+		<replace token="@YEAR@" value="${year}"
 			file="${build.dir.dist}/doc/readme.txt" />
-		
-		<replace token="@VERSION@" value="${version}" 
+
+		<replace token="@VERSION@" value="${version}"
 			file="${build.dir.dist}/doc/release_notes.txt" />
-		<replace token="@BUILD_ID@" value="${build.id}" 
+		<replace token="@BUILD_ID@" value="${build.id}"
 			file="${build.dir.dist}/doc/release_notes.txt" />
-		<replace token="@RELEASE_DATE@" value="${date}" 
+		<replace token="@RELEASE_DATE@" value="${date}"
 			file="${build.dir.dist}/doc/release_notes.txt" />
-		<replace token="@YEAR@" value="${year}" 
+		<replace token="@YEAR@" value="${year}"
 			file="${build.dir.dist}/doc/release_notes.txt" />
-		
-			
+
+
 		<zip destfile="${release.zip}">
 			<zipfileset dir="${build.dir.dist}"
 				includes="**/*" prefix="${project.id}-${version}/"/>

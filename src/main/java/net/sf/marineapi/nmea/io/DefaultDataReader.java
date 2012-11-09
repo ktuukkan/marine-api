@@ -42,7 +42,7 @@ class DefaultDataReader implements DataReader {
 	private volatile boolean isRunning = true;
 
 	/**
-	 * Creates a new instance of StreamReader.
+	 * Creates a new instance of DefaultDataReader.
 	 * 
 	 * @param source InputStream from where to read data.
 	 */
