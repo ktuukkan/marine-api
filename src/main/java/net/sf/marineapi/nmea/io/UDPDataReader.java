@@ -28,7 +28,7 @@ import net.sf.marineapi.nmea.sentence.Sentence;
 import net.sf.marineapi.nmea.sentence.SentenceValidator;
 
 /**
- * UDP data reader implementation, using DatagramSocket as source.
+ * UDP data reader implementation using DatagramSocket as data source.
  * 
  * @author Kimmo Tuukkanen, Ludovic Drouineau
  * @version $Revision$
@@ -44,11 +44,12 @@ class UDPDataReader implements DataReader {
 	/**
 	 * Creates a new instance of StreamReader.
 	 * 
-	 * @param source
-	 *            InputStream from where to read data.
+	 * @param socket DatagramSocket to be used as data source.
+	 * @param parent SentenceReader dispatching events for this reader.
 	 */
-	public UDPDataReader(DatagramSocket source, SentenceReader parent) {
-		socket = source;
+	public UDPDataReader(DatagramSocket socket, SentenceReader parent) {
+		this.socket = socket;
+		this.parent = parent;
 	}
 
 	/**

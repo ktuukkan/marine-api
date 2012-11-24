@@ -57,125 +57,125 @@ import net.sf.marineapi.nmea.sentence.SentenceValidator;
  */
 public class SerialPortExample implements SentenceListener {
 
-    /**
-     * Constructor
-     */
-    public SerialPortExample() {
-        init();
-    }
+	/**
+	 * Constructor
+	 */
+	public SerialPortExample() {
+		init();
+	}
 
-    /*
-     * (non-Javadoc)
-     * @see net.sf.marineapi.nmea.event.SentenceListener#readingPaused()
-     */
-    public void readingPaused() {
-        System.out.println("-- Paused --");
-    }
+	/*
+	 * (non-Javadoc)
+	 * @see net.sf.marineapi.nmea.event.SentenceListener#readingPaused()
+	 */
+	public void readingPaused() {
+		System.out.println("-- Paused --");
+	}
 
-    /*
-     * (non-Javadoc)
-     * @see net.sf.marineapi.nmea.event.SentenceListener#readingStarted()
-     */
-    public void readingStarted() {
-        System.out.println("-- Started --");
-    }
+	/*
+	 * (non-Javadoc)
+	 * @see net.sf.marineapi.nmea.event.SentenceListener#readingStarted()
+	 */
+	public void readingStarted() {
+		System.out.println("-- Started --");
+	}
 
-    /*
-     * (non-Javadoc)
-     * @see net.sf.marineapi.nmea.event.SentenceListener#readingStopped()
-     */
-    public void readingStopped() {
-        System.out.println("-- Stopped --");
-    }
+	/*
+	 * (non-Javadoc)
+	 * @see net.sf.marineapi.nmea.event.SentenceListener#readingStopped()
+	 */
+	public void readingStopped() {
+		System.out.println("-- Stopped --");
+	}
 
-    /*
-     * (non-Javadoc)
-     * @see
-     * net.sf.marineapi.nmea.event.SentenceListener#sentenceRead(net.sf.marineapi
-     * .nmea.event.SentenceEvent)
-     */
-    public void sentenceRead(SentenceEvent event) {
-        // here we receive each sentence read from the port
-        System.out.println(event.getSentence());
-    }
+	/*
+	 * (non-Javadoc)
+	 * @see
+	 * net.sf.marineapi.nmea.event.SentenceListener#sentenceRead(net.sf.marineapi
+	 * .nmea.event.SentenceEvent)
+	 */
+	public void sentenceRead(SentenceEvent event) {
+		// here we receive each sentence read from the port
+		System.out.println(event.getSentence());
+	}
 
-    /**
-     * Scan serial ports for NMEA data.
-     * 
-     * @return SerialPort from which NMEA data was found, or null if data was
-     *         not found in any of the ports.
-     */
-    private SerialPort getSerialPort() {
-        try {
-            Enumeration<?> e = CommPortIdentifier.getPortIdentifiers();
+	/**
+	 * Scan serial ports for NMEA data.
+	 * 
+	 * @return SerialPort from which NMEA data was found, or null if data was
+	 *         not found in any of the ports.
+	 */
+	private SerialPort getSerialPort() {
+		try {
+			Enumeration<?> e = CommPortIdentifier.getPortIdentifiers();
 
-            while (e.hasMoreElements()) {
-                CommPortIdentifier id = (CommPortIdentifier) e.nextElement();
+			while (e.hasMoreElements()) {
+				CommPortIdentifier id = (CommPortIdentifier) e.nextElement();
 
-                if (id.getPortType() == CommPortIdentifier.PORT_SERIAL) {
+				if (id.getPortType() == CommPortIdentifier.PORT_SERIAL) {
 
-                    SerialPort sp = (SerialPort) id.open("SerialExample", 30);
+					SerialPort sp = (SerialPort) id.open("SerialExample", 30);
 
-                    sp.setSerialPortParams(4800, SerialPort.DATABITS_8,
-                            SerialPort.STOPBITS_1, SerialPort.PARITY_NONE);
+					sp.setSerialPortParams(4800, SerialPort.DATABITS_8,
+							SerialPort.STOPBITS_1, SerialPort.PARITY_NONE);
 
-                    InputStream is = sp.getInputStream();
-                    InputStreamReader isr = new InputStreamReader(is);
-                    BufferedReader buf = new BufferedReader(isr);
+					InputStream is = sp.getInputStream();
+					InputStreamReader isr = new InputStreamReader(is);
+					BufferedReader buf = new BufferedReader(isr);
 
-                    System.out.println("Scanning port " + sp.getName());
+					System.out.println("Scanning port " + sp.getName());
 
-                    // try each port few times before giving up
-                    for (int i = 0; i < 5; i++) {
-                        try {
-                            String data = buf.readLine();
-                            if (SentenceValidator.isValid(data)) {
-                                System.out.println("NMEA data found!");
-                                return sp;
-                            }
-                        } catch (Exception ex) {
-                            ex.printStackTrace();
-                        }
-                    }
-                    is.close();
-                    isr.close();
-                    buf.close();
-                }
-            }
-            System.out.println("NMEA data was not found..");
+					// try each port few times before giving up
+					for (int i = 0; i < 5; i++) {
+						try {
+							String data = buf.readLine();
+							if (SentenceValidator.isValid(data)) {
+								System.out.println("NMEA data found!");
+								return sp;
+							}
+						} catch (Exception ex) {
+							ex.printStackTrace();
+						}
+					}
+					is.close();
+					isr.close();
+					buf.close();
+				}
+			}
+			System.out.println("NMEA data was not found..");
 
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 
-        return null;
-    }
+		return null;
+	}
 
-    /**
-     * Init serial port and reader.
-     */
-    private void init() {
-        try {
-            SerialPort sp = getSerialPort();
+	/**
+	 * Init serial port and reader.
+	 */
+	private void init() {
+		try {
+			SerialPort sp = getSerialPort();
 
-            if (sp != null) {
-                InputStream is = sp.getInputStream();
-                SentenceReader sr = new SentenceReader(is);
-                sr.addSentenceListener(this);
-                sr.start();
-            }
+			if (sp != null) {
+				InputStream is = sp.getInputStream();
+				SentenceReader sr = new SentenceReader(is);
+				sr.addSentenceListener(this);
+				sr.start();
+			}
 
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
 
-    /**
-     * Startup method, no arguments required.
-     * 
-     * @param args None
-     */
-    public static void main(String[] args) {
-        new SerialPortExample();
-    }
+	/**
+	 * Startup method, no arguments required.
+	 * 
+	 * @param args None
+	 */
+	public static void main(String[] args) {
+		new SerialPortExample();
+	}
 }

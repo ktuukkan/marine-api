@@ -29,95 +29,96 @@ import org.junit.Test;
  */
 public class HeadingProviderTest implements HeadingListener {
 
-    private HeadingProvider instance;
+	private HeadingProvider instance;
 
-    private HeadingEvent event;
+	private HeadingEvent event;
 
-    /**
-     * @throws java.lang.Exception
-     */
-    @Before
-    public void setUp() throws Exception {
-    	
-        FileInputStream str = new FileInputStream(new File("target/test-classes/data/sample1.txt"));
-        SentenceReader r = new SentenceReader(str);
-        instance = new HeadingProvider(r);
-        instance.addListener(this);
-        r.start();
-        
-        event = null;
-    }
+	/**
+	 * @throws java.lang.Exception
+	 */
+	@Before
+	public void setUp() throws Exception {
 
-    @After
-    public void tearDown() {
-        instance.removeListener(this);
-    }
+		FileInputStream str = new FileInputStream(new File(
+				"target/test-classes/data/sample1.txt"));
+		SentenceReader r = new SentenceReader(str);
+		instance = new HeadingProvider(r);
+		instance.addListener(this);
+		r.start();
 
-    /**
-     * Test method for
-     * {@link net.sf.marineapi.provider.AbstractProvider#sentenceRead(net.sf.marineapi.nmea.event.SentenceEvent)}
-     * .
-     */
-    @Test
-    public void testHDMSentenceRead() {
-    	
-        SentenceFactory sf = SentenceFactory.getInstance();
-        Sentence s = sf.createParser(HDMTest.EXAMPLE);
-        
-        assertNull(event);
-        instance.sentenceRead(new SentenceEvent(this, s));
-        assertNotNull(event);
-        
-        assertEquals(90.0, event.getHeading(), 0.1);
-        assertFalse(event.isTrue());
-    }
+		event = null;
+	}
 
-    /**
-     * Test method for
-     * {@link net.sf.marineapi.provider.AbstractProvider#sentenceRead(net.sf.marineapi.nmea.event.SentenceEvent)}
-     * .
-     */
-    @Test
-    public void testHDTSentenceRead() {
-    	
-        SentenceFactory sf = SentenceFactory.getInstance();
-        Sentence s = sf.createParser(HDTTest.EXAMPLE);
-        
-        assertNull(event);
-        instance.sentenceRead(new SentenceEvent(this, s));
-        assertNotNull(event);
-        
-        assertEquals(90.1, event.getHeading(), 0.1);
-        assertTrue(event.isTrue());
-    }
+	@After
+	public void tearDown() {
+		instance.removeListener(this);
+	}
 
-    /**
-     * Test method for
-     * {@link net.sf.marineapi.provider.AbstractProvider#sentenceRead(net.sf.marineapi.nmea.event.SentenceEvent)}
-     * .
-     */
-    @Test
-    public void testHDGSentenceRead() {
-    	
-        SentenceFactory sf = SentenceFactory.getInstance();
-        Sentence s = sf.createParser(HDGTest.EXAMPLE);
-        
-        assertNull(event);
-        instance.sentenceRead(new SentenceEvent(this, s));
-        assertNotNull(event);
-        
-        assertEquals(123.4, event.getHeading(), 0.1);
-        assertFalse(event.isTrue());
-    }
+	/**
+	 * Test method for
+	 * {@link net.sf.marineapi.provider.AbstractProvider#sentenceRead(net.sf.marineapi.nmea.event.SentenceEvent)}
+	 * .
+	 */
+	@Test
+	public void testHDMSentenceRead() {
 
-    /*
-     * (non-Javadoc)
-     * @see
-     * net.sf.marineapi.provider.event.HeadingListener#providerUpdate(net.sf
-     * .marineapi.provider.event.HeadingEvent)
-     */
-    public void providerUpdate(HeadingEvent evt) {
-        this.event = evt;
-    }
+		SentenceFactory sf = SentenceFactory.getInstance();
+		Sentence s = sf.createParser(HDMTest.EXAMPLE);
+
+		assertNull(event);
+		instance.sentenceRead(new SentenceEvent(this, s));
+		assertNotNull(event);
+
+		assertEquals(90.0, event.getHeading(), 0.1);
+		assertFalse(event.isTrue());
+	}
+
+	/**
+	 * Test method for
+	 * {@link net.sf.marineapi.provider.AbstractProvider#sentenceRead(net.sf.marineapi.nmea.event.SentenceEvent)}
+	 * .
+	 */
+	@Test
+	public void testHDTSentenceRead() {
+
+		SentenceFactory sf = SentenceFactory.getInstance();
+		Sentence s = sf.createParser(HDTTest.EXAMPLE);
+
+		assertNull(event);
+		instance.sentenceRead(new SentenceEvent(this, s));
+		assertNotNull(event);
+
+		assertEquals(90.1, event.getHeading(), 0.1);
+		assertTrue(event.isTrue());
+	}
+
+	/**
+	 * Test method for
+	 * {@link net.sf.marineapi.provider.AbstractProvider#sentenceRead(net.sf.marineapi.nmea.event.SentenceEvent)}
+	 * .
+	 */
+	@Test
+	public void testHDGSentenceRead() {
+
+		SentenceFactory sf = SentenceFactory.getInstance();
+		Sentence s = sf.createParser(HDGTest.EXAMPLE);
+
+		assertNull(event);
+		instance.sentenceRead(new SentenceEvent(this, s));
+		assertNotNull(event);
+
+		assertEquals(123.4, event.getHeading(), 0.1);
+		assertFalse(event.isTrue());
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @see
+	 * net.sf.marineapi.provider.event.HeadingListener#providerUpdate(net.sf
+	 * .marineapi.provider.event.HeadingEvent)
+	 */
+	public void providerUpdate(HeadingEvent evt) {
+		this.event = evt;
+	}
 
 }

@@ -31,11 +31,11 @@ import net.sf.marineapi.nmea.sentence.TalkerId;
  */
 public class BARParser extends SentenceParser {
 
-    /**
-     * Constructor
-     */
-    public BARParser() {
-        super(TalkerId.GP, "BAR", 5);
-    }
+	/**
+	 * Constructor
+	 */
+	public BARParser() {
+		super(TalkerId.GP, "BAR", 5);
+	}
 
 }

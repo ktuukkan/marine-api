@@ -33,34 +33,34 @@ import org.junit.Test;
  */
 public class TalkerIdTest {
 
-    /**
-     * @throws java.lang.Exception
-     */
-    @Before
-    public void setUp() throws Exception {
-    }
+	/**
+	 * @throws java.lang.Exception
+	 */
+	@Before
+	public void setUp() throws Exception {
+	}
 
-    /**
-     * Test method for
-     * {@link net.sf.marineapi.nmea.sentence.TalkerId#parse(java.lang.String)}.
-     */
-    @Test
-    public void testParse() {
-        TalkerId a = TalkerId.parse("$GPGLL,,,,,,,");
-        assertEquals(TalkerId.GP, a);
+	/**
+	 * Test method for
+	 * {@link net.sf.marineapi.nmea.sentence.TalkerId#parse(java.lang.String)}.
+	 */
+	@Test
+	public void testParse() {
+		TalkerId a = TalkerId.parse("$GPGLL,,,,,,,");
+		assertEquals(TalkerId.GP, a);
 
-        TalkerId b = TalkerId.parse("$IIDPT,,,,,,,");
-        assertEquals(TalkerId.II, b);
+		TalkerId b = TalkerId.parse("$IIDPT,,,,,,,");
+		assertEquals(TalkerId.II, b);
 
-        TalkerId c = TalkerId.parse("$PGRMZ,,,,,,,");
-        assertEquals(TalkerId.P, c);
+		TalkerId c = TalkerId.parse("$PGRMZ,,,,,,,");
+		assertEquals(TalkerId.P, c);
 
-        try {
-            TalkerId.parse("$XXXXX,,,,,,");
-            fail("Did not throw exception");
-        } catch (Exception e) {
-            // pass
-        }
-    }
+		try {
+			TalkerId.parse("$XXXXX,,,,,,");
+			fail("Did not throw exception");
+		} catch (Exception e) {
+			// pass
+		}
+	}
 
 }

@@ -33,36 +33,36 @@ import org.junit.Test;
  */
 public class ChecksumTest {
 
-    /**
-     * Test method for
-     * {@link net.sf.marineapi.nmea.sentence.Checksum#add(java.lang.String)}.
-     */
-    @Test
-    public void testAdd() {
-        String a = "$GPGLL,6011.552,N,02501.941,E,120045,A";
-        String b = "$GPGLL,6011.552,N,02501.941,E,120045,A*";
-        String c = "$GPGLL,6011.552,N,02501.941,E,120045,A*00";
-        final String expected = a.concat("*26");
-        assertEquals(expected, Checksum.add(a));
-        assertEquals(expected, Checksum.add(b));
-        assertEquals(expected, Checksum.add(c));
-    }
+	/**
+	 * Test method for
+	 * {@link net.sf.marineapi.nmea.sentence.Checksum#add(java.lang.String)}.
+	 */
+	@Test
+	public void testAdd() {
+		String a = "$GPGLL,6011.552,N,02501.941,E,120045,A";
+		String b = "$GPGLL,6011.552,N,02501.941,E,120045,A*";
+		String c = "$GPGLL,6011.552,N,02501.941,E,120045,A*00";
+		final String expected = a.concat("*26");
+		assertEquals(expected, Checksum.add(a));
+		assertEquals(expected, Checksum.add(b));
+		assertEquals(expected, Checksum.add(c));
+	}
 
-    /**
-     * Test method for
-     * {@link net.sf.marineapi.nmea.sentence.Checksum#calculate(java.lang.String)}
-     * .
-     */
-    @Test
-    public void testCalculate() {
-        assertEquals("1D", Checksum.calculate(BODTest.EXAMPLE));
-        assertEquals("79", Checksum.calculate(GGATest.EXAMPLE));
-        assertEquals("26", Checksum.calculate(GLLTest.EXAMPLE));
-        assertEquals("11", Checksum.calculate(RMCTest.EXAMPLE));
-        assertEquals("3D", Checksum.calculate(GSATest.EXAMPLE));
-        assertEquals("73", Checksum.calculate(GSVTest.EXAMPLE));
-        assertEquals("58", Checksum.calculate(RMBTest.EXAMPLE));
-        assertEquals("25", Checksum.calculate(RTETest.EXAMPLE));
-    }
+	/**
+	 * Test method for
+	 * {@link net.sf.marineapi.nmea.sentence.Checksum#calculate(java.lang.String)}
+	 * .
+	 */
+	@Test
+	public void testCalculate() {
+		assertEquals("1D", Checksum.calculate(BODTest.EXAMPLE));
+		assertEquals("79", Checksum.calculate(GGATest.EXAMPLE));
+		assertEquals("26", Checksum.calculate(GLLTest.EXAMPLE));
+		assertEquals("11", Checksum.calculate(RMCTest.EXAMPLE));
+		assertEquals("3D", Checksum.calculate(GSATest.EXAMPLE));
+		assertEquals("73", Checksum.calculate(GSVTest.EXAMPLE));
+		assertEquals("58", Checksum.calculate(RMBTest.EXAMPLE));
+		assertEquals("25", Checksum.calculate(RTETest.EXAMPLE));
+	}
 
 }

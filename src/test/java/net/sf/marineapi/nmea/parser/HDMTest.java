@@ -38,92 +38,92 @@ import org.junit.Test;
  */
 public class HDMTest {
 
-    public static final String EXAMPLE = "$GPHDM,90.0,M";
+	public static final String EXAMPLE = "$GPHDM,90.0,M";
 
-    HDMSentence hdm;
+	HDMSentence hdm;
 
-    /**
-     * @throws java.lang.Exception
-     */
-    @Before
-    public void setUp() throws Exception {
-        hdm = new HDMParser(EXAMPLE);
-    }
+	/**
+	 * @throws java.lang.Exception
+	 */
+	@Before
+	public void setUp() throws Exception {
+		hdm = new HDMParser(EXAMPLE);
+	}
 
-    /**
-     * Test method for {@link net.sf.marineapi.nmea.parser.HDMParser(TalkerId)}.
-     */
-    @Test
-    public void testConstructor() {
-        HDMSentence empty = new HDMParser(TalkerId.HC);
-        assertEquals(TalkerId.HC, empty.getTalkerId());
-        assertEquals(SentenceId.HDM.toString(), empty.getSentenceId());
-        try {
-            empty.getHeading();
-        } catch (DataNotAvailableException e) {
-            // pass
-        } catch (Exception e) {
-            fail(e.getMessage());
-        }
-    }
+	/**
+	 * Test method for {@link net.sf.marineapi.nmea.parser.HDMParser(TalkerId)}.
+	 */
+	@Test
+	public void testConstructor() {
+		HDMSentence empty = new HDMParser(TalkerId.HC);
+		assertEquals(TalkerId.HC, empty.getTalkerId());
+		assertEquals(SentenceId.HDM.toString(), empty.getSentenceId());
+		try {
+			empty.getHeading();
+		} catch (DataNotAvailableException e) {
+			// pass
+		} catch (Exception e) {
+			fail(e.getMessage());
+		}
+	}
 
-    /**
-     * Test method for {@link net.sf.marineapi.nmea.parser.HDTParser#isTrue()}.
-     */
-    @Test
-    public void testIsTrue() {
-        assertFalse(hdm.isTrue());
-    }
+	/**
+	 * Test method for {@link net.sf.marineapi.nmea.parser.HDTParser#isTrue()}.
+	 */
+	@Test
+	public void testIsTrue() {
+		assertFalse(hdm.isTrue());
+	}
 
-    /**
-     * Test method for
-     * {@link net.sf.marineapi.nmea.parser.HDMParser#getHeading()}.
-     */
-    @Test
-    public void testGetHeading() {
-        double value = hdm.getHeading();
-        assertEquals(90.0, value, 0.1);
-    }
+	/**
+	 * Test method for
+	 * {@link net.sf.marineapi.nmea.parser.HDMParser#getHeading()}.
+	 */
+	@Test
+	public void testGetHeading() {
+		double value = hdm.getHeading();
+		assertEquals(90.0, value, 0.1);
+	}
 
-    /**
-     * Test method for
-     * {@link net.sf.marineapi.nmea.parser.HDMParser#setHeading(double)}.
-     */
-    @Test
-    public void testSetHeading() {
-        hdm.setHeading(123.45);
-        assertEquals(123.5, hdm.getHeading(), 0.1);
-    }
+	/**
+	 * Test method for
+	 * {@link net.sf.marineapi.nmea.parser.HDMParser#setHeading(double)}.
+	 */
+	@Test
+	public void testSetHeading() {
+		hdm.setHeading(123.45);
+		assertEquals(123.5, hdm.getHeading(), 0.1);
+	}
 
-    /**
-     * Test method for
-     * {@link net.sf.marineapi.nmea.parser.HDMParser#setHeading(double)}.
-     */
-    @Test
-    public void testSetNegativeHeading() {
-        try {
-            hdm.setHeading(-0.005);
-            fail("Did not throw exception");
-        } catch (IllegalArgumentException iae) {
-            // pass
-        } catch (Exception e) {
-            fail(e.getMessage());
-        }
-    }
+	/**
+	 * Test method for
+	 * {@link net.sf.marineapi.nmea.parser.HDMParser#setHeading(double)}.
+	 */
+	@Test
+	public void testSetNegativeHeading() {
+		try {
+			hdm.setHeading(-0.005);
+			fail("Did not throw exception");
+		} catch (IllegalArgumentException iae) {
+			// pass
+		} catch (Exception e) {
+			fail(e.getMessage());
+		}
+	}
 
-    /**
-     * Test method for
-     * {@link net.sf.marineapi.nmea.parser.HDMParser#setHeading(double)}.
-     */
-    @Test
-    public void testSetHeadingTooHigh() {
-        try {
-            hdm.setHeading(360.0001);
-            fail("Did not throw exception");
-        } catch (IllegalArgumentException iae) {
-            // pass
-        } catch (Exception e) {
-            fail(e.getMessage());
-        }
-    }
+	/**
+	 * Test method for
+	 * {@link net.sf.marineapi.nmea.parser.HDMParser#setHeading(double)}.
+	 */
+	@Test
+	public void testSetHeadingTooHigh() {
+		try {
+			hdm.setHeading(360.0001);
+			fail("Did not throw exception");
+		} catch (IllegalArgumentException iae) {
+			// pass
+		} catch (Exception e) {
+			fail(e.getMessage());
+		}
+	}
 }

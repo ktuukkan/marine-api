@@ -9,23 +9,23 @@ import net.sf.marineapi.nmea.sentence.TalkerId;
  */
 public class FOOParser extends SentenceParser {
 
-    public FOOParser(String s) {
-        super(s, "FOO");
-    }
+	public FOOParser(String s) {
+		super(s, "FOO");
+	}
 
-    public FOOParser(TalkerId tid) {
-        super(tid, "FOO", 3);
-    }
+	public FOOParser(TalkerId tid) {
+		super(tid, "FOO", 3);
+	}
 
-    public String getValueA() {
-        return getStringValue(0);
-    }
+	public String getValueA() {
+		return getStringValue(0);
+	}
 
-    public String getValueB() {
-        return getStringValue(1);
-    }
+	public String getValueB() {
+		return getStringValue(1);
+	}
 
-    public String getValueC() {
-        return getStringValue(2);
-    }
+	public String getValueC() {
+		return getStringValue(2);
+	}
 }

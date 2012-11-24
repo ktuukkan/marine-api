@@ -46,82 +46,82 @@ import org.junit.Test;
  */
 public class TPVProviderTest implements TPVListener {
 
-    TPVEvent event;
-    TPVProvider instance;
+	TPVEvent event;
+	TPVProvider instance;
 
-    /**
-     * @throws java.lang.Exception
-     */
-    @Before
-    public void setUp() throws Exception {
-        File f = new File("target/test-classes/data/Navibe-GM720.txt");
-        FileInputStream str = new FileInputStream(f);
-        SentenceReader r = new SentenceReader(str);
-        instance = new TPVProvider(r);
-        instance.addListener(this);
-        r.start();
-    }
+	/**
+	 * @throws java.lang.Exception
+	 */
+	@Before
+	public void setUp() throws Exception {
+		File f = new File("target/test-classes/data/Navibe-GM720.txt");
+		FileInputStream str = new FileInputStream(f);
+		SentenceReader r = new SentenceReader(str);
+		instance = new TPVProvider(r);
+		instance.addListener(this);
+		r.start();
+	}
 
-    /**
-     * @throws java.lang.Exception
-     */
-    @After
-    public void tearDown() throws Exception {
-        instance.removeListener(this);
-    }
+	/**
+	 * @throws java.lang.Exception
+	 */
+	@After
+	public void tearDown() throws Exception {
+		instance.removeListener(this);
+	}
 
-    /**
-     * Test method for
-     * {@link net.sf.marineapi.provider.AbstractProvider#sentenceRead(net.sf.marineapi.nmea.event.SentenceEvent)}
-     * .
-     */
-    @Test
-    public void testSentenceReadWithGGA() {
+	/**
+	 * Test method for
+	 * {@link net.sf.marineapi.provider.AbstractProvider#sentenceRead(net.sf.marineapi.nmea.event.SentenceEvent)}
+	 * .
+	 */
+	@Test
+	public void testSentenceReadWithGGA() {
 
-        SentenceFactory sf = SentenceFactory.getInstance();
-        Sentence gga = sf.createParser(GGATest.EXAMPLE);
-        
-        assertNull(event);
-        instance.sentenceRead(new SentenceEvent(this, gga));
-        assertNull(event);
-        
-        Sentence rmc = sf.createParser(RMCTest.EXAMPLE);
-        
-        assertNull(event);
-        instance.sentenceRead(new SentenceEvent(this, rmc));
-        assertNotNull(event);
+		SentenceFactory sf = SentenceFactory.getInstance();
+		Sentence gga = sf.createParser(GGATest.EXAMPLE);
 
-    }
+		assertNull(event);
+		instance.sentenceRead(new SentenceEvent(this, gga));
+		assertNull(event);
 
-    /**
-     * Test method for
-     * {@link net.sf.marineapi.provider.AbstractProvider#sentenceRead(net.sf.marineapi.nmea.event.SentenceEvent)}
-     * .
-     */
-    @Test
-    public void testSentenceReadWithGLL() {
+		Sentence rmc = sf.createParser(RMCTest.EXAMPLE);
 
-        SentenceFactory sf = SentenceFactory.getInstance();
-        Sentence gll = sf.createParser(GLLTest.EXAMPLE);
-        
-        assertNull(event);
-        instance.sentenceRead(new SentenceEvent(this, gll));
-        assertNull(event);
+		assertNull(event);
+		instance.sentenceRead(new SentenceEvent(this, rmc));
+		assertNotNull(event);
 
-        Sentence rmc = sf.createParser(RMCTest.EXAMPLE);
-        instance.sentenceRead(new SentenceEvent(this, rmc));
-        assertNotNull(event);
+	}
 
-    }
+	/**
+	 * Test method for
+	 * {@link net.sf.marineapi.provider.AbstractProvider#sentenceRead(net.sf.marineapi.nmea.event.SentenceEvent)}
+	 * .
+	 */
+	@Test
+	public void testSentenceReadWithGLL() {
 
-    /*
-     * (non-Javadoc)
-     * @see
-     * net.sf.marineapi.provider.event.TPVListener#providerUpdate(net.sf.marineapi
-     * .provider.event.TPVEvent)
-     */
-    public void providerUpdate(TPVEvent evt) {
-        event = evt;
-    }
+		SentenceFactory sf = SentenceFactory.getInstance();
+		Sentence gll = sf.createParser(GLLTest.EXAMPLE);
+
+		assertNull(event);
+		instance.sentenceRead(new SentenceEvent(this, gll));
+		assertNull(event);
+
+		Sentence rmc = sf.createParser(RMCTest.EXAMPLE);
+		instance.sentenceRead(new SentenceEvent(this, rmc));
+		assertNotNull(event);
+
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @see
+	 * net.sf.marineapi.provider.event.TPVListener#providerUpdate(net.sf.marineapi
+	 * .provider.event.TPVEvent)
+	 */
+	public void providerUpdate(TPVEvent evt) {
+		event = evt;
+	}
 
 }

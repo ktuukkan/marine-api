@@ -33,52 +33,52 @@ import org.junit.Test;
  */
 public class SentenceIdTest {
 
-    /**
-     * @throws java.lang.Exception
-     */
-    @Before
-    public void setUp() throws Exception {
-    }
+	/**
+	 * @throws java.lang.Exception
+	 */
+	@Before
+	public void setUp() throws Exception {
+	}
 
-    /**
-     * Test method for
-     * {@link net.sf.marineapi.nmea.sentence.SentenceId#parse(java.lang.String)}
-     * .
-     */
-    @Test
-    public void testParse() {
-        SentenceId a = SentenceId.parse("$GPGLL,,,,,,,");
-        assertEquals(SentenceId.GLL, a);
+	/**
+	 * Test method for
+	 * {@link net.sf.marineapi.nmea.sentence.SentenceId#parse(java.lang.String)}
+	 * .
+	 */
+	@Test
+	public void testParse() {
+		SentenceId a = SentenceId.parse("$GPGLL,,,,,,,");
+		assertEquals(SentenceId.GLL, a);
 
-        SentenceId b = SentenceId.parse("$IIDPT,,,,,,,");
-        assertEquals(SentenceId.DPT, b);
+		SentenceId b = SentenceId.parse("$IIDPT,,,,,,,");
+		assertEquals(SentenceId.DPT, b);
 
-        try {
-            SentenceId.parse("$ABCDE,,,,,,");
-            fail("Did not throw exception");
-        } catch (Exception e) {
-            // pass
-        }
-    }
+		try {
+			SentenceId.parse("$ABCDE,,,,,,");
+			fail("Did not throw exception");
+		} catch (Exception e) {
+			// pass
+		}
+	}
 
-    /**
-     * Test method for
-     * {@link net.sf.marineapi.nmea.sentence.SentenceId#parseStr(java.lang.String)}
-     * .
-     */
-    @Test
-    public void testParseStr() {
-        String a = SentenceId.parseStr("$GPGLL,,,,,,,");
-        assertEquals("GLL", a);
+	/**
+	 * Test method for
+	 * {@link net.sf.marineapi.nmea.sentence.SentenceId#parseStr(java.lang.String)}
+	 * .
+	 */
+	@Test
+	public void testParseStr() {
+		String a = SentenceId.parseStr("$GPGLL,,,,,,,");
+		assertEquals("GLL", a);
 
-        String b = SentenceId.parseStr("$IIDPT,,,,,,,");
-        assertEquals("DPT", b);
+		String b = SentenceId.parseStr("$IIDPT,,,,,,,");
+		assertEquals("DPT", b);
 
-        String c = SentenceId.parseStr("$ABCDE,,,,,,,");
-        assertEquals("CDE", c);
+		String c = SentenceId.parseStr("$ABCDE,,,,,,,");
+		assertEquals("CDE", c);
 
-        String d = SentenceId.parseStr("$PGRMZ,,,,,,,");
-        assertEquals("GRMZ", d);
-    }
+		String d = SentenceId.parseStr("$PGRMZ,,,,,,,");
+		assertEquals("GRMZ", d);
+	}
 
 }

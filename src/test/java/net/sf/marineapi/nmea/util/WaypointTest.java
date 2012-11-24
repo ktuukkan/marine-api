@@ -33,38 +33,38 @@ import org.junit.Test;
  */
 public class WaypointTest {
 
-    private final String id1 = "FOO";
-    private final String id2 = "BAR";
-    private final String desc = "Description text";
-    Waypoint point;
+	private final String id1 = "FOO";
+	private final String id2 = "BAR";
+	private final String desc = "Description text";
+	Waypoint point;
 
-    @Before
-    public void setUp() {
-        point = new Waypoint(id1, 60.0, CompassPoint.NORTH, 25.0,
-                CompassPoint.EAST, Datum.WGS84);
-    }
+	@Before
+	public void setUp() {
+		point = new Waypoint(id1, 60.0, CompassPoint.NORTH, 25.0,
+				CompassPoint.EAST, Datum.WGS84);
+	}
 
-    /**
-     * Test method for
-     * {@link net.sf.marineapi.nmea.util.Waypoint#setDescription(java.lang.String)}
-     * .
-     */
-    @Test
-    public void testDescription() {
-        assertEquals("", point.getDescription());
-        point.setDescription(desc);
-        assertEquals(desc, point.getDescription());
-    }
+	/**
+	 * Test method for
+	 * {@link net.sf.marineapi.nmea.util.Waypoint#setDescription(java.lang.String)}
+	 * .
+	 */
+	@Test
+	public void testDescription() {
+		assertEquals("", point.getDescription());
+		point.setDescription(desc);
+		assertEquals(desc, point.getDescription());
+	}
 
-    /**
-     * Test method for
-     * {@link net.sf.marineapi.nmea.util.Waypoint#setId(java.lang.String)}.
-     */
-    @Test
-    public void testId() {
-        assertEquals(id1, point.getId());
-        point.setId(id2);
-        assertEquals(id2, point.getId());
-    }
+	/**
+	 * Test method for
+	 * {@link net.sf.marineapi.nmea.util.Waypoint#setId(java.lang.String)}.
+	 */
+	@Test
+	public void testId() {
+		assertEquals(id1, point.getId());
+		point.setId(id2);
+		assertEquals(id2, point.getId());
+	}
 
 }

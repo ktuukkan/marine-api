@@ -39,45 +39,45 @@ import net.sf.marineapi.provider.event.TPVListener;
  */
 public class TPVProviderExample implements TPVListener {
 
-    TPVProvider provider;
+	TPVProvider provider;
 
-    public TPVProviderExample(File f) throws FileNotFoundException {
-        InputStream stream = new FileInputStream(f);
-        SentenceReader reader = new SentenceReader(stream);
-        provider = new TPVProvider(reader);
-        provider.addListener(this);
-        reader.start();
-    }
+	public TPVProviderExample(File f) throws FileNotFoundException {
+		InputStream stream = new FileInputStream(f);
+		SentenceReader reader = new SentenceReader(stream);
+		provider = new TPVProvider(reader);
+		provider.addListener(this);
+		reader.start();
+	}
 
-    /*
-     * (non-Javadoc)
-     * @see
-     * net.sf.marineapi.provider.event.TPVListener#providerUpdate(net.sf.marineapi
-     * .provider.event.TPVEvent)
-     */
-    public void providerUpdate(TPVEvent evt) {
-        // do something with the data..
-        System.out.println("TPV: " + evt.toString());
-    }
+	/*
+	 * (non-Javadoc)
+	 * @see
+	 * net.sf.marineapi.provider.event.TPVListener#providerUpdate(net.sf.marineapi
+	 * .provider.event.TPVEvent)
+	 */
+	public void providerUpdate(TPVEvent evt) {
+		// do something with the data..
+		System.out.println("TPV: " + evt.toString());
+	}
 
-    /**
-     * Startup method.
-     * 
-     * @param args NMEA log file
-     */
-    public static void main(String[] args) {
+	/**
+	 * Startup method.
+	 * 
+	 * @param args NMEA log file
+	 */
+	public static void main(String[] args) {
 
-        if (args.length != 1) {
-            System.out.println("Usage:\njava TPVProviderExample nmea.log");
-            System.exit(1);
-        }
+		if (args.length != 1) {
+			System.out.println("Usage:\njava TPVProviderExample nmea.log");
+			System.exit(1);
+		}
 
-        try {
-            new TPVProviderExample(new File(args[0]));
-            System.out.println("Running, press CTRL-C to stop..");
-        } catch (IOException e) {
-            e.printStackTrace();
-            System.exit(1);
-        }
-    }
+		try {
+			new TPVProviderExample(new File(args[0]));
+			System.out.println("Running, press CTRL-C to stop..");
+		} catch (IOException e) {
+			e.printStackTrace();
+			System.exit(1);
+		}
+	}
 }

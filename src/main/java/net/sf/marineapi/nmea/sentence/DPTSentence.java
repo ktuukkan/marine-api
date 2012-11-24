@@ -31,31 +31,31 @@ package net.sf.marineapi.nmea.sentence;
  */
 public interface DPTSentence extends DepthSentence {
 
-    /**
-     * Get offset to transducer.
-     * 
-     * @return Offset in meters.
-     */
-    double getOffset();
+	/**
+	 * Get offset to transducer.
+	 * 
+	 * @return Offset in meters.
+	 */
+	double getOffset();
 
-    /**
-     * Set offset to transducer.
-     * 
-     * @param offset Offset in meters
-     */
-    void setOffset(double offset);
+	/**
+	 * Set offset to transducer.
+	 * 
+	 * @param offset Offset in meters
+	 */
+	void setOffset(double offset);
 
-    /**
-     * Get maximum depth value the sounder can detect.
-     * 
-     * @return Maximum depth, in meters.
-     */
-    int getMaximum();
+	/**
+	 * Get maximum depth value the sounder can detect.
+	 * 
+	 * @return Maximum depth, in meters.
+	 */
+	int getMaximum();
 
-    /**
-     * Get maximum depth value the sounder can detect.
-     * 
-     * @param max Maximum depth, in meters.
-     */
-    void setMaximum(int max);
+	/**
+	 * Get maximum depth value the sounder can detect.
+	 * 
+	 * @param max Maximum depth, in meters.
+	 */
+	void setMaximum(int max);
 }

@@ -57,93 +57,92 @@ import net.sf.marineapi.provider.event.TPVEvent;
  */
 public class TPVProvider extends AbstractProvider<TPVEvent> {
 
-    /**
-     * Creates a new instance of TPVProvider.
-     * 
-     * @param reader SentenceReader that provides the required sentences.
-     */
-    public TPVProvider(SentenceReader reader) {
-        super(reader, SentenceId.RMC, SentenceId.GGA, SentenceId.GLL);
-    }
+	/**
+	 * Creates a new instance of TPVProvider.
+	 * 
+	 * @param reader SentenceReader that provides the required sentences.
+	 */
+	public TPVProvider(SentenceReader reader) {
+		super(reader, SentenceId.RMC, SentenceId.GGA, SentenceId.GLL);
+	}
 
-    /* 
-     * (non-Javadoc)
-     * @see net.sf.marineapi.provider.AbstractProvider#createProviderEvent()
-     */
-    @Override
-    protected TPVEvent createProviderEvent() {
-        Position p = null;
-        Double sog = null;
-        Double cog = null;
-        Date d = null;
-        Time t = null;
-        FaaMode mode = null;
-        GpsFixQuality fix = null;
+	/*
+	 * (non-Javadoc)
+	 * @see net.sf.marineapi.provider.AbstractProvider#createProviderEvent()
+	 */
+	@Override
+	protected TPVEvent createProviderEvent() {
+		Position p = null;
+		Double sog = null;
+		Double cog = null;
+		Date d = null;
+		Time t = null;
+		FaaMode mode = null;
+		GpsFixQuality fix = null;
 
-        for (Sentence s : getSentences()) {
-            if (s instanceof RMCSentence) {
-                RMCSentence rmc = (RMCSentence) s;
-                sog = rmc.getSpeed();
-                cog = rmc.getCourse();
-                d = rmc.getDate();
-                t = rmc.getTime();
-                mode = rmc.getMode();
-                if (p == null) {
-                    p = rmc.getPosition();
-                }
-            } else if (s instanceof GGASentence) {
-                // Using GGA as primary position source as it contains both
-                // position and altitude
-                GGASentence gga = (GGASentence) s;
-                p = gga.getPosition();
-                fix = gga.getFixQuality();
-            } else if (s instanceof GLLSentence && p == null) {
-                GLLSentence gll = (GLLSentence) s;
-                p = gll.getPosition();
-            }
-        }
+		for (Sentence s : getSentences()) {
+			if (s instanceof RMCSentence) {
+				RMCSentence rmc = (RMCSentence) s;
+				sog = rmc.getSpeed();
+				cog = rmc.getCourse();
+				d = rmc.getDate();
+				t = rmc.getTime();
+				mode = rmc.getMode();
+				if (p == null) {
+					p = rmc.getPosition();
+				}
+			} else if (s instanceof GGASentence) {
+				// Using GGA as primary position source as it contains both
+				// position and altitude
+				GGASentence gga = (GGASentence) s;
+				p = gga.getPosition();
+				fix = gga.getFixQuality();
+			} else if (s instanceof GLLSentence && p == null) {
+				GLLSentence gll = (GLLSentence) s;
+				p = gll.getPosition();
+			}
+		}
 
-        return new TPVEvent(this, p, sog, cog, d, t, mode, fix);
-    }
+		return new TPVEvent(this, p, sog, cog, d, t, mode, fix);
+	}
 
-    /* 
-     * (non-Javadoc)
-     * @see net.sf.marineapi.provider.AbstractProvider#isReady()
-     */
-    @Override
-    protected boolean isReady() {
-        return hasOne("RMC") && hasOne("GGA", "GLL");
-    }
+	/*
+	 * (non-Javadoc)
+	 * @see net.sf.marineapi.provider.AbstractProvider#isReady()
+	 */
+	@Override
+	protected boolean isReady() {
+		return hasOne("RMC") && hasOne("GGA", "GLL");
+	}
 
+	/*
+	 * (non-Javadoc)
+	 * @see net.sf.marineapi.provider.AbstractProvider#isValid()
+	 */
+	@Override
+	protected boolean isValid() {
 
-    /* 
-     * (non-Javadoc)
-     * @see net.sf.marineapi.provider.AbstractProvider#isValid()
-     */
-    @Override
-    protected boolean isValid() {
+		for (Sentence s : getSentences()) {
 
-        for (Sentence s : getSentences()) {
+			if (s instanceof RMCSentence) {
+				DataStatus ds = ((RMCSentence) s).getStatus();
+				FaaMode gm = ((RMCSentence) s).getMode();
+				if (DataStatus.VOID.equals(ds) || FaaMode.NONE.equals(gm)) {
+					return false;
+				}
+			} else if (s instanceof GGASentence) {
+				GpsFixQuality fq = ((GGASentence) s).getFixQuality();
+				if (GpsFixQuality.INVALID.equals(fq)) {
+					return false;
+				}
+			} else if (s instanceof GLLSentence) {
+				DataStatus ds = ((GLLSentence) s).getStatus();
+				if (DataStatus.VOID.equals(ds)) {
+					return false;
+				}
+			}
+		}
 
-            if (s instanceof RMCSentence) {
-                DataStatus ds = ((RMCSentence) s).getStatus();
-                FaaMode gm = ((RMCSentence) s).getMode();
-                if (DataStatus.VOID.equals(ds) || FaaMode.NONE.equals(gm)) {
-                    return false;
-                }
-            } else if (s instanceof GGASentence) {
-                GpsFixQuality fq = ((GGASentence) s).getFixQuality();
-                if (GpsFixQuality.INVALID.equals(fq)) {
-                    return false;
-                }
-            } else if (s instanceof GLLSentence) {
-                DataStatus ds = ((GLLSentence) s).getStatus();
-                if (DataStatus.VOID.equals(ds)) {
-                    return false;
-                }
-            }
-        }
-
-        return true;
-    }
+		return true;
+	}
 }

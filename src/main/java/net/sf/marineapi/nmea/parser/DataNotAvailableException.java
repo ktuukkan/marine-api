@@ -29,24 +29,24 @@ package net.sf.marineapi.nmea.parser;
  */
 public class DataNotAvailableException extends RuntimeException {
 
-    private static final long serialVersionUID = -3672061046826633631L;
+	private static final long serialVersionUID = -3672061046826633631L;
 
-    /**
-     * Constructor
-     * 
-     * @param msg Exception message
-     */
-    public DataNotAvailableException(String msg) {
-        super(msg);
-    }
+	/**
+	 * Constructor
+	 * 
+	 * @param msg Exception message
+	 */
+	public DataNotAvailableException(String msg) {
+		super(msg);
+	}
 
-    /**
-     * Constructor
-     * 
-     * @param msg Exception message
-     * @param cause Throwable that caused the exception
-     */
-    public DataNotAvailableException(String msg, Throwable cause) {
-        super(msg, cause);
-    }
+	/**
+	 * Constructor
+	 * 
+	 * @param msg Exception message
+	 * @param cause Throwable that caused the exception
+	 */
+	public DataNotAvailableException(String msg, Throwable cause) {
+		super(msg, cause);
+	}
 }

@@ -32,17 +32,17 @@ import net.sf.marineapi.nmea.util.Time;
  */
 public interface TimeSentence extends Sentence {
 
-    /**
-     * Get the time of day.
-     * 
-     * @return Time
-     */
-    Time getTime();
+	/**
+	 * Get the time of day.
+	 * 
+	 * @return Time
+	 */
+	Time getTime();
 
-    /**
-     * Set the time of day.
-     * 
-     * @param t Time to set
-     */
-    void setTime(Time t);
+	/**
+	 * Set the time of day.
+	 * 
+	 * @param t Time to set
+	 */
+	void setTime(Time t);
 }

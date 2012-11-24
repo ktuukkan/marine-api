@@ -14,7 +14,7 @@ public class MTATest {
 	public static final String EXAMPLE = "$IIMTA,21.5,C";
 
 	private MTASentence mta;
-	
+
 	@Before
 	public void setUp() throws Exception {
 		mta = new MTAParser(EXAMPLE);
@@ -25,7 +25,7 @@ public class MTATest {
 		assertEquals(TalkerId.II, mta.getTalkerId());
 		assertEquals(SentenceId.MTA.name(), mta.getSentenceId());
 	}
-	
+
 	@Test
 	public void testMTAParserTalkerId() {
 		MTAParser empty = new MTAParser(TalkerId.WI);

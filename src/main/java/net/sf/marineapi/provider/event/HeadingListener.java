@@ -30,7 +30,6 @@ public interface HeadingListener extends ProviderListener<HeadingEvent> {
 
 	/*
 	 * (non-Javadoc)
-	 * 
 	 * @see
 	 * net.sf.marineapi.provider.event.ProviderListener#providerUpdate(net.sf
 	 * .marineapi.provider.event.ProviderEvent)

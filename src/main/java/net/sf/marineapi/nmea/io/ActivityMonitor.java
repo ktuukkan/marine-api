@@ -21,8 +21,8 @@
 package net.sf.marineapi.nmea.io;
 
 /**
- * Monitor for firing state change events events, i.e. reader started, paused
- * or stopped.
+ * Monitor for firing state change events events, i.e. reader started, paused or
+ * stopped.
  * 
  * @author Kimmo Tuukkanen
  * @version $Revision$

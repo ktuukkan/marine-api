@@ -30,21 +30,21 @@ import net.sf.marineapi.nmea.util.Position;
  */
 public interface PositionSentence extends Sentence {
 
-    /**
-     * Gets the geographic position.
-     * 
-     * @return Position
-     * @throws net.sf.marineapi.parser.DataNotAvailableException If any of the position related fields
-     *             is empty.
-     * @throws net.sf.marineapi.parser.ParseException If any of the position related fields contains
-     *             unexpected value.
-     */
-    Position getPosition();
+	/**
+	 * Gets the geographic position.
+	 * 
+	 * @return Position
+	 * @throws net.sf.marineapi.parser.DataNotAvailableException If any of the
+	 *             position related fields is empty.
+	 * @throws net.sf.marineapi.parser.ParseException If any of the position
+	 *             related fields contains unexpected value.
+	 */
+	Position getPosition();
 
-    /**
-     * Set the geographic position.
-     * 
-     * @param pos Position to set
-     */
-    void setPosition(Position pos);
+	/**
+	 * Set the geographic position.
+	 * 
+	 * @param pos Position to set
+	 */
+	void setPosition(Position pos);
 }

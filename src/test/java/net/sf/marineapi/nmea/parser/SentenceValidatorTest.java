@@ -33,18 +33,18 @@ import org.junit.Test;
  */
 public class SentenceValidatorTest {
 
-    /**
-     * Test method for
-     * {@link net.sf.marineapi.nmea.sentence.SentenceValidator#isValid(java.lang.String)}
-     * .
-     */
-    @Test
-    public void testIsValid() {
+	/**
+	 * Test method for
+	 * {@link net.sf.marineapi.nmea.sentence.SentenceValidator#isValid(java.lang.String)}
+	 * .
+	 */
+	@Test
+	public void testIsValid() {
 
 		// "normal"
 		String a = "$ABCDE,1,2,3,4,5,6,7,8,9";
-        assertTrue(SentenceValidator.isValid(a));
-        assertTrue(SentenceValidator.isValid(Checksum.add(a)));
+		assertTrue(SentenceValidator.isValid(a));
+		assertTrue(SentenceValidator.isValid(Checksum.add(a)));
 
 		// '!' as begin char
 		String b = "!ABCDE,1,2,3,4,5,6,7,8,9";
@@ -54,52 +54,52 @@ public class SentenceValidatorTest {
 		String c = "$ABCDE,1,TWO,three,FOUR?,5,6.0,-7.0,Eigth-8,N1N3,#T3n";
 		assertTrue(SentenceValidator.isValid(c));
 		assertTrue(SentenceValidator.isValid(Checksum.add(c)));
-    }
+	}
 
-    /**
-     * Test method for
-     * {@link net.sf.marineapi.nmea.sentence.SentenceValidator#isValid(java.lang.String)}
-     * .
-     */
-    @Test
-    public void testIsValidWithInvalidInput() {
+	/**
+	 * Test method for
+	 * {@link net.sf.marineapi.nmea.sentence.SentenceValidator#isValid(java.lang.String)}
+	 * .
+	 */
+	@Test
+	public void testIsValidWithInvalidInput() {
 		// invalid checksum, otherwise valid
 		assertFalse(SentenceValidator.isValid("$ABCDE,1,2,3,4,5,6,7,8,9*00"));
 		// something weird
-        assertFalse(SentenceValidator.isValid(null));
-        assertFalse(SentenceValidator.isValid(""));
-        assertFalse(SentenceValidator.isValid("$"));
-        assertFalse(SentenceValidator.isValid("*"));
-        assertFalse(SentenceValidator.isValid("$,*"));
-        assertFalse(SentenceValidator.isValid("$GPGSV*"));
-        assertFalse(SentenceValidator.isValid("foobar"));
-        assertFalse(SentenceValidator.isValid("GPGGA,1,2,3,4,5,6,7,8,9"));
-        assertFalse(SentenceValidator.isValid("$GpGGA,1,2,3,4,5,6,7,8,9"));
-        assertFalse(SentenceValidator.isValid("$GPGGa,1,2,3,4,5,6,7,8,9"));
-        assertFalse(SentenceValidator.isValid("$GPGG#,1,2,3,4,5,6,7,8,9"));
+		assertFalse(SentenceValidator.isValid(null));
+		assertFalse(SentenceValidator.isValid(""));
+		assertFalse(SentenceValidator.isValid("$"));
+		assertFalse(SentenceValidator.isValid("*"));
+		assertFalse(SentenceValidator.isValid("$,*"));
+		assertFalse(SentenceValidator.isValid("$GPGSV*"));
+		assertFalse(SentenceValidator.isValid("foobar"));
+		assertFalse(SentenceValidator.isValid("GPGGA,1,2,3,4,5,6,7,8,9"));
+		assertFalse(SentenceValidator.isValid("$GpGGA,1,2,3,4,5,6,7,8,9"));
+		assertFalse(SentenceValidator.isValid("$GPGGa,1,2,3,4,5,6,7,8,9"));
+		assertFalse(SentenceValidator.isValid("$GPGG#,1,2,3,4,5,6,7,8,9"));
 		assertFalse(SentenceValidator.isValid("$GPGG,1,2,3,4,5,6,7,8,9"));
-        assertFalse(SentenceValidator.isValid("$GPGGAA,1,2,3,4,5,6,7,8,9"));
+		assertFalse(SentenceValidator.isValid("$GPGGAA,1,2,3,4,5,6,7,8,9"));
 		assertFalse(SentenceValidator.isValid("$GPGGA,1,2,3,4,5,6,7,8,9*00"));
-    }
+	}
 
-    /**
-     * Test method for
-     * {@link net.sf.marineapi.nmea.sentence.SentenceValidator#isValid(java.lang.String)}
-     * .
-     */
-    @Test
-    public void testIsValidWithValidInput() {
-        assertTrue(SentenceValidator.isValid(BODTest.EXAMPLE));
-        assertTrue(SentenceValidator.isValid(GGATest.EXAMPLE));
-        assertTrue(SentenceValidator.isValid(GLLTest.EXAMPLE));
-        assertTrue(SentenceValidator.isValid(GSATest.EXAMPLE));
-        assertTrue(SentenceValidator.isValid(GSVTest.EXAMPLE));
-        assertTrue(SentenceValidator.isValid(RMBTest.EXAMPLE));
-        assertTrue(SentenceValidator.isValid(RMCTest.EXAMPLE));
-        assertTrue(SentenceValidator.isValid(RTETest.EXAMPLE));
-        assertTrue(SentenceValidator.isValid(VTGTest.EXAMPLE));
-        assertTrue(SentenceValidator.isValid(WPLTest.EXAMPLE));
-        assertTrue(SentenceValidator.isValid(ZDATest.EXAMPLE));
-    }
+	/**
+	 * Test method for
+	 * {@link net.sf.marineapi.nmea.sentence.SentenceValidator#isValid(java.lang.String)}
+	 * .
+	 */
+	@Test
+	public void testIsValidWithValidInput() {
+		assertTrue(SentenceValidator.isValid(BODTest.EXAMPLE));
+		assertTrue(SentenceValidator.isValid(GGATest.EXAMPLE));
+		assertTrue(SentenceValidator.isValid(GLLTest.EXAMPLE));
+		assertTrue(SentenceValidator.isValid(GSATest.EXAMPLE));
+		assertTrue(SentenceValidator.isValid(GSVTest.EXAMPLE));
+		assertTrue(SentenceValidator.isValid(RMBTest.EXAMPLE));
+		assertTrue(SentenceValidator.isValid(RMCTest.EXAMPLE));
+		assertTrue(SentenceValidator.isValid(RTETest.EXAMPLE));
+		assertTrue(SentenceValidator.isValid(VTGTest.EXAMPLE));
+		assertTrue(SentenceValidator.isValid(WPLTest.EXAMPLE));
+		assertTrue(SentenceValidator.isValid(ZDATest.EXAMPLE));
+	}
 
 }

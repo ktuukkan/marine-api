@@ -20,7 +20,6 @@ import net.sf.marineapi.provider.event.HeadingEvent;
  */
 public class HeadingProvider extends AbstractProvider<HeadingEvent> {
 
-	
 	/**
 	 * Creates a new intance of HeadingProvider.
 	 * 
@@ -61,5 +60,5 @@ public class HeadingProvider extends AbstractProvider<HeadingEvent> {
 	protected boolean isValid() {
 		return true;
 	}
-	
+
 }

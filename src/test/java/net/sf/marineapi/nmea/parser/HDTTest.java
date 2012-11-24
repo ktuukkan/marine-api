@@ -36,92 +36,92 @@ import org.junit.Test;
  */
 public class HDTTest {
 
-    public static final String EXAMPLE = "$HCHDT,90.1,T";
-    HDTSentence hdt;
+	public static final String EXAMPLE = "$HCHDT,90.1,T";
+	HDTSentence hdt;
 
-    /**
-     * @throws java.lang.Exception
-     */
-    @Before
-    public void setUp() throws Exception {
-        hdt = new HDTParser(EXAMPLE);
-    }
+	/**
+	 * @throws java.lang.Exception
+	 */
+	@Before
+	public void setUp() throws Exception {
+		hdt = new HDTParser(EXAMPLE);
+	}
 
-    /**
-     * Test method for {@link net.sf.marineapi.nmea.parser.HDTParser(TalkerId)}.
-     */
-    @Test
-    public void testConstructor() {
-        HDTSentence empty = new HDTParser(TalkerId.HE);
-        assertEquals(TalkerId.HE, empty.getTalkerId());
-        assertEquals(SentenceId.HDT.toString(), empty.getSentenceId());
-        try {
-            empty.getHeading();
-        } catch (DataNotAvailableException e) {
-            // pass
-        } catch (Exception e) {
-            fail(e.getMessage());
-        }
-    }
+	/**
+	 * Test method for {@link net.sf.marineapi.nmea.parser.HDTParser(TalkerId)}.
+	 */
+	@Test
+	public void testConstructor() {
+		HDTSentence empty = new HDTParser(TalkerId.HE);
+		assertEquals(TalkerId.HE, empty.getTalkerId());
+		assertEquals(SentenceId.HDT.toString(), empty.getSentenceId());
+		try {
+			empty.getHeading();
+		} catch (DataNotAvailableException e) {
+			// pass
+		} catch (Exception e) {
+			fail(e.getMessage());
+		}
+	}
 
-    /**
-     * Test method for {@link net.sf.marineapi.nmea.parser.HDTParser#isTrue()}.
-     */
-    @Test
-    public void testIsTrue() {
-        assertTrue(hdt.isTrue());
-    }
+	/**
+	 * Test method for {@link net.sf.marineapi.nmea.parser.HDTParser#isTrue()}.
+	 */
+	@Test
+	public void testIsTrue() {
+		assertTrue(hdt.isTrue());
+	}
 
-    /**
-     * Test method for
-     * {@link net.sf.marineapi.nmea.parser.HDTParser#getHeading()}.
-     */
-    @Test
-    public void testGetHeading() {
-        double value = hdt.getHeading();
-        assertEquals(90.0, value, 0.1);
-    }
+	/**
+	 * Test method for
+	 * {@link net.sf.marineapi.nmea.parser.HDTParser#getHeading()}.
+	 */
+	@Test
+	public void testGetHeading() {
+		double value = hdt.getHeading();
+		assertEquals(90.0, value, 0.1);
+	}
 
-    /**
-     * Test method for
-     * {@link net.sf.marineapi.nmea.parser.HDTParser#setHeading(double)}.
-     */
-    @Test
-    public void testSetHeading() {
-        hdt.setHeading(123.45);
-        assertEquals(123.5, hdt.getHeading(), 0.1);
-    }
+	/**
+	 * Test method for
+	 * {@link net.sf.marineapi.nmea.parser.HDTParser#setHeading(double)}.
+	 */
+	@Test
+	public void testSetHeading() {
+		hdt.setHeading(123.45);
+		assertEquals(123.5, hdt.getHeading(), 0.1);
+	}
 
-    /**
-     * Test method for
-     * {@link net.sf.marineapi.nmea.parser.HDTParser#setHeading(double)}.
-     */
-    @Test
-    public void testSetNegativeHeading() {
-        try {
-            hdt.setHeading(-0.005);
-            fail("Did not throw exception");
-        } catch (IllegalArgumentException iae) {
-            // pass
-        } catch (Exception e) {
-            fail(e.getMessage());
-        }
-    }
+	/**
+	 * Test method for
+	 * {@link net.sf.marineapi.nmea.parser.HDTParser#setHeading(double)}.
+	 */
+	@Test
+	public void testSetNegativeHeading() {
+		try {
+			hdt.setHeading(-0.005);
+			fail("Did not throw exception");
+		} catch (IllegalArgumentException iae) {
+			// pass
+		} catch (Exception e) {
+			fail(e.getMessage());
+		}
+	}
 
-    /**
-     * Test method for
-     * {@link net.sf.marineapi.nmea.parser.HDTParser#setHeading(double)}.
-     */
-    @Test
-    public void testSetHeadingTooHigh() {
-        try {
-            hdt.setHeading(360.0001);
-            fail("Did not throw exception");
-        } catch (IllegalArgumentException iae) {
-            // pass
-        } catch (Exception e) {
-            fail(e.getMessage());
-        }
-    }
+	/**
+	 * Test method for
+	 * {@link net.sf.marineapi.nmea.parser.HDTParser#setHeading(double)}.
+	 */
+	@Test
+	public void testSetHeadingTooHigh() {
+		try {
+			hdt.setHeading(360.0001);
+			fail("Did not throw exception");
+		} catch (IllegalArgumentException iae) {
+			// pass
+		} catch (Exception e) {
+			fail(e.getMessage());
+		}
+	}
 
 }

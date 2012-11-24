@@ -34,22 +34,22 @@ import net.sf.marineapi.nmea.util.Waypoint;
  */
 public interface WPLSentence extends Sentence {
 
-    /**
-     * Get the destination waypoint.
-     * 
-     * @return Waypoint
-     * @throws net.sf.marineapi.parser.DataNotAvailableException If any of the waypoint related data is
-     *             not available.
-     * @throws net.sf.marineapi.parser.ParseException If any of the waypoint related fields contain
-     *             unexpected or illegal value.
-     */
-    Waypoint getWaypoint();
+	/**
+	 * Get the destination waypoint.
+	 * 
+	 * @return Waypoint
+	 * @throws net.sf.marineapi.parser.DataNotAvailableException If any of the
+	 *             waypoint related data is not available.
+	 * @throws net.sf.marineapi.parser.ParseException If any of the waypoint
+	 *             related fields contain unexpected or illegal value.
+	 */
+	Waypoint getWaypoint();
 
-    /**
-     * Set the destination waypoint.
-     * 
-     * @param wp Waypoint to set
-     */
-    void setWaypoint(Waypoint wp);
+	/**
+	 * Set the destination waypoint.
+	 * 
+	 * @param wp Waypoint to set
+	 */
+	void setWaypoint(Waypoint wp);
 
 }

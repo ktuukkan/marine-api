@@ -39,85 +39,85 @@ import net.sf.marineapi.nmea.sentence.SentenceId;
  */
 public class FileExample implements SentenceListener {
 
-    private SentenceReader reader;
+	private SentenceReader reader;
 
-    /**
-     * Creates a new instance of FileExample
-     * 
-     * @param f File from which to read Checksum data
-     */
-    public FileExample(File file) throws IOException {
+	/**
+	 * Creates a new instance of FileExample
+	 * 
+	 * @param f File from which to read Checksum data
+	 */
+	public FileExample(File file) throws IOException {
 
-        // create sentence reader and provide input stream
-        InputStream stream = new FileInputStream(file);
-        reader = new SentenceReader(stream);
+		// create sentence reader and provide input stream
+		InputStream stream = new FileInputStream(file);
+		reader = new SentenceReader(stream);
 
-        // register self as a listener for GGA sentences
-        reader.addSentenceListener(this, SentenceId.GGA);
-        reader.start();
-    }
+		// register self as a listener for GGA sentences
+		reader.addSentenceListener(this, SentenceId.GGA);
+		reader.start();
+	}
 
-    /*
-     * (non-Javadoc)
-     * @see net.sf.marineapi.nmea.event.SentenceListener#readingPaused()
-     */
-    public void readingPaused() {
-        System.out.println("-- Paused --");
-    }
+	/*
+	 * (non-Javadoc)
+	 * @see net.sf.marineapi.nmea.event.SentenceListener#readingPaused()
+	 */
+	public void readingPaused() {
+		System.out.println("-- Paused --");
+	}
 
-    /*
-     * (non-Javadoc)
-     * @see net.sf.marineapi.nmea.event.SentenceListener#readingStarted()
-     */
-    public void readingStarted() {
-        System.out.println("-- Started --");
-    }
+	/*
+	 * (non-Javadoc)
+	 * @see net.sf.marineapi.nmea.event.SentenceListener#readingStarted()
+	 */
+	public void readingStarted() {
+		System.out.println("-- Started --");
+	}
 
-    /*
-     * (non-Javadoc)
-     * @see net.sf.marineapi.nmea.event.SentenceListener#readingStopped()
-     */
-    public void readingStopped() {
-        System.out.println("-- Stopped --");
-    }
+	/*
+	 * (non-Javadoc)
+	 * @see net.sf.marineapi.nmea.event.SentenceListener#readingStopped()
+	 */
+	public void readingStopped() {
+		System.out.println("-- Stopped --");
+	}
 
-    /*
-     * (non-Javadoc)
-     * @see
-     * net.sf.marineapi.nmea.event.SentenceListener#sentenceRead(net.sf.marineapi
-     * .nmea.event.SentenceEvent)
-     */
-    public void sentenceRead(SentenceEvent event) {
+	/*
+	 * (non-Javadoc)
+	 * @see
+	 * net.sf.marineapi.nmea.event.SentenceListener#sentenceRead(net.sf.marineapi
+	 * .nmea.event.SentenceEvent)
+	 */
+	public void sentenceRead(SentenceEvent event) {
 
-        // Safe to cast as we are registered only for GGA updates. Could
-        // also cast to PositionSentence if interested only in position data.
-        // When receiving all sentences without filtering, you should check the
-        // sentence type before casting (e.g. with Sentence.getSentenceId()).
-        GGASentence s = (GGASentence) event.getSentence();
+		// Safe to cast as we are registered only for GGA updates. Could
+		// also cast to PositionSentence if interested only in position data.
+		// When receiving all sentences without filtering, you should check the
+		// sentence type before casting (e.g. with Sentence.getSentenceId()).
+		GGASentence s = (GGASentence) event.getSentence();
 
-        // Do something with sentence data..
-        System.out.println(s.getPosition());
-    }
+		// Do something with sentence data..
+		System.out.println(s.getPosition());
+	}
 
-    /**
-     * Main method takes one command-line argument, the name of the file to
-     * read.
-     * 
-     * @param args Command-line arguments
-     */
-    public static void main(String[] args) {
+	/**
+	 * Main method takes one command-line argument, the name of the file to
+	 * read.
+	 * 
+	 * @param args Command-line arguments
+	 */
+	public static void main(String[] args) {
 
-        if (args.length != 1) {
-            System.out.println("Example usage:\njava FileExample nmea.log");
-            System.exit(1);
-        }
+		if (args.length != 1) {
+			System.out.println("Example usage:\njava FileExample nmea.log");
+			System.exit(1);
+		}
 
-        try {
-            new FileExample(new File(args[0]));
-            System.out.println("Running, press CTRL-C to stop..");
-        } catch (IOException e) {
-            e.printStackTrace();
-            System.exit(1);
-        }
-    }
+		try {
+			new FileExample(new File(args[0]));
+			System.out.println("Running, press CTRL-C to stop..");
+		} catch (IOException e) {
+			e.printStackTrace();
+			System.exit(1);
+		}
+	}
 }

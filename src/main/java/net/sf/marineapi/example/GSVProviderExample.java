@@ -37,59 +37,59 @@ import net.sf.marineapi.provider.event.GSVListener;
  */
 public class GSVProviderExample implements GSVListener {
 
-    SentenceReader reader;
-    GSVProvider provider;
+	SentenceReader reader;
+	GSVProvider provider;
 
-    public GSVProviderExample(File file) throws IOException {
+	public GSVProviderExample(File file) throws IOException {
 
-        // create sentence reader and provide input stream
-        InputStream stream = new FileInputStream(file);
-        reader = new SentenceReader(stream);
+		// create sentence reader and provide input stream
+		InputStream stream = new FileInputStream(file);
+		reader = new SentenceReader(stream);
 
-        // create provider and register listener
-        provider = new GSVProvider(reader);
-        provider.addListener(this);
+		// create provider and register listener
+		provider = new GSVProvider(reader);
+		provider.addListener(this);
 
-        reader.start();
-    }
+		reader.start();
+	}
 
-    /*
-     * (non-Javadoc)
-     * @see
-     * net.sf.marineapi.provider.event.GSVListener#providerUpdate(net.sf.marineapi
-     * .provider.event.GSVEvent)
-     */
-    public void providerUpdate(GSVEvent event) {
-        System.out.println("-- GSV report --");
-        for (SatelliteInfo si : event.getSatelliteInfo()) {
-            String ptrn = "%s: %d, %d";
-            String msg = String.format(ptrn, si.getId(), si.getAzimuth(), si
-                    .getElevation());
-            System.out.println(msg);
-        }
-        System.out.println("-----");
-    }
+	/*
+	 * (non-Javadoc)
+	 * @see
+	 * net.sf.marineapi.provider.event.GSVListener#providerUpdate(net.sf.marineapi
+	 * .provider.event.GSVEvent)
+	 */
+	public void providerUpdate(GSVEvent event) {
+		System.out.println("-- GSV report --");
+		for (SatelliteInfo si : event.getSatelliteInfo()) {
+			String ptrn = "%s: %d, %d";
+			String msg = String.format(ptrn, si.getId(), si.getAzimuth(), si
+					.getElevation());
+			System.out.println(msg);
+		}
+		System.out.println("-----");
+	}
 
-    /**
-     * Main method takes one command-line argument, the name of the file to
-     * read.
-     * 
-     * @param args Command-line arguments
-     */
-    public static void main(String[] args) {
+	/**
+	 * Main method takes one command-line argument, the name of the file to
+	 * read.
+	 * 
+	 * @param args Command-line arguments
+	 */
+	public static void main(String[] args) {
 
-        if (args.length != 1) {
-            String msg = "Example usage:\njava GSVProviderExample nmea.log";
-            System.out.println(msg);
-            System.exit(0);
-        }
+		if (args.length != 1) {
+			String msg = "Example usage:\njava GSVProviderExample nmea.log";
+			System.out.println(msg);
+			System.exit(0);
+		}
 
-        try {
-            new GSVProviderExample(new File(args[0]));
-            System.out.println("Running, press CTRL-C to stop..");
-        } catch (IOException e) {
-            e.printStackTrace();
-            System.exit(1);
-        }
-    }
+		try {
+			new GSVProviderExample(new File(args[0]));
+			System.out.println("Running, press CTRL-C to stop..");
+		} catch (IOException e) {
+			e.printStackTrace();
+			System.exit(1);
+		}
+	}
 }

@@ -42,7 +42,7 @@ public class HeadingEvent extends ProviderEvent {
 	public HeadingEvent(Object source, HeadingSentence s) {
 		super(source);
 		heading = s.getHeading();
-		isTrue= s.isTrue();
+		isTrue = s.isTrue();
 	}
 
 	/**
@@ -62,8 +62,8 @@ public class HeadingEvent extends ProviderEvent {
 	public boolean isTrue() {
 		return isTrue;
 	}
-	
-	/* 
+
+	/*
 	 * (non-Javadoc)
 	 * @see java.util.EventObject#toString()
 	 */

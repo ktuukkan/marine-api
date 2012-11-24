@@ -36,109 +36,109 @@ import org.junit.Test;
  */
 public class PositionParserTest {
 
-    private PositionParser instance;
+	private PositionParser instance;
 
-    /**
-     * @throws java.lang.Exception
-     */
-    @Before
-    public void setUp() throws Exception {
-        instance = new PositionParser(GLLTest.EXAMPLE, SentenceId.GLL) {
-        };
-    }
+	/**
+	 * @throws java.lang.Exception
+	 */
+	@Before
+	public void setUp() throws Exception {
+		instance = new PositionParser(GLLTest.EXAMPLE, SentenceId.GLL) {
+		};
+	}
 
-    /**
-     * Test method for
-     * {@link net.sf.marineapi.nmea.parser.PositionParser#parseHemisphereLat(int)}
-     * .
-     */
-    @Test
-    public void testParseHemisphereLat() {
-        assertEquals(CompassPoint.NORTH, instance.parseHemisphereLat(1));
-    }
+	/**
+	 * Test method for
+	 * {@link net.sf.marineapi.nmea.parser.PositionParser#parseHemisphereLat(int)}
+	 * .
+	 */
+	@Test
+	public void testParseHemisphereLat() {
+		assertEquals(CompassPoint.NORTH, instance.parseHemisphereLat(1));
+	}
 
-    /**
-     * Test method for
-     * {@link net.sf.marineapi.nmea.parser.PositionParser#parseHemisphereLon(int)}
-     * .
-     */
-    @Test
-    public void testParseHemisphereLon() {
-        assertEquals(CompassPoint.EAST, instance.parseHemisphereLon(3));
-    }
+	/**
+	 * Test method for
+	 * {@link net.sf.marineapi.nmea.parser.PositionParser#parseHemisphereLon(int)}
+	 * .
+	 */
+	@Test
+	public void testParseHemisphereLon() {
+		assertEquals(CompassPoint.EAST, instance.parseHemisphereLon(3));
+	}
 
-    /**
-     * Test method for
-     * {@link net.sf.marineapi.nmea.parser.PositionParser#parseLatitude(int)}.
-     */
-    @Test
-    public void testParseLatitude() {
-        // 6011.552
-        final double lat = 60 + (11.552 / 60);
-        assertEquals(lat, instance.parseLatitude(0), 0.000001);
-    }
+	/**
+	 * Test method for
+	 * {@link net.sf.marineapi.nmea.parser.PositionParser#parseLatitude(int)}.
+	 */
+	@Test
+	public void testParseLatitude() {
+		// 6011.552
+		final double lat = 60 + (11.552 / 60);
+		assertEquals(lat, instance.parseLatitude(0), 0.000001);
+	}
 
-    /**
-     * Test method for
-     * {@link net.sf.marineapi.nmea.parser.PositionParser#parseLongitude(int)}.
-     */
-    @Test
-    public void testParseLongitude() {
-        // 02501.941
-        final double lat = 25 + (01.941 / 60);
-        assertEquals(lat, instance.parseLongitude(2), 0.000001);
-    }
+	/**
+	 * Test method for
+	 * {@link net.sf.marineapi.nmea.parser.PositionParser#parseLongitude(int)}.
+	 */
+	@Test
+	public void testParseLongitude() {
+		// 02501.941
+		final double lat = 25 + (01.941 / 60);
+		assertEquals(lat, instance.parseLongitude(2), 0.000001);
+	}
 
-    /**
-     * Test method for
-     * {@link net.sf.marineapi.nmea.parser.PositionParser#setLatHemisphere(int, net.sf.marineapi.nmea.util.CompassPoint)}
-     * .
-     */
-    @Test
-    public void testSetLatHemisphere() {
-        instance.setLatHemisphere(1, CompassPoint.SOUTH);
-        assertTrue(instance.toString().contains(",S,"));
-        assertEquals(CompassPoint.SOUTH, instance.parseHemisphereLat(1));
-    }
+	/**
+	 * Test method for
+	 * {@link net.sf.marineapi.nmea.parser.PositionParser#setLatHemisphere(int, net.sf.marineapi.nmea.util.CompassPoint)}
+	 * .
+	 */
+	@Test
+	public void testSetLatHemisphere() {
+		instance.setLatHemisphere(1, CompassPoint.SOUTH);
+		assertTrue(instance.toString().contains(",S,"));
+		assertEquals(CompassPoint.SOUTH, instance.parseHemisphereLat(1));
+	}
 
-    /**
-     * Test method for
-     * {@link net.sf.marineapi.nmea.parser.PositionParser#setLatitude(int, double)}
-     * .
-     */
-    @Test
-    public void testSetLatitude() {
-        // 2501.941
-        final double lat = 25 + (01.941 / 60);
-        instance.setLatitude(0, lat);
-        assertTrue(instance.toString().contains(",02501.941"));
-        assertEquals(lat, instance.parseLatitude(0), 0.000001);
-    }
+	/**
+	 * Test method for
+	 * {@link net.sf.marineapi.nmea.parser.PositionParser#setLatitude(int, double)}
+	 * .
+	 */
+	@Test
+	public void testSetLatitude() {
+		// 2501.941
+		final double lat = 25 + (01.941 / 60);
+		instance.setLatitude(0, lat);
+		assertTrue(instance.toString().contains(",02501.941"));
+		assertEquals(lat, instance.parseLatitude(0), 0.000001);
+	}
 
-    /**
-     * Test method for
-     * {@link net.sf.marineapi.nmea.parser.PositionParser#setLongitude(int, double)}
-     * .
-     */
-    @Test
-    public void testSetLongitude() {
-        // 02801.941
-        final double lon = 28 + (01.941 / 60);
-        instance.setLongitude(2, lon);
-        assertTrue(instance.toString().contains(",02801.941"));
-        assertEquals(lon, instance.parseLongitude(2), 0.000001);
-    }
+	/**
+	 * Test method for
+	 * {@link net.sf.marineapi.nmea.parser.PositionParser#setLongitude(int, double)}
+	 * .
+	 */
+	@Test
+	public void testSetLongitude() {
+		// 02801.941
+		final double lon = 28 + (01.941 / 60);
+		instance.setLongitude(2, lon);
+		assertTrue(instance.toString().contains(",02801.941"));
+		assertEquals(lon, instance.parseLongitude(2), 0.000001);
+	}
 
-    /**
-     * Test method for
-     * {@link net.sf.marineapi.nmea.parser.PositionParser#setLonHemisphere(int, net.sf.marineapi.nmea.util.CompassPoint)}
-     * .
-     */
-    @Test
-    public void testSetLonHemisphere() {
-        instance.setLonHemisphere(3, CompassPoint.WEST);
-        assertTrue(instance.toString().contains(",W,"));
-        assertEquals(CompassPoint.WEST, instance.parseHemisphereLon(3));
-    }
+	/**
+	 * Test method for
+	 * {@link net.sf.marineapi.nmea.parser.PositionParser#setLonHemisphere(int, net.sf.marineapi.nmea.util.CompassPoint)}
+	 * .
+	 */
+	@Test
+	public void testSetLonHemisphere() {
+		instance.setLonHemisphere(3, CompassPoint.WEST);
+		assertTrue(instance.toString().contains(",W,"));
+		assertEquals(CompassPoint.WEST, instance.parseHemisphereLon(3));
+	}
 
 }

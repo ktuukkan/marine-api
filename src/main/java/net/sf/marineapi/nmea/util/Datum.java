@@ -30,10 +30,10 @@ package net.sf.marineapi.nmea.util;
  */
 public enum Datum {
 
-    /** World Geodetic System 1984, the default datum in GPS systems. */
-    WGS84,
-    /** North American Datum 1983 */
-    NAD83,
-    /** North American Datum 1927 */
-    NAD27;
+	/** World Geodetic System 1984, the default datum in GPS systems. */
+	WGS84,
+	/** North American Datum 1983 */
+	NAD83,
+	/** North American Datum 1927 */
+	NAD27;
 }

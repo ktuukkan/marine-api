@@ -29,7 +29,7 @@ import net.sf.marineapi.nmea.sentence.Sentence;
 import net.sf.marineapi.nmea.sentence.SentenceValidator;
 
 /**
- * Default data reader implementation, using InputStream as a source.
+ * Default data reader implementation using InputStream as data source.
  * 
  * @author Kimmo Tuukkanen
  * @version $Revision$
@@ -44,17 +44,17 @@ class DefaultDataReader implements DataReader {
 	/**
 	 * Creates a new instance of DefaultDataReader.
 	 * 
-	 * @param source InputStream from where to read data.
+	 * @param source InputStream to be used as data source.
+	 * @param parent SentenceReader dispatching events for this reader.
 	 */
 	public DefaultDataReader(InputStream source, SentenceReader parent) {
-		this.parent = parent;
 		InputStreamReader isr = new InputStreamReader(source);
-		input = new BufferedReader(isr);
+		this.input = new BufferedReader(isr);
+		this.parent = parent;
 	}
 
 	/*
 	 * (non-Javadoc)
-	 * 
 	 * @see net.sf.marineapi.nmea.io.DataReader#isRunning()
 	 */
 	public boolean isRunning() {
@@ -63,7 +63,6 @@ class DefaultDataReader implements DataReader {
 
 	/*
 	 * (non-Javadoc)
-	 * 
 	 * @see net.sf.marineapi.nmea.io.DataReader#stop()
 	 */
 	public void stop() {
@@ -72,11 +71,10 @@ class DefaultDataReader implements DataReader {
 
 	/*
 	 * (non-Javadoc)
-	 * 
 	 * @see java.lang.Runnable#run()
 	 */
 	public void run() {
-	
+
 		monitor = new ActivityMonitor(parent);
 		SentenceFactory factory = SentenceFactory.getInstance();
 

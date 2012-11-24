@@ -33,81 +33,81 @@ import net.sf.marineapi.nmea.util.Units;
  */
 class DBTParser extends SentenceParser implements DBTSentence {
 
-    // TODO calculate value for all units when setting a value
+	// TODO calculate value for all units when setting a value
 
-    private static final int DEPTH_FEET = 0;
-    private static final int FEET = 1;
-    private static final int DEPTH_METERS = 2;
-    private static final int METERS = 3;
-    private static final int DEPTH_FATHOMS = 4;
-    private static final int FATHOMS = 5;
+	private static final int DEPTH_FEET = 0;
+	private static final int FEET = 1;
+	private static final int DEPTH_METERS = 2;
+	private static final int METERS = 3;
+	private static final int DEPTH_FATHOMS = 4;
+	private static final int FATHOMS = 5;
 
-    /**
-     * Creates a new instance of DBTParser.
-     * 
-     * @param nmea
-     */
-    public DBTParser(String nmea) {
-        super(nmea, SentenceId.DBT);
-    }
+	/**
+	 * Creates a new instance of DBTParser.
+	 * 
+	 * @param nmea
+	 */
+	public DBTParser(String nmea) {
+		super(nmea, SentenceId.DBT);
+	}
 
-    /**
-     * Creates a new instance of DBTParser with empty data fields.
-     * 
-     * @param talker TalkerId to set
-     */
-    public DBTParser(TalkerId talker) {
-        super(talker, SentenceId.DBT, 6);
-        setCharValue(FEET, Units.FEET.toChar());
-        setCharValue(METERS, Units.METER.toChar());
-        setCharValue(FATHOMS, Units.FATHOMS.toChar());
-    }
+	/**
+	 * Creates a new instance of DBTParser with empty data fields.
+	 * 
+	 * @param talker TalkerId to set
+	 */
+	public DBTParser(TalkerId talker) {
+		super(talker, SentenceId.DBT, 6);
+		setCharValue(FEET, Units.FEET.toChar());
+		setCharValue(METERS, Units.METER.toChar());
+		setCharValue(FATHOMS, Units.FATHOMS.toChar());
+	}
 
-    /*
-     * (non-Javadoc)
-     * @see net.sf.marineapi.nmea.sentence.DBTSentence#getMeters()
-     */
-    public double getDepth() {
-        return getDoubleValue(DEPTH_METERS);
-    }
+	/*
+	 * (non-Javadoc)
+	 * @see net.sf.marineapi.nmea.sentence.DBTSentence#getMeters()
+	 */
+	public double getDepth() {
+		return getDoubleValue(DEPTH_METERS);
+	}
 
-    /*
-     * (non-Javadoc)
-     * @see net.sf.marineapi.nmea.sentence.DBTSentence#getFathoms()
-     */
-    public double getFathoms() {
-        return getDoubleValue(DEPTH_FATHOMS);
-    }
+	/*
+	 * (non-Javadoc)
+	 * @see net.sf.marineapi.nmea.sentence.DBTSentence#getFathoms()
+	 */
+	public double getFathoms() {
+		return getDoubleValue(DEPTH_FATHOMS);
+	}
 
-    /*
-     * (non-Javadoc)
-     * @see net.sf.marineapi.nmea.sentence.DBTSentence#getFeet()
-     */
-    public double getFeet() {
-        return getDoubleValue(DEPTH_FEET);
-    }
+	/*
+	 * (non-Javadoc)
+	 * @see net.sf.marineapi.nmea.sentence.DBTSentence#getFeet()
+	 */
+	public double getFeet() {
+		return getDoubleValue(DEPTH_FEET);
+	}
 
-    /*
-     * (non-Javadoc)
-     * @see net.sf.marineapi.nmea.sentence.DBTSentence#setMeters(double)
-     */
-    public void setDepth(double depth) {
-        setDoubleValue(DEPTH_METERS, depth, 1, 1);
-    }
+	/*
+	 * (non-Javadoc)
+	 * @see net.sf.marineapi.nmea.sentence.DBTSentence#setMeters(double)
+	 */
+	public void setDepth(double depth) {
+		setDoubleValue(DEPTH_METERS, depth, 1, 1);
+	}
 
-    /*
-     * (non-Javadoc)
-     * @see net.sf.marineapi.nmea.sentence.DBTSentence#setFathoms(double)
-     */
-    public void setFathoms(double depth) {
-        setDoubleValue(DEPTH_FATHOMS, depth, 1, 1);
-    }
+	/*
+	 * (non-Javadoc)
+	 * @see net.sf.marineapi.nmea.sentence.DBTSentence#setFathoms(double)
+	 */
+	public void setFathoms(double depth) {
+		setDoubleValue(DEPTH_FATHOMS, depth, 1, 1);
+	}
 
-    /*
-     * (non-Javadoc)
-     * @see net.sf.marineapi.nmea.sentence.DBTSentence#setFeet(double)
-     */
-    public void setFeet(double depth) {
-        setDoubleValue(DEPTH_FEET, depth, 1, 1);
-    }
+	/*
+	 * (non-Javadoc)
+	 * @see net.sf.marineapi.nmea.sentence.DBTSentence#setFeet(double)
+	 */
+	public void setFeet(double depth) {
+		setDoubleValue(DEPTH_FEET, depth, 1, 1);
+	}
 }

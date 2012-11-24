@@ -29,13 +29,13 @@ import java.util.EventListener;
  * @version $Revision$
  */
 public abstract interface ProviderListener<T extends ProviderEvent> extends
-        EventListener {
+		EventListener {
 
-    /**
-     * Invoked when provider has new data available.
-     * 
-     * @param evt ProviderEvent object
-     */
-    void providerUpdate(T evt);
+	/**
+	 * Invoked when provider has new data available.
+	 * 
+	 * @param evt ProviderEvent object
+	 */
+	void providerUpdate(T evt);
 
 }

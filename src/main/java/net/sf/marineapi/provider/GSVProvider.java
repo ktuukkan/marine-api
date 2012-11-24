@@ -39,68 +39,68 @@ import net.sf.marineapi.provider.event.GSVEvent;
  */
 public class GSVProvider extends AbstractProvider<GSVEvent> {
 
-    /**
-     * Creates a new instance of GSVProvider with specified reader.
-     * 
-     * @param reader Reader to scan for GSV sentences.
-     */
-    public GSVProvider(SentenceReader reader) {
-        super(reader, "GSA", "GSV");
-    }
+	/**
+	 * Creates a new instance of GSVProvider with specified reader.
+	 * 
+	 * @param reader Reader to scan for GSV sentences.
+	 */
+	public GSVProvider(SentenceReader reader) {
+		super(reader, "GSA", "GSV");
+	}
 
-    /*
-     * (non-Javadoc)
-     * @see net.sf.marineapi.provider.AbstractProvider#createProviderEvent()
-     */
-    @Override
-    protected GSVEvent createProviderEvent() {
+	/*
+	 * (non-Javadoc)
+	 * @see net.sf.marineapi.provider.AbstractProvider#createProviderEvent()
+	 */
+	@Override
+	protected GSVEvent createProviderEvent() {
 
-        GSASentence gsa = null;
-        List<SatelliteInfo> info = new ArrayList<SatelliteInfo>();
+		GSASentence gsa = null;
+		List<SatelliteInfo> info = new ArrayList<SatelliteInfo>();
 
-        for (Sentence sentence : getSentences()) {
-            if ("GSA".equals(sentence.getSentenceId())) {
-                gsa = (GSASentence) sentence;
-            } else if ("GSV".equals(sentence.getSentenceId())) {
-                GSVSentence gsv = (GSVSentence) sentence;
-                info.addAll(gsv.getSatelliteInfo());
-            }
-        }
+		for (Sentence sentence : getSentences()) {
+			if ("GSA".equals(sentence.getSentenceId())) {
+				gsa = (GSASentence) sentence;
+			} else if ("GSV".equals(sentence.getSentenceId())) {
+				GSVSentence gsv = (GSVSentence) sentence;
+				info.addAll(gsv.getSatelliteInfo());
+			}
+		}
 
-        return new GSVEvent(this, gsa, info);
-    }
+		return new GSVEvent(this, gsa, info);
+	}
 
-    /*
-     * (non-Javadoc)
-     * @see net.sf.marineapi.provider.AbstractProvider#isReady()
-     */
-    @Override
-    protected boolean isReady() {
+	/*
+	 * (non-Javadoc)
+	 * @see net.sf.marineapi.provider.AbstractProvider#isReady()
+	 */
+	@Override
+	protected boolean isReady() {
 
-        boolean hasFirstGSV = false;
-        boolean hasLastGSV = false;
+		boolean hasFirstGSV = false;
+		boolean hasLastGSV = false;
 
-        for (Sentence s : getSentences()) {
-            if ("GSV".equals(s.getSentenceId())) {
-                GSVSentence gsv = (GSVSentence) s;
-                if (!hasFirstGSV) {
-                    hasFirstGSV = gsv.isFirst();
-                }
-                if (!hasLastGSV) {
-                    hasLastGSV = gsv.isLast();
-                }
-            }
-        }
+		for (Sentence s : getSentences()) {
+			if ("GSV".equals(s.getSentenceId())) {
+				GSVSentence gsv = (GSVSentence) s;
+				if (!hasFirstGSV) {
+					hasFirstGSV = gsv.isFirst();
+				}
+				if (!hasLastGSV) {
+					hasLastGSV = gsv.isLast();
+				}
+			}
+		}
 
-        return hasOne("GSA") && hasFirstGSV && hasLastGSV;
-    }
+		return hasOne("GSA") && hasFirstGSV && hasLastGSV;
+	}
 
-    /*
-     * (non-Javadoc)
-     * @see net.sf.marineapi.provider.AbstractProvider#isValid()
-     */
-    @Override
-    protected boolean isValid() {
-        return true;
-    }
+	/*
+	 * (non-Javadoc)
+	 * @see net.sf.marineapi.provider.AbstractProvider#isValid()
+	 */
+	@Override
+	protected boolean isValid() {
+		return true;
+	}
 }

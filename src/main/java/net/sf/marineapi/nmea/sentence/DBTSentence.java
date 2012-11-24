@@ -28,32 +28,32 @@ package net.sf.marineapi.nmea.sentence;
  */
 public interface DBTSentence extends DepthSentence {
 
-    /**
-     * Get depth in fathoms.
-     * 
-     * @return Depth value
-     */
-    double getFathoms();
+	/**
+	 * Get depth in fathoms.
+	 * 
+	 * @return Depth value
+	 */
+	double getFathoms();
 
-    /**
-     * Get depth in feet.
-     * 
-     * @return Depth value
-     */
-    double getFeet();
+	/**
+	 * Get depth in feet.
+	 * 
+	 * @return Depth value
+	 */
+	double getFeet();
 
-    /**
-     * Set depth value, in fathoms.
-     * 
-     * @param depth Depth to set
-     */
-    void setFathoms(double depth);
+	/**
+	 * Set depth value, in fathoms.
+	 * 
+	 * @param depth Depth to set
+	 */
+	void setFathoms(double depth);
 
-    /**
-     * Set depth value, in feet.
-     * 
-     * @param depth Depth to set
-     */
-    void setFeet(double depth);
+	/**
+	 * Set depth value, in feet.
+	 * 
+	 * @param depth Depth to set
+	 */
+	void setFeet(double depth);
 
 }

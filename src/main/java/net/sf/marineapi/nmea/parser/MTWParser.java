@@ -33,42 +33,42 @@ import net.sf.marineapi.nmea.util.Units;
  */
 class MTWParser extends SentenceParser implements MTWSentence {
 
-    private static final int TEMPERATURE = 0;
-    private static final int UNIT_INDICATOR = 1;
+	private static final int TEMPERATURE = 0;
+	private static final int UNIT_INDICATOR = 1;
 
-    /**
-     * Creates new instance of MTWParser with specified sentence.
-     * 
-     * @param nmea MTW sentence string
-     */
-    public MTWParser(String nmea) {
-        super(nmea);
-    }
+	/**
+	 * Creates new instance of MTWParser with specified sentence.
+	 * 
+	 * @param nmea MTW sentence string
+	 */
+	public MTWParser(String nmea) {
+		super(nmea);
+	}
 
-    /**
-     * Creates new MTW parse without data.
-     * 
-     * @param tid TalkerId to set
-     */
-    public MTWParser(TalkerId tid) {
-        super(tid, SentenceId.MTW, 2);
-        setCharValue(UNIT_INDICATOR, Units.CELSIUS.toChar());
-    }
+	/**
+	 * Creates new MTW parse without data.
+	 * 
+	 * @param tid TalkerId to set
+	 */
+	public MTWParser(TalkerId tid) {
+		super(tid, SentenceId.MTW, 2);
+		setCharValue(UNIT_INDICATOR, Units.CELSIUS.toChar());
+	}
 
-    /*
-     * (non-Javadoc)
-     * @see net.sf.marineapi.nmea.sentence.MTWSentence#getTemperature()
-     */
-    public double getTemperature() {
-        return getDoubleValue(TEMPERATURE);
-    }
+	/*
+	 * (non-Javadoc)
+	 * @see net.sf.marineapi.nmea.sentence.MTWSentence#getTemperature()
+	 */
+	public double getTemperature() {
+		return getDoubleValue(TEMPERATURE);
+	}
 
-    /*
-     * (non-Javadoc)
-     * @see net.sf.marineapi.nmea.sentence.MTWSentence#setTemperature(double)
-     */
-    public void setTemperature(double temp) {
-        setDoubleValue(TEMPERATURE, temp, 1, 2);
-    }
+	/*
+	 * (non-Javadoc)
+	 * @see net.sf.marineapi.nmea.sentence.MTWSentence#setTemperature(double)
+	 */
+	public void setTemperature(double temp) {
+		setDoubleValue(TEMPERATURE, temp, 1, 2);
+	}
 
 }
