@@ -1,4 +1,4 @@
-Java Marine API
+Java Marine API "!https://travis-ci.org/ktuukkan/marine-api.png!":https://travis-ci.org/ktuukkan/marine-api
 ===============
 
 Java Marine API is an NMEA 0183 parser library for Java. The goal of this project is to enable easy access to data provided by various marine instruments, such as GPS, sonar or autopilot. NMEA sentences can be read from any source that is accessed with input stream, eg. serial port, file, TCP/IP socket etc. The plain ASCII data is converted to events that can be listened in your application. Interfaces and parser implementations for selected sentences are provided and you can also implement and integrate your own by extending the provided base classes.
@@ -35,5 +35,3 @@ http://marineapi.sourceforge.net/
 
 Downloads:
 https://sourceforge.net/projects/marineapi/files/Releases/
-
-https://travis-ci.org/ktuukkan/marine-api.png
