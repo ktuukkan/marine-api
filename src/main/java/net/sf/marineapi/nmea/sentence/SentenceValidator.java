@@ -20,6 +20,8 @@
  */
 package net.sf.marineapi.nmea.sentence;
 
+import java.util.regex.Pattern;
+
 /**
  * SentenceValidator checks any String against NMEA 0183 format.
  * 
@@ -27,6 +29,12 @@ package net.sf.marineapi.nmea.sentence;
  * @version $Revision$
  */
 public final class SentenceValidator {
+
+	private static final Pattern reChecksum = Pattern.compile(
+		"^[$|!]{1}[A-Z0-9]{5}[,][\\x20-\\x7F]{0,72}[*][A-F0-9]{2}$");
+	
+	private static final Pattern reNoChecksum = Pattern.compile(
+		"^[$|!]{1}[A-Z0-9]{5}[,][\\x20-\\x7F]{0,75}$");
 
 	private SentenceValidator() {
 	}
@@ -52,15 +60,11 @@ public final class SentenceValidator {
 			return false;
 		}
 
-		int i = nmea.indexOf(Sentence.CHECKSUM_DELIMITER);
-
-		// printable ASCII chars 0x20 to 0x7E
-		String re = "^[$|!]{1}[A-Z0-9]{5}[,][\\x20-\\x7F]{0,72}[*][A-F0-9]{2}$";
-		if (i < 0) {
-			re = "^[$|!]{1}[A-Z0-9]{5}[,][\\x20-\\x7F]{0,75}$";
+		if (nmea.indexOf(Sentence.CHECKSUM_DELIMITER) < 0) {
+			return reNoChecksum.matcher(nmea).matches();
 		}
 
-		return nmea.matches(re);
+		return reChecksum.matcher(nmea).matches();
 	}
 
 	/**
