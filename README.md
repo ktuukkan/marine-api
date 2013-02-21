@@ -32,3 +32,5 @@ The project has just recently been migrated in Github from Sourceforge. The old 
 
 http://marineapi.sourceforge.net/
 
+Downloads:
+https://sourceforge.net/projects/marineapi/files/Releases/
