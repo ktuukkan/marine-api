@@ -30,7 +30,10 @@ In addition to data input, library also supports output by allowing the modifica
 
 The project has just recently been migrated in Github from Sourceforge. The old site, javadocs and downloads are still there:
 
+Old site:
 http://marineapi.sourceforge.net/
 
 Downloads:
 https://sourceforge.net/projects/marineapi/files/Releases/
+
+https://travis-ci.org/ktuukkan/marine-api.png
