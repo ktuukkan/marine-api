@@ -29,6 +29,8 @@ import org.junit.Test;
  */
 public class HeadingProviderTest implements HeadingListener {
 
+	private SentenceFactory factory;
+
 	private HeadingProvider instance;
 
 	private HeadingEvent event;
@@ -38,14 +40,13 @@ public class HeadingProviderTest implements HeadingListener {
 	 */
 	@Before
 	public void setUp() throws Exception {
-
-		FileInputStream str = new FileInputStream(new File(
-				"target/test-classes/data/sample1.txt"));
+		factory = SentenceFactory.getInstance();
+		File file = new File("target/test-classes/data/sample1.txt");
+		FileInputStream str = new FileInputStream(file);
 		SentenceReader r = new SentenceReader(str);
 		instance = new HeadingProvider(r);
 		instance.addListener(this);
 		r.start();
-
 		event = null;
 	}
 
@@ -62,8 +63,7 @@ public class HeadingProviderTest implements HeadingListener {
 	@Test
 	public void testHDMSentenceRead() {
 
-		SentenceFactory sf = SentenceFactory.getInstance();
-		Sentence s = sf.createParser(HDMTest.EXAMPLE);
+		Sentence s = factory.createParser(HDMTest.EXAMPLE);
 
 		assertNull(event);
 		instance.sentenceRead(new SentenceEvent(this, s));
@@ -81,8 +81,7 @@ public class HeadingProviderTest implements HeadingListener {
 	@Test
 	public void testHDTSentenceRead() {
 
-		SentenceFactory sf = SentenceFactory.getInstance();
-		Sentence s = sf.createParser(HDTTest.EXAMPLE);
+		Sentence s = factory.createParser(HDTTest.EXAMPLE);
 
 		assertNull(event);
 		instance.sentenceRead(new SentenceEvent(this, s));
@@ -100,8 +99,7 @@ public class HeadingProviderTest implements HeadingListener {
 	@Test
 	public void testHDGSentenceRead() {
 
-		SentenceFactory sf = SentenceFactory.getInstance();
-		Sentence s = sf.createParser(HDGTest.EXAMPLE);
+		Sentence s = factory.createParser(HDGTest.EXAMPLE);
 
 		assertNull(event);
 		instance.sentenceRead(new SentenceEvent(this, s));
