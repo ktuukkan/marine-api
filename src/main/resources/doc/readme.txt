@@ -17,6 +17,9 @@ SYSTEM REQUIREMENTS
  * RXTX library
    <http://rxtx.qbang.org/>
 
+ * Neuron Robotics Java Serial Library
+   <http://code.google.com/p/nrjavaserial/>
+
 LICENSING
 
 Java Marine API is free software: you can redistribute it and/or modify it
