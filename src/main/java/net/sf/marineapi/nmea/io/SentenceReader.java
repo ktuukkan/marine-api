@@ -142,16 +142,29 @@ public class SentenceReader {
 	}
 
 	/**
-	 * Sets the input stream from which to read NMEA data. If reader is running,
+	 * Sets the InputStream to be used as data source. If reader is running,
 	 * it is first stopped and you must call {@link #start()} to resume reading.
 	 * 
-	 * @param stream New input stream to set.
+	 * @param stream InputStream to set.
 	 */
 	public void setInputStream(InputStream stream) {
 		if (reader.isRunning()) {
 			stop();
 		}
 		reader = new DefaultDataReader(stream, this);
+	}
+
+	/**
+	 * Sets the DatagramSocket to be used as data source. If reader is running,
+	 * it is first stopped and you must call {@link #start()} to resume reading.
+	 * 
+	 * @param socket DatagramSocket to set
+	 */
+	public void setDatagramSocket(DatagramSocket socket) {
+		if (reader.isRunning()) {
+			stop();
+		}
+		reader = new UDPDataReader(socket, this);
 	}
 
 	/**
