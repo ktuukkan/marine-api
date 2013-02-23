@@ -34,7 +34,7 @@ import net.sf.marineapi.nmea.util.Time;
  * 
  * @author Kimmo Tuukkanen
  * @version $Revision$
- * @see net.sf.marineapi.provider.TPVProvider
+ * @see net.sf.marineapi.provider.PositionProvider
  * @see net.sf.marineapi.provider.event.TPVListener
  */
 public class TPVEvent extends ProviderEvent implements Cloneable {

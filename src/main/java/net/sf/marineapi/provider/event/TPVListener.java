@@ -25,7 +25,7 @@ package net.sf.marineapi.provider.event;
  * 
  * @author Kimmo Tuukkanen
  * @version $Revision$
- * @see net.sf.marineapi.provider.TPVProvider
+ * @see net.sf.marineapi.provider.PositionProvider
  * @see net.sf.marineapi.provider.event.TPVEvent
  */
 public interface TPVListener extends ProviderListener<TPVEvent> {

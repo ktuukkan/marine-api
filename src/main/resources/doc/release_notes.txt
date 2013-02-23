@@ -7,11 +7,17 @@ versions. Released on @RELEASE_DATE@.
 
 CHANGES
 
- * TBD
+ * SentenceReader refactored to support better diffrent data sources.
+
+ * Some regexp performance tweaks in SentenceValidator.
+
+ * TPVProvider renamed to PositionProvider.
 
 NEW FEATURES
 
  * SentenceReader now supports UDP sockets.
+
+ * SatelliteInfoProvider that reports GPS satellite information in single event.
 
 KNOWN ISSUES
 
