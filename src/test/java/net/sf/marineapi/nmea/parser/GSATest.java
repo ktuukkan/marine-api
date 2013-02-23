@@ -78,11 +78,11 @@ public class GSATest {
 
 	/**
 	 * Test method for
-	 * {@link net.sf.marineapi.nmea.parser.GSAParser#getSatellitesIds()}.
+	 * {@link net.sf.marineapi.nmea.parser.GSAParser#getSatelliteIds()}.
 	 */
 	@Test
 	public void testGetSatelliteIds() {
-		String[] satellites = instance.getSatellitesIds();
+		String[] satellites = instance.getSatelliteIds();
 		assertEquals(5, satellites.length);
 		assertEquals("02", satellites[0]);
 		assertEquals("07", satellites[1]);
@@ -169,7 +169,7 @@ public class GSATest {
 		String[] ids = { "02", "04", "06", "08", "10", "12" };
 		instance.setSatelliteIds(ids);
 
-		String[] satellites = instance.getSatellitesIds();
+		String[] satellites = instance.getSatelliteIds();
 		assertEquals(ids.length, satellites.length);
 
 		int i = 0;

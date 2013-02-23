@@ -89,7 +89,7 @@ public interface GSASentence extends Sentence {
 	 * @throws net.sf.marineapi.parser.ParseException If the field contains
 	 *             unexpected or illegal value.
 	 */
-	String[] getSatellitesIds();
+	String[] getSatelliteIds();
 
 	/**
 	 * Get the vertical dilution of precision (VDOP).

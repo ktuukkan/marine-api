@@ -99,9 +99,9 @@ class GSAParser extends SentenceParser implements GSASentence {
 
 	/*
 	 * (non-Javadoc)
-	 * @see net.sf.marineapi.nmea.sentence.GSASentence#getSatellitesIds()
+	 * @see net.sf.marineapi.nmea.sentence.GSASentence#getSatelliteIds()
 	 */
-	public String[] getSatellitesIds() {
+	public String[] getSatelliteIds() {
 		List<String> result = new ArrayList<String>();
 		for (int i = FIRST_SV; i <= LAST_SV; i++) {
 			if (hasValue(i)) {
