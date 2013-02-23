@@ -13,11 +13,13 @@ CHANGES
 
  * TPVProvider renamed to PositionProvider.
 
+ * GSASentence; getSatellitesIds() renamed to getSatelliteIds().
+
 NEW FEATURES
 
- * SentenceReader now supports UDP sockets.
+ * UDP/DatagramSocket support in SentenceReader.
 
- * SatelliteInfoProvider that reports GPS satellite information in single event.
+ * SatelliteInfoProvider reports all GPS satellite information in single event.
 
 KNOWN ISSUES
 
@@ -33,3 +35,5 @@ ACKNOWLEDGEMENTS
  
  * Thanks to Ludovic Drouineau for providing the UDP implementation for
    SentenceReader.
+
+ * Thanks to Robert Huitema/www.42.co.nz for regexp performance enhancements.
