@@ -67,6 +67,14 @@ public class HeadingProviderTest implements HeadingListener {
 
 		assertNull(event);
 		instance.sentenceRead(new SentenceEvent(this, s));
+		
+		// ugly hack, sometimes the provider can't keep up with the test flow..
+		try {
+			Thread.sleep(250);
+		} catch (Exception e) {
+			// nevermind
+		}
+
 		assertNotNull(event);
 
 		assertEquals(90.0, event.getHeading(), 0.1);
@@ -85,8 +93,14 @@ public class HeadingProviderTest implements HeadingListener {
 
 		assertNull(event);
 		instance.sentenceRead(new SentenceEvent(this, s));
-		assertNotNull(event);
+		
+		try {
+			Thread.sleep(250);
+		} catch (Exception e) {
+			// nevermind
+		}
 
+		assertNotNull(event);
 		assertEquals(90.1, event.getHeading(), 0.1);
 		assertTrue(event.isTrue());
 	}
@@ -103,8 +117,14 @@ public class HeadingProviderTest implements HeadingListener {
 
 		assertNull(event);
 		instance.sentenceRead(new SentenceEvent(this, s));
+		
+		try {
+			Thread.sleep(250);
+		} catch (Exception e) {
+			// nevermind
+		}
+		
 		assertNotNull(event);
-
 		assertEquals(123.4, event.getHeading(), 0.1);
 		assertFalse(event.isTrue());
 	}
