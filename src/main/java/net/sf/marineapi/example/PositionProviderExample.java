@@ -28,8 +28,8 @@ import java.io.InputStream;
 
 import net.sf.marineapi.nmea.io.SentenceReader;
 import net.sf.marineapi.provider.PositionProvider;
-import net.sf.marineapi.provider.event.TPVEvent;
-import net.sf.marineapi.provider.event.TPVListener;
+import net.sf.marineapi.provider.event.PositionEvent;
+import net.sf.marineapi.provider.event.PositionListener;
 
 /**
  * Demonstrates the usage of PositionProvider.
@@ -37,7 +37,7 @@ import net.sf.marineapi.provider.event.TPVListener;
  * @author Kimmo Tuukkanen
  * @see PositionProvider
  */
-public class PositionProviderExample implements TPVListener {
+public class PositionProviderExample implements PositionListener {
 
 	PositionProvider provider;
 
@@ -52,10 +52,10 @@ public class PositionProviderExample implements TPVListener {
 	/*
 	 * (non-Javadoc)
 	 * @see
-	 * net.sf.marineapi.provider.event.TPVListener#providerUpdate(net.sf.marineapi
-	 * .provider.event.TPVEvent)
+	 * net.sf.marineapi.provider.event.PositionListener#providerUpdate(net.sf.marineapi
+	 * .provider.event.PositionEvent)
 	 */
-	public void providerUpdate(TPVEvent evt) {
+	public void providerUpdate(PositionEvent evt) {
 		// do something with the data..
 		System.out.println("TPV: " + evt.toString());
 	}

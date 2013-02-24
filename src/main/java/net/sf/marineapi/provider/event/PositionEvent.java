@@ -1,5 +1,5 @@
 /* 
- * TPVEvent.java
+ * PositionEvent.java
  * Copyright (C) 2011 Kimmo Tuukkanen
  * 
  * This file is part of Java Marine API.
@@ -35,9 +35,9 @@ import net.sf.marineapi.nmea.util.Time;
  * @author Kimmo Tuukkanen
  * @version $Revision$
  * @see net.sf.marineapi.provider.PositionProvider
- * @see net.sf.marineapi.provider.event.TPVListener
+ * @see net.sf.marineapi.provider.event.PositionListener
  */
-public class TPVEvent extends ProviderEvent implements Cloneable {
+public class PositionEvent extends ProviderEvent implements Cloneable {
 
 	private static final long serialVersionUID = 1L;
 	private Double course;
@@ -49,11 +49,11 @@ public class TPVEvent extends ProviderEvent implements Cloneable {
 	private GpsFixQuality fix;
 
 	/**
-	 * Creates a new instance of TPVEvent.
+	 * Creates a new instance of PositionEvent.
 	 * 
 	 * @param source Source object of event
 	 */
-	public TPVEvent(Object source, Position p, double sog, double cog, Date d,
+	public PositionEvent(Object source, Position p, double sog, double cog, Date d,
 			Time t, FaaMode m, GpsFixQuality fq) {
 		super(source);
 		position = p;
@@ -70,8 +70,8 @@ public class TPVEvent extends ProviderEvent implements Cloneable {
 	 * @see java.lang.Object#clone()
 	 */
 	@Override
-	public TPVEvent clone() {
-		return new TPVEvent(getSource(), position, speed, course, date, time,
+	public PositionEvent clone() {
+		return new PositionEvent(getSource(), position, speed, course, date, time,
 				mode, fix);
 	}
 

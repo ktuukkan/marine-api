@@ -32,7 +32,7 @@ import net.sf.marineapi.nmea.util.FaaMode;
 import net.sf.marineapi.nmea.util.GpsFixQuality;
 import net.sf.marineapi.nmea.util.Position;
 import net.sf.marineapi.nmea.util.Time;
-import net.sf.marineapi.provider.event.TPVEvent;
+import net.sf.marineapi.provider.event.PositionEvent;
 
 /**
  * <p>
@@ -45,17 +45,17 @@ import net.sf.marineapi.provider.event.TPVEvent;
  * captured and events are dispatched only when sentences report
  * {@link net.sf.marineapi.nmea.util.DataStatus#ACTIVE}.
  * <p>
- * When constructing {@link net.sf.marineapi.provider.event.TPVEvent}, the
+ * When constructing {@link net.sf.marineapi.provider.event.PositionEvent}, the
  * maximum age of captured sentences is 1000 ms, i.e. all sentences are from
  * within the default NMEA update rate (1/s).
  * 
  * @author Kimmo Tuukkanen
  * @version $Revision$
- * @see net.sf.marineapi.provider.event.TPVListener
- * @see net.sf.marineapi.provider.event.TPVEvent
+ * @see net.sf.marineapi.provider.event.PositionListener
+ * @see net.sf.marineapi.provider.event.PositionEvent
  * @see net.sf.marineapi.nmea.io.SentenceReader
  */
-public class PositionProvider extends AbstractProvider<TPVEvent> {
+public class PositionProvider extends AbstractProvider<PositionEvent> {
 
 	/**
 	 * Creates a new instance of PositionProvider.
@@ -71,7 +71,7 @@ public class PositionProvider extends AbstractProvider<TPVEvent> {
 	 * @see net.sf.marineapi.provider.AbstractProvider#createProviderEvent()
 	 */
 	@Override
-	protected TPVEvent createProviderEvent() {
+	protected PositionEvent createProviderEvent() {
 		Position p = null;
 		Double sog = null;
 		Double cog = null;
@@ -103,7 +103,7 @@ public class PositionProvider extends AbstractProvider<TPVEvent> {
 			}
 		}
 
-		return new TPVEvent(this, p, sog, cog, d, t, mode, fix);
+		return new PositionEvent(this, p, sog, cog, d, t, mode, fix);
 	}
 
 	/*

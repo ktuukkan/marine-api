@@ -1,5 +1,5 @@
 /* 
- * TPVListener.java
+ * PositionListener.java
  * Copyright (C) 2011 Kimmo Tuukkanen
  * 
  * This file is part of Java Marine API.
@@ -26,15 +26,15 @@ package net.sf.marineapi.provider.event;
  * @author Kimmo Tuukkanen
  * @version $Revision$
  * @see net.sf.marineapi.provider.PositionProvider
- * @see net.sf.marineapi.provider.event.TPVEvent
+ * @see net.sf.marineapi.provider.event.PositionEvent
  */
-public interface TPVListener extends ProviderListener<TPVEvent> {
+public interface PositionListener extends ProviderListener<PositionEvent> {
 
 	/**
 	 * Invoked when fresh time/position/velocity report is available, typically
 	 * once per second.
 	 * 
-	 * @param evt TPVEvent
+	 * @param evt PositionEvent
 	 */
-	void providerUpdate(TPVEvent evt);
+	void providerUpdate(PositionEvent evt);
 }

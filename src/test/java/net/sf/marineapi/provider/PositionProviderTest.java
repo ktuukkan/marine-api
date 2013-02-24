@@ -33,8 +33,8 @@ import net.sf.marineapi.nmea.parser.GLLTest;
 import net.sf.marineapi.nmea.parser.RMCTest;
 import net.sf.marineapi.nmea.parser.SentenceFactory;
 import net.sf.marineapi.nmea.sentence.Sentence;
-import net.sf.marineapi.provider.event.TPVEvent;
-import net.sf.marineapi.provider.event.TPVListener;
+import net.sf.marineapi.provider.event.PositionEvent;
+import net.sf.marineapi.provider.event.PositionListener;
 
 import org.junit.After;
 import org.junit.Before;
@@ -44,9 +44,9 @@ import org.junit.Test;
  * @author Kimmo Tuukkanen
  * @version $Revision$
  */
-public class PositionProviderTest implements TPVListener {
+public class PositionProviderTest implements PositionListener {
 
-	TPVEvent event;
+	PositionEvent event;
 	PositionProvider instance;
 
 	/**
@@ -118,10 +118,10 @@ public class PositionProviderTest implements TPVListener {
 	/*
 	 * (non-Javadoc)
 	 * @see
-	 * net.sf.marineapi.provider.event.TPVListener#providerUpdate(net.sf.marineapi
-	 * .provider.event.TPVEvent)
+	 * net.sf.marineapi.provider.event.PositionListener#providerUpdate(net.sf.marineapi
+	 * .provider.event.PositionEvent)
 	 */
-	public void providerUpdate(TPVEvent evt) {
+	public void providerUpdate(PositionEvent evt) {
 		event = evt;
 	}
 
