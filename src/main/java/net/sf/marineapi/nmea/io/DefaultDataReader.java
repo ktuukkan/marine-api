@@ -29,7 +29,7 @@ import net.sf.marineapi.nmea.sentence.Sentence;
 import net.sf.marineapi.nmea.sentence.SentenceValidator;
 
 /**
- * Default data reader implementation using InputStream as data source.
+ * The default data reader implementation using InputStream as data source.
  * 
  * @author Kimmo Tuukkanen
  * @version $Revision$

@@ -28,7 +28,7 @@ import net.sf.marineapi.nmea.sentence.Sentence;
 import net.sf.marineapi.nmea.sentence.SentenceValidator;
 
 /**
- * UDP data reader implementation using DatagramSocket as data source.
+ * DataReader implementation using DatagramSocket as data source.
  * 
  * @author Kimmo Tuukkanen, Ludovic Drouineau
  * @version $Revision$
