@@ -3,7 +3,9 @@
 Java Marine API
 ===============
 
-Java Marine API is an NMEA 0183 parser library for Java. The goal of this project is to enable easy access to data provided by various marine instruments, such as GPS, sonar or autopilot. NMEA sentences can be read from any source that is accessed with input stream, eg. serial port, file, TCP/IP socket etc. The plain ASCII data is converted to events that can be listened in your application. Interfaces and parser implementations for selected sentences are provided and you can also implement and integrate your own by extending the provided base classes.
+Java Marine API is an [NMEA 0183](http://en.wikipedia.org/wiki/NMEA_0183) parser library for Java. The goal of this project is to enable easy access to data provided by various electronic marine devices such as GPS, sonar or weather instruments.
+
+NMEA sentences can be read from any source that is accessed with input stream, eg. serial port, file, TCP/IP socket etc. The plain ASCII data is converted to event/listener model with interfaces and parser implementations for selected sentences. Custom parsers may also be integrated by extending the provided base classes. In addition to data input, output is also supported by allowing the modification of sentence contents with data formatting and validation.
 
 Currently the following sentences are supported:
 
@@ -28,12 +30,11 @@ Currently the following sentences are supported:
     WPL - Destination waypoint location and ID
     ZDA - UTC time and date with local time offset
 
-In addition to data input, library also supports output by allowing the modification of sentence contents with data formatting and validation.
+Project was published originally in Sourceforge.net and main web page, javadocs and downloads are still there but the old SVN repository is no longer updated.
 
-The project has just recently been migrated in Github from Sourceforge. The old site, javadocs and downloads are still there:
+sf.net:
+http://marineapi.sf.net/
+http://sf.net/projects/marineapi/
 
-Old site:
-http://marineapi.sourceforge.net/
-
-Downloads:
+downloads:
 https://sourceforge.net/projects/marineapi/files/Releases/
