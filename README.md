@@ -1,7 +1,7 @@
 [![Build Status](https://travis-ci.org/ktuukkan/marine-api.png)](https://travis-ci.org/ktuukkan/marine-api)
 
 Java Marine API
-===============
+---------------
 
 Java Marine API is an [NMEA 0183](http://en.wikipedia.org/wiki/NMEA_0183) parser library for Java. The goal of this project is to enable easy access to data provided by various electronic marine devices such as GPS, sonar or weather instruments.
 
@@ -30,11 +30,11 @@ Currently the following sentences are supported:
     WPL - Destination waypoint location and ID
     ZDA - UTC time and date with local time offset
 
-Project was published originally in Sourceforge.net and main web page, javadocs and downloads are still there but the old SVN repository is no longer updated.
+**Sourceforge**
 
-sf.net:
-http://marineapi.sf.net/
-http://sf.net/projects/marineapi/
+Project was originally published in Sourceforge.net, hence the net.sf.. package naming. Project page, website, javadocs and downloads are still there, but the old SVN repository is no longer updated.
 
-downloads:
-https://sourceforge.net/projects/marineapi/files/Releases/
+* [Project page](http://sf.net/projects/marineapi/)
+* [Website](http://marineapi.sf.net/)
+* [Downloads](https://sourceforge.net/projects/marineapi/files/Releases/)
+
