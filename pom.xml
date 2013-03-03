@@ -1,6 +1,6 @@
 <!--
 Apache Maven script for Java Marine API
-Copyright (C) 2012 Amanda Fenech, Kimmo Tuukkanen
+Copyright (C) 2012- Amanda Fenech, Kimmo Tuukkanen
 
 This file is part of Java Marine API.
 <http://sourceforge.net/projects/marineapi/>
@@ -53,20 +53,20 @@ $Revision$
 
 	<organization>
 		<name>Kimmo Tuukkanen</name>
-		<url>http://ktuukkan.users.sourceforge.net/</url>
+		<url>https://github.com/ktuukkan/</url>
 	</organization>
 
 	<scm>
-		<connection>scm:svn:http://marineapi.svn.sourceforge.net/svnroot/marineapi/trunk</connection>
-		<developerConnection>scm:svn:https://marineapi.svn.sourceforge.net/svnroot/marineapi/trunk</developerConnection>
-		<url>http://marineapi.svn.sourceforge.net/svnroot/marineapi/trunk</url>
+		<connection>scm:git:git@github.com:ktuukkan/marine-api.git</connection>
+		<developerConnection>scm:git:git@github.com:ktuukkan/marine-api.git</developerConnection>
+		<url>git@github.com:ktuukkan/marine-api.git</url>
 	</scm>
 
 	<developers>
 		<developer>
 			<id>ktuukkan</id>
 			<name>Kimmo Tuukkanen</name>
-			<email>ktuukkan at users.sourceforge.net</email>
+			<email>kimmo.tuukkanen at gmail.com</email>
 		</developer>
 	</developers>
 
