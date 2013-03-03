@@ -29,12 +29,12 @@ import net.sf.marineapi.nmea.util.FaaMode;
 
 /**
  * SatelliteInfoEvent contains the satellite information collected by
- * {@link net.sf.marineapi.provider.GSVProvider}.
+ * {@link net.sf.marineapi.provider.SatelliteInfoProvider}.
  * 
  * @author Kimmo Tuukkanen
  * @version $Revision$
- * @see net.sf.marineapi.nmea.sentance.GSASentence
- * @see net.sf.marineapi.nmea.sentance.GSVSentence
+ * @see net.sf.marineapi.nmea.sentence.GSASentence
+ * @see net.sf.marineapi.nmea.sentence.GSVSentence
  * @see net.sf.marineapi.nmea.util.SatelliteInfo
  */
 public class SatelliteInfoEvent extends ProviderEvent {
