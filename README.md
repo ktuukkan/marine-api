@@ -5,7 +5,7 @@ Java Marine API
 
 Java Marine API is an [NMEA 0183](http://en.wikipedia.org/wiki/NMEA_0183) parser library for Java. The goal of this project is to enable easy access to data provided by various electronic marine devices such as GPS, sonar or weather instruments.
 
-NMEA sentences can be read from any source that is accessed with input stream, eg. serial port, file, TCP/IP socket etc. The plain ASCII data is converted to event/listener model with interfaces and parser implementations for selected sentences. Custom parsers may also be integrated by extending the provided base classes. In addition to data input, output is also supported by allowing the modification of sentence contents with data formatting and validation.
+Reads NMEA sentences from any source that is accessed with input stream, eg. serial port, file, TCP/IP socket etc. The plain ASCII data is converted to event/listener model with interfaces and parser implementations for selected sentences. Custom parsers may also be integrated by extending the provided base classes. In addition to data input, output is also supported by allowing the modification of sentence contents with data formatting and validation.
 
 Currently the following sentences are supported:
 
