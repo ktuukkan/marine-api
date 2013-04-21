@@ -57,14 +57,17 @@ $("#close").click(function(event) {
 Java Marine API is an
 <a href="http://www.nmea.org/content/nmea_standards/nmea_083_v_400.asp">NMEA
 0183</a> parser library for <a href="http://www.oracle.com/technetwork/java/">Java
-1.5</a> and newer. The goal of the project is to enable easy access to data
-provided by various marine instruments, such as GPS, sonar or autopilot. The
-library reads NMEA sentences from any source that can be accessed through input
-stream, e.g. serial port, file, TCP/IP socket etc. The plain ASCII data is
-converted to events that can be listened in your application. Library provides
-interfaces and parser implementations for selected sentences and you can also
-implement and integrate your own parsers by extending the provided base parser.
+1.5</a>. The goal of the project is to enable easy access to data provided by
+various marine devices such as GPS, sonar or weather instruments.</p>
+
+<p>Reads NMEA sentences from any source that is accessed with input stream, eg.
+serial port, file, TCP/IP socket etc. The plain ASCII data is converted to
+event/listener model with interfaces and parser implementations for selected
+sentences. Custom parsers may also be integrated by extending the provided base
+classes. In addition to data input, output is also supported by allowing the
+modification of sentence contents with data formatting and validation.
 </p>
+
 <p>
 Currently the following sentences are supported:</p>
 <ul>
@@ -89,11 +92,6 @@ Currently the following sentences are supported:</p>
 	<li>WPL - Destination waypoint location and ID</li>
 	<li>ZDA - UTC time and date with local time offset</li>
 </ul>
-
-<p>
-In addition to data reading, the library also supports modifying the sentence
-contents and provides data field formatting and validation.
-</p>
 
 <h2>Licensing</h2>
 <p>
@@ -165,8 +163,27 @@ older versions.
 
 <h2>Contact and support</h2>
 <p>
-Any kind of feedback or contribution is welcome. You may contact me directly by
-e-mail or create issues for bugs in Github.</p>
+Any kind of feedback or contribution is welcome. You may..
+<ul>
+  <li><a href="https://github.com/ktuukkan">Contact me</a></li>
+  <li>Create <a href="https://github.com/ktuukkan/marine-api/issues">issues</a> for bugs</li>
+  <li>Fork and send pull requests in <a href="https://github.com/ktuukkan/marine-api">Github</a></li>
+</ul>
+</p>
+
+<h2>Sourceforge</h2>
+<p>
+The project was originally published in Sourceforge.net, hence the net.sf
+package naming. While the source code, website, issues, wiki etc. are now hosted
+in Github, the binary releases still remain in Sf.net.
+<ul>
+  <li><a href="https://sourceforge.net/projects/marineapi/">Project page</a>
+  <li><a href="https://sourceforge.net/projects/marineapi/files/Releases/">Downloads</a>
+</ul>
+</p>
+<p>
+Notice that the old SVN repository is out-dated and no longer updated.
+</p>
 
 <p id="footer">
 Copyright &copy; 2010-2013 Kimmo Tuukkanen</p>
