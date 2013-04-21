@@ -1,0 +1,26 @@
+[EMMA v2.0.5312 report, generated Tue May 08 22:32:15 EEST 2012]
+-------------------------------------------------------------------------------
+OVERALL COVERAGE SUMMARY:
+
+[class, %]	[method, %]	[block, %]	[line, %]	[name]
+98%  (52/53)!	87%  (408/467)	85%  (6166/7250)	86%  (1294,6/1509)	all classes
+
+OVERALL STATS SUMMARY:
+
+total packages:	7
+total classes:	53
+total methods:	467
+total executable files:	51
+total executable lines:	1509
+
+COVERAGE BREAKDOWN BY PACKAGE:
+
+[class, %]	[method, %]	[block, %]	[line, %]	[name]
+100% (3/3)	33%  (5/15)!	34%  (49/145)!	61%  (17/28)!	net.sf.marineapi.provider.event
+100% (3/3)	52%  (14/27)!	51%  (247/483)!	51%  (56,6/112)!	net.sf.marineapi.nmea.io
+100% (14/14)	78%  (86/110)	77%  (1302/1697)!	79%  (240/303)!	net.sf.marineapi.nmea.util
+100% (1/1)	100% (3/3)	78%  (18/23)!	88%  (7/8)	net.sf.marineapi.nmea.event
+100% (3/3)	86%  (18/21)	89%  (413/464)	86%  (87,9/102)	net.sf.marineapi.provider
+96%  (24/25)!	97%  (267/274)	92%  (3204/3494)	92%  (765,1/830)	net.sf.marineapi.nmea.parser
+100% (4/4)	88%  (15/17)	99%  (933/944)	96%  (121/126)	net.sf.marineapi.nmea.sentence
+-------------------------------------------------------------------------------

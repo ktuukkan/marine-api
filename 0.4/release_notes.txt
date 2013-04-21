@@ -1,0 +1,52 @@
+Java Marine API release notes
+Version 0.4 (b20110712215512)
+<http://marineapi.sourceforge.net/>
+Copyright (C) 2010-2011 Kimmo Tuukkanen <ktuukkan@users.sourceforge.net>
+
+Pre-alpha preview release, not to be used in production. Major API changes may
+be introduced in future versions. Released on 2011-07-12.
+
+CHANGES
+
+ * SentenceFactory; DPT parser was not automatically registered, fixed.
+  
+ * Parsing methods in SentenceId now validates the given String before parsing
+   the id.
+   
+ * Double values are now rounded to certain decimal precision by setters. Also,
+   course and bearing values are padded with leading zeros.
+ 
+ * SentenceReader; reader now invokes SentenceLister.readingPaused() when data
+   flow is paused, but reader is still running. The readingStopped() is now
+   called only when reader has permanently stopped. Pause timeout can be set 
+   using the SentenceReader.setPauseTimeout() method.
+   
+ * SentenceValidator; fixed regular expressions to match all printable ASCII
+   characters. Added also '!' as acceptable begin character.
+   
+ * TalkerId; Added more complete list of talker ids.
+ 
+ * SentenceEvent; creation time stamp is now returned as plain long value.
+ 
+ * Date; constructor was setting month off by one, fixed.
+  
+NEW FEATURES
+ 
+ * Added method for unregistering parsers in SentenceFactory.
+ 
+ * Added TPVProvider that reports time, position, altitude, velocity and course
+   from GPS in a single event. Report is constructed by capturing the required
+   data from several sentences. This is also the initial implementation and
+   preview of high level APIs that focus on actual data instead of sentences.
+   
+ * SentenceParser; added methods for setting double and integer values with
+   leading zeros. Double values can also be rounded to certain precision.
+   
+ * SentenceListener; added readingPaused() notification.
+ 
+ * Sentence; added convenience methods isValid() and isProprietary().
+ 
+KNOWN ISSUES
+  
+ * Position.distanceTo() may not produce correct results.
+ 
