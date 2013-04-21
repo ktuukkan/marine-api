@@ -20,7 +20,7 @@ along with Java Marine API. If not, see <http://www.gnu.org/licenses/>.
 
 $Revision$
 -->
-<project name="Java Marine API" default="build" basedir=".">
+<project name="Java Marine API" default="build" basedir="." xmlns:artifact="antlib:org.apache.maven.artifact.ant">
 
 	<target name="init">
 		<echo message="Java version: ${ant.java.version}" />
@@ -47,7 +47,7 @@ $Revision$
 		<property name="build.dir.reports" value="${build.dir}/reports/" />
 
 		<property name="manifest.file" value="${build.dir}/MANIFEST.MF" />
-		<property name="jar.file" value="${build.dir}/${project.id}.jar" />
+		<property name="jar.file" value="${build.dir}/${project.id}-${version}.jar" />
 
 		<property name="release.zip"
 			value="${build.dir}/${project.id}-${version}.zip" />
@@ -56,7 +56,20 @@ $Revision$
 			value="${app.name} v${version} (b${build.id})" />
 
 		<property name="javadoc.footer"
-			value="Copyright (C) 2010-${year} ${app.name} author(s). All Rights Reserved." />
+			value="Copyright (C) 2010-${year} ${app.name} authors. All Rights Reserved." />
+
+		<!-- define Maven coordinates (version is defined earlier above) -->
+		<property name="groupId" value="net.sf.marineapi" />
+		<property name="artifactId" value="${project.id}" />
+		<!-- artifact names, following the Maven conventions -->
+		<property name="maven-jar" value="${jar.file}" />
+		<property name="maven-javadoc-jar" value="${build.dir}/${artifactId}-${version}-javadoc.jar" />
+		<property name="maven-sources-jar" value="${build.dir}/${artifactId}-${version}-sources.jar" />
+		<!-- maven snapshot and staging repository id and url -->
+		<property name="maven-snapshots-repository-id" value="sonatype-nexus-snapshots" />
+		<property name="maven-snapshots-repository-url" value="https://oss.sonatype.org/content/repositories/snapshots/" />
+		<property name="maven-staging-repository-id" value="sonatype-nexus-staging" />
+		<property name="maven-staging-repository-url" value="https://oss.sonatype.org/service/local/staging/deploy/maven2/" />
 	</target>
 
 	<!-- compile project -->
@@ -97,8 +110,7 @@ $Revision$
 			<attribute name="Implementation-Version" value="b${build.id}" />
 		</manifest>
 		<jar destfile="${jar.file}" manifest="${manifest.file}">
-			<fileset dir="${build.dir.classes}" includes="**/*.class"
-				excludes="**/example/*" />
+			<fileset dir="${build.dir.classes}" includes="**/*.class" excludes="**/example/*" />
 		</jar>
 	</target>
 
@@ -144,9 +156,8 @@ $Revision$
 		</javadoc>
 	</target>
 
-	<!-- build release package -->
-	<target name="dist" depends="clean, build, javadoc"
-		description="Builds a distribution package">
+	<!-- build and package release artifacts -->
+	<target name="dist" depends="clean, build, javadoc" description="Builds a distribution package">
 
 		<mkdir dir="${build.dir.dist}" />
 		<mkdir dir="${build.dir.dist}/examples" />
@@ -165,7 +176,7 @@ $Revision$
 		</copy>
 
 		<copy todir="${build.dir.dist}/examples/data">
-			<fileset dir="${data.dir}" includes="*.txt,*.log" />
+			<fileset dir="${data.dir}" includes="*.txt, *.log" />
 		</copy>
 
 		<replace token="@VERSION@" value="${version}"
@@ -184,11 +195,63 @@ $Revision$
 		<replace token="@YEAR@" value="${year}"
 			file="${build.dir.dist}/doc/release_notes.txt" />
 
+		<jar destfile="${maven-sources-jar}">
+			<fileset dir="${src.dir}" includes="**/*.java" excludes="**/example/*" />
+		</jar>
+
+		<jar destfile="${maven-javadoc-jar}">
+			<fileset dir="${build.dir.javadoc}" />
+		</jar>
 
 		<zip destfile="${release.zip}">
-			<zipfileset dir="${build.dir.dist}"
-				includes="**/*" prefix="${project.id}-${version}/"/>
+			<zipfileset dir="${build.dir.dist}" prefix="${project.id}-${version}/" />
 		</zip>
+	</target>
+
+	<!-- before this, make sure project version is SNAPSHOT, e.g. 1.2.3-SNAPSHOT -->
+	<target name="snapshot" depends="dist" description="deploy snapshot version to Maven snapshot repository">
+		<artifact:mvn>
+			<arg value="org.apache.maven.plugins:maven-deploy-plugin:2.6:deploy-file" />
+			<arg value="-Durl=${maven-snapshots-repository-url}" />
+			<arg value="-DrepositoryId=${maven-snapshots-repository-id}" />
+			<arg value="-DpomFile=pom.xml" />
+			<arg value="-Dfile=${jar.file}" />
+		</artifact:mvn>
+	</target>
+
+	<!-- before this, update project version number to release version, e.g. 1.2.3 -->
+	<target name="release" depends="dist" description="deploy release version to Maven staging repository">
+		<!-- sign and deploy the main artifact -->
+		<artifact:mvn>
+			<arg value="org.apache.maven.plugins:maven-gpg-plugin:1.3:sign-and-deploy-file" />
+			<arg value="-Durl=${maven-staging-repository-url}" />
+			<arg value="-DrepositoryId=${maven-staging-repository-id}" />
+			<arg value="-DpomFile=pom.xml" />
+			<arg value="-Dfile=${jar.file}" />
+			<arg value="-Pgpg" />
+		</artifact:mvn>
+
+		<!-- sign and deploy the sources artifact -->
+		<artifact:mvn>
+			<arg value="org.apache.maven.plugins:maven-gpg-plugin:1.3:sign-and-deploy-file" />
+			<arg value="-Durl=${maven-staging-repository-url}" />
+			<arg value="-DrepositoryId=${maven-staging-repository-id}" />
+			<arg value="-DpomFile=pom.xml" />
+			<arg value="-Dfile=${maven-sources-jar}" />
+			<arg value="-Dclassifier=sources" />
+			<arg value="-Pgpg" />
+		</artifact:mvn>
+
+		<!-- sign and deploy the javadoc artifact -->
+		<artifact:mvn>
+			<arg value="org.apache.maven.plugins:maven-gpg-plugin:1.3:sign-and-deploy-file" />
+			<arg value="-Durl=${maven-staging-repository-url}" />
+			<arg value="-DrepositoryId=${maven-staging-repository-id}" />
+			<arg value="-DpomFile=pom.xml" />
+			<arg value="-Dfile=${maven-javadoc-jar}" />
+			<arg value="-Dclassifier=javadoc" />
+			<arg value="-Pgpg" />
+		</artifact:mvn>
 	</target>
 
 </project>
