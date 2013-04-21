@@ -56,20 +56,29 @@ $("#close").click(function(event) {
 <p>
 Java Marine API is an
 <a href="http://www.nmea.org/content/nmea_standards/nmea_083_v_400.asp">NMEA
-0183</a> parser library for <a href="http://www.oracle.com/technetwork/java/">Java
-1.5</a>. The goal of the project is to enable easy access to data provided by
-various marine devices such as GPS, sonar or weather instruments.</p>
+0183</a> parser library for <a href="http://www.oracle.com/technetwork/java/">Java</a>.
+The goal of the project is to enable easy access to data provided by various
+marine devices such as GPS, sonar or weather instruments.</p>
 
-<p>Reads NMEA sentences from any source that is accessed with input stream, eg.
-serial port, file, TCP/IP socket etc. The plain ASCII data is converted to
-event/listener model with interfaces and parser implementations for selected
-sentences. Custom parsers may also be integrated by extending the provided base
-classes. In addition to data input, output is also supported by allowing the
-modification of sentence contents with data formatting and validation.
+<p>Library reads NMEA sentences from any source that is accessed with input
+stream, eg. serial port, file, TCP/IP socket etc. The plain ASCII data is
+converted to event/listener model with interfaces and parser implementations for
+selected sentences. Custom parsers may also be integrated by extending the
+provided base classes. In addition to data input, output is also supported by
+allowing the modification of sentence contents with data formatting and
+validation.
 </p>
 
-<p>
-Currently the following sentences are supported:</p>
+<h2>Features</h2>
+<p>Main features are:</p>
+<ul>
+  <li>Detects and reads NMEA sentences from any input stream</li>
+  <li>Extendable base parser for implementing custom parsers</li>
+  <li>Extendable base provider for higher level data updates (e.g. position, heading)</li>
+  <li>General utility classes for data handling</li>
+</ul>
+
+<p>Sentences that are supported "off-the-shelf":</p>
 <ul>
     <li>BOD - Bearing from origin to destination</li>
 	<li>DBT - Water depth below transducer in meters, feet and fathoms.</li>
@@ -161,12 +170,12 @@ older versions.
 
 </div>
 
-<h2>Contact and support</h2>
+<h2>Contact</h2>
 <p>
 Any kind of feedback or contribution is welcome. You may..
 <ul>
   <li><a href="https://github.com/ktuukkan">Contact me</a></li>
-  <li>Create <a href="https://github.com/ktuukkan/marine-api/issues">issues</a> for bugs</li>
+  <li><a href="https://github.com/ktuukkan/marine-api/issues">Create issues</a> for discovered bugs</li>
   <li>Fork and send pull requests in <a href="https://github.com/ktuukkan/marine-api">Github</a></li>
 </ul>
 </p>
