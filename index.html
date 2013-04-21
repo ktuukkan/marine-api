@@ -47,6 +47,12 @@ $("#close").click(function(event) {
 
 <body>
 
+<div>
+<a href="https://github.com/ktuukkan/marine-api/">
+<img style="position: absolute; top: 0; left: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_left_green_007200.png" alt="Fork me on GitHub">
+</a>
+</div>
+
 <div id="frame">
 <div id="content">
 
@@ -55,30 +61,16 @@ $("#close").click(function(event) {
 <h2>About</h2>
 <p>
 Java Marine API is an
-<a href="http://www.nmea.org/content/nmea_standards/nmea_083_v_400.asp">NMEA
-0183</a> parser library for <a href="http://www.oracle.com/technetwork/java/">Java</a>.
-The goal of the project is to enable easy access to data provided by various
-marine devices such as GPS, sonar or weather instruments.</p>
-
-<p>Library reads NMEA sentences from any source that is accessed with input
-stream, eg. serial port, file, TCP/IP socket etc. The plain ASCII data is
-converted to event/listener model with interfaces and parser implementations for
-selected sentences. Custom parsers may also be integrated by extending the
-provided base classes. In addition to data input, output is also supported by
-allowing the modification of sentence contents with data formatting and
-validation.
+<a href="http://www.nmea.org/content/nmea_standards/nmea_083_v_400.asp">NMEA 0183</a> parser library for <a href="http://www.oracle.com/technetwork/java/">Java</a>. It aims to enable easy access to data provided by various marine devices such as GPS, sonar or weather instruments.
 </p>
 
-<h2>Features</h2>
-<p>Main features are:</p>
-<ul>
-  <li>Detects and reads NMEA sentences from any input stream</li>
-  <li>Extendable base parser for implementing custom parsers</li>
-  <li>Extendable base provider for higher level data updates (e.g. position, heading)</li>
-  <li>General utility classes for data handling</li>
-</ul>
+<h3>Features</h3>
+<p>
+Detects and reads NMEA sentences from any input stream, e.g. file, serial port, TCP/IP socket etc. The plain ASCII data is converted to event/listener model with interfaces and parser implementations for selected sentences. Custom parsers may also be implemented and integrated by extending the provided base classes. Data output is also supported by allowing the modification of sentence contents with data formatting and validation. In addition, some general utility classes are provided for hangling the information extracted from sentences. Higher-level data updates may be aquired through providers that
+translate NMEA updates to direct measurement updates.
+</p>
 
-<p>Sentences that are supported "off-the-shelf":</p>
+<h3>Supported sentences</h3>
 <ul>
     <li>BOD - Bearing from origin to destination</li>
 	<li>DBT - Water depth below transducer in meters, feet and fathoms.</li>
@@ -104,20 +96,17 @@ validation.
 
 <h2>Licensing</h2>
 <p>
-Java Marine API is open source software and licensed under the
-<a href="http://www.gnu.org/licenses/lgpl-3.0-standalone.html">GNU Lesser
-General Public License</a>.
+Java Marine API is open source software and licensed under the <a href="http://www.gnu.org/licenses/lgpl-3.0-standalone.html">GNU Lesser General Public License</a>.
 <p>
-Source code is freely available in <a href="http://github.com/ktuukkan/marine-api/">Github</a>.
-Feel free to fork and send pull requests.
+Source code is freely available in <a href="http://github.com/ktuukkan/marine-api/">Github</a>. Feel free to fork and send pull requests.
 </p>
 
 <h2>Releases</h2>
 
-<h3>Latest</h3>
+<h3>Downloads</h3>
 <p>v0.5 pre-alpha, released on 2012-04-19:</p>
 <ul>
-	<li><a href="https://sourceforge.net/projects/marineapi/files/Releases/">Download</a></li>
+	<li><a href="https://sourceforge.net/projects/marineapi/files/Releases/">Download</a> (Sourceforge.net)</li>
 	<li><a href="0.5/javadoc/">Javadoc</a></li>
 	<li><a href="0.5/readme.txt">Readme</a></li>
 	<li><a href="0.5/release_notes.txt">Release notes</a></li>
@@ -167,12 +156,20 @@ older versions.
 	<li><a href="0.1/release_notes.txt">Release notes</a></li>
 	<li>Test <a href="0.1/junit-noframes.html">results</a> and <a href="0.1/coverage.html">coverage</a></li>
 </ul>
-
 </div>
+
+<h3>Maven repository</h3>
+<p>
+Maven projects may download the library by adding dependency in pom.xml. Notice that this repository was set up after the release of v0.5 and v0.5.1 is equal to v0.5. Only source code layout changes were made between these versions and  similar version mismatch should not be seen in future releases.
+</p>
+<ul>
+  <li><a href="http://search.maven.org/#search|ga|1|marineapi">The Central Repository</a></li>
+  <li><a href="http://mvnrepository.com/artifact/net.sf.marineapi/marineapi">MvnRepository</a></li>
+</ul>
 
 <h2>Contact</h2>
 <p>
-Any kind of feedback or contribution is welcome. You may..
+Any kind of feedback or contribution is welcome, so you may..
 <ul>
   <li><a href="https://github.com/ktuukkan">Contact me</a></li>
   <li><a href="https://github.com/ktuukkan/marine-api/issues">Create issues</a> for discovered bugs</li>
@@ -182,9 +179,7 @@ Any kind of feedback or contribution is welcome. You may..
 
 <h2>Sourceforge</h2>
 <p>
-The project was originally published in Sourceforge.net, hence the net.sf
-package naming. While the source code, website, issues, wiki etc. are now hosted
-in Github, the binary releases still remain in Sf.net.
+The project was originally published in Sourceforge.net, hence the net.sf package naming. While the source code, website, issues, wiki etc. are now hosted in Github, the binary releases still remain in Sf.net.
 <ul>
   <li><a href="https://sourceforge.net/projects/marineapi/">Project page</a>
   <li><a href="https://sourceforge.net/projects/marineapi/files/Releases/">Downloads</a>
