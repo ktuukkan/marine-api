@@ -1,6 +1,6 @@
 Java Marine API - RELEASE NOTES
 Version @VERSION@ (b@BUILD_ID@)
-<http://marineapi.sourceforge.net/>
+<http://ktuukkan.github.io/marine-api/>
 
 This is a pre-alpha release, major API changes may be introduced in future
 versions. Released on @RELEASE_DATE@.
