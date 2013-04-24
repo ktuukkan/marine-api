@@ -1,6 +1,6 @@
 Java Marine API - README
 Version @VERSION@ pre-alpha (b@BUILD_ID@)
-<http://marineapi.sourceforge.net/>
+<http://ktuukkan.github.io/marine-api/>
 
 Java Marine API is an NMEA 0183 library for accessing the data provided by 
 electronic marine instruments such as GPS, sonar or autopilot.
@@ -45,21 +45,20 @@ follow the standard accurately.
 
 SOURCE CODE
 
-The source code is freely available in project's SVN repository. See below URLs
-and project homepage at SourceForge.net for more info.
+The source code is freely available in Github.
 
-Browse at sf.net:
-<http://sourceforge.net/p/marineapi/svn/>
+Browse code at Github.com:
+<https://github.com/ktuukkan/marine-api>
 
-SVN checkout (no login required):
-svn checkout svn://svn.code.sf.net/p/marineapi/svn/trunk marine-api 
+Repository URL (read-only):
+git://github.com/ktuukkan/marine-api.git
 
-If you wish to contribute by adding new code or bug fixes, you may request for
-SVN write access or provide patch file(s) via e-mail.
+If you wish to contribute new code or bug fixes, please fork and send pull
+requests in Github.
 
 DEVELOPERS
 
-* Kimmo Tuukkanen <ktuukkan@users.sourceforge.net>
+* Kimmo Tuukkanen <kimmo.tuukkanen@gmail.com>
   - project admin, lead developer
 
 REFERENCES
