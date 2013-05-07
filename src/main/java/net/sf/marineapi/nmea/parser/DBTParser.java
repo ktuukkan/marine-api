@@ -29,7 +29,6 @@ import net.sf.marineapi.nmea.util.Units;
  * DBT sentence parser.
  * 
  * @author Kimmo Tuukkanen
- * @version $Revision$
  */
 class DBTParser extends SentenceParser implements DBTSentence {
 

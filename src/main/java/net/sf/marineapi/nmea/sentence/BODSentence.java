@@ -29,7 +29,6 @@ package net.sf.marineapi.nmea.sentence;
  * <code>$GPBOD,234.9,T,228.8,M,RUSKI,*1D</code>
  * 
  * @author Kimmo Tuukkanen
- * @version $Revision$
  */
 public interface BODSentence extends Sentence {
 

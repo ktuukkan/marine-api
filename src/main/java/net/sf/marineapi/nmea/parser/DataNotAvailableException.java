@@ -25,7 +25,6 @@ package net.sf.marineapi.nmea.parser;
  * invoking a getter for sentence data field that contains no value.
  * 
  * @author Kimmo Tuukkanen
- * @version $Revision$
  */
 public class DataNotAvailableException extends RuntimeException {
 

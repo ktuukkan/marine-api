@@ -28,7 +28,6 @@ import net.sf.marineapi.nmea.sentence.TalkerId;
  * BOD sentence parser.
  * 
  * @author Kimmo Tuukkanen
- * @version $Revision$
  * @see net.sf.marineapi.nmea.sentence.BODSentence
  */
 class BODParser extends SentenceParser implements BODSentence {

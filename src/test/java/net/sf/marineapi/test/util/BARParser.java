@@ -27,7 +27,6 @@ import net.sf.marineapi.nmea.sentence.TalkerId;
  * Invalid parser implementation, no constructor with String param.
  * 
  * @author Kimmo Tuukkanen
- * @version $Revision$
  */
 public class BARParser extends SentenceParser {
 

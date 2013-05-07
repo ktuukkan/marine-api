@@ -25,7 +25,6 @@ package net.sf.marineapi.nmea.util;
  * other datum is explicitly specified.
  * 
  * @author Kimmo Tuukkanen
- * @version $Revision$
  */
 public class Position {
 

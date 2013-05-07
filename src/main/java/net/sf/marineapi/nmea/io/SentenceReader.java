@@ -44,7 +44,6 @@ import net.sf.marineapi.nmea.sentence.SentenceId;
  * where you can also register your own custom parsers.
  * 
  * @author Kimmo Tuukkanen
- * @version $Revision$
  * @see SentenceListener
  * @see SentenceEvent
  * @see SentenceFactory

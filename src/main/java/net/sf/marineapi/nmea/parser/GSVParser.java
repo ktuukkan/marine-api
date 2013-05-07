@@ -32,7 +32,6 @@ import net.sf.marineapi.nmea.util.SatelliteInfo;
  * GSV sentence parser.
  * 
  * @author Kimmo Tuukkanen
- * @version $Revision$
  */
 class GSVParser extends SentenceParser implements GSVSentence {
 

@@ -28,7 +28,6 @@ import net.sf.marineapi.nmea.sentence.TalkerId;
  * DPT sentence parser.
  * 
  * @author Kimmo Tuukkanen
- * @version $Revision$
  */
 class DPTParser extends SentenceParser implements DPTSentence {
 

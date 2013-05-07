@@ -30,7 +30,6 @@ import net.sf.marineapi.nmea.util.Waypoint;
  * WPL sentence parser.
  * 
  * @author Kimmo Tuukkanen
- * @version $Revision$
  */
 class WPLParser extends PositionParser implements WPLSentence {
 

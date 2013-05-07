@@ -29,7 +29,6 @@ import net.sf.marineapi.nmea.util.RouteType;
  * <code>$GPRTE,1,1,c,0,MELIN,RUSKI,KNUDAN*25</code>
  * 
  * @author Kimmo Tuukkanen
- * @version $Revision$
  */
 public interface RTESentence extends Sentence {
 

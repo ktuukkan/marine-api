@@ -33,7 +33,6 @@ import net.sf.marineapi.nmea.util.Time;
  * ZDA sentence parser.
  * 
  * @author Kimmo Tuukkanen
- * @version $Revision$
  */
 class ZDAParser extends SentenceParser implements ZDASentence {
 

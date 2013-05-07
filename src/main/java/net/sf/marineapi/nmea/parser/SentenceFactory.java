@@ -57,7 +57,6 @@ import net.sf.marineapi.nmea.sentence.TalkerId;
  * </ol>
  * 
  * @author Kimmo Tuukkanen
- * @version $Revision$
  */
 public final class SentenceFactory {
 

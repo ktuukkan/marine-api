@@ -28,7 +28,6 @@ import net.sf.marineapi.nmea.sentence.TalkerId;
  * HDM sentence parser.
  * 
  * @author Kimmo Tuukkanen
- * @version $Revision$
  */
 class HDMParser extends SentenceParser implements HDMSentence {
 

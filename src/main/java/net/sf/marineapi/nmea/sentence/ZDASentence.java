@@ -29,7 +29,6 @@ import java.util.Date;
  * <code>$GPZDA,032915,07,08,2004,00,00*4D</code>
  * 
  * @author Kimmo Tuukkanen
- * @version $Revision$
  */
 public interface ZDASentence extends TimeSentence, DateSentence {
 

@@ -33,7 +33,6 @@ import net.sf.marineapi.nmea.util.GpsFixStatus;
  * GSA sentence parser.
  * 
  * @author Kimmo Tuukkanen
- * @version $Revision$
  */
 class GSAParser extends SentenceParser implements GSASentence {
 

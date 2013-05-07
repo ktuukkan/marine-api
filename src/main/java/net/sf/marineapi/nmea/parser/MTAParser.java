@@ -29,7 +29,6 @@ import net.sf.marineapi.nmea.util.Units;
  * MTA sentence parser.
  * 
  * @author Kimmo Tuukkanen
- * @version $Revision$
  */
 class MTAParser extends SentenceParser implements MTASentence {
 

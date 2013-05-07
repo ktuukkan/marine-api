@@ -24,7 +24,6 @@ package net.sf.marineapi.nmea.util;
  * GpsFixStatus defines the status of current GPS fix.
  * 
  * @author Kimmo Tuukkanen
- * @version $Revision$
  * @see FaaMode
  * @see GpsFixQuality
  * @see DataStatus

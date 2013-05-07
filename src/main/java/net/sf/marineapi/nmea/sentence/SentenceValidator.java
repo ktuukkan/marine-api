@@ -26,7 +26,6 @@ import java.util.regex.Pattern;
  * SentenceValidator checks any String against NMEA 0183 format.
  * 
  * @author Kimmo Tuukkanen
- * @version $Revision$
  */
 public final class SentenceValidator {
 

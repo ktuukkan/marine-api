@@ -22,7 +22,6 @@ package net.sf.marineapi.provider.event;
 
 /**
  * @author Kimmo Tuukkanen
- * @version $Revision$
  */
 public interface SatelliteInfoListener extends ProviderListener<SatelliteInfoEvent> {
 

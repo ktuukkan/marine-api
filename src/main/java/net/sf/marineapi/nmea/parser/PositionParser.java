@@ -35,7 +35,6 @@ import net.sf.marineapi.nmea.util.CompassPoint;
  * provide current location.
  * 
  * @author Kimmo Tuukkanen
- * @version $Revision$
  */
 abstract class PositionParser extends SentenceParser {
 

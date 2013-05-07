@@ -31,7 +31,6 @@ import net.sf.marineapi.nmea.util.FaaMode;
  * <code>$GPVTG,46.96,T,,,16.89,N,31.28,K,A*43</code>
  * 
  * @author Kimmo Tuukkanen
- * @version $Revision$
  */
 public interface VTGSentence extends Sentence {
 

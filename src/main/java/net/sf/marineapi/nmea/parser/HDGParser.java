@@ -29,7 +29,6 @@ import net.sf.marineapi.nmea.util.CompassPoint;
  * HDG sentence parser.
  * 
  * @author Kimmo Tuukkanen
- * @version $Revision$
  */
 class HDGParser extends SentenceParser implements HDGSentence {
 

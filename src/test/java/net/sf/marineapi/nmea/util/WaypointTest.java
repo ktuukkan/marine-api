@@ -29,7 +29,6 @@ import org.junit.Test;
  * WaypointTest
  * 
  * @author Kimmo Tuukkanen
- * @version $Revision$
  */
 public class WaypointTest {
 

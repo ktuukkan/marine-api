@@ -30,7 +30,6 @@ package net.sf.marineapi.nmea.sentence;
  * these are still unconfirmed.
  * 
  * @author Kimmo Tuukkanen
- * @version $Revision$
  * @see net.sf.marineapi.nmea.sentence.SentenceId
  */
 public enum TalkerId {

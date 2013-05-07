@@ -24,7 +24,6 @@ package net.sf.marineapi.nmea.sentence;
  * Base interface and constants for NMEA 0183 sentences.
  * 
  * @author Kimmo Tuukkanen
- * @version $Revision$
  */
 public interface Sentence {
 

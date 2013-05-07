@@ -29,7 +29,6 @@ import net.sf.marineapi.nmea.sentence.Sentence;
  * data source.
  * 
  * @author Kimmo Tuukkanen
- * @version $Revision$
  * @see SentenceListener
  * @see net.sf.marineapi.nmea.io.SentenceReader
  */

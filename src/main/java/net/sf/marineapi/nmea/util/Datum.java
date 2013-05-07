@@ -25,7 +25,6 @@ package net.sf.marineapi.nmea.util;
  * geographic positions.
  * 
  * @author Kimmo Tuukkanen
- * @version $Revision$
  * @see net.sf.marineapi.nmea.util.Position
  */
 public enum Datum {

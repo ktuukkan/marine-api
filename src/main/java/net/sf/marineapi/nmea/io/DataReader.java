@@ -24,7 +24,6 @@ package net.sf.marineapi.nmea.io;
  * Interface for data readers.
  * 
  * @author Kimmo Tuukkanen
- * @version $Revision$
  */
 interface DataReader extends Runnable {
 

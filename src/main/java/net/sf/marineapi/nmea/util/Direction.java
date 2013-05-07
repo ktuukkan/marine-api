@@ -24,7 +24,6 @@ package net.sf.marineapi.nmea.util;
  * Defines the relative directions, e.g. "left" and "right".
  * 
  * @author Kimmo Tuukkanen
- * @version $Revision$
  */
 public enum Direction {
 

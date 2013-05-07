@@ -32,7 +32,6 @@ import net.sf.marineapi.nmea.util.FaaMode;
  * {@link net.sf.marineapi.provider.SatelliteInfoProvider}.
  * 
  * @author Kimmo Tuukkanen
- * @version $Revision$
  * @see net.sf.marineapi.nmea.sentence.GSASentence
  * @see net.sf.marineapi.nmea.sentence.GSVSentence
  * @see net.sf.marineapi.nmea.util.SatelliteInfo

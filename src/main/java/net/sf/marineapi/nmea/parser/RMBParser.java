@@ -32,7 +32,6 @@ import net.sf.marineapi.nmea.util.Waypoint;
  * RMB sentence parser.
  * 
  * @author Kimmo Tuukkanen
- * @version $Revision$
  */
 class RMBParser extends PositionParser implements RMBSentence {
 

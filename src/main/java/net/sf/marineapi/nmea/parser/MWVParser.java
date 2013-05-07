@@ -30,7 +30,6 @@ import net.sf.marineapi.nmea.util.Units;
  * MWV sentence parser.
  * 
  * @author Kimmo Tuukkanen
- * @version $Revision$
  */
 class MWVParser extends SentenceParser implements MWVSentence {
 

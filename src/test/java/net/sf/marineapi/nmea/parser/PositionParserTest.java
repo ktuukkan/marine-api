@@ -32,7 +32,6 @@ import org.junit.Test;
  * Unit tests for PositionParser class.
  * 
  * @author Kimmo Tuukkanen
- * @version $Revision$
  */
 public class PositionParserTest {
 

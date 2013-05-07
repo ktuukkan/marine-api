@@ -32,7 +32,6 @@ import net.sf.marineapi.nmea.util.Waypoint;
  * <code>$GPRMB,A,0.00,R,,RUSKI,5536.200,N,01436.500,E,432.3,234.9,,V*58</code>
  * 
  * @author Kimmo Tuukkanen
- * @version $Revision$
  */
 public interface RMBSentence extends Sentence {
 

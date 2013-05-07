@@ -24,7 +24,6 @@ package net.sf.marineapi.nmea.sentence;
  * Interface for sentences that provide vessel's true or magnetic heading.
  * 
  * @author Kimmo Tuukkanen
- * @version $Revision$
  */
 public interface HeadingSentence extends Sentence {
 

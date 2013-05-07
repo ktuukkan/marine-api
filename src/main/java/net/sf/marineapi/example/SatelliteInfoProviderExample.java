@@ -33,7 +33,6 @@ import net.sf.marineapi.provider.event.SatelliteInfoListener;
 
 /**
  * @author Kimmo Tuukkanen
- * @version $Revision$
  */
 public class SatelliteInfoProviderExample implements SatelliteInfoListener {
 

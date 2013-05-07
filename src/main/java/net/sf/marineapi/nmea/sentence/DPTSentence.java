@@ -27,7 +27,6 @@ package net.sf.marineapi.nmea.sentence;
  * v3.0, and may thus be missing.
  * 
  * @author Kimmo Tuukkanen
- * @version $Revision$
  */
 public interface DPTSentence extends DepthSentence {
 

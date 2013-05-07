@@ -32,7 +32,6 @@ import net.sf.marineapi.nmea.util.FaaMode;
  * <code>$GPRMC,120044,A,6011.552,N,02501.941,E,000.0,360.0,160705,006.1,E*7C</code>
  * 
  * @author Kimmo Tuukkanen
- * @version $Revision$
  */
 public interface RMCSentence extends PositionSentence, TimeSentence,
 		DateSentence {

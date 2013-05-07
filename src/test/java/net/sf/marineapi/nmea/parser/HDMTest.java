@@ -34,7 +34,6 @@ import org.junit.Test;
  * HDM parser tests.
  * 
  * @author Kimmo Tuukkanen
- * @version $Revision$
  */
 public class HDMTest {
 

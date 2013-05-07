@@ -24,7 +24,6 @@ package net.sf.marineapi.provider.event;
  * Listener interface for {@link net.sf.marineapi.provider.HeadingProvider}.
  * 
  * @author Kimmo Tuukkanen
- * @version $Revision$
  */
 public interface HeadingListener extends ProviderListener<HeadingEvent> {
 

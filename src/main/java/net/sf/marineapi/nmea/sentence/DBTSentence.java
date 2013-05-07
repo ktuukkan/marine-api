@@ -24,7 +24,6 @@ package net.sf.marineapi.nmea.sentence;
  * Water depth below transducer, in meters, feet and fathoms.
  * 
  * @author Kimmo Tuukkanen
- * @version $Revision$
  */
 public interface DBTSentence extends DepthSentence {
 

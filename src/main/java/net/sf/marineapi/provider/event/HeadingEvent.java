@@ -27,7 +27,6 @@ import net.sf.marineapi.nmea.sentence.HeadingSentence;
  * degrees.
  * 
  * @author Kimmo Tuukkanen
- * @version $Revision$
  * @see net.sf.marineapi.provider.HeadingProvider
  */
 public class HeadingEvent extends ProviderEvent {

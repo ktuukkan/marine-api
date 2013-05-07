@@ -57,7 +57,6 @@ import net.sf.marineapi.nmea.sentence.TalkerId;
  * Eric S. Raymond. Java Marine API is based mostly on these documents.
  * 
  * @author Kimmo Tuukkanen
- * @version $Revision$
  */
 public class SentenceParser implements Sentence {
 

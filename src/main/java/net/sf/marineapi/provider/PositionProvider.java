@@ -50,7 +50,6 @@ import net.sf.marineapi.provider.event.PositionEvent;
  * within the default NMEA update rate (1/s).
  * 
  * @author Kimmo Tuukkanen
- * @version $Revision$
  * @see net.sf.marineapi.provider.event.PositionListener
  * @see net.sf.marineapi.provider.event.PositionEvent
  * @see net.sf.marineapi.nmea.io.SentenceReader

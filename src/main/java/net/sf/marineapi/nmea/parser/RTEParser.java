@@ -32,7 +32,6 @@ import net.sf.marineapi.nmea.util.RouteType;
  * RTE sentence parser.
  * 
  * @author Kimmo Tuukkanen
- * @version $Revision$
  */
 class RTEParser extends SentenceParser implements RTESentence {
 

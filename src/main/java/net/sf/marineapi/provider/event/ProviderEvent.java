@@ -26,7 +26,6 @@ import java.util.EventObject;
  * Abstract base class for provider events.
  * 
  * @author Kimmo Tuukkanen
- * @version $Revision$
  */
 public abstract class ProviderEvent extends EventObject {
 

@@ -24,7 +24,6 @@ package net.sf.marineapi.nmea.sentence;
  * Water temperature in degrees Celsius.
  * 
  * @author Warren Zahra, Kimmo Tuukkanen
- * @version $Revision$
  */
 public interface MTWSentence extends Sentence {
 

@@ -32,7 +32,6 @@ import net.sf.marineapi.nmea.sentence.SentenceValidator;
  * The default data reader implementation using InputStream as data source.
  * 
  * @author Kimmo Tuukkanen
- * @version $Revision$
  */
 class DefaultDataReader implements DataReader {
 

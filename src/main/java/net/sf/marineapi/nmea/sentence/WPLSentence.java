@@ -30,7 +30,6 @@ import net.sf.marineapi.nmea.util.Waypoint;
  * <code>$GPWPL,5536.200,N,01436.500,E,RUSKI*1F</code>
  * 
  * @author Kimmo Tuukkanen
- * @version $Revision$
  */
 public interface WPLSentence extends Sentence {
 

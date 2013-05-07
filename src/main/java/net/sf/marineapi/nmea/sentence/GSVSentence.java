@@ -37,7 +37,6 @@ import net.sf.marineapi.nmea.util.SatelliteInfo;
  * <code>$GPGSV,3,2,12,15,56,182,51,17,38,163,47,18,63,058,50,21,53,329,47*73</code>
  * 
  * @author Kimmo Tuukkanen
- * @version $Revision$
  */
 public interface GSVSentence extends Sentence {
 

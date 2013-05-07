@@ -34,7 +34,6 @@ import net.sf.marineapi.nmea.util.Time;
  * RMC sentence parser.
  * 
  * @author Kimmo Tuukkanen
- * @version $Revision$
  */
 class RMCParser extends PositionParser implements RMCSentence {
 

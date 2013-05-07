@@ -25,7 +25,6 @@ package net.sf.marineapi.nmea.io;
  * stopped.
  * 
  * @author Kimmo Tuukkanen
- * @version $Revision$
  */
 class ActivityMonitor {
 

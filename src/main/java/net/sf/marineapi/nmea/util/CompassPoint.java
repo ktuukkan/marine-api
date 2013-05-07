@@ -24,7 +24,6 @@ package net.sf.marineapi.nmea.util;
  * Defines the supported compass and relative directions.
  * 
  * @author Kimmo Tuukkanen
- * @version $Revision$
  */
 public enum CompassPoint {
 

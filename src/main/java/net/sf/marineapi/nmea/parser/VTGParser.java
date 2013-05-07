@@ -29,7 +29,6 @@ import net.sf.marineapi.nmea.util.FaaMode;
  * VTG sentence parser.
  * 
  * @author Kimmo Tuukkanen
- * @version $Revision$
  */
 class VTGParser extends SentenceParser implements VTGSentence {
 

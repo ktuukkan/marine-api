@@ -24,7 +24,6 @@ package net.sf.marineapi.nmea.util;
  * DataStatus defines the validity of data being broadcasted by an NMEA device.
  * 
  * @author Kimmo Tuukkanen
- * @version $Revision$
  */
 public enum DataStatus {
 

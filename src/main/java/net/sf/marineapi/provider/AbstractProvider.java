@@ -38,7 +38,6 @@ import net.sf.marineapi.provider.event.ProviderListener;
  * required sentences.
  * 
  * @author Kimmo Tuukkanen
- * @version $Revision$
  */
 public abstract class AbstractProvider<T extends ProviderEvent> implements
 		SentenceListener {

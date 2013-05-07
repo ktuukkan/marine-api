@@ -25,7 +25,6 @@ package net.sf.marineapi.nmea.sentence;
  * combination of talker and sentence IDs, for example GPBOD, GPGGA or GPGGL.
  * 
  * @author Kimmo Tuukkanen
- * @version $Revision$
  * @see net.sf.marineapi.nmea.sentence.TalkerId
  */
 public enum SentenceId {

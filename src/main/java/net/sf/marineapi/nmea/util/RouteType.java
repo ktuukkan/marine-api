@@ -24,7 +24,6 @@ package net.sf.marineapi.nmea.util;
  * Defines the supported route types.
  * 
  * @author Kimmo Tuukkanen
- * @version $Revision$
  * @see net.sf.marineapi.nmea.sentence.RTESentence
  */
 public enum RouteType {

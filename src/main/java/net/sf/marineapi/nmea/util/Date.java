@@ -28,7 +28,6 @@ import java.util.GregorianCalendar;
  * implement {@link net.sf.marineapi.nmea.sentence.DateSentence}.
  * 
  * @author Kimmo Tuukkanen
- * @version $Revision$
  * @see net.sf.marineapi.nmea.sentence.DateSentence
  * @see net.sf.marineapi.nmea.util.Time
  */

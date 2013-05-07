@@ -33,7 +33,6 @@ import net.sf.marineapi.nmea.util.Units;
  * GGA sentence parser.
  * 
  * @author Kimmo Tuukkanen
- * @version $Revision$
  */
 class GGAParser extends PositionParser implements GGASentence {
 

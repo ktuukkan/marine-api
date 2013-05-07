@@ -35,7 +35,6 @@ import net.sf.marineapi.provider.event.SatelliteInfoEvent;
  * and reports all the information in a single event.
  * 
  * @author Kimmo Tuukkanen
- * @version $Revision$
  */
 public class SatelliteInfoProvider extends AbstractProvider<SatelliteInfoEvent> {
 

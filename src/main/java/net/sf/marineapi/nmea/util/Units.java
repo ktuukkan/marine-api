@@ -24,7 +24,6 @@ package net.sf.marineapi.nmea.util;
  * Defines the supported units of measure.
  * 
  * @author Kimmo Tuukkanen
- * @version $Revision$
  */
 public enum Units {
 

@@ -25,7 +25,6 @@ import org.junit.Test;
 
 /**
  * @author Kimmo Tuukkanen
- * @version $Revision$
  */
 public class HeadingProviderTest implements HeadingListener {
 

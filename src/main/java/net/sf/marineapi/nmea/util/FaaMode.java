@@ -30,7 +30,6 @@ package net.sf.marineapi.nmea.util;
  * {@link #DGPS}, and {@link DataStatus#VOID} for all other modes.
  * 
  * @author Kimmo Tuukkanen
- * @version $Revision$
  * @see GpsFixQuality
  * @see GpsFixStatus
  * @see DataStatus

@@ -26,7 +26,6 @@ import net.sf.marineapi.nmea.util.Position;
  * Common interface for sentences that contain geographic position.
  * 
  * @author Kimmo Tuukkanen
- * @version $Revision$
  */
 public interface PositionSentence extends Sentence {
 

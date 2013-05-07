@@ -26,7 +26,6 @@ package net.sf.marineapi.nmea.parser;
  * parsed to expected native data type.
  * 
  * @author Kimmo Tuukkanen
- * @version $Revision$
  */
 public class ParseException extends DataNotAvailableException {
 

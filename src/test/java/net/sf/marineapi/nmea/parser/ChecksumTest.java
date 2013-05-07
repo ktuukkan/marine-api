@@ -29,7 +29,6 @@ import org.junit.Test;
  * Tests the Checksum class.
  * 
  * @author Kimmo Tuukkanen
- * @version $Revision$
  */
 public class ChecksumTest {
 

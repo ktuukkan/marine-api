@@ -26,7 +26,6 @@ import java.util.EventListener;
  * Base interface for listening to SentenceEvents.
  * 
  * @author Kimmo Tuukkanen
- * @version $Revision$
  * @see net.sf.marineapi.nmea.io.SentenceReader
  * @see SentenceEvent
  */

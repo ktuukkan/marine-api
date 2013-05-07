@@ -25,7 +25,6 @@ package net.sf.marineapi.nmea.sentence;
  * producing true heading.
  * 
  * @author Kimmo Tuukkanen
- * @version $Revision$
  */
 public interface HDTSentence extends HeadingSentence {
 }

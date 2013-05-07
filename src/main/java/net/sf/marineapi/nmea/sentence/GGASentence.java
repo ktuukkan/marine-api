@@ -31,7 +31,6 @@ import net.sf.marineapi.nmea.util.Units;
  * <code>$GPGGA,120044,6011.552,N,02501.941,E,1,00,2.0,28.0,M,19.6,M,,*79</code>
  * 
  * @author Kimmo Tuukkanen
- * @version $Revision$
  */
 public interface GGASentence extends PositionSentence, TimeSentence {
 

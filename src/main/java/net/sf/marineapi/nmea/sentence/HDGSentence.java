@@ -24,7 +24,6 @@ package net.sf.marineapi.nmea.sentence;
  * Vessel heading with magnetic deviation and variation.
  * 
  * @author Kimmo Tuukkanen
- * @version $Revision$
  */
 public interface HDGSentence extends HeadingSentence {
 

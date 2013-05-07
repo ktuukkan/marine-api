@@ -45,7 +45,6 @@ import net.sf.marineapi.nmea.sentence.SentenceValidator;
  * where you can also register your own custom parsers.
  * 
  * @author Kimmo Tuukkanen, Ludovic Drouineau
- * @version $Revision$
  * @see SentenceListener
  * @see SentenceEvent
  * @see SentenceFactory

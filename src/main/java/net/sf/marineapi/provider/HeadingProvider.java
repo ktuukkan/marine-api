@@ -14,7 +14,6 @@ import net.sf.marineapi.provider.event.HeadingEvent;
  * HDT, HDM or HDG sentences.
  * 
  * @author Kimmo Tuukkanen
- * @version $Revision$
  * @see net.sf.marineapi.provider.event.HeadingEvent
  * @see net.sf.marineapi.provider.event.HeadingListener
  */

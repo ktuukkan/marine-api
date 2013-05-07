@@ -25,7 +25,6 @@ package net.sf.marineapi.nmea.util;
  * vehicle.
  * 
  * @author Kimmo Tuukkanen
- * @version $Revision$
  * @see net.sf.marineapi.nmea.sentence.GSVSentence
  */
 public class SatelliteInfo {

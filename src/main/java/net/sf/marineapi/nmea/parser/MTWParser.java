@@ -29,7 +29,6 @@ import net.sf.marineapi.nmea.util.Units;
  * MTW Sentence parser.
  * 
  * @author Warren Zahra, Kimmo Tuukkanen
- * @version $Revision$
  */
 class MTWParser extends SentenceParser implements MTWSentence {
 

@@ -27,7 +27,6 @@ import net.sf.marineapi.nmea.util.Date;
  * contain only time without the date.
  * 
  * @author Kimmo Tuukkanen
- * @version $Revision$
  * @see net.sf.marineapi.nmea.sentence.TimeSentence
  */
 public interface DateSentence extends Sentence {

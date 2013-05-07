@@ -33,7 +33,6 @@ import net.sf.marineapi.nmea.util.Time;
  * {@link net.sf.marineapi.nmea.sentence.GGASentence} contains altitude).
  * 
  * @author Kimmo Tuukkanen
- * @version $Revision$
  * @see net.sf.marineapi.provider.PositionProvider
  * @see net.sf.marineapi.provider.event.PositionListener
  */

@@ -24,7 +24,6 @@ package net.sf.marineapi.nmea.sentence;
  * Provides Sentence checksum calculation and utilities.
  * 
  * @author Kimmo Tuukkanen
- * @version $Revision$
  */
 public final class Checksum {
 

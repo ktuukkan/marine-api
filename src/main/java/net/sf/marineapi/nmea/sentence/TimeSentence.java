@@ -27,7 +27,6 @@ import net.sf.marineapi.nmea.util.Time;
  * contain only UTC time, while others may provide also date.
  * 
  * @author Kimmo Tuukkanen
- * @version $Revision$
  * @see net.sf.marineapi.nmea.sentence.DateSentence
  */
 public interface TimeSentence extends Sentence {

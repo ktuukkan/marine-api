@@ -24,7 +24,6 @@ package net.sf.marineapi.nmea.sentence;
  * Interface for sentences containing the depth of water.
  * 
  * @author Kimmo Tuukkanen
- * @version $Revision$
  */
 public interface DepthSentence extends Sentence {
 

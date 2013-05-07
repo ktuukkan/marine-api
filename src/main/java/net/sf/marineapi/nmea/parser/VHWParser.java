@@ -28,7 +28,6 @@ import net.sf.marineapi.nmea.sentence.VHWSentence;
  * WHV sentence parser.
  * 
  * @author Warren Zahra, Kimmo Tuukkanen
- * @version $Revision$
  */
 class VHWParser extends SentenceParser implements VHWSentence {
 

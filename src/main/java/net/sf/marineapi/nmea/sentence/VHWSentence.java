@@ -24,7 +24,6 @@ package net.sf.marineapi.nmea.sentence;
  * Water speed and heading in respect to true and magnetic north.
  * 
  * @author Warren Zahra, Kimmo Tuukkanen
- * @version $Revision$
  */
 public interface VHWSentence extends HeadingSentence {
 

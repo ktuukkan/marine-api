@@ -24,7 +24,6 @@ package net.sf.marineapi.nmea.util;
  * GpsFixQuality defines the supported fix quality types.
  * 
  * @author Kimmo Tuukkanen
- * @version $Revision$
  * @see FaaMode
  * @see GpsFixStatus
  * @see DataStatus

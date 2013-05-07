@@ -32,7 +32,6 @@ import net.sf.marineapi.nmea.util.Time;
  * GLL Sentence parser.
  * 
  * @author Kimmo Tuukkanen
- * @version $Revision$
  */
 class GLLParser extends PositionParser implements GLLSentence {
 

@@ -26,7 +26,6 @@ import java.util.Date;
  * Waypoint represents a named geographic location.
  * 
  * @author Kimmo Tuukkanen
- * @version $Revision$
  * @see net.sf.marineapi.nmea.util.Position
  */
 public class Waypoint extends Position {

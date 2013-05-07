@@ -28,7 +28,6 @@ import net.sf.marineapi.nmea.util.Units;
  * degrees relative to bow or true north.
  * 
  * @author Kimmo Tuukkanen
- * @version $Revision$
  */
 public interface MWVSentence extends Sentence {
 

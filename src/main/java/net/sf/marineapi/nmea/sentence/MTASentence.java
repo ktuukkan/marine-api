@@ -24,7 +24,6 @@ package net.sf.marineapi.nmea.sentence;
  * Air temperature in degrees Celsius.
  * 
  * @author Kimmo Tuukkanen
- * @version $Revision$
  */
 public interface MTASentence extends Sentence {
 

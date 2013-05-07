@@ -29,7 +29,6 @@ import net.sf.marineapi.nmea.util.DataStatus;
  * <code>$GPGLL,6011.552,N,02501.941,E,120045,A*26</code>
  * 
  * @author Kimmo Tuukkanen
- * @version $Revision$
  */
 public interface GLLSentence extends PositionSentence, TimeSentence {
 
