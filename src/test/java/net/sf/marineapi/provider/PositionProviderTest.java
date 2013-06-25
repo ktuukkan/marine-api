@@ -60,7 +60,6 @@ public class PositionProviderTest implements PositionListener {
 		SentenceReader r = new SentenceReader(str);
 		instance = new PositionProvider(r);
 		instance.addListener(this);
-		r.start();
 	}
 
 	/**

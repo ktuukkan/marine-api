@@ -46,7 +46,6 @@ public class HeadingProviderTest implements HeadingListener {
 		SentenceReader r = new SentenceReader(str);
 		instance = new HeadingProvider(r);
 		instance.addListener(this);
-		r.start();
 		event = null;
 	}
 
@@ -64,19 +63,11 @@ public class HeadingProviderTest implements HeadingListener {
 	public void testHDMSentenceRead() {
 
 		Sentence s = factory.createParser(HDMTest.EXAMPLE);
-
 		assertNull(event);
+
 		instance.sentenceRead(new SentenceEvent(this, s));
-		
-		// ugly hack, sometimes the provider can't keep up with the test flow..
-		try {
-			Thread.sleep(250);
-		} catch (Exception e) {
-			// nevermind
-		}
 
 		assertNotNull(event);
-
 		assertEquals(90.0, event.getHeading(), 0.1);
 		assertFalse(event.isTrue());
 	}
@@ -90,16 +81,10 @@ public class HeadingProviderTest implements HeadingListener {
 	public void testHDTSentenceRead() {
 
 		Sentence s = factory.createParser(HDTTest.EXAMPLE);
-
 		assertNull(event);
-		instance.sentenceRead(new SentenceEvent(this, s));
-		
-		try {
-			Thread.sleep(250);
-		} catch (Exception e) {
-			// nevermind
-		}
 
+		instance.sentenceRead(new SentenceEvent(this, s));
+	
 		assertNotNull(event);
 		assertEquals(90.1, event.getHeading(), 0.1);
 		assertTrue(event.isTrue());
@@ -114,15 +99,9 @@ public class HeadingProviderTest implements HeadingListener {
 	public void testHDGSentenceRead() {
 
 		Sentence s = factory.createParser(HDGTest.EXAMPLE);
-
 		assertNull(event);
+
 		instance.sentenceRead(new SentenceEvent(this, s));
-		
-		try {
-			Thread.sleep(250);
-		} catch (Exception e) {
-			// nevermind
-		}
 		
 		assertNotNull(event);
 		assertEquals(123.4, event.getHeading(), 0.1);
