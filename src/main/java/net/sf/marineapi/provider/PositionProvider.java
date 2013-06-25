@@ -3,7 +3,7 @@
  * Copyright (C) 2011 Kimmo Tuukkanen
  * 
  * This file is part of Java Marine API.
- * <http://sourceforge.net/projects/marineapi/>
+ * <http://ktuukkan.github.io/marine-api/>
  * 
  * Java Marine API is free software: you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by the
@@ -50,7 +50,6 @@ import net.sf.marineapi.provider.event.PositionEvent;
  * within the default NMEA update rate (1/s).
  * 
  * @author Kimmo Tuukkanen
- * @version $Revision$
  * @see net.sf.marineapi.provider.event.PositionListener
  * @see net.sf.marineapi.provider.event.PositionEvent
  * @see net.sf.marineapi.nmea.io.SentenceReader

@@ -3,7 +3,7 @@
  * Copyright (C) 2010 Kimmo Tuukkanen
  * 
  * This file is part of Java Marine API.
- * <http://sourceforge.net/projects/marineapi/>
+ * <http://ktuukkan.github.io/marine-api/>
  * 
  * Java Marine API is free software: you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by the
@@ -26,7 +26,6 @@ import net.sf.marineapi.nmea.util.Position;
  * Common interface for sentences that contain geographic position.
  * 
  * @author Kimmo Tuukkanen
- * @version $Revision$
  */
 public interface PositionSentence extends Sentence {
 

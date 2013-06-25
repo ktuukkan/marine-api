@@ -3,7 +3,7 @@
  * Copyright (C) 2010-2012 Kimmo Tuukkanen
  * 
  * This file is part of Java Marine API.
- * <http://sourceforge.net/projects/marineapi/>
+ * <http://ktuukkan.github.io/marine-api/>
  * 
  * Java Marine API is free software: you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by the
@@ -32,7 +32,6 @@ import net.sf.marineapi.nmea.sentence.SentenceValidator;
  * The default data reader implementation using InputStream as data source.
  * 
  * @author Kimmo Tuukkanen
- * @version $Revision$
  */
 class DefaultDataReader implements DataReader {
 

@@ -3,7 +3,7 @@
  * Copyright (C) 2010 Kimmo Tuukkanen
  * 
  * This file is part of Java Marine API.
- * <http://sourceforge.net/projects/marineapi/>
+ * <http://ktuukkan.github.io/marine-api/>
  * 
  * Java Marine API is free software: you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by the
@@ -28,7 +28,6 @@ import java.util.GregorianCalendar;
  * implement {@link net.sf.marineapi.nmea.sentence.DateSentence}.
  * 
  * @author Kimmo Tuukkanen
- * @version $Revision$
  * @see net.sf.marineapi.nmea.sentence.DateSentence
  * @see net.sf.marineapi.nmea.util.Time
  */

@@ -3,7 +3,7 @@
  * Copyright (C) 2010 Kimmo Tuukkanen
  * 
  * This file is part of Java Marine API.
- * <http://sourceforge.net/projects/marineapi/>
+ * <http://ktuukkan.github.io/marine-api/>
  * 
  * Java Marine API is free software: you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by the
@@ -32,7 +32,6 @@ import net.sf.marineapi.nmea.util.FaaMode;
  * <code>$GPRMC,120044,A,6011.552,N,02501.941,E,000.0,360.0,160705,006.1,E*7C</code>
  * 
  * @author Kimmo Tuukkanen
- * @version $Revision$
  */
 public interface RMCSentence extends PositionSentence, TimeSentence,
 		DateSentence {

@@ -3,7 +3,7 @@
  * Copyright (C) 2010-2012 Kimmo Tuukkanen, Ludovic Drouineau
  * 
  * This file is part of Java Marine API.
- * <http://sourceforge.net/projects/marineapi/>
+ * <http://ktuukkan.github.io/marine-api/>
  * 
  * Java Marine API is free software: you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by the
@@ -31,7 +31,6 @@ import net.sf.marineapi.nmea.sentence.SentenceValidator;
  * DataReader implementation using DatagramSocket as data source.
  * 
  * @author Kimmo Tuukkanen, Ludovic Drouineau
- * @version $Revision$
  */
 class UDPDataReader implements DataReader {
 

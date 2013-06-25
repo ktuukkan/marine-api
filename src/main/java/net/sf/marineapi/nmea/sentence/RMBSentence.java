@@ -3,7 +3,7 @@
  * Copyright (C) 2010 Kimmo Tuukkanen
  * 
  * This file is part of Java Marine API.
- * <http://sourceforge.net/projects/marineapi/>
+ * <http://ktuukkan.github.io/marine-api/>
  * 
  * Java Marine API is free software: you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by the
@@ -32,7 +32,6 @@ import net.sf.marineapi.nmea.util.Waypoint;
  * <code>$GPRMB,A,0.00,R,,RUSKI,5536.200,N,01436.500,E,432.3,234.9,,V*58</code>
  * 
  * @author Kimmo Tuukkanen
- * @version $Revision$
  */
 public interface RMBSentence extends Sentence {
 

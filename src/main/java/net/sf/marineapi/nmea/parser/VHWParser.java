@@ -3,7 +3,7 @@
  * Copyright (C) 2011 Warren Zahra
  * 
  * This file is part of Java Marine API.
- * <http://sourceforge.net/projects/marineapi/>
+ * <http://ktuukkan.github.io/marine-api/>
  * 
  * Java Marine API is free software: you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by the
@@ -28,7 +28,6 @@ import net.sf.marineapi.nmea.sentence.VHWSentence;
  * WHV sentence parser.
  * 
  * @author Warren Zahra, Kimmo Tuukkanen
- * @version $Revision$
  */
 class VHWParser extends SentenceParser implements VHWSentence {
 

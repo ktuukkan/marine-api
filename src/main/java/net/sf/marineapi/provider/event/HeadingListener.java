@@ -3,7 +3,7 @@
  * Copyright (C) 2012 Kimmo Tuukkanen
  * 
  * This file is part of Java Marine API.
- * <http://sourceforge.net/projects/marineapi/>
+ * <http://ktuukkan.github.io/marine-api/>
  * 
  * Java Marine API is free software: you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by the
@@ -24,7 +24,6 @@ package net.sf.marineapi.provider.event;
  * Listener interface for {@link net.sf.marineapi.provider.HeadingProvider}.
  * 
  * @author Kimmo Tuukkanen
- * @version $Revision$
  */
 public interface HeadingListener extends ProviderListener<HeadingEvent> {
 
