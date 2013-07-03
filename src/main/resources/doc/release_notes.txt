@@ -9,9 +9,11 @@ CHANGES
 
  * SentenceReader refactored to support better diffrent data sources.
 
+ * SentenceReader performance tweaks; should take less CPU now
+
  * Some regexp performance tweaks in SentenceValidator.
 
- * TPVProvider renamed to PositionProvider.
+ * TPVProvider and related classes renamed to PositionProvider.
 
  * GSASentence; getSatellitesIds() renamed to getSatelliteIds().
 
@@ -19,7 +21,7 @@ NEW FEATURES
 
  * UDP/DatagramSocket support in SentenceReader.
 
- * SatelliteInfoProvider reports all GPS satellite information in single event.
+ * SatelliteInfoProvider; reports all GPS satellite information in single event.
 
 KNOWN ISSUES
 
@@ -33,7 +35,6 @@ ACKNOWLEDGEMENTS
 
  * Thanks to Amanda Fenech/Marssa.org for migrating the project in Maven layout.
  
- * Thanks to Ludovic Drouineau for providing the UDP implementation for
-   SentenceReader.
+ * Thanks to Ludovic Drouineau for UDP implementation.
 
- * Thanks to Robert Huitema/www.42.co.nz for regexp performance enhancements.
+ * Thanks to Robert Huitema and Vladimir Loginov for performance tweaks.
