@@ -67,6 +67,8 @@ public enum SentenceId {
 	VHW,
 	/** Waypoint location (latitude/longitude) */
 	WPL,
+	/** Transducer measurements (sensor data) */
+	XDR,
 	/** UTC time and date with local time zone offset */
 	ZDA;
 

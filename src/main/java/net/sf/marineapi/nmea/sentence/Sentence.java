@@ -113,6 +113,13 @@ public interface Sentence {
 	boolean isValid();
 
 	/**
+	 * Resets the sentence contents, i.e. removes all existing values from data
+	 * fields. After resetting, address field remains as is and checksum is
+	 * calculated according to empty data fields.
+	 */
+	void reset();
+	
+	/**
 	 * Set the sentence begin character. Although most of the sentences start
 	 * with '$', some of them use '!' as begin character.
 	 * 
