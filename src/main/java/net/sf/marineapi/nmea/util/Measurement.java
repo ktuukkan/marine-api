@@ -1,5 +1,5 @@
 /*
- * XDRValue.java
+ * Measurement.java
  * Copyright (C) 2013 Robert Huitema
  * 
  * This file is part of Java Marine API.
@@ -23,7 +23,7 @@ package net.sf.marineapi.nmea.util;
 /** 
  * Measurement data delivered by {@link net.sf.marineapi.nmea.sentence.XDRSentence}.
  * 
- * @author Robert Huitema
+ * @author Robert Huitema, Kimmo Tuukkanen
  */
 public class Measurement {
 	
@@ -33,13 +33,13 @@ public class Measurement {
 	private double value;
 	
 	/**
-	 * Creates a new empty instance of XDRValue.
+	 * Creates a new empty instance of Measurement.
 	 */
 	public Measurement() {
 	}
 
 	/**
-	 * Creates a new instance of XDRValue with given values.
+	 * Creates a new instance of Measurement with given values.
 	 */
 	public Measurement(String type, double value, String units, String name) {
 		this.type = type;
@@ -58,7 +58,7 @@ public class Measurement {
 	}
 	
 	/**
-	 * Returns the transducer type.
+	 * Returns the type of transducer.
 	 * 
 	 * @return Type String
 	 */
@@ -94,7 +94,7 @@ public class Measurement {
 	}
 	
 	/**
-	 * Sets the measurement type.
+	 * Sets the type of measurement.
 	 * 
 	 * @param type Type to set
 	 */

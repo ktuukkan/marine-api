@@ -24,6 +24,9 @@ NEW FEATURES
 
  * SatelliteInfoProvider reports all GPS satellite information in single event.
  
+ * SentenceReader; reset() and setFieldCount(int) methods for resetting and
+   adjusting the number of data fields.
+ 
  * Support for XDR sentence; transducer measurements.
 
 KNOWN ISSUES
