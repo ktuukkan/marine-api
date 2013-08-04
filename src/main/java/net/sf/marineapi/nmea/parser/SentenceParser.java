@@ -110,32 +110,6 @@ public class SentenceParser implements Sentence {
 	}
 
 	/**
-	 * Creates a new instance of SentenceParser. Parser may be constructed only
-	 * if parameter <code>nmea</code> contains a valid NMEA 0183 sentence of the
-	 * specified <code>type</code>.
-	 * <p>
-	 * For example, GGA sentence parser should specify "GGA" as the type.
-	 * 
-	 * @param nmea NMEA 0183 sentence String
-	 * @param type Expected type of the sentence in <code>nmea</code> parameter
-	 * @throws IllegalArgumentException If the specified sentence is not a valid
-	 *             or is not of expected type.
-	 */
-	protected SentenceParser(String nmea, String type) {
-		this(nmea);
-		if (type == null || "".equals(type)) {
-			throw new IllegalArgumentException(
-					"Sentence type must be specified.");
-		}
-		String sid = getSentenceId();
-		if (!sid.equals(type)) {
-			String ptrn = "Sentence id mismatch; expected [%s], found [%s].";
-			String msg = String.format(ptrn, type, sid);
-			throw new IllegalArgumentException(msg);
-		}
-	}
-
-	/**
 	 * Creates a new empty sentence with specified begin character, talker and
 	 * sentence IDs.
 	 * 
@@ -161,6 +135,32 @@ public class SentenceParser implements Sentence {
 		fields = new ArrayList<String>(size);
 		for (int i = 0; i < size; i++) {
 			fields.add("");
+		}
+	}
+
+	/**
+	 * Creates a new instance of SentenceParser. Parser may be constructed only
+	 * if parameter <code>nmea</code> contains a valid NMEA 0183 sentence of the
+	 * specified <code>type</code>.
+	 * <p>
+	 * For example, GGA sentence parser should specify "GGA" as the type.
+	 * 
+	 * @param nmea NMEA 0183 sentence String
+	 * @param type Expected type of the sentence in <code>nmea</code> parameter
+	 * @throws IllegalArgumentException If the specified sentence is not a valid
+	 *             or is not of expected type.
+	 */
+	protected SentenceParser(String nmea, String type) {
+		this(nmea);
+		if (type == null || "".equals(type)) {
+			throw new IllegalArgumentException(
+					"Sentence type must be specified.");
+		}
+		String sid = getSentenceId();
+		if (!sid.equals(type)) {
+			String ptrn = "Sentence id mismatch; expected [%s], found [%s].";
+			String msg = String.format(ptrn, type, sid);
+			throw new IllegalArgumentException(msg);
 		}
 	}
 
@@ -216,18 +216,21 @@ public class SentenceParser implements Sentence {
 
 	/*
 	 * (non-Javadoc)
-	 * @see net.sf.marineapi.nmea.sentence.Sentence#getFieldCount()
-	 */
-	public final int getFieldCount() {
-		return fields.size();
-	}
-
-	/*
-	 * (non-Javadoc)
 	 * @see net.sf.marineapi.nmea.sentence.Sentence#getBeginChar()
 	 */
 	public final char getBeginChar() {
 		return beginChar;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @see net.sf.marineapi.nmea.sentence.Sentence#getFieldCount()
+	 */
+	public final int getFieldCount() {
+		if(fields == null) {
+			return 0;
+		}
+		return fields.size();
 	}
 
 	/*
@@ -271,6 +274,28 @@ public class SentenceParser implements Sentence {
 		return SentenceValidator.isValid(toString());
 	}
 
+
+	/* (non-Javadoc)
+	 * @see net.sf.marineapi.nmea.sentence.Sentence#reset()
+	 */
+	public final void reset() {
+		for(int i = 0; i < fields.size(); i++) {
+			fields.set(i, "");
+		}
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @see net.sf.marineapi.nmea.sentence.Sentence#setBeginChar(char)
+	 */
+	public void setBeginChar(char ch) {
+		if (ch != BEGIN_CHAR || ch != ALTERNATIVE_BEGIN_CHAR) {
+			String msg = "Invalid begin char; expected '$' or '!'";
+			throw new IllegalArgumentException(msg);
+		}
+		beginChar = ch;
+	}
+
 	/*
 	 * (non-Javadoc)
 	 * @see
@@ -311,7 +336,7 @@ public class SentenceParser implements Sentence {
 
 		for (String field : fields) {
 			sb.append(FIELD_DELIMITER);
-			sb.append(field);
+			sb.append(field == null ? "" : field);
 		}
 
 		String sentence = Checksum.add(sb.toString());
@@ -480,6 +505,22 @@ public class SentenceParser implements Sentence {
 	}
 
 	/**
+	 * Sets the number of data fields.
+	 * 
+	 * @param size Number of data fields, must be greater than zero.
+	 */
+	protected final void setFieldCount(int size) {
+		if(size < 1) {
+			throw new IllegalArgumentException("Number of fields must be greater than zero.");
+		}
+		fields.clear();
+		fields = new ArrayList<String>(size);
+		for(int i = 0; i < size; i++) {
+			fields.add("");
+		}
+	}
+
+	/**
 	 * Set integer value in specified field.
 	 * 
 	 * @param index Field index
@@ -504,7 +545,7 @@ public class SentenceParser implements Sentence {
 		}
 		setStringValue(index, String.format(pattern, value));
 	}
-
+	
 	/**
 	 * Set String value in specified data field.
 	 * 
@@ -514,7 +555,7 @@ public class SentenceParser implements Sentence {
 	protected final void setStringValue(int index, String value) {
 		fields.set(index, value == null ? "" : value);
 	}
-
+	
 	/**
 	 * Replace multiple fields with given String array, starting at the
 	 * specified index. If parameter <code>first</code> is zero, all sentence
@@ -548,17 +589,5 @@ public class SentenceParser implements Sentence {
 
 		fields.clear();
 		fields = temp;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * @see net.sf.marineapi.nmea.sentence.Sentence#setBeginChar(char)
-	 */
-	public void setBeginChar(char ch) {
-		if (ch != BEGIN_CHAR || ch != ALTERNATIVE_BEGIN_CHAR) {
-			String msg = "Invalid begin char; expected '$' or '!'";
-			throw new IllegalArgumentException(msg);
-		}
-		beginChar = ch;
 	}
 }

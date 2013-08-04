@@ -7,34 +7,43 @@ versions. Released on @RELEASE_DATE@.
 
 CHANGES
 
- * SentenceReader refactored to support better diffrent data sources.
+ * Internals of SentenceReader refactored to better support for diffrent data
+   sources. Includes some performance tweaks, should take less CPU now.
 
- * SentenceReader performance tweaks; should take less CPU now
-
- * Some regexp performance tweaks in SentenceValidator.
+ * Regular expression performance tweaks in SentenceValidator.
 
  * TPVProvider and related classes renamed to PositionProvider.
 
  * GSASentence; getSatellitesIds() renamed to getSatelliteIds().
+ 
+ * SentenceId; added XDR.
 
 NEW FEATURES
 
  * UDP/DatagramSocket support in SentenceReader.
 
  * SatelliteInfoProvider; reports all GPS satellite information in single event.
+ 
+ * SentenceParser; reset() and setFieldCount(int) methods for resetting and
+   adjusting the number of data fields.
+ 
+ * Support for XDR sentence; transducer measurements.
 
 KNOWN ISSUES
 
  * Position.distanceTo() may not produce correct results.
  
- * Proprietary sentences with ID longer than five characters are not supported.
+ * Proprietary sentences that have sentence ID different to five characters are
+   not supported.
 
- * All AIS sentences may not be supported, TalkerId contains only AI, AB and BS.
+ * All AIS sentences may not be supported as TalkerId has only AI, AB and BS.
 
 ACKNOWLEDGEMENTS
 
- * Thanks to Amanda Fenech/Marssa.org for migrating the project in Maven layout.
+ * Thanks to Amanda Fenech (marssa.org) for migrating the project to Maven
+   layout.
  
- * Thanks to Ludovic Drouineau for UDP implementation.
+ * Thanks to Ludovic Drouineau for UDP implementation of SentenceReader.
 
- * Thanks to Robert Huitema and Vladimir Loginov for performance tweaks.
+ * Thanks to Robert Huitema (www.42.co.nz) and Vladimir Loginov for performance
+   tweaks. Robert also provided the base for new XDR parser.
