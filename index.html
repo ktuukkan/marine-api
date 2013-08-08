@@ -98,7 +98,7 @@ translate NMEA updates to direct measurement updates.
 <p>
 Java Marine API is open source software and licensed under the <a href="http://www.gnu.org/licenses/lgpl-3.0-standalone.html">GNU Lesser General Public License</a>.
 <p>
-Source code is freely available in <a href="http://github.com/ktuukkan/marine-api/">Github</a>. Feel free to fork and send pull requests.
+Source code is freely available in <a href="http://github.com/ktuukkan/marine-api/">Github</a>.
 </p>
 
 <h2>Releases</h2>
@@ -158,18 +158,30 @@ older versions.
 </ul>
 </div>
 
-<h3>Maven repository</h3>
+<h3>Maven</h3>
+<h4>Release repos</h3>
 <p>
-Maven projects may download the library by adding dependency in pom.xml. Notice that this repository was set up after the release of v0.5 and v0.5.1 is equal to v0.5. Only source code layout changes were made between these versions and  similar version mismatch should not be seen in future releases.
+Projects using Maven may download the library by adding dependency in pom.xml.
 </p>
 <ul>
   <li><a href="http://search.maven.org/#search|ga|1|marineapi">The Central Repository</a></li>
   <li><a href="http://mvnrepository.com/artifact/net.sf.marineapi/marineapi">MvnRepository</a></li>
 </ul>
+<p>
+<em>Notice that v0.5.1 is functionally equal to v0.5, only source code layout changes for Maven were made between the versions. I.e. v0.5 was last Ant-based release in only in Sf.net, v0.5.1 is first Maven-based release. Similar version mismatch should not be seen in future releases.
+</em>
+
+<h4>Snapshots</h4>
+<p>
+Snapshots of next release are deployed to sonatype.org every now and then. These
+are somewhat stable builds but still work-in-progress.
+<ul>
+<li><a href="https://oss.sonatype.org/content/repositories/snapshots/net/sf/marineapi/marineapi/">Snapshots</a></li>
+</ul>
 
 <h2>Contact</h2>
 <p>
-Any kind of feedback or contribution is welcome, so you may..
+Any kind of feedback or contribution is welcome.
 <ul>
   <li><a href="https://github.com/ktuukkan">Contact me</a></li>
   <li><a href="https://github.com/ktuukkan/marine-api/issues">Create issues</a> to report bugs or to request new features</li>
