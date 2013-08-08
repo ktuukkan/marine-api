@@ -78,7 +78,9 @@ public class SatelliteInfoProvider extends AbstractProvider<SatelliteInfoEvent> 
 
 		boolean hasFirstGSV = false;
 		boolean hasLastGSV = false;
-
+		boolean hasAllGSV = false;
+		int count = 0;
+		
 		for (Sentence s : getSentences()) {
 			if ("GSV".equals(s.getSentenceId())) {
 				GSVSentence gsv = (GSVSentence) s;
@@ -88,10 +90,11 @@ public class SatelliteInfoProvider extends AbstractProvider<SatelliteInfoEvent> 
 				if (!hasLastGSV) {
 					hasLastGSV = gsv.isLast();
 				}
+				hasAllGSV = (gsv.getSentenceCount() == ++count);
 			}
 		}
 
-		return hasOne("GSA") && hasFirstGSV && hasLastGSV;
+		return hasOne("GSA") && hasAllGSV && hasFirstGSV && hasLastGSV;
 	}
 
 	/*
