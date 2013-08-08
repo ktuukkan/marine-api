@@ -31,7 +31,7 @@ $Revision$
 	<name>Java Marine API</name>
 	<url>http://ktuukkan.github.io/marine-api/</url>
 	<description>
-		Java Marine API is an NMEA 0183 library for Java.
+		Java Marine API is an NMEA 0183 library for Java (http://ktuukkan.github.io/marine-api/).
 	</description>
 
 	<licenses>
