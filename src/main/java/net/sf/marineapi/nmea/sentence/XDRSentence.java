@@ -21,7 +21,6 @@
 package net.sf.marineapi.nmea.sentence;
 
 import java.util.List;
-
 import net.sf.marineapi.nmea.util.Measurement;
 
 /**
@@ -29,9 +28,9 @@ import net.sf.marineapi.nmea.util.Measurement;
  * XDR sentence - transducer measurements.
  * <p>
  * Measurements are delivered in sets containing four fields; transducer type,
- * measurement value, unit of measurement and transducer name. There may be
- * any number of sets like this, each describing a sensor. Measurements are
- * parsed and returned as {@link net.sf.marineapi.nmea.util.Measurement} objects. 
+ * measurement value, unit of measurement and transducer name. There may be any
+ * number of sets like this, each describing a sensor. Measurements are parsed
+ * and returned as {@link net.sf.marineapi.nmea.util.Measurement} objects.
  * 
  * @author Robert Huitema, Kimmo Tuukkanen
  */
@@ -43,19 +42,18 @@ public interface XDRSentence extends Sentence {
 	 * @return List of measurements, ordered as they appear in sentence.
 	 */
 	List<Measurement> getMeasurements();
-	
+
 	/**
-	 * Set single measurement. Sentence length is adjusted to required number of
-	 * data fields.
-	 *
-	 * @param m Measurement to set.
+	 * Set single measurement. Overwrites all existing values and adjusts the
+	 * number of data fields to minimum required by one measurement (4).
+	 * 
+	 * @param m Measurement to set.
 	 */
 	void setMeasurement(Measurement m);
 
 	/**
-	 * Set multiple measurements. Overwrites all existing data and adjusts the
-	 * sentence length to required number of data fields. Measurements are
-	 * inserted in given order.
+	 * Set multiple measurements in given order. Overwrites all existing values
+	 * and adjusts the number of data fields as required by given measurements.
 	 * 
 	 * @param measurements List of measurements to set.
 	 */
