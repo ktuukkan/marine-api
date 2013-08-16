@@ -55,13 +55,7 @@ $Revision$
 		<name>Kimmo Tuukkanen</name>
 		<url>https://github.com/ktuukkan/</url>
 	</organization>
-
-	<scm>
-		<connection>scm:git:git@github.com:ktuukkan/marine-api.git</connection>
-		<developerConnection>scm:git:git@github.com:ktuukkan/marine-api.git</developerConnection>
-		<url>git@github.com:ktuukkan/marine-api.git</url>
-	</scm>
-
+	
 	<developers>
 		<developer>
 			<id>ktuukkan</id>
@@ -70,19 +64,29 @@ $Revision$
 		</developer>
 	</developers>
 
+	<scm>
+		<connection>scm:git:git@github.com:ktuukkan/marine-api.git</connection>
+		<developerConnection>scm:git:git@github.com:ktuukkan/marine-api.git</developerConnection>
+		<url>git@github.com:ktuukkan/marine-api.git</url>
+	</scm>
+
 	<distributionManagement>
 		<repository>
 			<id>sonatype-nexus-staging</id>
 			<name>Sonatype Staging Repository</name>
 			<url>http://oss.sonatype.org/service/local/staging/deploy/maven2</url>
 		</repository>
-
 		<snapshotRepository>
 			<id>sonatype-nexus-snapshots</id>
 			<name>Sonatype Nexus Snapshots</name>
 			<url>http://oss.sonatype.org/content/repositories/snapshots</url>
 		</snapshotRepository>
 	</distributionManagement>
+
+	<issueManagement>
+	    <system>Github</system>
+	   	<url>https://github.com/ktuukkan/marine-api/issues</url>
+  	</issueManagement>
 
 	<dependencies>
 		<dependency>
@@ -97,9 +101,9 @@ $Revision$
 			<scope>test</scope>
 		</dependency>
 		<dependency>
-			<groupId>maven-plugins</groupId>
-			<artifactId>maven-cobertura-plugin</artifactId>
-			<version>1.4</version>
+			<groupId>org.codehaus.mojo</groupId>
+			<artifactId>cobertura-maven-plugin</artifactId>
+			<version>2.5.2</version>
 		</dependency>
 	</dependencies>
 
@@ -151,8 +155,55 @@ $Revision$
 					<target>1.5</target>
 				</configuration>
 			</plugin>
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>cobertura-maven-plugin</artifactId>
+				<version>2.5.2</version>
+				<configuration>
+					<instrumentation>
+						<ignores>
+							<ignore>net.sf.marineapi.example.*</ignore>
+						</ignores>
+						<excludes>
+							<exclude>net/sf/marineapi/example/**/*.class</exclude>
+							<exclude>net/sf/marineapi/**/*Test.class</exclude>
+						</excludes>
+					</instrumentation>
+					<check>
+						<branchRate>85</branchRate>
+						<lineRate>85</lineRate>
+						<haltOnFailure>true</haltOnFailure>
+						<totalBranchRate>85</totalBranchRate>
+						<totalLineRate>85</totalLineRate>
+						<packageLineRate>85</packageLineRate>
+						<packageBranchRate>85</packageBranchRate>
+					</check>
+					<formats>
+            			<format>html</format>
+            			<format>xml</format>
+          			</formats>
+				</configuration>
+				<executions>
+					<execution>
+						<goals>
+							<goal>clean</goal>
+							<goal>check</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
 		</plugins>
 	</build>
+
+	<reporting>
+		<plugins>
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>cobertura-maven-plugin</artifactId>
+				<version>2.6</version>
+			</plugin>
+		</plugins>
+	</reporting>
 
 	<profiles>
 		<profile>
