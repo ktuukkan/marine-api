@@ -78,7 +78,7 @@ public class Time {
 		if (obj instanceof Time) {
 			Time d = (Time) obj;
 			if (d.getHour() == this.hour && d.getMinutes() == this.minutes
-					&& d.getSeconds() == this.seconds) {
+				&& d.getSeconds() == this.seconds) {
 				return true;
 			}
 		}
@@ -100,7 +100,7 @@ public class Time {
 	 * @return Milliseconds
 	 */
 	public long getMilliseconds() {
-		long m = (long) Math.floor(getSeconds()) * 1000;
+		long m = (long) Math.round(getSeconds() * 1000);
 		m += getMinutes() * 60 * 1000;
 		m += getHour() * 3600 * 1000;
 		return m;
@@ -130,7 +130,7 @@ public class Time {
 	 */
 	@Override
 	public int hashCode() {
-		String s = String.format("%02d%02d%02f", hour, minutes, seconds);
+		String s = String.format("%2d%2d%2f", hour, minutes, seconds);
 		return s.hashCode();
 	}
 
@@ -143,7 +143,7 @@ public class Time {
 	public void setHour(int hour) {
 		if (hour < 0 || hour > 23) {
 			throw new IllegalArgumentException(
-					"Valid hour value is between 0..23");
+				"Valid hour value is between 0..23");
 		}
 		this.hour = hour;
 	}
@@ -157,7 +157,7 @@ public class Time {
 	public void setMinutes(int minutes) {
 		if (minutes < 0 || minutes > 59) {
 			throw new IllegalArgumentException(
-					"Valid minutes value is between 0..59");
+				"Valid minutes value is between 0..59");
 		}
 		this.minutes = minutes;
 	}
@@ -165,13 +165,14 @@ public class Time {
 	/**
 	 * Set seconds of minute.
 	 * 
-	 * @param seconds the seconds to set
-	 * @throws IllegalArgumentException If seconds value out of bounds 0..59
+	 * @param seconds Seconds to set
+	 * @throws IllegalArgumentException If seconds out of bounds (
+	 *             <code>0 < seconds < 60</code>)
 	 */
 	public void setSeconds(double seconds) {
-		if (seconds < 0 || seconds > 59.999) {
+		if (seconds < 0 || seconds >= 60) {
 			throw new IllegalArgumentException(
-					"Invalid value for second (0..59)");
+				"Invalid value for second (0 < seconds < 60)");
 		}
 		this.seconds = seconds;
 	}
@@ -187,7 +188,9 @@ public class Time {
 		cal.setTime(d);
 		setHour(cal.get(Calendar.HOUR_OF_DAY));
 		setMinutes(cal.get(Calendar.MINUTE));
-		setSeconds(cal.get(Calendar.SECOND));
+		double seconds = cal.get(Calendar.SECOND)
+			+ (cal.get(Calendar.MILLISECOND) / 1000.0);
+		setSeconds(seconds);
 	}
 
 	/**
@@ -197,11 +200,18 @@ public class Time {
 	 * @return A Date that is combination of specified Date and Time
 	 */
 	public Date toDate(Date d) {
+
+		double seconds = getSeconds();
+		int fullSeconds = (int) Math.floor(seconds);
+		int milliseconds = (int) Math.round((seconds - fullSeconds) * 1000);
+
 		GregorianCalendar cal = new GregorianCalendar();
 		cal.setTime(d);
 		cal.set(Calendar.HOUR, getHour());
 		cal.set(Calendar.MINUTE, getMinutes());
-		cal.set(Calendar.SECOND, (int) Math.floor(getSeconds()));
+		cal.set(Calendar.SECOND, fullSeconds);
+		cal.set(Calendar.MILLISECOND, milliseconds);
+
 		return cal.getTime();
 	}
 

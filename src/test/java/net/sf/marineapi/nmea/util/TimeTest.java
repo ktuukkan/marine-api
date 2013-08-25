@@ -65,8 +65,8 @@ public class TimeTest {
 		assertEquals(43261000, time.getMilliseconds());
 		time.setHour(18);
 		time.setMinutes(1);
-		time.setSeconds(1.0);
-		assertEquals(64861000, time.getMilliseconds());
+		time.setSeconds(1.123);
+		assertEquals(64861123, time.getMilliseconds());
 	}
 
 	/**
@@ -82,7 +82,7 @@ public class TimeTest {
 	 */
 	@Test
 	public void testGetSeconds() {
-		assertEquals(3.4, time.getSeconds(), 0.1);
+		assertEquals(3.4, time.getSeconds(), 0.001);
 	}
 
 	/**
@@ -176,7 +176,7 @@ public class TimeTest {
 	@Test
 	public void testSetNegativeSeconds() {
 		try {
-			time.setSeconds(-0.01);
+			time.setSeconds(-0.001);
 			fail("Did not throw exception");
 		} catch (IllegalArgumentException e) {
 			// pass
@@ -188,8 +188,8 @@ public class TimeTest {
 	 */
 	@Test
 	public void testSetSeconds() {
-		time.setSeconds(45.1);
-		assertEquals(45.1, time.getSeconds(), 0.1);
+		time.setSeconds(45.12345);
+		assertEquals(45.12345, time.getSeconds(), 0.001);
 	}
 
 	/**
@@ -198,13 +198,21 @@ public class TimeTest {
 	 */
 	@Test
 	public void testSetTime() {
+		
 		Date now = new Date();
 		time.setTime(now);
+		
 		GregorianCalendar cal = new GregorianCalendar();
 		cal.setTime(now);
-		assertEquals(cal.get(Calendar.HOUR_OF_DAY), time.getHour());
-		assertEquals(cal.get(Calendar.MINUTE), time.getMinutes());
-		assertEquals(cal.get(Calendar.SECOND), time.getSeconds(), 0.1);
+		int hours = cal.get(Calendar.HOUR_OF_DAY);
+		int minutes = cal.get(Calendar.MINUTE);
+		int fullSeconds = cal.get(Calendar.SECOND);
+		int milliSeconds = cal.get(Calendar.MILLISECOND);
+		double seconds = fullSeconds + (milliSeconds/1000.0);
+		
+		assertEquals(hours, time.getHour());
+		assertEquals(minutes, time.getMinutes());
+		assertEquals(seconds, time.getSeconds(), 0.001);
 	}
 
 	/**
@@ -213,23 +221,33 @@ public class TimeTest {
 	 */
 	@Test
 	public void testToDate() {
+		
 		Calendar cal = new GregorianCalendar();
-		cal.set(Calendar.YEAR, 2010);
-		cal.set(Calendar.MONTH, Calendar.JANUARY);
-		cal.set(Calendar.DAY_OF_MONTH, 1);
+		Calendar result = new GregorianCalendar();
+		
+		// set cal to reference date/time (date portion not significant)
 		cal.set(Calendar.HOUR_OF_DAY, 0);
 		cal.set(Calendar.MINUTE, 0);
-		cal.set(Calendar.SECOND, 0);
+		cal.set(Calendar.SECOND, 3);
+		cal.set(Calendar.MILLISECOND, 400);
 
-		Date date = time.toDate(cal.getTime());
-		Calendar result = new GregorianCalendar();
-		result.setTime(date);
+		// convert Time to Date and insert to result Calendar for comparison
+		result.setTime(time.toDate(cal.getTime()));
+		
+		int resultHour = result.get(Calendar.HOUR_OF_DAY);
+		int resultMinute = result.get(Calendar.MINUTE);
+		int resultFullSeconds = result.get(Calendar.SECOND);
+		int resultMilliseconds = result.get(Calendar.MILLISECOND);
+		double resultSeconds = resultFullSeconds + (resultMilliseconds/1000.0); 
+			
+		// Time portion, should match values in Time exactly
+		assertEquals(time.getHour(), resultHour);
+		assertEquals(time.getMinutes(), resultMinute);
+		assertEquals(time.getSeconds(), resultSeconds, 0.001);
 
-		assertEquals(time.getHour(), result.get(Calendar.HOUR_OF_DAY));
-		assertEquals(time.getMinutes(), result.get(Calendar.MINUTE));
-		assertEquals((int) time.getSeconds(), result.get(Calendar.SECOND));
-		assertEquals(2010, result.get(Calendar.YEAR));
-		assertEquals(Calendar.JANUARY, result.get(Calendar.MONTH));
-		assertEquals(1, result.get(Calendar.DAY_OF_YEAR));
+		// Date portion should not have changed
+		assertEquals(cal.get(Calendar.YEAR), result.get(Calendar.YEAR));
+		assertEquals(cal.get(Calendar.MONTH), result.get(Calendar.MONTH));
+		assertEquals(cal.get(Calendar.DAY_OF_YEAR), result.get(Calendar.DAY_OF_YEAR));
 	}
 }
