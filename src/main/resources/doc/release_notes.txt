@@ -7,15 +7,22 @@ versions. Released on @RELEASE_DATE@.
 
 CHANGES
 
- * Internals of SentenceReader refactored to better support for diffrent data
-   sources. Includes some performance tweaks, should take less CPU now.
+ * SentenceReader; refactored to better support diffrent data sources. Includes
+   some performance tweaks, should take less CPU now.
 
- * Regular expression performance tweaks in SentenceValidator.
+ * SentenceValidator; regular expression performance tweaks in.
 
  * TPVProvider and related classes renamed to PositionProvider.
 
  * GSASentence; getSatellitesIds() renamed to getSatelliteIds().
  
+ * Time; handles now fractions of a second. Fixed also a bug in toDate() causing
+   error in hour of day.
+   
+ * GLL, GGA, RMC and ZDA parsers; fractions of a second are now parsed and
+   formatted in timestamp fields. When setting/formatting values, three decimals
+   is used regardless of given precision (padded with zeros if needed).
+
  * SentenceId; added XDR.
 
 NEW FEATURES
@@ -41,9 +48,9 @@ KNOWN ISSUES
 ACKNOWLEDGEMENTS
 
  * Thanks to Amanda Fenech (marssa.org) for migrating the project to Maven
-   layout.
+   layout and initial release in repository (v0.5.1).
  
  * Thanks to Ludovic Drouineau for UDP implementation of SentenceReader.
 
  * Thanks to Robert Huitema (www.42.co.nz) and Vladimir Loginov for performance
-   tweaks. Robert also provided the base for new XDR parser.
+   tweaks. Robert also provided the base work for XDR parser.
