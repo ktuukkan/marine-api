@@ -25,19 +25,27 @@ import net.sf.marineapi.nmea.util.Measurement;
 
 /**
  * <p>
- * XDR sentence - transducer measurements.
- * <p>
- * Measurements are delivered in sets containing four fields; transducer type,
- * measurement value, unit of measurement and transducer name. There may be any
- * number of sets like this, each describing a sensor. Measurements are parsed
- * and returned as {@link net.sf.marineapi.nmea.util.Measurement} objects.
+ * Transducer measurements. Measurements are delivered in sets containing four
+ * fields; transducer type, measurement value, unit of measurement and
+ * transducer name. There may be any number of sets like this, each describing a
+ * sensor. Notice that inserting too many measuments in one sentence may result
+ * in exceeding the maximum sentence length (82 chars).
  * 
+ * @see net.sf.marineapi.nmea.util.Measurement
  * @author Robert Huitema, Kimmo Tuukkanen
  */
 public interface XDRSentence extends Sentence {
 
 	/**
-	 * Returns all measurement values.
+	 * Adds specified measurement in sentence placing it last. Multiple
+	 * measurements are inserted in given order.
+	 * 
+	 * @param m Measurements to add.
+	 */
+	void addMeasurement(Measurement... m);
+
+	/**
+	 * Returns all measurements.
 	 * 
 	 * @return List of measurements, ordered as they appear in sentence.
 	 */

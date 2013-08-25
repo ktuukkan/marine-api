@@ -20,18 +20,21 @@
  */
 package net.sf.marineapi.nmea.util;
 
-/** 
- * Measurement data delivered by {@link net.sf.marineapi.nmea.sentence.XDRSentence}.
+/**
+ * Sensor measurement data delivered by
+ * {@link net.sf.marineapi.nmea.sentence.XDRSentence}. Notice that any of the
+ * fields may be empty (<code>null</code>), depending on sentence and sensor
+ * that produced it.
  * 
  * @author Robert Huitema, Kimmo Tuukkanen
  */
 public class Measurement {
-	
+
 	private String name;
 	private String type;
 	private String units;
-	private double value;
-	
+	private Double value;
+
 	/**
 	 * Creates a new empty instance of Measurement.
 	 */
@@ -56,7 +59,7 @@ public class Measurement {
 	public String getName() {
 		return name;
 	}
-	
+
 	/**
 	 * Returns the type of transducer.
 	 * 
@@ -65,7 +68,7 @@ public class Measurement {
 	public String getType() {
 		return type;
 	}
-	
+
 	/**
 	 * Returns the units of measurement.
 	 * 
@@ -74,7 +77,7 @@ public class Measurement {
 	public String getUnits() {
 		return units;
 	}
-	
+
 	/**
 	 * Returns the measurement value.
 	 * 
@@ -83,7 +86,7 @@ public class Measurement {
 	public double getValue() {
 		return value;
 	}
-	
+
 	/**
 	 * Sets the name of transducer.
 	 * 
@@ -92,7 +95,7 @@ public class Measurement {
 	public void setName(String name) {
 		this.name = name;
 	}
-	
+
 	/**
 	 * Sets the type of measurement.
 	 * 
@@ -101,7 +104,7 @@ public class Measurement {
 	public void setType(String type) {
 		this.type = type;
 	}
-	
+
 	/**
 	 * Sets the units of measurement.
 	 * 
@@ -110,7 +113,7 @@ public class Measurement {
 	public void setUnits(String units) {
 		this.units = units;
 	}
-	
+
 	/**
 	 * Sets the measurement value.
 	 * 
@@ -118,6 +121,15 @@ public class Measurement {
 	 */
 	public void setValue(double value) {
 		this.value = value;
+	}
+
+	/**
+	 * Tells if all fields in this measurement are empty (null).
+	 * 
+	 * @return true if empty, otherwise false.
+	 */
+	public boolean isEmpty() {
+		return name == null && type == null && value == null && units == null;
 	}
 
 }

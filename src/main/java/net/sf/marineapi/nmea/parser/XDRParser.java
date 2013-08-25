@@ -21,6 +21,7 @@
 package net.sf.marineapi.nmea.parser;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import net.sf.marineapi.nmea.sentence.SentenceId;
@@ -30,7 +31,7 @@ import net.sf.marineapi.nmea.util.Measurement;
 
 /**
  * <p>
- * XDR parser, transducer measurements.
+ * Transducer measurements.
  * <pre>
  *         1 2   3 4            n
  *         | |   | |            |
@@ -79,6 +80,18 @@ class XDRParser extends SentenceParser implements XDRSentence {
 		super(talker, SentenceId.XDR, DATA_SET_LENGTH);
 	}
 
+
+
+	/* (non-Javadoc)
+	 * @see net.sf.marineapi.nmea.sentence.XDRSentence#addMeasurement(net.sf.marineapi.nmea.util.Measurement[])
+	 */
+	@Override
+	public void addMeasurement(Measurement... m) {
+		List<Measurement> ms = getMeasurements();
+		ms.addAll(Arrays.asList(m));
+		setMeasurements(ms);		
+	}
+
 	/* (non-Javadoc)
 	 * @see net.sf.marineapi.nmea.sentence.XDRSentence#getMeasurements()
 	 */
@@ -89,12 +102,22 @@ class XDRParser extends SentenceParser implements XDRSentence {
 		
 		for (int i = 0; i <= setCount; i += DATA_SET_LENGTH) {
 			Measurement value = fetchValues(i);
-			result.add(value);				
+			if(!value.isEmpty()) {
+				result.add(value);
+			}
 		}
 		
 		return result;
 	}
 
+	/* (non-Javadoc)
+	 * @see net.sf.marineapi.nmea.sentence.XDRSentence#setMeasurement(net.sf.marineapi.nmea.util.Measurement)
+	 */
+	public void setMeasurement(Measurement m) {
+		setFieldCount(DATA_SET_LENGTH);
+		insertValues(TYPE_INDEX, m);
+	}
+	
 	/* (non-Javadoc)
 	 * @see net.sf.marineapi.nmea.sentence.XDRSentence#setMeasurements(java.util.List)
 	 */
@@ -107,14 +130,6 @@ class XDRParser extends SentenceParser implements XDRSentence {
 			insertValues(i, m);
 			i += DATA_SET_LENGTH;
 		}
-	}
-
-	/* (non-Javadoc)
-	 * @see net.sf.marineapi.nmea.sentence.XDRSentence#setMeasurement(net.sf.marineapi.nmea.util.Measurement)
-	 */
-	public void setMeasurement(Measurement m) {
-		setFieldCount(DATA_SET_LENGTH);
-		insertValues(TYPE_INDEX, m);
 	}
 
 	/**
@@ -145,7 +160,7 @@ class XDRParser extends SentenceParser implements XDRSentence {
 
 		return m;
 	}
-	
+
 	/**
 	 * Inserts the given data set beginning at given index. Before inserting,
 	 * make sure the sentence has enough fields for it.
@@ -161,5 +176,5 @@ class XDRParser extends SentenceParser implements XDRSentence {
 			setStringValue((i + UNITS_INDEX), m.getUnits());
 			setStringValue((i + NAME_INDEX), m.getName());
 		}
-	}	
+	}
 }
