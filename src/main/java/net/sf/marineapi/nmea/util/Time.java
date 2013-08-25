@@ -77,8 +77,8 @@ public class Time {
 		}
 		if (obj instanceof Time) {
 			Time d = (Time) obj;
-			if (d.getHour() == this.hour && d.getMinutes() == this.minutes
-				&& d.getSeconds() == this.seconds) {
+			if (d.getHour() == getHour() && d.getMinutes() == getMinutes()
+				&& d.getSeconds() == getSeconds()) {
 				return true;
 			}
 		}
@@ -207,7 +207,7 @@ public class Time {
 
 		GregorianCalendar cal = new GregorianCalendar();
 		cal.setTime(d);
-		cal.set(Calendar.HOUR, getHour());
+		cal.set(Calendar.HOUR_OF_DAY, getHour());
 		cal.set(Calendar.MINUTE, getMinutes());
 		cal.set(Calendar.SECOND, fullSeconds);
 		cal.set(Calendar.MILLISECOND, milliseconds);

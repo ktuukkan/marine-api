@@ -214,6 +214,21 @@ public class TimeTest {
 		assertEquals(minutes, time.getMinutes());
 		assertEquals(seconds, time.getSeconds(), 0.001);
 	}
+	
+	/**
+	 * Test method for setTime() and toDate() round-trip.
+	 */
+	@Test
+	public void testDateRoundTrip() {
+		
+		Date now = new Date();
+		
+		time.setTime(now);
+		Date result = time.toDate(now);
+		
+		assertEquals(now, result);
+		assertEquals(now.getTime(), result.getTime());
+	}
 
 	/**
 	 * Test method for
