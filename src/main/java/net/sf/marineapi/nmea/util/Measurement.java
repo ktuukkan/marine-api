@@ -1,6 +1,6 @@
 /*
  * Measurement.java
- * Copyright (C) 2013 Robert Huitema
+ * Copyright (C) 2013 Robert Huitema, Kimmo Tuukkanen
  * 
  * This file is part of Java Marine API.
  * <http://ktuukkan.github.io/marine-api/>
