@@ -55,9 +55,9 @@ public class ChecksumTest {
 	@Test
 	public void testCalculate() {
 		assertEquals("1D", Checksum.calculate(BODTest.EXAMPLE));
-		assertEquals("79", Checksum.calculate(GGATest.EXAMPLE));
+		assertEquals("63", Checksum.calculate(GGATest.EXAMPLE));
 		assertEquals("26", Checksum.calculate(GLLTest.EXAMPLE));
-		assertEquals("11", Checksum.calculate(RMCTest.EXAMPLE));
+		assertEquals("0B", Checksum.calculate(RMCTest.EXAMPLE));
 		assertEquals("3D", Checksum.calculate(GSATest.EXAMPLE));
 		assertEquals("73", Checksum.calculate(GSVTest.EXAMPLE));
 		assertEquals("58", Checksum.calculate(RMBTest.EXAMPLE));

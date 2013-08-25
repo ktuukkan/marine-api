@@ -151,7 +151,7 @@ public class ZDATest {
 		// 09:08:07.6
 		Time t = new Time(9, 8, 7.6);
 		zda.setTime(t);
-		assertTrue(zda.toString().startsWith("$GPZDA,090807,07,"));
+		assertTrue(zda.toString().startsWith("$GPZDA,090807.600,07,"));
 	}
 
 	/**
@@ -161,7 +161,7 @@ public class ZDATest {
 	public void testToDate() {
 
 		Date d = new Date(2010, 6, 15);
-		Time t = new Time(12, 15, 30.5);
+		Time t = new Time(12, 15, 30.555);
 		zda.setDate(d);
 		zda.setTime(t);
 
@@ -172,11 +172,13 @@ public class ZDATest {
 		cal.set(Calendar.HOUR_OF_DAY, t.getHour());
 		cal.set(Calendar.MINUTE, t.getMinutes());
 		cal.set(Calendar.SECOND, (int) Math.floor(t.getSeconds()));
-		cal.set(Calendar.MILLISECOND, 0); // ZDA precision is 1s
+		cal.set(Calendar.MILLISECOND, 555);
 
 		GregorianCalendar result = new GregorianCalendar();
 		result.setTime(zda.toDate());
 
 		assertEquals(cal, result);
+		assertEquals(cal.getTime(), result.getTime());
+		assertEquals(cal.getTime().getTime(), result.getTime().getTime());
 	}
 }

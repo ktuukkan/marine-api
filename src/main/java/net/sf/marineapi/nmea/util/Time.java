@@ -20,6 +20,8 @@
  */
 package net.sf.marineapi.nmea.util;
 
+import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
@@ -54,6 +56,18 @@ public class Time {
 	}
 
 	/**
+	 * Creates a new instance of <code>Time</code> based on given String.
+	 * Assumes the <code>hhmmss.sss</code> formatting used in NMEA sentences.
+	 * 
+	 * @param time Timestamp String
+	 */
+	public Time(String time) {
+		setHour(Integer.parseInt(time.substring(0, 2)));
+		setMinutes(Integer.parseInt(time.substring(2, 4)));
+		setSeconds(Double.parseDouble(time.substring(4)));
+	}
+
+	/**
 	 * Creates a new instance of Time.
 	 * 
 	 * @param hour Hour of day
@@ -77,10 +91,9 @@ public class Time {
 		}
 		if (obj instanceof Time) {
 			Time d = (Time) obj;
-			if (d.getHour() == getHour() && d.getMinutes() == getMinutes()
-				&& d.getSeconds() == getSeconds()) {
-				return true;
-			}
+			return (d.getHour() == getHour()
+				&& d.getMinutes() == getMinutes()
+				&& d.getSeconds() == getSeconds());
 		}
 		return false;
 	}
@@ -215,13 +228,23 @@ public class Time {
 		return cal.getTime();
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * @see java.lang.Object#toString()
+	/**
+	 * Returns the String representation of <code>Time</code>. Formats the time
+	 * in <code>hhmmss.sss</code> format used in NMEA sentences. Seconds are
+	 * presented with three decimals regardless of the precision returned by
+	 * {@link #getSeconds()}.
 	 */
 	@Override
 	public String toString() {
-		String ptr = "%02d:%02d:%02.03f";
-		return String.format(ptr, getHour(), getMinutes(), getSeconds());
+		String str = String.format("%02d%02d", getHour(), getMinutes());
+
+		DecimalFormat nf = new DecimalFormat("00.000");
+		DecimalFormatSymbols dfs = new DecimalFormatSymbols();
+		dfs.setDecimalSeparator('.');
+		nf.setDecimalFormatSymbols(dfs);
+
+		str += nf.format(getSeconds());
+		return str;
 	}
+
 }

@@ -147,7 +147,7 @@ public class GLLTest {
 	public void testSetTime() {
 		Time t = new Time(1, 2, 3.4);
 		instance.setTime(t);
-		assertTrue(instance.toString().contains(",E,010203,A*"));
+		assertTrue(instance.toString().contains(",E,010203.400,A*"));
 	}
 
 }

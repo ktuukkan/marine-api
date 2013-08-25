@@ -23,7 +23,7 @@ import org.junit.Test;
  */
 public class GGATest {
 
-	public static final String EXAMPLE = "$GPGGA,120044,6011.552,N,02501.941,E,1,00,2.0,28.0,M,19.6,M,,*79";
+	public static final String EXAMPLE = "$GPGGA,120044.567,6011.552,N,02501.941,E,1,00,2.0,28.0,M,19.6,M,,*63";
 
 	private GGAParser gga;
 	private GGAParser empty;
@@ -125,7 +125,7 @@ public class GGATest {
 		assertNotNull(t);
 		assertEquals(12, t.getHour());
 		assertEquals(0, t.getMinutes());
-		assertEquals(44.0, t.getSeconds(), 0.1);
+		assertEquals(44.567, t.getSeconds(), 0.001);
 	}
 
 	/**
@@ -221,9 +221,9 @@ public class GGATest {
 	 */
 	@Test
 	public void testSetTime() {
-		Time t = new Time(1, 2, 3.4);
+		Time t = new Time(1, 2, 3.456);
 		gga.setTime(t);
-		assertTrue(gga.toString().contains("GPGGA,010203,6011"));
+		assertTrue(gga.toString().contains("GPGGA,010203.456,6011"));
 	}
 
 }

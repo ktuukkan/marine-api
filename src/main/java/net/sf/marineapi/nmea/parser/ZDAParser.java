@@ -20,9 +20,6 @@
  */
 package net.sf.marineapi.nmea.parser;
 
-import java.util.Calendar;
-import java.util.GregorianCalendar;
-
 import net.sf.marineapi.nmea.sentence.SentenceId;
 import net.sf.marineapi.nmea.sentence.TalkerId;
 import net.sf.marineapi.nmea.sentence.ZDASentence;
@@ -96,10 +93,7 @@ class ZDAParser extends SentenceParser implements ZDASentence {
 	 */
 	public Time getTime() {
 		String str = getStringValue(UTC_TIME);
-		int h = Integer.parseInt(str.substring(0, 2));
-		int m = Integer.parseInt(str.substring(2, 4));
-		double s = Double.parseDouble(str.substring(4, 6));
-		return new Time(h, m, s);
+		return new Time(str);
 	}
 
 	/*
@@ -121,7 +115,7 @@ class ZDAParser extends SentenceParser implements ZDASentence {
 	public void setLocalZoneHours(int hours) {
 		if (hours < -13 || hours > 13) {
 			throw new IllegalArgumentException(
-					"Value must be within range -13..13");
+				"Value must be within range -13..13");
 		}
 		setIntValue(LOCAL_ZONE_HOURS, hours, 2);
 	}
@@ -133,7 +127,7 @@ class ZDAParser extends SentenceParser implements ZDASentence {
 	public void setLocalZoneMinutes(int minutes) {
 		if (minutes < -59 || minutes > 59) {
 			throw new IllegalArgumentException(
-					"Value must be within range -59..59");
+				"Value must be within range -59..59");
 		}
 		setIntValue(LOCAL_ZONE_MINUTES, minutes, 2);
 	}
@@ -145,11 +139,7 @@ class ZDAParser extends SentenceParser implements ZDASentence {
 	 * nmea.util.Time)
 	 */
 	public void setTime(Time t) {
-		int h = t.getHour();
-		int m = t.getMinutes();
-		int s = (int) Math.floor(t.getSeconds());
-		String time = String.format("%02d%02d%02d", h, m, s);
-		setStringValue(UTC_TIME, time);
+		setStringValue(UTC_TIME, t.toString());
 	}
 
 	/*
@@ -159,16 +149,6 @@ class ZDAParser extends SentenceParser implements ZDASentence {
 	public java.util.Date toDate() {
 		Date d = getDate();
 		Time t = getTime();
-
-		GregorianCalendar cal = new GregorianCalendar();
-		cal.set(Calendar.YEAR, d.getYear());
-		cal.set(Calendar.MONTH, d.getMonth());
-		cal.set(Calendar.DAY_OF_MONTH, d.getDay());
-		cal.set(Calendar.HOUR_OF_DAY, t.getHour());
-		cal.set(Calendar.MINUTE, t.getMinutes());
-		cal.set(Calendar.SECOND, (int) Math.floor(t.getSeconds()));
-		cal.set(Calendar.MILLISECOND, 0); // precision is 1s
-
-		return cal.getTime();
+		return t.toDate(d.toDate());
 	}
 }

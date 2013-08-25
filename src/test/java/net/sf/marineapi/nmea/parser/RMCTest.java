@@ -23,7 +23,7 @@ import org.junit.Test;
 public class RMCTest {
 
 	/** Example sentence */
-	public static final String EXAMPLE = "$GPRMC,120044,A,6011.552,N,02501.941,E,000.0,360.0,160705,006.1,E,A*11";
+	public static final String EXAMPLE = "$GPRMC,120044.567,A,6011.552,N,02501.941,E,000.0,360.0,160705,006.1,E,A*0B";
 
 	RMCParser empty;
 	RMCParser rmc;
@@ -161,7 +161,7 @@ public class RMCTest {
 		assertNotNull(t);
 		assertEquals(12, t.getHour());
 		assertEquals(0, t.getMinutes());
-		assertEquals(44.0, t.getSeconds(), 0.1);
+		assertEquals(44.567, t.getSeconds(), 0.1);
 	}
 
 	/**
@@ -283,9 +283,9 @@ public class RMCTest {
 	 */
 	@Test
 	public void testSetTime() {
-		Time t = new Time(1, 2, 3.4);
+		Time t = new Time(1, 2, 3.456);
 		rmc.setTime(t);
-		assertTrue(rmc.toString().contains("$GPRMC,010203,A,"));
+		assertTrue(rmc.toString().contains("$GPRMC,010203.456,A,"));
 	}
 
 	/**

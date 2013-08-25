@@ -21,12 +21,12 @@
 package net.sf.marineapi.nmea.util;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
-
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
-
 import org.junit.Before;
 import org.junit.Test;
 
@@ -43,6 +43,54 @@ public class TimeTest {
 	@Before
 	public void setUp() throws Exception {
 		time = new Time(1, 2, 3.4);
+	}
+
+	/**
+	 * Test method for setTime() and toDate() round-trip.
+	 */
+	@Test
+	public void testDateRoundTrip() {
+
+		Date now = new Date();
+
+		time.setTime(now);
+		Date result = time.toDate(now);
+
+		assertEquals(now, result);
+		assertEquals(now.getTime(), result.getTime());
+	}
+
+	/**
+	 * Test method for
+	 * {@link net.sf.marineapi.nmea.util.Time#toString(net.sf.marineapi.nmea.util.Time)}
+	 * .
+	 */
+	@Test
+	public void testFormatTimeNoDecimals() {
+		Time t = new Time(1, 2, 3);
+		assertEquals("010203.000", t.toString());
+	}
+
+	/**
+	 * Test method for
+	 * {@link net.sf.marineapi.nmea.util.Time#toString(net.sf.marineapi.nmea.util.Time)}
+	 * .
+	 */
+	@Test
+	public void testFormatTimeWithDecimals() {
+		Time t = new Time(1, 2, 3.456);
+		assertEquals("010203.456", t.toString());
+	}
+
+	/**
+	 * Test method for
+	 * {@link net.sf.marineapi.nmea.util.Time#toString(net.sf.marineapi.nmea.util.Time)}
+	 * .
+	 */
+	@Test
+	public void testFormatTimeWithOneDecimal() {
+		Time t = new Time(1, 2, 3.4);
+		assertEquals("010203.400", t.toString());
 	}
 
 	/**
@@ -83,6 +131,42 @@ public class TimeTest {
 	@Test
 	public void testGetSeconds() {
 		assertEquals(3.4, time.getSeconds(), 0.001);
+	}
+
+	/**
+	 * Test method for {@link net.sf.marineapi.nmea.util.Time(java.lang.String)}
+	 * .
+	 */
+	@Test
+	public void testParseTimeWithDecimals() {
+		Time t = new Time("010203.456");
+		assertEquals(1, t.getHour());
+		assertEquals(2, t.getMinutes());
+		assertEquals(3.456, t.getSeconds(), 0.001);
+	}
+
+	/**
+	 * Test method for {@link net.sf.marineapi.nmea.util.Time(java.lang.String)}
+	 * .
+	 */
+	@Test
+	public void testParseTimeWithOneDecimal() {
+		Time t = new Time("010203.4");
+		assertEquals(1, t.getHour());
+		assertEquals(2, t.getMinutes());
+		assertEquals(3.4, t.getSeconds(), 0.001);
+	}
+
+	/**
+	 * Test method for {@link net.sf.marineapi.nmea.util.Time(java.lang.String)}
+	 * .
+	 */
+	@Test
+	public void testParseTimeWithoutDecimals() {
+		Time t = new Time("010203");
+		assertEquals(1, t.getHour());
+		assertEquals(2, t.getMinutes());
+		assertEquals(3.0, t.getSeconds(), 0.001);
 	}
 
 	/**
@@ -198,36 +282,21 @@ public class TimeTest {
 	 */
 	@Test
 	public void testSetTime() {
-		
+
 		Date now = new Date();
 		time.setTime(now);
-		
+
 		GregorianCalendar cal = new GregorianCalendar();
 		cal.setTime(now);
 		int hours = cal.get(Calendar.HOUR_OF_DAY);
 		int minutes = cal.get(Calendar.MINUTE);
 		int fullSeconds = cal.get(Calendar.SECOND);
 		int milliSeconds = cal.get(Calendar.MILLISECOND);
-		double seconds = fullSeconds + (milliSeconds/1000.0);
-		
+		double seconds = fullSeconds + (milliSeconds / 1000.0);
+
 		assertEquals(hours, time.getHour());
 		assertEquals(minutes, time.getMinutes());
 		assertEquals(seconds, time.getSeconds(), 0.001);
-	}
-	
-	/**
-	 * Test method for setTime() and toDate() round-trip.
-	 */
-	@Test
-	public void testDateRoundTrip() {
-		
-		Date now = new Date();
-		
-		time.setTime(now);
-		Date result = time.toDate(now);
-		
-		assertEquals(now, result);
-		assertEquals(now.getTime(), result.getTime());
 	}
 
 	/**
@@ -236,10 +305,10 @@ public class TimeTest {
 	 */
 	@Test
 	public void testToDate() {
-		
+
 		Calendar cal = new GregorianCalendar();
 		Calendar result = new GregorianCalendar();
-		
+
 		// set cal to reference date/time (date portion not significant)
 		cal.set(Calendar.HOUR_OF_DAY, 0);
 		cal.set(Calendar.MINUTE, 0);
@@ -248,13 +317,14 @@ public class TimeTest {
 
 		// convert Time to Date and insert to result Calendar for comparison
 		result.setTime(time.toDate(cal.getTime()));
-		
+
 		int resultHour = result.get(Calendar.HOUR_OF_DAY);
 		int resultMinute = result.get(Calendar.MINUTE);
 		int resultFullSeconds = result.get(Calendar.SECOND);
 		int resultMilliseconds = result.get(Calendar.MILLISECOND);
-		double resultSeconds = resultFullSeconds + (resultMilliseconds/1000.0); 
-			
+		double resultSeconds = resultFullSeconds
+			+ (resultMilliseconds / 1000.0);
+
 		// Time portion, should match values in Time exactly
 		assertEquals(time.getHour(), resultHour);
 		assertEquals(time.getMinutes(), resultMinute);
@@ -263,6 +333,21 @@ public class TimeTest {
 		// Date portion should not have changed
 		assertEquals(cal.get(Calendar.YEAR), result.get(Calendar.YEAR));
 		assertEquals(cal.get(Calendar.MONTH), result.get(Calendar.MONTH));
-		assertEquals(cal.get(Calendar.DAY_OF_YEAR), result.get(Calendar.DAY_OF_YEAR));
+		assertEquals(cal.get(Calendar.DAY_OF_YEAR),
+			result.get(Calendar.DAY_OF_YEAR));
+	}
+	
+	@Test
+	public void testEquals() {
+		
+		Time a = new Time(1, 2, 3.456);
+		Time b = new Time(1, 2, 3.456);
+		Time c = new Time(2, 3, 4.567);
+		
+		assertTrue(a.equals(a));
+		assertTrue(a.equals(b));
+		assertFalse(a.equals(c));
+		assertFalse(a.equals(new Object()));
+		assertEquals(a.hashCode(), b.hashCode());
 	}
 }

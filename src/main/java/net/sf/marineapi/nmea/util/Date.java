@@ -84,7 +84,7 @@ public class Date {
 		if (obj instanceof Date) {
 			Date d = (Date) obj;
 			if (d.getDay() == this.day && d.getMonth() == this.month
-					&& d.getYear() == this.year) {
+				&& d.getYear() == this.year) {
 				return true;
 			}
 		}
@@ -157,7 +157,7 @@ public class Date {
 	public void setMonth(int month) {
 		if (month < 1 || month > 12) {
 			throw new IllegalArgumentException(
-					"Month value out of bounds [1..12]");
+				"Month value out of bounds [1..12]");
 		}
 		this.month = month;
 	}
@@ -177,7 +177,7 @@ public class Date {
 	public void setYear(int year) {
 		if (year < 0 || (year > 99 && year < 1000) || year > 9999) {
 			throw new IllegalArgumentException(
-					"Year must be two or four digit value");
+				"Year must be two or four digit value");
 		}
 		if (year < 100 && year > PIVOT_YEAR) {
 			this.year = 1900 + year;
@@ -196,5 +196,23 @@ public class Date {
 	public String toString() {
 		String ptr = "%04d-%02d-%02d";
 		return String.format(ptr, getYear(), getMonth(), getDay());
+	}
+
+	/**
+	 * Converts to {@java.util.Date}, time of day set to 00:00:00.000.
+	 * 
+	 * @return java.util.Date
+	 */
+	public java.util.Date toDate() {
+		GregorianCalendar cal = new GregorianCalendar();
+		cal.set(Calendar.YEAR, getYear());
+		cal.set(Calendar.MONTH, getMonth());
+		cal.set(Calendar.DAY_OF_MONTH, getDay());
+		cal.set(Calendar.HOUR_OF_DAY, 0);
+		cal.set(Calendar.MINUTE, 0);
+		cal.set(Calendar.SECOND, 0);
+		cal.set(Calendar.MILLISECOND, 0);
+
+		return cal.getTime();
 	}
 }

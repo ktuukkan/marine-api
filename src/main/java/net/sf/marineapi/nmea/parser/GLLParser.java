@@ -89,10 +89,7 @@ class GLLParser extends PositionParser implements GLLSentence {
 	 */
 	public Time getTime() {
 		String str = getStringValue(UTC_TIME);
-		int h = Integer.parseInt(str.substring(0, 2));
-		int m = Integer.parseInt(str.substring(2, 4));
-		double s = Double.parseDouble(str.substring(4, 6));
-		return new Time(h, m, s);
+		return new Time(str);
 	}
 
 	/*
@@ -125,10 +122,6 @@ class GLLParser extends PositionParser implements GLLSentence {
 	 * nmea.util.Time)
 	 */
 	public void setTime(Time t) {
-		int h = t.getHour();
-		int m = t.getMinutes();
-		int s = (int) Math.floor(t.getSeconds());
-		String time = String.format("%02d%02d%02d", h, m, s);
-		setStringValue(UTC_TIME, time);
+		setStringValue(UTC_TIME, t.toString());
 	}
 }

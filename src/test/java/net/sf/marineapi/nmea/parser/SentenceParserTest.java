@@ -285,7 +285,7 @@ public class SentenceParserTest {
 	public void testGetStringValueWithValidIndex() {
 		try {
 			String val = instance.getStringValue(0);
-			assertEquals("120044", val);
+			assertEquals("120044.567", val);
 			val = instance.getStringValue(instance.getFieldCount() - 1);
 			assertEquals("A", val);
 		} catch (IndexOutOfBoundsException e) {
