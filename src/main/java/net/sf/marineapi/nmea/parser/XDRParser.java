@@ -85,7 +85,6 @@ class XDRParser extends SentenceParser implements XDRSentence {
 	/* (non-Javadoc)
 	 * @see net.sf.marineapi.nmea.sentence.XDRSentence#addMeasurement(net.sf.marineapi.nmea.util.Measurement[])
 	 */
-	@Override
 	public void addMeasurement(Measurement... m) {
 		List<Measurement> ms = getMeasurements();
 		ms.addAll(Arrays.asList(m));
