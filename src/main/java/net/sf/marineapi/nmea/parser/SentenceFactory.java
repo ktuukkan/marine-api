@@ -24,7 +24,6 @@ import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.util.HashMap;
 import java.util.Map;
-
 import net.sf.marineapi.nmea.sentence.Sentence;
 import net.sf.marineapi.nmea.sentence.SentenceId;
 import net.sf.marineapi.nmea.sentence.TalkerId;
@@ -52,8 +51,8 @@ import net.sf.marineapi.nmea.sentence.TalkerId;
  * <li>Use {@link SentenceFactory#createParser(String)} or
  * {@link SentenceFactory#createParser(TalkerId, String)} to obtain an instance
  * of your parser. Also, {@link net.sf.marineapi.nmea.io.SentenceReader} will
- * now dispatch instances of it whenever the corresponding sentence is read from
- * input stream.</li>
+ * now dispatch instances of it when corresponding sentence is read from data
+ * source.</li>
  * </ol>
  * 
  * @author Kimmo Tuukkanen
@@ -107,7 +106,7 @@ public final class SentenceFactory {
 	 */
 	public Sentence createParser(String nmea) {
 		String sid = SentenceId.parseStr(nmea);
-		return createParserImpl(sid, String.class, nmea);
+		return createParserImpl(sid, nmea);
 	}
 
 	/**
@@ -126,7 +125,7 @@ public final class SentenceFactory {
 		if (talker == null) {
 			throw new IllegalArgumentException("TalkerId cannot be null");
 		}
-		return createParserImpl(type, TalkerId.class, talker);
+		return createParserImpl(type, talker);
 	}
 
 	/**
@@ -153,7 +152,7 @@ public final class SentenceFactory {
 	 * @param parser Class of parser implementation for given <code>type</code>.
 	 */
 	public void registerParser(String type,
-			Class<? extends SentenceParser> parser) {
+		Class<? extends SentenceParser> parser) {
 
 		try {
 			parser.getConstructor(String.class);
@@ -188,13 +187,10 @@ public final class SentenceFactory {
 	 * Creates a new parser instance with specified parameters.
 	 * 
 	 * @param sid Sentence/parser type ID, e.g. "GGA" or "GLL"
-	 * @param paramClass Class of the constructor parameter, String.class or
-	 *            TalkerId.class
-	 * @param param Object to pass in parser constructor
-	 * @return Parser instance
+	 * @param param Object to pass as parameter to parser constructor
+	 * @return Sentence parser
 	 */
-	private Sentence createParserImpl(String sid, Class<?> paramClass,
-			Object param) {
+	private Sentence createParserImpl(String sid, Object param) {
 
 		if (!hasParser(sid)) {
 			String msg = String.format("Parser for type '%s' not found", sid);
@@ -202,24 +198,24 @@ public final class SentenceFactory {
 		}
 
 		Sentence parser = null;
+		Class<?> klass = param.getClass();
 
 		try {
 			Class<? extends SentenceParser> c = parsers.get(sid);
-			Constructor<? extends SentenceParser> co = c
-					.getConstructor(paramClass);
+			Constructor<? extends SentenceParser> co = c.getConstructor(klass);
 			parser = co.newInstance(param);
 
 		} catch (NoSuchMethodException e) {
-			String name = paramClass.getName();
+			String name = klass.getName();
 			String msg = "Constructor with %s parameter not found";
 			throw new IllegalStateException(String.format(msg, name), e);
 		} catch (InstantiationException e) {
 			throw new IllegalStateException("Unable to instantiate parser", e);
 		} catch (IllegalAccessException e) {
-			throw new IllegalStateException("Parser is unaccessible", e);
+			throw new IllegalStateException("Unable to access parser", e);
 		} catch (InvocationTargetException e) {
 			throw new IllegalStateException(
-					"Unable to invoke parser constructor", e);
+				"Unable to invoke parser constructor", e);
 		}
 
 		return parser;
