@@ -28,11 +28,6 @@ package net.sf.marineapi.nmea.sentence;
 public interface Sentence {
 
 	/**
-	 * Address field index, the first field of all sentences.
-	 */
-	int ADDRESS_FIELD = 0;
-
-	/**
 	 * Sentence begin character
 	 */
 	char BEGIN_CHAR = '$';
