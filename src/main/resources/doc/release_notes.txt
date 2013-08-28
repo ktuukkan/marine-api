@@ -24,6 +24,8 @@ CHANGES
    is used regardless of given precision (padded with zeros if needed).
 
  * SentenceId; added XDR.
+ 
+ * Sentence; removed unused constant ADDRESS_FIELD.
 
 NEW FEATURES
 

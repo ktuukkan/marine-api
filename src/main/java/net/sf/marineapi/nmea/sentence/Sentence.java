@@ -28,14 +28,14 @@ package net.sf.marineapi.nmea.sentence;
 public interface Sentence {
 
 	/**
-	 * Sentence begin character
-	 */
-	char BEGIN_CHAR = '$';
-
-	/**
 	 * Alternative sentence begin character used in VDO and VDM sentences.
 	 */
 	char ALTERNATIVE_BEGIN_CHAR = '!';
+
+	/**
+	 * Sentence begin character
+	 */
+	char BEGIN_CHAR = '$';
 
 	/**
 	 * Checksum field delimiter char
@@ -59,20 +59,20 @@ public interface Sentence {
 	String TERMINATOR = "\r\n";
 
 	/**
-	 * Returns the current number of data fields in sentence, excluding ID field
-	 * and checksum.
-	 * 
-	 * @return Data field count
-	 */
-	int getFieldCount();
-
-	/**
 	 * Get the sentence begin character. Although most of the sentences start
 	 * with '$', some of them use '!' as begin character.
 	 * 
 	 * @return Sentence begin char, e.g. "$" or "!".
 	 */
 	char getBeginChar();
+
+	/**
+	 * Returns the current number of data fields in sentence, excluding ID field
+	 * and checksum.
+	 * 
+	 * @return Data field count
+	 */
+	int getFieldCount();
 
 	/**
 	 * Get the sentence ID that specifies the sentence type and data it holds.
@@ -145,9 +145,12 @@ public interface Sentence {
 	String toSentence();
 
 	/**
-	 * Returns the String representation of sentence in NMEA 0183 format.
+	 * Returns the String representation of the sentence (without line
+	 * terminator CR/LR). Checksum is calculated and appended at the end of the
+	 * sentence, but no validation is done. Use {@link #toSentence()} to also
+	 * validate the result.
 	 * 
-	 * @return Sentence String
+	 * @return String representation of sentence
 	 */
 	String toString();
 }

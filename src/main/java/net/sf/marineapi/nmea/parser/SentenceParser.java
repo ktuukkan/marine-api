@@ -318,13 +318,9 @@ public class SentenceParser implements Sentence {
 		return toString();
 	}
 
-	/**
-	 * Returns the String representation of the sentence (without line
-	 * terminator CR/LR). Checksum is calculated and appended at the end of the
-	 * sentence, but no validation is done. Use {@link #toSentence()} to also
-	 * validate the result.
-	 * 
-	 * @return String representation of sentence
+	
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
 	 */
 	@Override
 	public String toString() {
