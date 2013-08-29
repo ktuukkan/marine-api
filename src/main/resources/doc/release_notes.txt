@@ -10,21 +10,19 @@ CHANGES
  * SentenceReader; refactored to better support diffrent data sources. Includes
    some performance tweaks, should take less CPU now.
 
- * SentenceValidator; regular expression performance tweaks in.
+ * SentenceValidator; performance tweaks in regular expressions.
 
  * TPVProvider and related classes renamed to PositionProvider.
 
  * GSASentence; getSatellitesIds() renamed to getSatelliteIds().
  
- * Time; handles now fractions of a second. Fixed also a bug in toDate() causing
-   error in hour of day.
+ * Time; fractions of second are now handled, added constructor that parses NMEA
+   timestamps. Fixed also a bug in toDate() causing error in hour of day.
    
- * GLL, GGA, RMC and ZDA parsers; fractions of a second are now parsed and
+ * GLL, GGA, RMC and ZDA parsers; fractions of second are now parsed and
    formatted in timestamp fields. When setting/formatting values, three decimals
-   is used regardless of given precision (padded with zeros if needed).
+   is used regardless of given precision (padded with zeros as needed).
 
- * SentenceId; added XDR.
- 
  * Sentence; removed unused constant ADDRESS_FIELD.
 
 NEW FEATURES
