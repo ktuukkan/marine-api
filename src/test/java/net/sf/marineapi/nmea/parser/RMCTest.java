@@ -161,7 +161,7 @@ public class RMCTest {
 		assertNotNull(t);
 		assertEquals(12, t.getHour());
 		assertEquals(0, t.getMinutes());
-		assertEquals(44.567, t.getSeconds(), 0.1);
+		assertEquals(44.567, t.getSeconds(), 0.001);
 	}
 
 	/**
