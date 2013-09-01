@@ -53,8 +53,8 @@ public class WPLTest {
 
 		assertNotNull(wp);
 		assertEquals("RUSKI", wp.getId());
-		assertEquals(CompassPoint.NORTH, wp.getLatHemisphere());
-		assertEquals(CompassPoint.EAST, wp.getLonHemisphere());
+		assertEquals(CompassPoint.NORTH, wp.getLatitudeHemisphere());
+		assertEquals(CompassPoint.EAST, wp.getLongitudeHemisphere());
 		assertEquals(lat, new Double(wp.getLatitude()));
 		assertEquals(lon, new Double(wp.getLongitude()));
 	}
@@ -69,13 +69,12 @@ public class WPLTest {
 		final double lat = 60 + (11.552 / 60);
 		final double lon = 25 + (1.941 / 60);
 
-		Waypoint p2 = new Waypoint("WAYP2", lat, CompassPoint.SOUTH, lon,
-				CompassPoint.WEST);
+		Waypoint p2 = new Waypoint("WAYP2", lat, lon);
 
 		wpl.setWaypoint(p2);
 
 		String s2 = wpl.toString();
-		assertTrue(s2.contains(",6011.552,S,02501.941,W,WAYP2*"));
+		assertTrue(s2.contains(",6011.552,N,02501.941,E,WAYP2*"));
 
 		Waypoint p = wpl.getWaypoint();
 		assertNotNull(p);
@@ -90,8 +89,7 @@ public class WPLTest {
 	@Test
 	public void testSetWaypointWithZeroValues() {
 
-		Waypoint p1 = new Waypoint("WAYP1", 0.0, CompassPoint.NORTH, 0.0,
-				CompassPoint.EAST);
+		Waypoint p1 = new Waypoint("WAYP1", 0.0, 0.0);
 		wpl.setWaypoint(p1);
 
 		String s1 = wpl.toString();

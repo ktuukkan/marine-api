@@ -22,10 +22,10 @@ package net.sf.marineapi.nmea.parser;
 
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
-
 import net.sf.marineapi.nmea.sentence.SentenceId;
 import net.sf.marineapi.nmea.sentence.TalkerId;
 import net.sf.marineapi.nmea.util.CompassPoint;
+import net.sf.marineapi.nmea.util.Position;
 
 /**
  * Abstract base class for sentence parsers that provide geographic position or
@@ -50,6 +50,27 @@ abstract class PositionParser extends SentenceParser {
 	 */
 	protected PositionParser(TalkerId talker, SentenceId type, int size) {
 		super(talker, type, size);
+	}
+
+	/**
+	 * Sets the values from specified <code>Position</code> according to given
+	 * field indices. Sets the absolute values of latitude and longitude, and
+	 * hemisphere indicators as given by <code>Position</code>. Does not set
+	 * altitude.
+	 * 
+	 * @param p Position to set
+	 * @param latIndex Index of latitude field
+	 * @param latHemIndex Index of latitude hemisphere field
+	 * @param lonIndex Index of longitude field
+	 * @param lonHemIndex Index of longitude hemisphere field
+	 */
+	protected void setPositionValues(Position p, int latIndex, int latHemIndex,
+		int lonIndex, int lonHemIndex) {
+
+		setLatitude(latIndex, Math.abs(p.getLatitude()));
+		setLongitude(lonIndex, Math.abs(p.getLongitude()));
+		setLatHemisphere(latHemIndex, p.getLatitudeHemisphere());
+		setLonHemisphere(lonHemIndex, p.getLongitudeHemisphere());
 	}
 
 	/**
@@ -111,6 +132,31 @@ abstract class PositionParser extends SentenceParser {
 	}
 
 	/**
+	 * Parses a <code>Position</code> from specified fields.
+	 * 
+	 * @param latIndex Latitude field index
+	 * @param latHemIndex Latitude hemisphere field index
+	 * @param lonIndex Longitude field index
+	 * @param lonHemIndex Longitude hemisphere field index
+	 * @return Position object
+	 */
+	protected Position parsePosition(int latIndex, int latHemIndex,
+		int lonIndex, int lonHemIndex) {
+
+		double lat = parseLatitude(latIndex);
+		double lon = parseLongitude(lonIndex);
+		CompassPoint lath = parseHemisphereLat(latHemIndex);
+		CompassPoint lonh = parseHemisphereLon(lonHemIndex);
+		if (lath.equals(CompassPoint.SOUTH)) {
+			lat = -lat;
+		}
+		if (lonh.equals(CompassPoint.WEST)) {
+			lon = -lon;
+		}
+		return new Position(lat, lon);
+	}
+
+	/**
 	 * Set the hemisphere of latitude in specified field.
 	 * 
 	 * @param field Field index
@@ -121,7 +167,7 @@ abstract class PositionParser extends SentenceParser {
 	protected void setLatHemisphere(int field, CompassPoint hem) {
 		if (hem != CompassPoint.NORTH && hem != CompassPoint.SOUTH) {
 			throw new IllegalArgumentException("Invalid latitude hemisphere: "
-					+ hem);
+				+ hem);
 		}
 		setCharValue(field, hem.toChar());
 	}
@@ -148,6 +194,8 @@ abstract class PositionParser extends SentenceParser {
 
 	/**
 	 * Sets the longitude value in specified field, formatted in "dddmm.mmm".
+	 * Does not check if the given value is logically correct to current
+	 * longitude hemisphere.
 	 * 
 	 * @param index Field index
 	 * @param lon Longitude value in degrees
@@ -167,7 +215,8 @@ abstract class PositionParser extends SentenceParser {
 	}
 
 	/**
-	 * Set the hemisphere of longitude in specified field.
+	 * Set the hemisphere of longitude in specified field. Does not check if the
+	 * given value is logically correct to current longitude value.
 	 * 
 	 * @param field Field index
 	 * @param hem Direction.EAST or Direction.WEST
@@ -177,7 +226,7 @@ abstract class PositionParser extends SentenceParser {
 	protected void setLonHemisphere(int field, CompassPoint hem) {
 		if (hem != CompassPoint.EAST && hem != CompassPoint.WEST) {
 			throw new IllegalArgumentException("Invalid longitude hemisphere: "
-					+ hem);
+				+ hem);
 		}
 		setCharValue(field, hem.toChar());
 	}

@@ -139,8 +139,8 @@ public class RMCTest {
 		assertNotNull(p);
 		assertEquals(lat, p.getLatitude(), 0.0000001);
 		assertEquals(lon, p.getLongitude(), 0.0000001);
-		assertEquals(CompassPoint.NORTH, p.getLatHemisphere());
-		assertEquals(CompassPoint.EAST, p.getLonHemisphere());
+		assertEquals(CompassPoint.NORTH, p.getLatitudeHemisphere());
+		assertEquals(CompassPoint.EAST, p.getLongitudeHemisphere());
 	}
 
 	/**
@@ -251,8 +251,7 @@ public class RMCTest {
 	public void testSetPosition() {
 		final double lat = 61 + (1.111 / 60);
 		final double lon = 27 + (7.777 / 60);
-		Position p = new Position(lat, CompassPoint.NORTH, lon,
-				CompassPoint.EAST);
+		Position p = new Position(lat, lon);
 		rmc.setPosition(p);
 
 		String str = rmc.toString();
@@ -262,8 +261,8 @@ public class RMCTest {
 		assertNotNull(wp);
 		assertEquals(lat, wp.getLatitude(), 0.0000001);
 		assertEquals(lon, wp.getLongitude(), 0.0000001);
-		assertEquals(CompassPoint.NORTH, wp.getLatHemisphere());
-		assertEquals(CompassPoint.EAST, wp.getLonHemisphere());
+		assertEquals(CompassPoint.NORTH, wp.getLatitudeHemisphere());
+		assertEquals(CompassPoint.EAST, wp.getLongitudeHemisphere());
 	}
 
 	/**

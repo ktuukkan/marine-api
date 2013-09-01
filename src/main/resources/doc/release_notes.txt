@@ -24,6 +24,11 @@ CHANGES
    is used regardless of given precision (padded with zeros as needed).
 
  * Sentence; removed unused constant ADDRESS_FIELD.
+ 
+ * Position; refactored and removed explicit hemisphere indicators. Hemispheres
+   are now handled more automatically and indicated by positive and negative
+   values of latitude and longitude. Affected classes are PositionParser,
+   GGAParser, GLLParser, RMAParser, RMCParser, WPLParser and Waypoint.
 
 NEW FEATURES
 
@@ -33,6 +38,8 @@ NEW FEATURES
  
  * SentenceParser; reset() and setFieldCount(int) methods for resetting and
    adjusting the number of data fields.
+  
+ * PositionParser; parsePosition(Position) and insertPosition(Position) methods.
  
  * Support for XDR sentence; transducer measurements.
 

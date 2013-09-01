@@ -22,10 +22,8 @@ package net.sf.marineapi.provider;
 
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
-
 import java.io.File;
 import java.io.FileInputStream;
-
 import net.sf.marineapi.nmea.event.SentenceEvent;
 import net.sf.marineapi.nmea.io.SentenceReader;
 import net.sf.marineapi.nmea.parser.GGATest;
@@ -35,7 +33,6 @@ import net.sf.marineapi.nmea.parser.SentenceFactory;
 import net.sf.marineapi.nmea.sentence.Sentence;
 import net.sf.marineapi.provider.event.PositionEvent;
 import net.sf.marineapi.provider.event.PositionListener;
-
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -53,7 +50,6 @@ public class PositionProviderTest implements PositionListener {
 	 */
 	@Before
 	public void setUp() throws Exception {
-		SentenceFactory sf = SentenceFactory.getInstance();
 		File f = new File("target/test-classes/data/Navibe-GM720.txt");
 		FileInputStream str = new FileInputStream(f);
 		SentenceReader r = new SentenceReader(str);

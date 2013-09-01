@@ -23,9 +23,9 @@ package net.sf.marineapi.nmea.parser;
 import net.sf.marineapi.nmea.sentence.RMBSentence;
 import net.sf.marineapi.nmea.sentence.SentenceId;
 import net.sf.marineapi.nmea.sentence.TalkerId;
-import net.sf.marineapi.nmea.util.CompassPoint;
 import net.sf.marineapi.nmea.util.DataStatus;
 import net.sf.marineapi.nmea.util.Direction;
+import net.sf.marineapi.nmea.util.Position;
 import net.sf.marineapi.nmea.util.Waypoint;
 
 /**
@@ -98,11 +98,9 @@ class RMBParser extends PositionParser implements RMBSentence {
 	 */
 	public Waypoint getDestination() {
 		String id = getStringValue(DEST_WPT);
-		double lat = parseLatitude(DEST_LAT);
-		double lon = parseLongitude(DEST_LON);
-		CompassPoint lath = parseHemisphereLat(DEST_LAT_HEM);
-		CompassPoint lonh = parseHemisphereLon(DEST_LON_HEM);
-		return new Waypoint(id, lat, lath, lon, lonh);
+		Position p = parsePosition(
+			DEST_LAT, DEST_LAT_HEM, DEST_LON, DEST_LON_HEM);
+		return p.toWaypoint(id);
 	}
 
 	/*
@@ -186,12 +184,9 @@ class RMBParser extends PositionParser implements RMBSentence {
 	 * net.sf.marineapi.nmea.sentence.RMBSentence#setDestination(net.sf.marineapi
 	 * .nmea.util.Waypoint)
 	 */
-	public void setDestination(Waypoint dest) {
+	public void setDestination(Waypoint dest) {		
 		setStringValue(DEST_WPT, dest.getId());
-		setLatitude(DEST_LAT, dest.getLatitude());
-		setLatHemisphere(DEST_LAT_HEM, dest.getLatHemisphere());
-		setLongitude(DEST_LON, dest.getLongitude());
-		setLonHemisphere(DEST_LON_HEM, dest.getLonHemisphere());
+		setPositionValues(dest, DEST_LAT, DEST_LAT_HEM, DEST_LON, DEST_LON_HEM);
 	}
 
 	/*

@@ -39,8 +39,7 @@ public class WaypointTest {
 
 	@Before
 	public void setUp() {
-		point = new Waypoint(id1, 60.0, CompassPoint.NORTH, 25.0,
-				CompassPoint.EAST, Datum.WGS84);
+		point = new Waypoint(id1, 60.0, 25.0, Datum.WGS84);
 	}
 
 	/**

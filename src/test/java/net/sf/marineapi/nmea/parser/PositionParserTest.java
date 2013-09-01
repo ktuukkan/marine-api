@@ -21,10 +21,11 @@
 package net.sf.marineapi.nmea.parser;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 import net.sf.marineapi.nmea.sentence.SentenceId;
 import net.sf.marineapi.nmea.util.CompassPoint;
-
+import net.sf.marineapi.nmea.util.Position;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -140,4 +141,47 @@ public class PositionParserTest {
 		assertEquals(CompassPoint.WEST, instance.parseHemisphereLon(3));
 	}
 
+	/**
+	 * Test method for 
+	 * {@link net.sf.marineapi.nmea.parser.PositionParser#setPositionValues(Position, int, int, int, int)
+	 */
+	@Test
+	public void testSetPositionValuesNE() {
+
+		final double lat = 60 + (11.552 / 60);
+		final double lon = 25 + (1.941 / 60);
+		Position p2 = new Position(lat, lon);
+		instance.setPositionValues(p2, 0, 1, 2, 3);
+
+		final String s2 = instance.toString();
+		final Position p = instance.parsePosition(0, 1, 2, 3);
+
+		assertTrue(s2.contains(",6011.552,N,"));
+		assertTrue(s2.contains(",02501.941,E,"));
+		assertNotNull(p);
+		assertEquals(lat, p.getLatitude(), 0.0000001);
+		assertEquals(lon, p.getLongitude(), 0.0000001);
+	}
+	
+	/**
+	 * Test method for 
+	 * {@link net.sf.marineapi.nmea.parser.PositionParser#setPositionValues(Position, int, int, int, int)
+	 */
+	@Test
+	public void testSetPositionValuesSW() {
+
+		final double lat = -60 - (11.552 / 60);
+		final double lon = -25 - (1.941 / 60);
+		Position p2 = new Position(lat, lon);
+		instance.setPositionValues(p2, 0, 1, 2, 3);
+
+		final String s2 = instance.toString();
+		final Position p = instance.parsePosition(0, 1, 2, 3);
+
+		assertTrue(s2.contains(",6011.552,S,"));
+		assertTrue(s2.contains(",02501.941,W,"));
+		assertNotNull(p);
+		assertEquals(lat, p.getLatitude(), 0.0000001);
+		assertEquals(lon, p.getLongitude(), 0.0000001);
+	}
 }

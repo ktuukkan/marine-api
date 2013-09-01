@@ -23,7 +23,7 @@ package net.sf.marineapi.nmea.parser;
 import net.sf.marineapi.nmea.sentence.SentenceId;
 import net.sf.marineapi.nmea.sentence.TalkerId;
 import net.sf.marineapi.nmea.sentence.WPLSentence;
-import net.sf.marineapi.nmea.util.CompassPoint;
+import net.sf.marineapi.nmea.util.Position;
 import net.sf.marineapi.nmea.util.Waypoint;
 
 /**
@@ -65,11 +65,10 @@ class WPLParser extends PositionParser implements WPLSentence {
 	 */
 	public Waypoint getWaypoint() {
 		String id = getStringValue(WAYPOINT_ID);
-		double lat = parseLatitude(LATITUDE);
-		double lon = parseLongitude(LONGITUDE);
-		CompassPoint lath = parseHemisphereLat(LAT_HEMISPHERE);
-		CompassPoint lonh = parseHemisphereLon(LON_HEMISPHERE);
-		return new Waypoint(id, lat, lath, lon, lonh);
+		Position p = parsePosition(
+			LATITUDE, LAT_HEMISPHERE, LONGITUDE, LON_HEMISPHERE);
+		
+		return p.toWaypoint(id);
 	}
 
 	/*
@@ -80,9 +79,6 @@ class WPLParser extends PositionParser implements WPLSentence {
 	 */
 	public void setWaypoint(Waypoint wp) {
 		setStringValue(WAYPOINT_ID, wp.getId());
-		setLatitude(LATITUDE, wp.getLatitude());
-		setLongitude(LONGITUDE, wp.getLongitude());
-		setLatHemisphere(LAT_HEMISPHERE, wp.getLatHemisphere());
-		setLonHemisphere(LON_HEMISPHERE, wp.getLonHemisphere());
+		setPositionValues(wp, LATITUDE, LAT_HEMISPHERE, LONGITUDE, LON_HEMISPHERE);
 	}
 }

@@ -98,8 +98,8 @@ public class RMBTest {
 		assertEquals(id, wp.getId());
 		assertEquals(lat, wp.getLatitude(), 0.0000001);
 		assertEquals(lon, wp.getLongitude(), 0.0000001);
-		assertEquals(CompassPoint.NORTH, wp.getLatHemisphere());
-		assertEquals(CompassPoint.EAST, wp.getLonHemisphere());
+		assertEquals(CompassPoint.NORTH, wp.getLatitudeHemisphere());
+		assertEquals(CompassPoint.EAST, wp.getLongitudeHemisphere());
 	}
 
 	/**
@@ -222,8 +222,7 @@ public class RMBTest {
 		final String id = "MYDEST";
 		final double lat = 61 + (1.111 / 60);
 		final double lon = 27 + (7.777 / 60);
-		Waypoint d = new Waypoint(id, lat, CompassPoint.NORTH, lon,
-				CompassPoint.EAST);
+		Waypoint d = new Waypoint(id, lat, lon);
 
 		rmb.setDestination(d);
 
@@ -235,8 +234,8 @@ public class RMBTest {
 		assertEquals(id, wp.getId());
 		assertEquals(lat, wp.getLatitude(), 0.0000001);
 		assertEquals(lon, wp.getLongitude(), 0.0000001);
-		assertEquals(CompassPoint.NORTH, wp.getLatHemisphere());
-		assertEquals(CompassPoint.EAST, wp.getLonHemisphere());
+		assertEquals(CompassPoint.NORTH, wp.getLatitudeHemisphere());
+		assertEquals(CompassPoint.EAST, wp.getLongitudeHemisphere());
 	}
 
 	/**

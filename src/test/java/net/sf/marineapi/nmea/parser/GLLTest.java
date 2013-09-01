@@ -68,8 +68,8 @@ public class GLLTest {
 		assertNotNull(p);
 		assertEquals(lat, p.getLatitude(), 0.0000001);
 		assertEquals(lon, p.getLongitude(), 0.0000001);
-		assertEquals(CompassPoint.NORTH, p.getLatHemisphere());
-		assertEquals(CompassPoint.EAST, p.getLonHemisphere());
+		assertEquals(CompassPoint.NORTH, p.getLatitudeHemisphere());
+		assertEquals(CompassPoint.EAST, p.getLongitudeHemisphere());
 	}
 
 	/**
@@ -104,20 +104,19 @@ public class GLLTest {
 
 		final double lat = 60 + (11.552 / 60);
 		final double lon = 25 + (1.941 / 60);
-		Position p2 = new Position(lat, CompassPoint.SOUTH, lon,
-				CompassPoint.WEST);
+		Position p2 = new Position(lat, lon);
 		instance.setPosition(p2);
 
 		final String s2 = instance.toString();
 		final Position p = instance.getPosition();
 
-		assertTrue(s2.contains(",6011.552,S,"));
-		assertTrue(s2.contains(",02501.941,W,"));
+		assertTrue(s2.contains(",6011.552,N,"));
+		assertTrue(s2.contains(",02501.941,E,"));
 		assertNotNull(p);
 		assertEquals(lat, p.getLatitude(), 0.0000001);
 		assertEquals(lon, p.getLongitude(), 0.0000001);
 	}
-
+	
 	/**
 	 * Test method for
 	 * {@link net.sf.marineapi.nmea.parser.GLLParser#setPosition(Position)}.
@@ -125,8 +124,7 @@ public class GLLTest {
 	@Test
 	public void testSetPositionWithZeroValues() {
 
-		Position p1 = new Position(0.0, CompassPoint.NORTH, 0.0,
-				CompassPoint.EAST);
+		Position p1 = new Position(0.0, 0.0);
 		instance.setPosition(p1);
 
 		String s1 = instance.toString();

@@ -117,11 +117,9 @@ class RMCParser extends PositionParser implements RMCSentence {
 	 * @see net.sf.marineapi.nmea.sentence.PositionSentence#getPosition()
 	 */
 	public Position getPosition() {
-		double lat = parseLatitude(LATITUDE);
-		double lon = parseLongitude(LONGITUDE);
-		CompassPoint lath = parseHemisphereLat(LAT_HEMISPHERE);
-		CompassPoint lonh = parseHemisphereLon(LON_HEMISPHERE);
-		return new Position(lat, lath, lon, lonh);
+		Position p = parsePosition(LATITUDE, LAT_HEMISPHERE, LONGITUDE,
+			LON_HEMISPHERE);
+		return p;
 	}
 
 	/*
@@ -193,7 +191,7 @@ class RMCParser extends PositionParser implements RMCSentence {
 	public void setDirectionOfVariation(CompassPoint dir) {
 		if (dir != CompassPoint.EAST && dir != CompassPoint.WEST) {
 			throw new IllegalArgumentException(
-					"Invalid variation direction, expected EAST or WEST.");
+				"Invalid variation direction, expected EAST or WEST.");
 		}
 		setCharValue(VAR_HEMISPHERE, dir.toChar());
 	}
@@ -215,10 +213,7 @@ class RMCParser extends PositionParser implements RMCSentence {
 	 * .nmea.util.Position)
 	 */
 	public void setPosition(Position pos) {
-		setLatitude(LATITUDE, pos.getLatitude());
-		setLongitude(LONGITUDE, pos.getLongitude());
-		setLatHemisphere(LAT_HEMISPHERE, pos.getLatHemisphere());
-		setLonHemisphere(LON_HEMISPHERE, pos.getLonHemisphere());
+		setPositionValues(pos, LATITUDE, LAT_HEMISPHERE, LONGITUDE, LON_HEMISPHERE);
 	}
 
 	/*

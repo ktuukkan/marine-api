@@ -23,7 +23,6 @@ package net.sf.marineapi.nmea.parser;
 import net.sf.marineapi.nmea.sentence.GLLSentence;
 import net.sf.marineapi.nmea.sentence.SentenceId;
 import net.sf.marineapi.nmea.sentence.TalkerId;
-import net.sf.marineapi.nmea.util.CompassPoint;
 import net.sf.marineapi.nmea.util.DataStatus;
 import net.sf.marineapi.nmea.util.Position;
 import net.sf.marineapi.nmea.util.Time;
@@ -68,11 +67,9 @@ class GLLParser extends PositionParser implements GLLSentence {
 	 * @see net.sf.marineapi.nmea.sentence.PositionSentence#getPosition()
 	 */
 	public Position getPosition() {
-		double lat = parseLatitude(LATITUDE);
-		double lon = parseLongitude(LONGITUDE);
-		CompassPoint lath = parseHemisphereLat(LAT_HEMISPHERE);
-		CompassPoint lonh = parseHemisphereLon(LON_HEMISPHERE);
-		return new Position(lat, lath, lon, lonh);
+		Position p = parsePosition(
+			LATITUDE, LAT_HEMISPHERE, LONGITUDE, LON_HEMISPHERE);
+		return p;
 	}
 
 	/*
@@ -99,10 +96,8 @@ class GLLParser extends PositionParser implements GLLSentence {
 	 * .nmea.util.Position)
 	 */
 	public void setPosition(Position pos) {
-		setLatitude(LATITUDE, pos.getLatitude());
-		setLongitude(LONGITUDE, pos.getLongitude());
-		setLatHemisphere(LAT_HEMISPHERE, pos.getLatHemisphere());
-		setLonHemisphere(LON_HEMISPHERE, pos.getLonHemisphere());
+		setPositionValues(
+			pos, LATITUDE, LAT_HEMISPHERE, LONGITUDE, LON_HEMISPHERE);
 	}
 
 	/*

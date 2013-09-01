@@ -30,26 +30,32 @@ import java.util.Date;
  */
 public class Waypoint extends Position {
 
-	/** ID or name of the waypoint */
 	private String id;
-	/** Waypoint description */
 	private String description = "";
-	/** Time stamp */
 	private final Date timeStamp = new Date();
 
 	/**
-	 * Creates a new instance of Waypoint with default WGS84 datum.
+	 * Creates a new instance of <code>Waypoint</code> with default WGS84 datum.
 	 * 
 	 * @param id Waypoint identifier
-	 * @param lat Latitude degrees of the waypoint position
-	 * @param lath Hemisphere of latitude
-	 * @param lon Longitude degrees of waypoint position
-	 * @param lonh Hemisphere of longitude
+	 * @param lat Latitude degrees of the waypoint location
+	 * @param lon Longitude degrees of waypoint location
 	 */
-	public Waypoint(String id, double lat, CompassPoint lath, double lon,
-			CompassPoint lonh) {
+	public Waypoint(String id, double lat, double lon) {
+		super(lat, lon);
+		this.id = id;
+	}
 
-		super(lat, lath, lon, lonh);
+	/**
+	 * Creates a new instance of <code>Waypoint</code> with default WGS84 datum.
+	 * 
+	 * @param id Waypoint identifier
+	 * @param lat Latitude degrees of the waypoint location
+	 * @param lon Longitude degrees of waypoint location
+	 * @param alt Altitude value, in meters above/below mean sea level
+	 */
+	public Waypoint(String id, double lat, double lon, double alt) {
+		super(lat, lon, alt);
 		this.id = id;
 	}
 
@@ -57,16 +63,27 @@ public class Waypoint extends Position {
 	 * Creates a new instance of Waypoint with explicitly specified datum.
 	 * 
 	 * @param id Waypoint identifier
-	 * @param lat Latitude degrees of the waypoint position
-	 * @param lath Hemisphere of latitude
-	 * @param lon Longitude degrees of waypoint position
-	 * @param lonh Hemisphere of longitude
+	 * @param lat Latitude degrees of the waypoint location
+	 * @param lon Longitude degrees of waypoint location
 	 * @param datum Position datum, i.e. the coordinate system.
 	 */
-	public Waypoint(String id, double lat, CompassPoint lath, double lon,
-			CompassPoint lonh, Datum datum) {
+	public Waypoint(String id, double lat, double lon, Datum datum) {
+		super(lat, lon, datum);
+		this.id = id;
+	}
 
-		super(lat, lath, lon, lonh, datum);
+	/**
+	 * Creates a new instance of <code>Waypoint</code> with explicitly specified
+	 * datum.
+	 * 
+	 * @param id Waypoint identifier/name
+	 * @param lat Latitude degrees of the waypoint location
+	 * @param lon Longitude degrees of waypoint location
+	 * @param alt Altitude value, in meters above/below mean sea level
+	 * @param datum Position datum, i.e. the coordinate system.
+	 */
+	public Waypoint(String id, double lat, double lon, double alt, Datum datum) {
+		super(lat, lon, alt, datum);
 		this.id = id;
 	}
 
@@ -89,7 +106,7 @@ public class Waypoint extends Position {
 	}
 
 	/**
-	 * Returns the time stamp when the Waypoint was created.
+	 * Returns the time stamp when <code>Waypoint</code> was created.
 	 * 
 	 * @return Date
 	 */
