@@ -1,20 +1,20 @@
-/* 
+/*
  * ZDAParser.java
  * Copyright (C) 2010 Kimmo Tuukkanen
- * 
+ *
  * This file is part of Java Marine API.
  * <http://ktuukkan.github.io/marine-api/>
- * 
+ *
  * Java Marine API is free software: you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by the
  * Free Software Foundation, either version 3 of the License, or (at your
  * option) any later version.
- * 
+ *
  * Java Marine API is distributed in the hope that it will be useful, but
  * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
  * FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License
  * for more details.
- * 
+ *
  * You should have received a copy of the GNU Lesser General Public License
  * along with Java Marine API. If not, see <http://www.gnu.org/licenses/>.
  */
@@ -28,7 +28,7 @@ import net.sf.marineapi.nmea.util.Time;
 
 /**
  * ZDA sentence parser.
- * 
+ *
  * @author Kimmo Tuukkanen
  */
 class ZDAParser extends SentenceParser implements ZDASentence {
@@ -43,7 +43,7 @@ class ZDAParser extends SentenceParser implements ZDASentence {
 
 	/**
 	 * Creates a new instance of ZDAParser.
-	 * 
+	 *
 	 * @param nmea ZDA sentence String
 	 * @throws IllegalArgumentException If specified sentence is invalid.
 	 */
@@ -53,7 +53,7 @@ class ZDAParser extends SentenceParser implements ZDASentence {
 
 	/**
 	 * Creates WPL parser with empty sentence.
-	 * 
+	 *
 	 * @param talker TalkerId to set
 	 */
 	public ZDAParser(TalkerId talker) {
@@ -92,8 +92,16 @@ class ZDAParser extends SentenceParser implements ZDASentence {
 	 * @see net.sf.marineapi.nmea.sentence.TimeSentence#getTime()
 	 */
 	public Time getTime() {
+
 		String str = getStringValue(UTC_TIME);
-		return new Time(str);
+		int tzHrs = getLocalZoneHours();
+		int tzMin = getLocalZoneMinutes();
+
+		Time t = new Time(str);
+		t.setOffsetHours(tzHrs);
+		t.setOffsetMinutes(tzMin);
+
+		return t;
 	}
 
 	/*
@@ -140,6 +148,18 @@ class ZDAParser extends SentenceParser implements ZDASentence {
 	 */
 	public void setTime(Time t) {
 		setStringValue(UTC_TIME, t.toString());
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @see
+	 * net.sf.marineapi.nmea.sentence.TimeSentence#setTimeAndLocalZone(net.sf.marineapi.
+	 * nmea.util.Time)
+	 */
+	public void setTimeAndLocalZone(Time t) {
+		setTime(t);
+		setLocalZoneHours(t.getOffsetHours());
+		setLocalZoneMinutes(t.getOffsetMinutes());
 	}
 
 	/*

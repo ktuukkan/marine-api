@@ -7,24 +7,25 @@ versions. Released on @RELEASE_DATE@.
 
 CHANGES
 
- * SentenceReader; refactored to better support diffrent data sources. Includes
-   some performance tweaks, should take less CPU now.
+ * SentenceReader; refactored to better support diffrent data sources, including
+   some performance tweaks (should take less CPU now).
 
  * SentenceValidator; performance tweaks in regular expressions.
 
  * TPVProvider and related classes renamed to PositionProvider.
 
  * GSASentence; getSatellitesIds() renamed to getSatelliteIds().
- 
- * Time; fractions of second are now handled, added constructor that parses NMEA
-   timestamps. Fixed also a bug in toDate() causing error in hour of day.
-   
+
+ * Sentence; removed unused constant ADDRESS_FIELD.
+
+ * Date, Time; fractions of second are now handled. Moved common date/time
+   parsing and formatting in Date and Time classes. Fixed a bug in Time.toDate()
+   causing incorrect hour of day.
+
  * GLL, GGA, RMC and ZDA parsers; fractions of second are now parsed and
    formatted in timestamp fields. When setting/formatting values, three decimals
    is used regardless of given precision (padded with zeros as needed).
 
- * Sentence; removed unused constant ADDRESS_FIELD.
- 
  * Position; refactored and removed explicit hemisphere indicators. Hemispheres
    are now handled more automatically and indicated by positive and negative
    values of latitude and longitude. Affected classes are PositionParser,
@@ -35,18 +36,22 @@ NEW FEATURES
  * UDP/DatagramSocket support in SentenceReader.
 
  * SatelliteInfoProvider; reports all GPS satellite information in single event.
- 
+
  * SentenceParser; reset() and setFieldCount(int) methods for resetting and
    adjusting the number of data fields.
-  
+
  * PositionParser; parsePosition(Position) and insertPosition(Position) methods.
- 
- * Support for XDR sentence; transducer measurements.
+
+ * Date, Time; added support for time zones and ISO 8601 formatting.
+
+ * ZDASentence; setTimeAndLocalZone(Time t) for setting time and offset.
+
+ * Support for XDR sentences; transducer measurements.
 
 KNOWN ISSUES
 
  * Position.distanceTo() may not produce correct results.
- 
+
  * Proprietary sentences that have sentence ID different to five characters are
    not supported.
 
@@ -56,7 +61,7 @@ ACKNOWLEDGEMENTS
 
  * Thanks to Amanda Fenech (marssa.org) for migrating the project to Maven
    layout and initial release in repository (v0.5.1).
- 
+
  * Thanks to Ludovic Drouineau for UDP implementation of SentenceReader.
 
  * Thanks to Robert Huitema (www.42.co.nz) and Vladimir Loginov for performance

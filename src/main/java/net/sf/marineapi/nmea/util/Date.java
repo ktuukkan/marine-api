@@ -1,20 +1,20 @@
-/* 
+/*
  * Date.java
  * Copyright (C) 2010 Kimmo Tuukkanen
- * 
+ *
  * This file is part of Java Marine API.
  * <http://ktuukkan.github.io/marine-api/>
- * 
+ *
  * Java Marine API is free software: you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by the
  * Free Software Foundation, either version 3 of the License, or (at your
  * option) any later version.
- * 
+ *
  * Java Marine API is distributed in the hope that it will be useful, but
  * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
  * FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License
  * for more details.
- * 
+ *
  * You should have received a copy of the GNU Lesser General Public License
  * along with Java Marine API. If not, see <http://www.gnu.org/licenses/>.
  */
@@ -26,12 +26,15 @@ import java.util.GregorianCalendar;
 /**
  * Represents a calendar date (day-month-year) transmitted in sentences that
  * implement {@link net.sf.marineapi.nmea.sentence.DateSentence}.
- * 
+ *
  * @author Kimmo Tuukkanen
  * @see net.sf.marineapi.nmea.sentence.DateSentence
  * @see net.sf.marineapi.nmea.util.Time
  */
 public class Date {
+
+	// ISO 8601 date format pattern
+	private static final String DATE_PATTERN = "%d-%02d-%02d";
 
 	/**
 	 * A pivot value that is used to determine century for two-digit year
@@ -58,8 +61,18 @@ public class Date {
 	}
 
 	/**
+	 * Creates a new instance of <code>Date</code>, assumes the default NMEA
+	 * 0183 date formatting, <code>ddmmyy</code> or <code>ddmmyyy</code>.
+	 */
+	public Date(String date) {
+		setDay(Integer.parseInt(date.substring(0, 2)));
+		setMonth(Integer.parseInt(date.substring(2, 4)));
+		setYear(Integer.parseInt(date.substring(4)));
+	}
+
+	/**
 	 * Constructor with date values.
-	 * 
+	 *
 	 * @param year Year, two or four digit value [0..99] or [1000..9999]
 	 * @param month Month [1..12]
 	 * @param day Day [1..31]
@@ -83,8 +96,8 @@ public class Date {
 		}
 		if (obj instanceof Date) {
 			Date d = (Date) obj;
-			if (d.getDay() == this.day && d.getMonth() == this.month
-				&& d.getYear() == this.year) {
+			if (d.getDay() == getDay() && d.getMonth() == getMonth()
+				&& d.getYear() == getYear()) {
 				return true;
 			}
 		}
@@ -93,7 +106,7 @@ public class Date {
 
 	/**
 	 * Get day of month.
-	 * 
+	 *
 	 * @return the day
 	 */
 	public int getDay() {
@@ -103,7 +116,7 @@ public class Date {
 	/**
 	 * Get month, valid values are 1-12 where 1 denotes January, 2 denotes
 	 * February etc.
-	 * 
+	 *
 	 * @return the month
 	 */
 	public int getMonth() {
@@ -116,7 +129,7 @@ public class Date {
 	 * by comparing the value against {@link #PIVOT_YEAR}. Values lower than or
 	 * equal to pivot are added to 2000, while values greater than pivot are
 	 * added to 1900.
-	 * 
+	 *
 	 * @return The four-digit year
 	 * @see #PIVOT_YEAR
 	 */
@@ -130,13 +143,12 @@ public class Date {
 	 */
 	@Override
 	public int hashCode() {
-		String s = String.format("%d%02d%02d", year, month, day);
-		return s.hashCode();
+		return toISO8601().hashCode();
 	}
 
 	/**
 	 * Set day of month.
-	 * 
+	 *
 	 * @param day the day to set
 	 */
 	public void setDay(int day) {
@@ -149,7 +161,7 @@ public class Date {
 	/**
 	 * Get month, valid values are 1-12 where 1 denotes January, 2 denotes
 	 * February etc.
-	 * 
+	 *
 	 * @param month the month to set
 	 * @throws IllegalArgumentException If specified value is out of bounds
 	 *             [1..12]
@@ -168,7 +180,7 @@ public class Date {
 	 * by comparing the value against {@link #PIVOT_YEAR}. Values lower than or
 	 * equal to pivot are added to 2000, while values greater than pivot are
 	 * added to 1900.
-	 * 
+	 *
 	 * @param year Year to set, two or four digit value.
 	 * @see #PIVOT_YEAR
 	 * @throws IllegalArgumentException If specified value is negative or
@@ -188,19 +200,39 @@ public class Date {
 		}
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * @see java.lang.Object#toString()
+	/**
+	 * Returns the String representation of <code>Date</code>. Formats the date
+	 * in <code>ddmmyy</code> format used in NMEA 0183 sentences.
 	 */
 	@Override
 	public String toString() {
-		String ptr = "%04d-%02d-%02d";
-		return String.format(ptr, getYear(), getMonth(), getDay());
+		int y = getYear();
+		String ystr = String.valueOf(y);
+		String year = ystr.substring(2);
+		String date = String.format("%02d%02d%s", getDay(), getMonth(), year);
+		return date;
 	}
 
 	/**
-	 * Converts to {@java.util.Date}, time of day set to 00:00:00.000.
-	 * 
+	 * Returns the date in ISO 8601 format (<code>yyyy-mm-dd</code>).
+	 */
+	public String toISO8601() {
+		return String.format(DATE_PATTERN, getYear(), getMonth(), getDay());
+	}
+
+	/**
+	 * Returns a timestamp in ISO 8601 format
+	 * (<code>yyyy-mm-ddThh:mm:ss+hh:mm</code>).
+	 *
+	 * @param t Time to format with date
+	 */
+	public String toISO8601(Time t) {
+		return toISO8601().concat("T").concat(t.toISO8601());
+	}
+
+	/**
+	 * Converts to {@link java.util.Date}, time of day set to 00:00:00.000.
+	 *
 	 * @return java.util.Date
 	 */
 	public java.util.Date toDate() {
@@ -212,7 +244,6 @@ public class Date {
 		cal.set(Calendar.MINUTE, 0);
 		cal.set(Calendar.SECOND, 0);
 		cal.set(Calendar.MILLISECOND, 0);
-
 		return cal.getTime();
 	}
 }

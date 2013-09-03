@@ -1,20 +1,20 @@
-/* 
+/*
  * TimeTest.java
  * Copyright (C) 2010 Kimmo Tuukkanen
- * 
+ *
  * This file is part of Java Marine API.
  * <http://ktuukkan.github.io/marine-api/>
- * 
+ *
  * Java Marine API is free software: you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by the
  * Free Software Foundation, either version 3 of the License, or (at your
  * option) any later version.
- * 
+ *
  * Java Marine API is distributed in the hope that it will be useful, but
  * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
  * FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License
  * for more details.
- * 
+ *
  * You should have received a copy of the GNU Lesser General Public License
  * along with Java Marine API. If not, see <http://www.gnu.org/licenses/>.
  */
@@ -42,7 +42,7 @@ public class TimeTest {
 	 */
 	@Before
 	public void setUp() throws Exception {
-		time = new Time(1, 2, 3.4);
+		time = new Time(1, 2, 3.4, 0, 0);
 	}
 
 	/**
@@ -52,8 +52,8 @@ public class TimeTest {
 	public void testDateRoundTrip() {
 
 		Date now = new Date();
-
 		time.setTime(now);
+
 		Date result = time.toDate(now);
 
 		assertEquals(now, result);
@@ -316,14 +316,14 @@ public class TimeTest {
 		cal.set(Calendar.MILLISECOND, 400);
 
 		// convert Time to Date and insert to result Calendar for comparison
-		result.setTime(time.toDate(cal.getTime()));
+		Date d = time.toDate(cal.getTime());
+		result.setTime(d);
 
 		int resultHour = result.get(Calendar.HOUR_OF_DAY);
 		int resultMinute = result.get(Calendar.MINUTE);
 		int resultFullSeconds = result.get(Calendar.SECOND);
 		int resultMilliseconds = result.get(Calendar.MILLISECOND);
-		double resultSeconds = resultFullSeconds
-			+ (resultMilliseconds / 1000.0);
+		double resultSeconds = resultFullSeconds + (resultMilliseconds / 1000.0);
 
 		// Time portion, should match values in Time exactly
 		assertEquals(time.getHour(), resultHour);
@@ -336,14 +336,14 @@ public class TimeTest {
 		assertEquals(cal.get(Calendar.DAY_OF_YEAR),
 			result.get(Calendar.DAY_OF_YEAR));
 	}
-	
+
 	@Test
 	public void testEquals() {
-		
+
 		Time a = new Time(1, 2, 3.456);
 		Time b = new Time(1, 2, 3.456);
 		Time c = new Time(2, 3, 4.567);
-		
+
 		assertTrue(a.equals(a));
 		assertTrue(a.equals(b));
 		assertFalse(a.equals(c));

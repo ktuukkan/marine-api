@@ -1,20 +1,20 @@
-/* 
+/*
  * DateTest.java
  * Copyright (C) 2010 Kimmo Tuukkanen
- * 
+ *
  * This file is part of Java Marine API.
  * <http://ktuukkan.github.io/marine-api/>
- * 
+ *
  * Java Marine API is free software: you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by the
  * Free Software Foundation, either version 3 of the License, or (at your
  * option) any later version.
- * 
+ *
  * Java Marine API is distributed in the hope that it will be useful, but
  * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
  * FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License
  * for more details.
- * 
+ *
  * You should have received a copy of the GNU Lesser General Public License
  * along with Java Marine API. If not, see <http://www.gnu.org/licenses/>.
  */
@@ -66,6 +66,18 @@ public class DateTest {
 	@Test
 	public void testConstructorWithValues() {
 		Date d = new Date(2010, 6, 15);
+		assertEquals(2010, d.getYear());
+		assertEquals(6, d.getMonth());
+		assertEquals(15, d.getDay());
+	}
+
+	/**
+	 * Test method for
+	 * {@link net.sf.marineapi.nmea.util.Date#Date(String)}.
+	 */
+	@Test
+	public void testConstructorWithString() {
+		Date d = new Date("150610");
 		assertEquals(2010, d.getYear());
 		assertEquals(6, d.getMonth());
 		assertEquals(15, d.getDay());
@@ -297,4 +309,55 @@ public class DateTest {
 		}
 	}
 
+	@Test
+	public void testToStringTwoDigitYear() {
+		Date d = new Date(13, 9, 2);
+		assertEquals("020913", d.toString());
+	}
+
+	@Test
+	public void testToStringFourDigitYear() {
+		Date d = new Date(2013, 9, 2);
+		assertEquals("020913", d.toString());
+	}
+
+	@Test
+	public void testToISO8601TwoDigitYear() {
+		Date d = new Date(13, 9, 2);
+		assertEquals("2013-09-02", d.toISO8601());
+	}
+
+	@Test
+	public void testToISO8601FourDigitYear() {
+		Date d = new Date(2013, 9, 2);
+		assertEquals("2013-09-02", d.toISO8601());
+	}
+
+	@Test
+	public void testToISO8601WithTime() {
+		Date d = new Date(2013, 9, 2);
+		Time t = new Time(2, 7, 9);
+		assertEquals("2013-09-02T02:07:09+00:00", d.toISO8601(t));
+	}
+
+	@Test
+	public void testToISO8601WithTimeAndZeroZone() {
+		Date d = new Date(2013, 9, 2);
+		Time t = new Time(2, 7, 9, 0, 0);
+		assertEquals("2013-09-02T02:07:09+00:00", d.toISO8601(t));
+	}
+
+	@Test
+	public void testToISO8601WithTimeAndPositiveOffset() {
+		Date d = new Date(2013, 9, 2);
+		Time t = new Time(2, 7, 9, 2, 0);
+		assertEquals("2013-09-02T02:07:09+02:00", d.toISO8601(t));
+	}
+
+	@Test
+	public void testToISO8601WithTimeAndNegativeOffset() {
+		Date d = new Date(2013, 9, 2);
+		Time t = new Time(2, 7, 9, -2, 5);
+		assertEquals("2013-09-02T02:07:09-02:05", d.toISO8601(t));
+	}
 }

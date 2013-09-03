@@ -1,20 +1,20 @@
-/* 
+/*
  * RMCParser.java
  * Copyright (C) 2010 Kimmo Tuukkanen
- * 
+ *
  * This file is part of Java Marine API.
  * <http://ktuukkan.github.io/marine-api/>
- * 
+ *
  * Java Marine API is free software: you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by the
  * Free Software Foundation, either version 3 of the License, or (at your
  * option) any later version.
- * 
+ *
  * Java Marine API is distributed in the hope that it will be useful, but
  * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
  * FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License
  * for more details.
- * 
+ *
  * You should have received a copy of the GNU Lesser General Public License
  * along with Java Marine API. If not, see <http://www.gnu.org/licenses/>.
  */
@@ -32,7 +32,7 @@ import net.sf.marineapi.nmea.util.Time;
 
 /**
  * RMC sentence parser.
- * 
+ *
  * @author Kimmo Tuukkanen
  */
 class RMCParser extends PositionParser implements RMCSentence {
@@ -52,7 +52,7 @@ class RMCParser extends PositionParser implements RMCSentence {
 
 	/**
 	 * Creates a new instance of RMCParser.
-	 * 
+	 *
 	 * @param nmea RMC sentence String.
 	 * @throws IllegalArgumentException If specified sentence is invalid.
 	 */
@@ -62,7 +62,7 @@ class RMCParser extends PositionParser implements RMCSentence {
 
 	/**
 	 * Creates a ZDA parser with empty sentence.
-	 * 
+	 *
 	 * @param talker TalkerId to set
 	 */
 	public RMCParser(TalkerId talker) {
@@ -90,10 +90,7 @@ class RMCParser extends PositionParser implements RMCSentence {
 	 * @see net.sf.marineapi.nmea.sentence.DateSentence#getDate()
 	 */
 	public Date getDate() {
-		int y = Integer.parseInt(getStringValue(UTC_DATE).substring(4));
-		int m = Integer.parseInt(getStringValue(UTC_DATE).substring(2, 4));
-		int d = Integer.parseInt(getStringValue(UTC_DATE).substring(0, 2));
-		return new Date(y, m, d);
+		return new Date(getStringValue(UTC_DATE));
 	}
 
 	/*
@@ -174,12 +171,7 @@ class RMCParser extends PositionParser implements RMCSentence {
 	 * nmea.util.Date)
 	 */
 	public void setDate(Date date) {
-		int y = date.getYear();
-		int m = date.getMonth();
-		int d = date.getDay();
-		String year = String.valueOf(y).substring(2);
-		String time = String.format("%02d%02d%s", d, m, year);
-		setStringValue(UTC_DATE, time);
+		setStringValue(UTC_DATE, date.toString());
 	}
 
 	/*

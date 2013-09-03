@@ -17,7 +17,7 @@ import org.junit.Test;
 
 /**
  * Tests the ZDA sentence parser.
- * 
+ *
  * @author Kimmo Tuukkanen
  */
 public class ZDATest {
@@ -144,7 +144,7 @@ public class ZDATest {
 	}
 
 	/**
-	 * Test method for {@link net.sf.marineapi.nmea.parser.ZDAParser#getTime()}.
+	 * Test method for {@link net.sf.marineapi.nmea.parser.ZDAParser#setTime()}.
 	 */
 	@Test
 	public void testSetTime() {
@@ -155,30 +155,43 @@ public class ZDATest {
 	}
 
 	/**
+	 * Test method for {@link net.sf.marineapi.nmea.parser.ZDAParser#setTimeAndLocalZone()}.
+	 */
+	@Test
+	public void testSetTimeAndLocalZone() {
+		// 09:08:07.6+01:02
+		Time t = new Time(9, 8, 7.6, 1, 2);
+		zda.setTimeAndLocalZone(t);
+		assertEquals(1, zda.getLocalZoneHours());
+		assertEquals(2, zda.getLocalZoneMinutes());
+		assertTrue(zda.toString().startsWith("$GPZDA,090807.600,07,"));
+		assertTrue(zda.toString().contains("2004,01,02*"));
+	}
+
+	/**
 	 * Test method for {@link net.sf.marineapi.nmea.parser.ZDAParser#toDate()}.
 	 */
 	@Test
 	public void testToDate() {
 
 		Date d = new Date(2010, 6, 15);
-		Time t = new Time(12, 15, 30.555);
+		Time t = new Time(12, 15, 30.246, 2, 0);
 		zda.setDate(d);
 		zda.setTime(t);
 
 		GregorianCalendar cal = new GregorianCalendar();
-		cal.set(Calendar.YEAR, d.getYear());
-		cal.set(Calendar.MONTH, d.getMonth());
-		cal.set(Calendar.DAY_OF_MONTH, d.getDay());
-		cal.set(Calendar.HOUR_OF_DAY, t.getHour());
-		cal.set(Calendar.MINUTE, t.getMinutes());
-		cal.set(Calendar.SECOND, (int) Math.floor(t.getSeconds()));
-		cal.set(Calendar.MILLISECOND, 555);
+		cal.set(Calendar.YEAR, 2010);
+		cal.set(Calendar.MONTH, 6);
+		cal.set(Calendar.DAY_OF_MONTH, 15);
+		cal.set(Calendar.HOUR_OF_DAY, 12);
+		cal.set(Calendar.MINUTE, 15);
+		cal.set(Calendar.SECOND, 30);
+		cal.set(Calendar.MILLISECOND, 246);
 
-		GregorianCalendar result = new GregorianCalendar();
-		result.setTime(zda.toDate());
+		java.util.Date result = zda.toDate();
+		java.util.Date expected = cal.getTime();
 
-		assertEquals(cal, result);
-		assertEquals(cal.getTime(), result.getTime());
-		assertEquals(cal.getTime().getTime(), result.getTime().getTime());
+		assertEquals(expected, result);
+		assertEquals(expected.getTime(), result.getTime());
 	}
 }
