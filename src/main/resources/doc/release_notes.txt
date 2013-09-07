@@ -10,7 +10,8 @@ CHANGES
  * SentenceReader; refactored to better support diffrent data sources, including
    some performance tweaks (should take less CPU now).
 
- * SentenceValidator; performance tweaks in regular expressions.
+ * SentenceValidator; performance tweaks in regular expressions. Sentence length
+   is no longer strictly checked, sentence IDs may contain now 3-10 chars.
 
  * TPVProvider and related classes renamed to PositionProvider.
 
