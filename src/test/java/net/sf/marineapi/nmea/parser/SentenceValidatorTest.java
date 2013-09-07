@@ -45,14 +45,19 @@ public class SentenceValidatorTest {
 		assertTrue(SentenceValidator.isValid(a));
 		assertTrue(SentenceValidator.isValid(Checksum.add(a)));
 
-		// '!' begin char
-		String b = "!ABCDE,1,2,3,4,5,6,7,8,9";
+		// empty sentence
+		String b = "$ABCDE,";
 		assertTrue(SentenceValidator.isValid(b));
 		assertTrue(SentenceValidator.isValid(Checksum.add(b)));
 
-		String c = "$ABCDE,1,TWO,three,FOUR?,5,6.0,-7.0,Eigth-8,N1N3,#T3n";
+		// '!' begin char
+		String c = "!ABCDE,1,2,3,4,5,6,7,8,9";
 		assertTrue(SentenceValidator.isValid(c));
 		assertTrue(SentenceValidator.isValid(Checksum.add(c)));
+
+		String d = "$ABCDE,1,TWO,three,FOUR?,5,6.0,-7.0,Eigth-8,N1N3,#T3n";
+		assertTrue(SentenceValidator.isValid(d));
+		assertTrue(SentenceValidator.isValid(Checksum.add(d)));
 	}
 
 	/**
