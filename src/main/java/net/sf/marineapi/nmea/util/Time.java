@@ -219,7 +219,7 @@ public class Time {
 	/**
 	 * Set time zone offset hours.
 	 *
-	 * @param minutes Offset to set (-13..13)
+	 * @param hours Offset to set (-13..13)
 	 * @throws IllegalArgumentException If offset out of bounds.
 	 */
 	public void setOffsetHours(int hours) {
