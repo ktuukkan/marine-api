@@ -45,19 +45,24 @@ public class SentenceValidatorTest {
 		assertTrue(SentenceValidator.isValid(a));
 		assertTrue(SentenceValidator.isValid(Checksum.add(a)));
 
-		// empty sentence
+		// empty sentence, single field
 		String b = "$ABCDE,";
 		assertTrue(SentenceValidator.isValid(b));
 		assertTrue(SentenceValidator.isValid(Checksum.add(b)));
 
-		// '!' begin char
-		String c = "!ABCDE,1,2,3,4,5,6,7,8,9";
+		// empty sentence, multiple fields
+		String c = "$ABCDE,,,,,,";
 		assertTrue(SentenceValidator.isValid(c));
 		assertTrue(SentenceValidator.isValid(Checksum.add(c)));
 
 		String d = "$ABCDE,1,TWO,three,FOUR?,5,6.0,-7.0,Eigth-8,N1N3,#T3n";
 		assertTrue(SentenceValidator.isValid(d));
 		assertTrue(SentenceValidator.isValid(Checksum.add(d)));
+
+		// '!' begin char
+		String e = "!ABCDE,1,2,3,4,5,6,7,8,9";
+		assertTrue(SentenceValidator.isValid(e));
+		assertTrue(SentenceValidator.isValid(Checksum.add(e)));
 	}
 
 	/**
@@ -77,6 +82,7 @@ public class SentenceValidatorTest {
 		assertFalse(SentenceValidator.isValid("$,*"));
 		assertFalse(SentenceValidator.isValid("$GPGSV*"));
 		assertFalse(SentenceValidator.isValid("foobar"));
+		assertFalse(SentenceValidator.isValid("$gpgga,1,2,3,4,5,6,7,8,9"));
 		assertFalse(SentenceValidator.isValid("GPGGA,1,2,3,4,5,6,7,8,9"));
 		assertFalse(SentenceValidator.isValid("$GpGGA,1,2,3,4,5,6,7,8,9"));
 		assertFalse(SentenceValidator.isValid("$GPGGa,1,2,3,4,5,6,7,8,9"));
