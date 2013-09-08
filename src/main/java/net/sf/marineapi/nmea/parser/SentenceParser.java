@@ -1,20 +1,20 @@
-/* 
+/*
  * SentenceParser.java
  * Copyright (C) 2010 Kimmo Tuukkanen
- * 
+ *
  * This file is part of Java Marine API.
  * <http://ktuukkan.github.io/marine-api/>
- * 
+ *
  * Java Marine API is free software: you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by the
  * Free Software Foundation, either version 3 of the License, or (at your
  * option) any later version.
- * 
+ *
  * Java Marine API is distributed in the hope that it will be useful, but
  * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
  * FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License
  * for more details.
- * 
+ *
  * You should have received a copy of the GNU Lesser General Public License
  * along with Java Marine API. If not, see <http://www.gnu.org/licenses/>.
  */
@@ -55,7 +55,7 @@ import net.sf.marineapi.nmea.sentence.TalkerId;
  * href="http://vancouver-webpages.com/peter/nmeafaq.txt">NMEA FAQ</a> by Peter
  * Bennett or <a href="http://gpsd.berlios.de/NMEA.txt">NMEA Revealed</a> by
  * Eric S. Raymond. Java Marine API is based mostly on these documents.
- * 
+ *
  * @author Kimmo Tuukkanen
  */
 public class SentenceParser implements Sentence {
@@ -75,7 +75,7 @@ public class SentenceParser implements Sentence {
 	/**
 	 * Creates a new instance of SentenceParser. Validates the input String and
 	 * resolves talker id and sentence type.
-	 * 
+	 *
 	 * @param nmea A valid NMEA 0183 sentence
 	 * @throws IllegalArgumentException If the specified sentence is invalid or
 	 *             if sentence type is not supported.
@@ -112,7 +112,7 @@ public class SentenceParser implements Sentence {
 	/**
 	 * Creates a new empty sentence with specified begin character, talker and
 	 * sentence IDs.
-	 * 
+	 *
 	 * @param begin The begin character, e.g. '$' or '!'
 	 * @param talker Talker type Id, e.g. "GP" or "LC".
 	 * @param type Sentence type Id, e.g. "GGA or "GLL".
@@ -144,7 +144,7 @@ public class SentenceParser implements Sentence {
 	 * specified <code>type</code>.
 	 * <p>
 	 * For example, GGA sentence parser should specify "GGA" as the type.
-	 * 
+	 *
 	 * @param nmea NMEA 0183 sentence String
 	 * @param type Expected type of the sentence in <code>nmea</code> parameter
 	 * @throws IllegalArgumentException If the specified sentence is not a valid
@@ -166,7 +166,7 @@ public class SentenceParser implements Sentence {
 
 	/**
 	 * Creates a new empty sentence with specified talker and sentence IDs.
-	 * 
+	 *
 	 * @param talker Talker type Id, e.g. "GP" or "LC".
 	 * @param type Sentence type Id, e.g. "GGA or "GLL".
 	 * @param size Number of data fields
@@ -179,7 +179,7 @@ public class SentenceParser implements Sentence {
 	 * Creates a new instance of SentenceParser with specified sentence data.
 	 * Type of the sentence is checked against the specified expected sentence
 	 * type id.
-	 * 
+	 *
 	 * @param nmea Sentence String
 	 * @param type Sentence type enum
 	 */
@@ -189,7 +189,7 @@ public class SentenceParser implements Sentence {
 
 	/**
 	 * Creates a new instance of SentenceParser without any data.
-	 * 
+	 *
 	 * @param tid Talker id to set in sentence
 	 * @param sid Sentence id to set in sentence
 	 * @param size Number of data fields following the sentence id field
@@ -311,14 +311,28 @@ public class SentenceParser implements Sentence {
 	 * @see net.sf.marineapi.nmea.sentence.Sentence#toSentence()
 	 */
 	public final String toSentence() {
-		if (!isValid()) {
-			String msg = String.format("Invalid result [%s]", toString());
+		String s = toString();
+		if (!SentenceValidator.isValid(s)) {
+			String msg = String.format("Validation failed [%s]", toString());
 			throw new IllegalStateException(msg);
 		}
-		return toString();
+		return s;
 	}
 
-	
+	/*
+	 * (non-Javadoc)
+	 * @see net.sf.marineapi.nmea.sentence.Sentence#toSentence(int)
+	 */
+	public final String toSentence(int maxLength) {
+		String s = toSentence();
+		if(s.length() > maxLength) {
+			String msg = "Sentence max length exceeded " + maxLength;
+			throw new IllegalStateException(msg);
+		}
+		return s;
+	}
+
+
 	/* (non-Javadoc)
 	 * @see java.lang.Object#toString()
 	 */
@@ -342,7 +356,7 @@ public class SentenceParser implements Sentence {
 
 	/**
 	 * Parse a single character from the specified sentence field.
-	 * 
+	 *
 	 * @param index Data field index in sentence
 	 * @return Character contained in the field
 	 * @throws net.sf.marineapi.parser.ParseException If field contains more
@@ -359,7 +373,7 @@ public class SentenceParser implements Sentence {
 
 	/**
 	 * Parse double value from the specified sentence field.
-	 * 
+	 *
 	 * @param index Data field index in sentence
 	 * @return Field as parsed by {@link java.lang.Double#parseDouble(String)}
 	 */
@@ -375,7 +389,7 @@ public class SentenceParser implements Sentence {
 
 	/**
 	 * Parse integer value from the specified sentence field.
-	 * 
+	 *
 	 * @param index Field index in sentence
 	 * @return Field parsed by {@link java.lang.Integer#parseInt(String)}
 	 */
@@ -397,7 +411,7 @@ public class SentenceParser implements Sentence {
 	 * <p>
 	 * Field indexing, let i = 1: <br>
 	 * <code>$&lt;id&gt;,&lt;i&gt;,&lt;i+1&gt;,&lt;i+2&gt;,...,&lt;i+n&gt;*&lt;checksum&gt;</code>
-	 * 
+	 *
 	 * @param index Field index
 	 * @return Field value as String
 	 * @throws net.sf.marineapi.parser.DataNotAvailableException If the field is
@@ -413,7 +427,7 @@ public class SentenceParser implements Sentence {
 
 	/**
 	 * Tells is if the field specified by the given index contains a value.
-	 * 
+	 *
 	 * @param index Field index
 	 * @return True if field contains value, otherwise false.
 	 */
@@ -429,7 +443,7 @@ public class SentenceParser implements Sentence {
 
 	/**
 	 * Set a character in specified field.
-	 * 
+	 *
 	 * @param index Field index
 	 * @param value Value to set
 	 */
@@ -439,7 +453,7 @@ public class SentenceParser implements Sentence {
 
 	/**
 	 * Set degrees value, e.g. course or heading.
-	 * 
+	 *
 	 * @param index Field index where to insert value
 	 * @param deg The degrees value to set
 	 * @throws IllegalArgumentException If degrees value out of range [0..360]
@@ -454,7 +468,7 @@ public class SentenceParser implements Sentence {
 	/**
 	 * Set double value in specified field. Value is set "as-is" without any
 	 * formatting or rounding.
-	 * 
+	 *
 	 * @param index Field index
 	 * @param value Value to set
 	 * @see #setDoubleValue(int, double, int, int)
@@ -468,7 +482,7 @@ public class SentenceParser implements Sentence {
 	 * and after the decimal separator ('.'). When necessary, the value is
 	 * padded with leading zeros and/or rounded to meet the requested number of
 	 * digits.
-	 * 
+	 *
 	 * @param index Field index
 	 * @param value Value to set
 	 * @param leading Number of digits before decimal separator
@@ -502,7 +516,7 @@ public class SentenceParser implements Sentence {
 
 	/**
 	 * Sets the number of data fields.
-	 * 
+	 *
 	 * @param size Number of data fields, must be greater than zero.
 	 */
 	protected final void setFieldCount(int size) {
@@ -518,7 +532,7 @@ public class SentenceParser implements Sentence {
 
 	/**
 	 * Set integer value in specified field.
-	 * 
+	 *
 	 * @param index Field index
 	 * @param value Value to set
 	 */
@@ -529,7 +543,7 @@ public class SentenceParser implements Sentence {
 	/**
 	 * Set integer value in specified field, with specified minimum number of
 	 * digits. Leading zeros are added to value if when necessary.
-	 * 
+	 *
 	 * @param index Field index
 	 * @param value Value to set
 	 * @param leading Number of digits to use.
@@ -541,17 +555,17 @@ public class SentenceParser implements Sentence {
 		}
 		setStringValue(index, String.format(pattern, value));
 	}
-	
+
 	/**
 	 * Set String value in specified data field.
-	 * 
+	 *
 	 * @param index Field index
 	 * @param value String to set, <code>null</code> converts to empty String.
 	 */
 	protected final void setStringValue(int index, String value) {
 		fields.set(index, value == null ? "" : value);
 	}
-	
+
 	/**
 	 * Replace multiple fields with given String array, starting at the
 	 * specified index. If parameter <code>first</code> is zero, all sentence
@@ -564,7 +578,7 @@ public class SentenceParser implements Sentence {
 	 * to add empty Strings to <code>newFields</code> in order to preserve the
 	 * original number of fields. Also, all existing values after
 	 * <code>first</code> are lost.
-	 * 
+	 *
 	 * @param first Index of first field to set
 	 * @param newFields Array of Strings to set
 	 */
