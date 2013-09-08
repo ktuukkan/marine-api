@@ -41,7 +41,8 @@ NEW FEATURES
  * SentenceParser; reset() and setFieldCount(int) methods for resetting and
    adjusting the number of data fields.
 
- * PositionParser; parsePosition(Position) and insertPosition(Position) methods.
+ * PositionParser; parsePosition(Position) and setPositionValues(Position)
+   methods.
 
  * Date, Time; added support for time zones and ISO 8601 formatting.
 
@@ -52,9 +53,6 @@ NEW FEATURES
 KNOWN ISSUES
 
  * Position.distanceTo() may not produce correct results.
-
- * Proprietary sentences that have sentence ID different to five characters are
-   not supported.
 
  * All AIS sentences may not be supported as TalkerId has only AI, AB and BS.
 
