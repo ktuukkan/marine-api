@@ -13,6 +13,10 @@ CHANGES
  * SentenceValidator; performance tweaks in regular expressions. Sentence length
    is no longer strictly checked, sentence IDs may contain now 3-10 chars.
 
+ * SentenceParser; due to changes in SentenceValidator, toSentence() does not
+   automatically check sentence length anymore. Added toSentence(int) method
+   for validating the length.
+
  * TPVProvider and related classes renamed to PositionProvider.
 
  * GSASentence; getSatellitesIds() renamed to getSatelliteIds().

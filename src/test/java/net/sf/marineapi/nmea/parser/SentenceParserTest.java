@@ -14,7 +14,7 @@ import org.junit.Test;
 
 /**
  * Tests the sentence parser base class.
- * 
+ *
  * @author Kimmo Tuukkanen
  */
 public class SentenceParserTest {
@@ -425,4 +425,38 @@ public class SentenceParserTest {
 		assertEquals(instance.toString(), instance.toSentence());
 	}
 
+	/**
+	 * Test method for
+	 * {@link net.sf.marineapi.nmea.parser.SentenceParser#toSentence(int)}.
+	 */
+	@Test
+	public void testToSentenceWithMaxLength() {
+		int max = instance.toString().length() + 1;
+		assertEquals(RMCTest.EXAMPLE, instance.toSentence(max));
+	}
+
+	/**
+	 * Test method for
+	 * {@link net.sf.marineapi.nmea.parser.SentenceParser#§(int)}.
+	 */
+	@Test
+	public void testToSentenceWithMaxLengthOnLimit() {
+		int max = instance.toString().length();
+		assertEquals(RMCTest.EXAMPLE, instance.toSentence(max));
+	}
+
+	/**
+	 * Test method for
+	 * {@link net.sf.marineapi.nmea.parser.SentenceParser#toSentence(int)}.
+	 */
+	@Test
+	public void testToSentenceWithMaxLengthExceeded() {
+		try {
+			int max = instance.toString().length() - 1;
+			assertEquals(RMCTest.EXAMPLE, instance.toSentence(max));
+			fail("didn't throw exception");
+		} catch (Exception e) {
+			// pass
+		}
+	}
 }
