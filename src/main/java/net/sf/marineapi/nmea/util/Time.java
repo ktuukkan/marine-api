@@ -57,7 +57,7 @@ public class Time {
 	 */
 	public Time() {
 		GregorianCalendar c = new GregorianCalendar();
-		this.hour = c.get(Calendar.HOUR);
+		this.hour = c.get(Calendar.HOUR_OF_DAY);
 		this.minutes = c.get(Calendar.MINUTE);
 		this.seconds = c.get(Calendar.SECOND);
 	}
