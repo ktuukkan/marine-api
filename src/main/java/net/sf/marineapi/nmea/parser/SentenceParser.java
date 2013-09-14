@@ -24,7 +24,6 @@ import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
 import java.util.ArrayList;
 import java.util.List;
-
 import net.sf.marineapi.nmea.sentence.Checksum;
 import net.sf.marineapi.nmea.sentence.Sentence;
 import net.sf.marineapi.nmea.sentence.SentenceId;
@@ -33,29 +32,29 @@ import net.sf.marineapi.nmea.sentence.TalkerId;
 
 /**
  * <p>
- * Base sentence parser for all NMEA sentence types. Provides general services
- * such as sentence validation and data field setters and getters with
- * formatting.
+ * Base class for all NMEA 0183 sentence parsers. Provides general services such
+ * as sentence validation and data field setters and getters with formatting.
  * <p>
- * NMEA data is transmitted in form of ASCII Strings that are called
+ * NMEA 0183 data is transmitted in form of ASCII Strings that are called
  * <em>sentences</em>. Each sentence starts with a '$', a two letter
  * <em>talker ID</em>, a three letter <em>sentence ID</em>, followed by a number
- * of <em>data fields</em> separated by commas, and terminated by an
- * <em>optional checksum</em>, and a carriage return/line feed. A sentence may
- * contain up to 82 characters including the '$' and <code>CR/LF</code>. If data
- * for a field is not available, the field is simply omitted, but the commas
- * that would delimit it are still sent, with no space between them.
+ * of comma separated <em>data fields</em>, <em>optional checksum</em> and a
+ * carriage return/line feed terminator (<code>CR/LF</code>). Sentence may
+ * contain up to 82 characters including the <code>CR/LF</code>. If data for
+ * certain field is not available, the field value is simply omitted, but the
+ * commas that would delimit it are still sent, with no space between them.
  * <p>
  * Sentence structure:<br>
  * <code>
  * $&lt;id&gt;,&lt;field #0&gt;,&lt;field #1&gt;,...,&lt;field #n&gt;*&lt;checksum&gt;(CR/LF)
  * </code>
  * <p>
- * For more details, see <a
- * href="http://vancouver-webpages.com/peter/nmeafaq.txt">NMEA FAQ</a> by Peter
- * Bennett or <a href="http://gpsd.berlios.de/NMEA.txt">NMEA Revealed</a> by
- * Eric S. Raymond. Java Marine API is based mostly on these documents.
- *
+ * For more details, see <a href="http://gpsd.berlios.de/NMEA.txt">NMEA
+ * Revealed</a> by Eric S. Raymond.
+ * <p>
+ * This class can be used to implement and integrate parsers not provided by in
+ * the library. See {@link SentenceFactory} for detailed instructions.
+ * 
  * @author Kimmo Tuukkanen
  */
 public class SentenceParser implements Sentence {
@@ -75,7 +74,7 @@ public class SentenceParser implements Sentence {
 	/**
 	 * Creates a new instance of SentenceParser. Validates the input String and
 	 * resolves talker id and sentence type.
-	 *
+	 * 
 	 * @param nmea A valid NMEA 0183 sentence
 	 * @throws IllegalArgumentException If the specified sentence is invalid or
 	 *             if sentence type is not supported.
@@ -112,7 +111,7 @@ public class SentenceParser implements Sentence {
 	/**
 	 * Creates a new empty sentence with specified begin character, talker and
 	 * sentence IDs.
-	 *
+	 * 
 	 * @param begin The begin character, e.g. '$' or '!'
 	 * @param talker Talker type Id, e.g. "GP" or "LC".
 	 * @param type Sentence type Id, e.g. "GGA or "GLL".
@@ -144,7 +143,7 @@ public class SentenceParser implements Sentence {
 	 * specified <code>type</code>.
 	 * <p>
 	 * For example, GGA sentence parser should specify "GGA" as the type.
-	 *
+	 * 
 	 * @param nmea NMEA 0183 sentence String
 	 * @param type Expected type of the sentence in <code>nmea</code> parameter
 	 * @throws IllegalArgumentException If the specified sentence is not a valid
@@ -154,7 +153,7 @@ public class SentenceParser implements Sentence {
 		this(nmea);
 		if (type == null || "".equals(type)) {
 			throw new IllegalArgumentException(
-					"Sentence type must be specified.");
+				"Sentence type must be specified.");
 		}
 		String sid = getSentenceId();
 		if (!sid.equals(type)) {
@@ -166,7 +165,7 @@ public class SentenceParser implements Sentence {
 
 	/**
 	 * Creates a new empty sentence with specified talker and sentence IDs.
-	 *
+	 * 
 	 * @param talker Talker type Id, e.g. "GP" or "LC".
 	 * @param type Sentence type Id, e.g. "GGA or "GLL".
 	 * @param size Number of data fields
@@ -179,7 +178,7 @@ public class SentenceParser implements Sentence {
 	 * Creates a new instance of SentenceParser with specified sentence data.
 	 * Type of the sentence is checked against the specified expected sentence
 	 * type id.
-	 *
+	 * 
 	 * @param nmea Sentence String
 	 * @param type Sentence type enum
 	 */
@@ -189,7 +188,7 @@ public class SentenceParser implements Sentence {
 
 	/**
 	 * Creates a new instance of SentenceParser without any data.
-	 *
+	 * 
 	 * @param tid Talker id to set in sentence
 	 * @param sid Sentence id to set in sentence
 	 * @param size Number of data fields following the sentence id field
@@ -227,7 +226,7 @@ public class SentenceParser implements Sentence {
 	 * @see net.sf.marineapi.nmea.sentence.Sentence#getFieldCount()
 	 */
 	public final int getFieldCount() {
-		if(fields == null) {
+		if (fields == null) {
 			return 0;
 		}
 		return fields.size();
@@ -274,12 +273,12 @@ public class SentenceParser implements Sentence {
 		return SentenceValidator.isValid(toString());
 	}
 
-
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
 	 * @see net.sf.marineapi.nmea.sentence.Sentence#reset()
 	 */
 	public final void reset() {
-		for(int i = 0; i < fields.size(); i++) {
+		for (int i = 0; i < fields.size(); i++) {
 			fields.set(i, "");
 		}
 	}
@@ -325,15 +324,15 @@ public class SentenceParser implements Sentence {
 	 */
 	public final String toSentence(int maxLength) {
 		String s = toSentence();
-		if(s.length() > maxLength) {
+		if (s.length() > maxLength) {
 			String msg = "Sentence max length exceeded " + maxLength;
 			throw new IllegalStateException(msg);
 		}
 		return s;
 	}
 
-
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
 	 * @see java.lang.Object#toString()
 	 */
 	@Override
@@ -356,7 +355,7 @@ public class SentenceParser implements Sentence {
 
 	/**
 	 * Parse a single character from the specified sentence field.
-	 *
+	 * 
 	 * @param index Data field index in sentence
 	 * @return Character contained in the field
 	 * @throws net.sf.marineapi.parser.ParseException If field contains more
@@ -373,7 +372,7 @@ public class SentenceParser implements Sentence {
 
 	/**
 	 * Parse double value from the specified sentence field.
-	 *
+	 * 
 	 * @param index Data field index in sentence
 	 * @return Field as parsed by {@link java.lang.Double#parseDouble(String)}
 	 */
@@ -389,7 +388,7 @@ public class SentenceParser implements Sentence {
 
 	/**
 	 * Parse integer value from the specified sentence field.
-	 *
+	 * 
 	 * @param index Field index in sentence
 	 * @return Field parsed by {@link java.lang.Integer#parseInt(String)}
 	 */
@@ -411,7 +410,7 @@ public class SentenceParser implements Sentence {
 	 * <p>
 	 * Field indexing, let i = 1: <br>
 	 * <code>$&lt;id&gt;,&lt;i&gt;,&lt;i+1&gt;,&lt;i+2&gt;,...,&lt;i+n&gt;*&lt;checksum&gt;</code>
-	 *
+	 * 
 	 * @param index Field index
 	 * @return Field value as String
 	 * @throws net.sf.marineapi.parser.DataNotAvailableException If the field is
@@ -427,7 +426,7 @@ public class SentenceParser implements Sentence {
 
 	/**
 	 * Tells is if the field specified by the given index contains a value.
-	 *
+	 * 
 	 * @param index Field index
 	 * @return True if field contains value, otherwise false.
 	 */
@@ -443,7 +442,7 @@ public class SentenceParser implements Sentence {
 
 	/**
 	 * Set a character in specified field.
-	 *
+	 * 
 	 * @param index Field index
 	 * @param value Value to set
 	 */
@@ -453,7 +452,7 @@ public class SentenceParser implements Sentence {
 
 	/**
 	 * Set degrees value, e.g. course or heading.
-	 *
+	 * 
 	 * @param index Field index where to insert value
 	 * @param deg The degrees value to set
 	 * @throws IllegalArgumentException If degrees value out of range [0..360]
@@ -468,7 +467,7 @@ public class SentenceParser implements Sentence {
 	/**
 	 * Set double value in specified field. Value is set "as-is" without any
 	 * formatting or rounding.
-	 *
+	 * 
 	 * @param index Field index
 	 * @param value Value to set
 	 * @see #setDoubleValue(int, double, int, int)
@@ -482,7 +481,7 @@ public class SentenceParser implements Sentence {
 	 * and after the decimal separator ('.'). When necessary, the value is
 	 * padded with leading zeros and/or rounded to meet the requested number of
 	 * digits.
-	 *
+	 * 
 	 * @param index Field index
 	 * @param value Value to set
 	 * @param leading Number of digits before decimal separator
@@ -490,7 +489,7 @@ public class SentenceParser implements Sentence {
 	 * @see #setDoubleValue(int, double)
 	 */
 	protected final void setDoubleValue(int index, double value, int leading,
-			int decimals) {
+		int decimals) {
 
 		StringBuilder pattern = new StringBuilder();
 		for (int i = 0; i < leading; i++) {
@@ -516,23 +515,24 @@ public class SentenceParser implements Sentence {
 
 	/**
 	 * Sets the number of data fields.
-	 *
+	 * 
 	 * @param size Number of data fields, must be greater than zero.
 	 */
 	protected final void setFieldCount(int size) {
-		if(size < 1) {
-			throw new IllegalArgumentException("Number of fields must be greater than zero.");
+		if (size < 1) {
+			throw new IllegalArgumentException(
+				"Number of fields must be greater than zero.");
 		}
 		fields.clear();
 		fields = new ArrayList<String>(size);
-		for(int i = 0; i < size; i++) {
+		for (int i = 0; i < size; i++) {
 			fields.add("");
 		}
 	}
 
 	/**
 	 * Set integer value in specified field.
-	 *
+	 * 
 	 * @param index Field index
 	 * @param value Value to set
 	 */
@@ -543,7 +543,7 @@ public class SentenceParser implements Sentence {
 	/**
 	 * Set integer value in specified field, with specified minimum number of
 	 * digits. Leading zeros are added to value if when necessary.
-	 *
+	 * 
 	 * @param index Field index
 	 * @param value Value to set
 	 * @param leading Number of digits to use.
@@ -558,7 +558,7 @@ public class SentenceParser implements Sentence {
 
 	/**
 	 * Set String value in specified data field.
-	 *
+	 * 
 	 * @param index Field index
 	 * @param value String to set, <code>null</code> converts to empty String.
 	 */
@@ -578,7 +578,7 @@ public class SentenceParser implements Sentence {
 	 * to add empty Strings to <code>newFields</code> in order to preserve the
 	 * original number of fields. Also, all existing values after
 	 * <code>first</code> are lost.
-	 *
+	 * 
 	 * @param first Index of first field to set
 	 * @param newFields Array of Strings to set
 	 */
