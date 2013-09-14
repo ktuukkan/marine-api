@@ -28,7 +28,8 @@ import java.util.Set;
 import java.util.Vector;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
-
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import net.sf.marineapi.nmea.event.SentenceEvent;
 import net.sf.marineapi.nmea.event.SentenceListener;
 import net.sf.marineapi.nmea.parser.SentenceFactory;
@@ -50,9 +51,16 @@ import net.sf.marineapi.nmea.sentence.SentenceId;
  */
 public class SentenceReader {
 
+	/** Default timeout value in milliseconds. */
+	public static final int DEFAULT_TIMEOUT = 5000;
+
 	// Map key for listeners that listen any kind of sentences, type
 	// specific listeners are registered with sentence type String
 	private static final String DISPATCH_ALL = "DISPATCH_ALL";
+
+	// logging
+	private static final Logger LOGGER = Logger.getLogger(SentenceReader.class.getName());
+	private static final String LOG_MSG = "Exception caught from SentenceListener";
 
 	// Thread for running the worker
 	private Thread thread;
@@ -61,7 +69,7 @@ public class SentenceReader {
 	// map of sentence listeners
 	private ConcurrentMap<String, List<SentenceListener>> listeners = new ConcurrentHashMap<String, List<SentenceListener>>();
 	// timeout for "reading paused" in ms
-	private volatile int pauseTimeout = 5000;
+	private volatile int pauseTimeout = DEFAULT_TIMEOUT;
 
 	/**
 	 * Creates a new instance of SentenceReader.
@@ -130,19 +138,19 @@ public class SentenceReader {
 	 * Remove a listener from reader. When removed, listener will not receive
 	 * any events from the reader.
 	 * 
-	 * @param sl {@link SentenceListener} to be removed.
+	 * @param listener {@link SentenceListener} to be removed.
 	 */
-	public void removeSentenceListener(SentenceListener sl) {
+	public void removeSentenceListener(SentenceListener listener) {
 		for (List<SentenceListener> list : listeners.values()) {
-			if (list.contains(sl)) {
-				list.remove(sl);
+			if (list.contains(listener)) {
+				list.remove(listener);
 			}
 		}
 	}
 
 	/**
-	 * Sets the InputStream to be used as data source. If reader is running,
-	 * it is first stopped and you must call {@link #start()} to resume reading.
+	 * Sets the InputStream to be used as data source. If reader is running, it
+	 * is first stopped and you must call {@link #start()} to resume reading.
 	 * 
 	 * @param stream InputStream to set.
 	 */
@@ -182,7 +190,7 @@ public class SentenceReader {
 	 */
 	public void start() {
 		if (thread != null && thread.isAlive() && reader != null
-				&& reader.isRunning()) {
+			&& reader.isRunning()) {
 			throw new IllegalStateException("Reader is already running");
 		}
 		thread = new Thread(reader);
@@ -202,12 +210,12 @@ public class SentenceReader {
 	 * Notifies all listeners that reader has paused due to timeout.
 	 */
 	void fireReadingPaused() {
-		for (String key : listeners.keySet()) {
-			for (SentenceListener listener : listeners.get(key)) {
+		for (List<SentenceListener> l : listeners.values()) {
+			for (SentenceListener listener : l) {
 				try {
 					listener.readingPaused();
 				} catch (Exception e) {
-					// nevermind
+					LOGGER.log(Level.WARNING, LOG_MSG, e);
 				}
 			}
 		}
@@ -218,12 +226,12 @@ public class SentenceReader {
 	 * events will be dispatched until stopped or timeout occurs.
 	 */
 	void fireReadingStarted() {
-		for (String key : listeners.keySet()) {
-			for (SentenceListener listener : listeners.get(key)) {
+		for (List<SentenceListener> l : listeners.values()) {
+			for (SentenceListener listener : l) {
 				try {
 					listener.readingStarted();
 				} catch (Exception e) {
-					// nevermind
+					LOGGER.log(Level.WARNING, LOG_MSG, e);
 				}
 			}
 		}
@@ -233,12 +241,12 @@ public class SentenceReader {
 	 * Notifies all listeners that data reading has stopped.
 	 */
 	void fireReadingStopped() {
-		for (String key : listeners.keySet()) {
-			for (SentenceListener listener : listeners.get(key)) {
+		for (List<SentenceListener> l : listeners.values()) {
+			for (SentenceListener listener : l) {
 				try {
 					listener.readingStopped();
 				} catch (Exception e) {
-					// nevermind
+					LOGGER.log(Level.WARNING, LOG_MSG, e);
 				}
 			}
 		}
@@ -252,21 +260,21 @@ public class SentenceReader {
 	void fireSentenceEvent(Sentence sentence) {
 
 		String type = sentence.getSentenceId();
-		Set<SentenceListener> list = new HashSet<SentenceListener>();
+		Set<SentenceListener> targets = new HashSet<SentenceListener>();
 
 		if (listeners.containsKey(type)) {
-			list.addAll(listeners.get(type));
+			targets.addAll(listeners.get(type));
 		}
 		if (listeners.containsKey(DISPATCH_ALL)) {
-			list.addAll(listeners.get(DISPATCH_ALL));
+			targets.addAll(listeners.get(DISPATCH_ALL));
 		}
 
-		for (SentenceListener sl : list) {
+		for (SentenceListener listener : targets) {
 			try {
 				SentenceEvent se = new SentenceEvent(this, sentence);
-				sl.sentenceRead(se);
+				listener.sentenceRead(se);
 			} catch (Exception e) {
-				// ignore listener failures
+				LOGGER.log(Level.WARNING, LOG_MSG, e);
 			}
 		}
 	}
@@ -275,14 +283,14 @@ public class SentenceReader {
 	 * Registers a SentenceListener to hash map with given key.
 	 * 
 	 * @param type Sentence type to register for
-	 * @param sl SentenceListener to register
+	 * @param listener SentenceListener to register
 	 */
-	private void registerListener(String type, SentenceListener sl) {
+	private void registerListener(String type, SentenceListener listener) {
 		if (listeners.containsKey(type)) {
-			listeners.get(type).add(sl);
+			listeners.get(type).add(listener);
 		} else {
 			List<SentenceListener> list = new Vector<SentenceListener>();
-			list.add(sl);
+			list.add(listener);
 			listeners.put(type, list);
 		}
 	}
