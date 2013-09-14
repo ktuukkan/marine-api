@@ -31,28 +31,28 @@ import net.sf.marineapi.nmea.sentence.TalkerId;
 /**
  * Factory for creating sentence parsers.
  * <p>
- * To create and register a custom parser:
+ * Custom parsers may be implemented and registered in factory as follows:
  * <ol>
  * <li>Define a sentence interface by extending the {@link Sentence} interface
- * (e.g. <code>XYZSentence</code>).</li>
+ * (e.g. <code>com.acme.XYZSentence</code>).</li>
  * <li>Implement the interface in a class that extends {@link SentenceParser},
- * (e.g. <code>XYZParser</code>).</li>
+ * (e.g. <code>com.acme.XYZParser</code>).</li>
  * <li>Use the protected getters and setters in <code>SentenceParser</code> to
  * read and write sentence data.</li>
- * <li>Add a constructor with <code>String</code> parameter, i.e. the sentence
- * to be parsed by the parser. Pass this parameter to
- * {@link SentenceParser#SentenceParser(String, String)} together with expected
- * sentence id (e.g. <code>"XYZ"</code>).</li>
+ * <li>Add a constructor in <code>XYZParser</code> with <code>String</code>
+ * parameter, i.e. the sentence to be parsed. Pass this parameter to
+ * {@link SentenceParser#SentenceParser(String, String)} with expected sentence
+ * type (e.g. <code>"XYZ"</code>).</li>
  * <li>Add another constructor with {@link TalkerId} parameter. Pass this
  * parameter to {@link SentenceParser#SentenceParser(TalkerId, String, int)}
- * along with parser type and number of sentence fields.</li>
- * <li>Register your parser class in <code>SentenceFactory</code> using the
- * {@link #registerParser(String, Class)} method.</li>
+ * with sentence type and number of data fields.</li>
+ * <li>Register <code>XYZParser</code> in <code>SentenceFactory</code> by using
+ * the {@link #registerParser(String, Class)} method.</li>
  * <li>Use {@link SentenceFactory#createParser(String)} or
  * {@link SentenceFactory#createParser(TalkerId, String)} to obtain an instance
- * of your parser. Also, {@link net.sf.marineapi.nmea.io.SentenceReader} will
- * now dispatch instances of it when corresponding sentence is read from data
- * source.</li>
+ * of your parser. In addition, {@link net.sf.marineapi.nmea.io.SentenceReader}
+ * will dispatch instances of <code>XYZSentence</code> when "XYZ" sentences are
+ * read from data source.</li>
  * </ol>
  * 
  * @author Kimmo Tuukkanen
@@ -93,9 +93,11 @@ public final class SentenceFactory {
 	}
 
 	/**
-	 * Creates a parser for specified NMEA sentence String. The parser
-	 * implementation is selected from the list of registered parsers according
-	 * to sentence type.
+	 * Creates a parser for specified NMEA 0183 sentence String. The parser
+	 * implementation is selected from registered parsers according to sentence
+	 * type. The returned instance must be cast in to correct sentence
+	 * interface, for which the type should first be checked by using the
+	 * {@link Sentence#getSentenceId()} method.
 	 * 
 	 * @param nmea NMEA 0183 sentence String
 	 * @return Sentence parser instance for specified sentence
@@ -142,11 +144,13 @@ public final class SentenceFactory {
 
 	/**
 	 * Register a sentence parser to factory. After registration,
-	 * {@link #createParser(String)} method can be used to obtain parsers for
-	 * registered type. All sentences supported by the library are registered by
-	 * default, and this method is provided mainly for registering custom
-	 * parsers that can be created by extending the {@link SentenceParser}
-	 * class.
+	 * {@link #createParser(String)} method can be used to obtain instances of
+	 * registered parser.
+	 * <p>
+	 * Sentences supported by the library are registered automatically, but they
+	 * can be overridden simply be registering a new parser implementation for
+	 * chosen sentence type. That is, each sentence type can have only one
+	 * parser registered at a time.
 	 * 
 	 * @param type Sentence type id, e.g. "GGA" or "GLL".
 	 * @param parser Class of parser implementation for given <code>type</code>.
@@ -162,7 +166,7 @@ public final class SentenceFactory {
 			String msg = "Unable to register parser due security violation";
 			throw new IllegalArgumentException(msg, e);
 		} catch (NoSuchMethodException e) {
-			String msg = "Parser must implement two constructors with String and TalkerId parameters";
+			String msg = "Required constructors not found; SentenceParser(String), SentenceParser(TalkerId)";
 			throw new IllegalArgumentException(msg, e);
 		}
 	}
