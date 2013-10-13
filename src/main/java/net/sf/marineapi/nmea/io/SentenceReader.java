@@ -1,20 +1,20 @@
-/* 
+/*
  * SentenceReader.java
  * Copyright (C) 2010-2012 Kimmo Tuukkanen
- * 
+ *
  * This file is part of Java Marine API.
  * <http://ktuukkan.github.io/marine-api/>
- * 
+ *
  * Java Marine API is free software: you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by the
  * Free Software Foundation, either version 3 of the License, or (at your
  * option) any later version.
- * 
+ *
  * Java Marine API is distributed in the hope that it will be useful, but
  * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
  * FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License
  * for more details.
- * 
+ *
  * You should have received a copy of the GNU Lesser General Public License
  * along with Java Marine API. If not, see <http://www.gnu.org/licenses/>.
  */
@@ -38,12 +38,12 @@ import net.sf.marineapi.nmea.sentence.SentenceId;
 
 /**
  * Sentence reader detects supported NMEA 0183 sentences from the specified
- * <code>InputStream</code> and dispatches them to registered listeners as
- * sentence events. Each event contains a parser for the read sentence.
+ * data source and dispatches them to registered listeners as sentence events.
+ * Each event contains a parser for the read sentence.
  * <p>
  * Parsers dispatched by reader are created using {@link SentenceFactory} class,
  * where you can also register your own custom parsers.
- * 
+ *
  * @author Kimmo Tuukkanen
  * @see SentenceListener
  * @see SentenceEvent
@@ -73,7 +73,7 @@ public class SentenceReader {
 
 	/**
 	 * Creates a new instance of SentenceReader.
-	 * 
+	 *
 	 * @param source Stream from which to read NMEA data
 	 */
 	public SentenceReader(InputStream source) {
@@ -82,7 +82,7 @@ public class SentenceReader {
 
 	/**
 	 * Creates a SentenceReader for UDP/DatagramSocket.
-	 * 
+	 *
 	 * @param source Socket from which to read NMEA data
 	 */
 	public SentenceReader(DatagramSocket source) {
@@ -92,7 +92,7 @@ public class SentenceReader {
 	/**
 	 * Adds a {@link SentenceListener} that wants to receive all sentences read
 	 * by the reader.
-	 * 
+	 *
 	 * @param listener {@link SentenceListener} to be registered.
 	 * @see net.sf.marineapi.nmea.event.SentenceListener
 	 */
@@ -103,7 +103,7 @@ public class SentenceReader {
 	/**
 	 * Adds a {@link SentenceListener} that is interested in receiving only
 	 * sentences of certain type.
-	 * 
+	 *
 	 * @param sl SentenceListener to add
 	 * @param type Sentence type for which the listener is registered.
 	 * @see net.sf.marineapi.nmea.event.SentenceListener
@@ -115,7 +115,7 @@ public class SentenceReader {
 	/**
 	 * Adds a {@link SentenceListener} that is interested in receiving only
 	 * sentences of certain type.
-	 * 
+	 *
 	 * @param sl SentenceListener to add
 	 * @param type Sentence type for which the listener is registered.
 	 * @see net.sf.marineapi.nmea.event.SentenceListener
@@ -126,7 +126,7 @@ public class SentenceReader {
 
 	/**
 	 * Returns the current reading paused timeout.
-	 * 
+	 *
 	 * @return Timeout limit in milliseconds.
 	 * @see #setPauseTimeout(int)
 	 */
@@ -137,7 +137,7 @@ public class SentenceReader {
 	/**
 	 * Remove a listener from reader. When removed, listener will not receive
 	 * any events from the reader.
-	 * 
+	 *
 	 * @param listener {@link SentenceListener} to be removed.
 	 */
 	public void removeSentenceListener(SentenceListener listener) {
@@ -151,7 +151,7 @@ public class SentenceReader {
 	/**
 	 * Sets the InputStream to be used as data source. If reader is running, it
 	 * is first stopped and you must call {@link #start()} to resume reading.
-	 * 
+	 *
 	 * @param stream InputStream to set.
 	 */
 	public void setInputStream(InputStream stream) {
@@ -164,7 +164,7 @@ public class SentenceReader {
 	/**
 	 * Sets the DatagramSocket to be used as data source. If reader is running,
 	 * it is first stopped and you must call {@link #start()} to resume reading.
-	 * 
+	 *
 	 * @param socket DatagramSocket to set
 	 */
 	public void setDatagramSocket(DatagramSocket socket) {
@@ -176,7 +176,7 @@ public class SentenceReader {
 
 	/**
 	 * Set timeout time for reading paused events. Default is 5000 ms.
-	 * 
+	 *
 	 * @param millis Timeout in milliseconds.
 	 */
 	public void setPauseTimeout(int millis) {
@@ -185,7 +185,7 @@ public class SentenceReader {
 
 	/**
 	 * Starts reading the input stream and dispatching events.
-	 * 
+	 *
 	 * @throws IllegalStateException If reader is already running.
 	 */
 	public void start() {
@@ -254,7 +254,7 @@ public class SentenceReader {
 
 	/**
 	 * Dispatch data to all listeners.
-	 * 
+	 *
 	 * @param sentence sentence string.
 	 */
 	void fireSentenceEvent(Sentence sentence) {
@@ -281,7 +281,7 @@ public class SentenceReader {
 
 	/**
 	 * Registers a SentenceListener to hash map with given key.
-	 * 
+	 *
 	 * @param type Sentence type to register for
 	 * @param listener SentenceListener to register
 	 */
