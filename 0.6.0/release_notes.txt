@@ -1,0 +1,73 @@
+Java Marine API - RELEASE NOTES
+Version 0.6.0 (b20131015224909)
+<http://ktuukkan.github.io/marine-api/>
+
+This is a pre-alpha release, major API changes may be introduced in future
+versions. Released on 2013-10-15.
+
+CHANGES
+
+ * SentenceReader; refactored to better support diffrent data sources, including
+   some performance tweaks (should take less CPU now). When dispatching events,
+   all exceptions thrown by SentenceListeners are now logged using the default
+   java.util.logging.Logger on level WARNING.
+
+ * SentenceValidator; performance tweaks in regular expressions. Sentence length
+   is no longer strictly checked, sentence IDs may contain now 3-10 chars.
+
+ * SentenceParser; due to changes in SentenceValidator, toSentence() does not
+   automatically check sentence length anymore. Added toSentence(int) method
+   for validating the length.
+
+ * TPVProvider and related classes renamed to PositionProvider.
+
+ * GSASentence; getSatellitesIds() renamed to getSatelliteIds().
+
+ * Sentence; removed unused constant ADDRESS_FIELD.
+
+ * Date, Time; fractions of second are now handled. Moved common date/time
+   parsing and formatting in Date and Time classes. Fixed a bug in Time.toDate()
+   causing incorrect hour of day.
+
+ * GLL, GGA, RMC and ZDA parsers; fractions of second are now parsed and
+   formatted in timestamp fields. When setting/formatting values, three decimals
+   is used regardless of given precision (padded with zeros as needed).
+
+ * Position; refactored and removed explicit hemisphere indicators. Hemispheres
+   are now handled more automatically and indicated by positive and negative
+   values of latitude and longitude. Affected classes are PositionParser,
+   GGAParser, GLLParser, RMAParser, RMCParser, WPLParser and Waypoint.
+
+NEW FEATURES
+
+ * UDP/DatagramSocket support in SentenceReader.
+
+ * SatelliteInfoProvider; reports all GPS satellite information in single event.
+
+ * SentenceParser; reset() and setFieldCount(int) methods for resetting and
+   adjusting the number of data fields.
+
+ * PositionParser; parsePosition(Position) and setPositionValues(Position)
+   methods.
+
+ * Date, Time; added support for time zones and ISO 8601 formatting.
+
+ * ZDASentence; setTimeAndLocalZone(Time t) for setting time and offset.
+
+ * Support for XDR sentences; transducer measurements.
+
+KNOWN ISSUES
+
+ * Position.distanceTo() may not produce correct results.
+
+ * All AIS sentences may not be supported as TalkerId has only AI, AB and BS.
+
+ACKNOWLEDGEMENTS
+
+ * Thanks to Amanda Fenech (marssa.org) for migrating the project to Maven
+   layout and initial release in repository (v0.5.1).
+
+ * Thanks to Ludovic Drouineau for UDP implementation of SentenceReader.
+
+ * Thanks to Robert Huitema (www.42.co.nz) and Vladimir Loginov for performance
+   tweaks. Robert also provided the base work for XDR parser.
