@@ -62,7 +62,7 @@ public class Date {
 
 	/**
 	 * Creates a new instance of <code>Date</code>, assumes the default NMEA
-	 * 0183 date formatting, <code>ddmmyy</code> or <code>ddmmyyy</code>.
+	 * 0183 date formatting, <code>ddmmyy</code> or <code>ddmmyyyy</code>.
 	 */
 	public Date(String date) {
 		setDay(Integer.parseInt(date.substring(0, 2)));
