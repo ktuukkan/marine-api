@@ -103,9 +103,9 @@ public enum SentenceId {
 
 		String id = null;
 		if (nmea.startsWith("$P")) {
-			id = nmea.substring(2, 6);
+			id = nmea.substring(2, nmea.indexOf(','));
 		} else {
-			id = nmea.substring(3, 6);
+			id = nmea.substring(3, nmea.indexOf(','));
 		}
 		return id;
 	}

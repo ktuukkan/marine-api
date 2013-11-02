@@ -32,26 +32,17 @@ import org.junit.Test;
  */
 public class SentenceIdTest {
 
-	/**
-	 * @throws java.lang.Exception
-	 */
-	@Before
-	public void setUp() throws Exception {
-	}
-
-	/**
-	 * Test method for
-	 * {@link net.sf.marineapi.nmea.sentence.SentenceId#parse(java.lang.String)}
-	 * .
-	 */
 	@Test
-	public void testParse() {
+	public void testParseKnownId() {
 		SentenceId a = SentenceId.parse("$GPGLL,,,,,,,");
 		assertEquals(SentenceId.GLL, a);
 
 		SentenceId b = SentenceId.parse("$IIDPT,,,,,,,");
 		assertEquals(SentenceId.DPT, b);
+	}
 
+	@Test
+	public void testParseUnknownId() {
 		try {
 			SentenceId.parse("$ABCDE,,,,,,");
 			fail("Did not throw exception");
@@ -60,24 +51,35 @@ public class SentenceIdTest {
 		}
 	}
 
-	/**
-	 * Test method for
-	 * {@link net.sf.marineapi.nmea.sentence.SentenceId#parseStr(java.lang.String)}
-	 * .
-	 */
 	@Test
-	public void testParseStr() {
+	public void testParseStrStandardId() {
 		String a = SentenceId.parseStr("$GPGLL,,,,,,,");
 		assertEquals("GLL", a);
-
 		String b = SentenceId.parseStr("$IIDPT,,,,,,,");
 		assertEquals("DPT", b);
-
-		String c = SentenceId.parseStr("$ABCDE,,,,,,,");
-		assertEquals("CDE", c);
-
-		String d = SentenceId.parseStr("$PGRMZ,,,,,,,");
-		assertEquals("GRMZ", d);
 	}
 
+	@Test
+	public void testParseStrNormalLengthProprietaryId() {
+		String a = SentenceId.parseStr("$PGRMZ,,,,,,,");
+		assertEquals("GRMZ", a);
+	}
+
+	@Test
+	public void testParseStrShortProprietaryId() {
+		String a = SentenceId.parseStr("$PBVE,,,,,,,");
+		assertEquals("BVE", a);
+	}
+
+	@Test
+	public void testParseStrVeryShortProprietaryId() {
+		String a = SentenceId.parseStr("$PAB,,,,,,,");
+		assertEquals("AB", a);
+	}
+
+	@Test
+	public void testParseStrLongProprietaryId() {
+		String s = SentenceId.parseStr("$PABCDEF,,,,,,,");
+		assertEquals("ABCDEF", s);
+	}
 }
