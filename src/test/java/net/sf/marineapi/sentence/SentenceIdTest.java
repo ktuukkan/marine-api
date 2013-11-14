@@ -23,8 +23,6 @@ package net.sf.marineapi.sentence;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
 import net.sf.marineapi.nmea.sentence.SentenceId;
-
-import org.junit.Before;
 import org.junit.Test;
 
 /**
@@ -34,11 +32,8 @@ public class SentenceIdTest {
 
 	@Test
 	public void testParseKnownId() {
-		SentenceId a = SentenceId.parse("$GPGLL,,,,,,,");
-		assertEquals(SentenceId.GLL, a);
-
-		SentenceId b = SentenceId.parse("$IIDPT,,,,,,,");
-		assertEquals(SentenceId.DPT, b);
+		SentenceId s = SentenceId.parse("$GPGLL,,,,,,,");
+		assertEquals(SentenceId.GLL, s);
 	}
 
 	@Test
@@ -53,33 +48,31 @@ public class SentenceIdTest {
 
 	@Test
 	public void testParseStrStandardId() {
-		String a = SentenceId.parseStr("$GPGLL,,,,,,,");
-		assertEquals("GLL", a);
-		String b = SentenceId.parseStr("$IIDPT,,,,,,,");
-		assertEquals("DPT", b);
+		String s = SentenceId.parseStr("$GPGLL,,,,,,,");
+		assertEquals("GLL", s);
 	}
 
 	@Test
 	public void testParseStrNormalLengthProprietaryId() {
-		String a = SentenceId.parseStr("$PGRMZ,,,,,,,");
-		assertEquals("GRMZ", a);
+		String s = SentenceId.parseStr("$PGRMZ,,,,,,,");
+		assertEquals("GRMZ", s);
 	}
 
 	@Test
 	public void testParseStrShortProprietaryId() {
-		String a = SentenceId.parseStr("$PBVE,,,,,,,");
-		assertEquals("BVE", a);
+		String s = SentenceId.parseStr("$PBVE,,,,,,,");
+		assertEquals("BVE", s);
 	}
 
 	@Test
-	public void testParseStrVeryShortProprietaryId() {
-		String a = SentenceId.parseStr("$PAB,,,,,,,");
-		assertEquals("AB", a);
+	public void testParseStrShortestPossibleProprietaryId() {
+		String s = SentenceId.parseStr("$PAB,,,,,,,");
+		assertEquals("AB", s);
 	}
 
 	@Test
-	public void testParseStrLongProprietaryId() {
-		String s = SentenceId.parseStr("$PABCDEF,,,,,,,");
-		assertEquals("ABCDEF", s);
+	public void testParseStrLongestPossibleProprietaryId() {
+		String s = SentenceId.parseStr("$PABCDEFGHI,,,,,,,");
+		assertEquals("ABCDEFGHI", s);
 	}
 }
