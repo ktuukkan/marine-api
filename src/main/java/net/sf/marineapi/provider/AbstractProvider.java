@@ -33,10 +33,13 @@ import net.sf.marineapi.provider.event.ProviderEvent;
 import net.sf.marineapi.provider.event.ProviderListener;
 
 /**
- * Abstract base class for providers. Defines methods that all providers must
+ * <p>Abstract base class for providers. Defines methods that all providers must
  * implement and provides general services for capturing and validating the
- * required sentences.
- * 
+ * required sentences.</p>
+ * <p>When constructing {@link net.sf.marineapi.provider.event.PositionEvent},
+ * the maximum age for all captured sentences is 1000 ms, i.e. all sentences are
+ * from within the default NMEA update rate (1/s).</p>
+ *
  * @author Kimmo Tuukkanen
  */
 public abstract class AbstractProvider<T extends ProviderEvent> implements

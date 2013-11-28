@@ -44,11 +44,7 @@ import net.sf.marineapi.provider.event.PositionEvent;
  * {@link net.sf.marineapi.nmea.util.Position}. GPS data statuses are also
  * captured and events are dispatched only when sentences report
  * {@link net.sf.marineapi.nmea.util.DataStatus#ACTIVE}.
- * <p>
- * When constructing {@link net.sf.marineapi.provider.event.PositionEvent}, the
- * maximum age of captured sentences is 1000 ms, i.e. all sentences are from
- * within the default NMEA update rate (1/s).
- * 
+ *  
  * @author Kimmo Tuukkanen
  * @see net.sf.marineapi.provider.event.PositionListener
  * @see net.sf.marineapi.provider.event.PositionEvent
