@@ -125,7 +125,7 @@ public class PositionEvent extends ProviderEvent implements Cloneable {
 	 * @return the speed
 	 */
 	public Double getSpeed() {
-		return speed;
+		return speed * 1.852;
 	}
 
 	/**
