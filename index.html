@@ -61,14 +61,12 @@ $("#close").click(function(event) {
 <h2>About</h2>
 <p>
 Java Marine API is an
-<a href="http://en.wikipedia.org/wiki/NMEA_0183">NMEA 0183</a> parser library for <a href="http://www.oracle.com/technetwork/java/">Java</a>. It aims to enable easy access to data provided by various marine devices such as GPS, sonar or weather instruments.
+<a href="http://en.wikipedia.org/wiki/NMEA_0183">NMEA 0183</a> parser library for <a href="http://www.oracle.com/technetwork/java/">Java</a>. It aims to enable easy access to data provided by various marine devices such as GPS, echo sounder and weather instruments.
 </p>
 
 <h3>Features</h3>
 <p>
-Detects and reads NMEA sentences from any input stream, e.g. file, serial port, TCP/IP socket etc. The plain ASCII data is converted to event/listener model with interfaces and parser implementations for selected sentences. Custom parsers may also be implemented and integrated by extending the provided base classes. Data output is also supported by allowing the modification of sentence contents with data formatting and validation. In addition, some general utility classes are provided for hangling the information extracted from sentences. Higher-level data updates may be aquired through providers that
-translate NMEA updates to direct measurement updates.
-</p>
+Detects and reads NMEA sentences from any input stream, e.g. file, serial port, TCP/IP or UDP socket etc. The plain ASCII data is converted to event/listener model with interfaces and parser implementations for selected sentences. Custom parsers may also be implemented and integrated by extending the provided base classes. Data output is also supported by allowing the modification of sentence contents with data formatting and validation. In addition, some general utility classes are provided for hangling the information extracted from sentences. Higher-level data updates may be aquired through providers that translate NMEA updates to direct measurement updates.</p>
 
 <h3>Supported sentences</h3>
 <ul>
@@ -95,11 +93,16 @@ translate NMEA updates to direct measurement updates.
 	<li>ZDA - UTC time and date with local time offset</li>
 </ul>
 
-<h2>Licensing</h2>
+<h3>Licensing</h3>
 <p>
 Java Marine API is open source software and licensed under the <a href="http://www.gnu.org/licenses/lgpl-3.0-standalone.html">GNU Lesser General Public License</a>.
 <p>
-Source code is freely available in <a href="http://github.com/ktuukkan/marine-api/">Github</a>.
+Source code is available at <a href="http://github.com/ktuukkan/marine-api/">Github</a>.
+</p>
+
+<h3>Usage</h3>
+<p>
+Code tells more than 1000 words, see the <a href="https://github.com/ktuukkan/marine-api/tree/master/src/main/java/net/sf/marineapi/example">examples</a>.
 </p>
 
 <h2>Releases</h2>
@@ -178,7 +181,7 @@ Projects using Maven may download the library by adding dependency in pom.xml.
   <li><a href="http://mvnrepository.com/artifact/net.sf.marineapi/marineapi">MvnRepository</a></li>
 </ul>
 <p>
-<small><em>Notice that v0.5.1 is functionally equal to v0.5, only source code layout changes for Maven were made between the versions. I.e. v0.5 was last Ant-based release in only in Sf.net, v0.5.1 is first Maven-based release. Similar version mismatch should not be seen in future releases.
+<small><em>Notice that v0.5.1 is functionally equal to v0.5, only source code layout changes for Maven were made between these versions. That is, v0.5 was the last Ant-based build released only in Sf.net, v0.5.1 is the first release made with Maven. Similar version mismatch should not be seen in future releases.
 </em></small>
 
 <h4>Snapshots</h4>
