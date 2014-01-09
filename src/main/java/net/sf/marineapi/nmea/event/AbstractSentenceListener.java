@@ -6,20 +6,27 @@ import java.util.Arrays;
 import net.sf.marineapi.nmea.sentence.Sentence;
 
 /**
- * Abstract listener with automatic sentence type inference and casting.
+ * <p>
+ * Abstract listener for typed listeners with automatic sentence type inference
+ * and casting. Extend this class to create a listener/handler for a certain
+ * sentence type.</p>
+ * <p>
+ * Methods in this class are empty, except {@link #sentenceRead(SentenceEvent)}
+ * which detects the incoming sentences and automatically casts them before
+ * passing to {@link #sentenceRead(Sentence)} method.</p>
  * 
  * @author Kimmo Tuukkanen
  * @param <T> Sentence interface to listen
  */
-public abstract class AbstractSentenceListener<T extends Sentence> implements
-	SentenceListener {
+public abstract class AbstractSentenceListener<T extends Sentence>
+	implements SentenceListener {
 
 	private final Type expectedType;
 
 	public AbstractSentenceListener() {
 
-		ParameterizedType superClass = (ParameterizedType) getClass()
-			.getGenericSuperclass();
+		ParameterizedType superClass =
+			(ParameterizedType) getClass().getGenericSuperclass();
 
 		Type[] superClassTypeArgs = superClass.getActualTypeArguments();
 
