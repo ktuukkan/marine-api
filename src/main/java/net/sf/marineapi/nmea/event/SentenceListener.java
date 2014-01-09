@@ -28,6 +28,7 @@ import java.util.EventListener;
  * @author Kimmo Tuukkanen
  * @see net.sf.marineapi.nmea.io.SentenceReader
  * @see SentenceEvent
+ * @see AbstractSentenceListener
  */
 public interface SentenceListener extends EventListener {
 
