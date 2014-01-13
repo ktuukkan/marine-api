@@ -30,6 +30,7 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import net.sf.marineapi.nmea.event.AbstractSentenceListener;
 import net.sf.marineapi.nmea.event.SentenceEvent;
 import net.sf.marineapi.nmea.event.SentenceListener;
 import net.sf.marineapi.nmea.parser.SentenceFactory;
@@ -45,6 +46,7 @@ import net.sf.marineapi.nmea.sentence.SentenceId;
  * where you can also register your own custom parsers.
  *
  * @author Kimmo Tuukkanen
+ * @see AbstractSentenceListener
  * @see SentenceListener
  * @see SentenceEvent
  * @see SentenceFactory
