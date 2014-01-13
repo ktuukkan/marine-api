@@ -459,4 +459,40 @@ public class SentenceParserTest {
 			// pass
 		}
 	}
+	
+	/**
+	 * Test method for
+	 * {@link net.sf.marineapi.nmea.parser.SentenceParser#equals(Object)
+	 */
+	@Test
+	public void testEquals() {
+		assertTrue(instance.equals(new SentenceParser(RMCTest.EXAMPLE)));
+	}
+	
+	/**
+	 * Test method for
+	 * {@link net.sf.marineapi.nmea.parser.SentenceParser#equals(Object)
+	 */
+	@Test
+	public void testEqualsWithNonEqual() {
+		assertFalse(instance.equals(new SentenceParser(RMBTest.EXAMPLE)));
+	}
+	
+	/**
+	 * Test method for
+	 * {@link net.sf.marineapi.nmea.parser.SentenceParser#equals(Object)
+	 */
+	@Test
+	public void testEqualsWithNull() {
+		assertFalse(instance.equals(null));
+	}
+	
+	/**
+	 * Test method for
+	 * {@link net.sf.marineapi.nmea.parser.SentenceParser#equals(Object)
+	 */
+	@Test
+	public void testEqualsWithSelf() {
+		assertTrue(instance.equals(instance));
+	}
 }
