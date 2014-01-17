@@ -3,9 +3,7 @@
 Java Marine API
 ---------------
 
-Java Marine API is an [NMEA 0183](http://en.wikipedia.org/wiki/NMEA_0183) parser library for Java. 
-
-See project [website](http://ktuukkan.github.io/marine-api/) for more info and documentation.
+Java Marine API is an [NMEA 0183](http://en.wikipedia.org/wiki/NMEA_0183) parser library for Java. See project [webpage](http://ktuukkan.github.io/marine-api/) for more info and documentation.
 
 **Snapshots**
 
