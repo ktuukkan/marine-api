@@ -53,27 +53,6 @@ abstract class PositionParser extends SentenceParser {
 	}
 
 	/**
-	 * Sets the values from specified <code>Position</code> according to given
-	 * field indices. Sets the absolute values of latitude and longitude, and
-	 * hemisphere indicators as given by <code>Position</code>. Does not set
-	 * altitude.
-	 * 
-	 * @param p Position to set
-	 * @param latIndex Index of latitude field
-	 * @param latHemIndex Index of latitude hemisphere field
-	 * @param lonIndex Index of longitude field
-	 * @param lonHemIndex Index of longitude hemisphere field
-	 */
-	protected void setPositionValues(Position p, int latIndex, int latHemIndex,
-		int lonIndex, int lonHemIndex) {
-
-		setLatitude(latIndex, Math.abs(p.getLatitude()));
-		setLongitude(lonIndex, Math.abs(p.getLongitude()));
-		setLatHemisphere(latHemIndex, p.getLatitudeHemisphere());
-		setLonHemisphere(lonHemIndex, p.getLongitudeHemisphere());
-	}
-
-	/**
 	 * Parses the hemisphere of latitude from specified field.
 	 * 
 	 * @param index Index of field that contains the latitude hemisphere value.
@@ -229,5 +208,26 @@ abstract class PositionParser extends SentenceParser {
 				+ hem);
 		}
 		setCharValue(field, hem.toChar());
+	}
+
+	/**
+	 * Sets the values from specified <code>Position</code> according to given
+	 * field indices. Sets the absolute values of latitude and longitude, and
+	 * hemisphere indicators as given by <code>Position</code>. Does not set
+	 * altitude.
+	 * 
+	 * @param p Position to set
+	 * @param latIndex Index of latitude field
+	 * @param latHemIndex Index of latitude hemisphere field
+	 * @param lonIndex Index of longitude field
+	 * @param lonHemIndex Index of longitude hemisphere field
+	 */
+	protected void setPositionValues(Position p, int latIndex, int latHemIndex,
+		int lonIndex, int lonHemIndex) {
+
+		setLatitude(latIndex, Math.abs(p.getLatitude()));
+		setLongitude(lonIndex, Math.abs(p.getLongitude()));
+		setLatHemisphere(latHemIndex, p.getLatitudeHemisphere());
+		setLonHemisphere(lonHemIndex, p.getLongitudeHemisphere());
 	}
 }
