@@ -73,6 +73,7 @@ public interface MWVSentence extends Sentence {
 	 * Set wind angle.
 	 * 
 	 * @param angle Wind angle in degrees.
+	 * @see #setTrue(boolean)
 	 */
 	void setAngle(double angle);
 
@@ -103,6 +104,7 @@ public interface MWVSentence extends Sentence {
 	 * Set angle to relative or true.
 	 * 
 	 * @param isTrue True for true angle, false for relative to bow.
+	 * @see #setAngle(double)
 	 */
 	void setTrue(boolean isTrue);
 }
