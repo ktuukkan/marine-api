@@ -21,13 +21,13 @@
 package net.sf.marineapi.nmea.util;
 
 /**
- * FaaMode defines the FAA operating modes reported by APB, BWC, BWR, GLL, RMA,
- * RMB, RMC, VTG, WCV, and XTE sentences since NMEA 2.3. Also, the mode field in
- * GGA was extended to contain these statuses.
+ * <p>FAA operating modes reported by APB, BWC, BWR, GLL, RMA, RMB, RMC, VTG,
+ * WCV and XTE sentences since NMEA 2.3. Also, the mode field in GGA was
+ * extended to contain these statuses.</p>
  * <p>
  * Notice that FAA mode dominates the {@link DataStatus} fields. Status field
  * will be set to {@link DataStatus#ACTIVE} for modes {@link #AUTOMATIC} and
- * {@link #DGPS}, and {@link DataStatus#VOID} for all other modes.
+ * {@link #DGPS}, and {@link DataStatus#VOID} for all other modes.</p>
  * 
  * @author Kimmo Tuukkanen
  * @see GpsFixQuality
