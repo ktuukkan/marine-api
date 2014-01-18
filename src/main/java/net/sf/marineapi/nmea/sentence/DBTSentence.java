@@ -21,7 +21,8 @@
 package net.sf.marineapi.nmea.sentence;
 
 /**
- * Water depth below transducer, in meters, feet and fathoms.
+ * <p>Water depth below transducer, in meters, feet and fathoms.</p>
+ * <p>Example:<br><code>$SDDBT,8.1,f,2.4,M,1.3,F*0B</code></p>
  * 
  * @author Kimmo Tuukkanen
  */

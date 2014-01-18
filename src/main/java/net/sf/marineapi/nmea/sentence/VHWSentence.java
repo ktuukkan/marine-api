@@ -21,14 +21,16 @@
 package net.sf.marineapi.nmea.sentence;
 
 /**
- * Water speed and heading in respect to true and magnetic north.
+ * <p>Water speed and heading in respect to true and magnetic north.</p>
+ * 
+ * <p>Example:<br><code>$IIVHW,,,213,M,0.00,N,,K*2F</code></p>
  * 
  * @author Warren Zahra, Kimmo Tuukkanen
  */
 public interface VHWSentence extends HeadingSentence {
 
 	/**
-	 * Returns the current heading.
+	 * Returns the current magnetic heading.
 	 * 
 	 * @return Heading in degrees magnetic.
 	 */

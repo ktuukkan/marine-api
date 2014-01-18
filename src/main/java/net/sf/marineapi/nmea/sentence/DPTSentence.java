@@ -21,10 +21,12 @@
 package net.sf.marineapi.nmea.sentence;
 
 /**
- * Depth of water, measured in meters. Includes offset to transducer, positive
+ * <p>Depth of water, measured in meters. Includes offset to transducer, positive
  * values for distance from transducer to water line and negative values for
  * distance from transducer to keel. The maximum value is included since NMEA
- * v3.0 and may thus be missing.
+ * v3.0 and may thus be missing.</p>
+ * 
+ * <p>Example:<br><code>$SDDPT,2.4,,*7F</code></p>
  * 
  * @author Kimmo Tuukkanen
  */

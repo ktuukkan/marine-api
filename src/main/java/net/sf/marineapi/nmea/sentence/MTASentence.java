@@ -21,7 +21,9 @@
 package net.sf.marineapi.nmea.sentence;
 
 /**
- * Air temperature in degrees Celsius.
+ * <p>Air temperature in degrees Celsius.</p>
+ * 
+ * <p>Example:<br><code>$IIMTA,16.7,C*05</code></p>
  * 
  * @author Kimmo Tuukkanen
  */

@@ -21,7 +21,9 @@
 package net.sf.marineapi.nmea.sentence;
 
 /**
- * Vessel heading in degrees with respect to magnetic north.
+ * <p>Vessel heading in degrees with respect to magnetic north.</p>
+ * 
+ * <p>Example:<br><code>$IIHDM,213,M*3C</code></p>
  * 
  * @author Kimmo Tuukkanen
  */
