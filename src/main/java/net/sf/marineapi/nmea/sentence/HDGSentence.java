@@ -21,7 +21,9 @@
 package net.sf.marineapi.nmea.sentence;
 
 /**
- * Vessel heading with magnetic deviation and variation.
+ * <p>Vessel heading with magnetic deviation and variation.</p>
+ * 
+ * <p>Example:<br><code>$HCHDG,205.2,,,2.7,W</code></p>
  * 
  * @author Kimmo Tuukkanen
  */
