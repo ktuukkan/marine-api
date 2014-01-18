@@ -17,6 +17,8 @@ CHANGES
    have ids of different lenghts.
  
  * PositionEvent; fixed speed returned in knots instead of km/h.
+ 
+ * Javadoc improvements
   
 KNOWN ISSUES
 

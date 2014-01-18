@@ -3,7 +3,7 @@ Version @VERSION@ pre-alpha (b@BUILD_ID@)
 <http://ktuukkan.github.io/marine-api/>
 
 Java Marine API is an NMEA 0183 library for accessing the data provided by 
-electronic marine instruments such as GPS, sonar or autopilot.
+electronic marine instruments such as GPS, echo sounder and weather instruments.
 
 SYSTEM REQUIREMENTS
  
