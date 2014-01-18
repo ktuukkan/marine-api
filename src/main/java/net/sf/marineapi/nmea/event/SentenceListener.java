@@ -22,6 +22,8 @@ package net.sf.marineapi.nmea.event;
 
 import java.util.EventListener;
 
+import net.sf.marineapi.nmea.io.SentenceReader;
+
 /**
  * Base interface for listening to SentenceEvents.
  * 
@@ -33,29 +35,39 @@ import java.util.EventListener;
 public interface SentenceListener extends EventListener {
 
 	/**
-	 * Called when NMEA data flow has paused for some reason, e.g. when reached
-	 * the end of file or device has stopped providing data, but the reader is
-	 * still running and waiting for more data. Timeout for pause event to occur
-	 * is 5 seconds.
+	 * <p>Called after {@link net.sf.marineapi.nmea.io.SentenceReader} has timed
+	 * out for receiving new data. Indicates that the reader is still active and
+	 * waiting for new data which isn't currently available for some reason. For
+	 * example, the device may have stopped broadcasting or the end of a file
+	 * has been reached.</p>
+	 * 
+	 * <p>Default time for timeout is defined by
+	 * {@link net.sf.marineapi.nmea.io.SentenceReader#DEFAULT_TIMEOUT}. This
+	 * value can be overridden with
+	 * {@link net.sf.marineapi.nmea.io.SentenceReader#setPauseTimeout(int)}.</p>
 	 */
 	void readingPaused();
 
 	/**
-	 * Called when NMEA data is found in stream and reader starts dispatching
-	 * SentenceEvents. Also, this notification occurs when events dispatching
-	 * continues after <code>readingPaused()</code> has occurred.
+	 * Called before {@link net.sf.marineapi.nmea.io.SentenceReader} starts
+	 * dispatching events. Indicates that the reader is active and receiving
+	 * data. Also, this notification occurs when the dispatching continues
+	 * again after {@link #readingPaused()} has occurred.
 	 */
 	void readingStarted();
 
 	/**
-	 * Invoked after <code>SentenceReader</code> has stopped reading the input
-	 * stream, either due to error or explicit request by calling
-	 * {@link net.sf.marineapi.nmea.io.SentenceReader#stop()}.
+	 * Called after {@link net.sf.marineapi.nmea.io.SentenceReader} has
+	 * permanently stopped reading, either due to an error or by calling the
+	 * {@link net.sf.marineapi.nmea.io.SentenceReader#stop()} method.
 	 */
 	void readingStopped();
 
 	/**
-	 * Invoked when valid NMEA 0183 data has been read by SentenceReader.
+	 * Called by {@link net.sf.marineapi.nmea.io.SentenceReader} when a single
+	 * NMEA 0183 sentence has been read and parsed from the data stream. By
+	 * default, only supported sentences defined in
+	 * {@link net.sf.marineapi.nmea.sentence.SentenceId} are dispatched.
 	 * 
 	 * @param event SentenceEvent containing the data.
 	 */
