@@ -12,9 +12,9 @@ import net.sf.marineapi.nmea.sentence.Sentence;
  * single sentence type and register it in
  * {@link net.sf.marineapi.nmea.io.SentenceReader}.</p>
  * <p>
- * Methods from {@link SentenceListener} interface implemented in this class are empty,
- * except {@link #sentenceRead(SentenceEvent)} which detects the incoming
- * sentence parsers and casts them to desired sentence interface before calling
+ * Methods of {@link SentenceListener} interface implemented by this class are
+ * empty, except {@link #sentenceRead(SentenceEvent)} which detects the incoming
+ * sentence parsers and casts them to correct sentence interface before calling
  * {@link #sentenceRead(Sentence)} method.
  *
  * @author Kimmo Tuukkanen
@@ -65,11 +65,15 @@ public abstract class AbstractSentenceListener<T extends Sentence>
 	public abstract void sentenceRead(T sentence);
 
 	/**
-	 * Resolves the type of each received sentence parser and passes it to
-	 * <code>sentenceRead(T sentence)</code> if the type matches listener's
-	 * expected type. This method maybe overridden too, but
-	 * be sure to call <code>super.sentencerRead(SentenceEvent)</code> before or
-	 * after your additional event handling.</p>
+	 * <p>Resolves the type of each received sentence parser and passes it to
+	 * <code>sentenceRead(T)</code> if the type matches the expected type
+	 * <code>T</code>.</p>
+	 * 
+	 * <p>This method may be overridden, but be sure to call
+	 * <code>super.sentencerRead(SentenceEvent)</code> before or after your
+	 * additional event handling. However, for listeners that need to handle all
+	 * incoming sentences, it's recommended to directly implement the 
+	 * {@link net.sf.marineapi.nmea.event.SentenceListener} interface.</p>
 	 *
 	 * @see net.sf.marineapi.nmea.event.SentenceListener#sentenceRead(net.sf.marineapi.nmea.event.SentenceEvent)
 	 */
