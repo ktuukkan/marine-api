@@ -1,6 +1,7 @@
 package net.sf.marineapi.nmea.parser;
 
-import net.sf.marineapi.nmea.sentence.HDTSentence;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.fail;
 import net.sf.marineapi.nmea.sentence.ROTSentence;
 import net.sf.marineapi.nmea.sentence.SentenceId;
 import net.sf.marineapi.nmea.sentence.TalkerId;
@@ -8,8 +9,6 @@ import net.sf.marineapi.nmea.util.DataStatus;
 
 import org.junit.Before;
 import org.junit.Test;
-
-import static org.junit.Assert.*;
 
 /**
  * Created by SJK on 22/01/14.
