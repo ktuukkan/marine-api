@@ -30,7 +30,7 @@ import net.sf.marineapi.nmea.util.DataStatus;
  *
  * @author Mike Tamis, Kimmo Tuukkanen
  */
-public class ROTParser extends SentenceParser implements ROTSentence {
+class ROTParser extends SentenceParser implements ROTSentence {
 
     private static final int RATE_OF_TURN = 0;
     private static final int STATUS = 1;
