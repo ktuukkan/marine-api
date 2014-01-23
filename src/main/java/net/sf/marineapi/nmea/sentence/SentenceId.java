@@ -59,6 +59,8 @@ public enum SentenceId {
 	RMB,
 	/** Recommended minimum specific GPS/TRANSIT data */
 	RMC,
+    /** Rate of Turn */
+    ROT,
 	/** Route data and waypoint list */
 	RTE,
 	/** Track made good and ground speed */

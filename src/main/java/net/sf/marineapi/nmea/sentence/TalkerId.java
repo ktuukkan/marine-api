@@ -52,6 +52,8 @@ public enum TalkerId {
 	/** Computer - Memory Data (obsolete) */
 	@Deprecated
 	CM,
+    /** Channel Pilot */
+    CP,
 	/** Communications - Satellite */
 	CS,
 	/** Communications - Radio-Telephone (MF/HF) */
