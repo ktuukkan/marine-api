@@ -112,12 +112,29 @@ public final class SentenceFactory {
 	}
 
 	/**
-	 * Creates a sentence parser for specified sentence type with given talker
-	 * ID.
+ 	 * Creates a parser for specified talker and sentence type. The returned
+ 	 * instance needs to be cast to corresponding sentence interface.
+ 	 * 
+	 * @param talker Sentence talker id
+	 * @param type Sentence type
+	 * @return Sentence parser of requested type.
+	 * @throws IllegalArgumentException If talker id is null or if there is no
+	 *             parser registered for given sentence type.
+	 * @throws IllegalStateException If parser instantiation fails.
+	 */
+	public Sentence createParser(TalkerId talker, SentenceId type) {
+		return createParser(talker, type.toString());
+	}
+	
+	/**
+	 * Creates a parser for specified talker and sentence type. This method is
+	 * mainly intended to be used when custom parsers have been registered in
+	 * the factory. The returned instance needs to be cast to corresponding
+	 * sentence interface.
 	 * 
 	 * @param talker Talker ID to use in parser
 	 * @param type Type of the parser to create
-	 * @return Sentence instance
+	 * @return Sentence parser for requested type
 	 * @throws IllegalArgumentException If talker id is null or if there is no
 	 *             parser registered for given sentence type.
 	 * @throws IllegalStateException If parser is found, but it does not
@@ -129,7 +146,7 @@ public final class SentenceFactory {
 		}
 		return createParserImpl(type, talker);
 	}
-
+	
 	/**
 	 * Tells if the factory is able to create parser for specified sentence
 	 * type. All {@link SentenceId} enum values should result returning
