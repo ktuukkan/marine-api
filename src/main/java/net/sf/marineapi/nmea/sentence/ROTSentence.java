@@ -1,6 +1,6 @@
 /*
  * ROTSentence.java
- * Copyright (C) 2014 Mike Tamis
+ * Copyright (C) 2014 Mike Tamis, Kimmo Tuukkanen
  *
  * This file is part of Java Marine API.
  * <http://ktuukkan.github.io/marine-api/>
@@ -20,11 +20,43 @@
  */
 package net.sf.marineapi.nmea.sentence;
 
+import net.sf.marineapi.nmea.util.DataStatus;
+
 /**
- * ROT sentence interface.
- *
- * @author Mike Tamis
+ * <p>Vessel's rate of turn given in degrees per minute. Negative values
+ * indicate bow turning to port.</p>
+ * 
+ * <p>Example:<br><code>$GPROT,35.6,A*4E</code></p>
+ * 
+ * @author Mike Tamis, Kimmo Tuukkanen
  */
-public interface ROTSentence  extends RateOfTurnSentence
-{
+public interface ROTSentence extends Sentence {
+
+	/**
+	 * Returns the vessel's rate of turn.
+	 * 
+	 * @return Rate of Turn value (degrees per minute)
+	 */
+	double getRateOfTurn();
+
+	/**
+	 * Sets the vessel's rate of turn value.
+	 * 
+	 * @param rot Rate of Turn value to set (degrees per minute)
+	 */
+	void setRateOfTurn(double rot);
+
+	/**
+	 * Returns the data status (valid/invalid).
+	 * 
+	 * @return True means data is valid
+	 */
+	DataStatus getStatus();
+
+	/**
+	 * Sets the data status.
+	 * 
+	 * @param status DataStatus to set.
+	 */
+	void setStatus(DataStatus status);
 }

@@ -1,6 +1,6 @@
 /*
  * ROTParser.java
- * Copyright (C) 2014 Mike Tamis
+ * Copyright (C) 2014 Mike Tamis, Kimmo Tuukkanen
  *
  * This file is part of Java Marine API.
  * <http://ktuukkan.github.io/marine-api/>
@@ -23,11 +23,12 @@ package net.sf.marineapi.nmea.parser;
 import net.sf.marineapi.nmea.sentence.ROTSentence;
 import net.sf.marineapi.nmea.sentence.SentenceId;
 import net.sf.marineapi.nmea.sentence.TalkerId;
+import net.sf.marineapi.nmea.util.DataStatus;
 
 /**
  * ROT sentence parser.
  *
- * @author Mike Tamis
+ * @author Mike Tamis, Kimmo Tuukkanen
  */
 public class ROTParser extends SentenceParser implements ROTSentence {
 
@@ -63,15 +64,21 @@ public class ROTParser extends SentenceParser implements ROTSentence {
      * (non-Javadoc)
      * @see net.sf.marineapi.nmea.sentence.RateOfTurnSentance#getStatus()
      */
-    public boolean getStatus() {
-        return getCharValue(STATUS) == 'A';
+    public DataStatus getStatus() {
+        return DataStatus.valueOf(getCharValue(STATUS));
     }
 
-    public void setStatus(boolean status) {
-        setCharValue(STATUS,status ? 'A' : 'V');
+    /* (non-Javadoc)
+     * @see net.sf.marineapi.nmea.sentence.ROTSentence#setRateOfTurn(double)
+     */
+    public void setRateOfTurn(double rot) {
+        setDegreesValue(RATE_OF_TURN, rot);
     }
-
-    public void setRateOfTurn(double ROT) {
-        setDegreesValue(RATE_OF_TURN, ROT);
+    
+    /* (non-Javadoc)
+     * @see net.sf.marineapi.nmea.sentence.ROTSentence#setStatus(net.sf.marineapi.nmea.util.DataStatus)
+     */
+    public void setStatus(DataStatus status) {
+        setCharValue(STATUS, status.toChar());
     }
 }
