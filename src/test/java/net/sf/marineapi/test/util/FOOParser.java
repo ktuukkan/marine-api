@@ -7,7 +7,7 @@ import net.sf.marineapi.nmea.sentence.TalkerId;
  * Dummy parser imaginary sentence type, for testing the inheritance of
  * SentenceParser.
  */
-public class FOOParser extends SentenceParser {
+public class FOOParser extends SentenceParser implements FOOSentence {
 
 	public FOOParser(String s) {
 		super(s, "FOO");

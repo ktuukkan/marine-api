@@ -11,6 +11,7 @@ import net.sf.marineapi.nmea.sentence.SentenceId;
 import net.sf.marineapi.nmea.sentence.TalkerId;
 import net.sf.marineapi.test.util.BARParser;
 import net.sf.marineapi.test.util.FOOParser;
+import net.sf.marineapi.test.util.FOOSentence;
 import net.sf.marineapi.test.util.VDMParser;
 
 import org.junit.Before;
@@ -56,15 +57,33 @@ public class SentenceFactoryTest {
 		assertTrue(bod instanceof Sentence);
 		assertTrue(bod instanceof BODSentence);
 		assertTrue(bod instanceof BODParser);
+		assertEquals(BODTest.EXAMPLE, bod.toSentence());
 	}
 
+	/**
+	 * Test method for
+	 * {@link net.sf.marineapi.nmea.parser.SentenceFactory#createParser(TalkerId, SentenceId)
+	 * .
+	 */
+	@Test
+	public void testCreateEmptyParserWithSentenceId() {
+		for (SentenceId id : SentenceId.values()) {
+			Sentence s = instance.createParser(TalkerId.II, id);
+			assertNotNull(s);
+			assertTrue(s instanceof Sentence);
+			assertTrue(s instanceof SentenceParser);
+			assertEquals(TalkerId.II, s.getTalkerId());
+			assertEquals(id.name(), s.getSentenceId());
+		}
+	}
+	
 	/**
 	 * Test method for
 	 * {@link net.sf.marineapi.nmea.parser.SentenceFactory#createParser(java.lang.String)}
 	 * .
 	 */
 	@Test
-	public void testCreateEmptyParser() {
+	public void testCreateEmptyParserWithSentenceIdStr() {
 		for (SentenceId id : SentenceId.values()) {
 			Sentence s = instance.createParser(TalkerId.II, id.name());
 			assertNotNull(s);
@@ -73,6 +92,39 @@ public class SentenceFactoryTest {
 		}
 	}
 
+	/**
+	 * Test method for
+	 * {@link net.sf.marineapi.nmea.parser.SentenceFactory#createParser(java.lang.String)}
+	 * .
+	 */
+	@Test
+	public void testCreateCustomParser() {
+
+		try {
+			instance.registerParser("FOO", FOOParser.class);
+			assertTrue(instance.hasParser("FOO"));
+		} catch (Exception e) {
+			fail("parser registering failed");
+		}
+		
+		Sentence s = null;
+		try {
+			s = instance.createParser("$IIFOO,aa,bb,cc");
+		} catch (Exception e) {
+			fail("sentence parsing failed");
+		}
+		
+		assertNotNull(s);
+		assertTrue(s instanceof Sentence);
+		assertTrue(s instanceof SentenceParser);
+		assertTrue(s instanceof FOOParser);
+		assertEquals(TalkerId.II, s.getTalkerId());
+		assertEquals("FOO", s.getSentenceId());
+		assertEquals("aa", ((FOOSentence)s).getValueA());
+		assertEquals("bb", ((FOOSentence)s).getValueB());
+		assertEquals("cc", ((FOOSentence)s).getValueC());
+	}
+	
 	/**
 	 * Test method for
 	 * {@link net.sf.marineapi.nmea.parser.SentenceFactory#createParser(java.lang.String)}
@@ -93,8 +145,9 @@ public class SentenceFactoryTest {
 		assertTrue(s instanceof Sentence);
 		assertTrue(s instanceof SentenceParser);
 		assertTrue(s instanceof FOOParser);
+		assertEquals("FOO", s.getSentenceId());
 	}
-
+	
 	/**
 	 * Test method for
 	 * {@link net.sf.marineapi.nmea.parser.SentenceFactory#createParser(java.lang.String)}
@@ -154,29 +207,7 @@ public class SentenceFactoryTest {
 			// pass
 		}
 	}
-
-	/**
-	 * Test method for
-	 * {@link net.sf.marineapi.nmea.parser.SentenceFactory#registerParser(java.lang.String, java.lang.Class)}
-	 * .
-	 */
-	@Test
-	public void testRegisterParser() {
-
-		try {
-			instance.registerParser("FOO", FOOParser.class);
-			assertTrue(instance.hasParser("FOO"));
-		} catch (Exception e) {
-			fail("parser registering failed");
-		}
-
-		Sentence s = instance.createParser("$IIFOO,1,2,3");
-		assertNotNull(s);
-		assertTrue(s instanceof Sentence);
-		assertTrue(s instanceof SentenceParser);
-		assertTrue(s instanceof FOOParser);
-	}
-
+	
 	/**
 	 * Test method for
 	 * {@link net.sf.marineapi.nmea.parser.SentenceFactory#registerParser(java.lang.String, java.lang.Class)}
@@ -247,6 +278,7 @@ public class SentenceFactoryTest {
 	@Test
 	public void testGetInstance() {
 		assertNotNull(instance);
+		assertTrue(instance == SentenceFactory.getInstance());
 		assertEquals(instance, SentenceFactory.getInstance());
 	}
 

@@ -8,6 +8,7 @@ import net.sf.marineapi.nmea.sentence.Sentence;
 import net.sf.marineapi.nmea.sentence.SentenceId;
 import net.sf.marineapi.nmea.sentence.TalkerId;
 import net.sf.marineapi.test.util.FOOParser;
+import net.sf.marineapi.test.util.FOOSentence;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -53,7 +54,7 @@ public class SentenceParserTest {
 		sf.registerParser(foo, FOOParser.class);
 
 		final String fooSentence = "$GPFOO,B,A,R";
-		final FOOParser fp = new FOOParser(fooSentence);
+		final FOOSentence fp = new FOOParser(fooSentence);
 		final Sentence s = sf.createParser(fooSentence);
 
 		assertTrue(s instanceof SentenceParser);
