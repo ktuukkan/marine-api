@@ -32,8 +32,8 @@ import net.sf.marineapi.nmea.sentence.TalkerId;
 
 /**
  * <p>
- * Base class for all NMEA 0183 sentence parsers. Provides general services such
- * as sentence validation and data field setters and getters with formatting.
+ * Base class for all NMEA 0183 sentence parsers. Contains generic methods such
+ * as data field setters and getters, data formatting, validation etc.
  * <p>
  * NMEA 0183 data is transmitted in form of ASCII Strings that are called
  * <em>sentences</em>. Each sentence starts with a '$', a two letter
@@ -49,11 +49,11 @@ import net.sf.marineapi.nmea.sentence.TalkerId;
  * $&lt;id&gt;,&lt;field #0&gt;,&lt;field #1&gt;,...,&lt;field #n&gt;*&lt;checksum&gt;(CR/LF)
  * </code>
  * <p>
- * For more details, see <a href="http://gpsd.berlios.de/NMEA.txt">NMEA
- * Revealed</a> by Eric S. Raymond.
+ * For more details, see <a href="http://catb.org/gpsd/NMEA.html"
+ * target="_blank">NMEA Revealed</a> by Eric S. Raymond.
  * <p>
- * This class can be used to implement and integrate parsers not provided by in
- * the library. See {@link SentenceFactory} for detailed instructions.
+ * This class can also be used to implement and integrate parsers not provided
+ * by in the library. See {@link SentenceFactory} for more instructions.
  * 
  * @author Kimmo Tuukkanen
  */
