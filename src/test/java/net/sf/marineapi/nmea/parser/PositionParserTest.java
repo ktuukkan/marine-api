@@ -26,6 +26,7 @@ import static org.junit.Assert.assertTrue;
 import net.sf.marineapi.nmea.sentence.SentenceId;
 import net.sf.marineapi.nmea.util.CompassPoint;
 import net.sf.marineapi.nmea.util.Position;
+
 import org.junit.Before;
 import org.junit.Test;
 

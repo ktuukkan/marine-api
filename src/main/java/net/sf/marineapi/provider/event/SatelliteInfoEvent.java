@@ -23,9 +23,9 @@ package net.sf.marineapi.provider.event;
 import java.util.List;
 
 import net.sf.marineapi.nmea.sentence.GSASentence;
-import net.sf.marineapi.nmea.util.SatelliteInfo;
-import net.sf.marineapi.nmea.util.GpsFixStatus;
 import net.sf.marineapi.nmea.util.FaaMode;
+import net.sf.marineapi.nmea.util.GpsFixStatus;
+import net.sf.marineapi.nmea.util.SatelliteInfo;
 
 /**
  * SatelliteInfoEvent contains the satellite information collected by

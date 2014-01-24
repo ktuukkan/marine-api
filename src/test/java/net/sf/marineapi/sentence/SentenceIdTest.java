@@ -23,6 +23,7 @@ package net.sf.marineapi.sentence;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
 import net.sf.marineapi.nmea.sentence.SentenceId;
+
 import org.junit.Test;
 
 /**

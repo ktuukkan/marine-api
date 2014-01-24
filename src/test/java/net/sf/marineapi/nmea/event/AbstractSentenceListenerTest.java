@@ -1,13 +1,14 @@
 package net.sf.marineapi.nmea.event;
 
-import static org.junit.Assert.*;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
 import net.sf.marineapi.nmea.parser.BODTest;
 import net.sf.marineapi.nmea.parser.GGATest;
 import net.sf.marineapi.nmea.parser.SentenceFactory;
 import net.sf.marineapi.nmea.sentence.BODSentence;
 import net.sf.marineapi.nmea.sentence.Sentence;
+
 import org.junit.Before;
 import org.junit.Test;
 
