@@ -288,8 +288,6 @@ public class Position {
 
 		double c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
 
-		double result = earthRadius * c * 1000;
-
-		return result;
+		return (earthRadius * c * 1000);
 	}
 }

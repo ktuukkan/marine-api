@@ -114,9 +114,7 @@ class RMCParser extends PositionParser implements RMCSentence {
 	 * @see net.sf.marineapi.nmea.sentence.PositionSentence#getPosition()
 	 */
 	public Position getPosition() {
-		Position p = parsePosition(LATITUDE, LAT_HEMISPHERE, LONGITUDE,
-			LON_HEMISPHERE);
-		return p;
+		return parsePosition(LATITUDE, LAT_HEMISPHERE, LONGITUDE, LON_HEMISPHERE);
 	}
 
 	/*

@@ -289,7 +289,7 @@ public class SentenceParser implements Sentence {
 	 * @see net.sf.marineapi.nmea.sentence.Sentence#setBeginChar(char)
 	 */
 	public void setBeginChar(char ch) {
-		if (ch != BEGIN_CHAR || ch != ALTERNATIVE_BEGIN_CHAR) {
+		if (ch != BEGIN_CHAR && ch != ALTERNATIVE_BEGIN_CHAR) {
 			String msg = "Invalid begin char; expected '$' or '!'";
 			throw new IllegalArgumentException(msg);
 		}
@@ -349,9 +349,7 @@ public class SentenceParser implements Sentence {
 			sb.append(field == null ? "" : field);
 		}
 
-		String sentence = Checksum.add(sb.toString());
-
-		return sentence;
+		return Checksum.add(sb.toString());
 	}
 
 	/**
