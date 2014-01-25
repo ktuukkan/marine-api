@@ -35,7 +35,6 @@ import net.sf.marineapi.nmea.sentence.SentenceValidator;
 class UDPDataReader implements DataReader {
 
 	private SentenceReader parent;
-	private ActivityMonitor monitor;
 	private DatagramSocket socket;
 	private volatile boolean isRunning = true;
 	byte[] buffer = new byte[1024];
@@ -66,7 +65,7 @@ class UDPDataReader implements DataReader {
 	 */
 	public void run() {
 
-		monitor = new ActivityMonitor(parent);
+		ActivityMonitor monitor = new ActivityMonitor(parent);
 		SentenceFactory factory = SentenceFactory.getInstance();
 
 		while (isRunning) {
