@@ -20,6 +20,9 @@ SYSTEM REQUIREMENTS
  * Neuron Robotics Java Serial Library
    <http://code.google.com/p/nrjavaserial/>
 
+ * PureJavaComm
+   <http://www.sparetimelabs.com/purejavacomm/>
+
 LICENSING
 
 Java Marine API is free software: you can redistribute it and/or modify it

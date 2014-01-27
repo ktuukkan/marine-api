@@ -52,7 +52,7 @@ public enum TalkerId {
 	/** Computer - Memory Data (obsolete) */
 	@Deprecated
 	CM,
-    /** Channel Pilot */
+    /** Channel Pilot (Navicom Dynamics proprietary) */
     CP,
 	/** Communications - Satellite */
 	CS,

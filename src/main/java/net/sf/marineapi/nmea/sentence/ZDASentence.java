@@ -21,6 +21,7 @@
 package net.sf.marineapi.nmea.sentence;
 
 import java.util.Date;
+
 import net.sf.marineapi.nmea.util.Time;
 
 /**

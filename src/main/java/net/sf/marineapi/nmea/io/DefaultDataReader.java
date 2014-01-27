@@ -36,7 +36,6 @@ import net.sf.marineapi.nmea.sentence.SentenceValidator;
 class DefaultDataReader implements DataReader {
 
 	private SentenceReader parent;
-	private ActivityMonitor monitor;
 	private BufferedReader input;
 	private volatile boolean isRunning = true;
 
@@ -74,7 +73,7 @@ class DefaultDataReader implements DataReader {
 	 */
 	public void run() {
 
-		monitor = new ActivityMonitor(parent);
+		ActivityMonitor monitor = new ActivityMonitor(parent);
 		SentenceFactory factory = SentenceFactory.getInstance();
 
 		while (isRunning) {
