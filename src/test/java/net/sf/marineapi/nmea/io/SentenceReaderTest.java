@@ -88,7 +88,6 @@ public class SentenceReaderTest {
 	}
 
 	@Test
-	@Ignore
 	public void testFireReadingPaused() {
 		assertFalse(paused);
 		reader.fireReadingPaused();
@@ -96,7 +95,6 @@ public class SentenceReaderTest {
 	}
 
 	@Test
-	@Ignore
 	public void testFireReadingStarted() {
 		assertFalse(started);
 		reader.fireReadingStarted();
@@ -104,7 +102,6 @@ public class SentenceReaderTest {
 	}
 
 	@Test
-	@Ignore
 	public void testFireReadingStopped() {
 		assertFalse(stopped);
 		reader.fireReadingStopped();
