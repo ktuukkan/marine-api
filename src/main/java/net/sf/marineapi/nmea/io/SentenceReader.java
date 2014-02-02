@@ -100,7 +100,7 @@ public class SentenceReader {
 	 * @see net.sf.marineapi.nmea.event.SentenceListener
 	 */
 	public void addSentenceListener(SentenceListener listener) {
-		registerListener(DISPATCH_ALL, listener);
+		registerListener(listener, DISPATCH_ALL);
 	}
 
 	/**
@@ -112,7 +112,7 @@ public class SentenceReader {
 	 * @see net.sf.marineapi.nmea.event.SentenceListener
 	 */
 	public void addSentenceListener(SentenceListener sl, SentenceId type) {
-		registerListener(type.toString(), sl);
+		registerListener(sl, type.toString());
 	}
 
 	/**
@@ -124,7 +124,7 @@ public class SentenceReader {
 	 * @see net.sf.marineapi.nmea.event.SentenceListener
 	 */
 	public void addSentenceListener(SentenceListener sl, String type) {
-		registerListener(type, sl);
+		registerListener(sl, type);
 	}
 
 	/**
@@ -284,11 +284,11 @@ public class SentenceReader {
 
 	/**
 	 * Registers a SentenceListener to hash map with given key.
-	 *
-	 * @param type Sentence type to register for
+	 * 
 	 * @param listener SentenceListener to register
+	 * @param type Sentence type to register for
 	 */
-	private void registerListener(String type, SentenceListener listener) {
+	private void registerListener(SentenceListener listener, String type) {
 		if (listeners.containsKey(type)) {
 			listeners.get(type).add(listener);
 		} else {
