@@ -1,6 +1,6 @@
 /*
  * DefaultDataReader.java
- * Copyright (C) 2010-2012 Kimmo Tuukkanen
+ * Copyright (C) 2010-2014 Kimmo Tuukkanen
  * 
  * This file is part of Java Marine API.
  * <http://ktuukkan.github.io/marine-api/>
@@ -23,21 +23,20 @@ package net.sf.marineapi.nmea.io;
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-
-import net.sf.marineapi.nmea.parser.SentenceFactory;
-import net.sf.marineapi.nmea.sentence.Sentence;
-import net.sf.marineapi.nmea.sentence.SentenceValidator;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * The default data reader implementation using InputStream as data source.
  * 
  * @author Kimmo Tuukkanen
  */
-class DefaultDataReader implements DataReader {
+class DefaultDataReader extends AbstractDataReader {
 
-	private SentenceReader parent;
-	private BufferedReader input;
-	private volatile boolean isRunning = true;
+	private static final Logger LOG =
+		Logger.getLogger(DefaultDataReader.class.getName());
+
+	private final BufferedReader input;
 
 	/**
 	 * Creates a new instance of DefaultDataReader.
@@ -46,53 +45,26 @@ class DefaultDataReader implements DataReader {
 	 * @param parent SentenceReader dispatching events for this reader.
 	 */
 	public DefaultDataReader(InputStream source, SentenceReader parent) {
+		super(parent);
 		InputStreamReader isr = new InputStreamReader(source);
 		this.input = new BufferedReader(isr);
-		this.parent = parent;
 	}
 
 	/*
 	 * (non-Javadoc)
-	 * @see net.sf.marineapi.nmea.io.DataReader#isRunning()
+	 * 
+	 * @see net.sf.marineapi.nmea.io.AbstractDataReader#read()
 	 */
-	public boolean isRunning() {
-		return isRunning;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * @see net.sf.marineapi.nmea.io.DataReader#stop()
-	 */
-	public void stop() {
-		isRunning = false;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * @see java.lang.Runnable#run()
-	 */
-	public void run() {
-
-		ActivityMonitor monitor = new ActivityMonitor(parent);
-		SentenceFactory factory = SentenceFactory.getInstance();
-
-		while (isRunning) {
-			try {
-				if (input.ready()) {
-					String data = input.readLine();
-					if (SentenceValidator.isValid(data)) {
-						monitor.refresh();
-						Sentence s = factory.createParser(data);
-						parent.fireSentenceEvent(s);
-					}
-				}
-				monitor.tick();
-				Thread.sleep(50);
-			} catch (Exception e) {
-				// nevermind, keep trying..
+	@Override
+	public String read() {
+		String data = null;
+		try {
+			if (input.ready()) {
+				data = input.readLine();
 			}
+		} catch (Exception e) {
+			LOG.log(Level.WARNING, "InputStream read failed", e);
 		}
-		monitor.reset();
-		parent.fireReadingStopped();
+		return data;
 	}
 }

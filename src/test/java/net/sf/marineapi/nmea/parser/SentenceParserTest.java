@@ -200,6 +200,24 @@ public class SentenceParserTest {
 			fail(ex.getMessage());
 		}
 	}
+	
+	/**
+	 * Test method for
+	 * {@link net.sf.marineapi.nmea.parser.SentenceParser#getDoubleValue(int)}.
+	 */
+	@Test
+	public void testGetDoubleValueWithInvalidValue() {
+		String nmea = "$GPGLL,a,b,c,d,e,f";
+		SentenceParser s = new SentenceParser(nmea);
+		try {
+			s.getDoubleValue(2);
+			fail("Did not throw exception");
+		} catch (ParseException ex) {
+			// pass
+		} catch (Exception ex) {
+			fail(ex.getMessage());
+		}
+	}
 
 	/**
 	 * Test method for
