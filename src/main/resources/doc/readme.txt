@@ -7,7 +7,7 @@ electronic marine instruments such as GPS, echo sounder and weather instruments.
 
 SYSTEM REQUIREMENTS
  
- * Java 2 SE JRE/JDK 1.5 (1.6+ recommended)
+ * Java 2 SE JRE/JDK (1.6+ recommended)
  
  For serial port communication (choose one):
  
@@ -72,24 +72,24 @@ documents publicly available in the Internet (URLs checked on 2013-09-08):
  * NMEA Revealed by Eric S. Raymond
    <http://catb.org/gpsd/NMEA.html>
 
- * The NMEA FAQ by Peter Bennett
-   <http://vancouver-webpages.com/peter/nmeafaq.txt> (not found)
-   <http://www.eoss.org/pubs/nmeafaq.htm> (archived older version)
- 
- * NMEA Sentence Information by Glenn Baddeley
-   <http://home.mira.net/~gnb/gps/nmea.html>
- 
- * NMEA Data by Dale DePriest
-   <http://www.gpsinformation.org/dale/nmea.htm>
-  
  * NMEA 0183 article in Wikipedia
    <http://en.wikipedia.org/wiki/NMEA_0183>
-   
+
  * The NMEA Information Sheet (issue 3, 25th Feb 2011) by Actisense
    <http://www.actisense.com/products/nmea-0183/opto-4/downloads-opto-4.html>
 
  * PB100 WeatherStation Technical Manual by Airmar 
    <http://www.airmartechnology.com/uploads/installguide/PB100TechnicalManual_rev1.007.pdf>
 
+ * NMEA Sentence Information by Glenn Baddeley
+   <http://home.mira.net/~gnb/gps/nmea.html>
+ 
+ * NMEA Data by Dale DePriest
+   <http://www.gpsinformation.org/dale/nmea.htm>
+
+ * The NMEA FAQ by Peter Bennett
+   <http://vancouver-webpages.com/peter/nmeafaq.txt> (not found)
+   <http://www.eoss.org/pubs/nmeafaq.htm> (archived older version)
+    
 All warnings concerning the accuracy of information in above documents apply
 equally to Java Marine API.
