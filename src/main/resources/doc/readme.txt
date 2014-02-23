@@ -81,6 +81,9 @@ documents publicly available in the Internet (URLs checked on 2013-09-08):
  * PB100 WeatherStation Technical Manual by Airmar 
    <http://www.airmartechnology.com/uploads/installguide/PB100TechnicalManual_rev1.007.pdf>
 
+ * NMEA 0183 Sentences Not Recommended for New Designs by NMEA
+   <http://www.nmea.org/Assets/100108_nmea_0183_sentences_not_recommended_for_new_designs.pdf>
+
  * NMEA Sentence Information by Glenn Baddeley
    <http://home.mira.net/~gnb/gps/nmea.html>
  
@@ -90,6 +93,6 @@ documents publicly available in the Internet (URLs checked on 2013-09-08):
  * The NMEA FAQ by Peter Bennett
    <http://vancouver-webpages.com/peter/nmeafaq.txt> (not found)
    <http://www.eoss.org/pubs/nmeafaq.htm> (archived older version)
-    
+ 
 All warnings concerning the accuracy of information in above documents apply
 equally to Java Marine API.
