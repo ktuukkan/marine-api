@@ -21,6 +21,8 @@ CHANGES
  * PositionEvent; fixed speed returned in knots instead of km/h.
   
  * TalkerId; added new id 'CP' (Channel Pilot).
+ 
+ * SentenceReader; refactored and removed duplicate code.
 
  * Javadoc improvements
 

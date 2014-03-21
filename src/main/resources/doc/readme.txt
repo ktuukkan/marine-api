@@ -2,18 +2,18 @@ Java Marine API - README
 Version @VERSION@ pre-alpha (b@BUILD_ID@)
 <http://ktuukkan.github.io/marine-api/>
 
-Java Marine API is an NMEA 0183 library for accessing the data provided by 
+Java Marine API is an NMEA 0183 library for accessing the data provided by
 electronic marine instruments such as GPS, echo sounder and weather instruments.
 
 SYSTEM REQUIREMENTS
- 
- * Java 2 SE JRE/JDK 1.5 (1.6+ recommended)
- 
+
+ * Java 2 SE JRE/JDK (1.6+ recommended)
+
  For serial port communication (choose one):
- 
+
  * Java Communications API
    <http://www.oracle.com/technetwork/java/index-jsp-141752.html>
- 
+
  * RXTX library
    <http://rxtx.qbang.org/>
 
@@ -78,12 +78,12 @@ documents publicly available in the Internet (URLs checked on 2013-09-08):
  * The NMEA Information Sheet (issue 3, 25th Feb 2011) by Actisense
    <http://www.actisense.com/products/nmea-0183/opto-4/downloads-opto-4.html>
 
- * PB100 WeatherStation Technical Manual by Airmar 
+ * PB100 WeatherStation Technical Manual by Airmar
    <http://www.airmartechnology.com/uploads/installguide/PB100TechnicalManual_rev1.007.pdf>
 
  * RT Intertial+ NMEA Description (rev. 100720) by Oxford Technical Solutions
    <http://www.oxts.com/Downloads/Products/Inertial2/nmeaman.pdf>
- 
+
  * NMEA Sentence Information by Glenn Baddeley
    <http://home.mira.net/~gnb/gps/nmea.html>
 
@@ -92,7 +92,20 @@ documents publicly available in the Internet (URLs checked on 2013-09-08):
 
  * The NMEA FAQ by Peter Bennett
    <http://vancouver-webpages.com/peter/nmeafaq.txt> (not found)
-   <http://www.eoss.org/pubs/nmeafaq.htm> (archived older version) 
+   <http://www.eoss.org/pubs/nmeafaq.htm> (archived older version)
+
+ * NMEA 0183 Sentences Not Recommended for New Designs by NMEA
+   <http://www.nmea.org/Assets/100108_nmea_0183_sentences_not_recommended_for_new_designs.pdf>
+
+ * NMEA Sentence Information by Glenn Baddeley
+   <http://home.mira.net/~gnb/gps/nmea.html>
+
+ * NMEA Data by Dale DePriest
+   <http://www.gpsinformation.org/dale/nmea.htm>
+
+ * The NMEA FAQ by Peter Bennett
+   <http://vancouver-webpages.com/peter/nmeafaq.txt> (not found)
+   <http://www.eoss.org/pubs/nmeafaq.htm> (archived older version)
 
 All warnings concerning the accuracy of information in above documents apply
 equally to Java Marine API.
