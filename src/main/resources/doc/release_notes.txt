@@ -7,25 +7,12 @@ versions. Released on @RELEASE_DATE@.
 
 NEW FEATURES
 
- * AbstractSentenceListener; base class for creating listeners with automatic
-   sentence type resolving and casting.
-
- * Support for ROT sentences (vessel's rate of turn)
+ * TBD
 
 CHANGES
-
- * SentenceId; fixed a bug in parseStr(), sentence id length was assumed to be
-   exactly three chars. This prevented parsing proprietary sentences that may
-   have ids of different lenghts.
-
- * PositionEvent; fixed speed returned in knots instead of km/h.
-  
- * TalkerId; added new id 'CP' (Channel Pilot).
  
- * SentenceReader; refactored and removed duplicate code.
-
- * Javadoc improvements
-
+ * TalkerId; added ids 'GL' and 'GN' for GLONASS sentences.
+ 
 KNOWN ISSUES
 
  * Position.distanceTo() may produce inaccurate results.
