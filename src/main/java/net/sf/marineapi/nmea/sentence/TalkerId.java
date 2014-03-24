@@ -75,6 +75,10 @@ public enum TalkerId {
 	EP,
 	/** Engine Room Monitoring Systems */
 	ER,
+	/** GLONASS (according to IEIC 61162-1) */
+	GL,
+	/** Mixed GLONASS and GPS data (according to IEIC 61162-1) */
+	GN,
 	/** Global Positioning System (GPS) */
 	GP,
 	/** Heading - Magnetic Compass */

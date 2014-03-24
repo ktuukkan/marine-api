@@ -144,6 +144,12 @@ public class GSVTest {
 		assertEquals(2, gsv.getSentenceCount());
 	}
 
+	@Test
+	public void testParserGlonassGSV() {
+		GSVParser gl = new GSVParser("$GLGSV,2,1,07,70,28,145,44,71,67,081,46,72,34,359,40,77,16,245,35,1*76");
+		assertEquals(TalkerId.GL, gl.getTalkerId());
+	}
+
 	/**
 	 * Tests the given SatelliteInfo against specified values.
 	 */
