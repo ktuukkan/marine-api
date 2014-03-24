@@ -45,21 +45,32 @@ public class TalkerIdTest {
 	 */
 	@Test
 	public void testParse() {
-		TalkerId a = TalkerId.parse("$GPGLL,,,,,,,");
-		assertEquals(TalkerId.GP, a);
+		assertEquals(TalkerId.GP, TalkerId.parse("$GPGLL,,,,,,,"));
+		assertEquals(TalkerId.GL, TalkerId.parse("$GLGSV,,,,,,,"));
+		assertEquals(TalkerId.GN, TalkerId.parse("$GNGSV,,,,,,,"));
+		assertEquals(TalkerId.II, TalkerId.parse("$IIDPT,,,,,,,"));
+	}
 
-		TalkerId b = TalkerId.parse("$IIDPT,,,,,,,");
-		assertEquals(TalkerId.II, b);
+	@Test
+	public void testParseProprietary() {
+		assertEquals(TalkerId.P, TalkerId.parse("$PRWIILOG,GGA,A,T,1,0"));
+	}
 
-		TalkerId c = TalkerId.parse("$PGRMZ,,,,,,,");
-		assertEquals(TalkerId.P, c);
+	@Test
+	public void testParseAIS() {
+		assertEquals(TalkerId.AI, TalkerId.parse("!AIVDM,,,,,,,"));	
+		assertEquals(TalkerId.AB, TalkerId.parse("!ABVDM,,,,,,,"));	
+		assertEquals(TalkerId.BS, TalkerId.parse("!BSVDM,,,,,,,"));	
+	}
 
+	@Test
+	public void testParseUnknown() {
 		try {
 			TalkerId.parse("$XXXXX,,,,,,");
 			fail("Did not throw exception");
 		} catch (Exception e) {
 			// pass
-		}
+		}		
 	}
 
 }
