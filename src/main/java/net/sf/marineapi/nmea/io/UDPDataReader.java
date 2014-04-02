@@ -22,6 +22,9 @@ package net.sf.marineapi.nmea.io;
 
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
+import java.util.Arrays;
+import java.util.LinkedList;
+import java.util.Queue;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -37,6 +40,7 @@ class UDPDataReader extends AbstractDataReader {
 	
 	private DatagramSocket socket;
 	private byte[] buffer = new byte[1024];
+	private Queue<String> queue = new LinkedList<String>();
 
 	/**
 	 * Creates a new instance of StreamReader.
@@ -51,13 +55,25 @@ class UDPDataReader extends AbstractDataReader {
 
 	@Override
 	public String read() {
+		String data = receive();
+		if(data != null) {
+			String[] lines = data.split("\\r?\\n");
+			queue.addAll(Arrays.asList(lines));
+		}
+		return queue.poll();
+	}
+	
+	/**
+	 * Receive UDP packet and return as String
+	 */
+	private String receive() {
 		String data = null;
 		try {
 			DatagramPacket pkg = new DatagramPacket(buffer, buffer.length);
 			socket.receive(pkg);
 			data = new String(pkg.getData(), 0, pkg.getLength());
 		} catch (Exception e) {
-			LOG.log(Level.WARNING, "UDP read failed", e);
+			LOG.log(Level.WARNING, "UDP receive failed", e);
 		}
 		return data;
 	}
