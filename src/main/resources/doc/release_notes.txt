@@ -13,6 +13,8 @@ CHANGES
  
  * TalkerId; added ids 'GL' and 'GN' for GLONASS sentences.
  
+ * SentenceReader; UDP packets may now contain multiple lines/sentences.
+ 
 KNOWN ISSUES
 
  * Position.distanceTo() may produce inaccurate results.
