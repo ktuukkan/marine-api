@@ -7,13 +7,13 @@ versions. Released on @RELEASE_DATE@.
 
 NEW FEATURES
 
- * TBD
+ * Support for RSA sentences; rudder angle in degrees.
 
 CHANGES
  
  * TalkerId; added ids 'GL' and 'GN' for GLONASS sentences.
  
- * SentenceReader; UDP packets may now contain multiple lines/sentences.
+ * SentenceReader; UDP packet may now contain multiple lines/sentences.
  
 KNOWN ISSUES
 
