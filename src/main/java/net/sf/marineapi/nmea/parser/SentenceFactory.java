@@ -85,6 +85,7 @@ public final class SentenceFactory {
 		registerParser("MWV", MWVParser.class);
 		registerParser("RMB", RMBParser.class);
 		registerParser("RMC", RMCParser.class);
+		registerParser("ROT", ROTParser.class);
 		registerParser("RTE", RTEParser.class);
 		registerParser("RSA", RSAParser.class);
 		registerParser("VHW", VHWParser.class);
@@ -92,7 +93,6 @@ public final class SentenceFactory {
 		registerParser("WPL", WPLParser.class);
 		registerParser("XDR", XDRParser.class);
 		registerParser("ZDA", ZDAParser.class);
-		registerParser("ROT", ROTParser.class);
 	}
 
 	/**
