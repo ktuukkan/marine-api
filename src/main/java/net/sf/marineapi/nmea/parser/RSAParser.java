@@ -31,7 +31,7 @@ import net.sf.marineapi.nmea.util.Side;
  * 
  * @author Lázár József, Kimmo Tuukkanen
  */
-public class RSAParser extends SentenceParser implements RSASentence {
+class RSAParser extends SentenceParser implements RSASentence {
 
 	private static final int STARBOARD_SENSOR = 0;
 	private static final int STARBOARD_STATUS = 1;
