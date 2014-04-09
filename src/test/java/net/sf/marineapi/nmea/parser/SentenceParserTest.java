@@ -514,4 +514,47 @@ public class SentenceParserTest {
 	public void testEqualsWithSelf() {
 		assertTrue(instance.equals(instance));
 	}
+	
+	@Test
+	public void testSetFieldCountLowerByOne() {
+		
+		final int count = instance.getFieldCount() - 1;
+		final int lastIndex = instance.getFieldCount() - 2;
+		final String value = instance.getStringValue(lastIndex);
+		
+		instance.setFieldCount(count);
+		assertEquals(count, instance.getFieldCount());
+		assertEquals(value, instance.getStringValue(lastIndex));
+	}
+	
+	@Test
+	public void testSetFieldCountLower() {
+		SentenceParser parser = new SentenceParser("$GPGGA,1,2,3,4");
+		parser.setFieldCount(2);
+		assertEquals(2, parser.getFieldCount());
+		assertEquals("1", parser.getStringValue(0));
+		assertEquals("2", parser.getStringValue(1));
+		assertTrue(parser.toString().startsWith("$GPGGA,1,2*"));
+	}
+	
+	@Test
+	public void testSetFieldCountHigherByOne() {
+		
+		final int count = instance.getFieldCount() + 1;
+		final int lastIndex = instance.getFieldCount() - 1;
+		final String value = instance.getStringValue(lastIndex);
+		
+		instance.setFieldCount(count);
+		assertEquals(count, instance.getFieldCount());
+		assertEquals(value, instance.getStringValue(lastIndex));
+	}
+
+	@Test
+	public void testSetFieldCountHigher() {
+		SentenceParser parser = new SentenceParser("$GPGGA,1,2,3,4");
+		parser.setFieldCount(8);
+		assertEquals(8, parser.getFieldCount());
+		assertTrue(parser.toString().startsWith("$GPGGA,1,2,3,4,,,,*"));
+	}
+
 }

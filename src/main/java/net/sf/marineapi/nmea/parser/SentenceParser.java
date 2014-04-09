@@ -23,6 +23,7 @@ package net.sf.marineapi.nmea.parser;
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import net.sf.marineapi.nmea.sentence.Checksum;
@@ -513,7 +514,10 @@ public class SentenceParser implements Sentence {
 	}
 
 	/**
-	 * Sets the number of data fields.
+	 * Sets the number of sentence data fields. Increases or decreases the
+	 * fields array, values in fields not affected by the change remain
+	 * unchanged. Does nothing if specified new size is equal to count returned
+	 * by {@link #getFieldCount()}.
 	 * 
 	 * @param size Number of data fields, must be greater than zero.
 	 */
@@ -522,10 +526,13 @@ public class SentenceParser implements Sentence {
 			throw new IllegalArgumentException(
 				"Number of fields must be greater than zero.");
 		}
-		fields.clear();
-		fields = new ArrayList<String>(size);
-		for (int i = 0; i < size; i++) {
-			fields.add("");
+		
+		if(size < fields.size()) {
+			fields = fields.subList(0, size);
+		} else if (size > fields.size()) {
+			for(int i = fields.size(); i < size; i++) {
+				fields.add("");
+			}
 		}
 	}
 
