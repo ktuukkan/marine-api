@@ -19,6 +19,9 @@ CHANGES
  
  * SentenceParser; setFieldCount() now preserves existing/remaining values.
  
+ * RMCParser, VTGParser; if optional FAA mode was omitted, sentence field count
+   is now adjusted before setting the mode.
+ 
 KNOWN ISSUES
 
  * Position.distanceTo() may produce inaccurate results.

@@ -247,6 +247,19 @@ public class RMCTest {
 		assertEquals(FaaMode.ESTIMATED, rmc.getMode());
 	}
 
+	/**
+	 * Test method for
+	 * {@link net.sf.marineapi.nmea.parser.RMCParser#setFaaMode()}.
+	 */
+	@Test
+	public void testSetFaaModeWhenOmitted() {
+		RMCParser parser = new RMCParser("$GPRMC,120044.567,A,6011.552,N,02501.941,E,000.0,360.0,160705,006.1,E");
+		parser.setMode(FaaMode.SIMULATED);
+		assertEquals(FaaMode.SIMULATED, parser.getMode());
+		parser.setMode(FaaMode.ESTIMATED);
+		assertEquals(FaaMode.ESTIMATED, parser.getMode());
+	}
+	
 	@Test
 	public void testSetPosition() {
 		final double lat = 61 + (1.111 / 60);

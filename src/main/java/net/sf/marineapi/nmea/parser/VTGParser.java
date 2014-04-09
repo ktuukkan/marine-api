@@ -120,6 +120,7 @@ class VTGParser extends SentenceParser implements VTGSentence {
 	 * .util.FaaMode)
 	 */
 	public void setMode(FaaMode mode) {
+		setFieldCount(9);
 		setCharValue(MODE, mode.toChar());
 	}
 

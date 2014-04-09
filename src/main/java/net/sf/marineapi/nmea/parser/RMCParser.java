@@ -193,6 +193,7 @@ class RMCParser extends PositionParser implements RMCSentence {
 	 * .nmea.util.FaaMode)
 	 */
 	public void setMode(FaaMode mode) {
+		setFieldCount(12);
 		setCharValue(MODE, mode.toChar());
 	}
 

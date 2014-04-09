@@ -140,6 +140,19 @@ public class VTGTest {
 
 	/**
 	 * Test method for
+	 * {@link net.sf.marineapi.nmea.parser.VTGParser#setMode(FaaMode)}.
+	 */
+	@Test
+	public void testSetModeWhenOmitted() {
+		VTGParser parser = new VTGParser("$GPVTG,360.0,T,348.7,M,16.89,N,31.28,K");
+		parser.setMode(FaaMode.MANUAL);
+		assertEquals(FaaMode.MANUAL, parser.getMode());
+		parser.setMode(FaaMode.SIMULATED);
+		assertEquals(FaaMode.SIMULATED, parser.getMode());
+	}
+	
+	/**
+	 * Test method for
 	 * {@link net.sf.marineapi.nmea.parser.VTGParser#setSpeedKmh(double)}.
 	 */
 	@Test
