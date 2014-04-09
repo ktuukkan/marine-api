@@ -73,6 +73,8 @@ public enum SentenceId {
 	WPL,
 	/** Transducer measurements (sensor data) */
 	XDR,
+	/** Cross-track error, measured */
+	XTE,
 	/** UTC time and date with local time zone offset */
 	ZDA;
 

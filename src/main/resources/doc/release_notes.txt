@@ -8,12 +8,16 @@ versions. Released on @RELEASE_DATE@.
 NEW FEATURES
 
  * Support for RSA sentences; rudder angle in degrees.
-
+ 
+ * Support for XTE sentences; measured cross-track error.
+ 
 CHANGES
  
  * TalkerId; added ids 'GL' and 'GN' for GLONASS sentences.
  
  * SentenceReader; UDP packet may now contain multiple lines/sentences.
+ 
+ * SentenceParser; setFieldCount() now preserves existing/remaining values.
  
 KNOWN ISSUES
 
