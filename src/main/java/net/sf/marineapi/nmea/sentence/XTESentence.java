@@ -60,12 +60,15 @@ public interface XTESentence extends Sentence {
 	/**
 	 * Returns the direction in which to steer in order to get back on route.
 	 * 
-	 * @return Direction
+	 * @return {@link Direction#LEFT} or {@link Direction#RIGHT}
 	 */
 	Direction getSteerTo();
 
 	/**
-	 * Sets the Loran-C cycle lock status, not used for GPS.
+	 * Sets the Loran-C cycle lock status. Not used for GPS, may be omitted or
+	 * {@link DataStatus#VOID}.
+	 * 
+	 * @param status DataStatus to set
 	 */
 	void setCycleLockStatus(DataStatus status);
 
@@ -79,14 +82,14 @@ public interface XTESentence extends Sentence {
 	/**
 	 * Sets the FAA mode. Optional, NMEA 2.3 and later.
 	 * 
-	 * @return FaaMode
+	 * @param mode FaaMode to set
 	 */
 	void setMode(FaaMode mode);
 
 	/**
 	 * Sets the signal/fix status.
 	 * 
-	 * @return DataStatus
+	 * @param status DataStatus to set
 	 */
 	void setStatus(DataStatus status);
 
