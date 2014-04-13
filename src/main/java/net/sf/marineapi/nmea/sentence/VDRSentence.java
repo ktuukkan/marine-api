@@ -3,7 +3,7 @@
  * Copyright (C) 2014 Kimmo Tuukkanen
  * 
  * This file is part of Java Marine API.
- * <http://Kimmo Tuukkanenkkan.github.io/marine-api/>
+ * <http://ktuukkan.github.io/marine-api/>
  * 
  * Java Marine API is free software: you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by the
