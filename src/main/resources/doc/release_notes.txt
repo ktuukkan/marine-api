@@ -11,6 +11,8 @@ NEW FEATURES
  
  * Support for XTE sentences; measured cross-track error.
  
+ * Support for VDR sentences; set and drift.
+ 
 CHANGES
  
  * TalkerId; added ids 'GL' and 'GN' for GLONASS sentences.

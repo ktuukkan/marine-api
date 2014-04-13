@@ -65,6 +65,8 @@ public enum SentenceId {
 	RSA,
 	/** Route data and waypoint list */
 	RTE,
+	/** Set and drift, direction and speed of current. */
+	VDR,
 	/** Track made good and ground speed */
 	VTG,
 	/** Water speed and heading */
