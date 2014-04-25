@@ -69,7 +69,7 @@ public enum TalkerId {
 	DF,
 	/** Velocity Sensor, Speed Log, Water, Magnetic */
 	DM,
-	/** Electronic Chart Display & Information System (ECDIS) */
+	/** Electronic Chart Display &lt; Information System (ECDIS) */
 	EC,
 	/** Emergency Position Indicating Beacon (EPIRB) */
 	EP,

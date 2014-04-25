@@ -44,7 +44,7 @@ public class FileExample implements SentenceListener {
 	/**
 	 * Creates a new instance of FileExample
 	 * 
-	 * @param f File containing NMEA data
+	 * @param file File containing NMEA data
 	 */
 	public FileExample(File file) throws IOException {
 

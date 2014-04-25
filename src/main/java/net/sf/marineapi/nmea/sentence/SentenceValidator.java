@@ -50,7 +50,6 @@ public final class SentenceValidator {
 	 *     printable ASCII characters (payload data)
 	 * <li>Data is followed by '*' and a two-char hex checksum (may be omitted)
 	 * </ul>
-	 * </p>
 	 * <p>
 	 * Notice that format matching is not strict; although NMEA 0183 defines a
 	 * maximum length of 80 chars, the sentence length is not checked. This is

@@ -43,7 +43,7 @@ public class HeadingProviderExample implements HeadingListener {
 	/**
 	 * Creates a new instance of FileExample
 	 * 
-	 * @param f File from which to read Checksum data
+	 * @param file File from which to read Checksum data
 	 */
 	public HeadingProviderExample(File file) throws IOException {
 

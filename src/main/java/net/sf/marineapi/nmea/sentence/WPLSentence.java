@@ -37,9 +37,9 @@ public interface WPLSentence extends Sentence {
 	 * Get the destination waypoint.
 	 * 
 	 * @return Waypoint
-	 * @throws net.sf.marineapi.parser.DataNotAvailableException If any of the
+	 * @throws net.sf.marineapi.nmea.parser.DataNotAvailableException If any of the
 	 *             waypoint related data is not available.
-	 * @throws net.sf.marineapi.parser.ParseException If any of the waypoint
+	 * @throws net.sf.marineapi.nmea.parser.ParseException If any of the waypoint
 	 *             related fields contain unexpected or illegal value.
 	 */
 	Waypoint getWaypoint();
