@@ -36,9 +36,9 @@ public interface DateSentence extends Sentence {
 	 * {@link Date}.
 	 * 
 	 * @return Date object
-	 * @throws net.sf.marineapi.parser.DataNotAvailableException If the data is
+	 * @throws net.sf.marineapi.nmea.parser.DataNotAvailableException If the data is
 	 *             not available.
-	 * @throws net.sf.marineapi.parser.ParseException If the field contains
+	 * @throws net.sf.marineapi.nmea.parser.ParseException If the field contains
 	 *             unexpected or illegal value.
 	 */
 	Date getDate();

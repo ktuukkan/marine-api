@@ -1,5 +1,5 @@
 /* 
- * WPLSentence.java
+ * AcquisitionType.java
  * Copyright (C) 2010 Kimmo Tuukkanen
  * 
  * This file is part of Java Marine API.
@@ -18,37 +18,41 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Java Marine API. If not, see <http://www.gnu.org/licenses/>.
  */
-package net.sf.marineapi.nmea.sentence;
+package net.sf.marineapi.nmea.util;
 
-import net.sf.marineapi.nmea.util.Waypoint;
-
-/**
- * Destination waypoint location and ID. This sentence is transmitted by some
- * GPS models in GOTO mode.
- * <p>
- * Example: <br>
- * <code>$GPWPL,5536.200,N,01436.500,E,RUSKI*1F</code>
- * 
- * @author Kimmo Tuukkanen
- */
-public interface WPLSentence extends Sentence {
-
-	/**
-	 * Get the destination waypoint.
-	 * 
-	 * @return Waypoint
-	 * @throws net.sf.marineapi.nmea.parser.DataNotAvailableException If any of the
-	 *             waypoint related data is not available.
-	 * @throws net.sf.marineapi.nmea.parser.ParseException If any of the waypoint
-	 *             related fields contain unexpected or illegal value.
-	 */
-	Waypoint getWaypoint();
+public enum AcquisitionType {
+	
+	AUTO('A'),
+	MANUAL('M'),
+	REPORTED('R');
+	
+	private char ch;
+	
+	private AcquisitionType(char ch) {
+		this.ch = ch;
+	}
 
 	/**
-	 * Set the destination waypoint.
+	 * Returns the corresponding char constant.
 	 * 
-	 * @param wp Waypoint to set
+	 * @return Char indicator for AcquisitionType
 	 */
-	void setWaypoint(Waypoint wp);
-
+	public char toChar() {
+		return ch;
+	}
+	
+	/**
+	 * Get the enum corresponding to specified char.
+	 * 
+	 * @param c Char indicator for AcquisitionType
+	 * @return AcquisitionType
+	 */
+	public static AcquisitionType valueOf(char c) {
+		for (AcquisitionType d : values()) {
+			if (d.toChar() == c) {
+				return d;
+			}
+		}
+		return valueOf(String.valueOf(c));
+	}	
 }

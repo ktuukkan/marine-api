@@ -33,9 +33,9 @@ public interface PositionSentence extends Sentence {
 	 * Gets the geographic position.
 	 * 
 	 * @return Position
-	 * @throws net.sf.marineapi.parser.DataNotAvailableException If any of the
+	 * @throws net.sf.marineapi.nmea.parser.DataNotAvailableException If any of the
 	 *             position related fields is empty.
-	 * @throws net.sf.marineapi.parser.ParseException If any of the position
+	 * @throws net.sf.marineapi.nmea.parser.ParseException If any of the position
 	 *             related fields contains unexpected value.
 	 */
 	Position getPosition();

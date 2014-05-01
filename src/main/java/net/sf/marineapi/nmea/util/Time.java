@@ -247,7 +247,7 @@ public class Time {
 	 *
 	 * @param seconds Seconds to set
 	 * @throws IllegalArgumentException If seconds out of bounds (
-	 *             <code>0 < seconds < 60</code>)
+	 *             <code>0 &lt; seconds &lt; 60</code>)
 	 */
 	public void setSeconds(double seconds) {
 		if (seconds < 0 || seconds >= 60) {

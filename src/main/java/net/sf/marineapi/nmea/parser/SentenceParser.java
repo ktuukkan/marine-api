@@ -358,7 +358,7 @@ public class SentenceParser implements Sentence {
 	 * 
 	 * @param index Data field index in sentence
 	 * @return Character contained in the field
-	 * @throws net.sf.marineapi.parser.ParseException If field contains more
+	 * @throws net.sf.marineapi.nmea.parser.ParseException If field contains more
 	 *             than one character
 	 */
 	protected final char getCharValue(int index) {
@@ -413,7 +413,7 @@ public class SentenceParser implements Sentence {
 	 * 
 	 * @param index Field index
 	 * @return Field value as String
-	 * @throws net.sf.marineapi.parser.DataNotAvailableException If the field is
+	 * @throws net.sf.marineapi.nmea.parser.DataNotAvailableException If the field is
 	 *             empty
 	 */
 	protected final String getStringValue(int index) {

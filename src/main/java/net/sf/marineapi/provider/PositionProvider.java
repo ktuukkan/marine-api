@@ -36,7 +36,7 @@ import net.sf.marineapi.provider.event.PositionEvent;
 
 /**
  * <p>
- * Provides Time, Position & Velocity reports from GPS. Data is captured from
+ * Provides Time, Position and Velocity reports from GPS. Data is captured from
  * RMC, GGA and GLL sentences. RMC is used for date/time, speed and course. GGA
  * is used as primary source for position as it contains also the altitude. When
  * GGA is not available, position may be taken from GLL or RMC. If this is the

@@ -36,9 +36,9 @@ public interface GLLSentence extends PositionSentence, TimeSentence {
 	 * Get the data quality status, valid or invalid.
 	 * 
 	 * @return {@link DataStatus#ACTIVE} or {@link DataStatus#VOID}
-	 * @throws net.sf.marineapi.parser.DataNotAvailableException If the data is
+	 * @throws net.sf.marineapi.nmea.parser.DataNotAvailableException If the data is
 	 *             not available.
-	 * @throws net.sf.marineapi.parser.ParseException If the field contains
+	 * @throws net.sf.marineapi.nmea.parser.ParseException If the field contains
 	 *             unexpected or illegal value.
 	 */
 	DataStatus getStatus();
@@ -47,9 +47,9 @@ public interface GLLSentence extends PositionSentence, TimeSentence {
 	 * Set the data quality status, valid or invalid.
 	 * 
 	 * @param status DataStatus to set
-	 * @throws net.sf.marineapi.parser.DataNotAvailableException If the data is
+	 * @throws net.sf.marineapi.nmea.parser.DataNotAvailableException If the data is
 	 *             not available.
-	 * @throws net.sf.marineapi.parser.ParseException If the field contains
+	 * @throws net.sf.marineapi.nmea.parser.ParseException If the field contains
 	 *             unexpected or illegal value.
 	 */
 	void setStatus(DataStatus status);

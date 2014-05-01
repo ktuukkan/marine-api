@@ -42,7 +42,7 @@ public class TypedSentenceListenerExample
 	/**
 	 * Creates a new instance.
 	 * 
-	 * @param f File containing NMEA data
+	 * @param file File containing NMEA data
 	 */
 	public TypedSentenceListenerExample(File file) throws IOException {
 		// create reader and provide input stream
