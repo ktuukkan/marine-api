@@ -1,20 +1,20 @@
-/* 
+/*
  * TTMParser.java
- * Copyright (C) 2014 Kimmo Tuukkanen
- * 
+ * Copyright (C) 2014 Johan Bergkvist
+ *
  * This file is part of Java Marine API.
  * <http://ktuukkan.github.io/marine-api/>
- * 
+ *
  * Java Marine API is free software: you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by the
  * Free Software Foundation, either version 3 of the License, or (at your
  * option) any later version.
- * 
+ *
  * Java Marine API is distributed in the hope that it will be useful, but
  * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
  * FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License
  * for more details.
- * 
+ *
  * You should have received a copy of the GNU Lesser General Public License
  * along with Java Marine API. If not, see <http://www.gnu.org/licenses/>.
  */
@@ -33,7 +33,7 @@ import net.sf.marineapi.nmea.util.Units;
 
 /**
  * TTM sentence parser.
- * 
+ *
  * @author Johan Bergkvist
  */
 public class TTMParser extends SentenceParser implements TTMSentence {
@@ -56,7 +56,7 @@ public class TTMParser extends SentenceParser implements TTMSentence {
 
 	/**
 	 * Create a new instance of TTMParser.
-	 * 
+	 *
 	 * @param nmea
 	 *            TTM sentence String.
 	 * @throws IllegalArgumentException
@@ -68,7 +68,7 @@ public class TTMParser extends SentenceParser implements TTMSentence {
 
 	/**
 	 * Create a TTM parser with an empty sentence.
-	 * 
+	 *
 	 * @param talker
 	 *            TalkerId to set
 	 */
@@ -78,7 +78,7 @@ public class TTMParser extends SentenceParser implements TTMSentence {
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see net.sf.marineapi.nmea.sentence.TimeSentence#getTime()
 	 */
 	@Override
@@ -89,7 +89,7 @@ public class TTMParser extends SentenceParser implements TTMSentence {
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see net.sf.marineapi.nmea.sentence.TimeSentence#setTime()
 	 */
 	@Override
@@ -112,7 +112,7 @@ public class TTMParser extends SentenceParser implements TTMSentence {
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see net.sf.marineapi.nmea.sentence.TTMSentence#getNumber()
 	 */
 	@Override
@@ -122,7 +122,7 @@ public class TTMParser extends SentenceParser implements TTMSentence {
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see net.sf.marineapi.nmea.sentence.TTMSentence#getDistance()
 	 */
 	@Override
@@ -132,7 +132,7 @@ public class TTMParser extends SentenceParser implements TTMSentence {
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see net.sf.marineapi.nmea.sentence.TTMSentence#getBearing()
 	 */
 	@Override
@@ -142,7 +142,7 @@ public class TTMParser extends SentenceParser implements TTMSentence {
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see net.sf.marineapi.nmea.sentence.TTMSentence#getSpeed()
 	 */
 	@Override
@@ -152,7 +152,7 @@ public class TTMParser extends SentenceParser implements TTMSentence {
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see net.sf.marineapi.nmea.sentence.TTMSentence#getCourse()
 	 */
 	@Override
@@ -162,7 +162,7 @@ public class TTMParser extends SentenceParser implements TTMSentence {
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see net.sf.marineapi.nmea.sentence.TTMSentence#getDistanceOfCPA()
 	 */
 	@Override
@@ -172,7 +172,7 @@ public class TTMParser extends SentenceParser implements TTMSentence {
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see net.sf.marineapi.nmea.sentence.TTMSentence#getTimeToCPA()
 	 */
 	@Override
@@ -182,7 +182,7 @@ public class TTMParser extends SentenceParser implements TTMSentence {
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see net.sf.marineapi.nmea.sentence.TTMSentence#getTimeToCPA()
 	 */
 	@Override
@@ -192,7 +192,7 @@ public class TTMParser extends SentenceParser implements TTMSentence {
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see net.sf.marineapi.nmea.sentence.TTMSentence#getName()
 	 */
 	@Override
@@ -202,7 +202,7 @@ public class TTMParser extends SentenceParser implements TTMSentence {
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see net.sf.marineapi.nmea.sentence.TTMSentence#getStatus()
 	 */
 	@Override
@@ -212,7 +212,7 @@ public class TTMParser extends SentenceParser implements TTMSentence {
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see net.sf.marineapi.nmea.sentence.TTMSentence#getAcquisitionType()
 	 */
 	@Override
@@ -222,7 +222,7 @@ public class TTMParser extends SentenceParser implements TTMSentence {
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see net.sf.marineapi.nmea.sentence.TTMSentence#getReference()
 	 */
 	@Override
@@ -232,7 +232,7 @@ public class TTMParser extends SentenceParser implements TTMSentence {
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see net.sf.marineapi.nmea.sentence.TTMSentence#setNumber()
 	 */
 	@Override
@@ -242,7 +242,7 @@ public class TTMParser extends SentenceParser implements TTMSentence {
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see net.sf.marineapi.nmea.sentence.TTMSentence#setDistance()
 	 */
 	@Override
@@ -253,7 +253,7 @@ public class TTMParser extends SentenceParser implements TTMSentence {
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see net.sf.marineapi.nmea.sentence.TTMSentence#setBearing()
 	 */
 	@Override
@@ -264,7 +264,7 @@ public class TTMParser extends SentenceParser implements TTMSentence {
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see net.sf.marineapi.nmea.sentence.TTMSentence#setSpeed()
 	 */
 	@Override
@@ -275,7 +275,7 @@ public class TTMParser extends SentenceParser implements TTMSentence {
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see net.sf.marineapi.nmea.sentence.TTMSentence#setCourse()
 	 */
 	@Override
@@ -286,7 +286,7 @@ public class TTMParser extends SentenceParser implements TTMSentence {
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see net.sf.marineapi.nmea.sentence.TTMSentence#setDistanceOfCPA()
 	 */
 	@Override
@@ -297,7 +297,7 @@ public class TTMParser extends SentenceParser implements TTMSentence {
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see net.sf.marineapi.nmea.sentence.TTMSentence#setTimeToCPA()
 	 */
 	@Override
@@ -307,7 +307,7 @@ public class TTMParser extends SentenceParser implements TTMSentence {
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see net.sf.marineapi.nmea.sentence.TTMSentence#setName()
 	 */
 	@Override
@@ -317,7 +317,7 @@ public class TTMParser extends SentenceParser implements TTMSentence {
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see net.sf.marineapi.nmea.sentence.TTMSentence#setStatus()
 	 */
 	@Override
@@ -327,7 +327,7 @@ public class TTMParser extends SentenceParser implements TTMSentence {
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see net.sf.marineapi.nmea.sentence.TTMSentence#setReference()
 	 */
 	@Override
@@ -339,7 +339,7 @@ public class TTMParser extends SentenceParser implements TTMSentence {
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see net.sf.marineapi.nmea.sentence.TTMSentence#setAcquisitionType()
 	 */
 	@Override
