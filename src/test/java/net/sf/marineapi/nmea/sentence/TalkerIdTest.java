@@ -1,4 +1,4 @@
-package net.sf.marineapi.sentence;
+package net.sf.marineapi.nmea.sentence;
 
 /* 
  * TalkerIdTest.java
