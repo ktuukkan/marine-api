@@ -37,6 +37,7 @@ class DefaultDataReader extends AbstractDataReader {
 		Logger.getLogger(DefaultDataReader.class.getName());
 
 	private final BufferedReader input;
+    private SentenceReader parent;
 
 	/**
 	 * Creates a new instance of DefaultDataReader.
@@ -46,6 +47,7 @@ class DefaultDataReader extends AbstractDataReader {
 	 */
 	public DefaultDataReader(InputStream source, SentenceReader parent) {
 		super(parent);
+        this.parent=parent;
 		InputStreamReader isr = new InputStreamReader(source);
 		this.input = new BufferedReader(isr);
 	}
@@ -59,11 +61,13 @@ class DefaultDataReader extends AbstractDataReader {
 	public String read() {
 		String data = null;
 		try {
-			if (input.ready()) {
-				data = input.readLine();
-			}
+            data = input.readLine();
 		} catch (Exception e) {
-			LOG.log(Level.WARNING, "InputStream read failed", e);
+            if(parent.getExceptionListener()!=null) {
+                parent.getExceptionListener().onException(e);
+            } else {
+                LOG.log(Level.WARNING, "InputStream read failed", e);
+            }
 		}
 		return data;
 	}

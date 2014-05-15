@@ -20,6 +20,11 @@
  */
 package net.sf.marineapi.nmea.io;
 
+import net.sf.marineapi.nmea.event.SentenceEvent;
+import net.sf.marineapi.nmea.event.SentenceListener;
+import net.sf.marineapi.nmea.sentence.Sentence;
+import net.sf.marineapi.nmea.sentence.SentenceId;
+
 import java.io.InputStream;
 import java.net.DatagramSocket;
 import java.util.HashSet;
@@ -31,26 +36,19 @@ import java.util.concurrent.ConcurrentMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import net.sf.marineapi.nmea.event.AbstractSentenceListener;
-import net.sf.marineapi.nmea.event.SentenceEvent;
-import net.sf.marineapi.nmea.event.SentenceListener;
-import net.sf.marineapi.nmea.parser.SentenceFactory;
-import net.sf.marineapi.nmea.sentence.Sentence;
-import net.sf.marineapi.nmea.sentence.SentenceId;
-
 /**
  * Sentence reader detects supported NMEA 0183 sentences from the specified
  * data source and dispatches them to registered listeners as sentence events.
  * Each event contains a parser for the read sentence.
  * <p>
- * Parsers dispatched by reader are created using {@link SentenceFactory} class,
+ * Parsers dispatched by reader are created using {@link net.sf.marineapi.nmea.parser.SentenceFactory} class,
  * where you can also register your own custom parsers.
  *
  * @author Kimmo Tuukkanen
- * @see AbstractSentenceListener
- * @see SentenceListener
- * @see SentenceEvent
- * @see SentenceFactory
+ * @see net.sf.marineapi.nmea.event.AbstractSentenceListener
+ * @see net.sf.marineapi.nmea.event.SentenceListener
+ * @see net.sf.marineapi.nmea.event.SentenceEvent
+ * @see net.sf.marineapi.nmea.parser.SentenceFactory
  */
 public class SentenceReader {
 
@@ -74,6 +72,9 @@ public class SentenceReader {
 	// timeout for "reading paused" in ms
 	private volatile int pauseTimeout = DEFAULT_TIMEOUT;
 
+    //Exception listener (null means no listener and default printout)
+    private ExceptionListener exceptionListener=null;
+
 	/**
 	 * Creates a new instance of SentenceReader.
 	 *
@@ -93,10 +94,10 @@ public class SentenceReader {
 	}
 
 	/**
-	 * Adds a {@link SentenceListener} that wants to receive all sentences read
+	 * Adds a {@link net.sf.marineapi.nmea.event.SentenceListener} that wants to receive all sentences read
 	 * by the reader.
 	 *
-	 * @param listener {@link SentenceListener} to be registered.
+	 * @param listener {@link net.sf.marineapi.nmea.event.SentenceListener} to be registered.
 	 * @see net.sf.marineapi.nmea.event.SentenceListener
 	 */
 	public void addSentenceListener(SentenceListener listener) {
@@ -104,7 +105,7 @@ public class SentenceReader {
 	}
 
 	/**
-	 * Adds a {@link SentenceListener} that is interested in receiving only
+	 * Adds a {@link net.sf.marineapi.nmea.event.SentenceListener} that is interested in receiving only
 	 * sentences of certain type.
 	 *
 	 * @param sl SentenceListener to add
@@ -116,7 +117,7 @@ public class SentenceReader {
 	}
 
 	/**
-	 * Adds a {@link SentenceListener} that is interested in receiving only
+	 * Adds a {@link net.sf.marineapi.nmea.event.SentenceListener} that is interested in receiving only
 	 * sentences of certain type.
 	 *
 	 * @param sl SentenceListener to add
@@ -141,7 +142,7 @@ public class SentenceReader {
 	 * Remove a listener from reader. When removed, listener will not receive
 	 * any events from the reader.
 	 *
-	 * @param listener {@link SentenceListener} to be removed.
+	 * @param listener {@link net.sf.marineapi.nmea.event.SentenceListener} to be removed.
 	 */
 	public void removeSentenceListener(SentenceListener listener) {
 		for (List<SentenceListener> list : listeners.values()) {
@@ -297,5 +298,13 @@ public class SentenceReader {
 			listeners.put(type, list);
 		}
 	}
+
+    public void setExceptionListener(ExceptionListener exceptionListener) {
+        this.exceptionListener=exceptionListener;
+    }
+
+    ExceptionListener getExceptionListener() {
+        return exceptionListener;
+    }
 
 }

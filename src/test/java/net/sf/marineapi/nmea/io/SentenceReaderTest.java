@@ -1,16 +1,5 @@
 package net.sf.marineapi.nmea.io;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.fail;
-
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.InputStream;
-
 import net.sf.marineapi.nmea.event.SentenceEvent;
 import net.sf.marineapi.nmea.event.SentenceListener;
 import net.sf.marineapi.nmea.parser.BODTest;
@@ -18,10 +7,17 @@ import net.sf.marineapi.nmea.parser.GGATest;
 import net.sf.marineapi.nmea.parser.SentenceFactory;
 import net.sf.marineapi.nmea.sentence.Sentence;
 import net.sf.marineapi.nmea.sentence.SentenceId;
-
 import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
+
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.ArrayList;
+
+import static org.junit.Assert.*;
 
 public class SentenceReaderTest {
 
@@ -35,11 +31,12 @@ public class SentenceReaderTest {
 	private boolean paused;
 	private boolean started;
 	private boolean stopped;
+    private InputStream stream;
 
 	@Before
 	public void setUp() throws Exception {
 		File file = new File(TEST_DATA);
-		InputStream stream = new FileInputStream(file);
+		stream = new FileInputStream(file);
 		reader = new SentenceReader(stream);
 		
 		dummyListener = new DummyListener();
@@ -151,6 +148,35 @@ public class SentenceReaderTest {
 			fail(e.getMessage());
 		}
 	}
+
+    @Test
+    @SuppressWarnings("all")
+    public void testExceptionListener() {
+        final ArrayList<String> result=new ArrayList<String>();
+        reader.setExceptionListener(new ExceptionListener() {
+            @Override
+            public void onException(Exception e) {
+                result.add("Was called");
+            }
+        });
+
+        reader.start();
+
+        try {
+            stream.close();
+        } catch (IOException e) {
+        }
+
+        try {
+            Thread.sleep(500);
+        } catch (InterruptedException e) {
+        }
+
+        if(result.size()==0)
+            fail("ExceptionListener wasn't called on closed stream");
+
+        reader.stop();
+    }
 
 	public class DummyListener implements SentenceListener {
 		public void readingPaused() {}
