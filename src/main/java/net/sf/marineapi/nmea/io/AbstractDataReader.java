@@ -36,7 +36,7 @@ abstract class AbstractDataReader implements DataReader {
 
 	private static final Logger LOG =
 		Logger.getLogger(AbstractDataReader.class.getName());
-	
+
 	private final SentenceReader parent;
 	private volatile boolean isRunning = true;
 
@@ -101,4 +101,11 @@ abstract class AbstractDataReader implements DataReader {
 	 * @return String or <code>null</code> if nothing was read.
 	 */
 	public abstract String read();
+
+	/**
+	 * Returns the parent SentenceReader.
+	 */
+	protected SentenceReader getParent() {
+		return this.parent;
+	}
 }

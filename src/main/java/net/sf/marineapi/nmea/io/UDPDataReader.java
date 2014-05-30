@@ -37,11 +37,10 @@ class UDPDataReader extends AbstractDataReader {
 
 	private static final Logger LOG =
 		Logger.getLogger(UDPDataReader.class.getName());
-	
+
 	private DatagramSocket socket;
 	private byte[] buffer = new byte[1024];
 	private Queue<String> queue = new LinkedList<String>();
-    private SentenceReader parent;
 
 	/**
 	 * Creates a new instance of StreamReader.
@@ -51,20 +50,19 @@ class UDPDataReader extends AbstractDataReader {
 	 */
 	public UDPDataReader(DatagramSocket socket, SentenceReader parent) {
 		super(parent);
-        this.parent=parent;
 		this.socket = socket;
 	}
 
 	@Override
 	public String read() {
 		String data = receive();
-		if(data != null) {
+		if (data != null) {
 			String[] lines = data.split("\\r?\\n");
 			queue.addAll(Arrays.asList(lines));
 		}
 		return queue.poll();
 	}
-	
+
 	/**
 	 * Receive UDP packet and return as String
 	 */
@@ -75,11 +73,7 @@ class UDPDataReader extends AbstractDataReader {
 			socket.receive(pkg);
 			data = new String(pkg.getData(), 0, pkg.getLength());
 		} catch (Exception e) {
-            if(parent.getExceptionListener()!=null) {
-                parent.getExceptionListener().onException(e);
-            } else {
-                LOG.log(Level.WARNING, "UDP receive failed", e);
-            }
+			getParent().handleException("UDP receive failed", e);
 		}
 		return data;
 	}

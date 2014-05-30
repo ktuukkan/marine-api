@@ -20,11 +20,6 @@
  */
 package net.sf.marineapi.nmea.io;
 
-import net.sf.marineapi.nmea.event.SentenceEvent;
-import net.sf.marineapi.nmea.event.SentenceListener;
-import net.sf.marineapi.nmea.sentence.Sentence;
-import net.sf.marineapi.nmea.sentence.SentenceId;
-
 import java.io.InputStream;
 import java.net.DatagramSocket;
 import java.util.HashSet;
@@ -35,6 +30,11 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
+import net.sf.marineapi.nmea.event.SentenceEvent;
+import net.sf.marineapi.nmea.event.SentenceListener;
+import net.sf.marineapi.nmea.sentence.Sentence;
+import net.sf.marineapi.nmea.sentence.SentenceId;
 
 /**
  * Sentence reader detects supported NMEA 0183 sentences from the specified
@@ -282,6 +282,24 @@ public class SentenceReader {
 			}
 		}
 	}
+	
+	/**
+	 * Handles an exception by dispatching it to ExceptionHandler (if any) and
+	 * logs the error.
+	 * 
+	 * @param msg Error message for logging
+	 * @param ex Exception to handle
+	 */
+	void handleException(String msg, Exception ex) {
+		LOGGER.log(Level.WARNING, msg, ex);
+		if(exceptionListener != null) {
+			try {
+				exceptionListener.onException(ex);
+			} catch (Exception e) {
+				LOGGER.log(Level.WARNING, "Exception thrown by ExceptionListener", e);
+			}
+		}
+	}
 
 	/**
 	 * Registers a SentenceListener to hash map with given key.
@@ -306,5 +324,7 @@ public class SentenceReader {
     ExceptionListener getExceptionListener() {
         return exceptionListener;
     }
+    
+    
 
 }
