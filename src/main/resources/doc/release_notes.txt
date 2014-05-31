@@ -14,6 +14,10 @@ NEW FEATURES
  * Support for VDR sentences; set and drift.
 
  * Support for TTM sentences; tracked target message.
+ 
+ * Support for DTM sentences; datum reference.
+ 
+ * SentenceReader; exception listener for detecting i/o errors.
 
 CHANGES
 
@@ -25,6 +29,9 @@ CHANGES
 
  * RMCParser, VTGParser; if optional FAA mode was omitted, sentence field count
    is now adjusted before setting the mode.
+   
+ * SentenceValidator; sentences including the terminator <cr><lf> did not pass
+   validation. Fixed by adding optional newline in sentence format regexp.
 
 KNOWN ISSUES
 
@@ -36,4 +43,6 @@ ACKNOWLEDGEMENTS
 
  * József Lázár helped resolving UDP issues and wrote most of RSA parser.
 
- * TTM parser written by Johan Bergkvist
+ * TTM parser written by Johan Bergkvist.
+ 
+ * SentenceReader exception handling written by Johan Riisberg-Jensen.

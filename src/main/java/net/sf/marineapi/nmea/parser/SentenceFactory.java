@@ -73,6 +73,7 @@ public final class SentenceFactory {
 		registerParser("BOD", BODParser.class);
 		registerParser("DBT", DBTParser.class);
 		registerParser("DPT", DPTParser.class);
+		registerParser("DTM", DTMParser.class);
 		registerParser("GGA", GGAParser.class);
 		registerParser("GLL", GLLParser.class);
 		registerParser("GSA", GSAParser.class);

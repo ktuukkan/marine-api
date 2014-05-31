@@ -35,6 +35,8 @@ public enum SentenceId {
 	DBT,
 	/** Depth of water below transducer; in meters. */
 	DPT,
+	/** Datum reference. */
+	DTM,
 	/** Global Positioning System fix data */
 	GGA,
 	/** Geographic position (latitude/longitude) */
