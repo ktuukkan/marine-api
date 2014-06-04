@@ -76,21 +76,21 @@ public class SentenceReader {
     private ExceptionListener exceptionListener=null;
 
 	/**
-	 * Creates a new instance of SentenceReader.
-	 *
-	 * @param source Stream from which to read NMEA data
-	 */
-	public SentenceReader(InputStream source) {
-		reader = new DefaultDataReader(source, this);
-	}
-
-	/**
 	 * Creates a SentenceReader for UDP/DatagramSocket.
 	 *
 	 * @param source Socket from which to read NMEA data
 	 */
 	public SentenceReader(DatagramSocket source) {
 		reader = new UDPDataReader(source, this);
+	}
+
+	/**
+	 * Creates a new instance of SentenceReader.
+	 *
+	 * @param source Stream from which to read NMEA data
+	 */
+	public SentenceReader(InputStream source) {
+		reader = new DefaultDataReader(source, this);
 	}
 
 	/**
@@ -126,88 +126,6 @@ public class SentenceReader {
 	 */
 	public void addSentenceListener(SentenceListener sl, String type) {
 		registerListener(sl, type);
-	}
-
-	/**
-	 * Returns the current reading paused timeout.
-	 *
-	 * @return Timeout limit in milliseconds.
-	 * @see #setPauseTimeout(int)
-	 */
-	public int getPauseTimeout() {
-		return this.pauseTimeout;
-	}
-
-	/**
-	 * Remove a listener from reader. When removed, listener will not receive
-	 * any events from the reader.
-	 *
-	 * @param listener {@link net.sf.marineapi.nmea.event.SentenceListener} to be removed.
-	 */
-	public void removeSentenceListener(SentenceListener listener) {
-		for (List<SentenceListener> list : listeners.values()) {
-			if (list.contains(listener)) {
-				list.remove(listener);
-			}
-		}
-	}
-
-	/**
-	 * Sets the InputStream to be used as data source. If reader is running, it
-	 * is first stopped and you must call {@link #start()} to resume reading.
-	 *
-	 * @param stream InputStream to set.
-	 */
-	public void setInputStream(InputStream stream) {
-		if (reader.isRunning()) {
-			stop();
-		}
-		reader = new DefaultDataReader(stream, this);
-	}
-
-	/**
-	 * Sets the DatagramSocket to be used as data source. If reader is running,
-	 * it is first stopped and you must call {@link #start()} to resume reading.
-	 *
-	 * @param socket DatagramSocket to set
-	 */
-	public void setDatagramSocket(DatagramSocket socket) {
-		if (reader.isRunning()) {
-			stop();
-		}
-		reader = new UDPDataReader(socket, this);
-	}
-
-	/**
-	 * Set timeout time for reading paused events. Default is 5000 ms.
-	 *
-	 * @param millis Timeout in milliseconds.
-	 */
-	public void setPauseTimeout(int millis) {
-		this.pauseTimeout = millis;
-	}
-
-	/**
-	 * Starts reading the input stream and dispatching events.
-	 *
-	 * @throws IllegalStateException If reader is already running.
-	 */
-	public void start() {
-		if (thread != null && thread.isAlive() && reader != null
-			&& reader.isRunning()) {
-			throw new IllegalStateException("Reader is already running");
-		}
-		thread = new Thread(reader);
-		thread.start();
-	}
-
-	/**
-	 * Stops the reader and event dispatching.
-	 */
-	public void stop() {
-		if (reader != null && reader.isRunning()) {
-			reader.stop();
-		}
 	}
 
 	/**
@@ -282,7 +200,26 @@ public class SentenceReader {
 			}
 		}
 	}
-	
+
+	/**
+     * Returns the exception call-back listener.
+     * 
+     * @return Currently set ExceptionListener, or <code>null</code> if none.
+     */
+    public ExceptionListener getExceptionListener() {
+        return exceptionListener;
+    }
+
+	/**
+	 * Returns the current reading paused timeout.
+	 *
+	 * @return Timeout limit in milliseconds.
+	 * @see #setPauseTimeout(int)
+	 */
+	public int getPauseTimeout() {
+		return this.pauseTimeout;
+	}
+
 	/**
 	 * Handles an exception by dispatching it to ExceptionHandler (if any) and
 	 * logs the error.
@@ -317,14 +254,84 @@ public class SentenceReader {
 		}
 	}
 
+	/**
+	 * Remove a listener from reader. When removed, listener will not receive
+	 * any events from the reader.
+	 *
+	 * @param listener {@link net.sf.marineapi.nmea.event.SentenceListener} to be removed.
+	 */
+	public void removeSentenceListener(SentenceListener listener) {
+		for (List<SentenceListener> list : listeners.values()) {
+			if (list.contains(listener)) {
+				list.remove(listener);
+			}
+		}
+	}
+
+	/**
+	 * Sets the DatagramSocket to be used as data source. If reader is running,
+	 * it is first stopped and you must call {@link #start()} to resume reading.
+	 *
+	 * @param socket DatagramSocket to set
+	 */
+	public void setDatagramSocket(DatagramSocket socket) {
+		if (reader.isRunning()) {
+			stop();
+		}
+		reader = new UDPDataReader(socket, this);
+	}
+
+	/**
+     * Set exception call-back listener.
+     * 
+     * @param exceptionListener Listener to set, or <code>null</code> to reset.
+     */
     public void setExceptionListener(ExceptionListener exceptionListener) {
-        this.exceptionListener=exceptionListener;
+        this.exceptionListener = exceptionListener;
     }
+	
+	/**
+	 * Sets the InputStream to be used as data source. If reader is running, it
+	 * is first stopped and you must call {@link #start()} to resume reading.
+	 *
+	 * @param stream InputStream to set.
+	 */
+	public void setInputStream(InputStream stream) {
+		if (reader.isRunning()) {
+			stop();
+		}
+		reader = new DefaultDataReader(stream, this);
+	}
 
-    ExceptionListener getExceptionListener() {
-        return exceptionListener;
-    }
-    
-    
+	/**
+	 * Set timeout time for reading paused events. Default is 5000 ms.
+	 *
+	 * @param millis Timeout in milliseconds.
+	 */
+	public void setPauseTimeout(int millis) {
+		this.pauseTimeout = millis;
+	}
 
+    /**
+	 * Starts reading the input stream and dispatching events.
+	 *
+	 * @throws IllegalStateException If reader is already running.
+	 */
+	public void start() {
+		if (thread != null && thread.isAlive() && reader != null
+			&& reader.isRunning()) {
+			throw new IllegalStateException("Reader is already running");
+		}
+		thread = new Thread(reader);
+		thread.start();
+	}
+
+    /**
+	 * Stops the reader and event dispatching.
+	 */
+	public void stop() {
+		if (reader != null && reader.isRunning()) {
+			reader.stop();
+		}
+	}
 }
