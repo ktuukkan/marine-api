@@ -23,8 +23,6 @@ package net.sf.marineapi.nmea.io;
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  * The default data reader implementation using InputStream as data source.
@@ -32,9 +30,6 @@ import java.util.logging.Logger;
  * @author Kimmo Tuukkanen
  */
 class DefaultDataReader extends AbstractDataReader {
-
-	private static final Logger LOG =
-		Logger.getLogger(DefaultDataReader.class.getName());
 
 	private final BufferedReader input;
 

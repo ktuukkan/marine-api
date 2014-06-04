@@ -25,8 +25,6 @@ import java.net.DatagramSocket;
 import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.Queue;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  * DataReader implementation using DatagramSocket as data source.
@@ -34,9 +32,6 @@ import java.util.logging.Logger;
  * @author Kimmo Tuukkanen, Ludovic Drouineau
  */
 class UDPDataReader extends AbstractDataReader {
-
-	private static final Logger LOG =
-		Logger.getLogger(UDPDataReader.class.getName());
 
 	private DatagramSocket socket;
 	private byte[] buffer = new byte[1024];
