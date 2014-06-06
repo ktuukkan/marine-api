@@ -36,7 +36,7 @@ import net.sf.marineapi.nmea.util.Units;
  *
  * @author Johan Bergkvist
  */
-public class TTMParser extends SentenceParser implements TTMSentence {
+class TTMParser extends SentenceParser implements TTMSentence {
 
 	private static final int NUMBER = 0;
 	private static final int DISTANCE = 1;

@@ -29,7 +29,7 @@ import net.sf.marineapi.nmea.sentence.TalkerId;
  * 
  * @author Kimmo Tuukkanen
  */
-public class DTMParser extends SentenceParser implements DTMSentence {
+class DTMParser extends SentenceParser implements DTMSentence {
 
 	private static final int DATUM_CODE = 0;
 	private static final int DATUM_SUBCODE = 1;
