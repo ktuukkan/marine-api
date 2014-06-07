@@ -28,7 +28,7 @@ import net.sf.marineapi.nmea.sentence.VLWSentence;
  * 
  * @author Kimmo Tuukkanen
  */
-public class VLWParser extends SentenceParser implements VLWSentence {
+class VLWParser extends SentenceParser implements VLWSentence {
 
 	private static final int TOTAL = 0;
 	private static final int TOTAL_UNITS = 1;

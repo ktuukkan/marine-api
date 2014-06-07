@@ -29,7 +29,7 @@ import net.sf.marineapi.nmea.util.DataStatus;
  * 
  * @author Kimmo Tuukkanen
  */
-public class RPMParser extends SentenceParser implements RPMSentence {
+class RPMParser extends SentenceParser implements RPMSentence {
 
 	private static final int SOURCE = 0;
 	private static final int SOURCE_NUMBER = 1;
