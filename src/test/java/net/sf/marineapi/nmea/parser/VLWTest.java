@@ -69,8 +69,8 @@ public class VLWTest {
 
 	@Test
 	public void testSetTrip() {
-		empty.setTotal(0.0);
-		assertEquals(0.0, empty.getTotal(), 0.1);
+		empty.setTrip(0.0);
+		assertEquals(0.0, empty.getTrip(), 0.1);
 	}
 
 	@Test

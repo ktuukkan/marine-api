@@ -21,6 +21,8 @@ NEW FEATURES
  
  * Support for VLW sentences; distance traveled through water.
  
+ * Support for APB sentences; autopilot destination, bearings and heading. 
+ 
  * SentenceReader; exception listener for detecting i/o errors.
 
 CHANGES
@@ -34,7 +36,7 @@ CHANGES
  * RMCParser, VTGParser; if optional FAA mode was omitted, sentence field count
    is now adjusted before setting the mode.
    
- * SentenceValidator; sentences including line terminator <cr><lf> did not pass
+ * SentenceValidator; sentences including line terminator <CR><LF> did not pass
    validation. Fixed by adding optional newline in sentence format regexp.
 
 KNOWN ISSUES

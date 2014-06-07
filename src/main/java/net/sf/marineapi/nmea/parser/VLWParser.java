@@ -120,7 +120,7 @@ class VLWParser extends SentenceParser implements VLWSentence {
 	 */
 	@Override
 	public void setTrip(double distance) {
-		setDoubleValue(TRIP_UNITS, distance, 1, 1);
+		setDoubleValue(TRIP, distance, 1, 1);
 	}
 
 	/*

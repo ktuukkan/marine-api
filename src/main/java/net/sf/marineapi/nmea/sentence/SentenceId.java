@@ -29,6 +29,8 @@ package net.sf.marineapi.nmea.sentence;
  */
 public enum SentenceId {
 
+	/** Autopilot sentence "B"; xte, bearings and heading toward destination */
+	APB,
 	/** Bearing Origin to Destination */
 	BOD,
 	/** Depth of water below transducer; in meters, feet and fathoms */

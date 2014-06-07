@@ -70,6 +70,7 @@ public final class SentenceFactory {
 	 * Constructor.
 	 */
 	private SentenceFactory() {
+		registerParser("APB", APBParser.class);
 		registerParser("BOD", BODParser.class);
 		registerParser("DBT", DBTParser.class);
 		registerParser("DPT", DPTParser.class);
