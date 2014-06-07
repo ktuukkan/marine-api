@@ -162,7 +162,7 @@ public interface APBSentence extends Sentence {
 	/**
 	 * Sets the bearing from origin to destination true or magnetic.
 	 * 
-	 * @return True if true bearing, false for magnetic.
+	 * @param isTrue True if true bearing, false for magnetic.
 	 */
 	void setBearingOriginToDestionationTrue(boolean isTrue);
 
@@ -176,7 +176,7 @@ public interface APBSentence extends Sentence {
 	/**
 	 * Sets the bearing from current position to destination true or magnetic.
 	 * 
-	 * @return True if true bearing, false for magnetic.
+	 * @param isTrue True if true bearing, false for magnetic.
 	 */
 	void setBearingPositionToDestinationTrue(boolean isTrue);
 
@@ -219,7 +219,7 @@ public interface APBSentence extends Sentence {
 	/**
 	 * Sets the heading to destionation true or magnetic.
 	 * 
-	 * @return True if true heading, false for magnetic.
+	 * @param isTrue True if true heading, false for magnetic.
 	 */
 	void setHeadingToDestinationTrue(boolean isTrue);
 
