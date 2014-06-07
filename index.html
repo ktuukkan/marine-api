@@ -70,9 +70,11 @@ Detects and reads NMEA sentences from any input stream, e.g. file, serial port, 
 
 <h3>Supported sentences</h3>
 <ul>
+    <li>APB - Autopilot; cross-track error, destination bearings and heading</li>
     <li>BOD - Bearing from origin to destination</li>
 	<li>DBT - Water depth below transducer in meters, feet and fathoms.</li>
 	<li>DPT - Water depth in meters with offset to transducer.</li>
+	<li>DTM - Datum reference</li>
 	<li>GGA - GPS fix data</li>
 	<li>GLL - Current geographic position and time</li>
 	<li>GSA - Precision of GPS fix</li>
@@ -86,11 +88,17 @@ Detects and reads NMEA sentences from any input stream, e.g. file, serial port, 
 	<li>RMB - Recommended minimum navigation information "type B"</li>
 	<li>RMC - Recommended minimum navigation information "type C"</li>
 	<li>ROT - Vessel's rate of turn</li>
+	<li>RPM - Engine or shaft revolutions</li>
+	<li>RSA - Rudder angle in degrees</li>
 	<li>RTE - GPS route data with list of waypoints</li>
+	<li>TTM - Tracked target message</li>
+	<li>VDR - Set and drift</li>
 	<li>VHW - Water speed and heading</li>
+	<li>VLW - Distance traveled through water</li>
 	<li>VTG - Course and speed over ground</li>
 	<li>WPL - Destination waypoint location and ID</li>
 	<li>XDR - Transducer measurements</li>
+	<li>XTE - Measured cross-track error</li>
 	<li>ZDA - UTC time and date with local time offset</li>
 </ul>
 
@@ -109,13 +117,13 @@ Code tells more than 1000 words, see the <a href="https://github.com/ktuukkan/ma
 <h2>Releases</h2>
 
 <h3>Downloads</h3>
-<p>v0.7.0 pre-alpha, released on 2014-02-21:</p>
+<p>v0.8.0 pre-alpha, released on 2014-06-07:</p>
 <ul>
 	<li><a href="https://sourceforge.net/projects/marineapi/files/Releases/">Download</a> (Sourceforge.net)</li>
-	<li><a href="0.7.0/javadoc/">Javadoc</a></li>
-	<li><a href="0.7.0/readme.txt">Readme</a></li>
-	<li><a href="0.7.0/release_notes.txt">Release notes</a></li>
-	<li>Test <a href="0.7.0/tests/">results</a> and <a href="0.7.0/coverage/">coverage</a></li>
+	<li><a href="0.8.0/javadoc/">Javadoc</a></li>
+	<li><a href="0.8.0/readme.txt">Readme</a></li>
+	<li><a href="0.8.0/release_notes.txt">Release notes</a></li>
+	<li>Test <a href="0.8.0/tests/">results</a> and <a href="0.8.0/coverage/">coverage</a></li>
 </ul>
 
 <p>
@@ -125,6 +133,15 @@ older versions.
 </p>
 
 <div id="oldReleases">
+
+<p>v0.7.0 pre-alpha, released on 2014-02-21:</p>
+<ul>
+	<li><a href="https://sourceforge.net/projects/marineapi/files/Releases/">Download</a> (Sourceforge.net)</li>
+	<li><a href="0.7.0/javadoc/">Javadoc</a></li>
+	<li><a href="0.7.0/readme.txt">Readme</a></li>
+	<li><a href="0.7.0/release_notes.txt">Release notes</a></li>
+	<li>Test <a href="0.7.0/tests/">results</a> and <a href="0.7.0/coverage/">coverage</a></li>
+</ul>
 
 <p>v0.6.0 pre-alpha, released on 2013-10-15:</p>
 <ul>
