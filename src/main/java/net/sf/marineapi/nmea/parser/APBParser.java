@@ -29,7 +29,7 @@ import net.sf.marineapi.nmea.util.Direction;
  * @author ktuu
  * 
  */
-public class APBParser extends SentenceParser implements APBSentence {
+class APBParser extends SentenceParser implements APBSentence {
 
 	private static final int SIGNAL_STATUS = 0;
 	private static final int CYCLE_LOCK_STATUS = 1;

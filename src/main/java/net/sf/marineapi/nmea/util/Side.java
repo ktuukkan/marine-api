@@ -21,7 +21,7 @@
 package net.sf.marineapi.nmea.util;
 
 /**
- * Defines the sides of a boat, e.g. "port" and "startboard".
+ * Defines the sides of a boat, i.e. "port" and "starboard".
  * 
  * @author Lázár József
  */

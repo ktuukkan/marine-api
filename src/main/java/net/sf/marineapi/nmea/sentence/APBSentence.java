@@ -26,7 +26,7 @@ import net.sf.marineapi.nmea.util.Direction;
 /**
  * <p>
  * Autopilot sentence "type B", cross-track error, bearings and heading towards
- * destionation waypoint. This is a fixed form of the APA sentence with some
+ * destination waypoint. This is a fixed form of the APA sentence with some
  * ambiguities removed.
  * </p>
  * <p>
@@ -41,10 +41,10 @@ public interface APBSentence extends Sentence {
 
 	/** Kilometers */
 	public static final char KM = 'K';
-	
+
 	/** Nautical miles */
 	public static final char NM = 'N';
-	
+
 	/**
 	 * Returns the bearing from current position to destination waypoint.
 	 * 
