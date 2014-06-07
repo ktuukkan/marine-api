@@ -152,7 +152,7 @@ $Revision$
 			private="false" windowtitle="${javadoc.title}"
 			bottom="${javadoc.footer}" breakiterator="true"
 			excludepackagenames="net.sf.marineapi.example">
-		    <link href="http://download.oracle.com/javase/5/docs/api/" />
+		    <link href="http://docs.oracle.com/javase/6/docs/api/" />
 		</javadoc>
 	</target>
 
