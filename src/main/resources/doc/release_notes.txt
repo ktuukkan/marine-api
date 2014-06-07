@@ -19,6 +19,8 @@ NEW FEATURES
  
  * Support for RPM sentences; engine or shaft revolutions.
  
+ * Support for VLW sentences; distance traveled through water.
+ 
  * SentenceReader; exception listener for detecting i/o errors.
 
 CHANGES
@@ -47,4 +49,4 @@ ACKNOWLEDGEMENTS
 
  * TTM parser written by Johan Bergkvist.
  
- * SentenceReader exception handling written by Johan Riisberg-Jensen.
+ * SentenceReader exception handling added by Johan Riisberg-Jensen.

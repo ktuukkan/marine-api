@@ -63,6 +63,8 @@ public enum SentenceId {
 	RMC,
 	/** Rate of Turn */
 	ROT,
+	/** Revolutions measured from engine or shaft. */
+	RPM,
 	/** Rudder angle, measured in degrees */
 	RSA,
 	/** Route data and waypoint list */
@@ -71,6 +73,8 @@ public enum SentenceId {
 	TTM,
 	/** Set and drift, direction and speed of current. */
 	VDR,
+	/** Distance traveled through water, cumulative and since reset. */
+	VLW,
 	/** Track made good and ground speed */
 	VTG,
 	/** Water speed and heading */

@@ -93,6 +93,7 @@ public final class SentenceFactory {
 		registerParser("VDR", VDRParser.class);
 		registerParser("TTM", TTMParser.class);
 		registerParser("VHW", VHWParser.class);
+		registerParser("VLW", VLWParser.class);
 		registerParser("VTG", VTGParser.class);
 		registerParser("WPL", WPLParser.class);
 		registerParser("XTE", XTEParser.class);
