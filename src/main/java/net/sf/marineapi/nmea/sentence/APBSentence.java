@@ -35,6 +35,9 @@ import net.sf.marineapi.nmea.util.Direction;
  * destination".
  * </p>
  * 
+ * <p>Example:<br/>
+ * <code>$GPAPB,A,A,0.10,R,N,V,V,011,M,DEST,011,M,011,M*82</code></p>
+ * 
  * @author Kimmo Tuukkanen
  */
 public interface APBSentence extends Sentence {
