@@ -2,8 +2,9 @@ Java Marine API - README
 Version @VERSION@ pre-alpha (b@BUILD_ID@)
 <http://ktuukkan.github.io/marine-api/>
 
-Java Marine API is an NMEA 0183 library for accessing the data provided by
-electronic marine instruments such as GPS, echo sounder and weather instruments.
+Java Marine API is an NMEA-0183 library for decoding and encoding the data
+provided by various electronic marine instruments such as GPS, echo sounder and
+weather instruments.
 
 SYSTEM REQUIREMENTS
 
@@ -40,21 +41,21 @@ along with Java Marine API. If not, see <http://www.gnu.org/licenses/>.
 
 DISCLAIMER
 
-Java Marine API is not official NMEA software or related to National Marine
-Electronics Association <http://www.nmea.org/>. The interpretation of NMEA
-sentences for this library is based entirely on freely available resources in
-the Internet. Thus, it is NOT guaranteed that the library would conform and
-follow the standard accurately.
+Java Marine API is not official NMEA software. Further, it is not related to
+National Marine Electronics Association <http://www.nmea.org/>. The decoding of
+NMEA-0183 sentences is based entirely on publicly available resources in the
+Internet. Thus, it is NOT guaranteed that the library would follow and implement
+the standard accurately and correctly.
 
 SOURCE CODE
 
-The source code is freely available in Github.
+The source code is maintained in Github <http://www.github.com>.
 
 Browse code at Github.com:
 <https://github.com/ktuukkan/marine-api>
 
 Repository URL (read-only):
-git://github.com/ktuukkan/marine-api.git
+<git://github.com/ktuukkan/marine-api.git>
 
 If you wish to contribute new code or bug fixes, please fork and send pull
 requests in Github.
@@ -62,7 +63,6 @@ requests in Github.
 DEVELOPERS
 
 * Kimmo Tuukkanen <kimmo.tuukkanen@gmail.com>
-  - project admin, lead developer
 
 REFERENCES
 
