@@ -25,7 +25,7 @@ package net.sf.marineapi.nmea.io;
  * 
  * @author Johan Riisberg-Jensen
  */
-interface ExceptionListener {
+public interface ExceptionListener {
 
 	/**
 	 * Invoked by {@link SentenceReader} when error has occured while reading
