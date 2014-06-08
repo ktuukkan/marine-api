@@ -23,7 +23,7 @@ along with Java Marine API. If not, see <http://www.gnu.org/licenses/>.
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>net.sf.marineapi</groupId>
 	<artifactId>marineapi</artifactId>
-	<version>0.8.0</version>
+	<version>0.8.1</version>
 	<packaging>jar</packaging>
 
 	<name>Java Marine API</name>
