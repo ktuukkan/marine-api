@@ -1,0 +1,9 @@
+Java Marine API - RELEASE NOTES
+Version 0.8.1 (b20140608201434)
+<http://ktuukkan.github.io/marine-api/>
+
+This is a pre-alpha release, major API changes may be introduced in future
+versions. Released on 2014-06-08.
+
+Patch to v0.8.0 where ExceptionListener visibility was accidentally set in
+package scope only, fixed back to public. Otherwise identical to v0.8.0.
