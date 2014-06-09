@@ -22,7 +22,6 @@ package net.sf.marineapi.nmea.sentence;
  */
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
-import net.sf.marineapi.nmea.sentence.TalkerId;
 
 import org.junit.Before;
 import org.junit.Test;

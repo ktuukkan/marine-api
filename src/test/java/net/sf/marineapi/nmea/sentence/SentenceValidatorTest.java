@@ -20,6 +20,8 @@
  */
 package net.sf.marineapi.nmea.sentence;
 
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 import net.sf.marineapi.nmea.parser.BODTest;
 import net.sf.marineapi.nmea.parser.GGATest;
 import net.sf.marineapi.nmea.parser.GLLTest;
@@ -31,11 +33,8 @@ import net.sf.marineapi.nmea.parser.RTETest;
 import net.sf.marineapi.nmea.parser.VTGTest;
 import net.sf.marineapi.nmea.parser.WPLTest;
 import net.sf.marineapi.nmea.parser.ZDATest;
-import net.sf.marineapi.nmea.sentence.SentenceValidator;
-import org.junit.Test;
 
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import org.junit.Test;
 
 /**
  * @author Kimmo Tuukkanen

@@ -23,7 +23,6 @@ package net.sf.marineapi.nmea.parser;
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 import net.sf.marineapi.nmea.sentence.Checksum;

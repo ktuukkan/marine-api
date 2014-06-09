@@ -1,15 +1,11 @@
 package net.sf.marineapi.nmea.io;
 
-import net.sf.marineapi.nmea.event.SentenceEvent;
-import net.sf.marineapi.nmea.event.SentenceListener;
-import net.sf.marineapi.nmea.parser.BODTest;
-import net.sf.marineapi.nmea.parser.GGATest;
-import net.sf.marineapi.nmea.parser.SentenceFactory;
-import net.sf.marineapi.nmea.sentence.Sentence;
-import net.sf.marineapi.nmea.sentence.SentenceId;
-import org.junit.Before;
-import org.junit.Ignore;
-import org.junit.Test;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -17,7 +13,17 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 
-import static org.junit.Assert.*;
+import net.sf.marineapi.nmea.event.SentenceEvent;
+import net.sf.marineapi.nmea.event.SentenceListener;
+import net.sf.marineapi.nmea.parser.BODTest;
+import net.sf.marineapi.nmea.parser.GGATest;
+import net.sf.marineapi.nmea.parser.SentenceFactory;
+import net.sf.marineapi.nmea.sentence.Sentence;
+import net.sf.marineapi.nmea.sentence.SentenceId;
+
+import org.junit.Before;
+import org.junit.Ignore;
+import org.junit.Test;
 
 public class SentenceReaderTest {
 

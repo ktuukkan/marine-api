@@ -1,7 +1,6 @@
 package net.sf.marineapi.nmea.parser;
 
-import static org.junit.Assert.*;
-import static org.junit.Assert.fail;
+import static org.junit.Assert.assertEquals;
 import net.sf.marineapi.nmea.sentence.TalkerId;
 import net.sf.marineapi.nmea.sentence.VLWSentence;
 
