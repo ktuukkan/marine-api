@@ -34,25 +34,16 @@ import net.sf.marineapi.nmea.event.SentenceListener;
 import net.sf.marineapi.nmea.io.SentenceReader;
 import net.sf.marineapi.nmea.sentence.SentenceValidator;
 
-// If using Java Communications API, remove gnu.io imports above and
-// use corresponding javax.comm classes:
-// 
-// import javax.comm.CommPortIdentifier;
-// import javax.comm.SerialPort;
-
 /**
- * <p>
- * Serial port example using Java Communications API or RXTX libraries.
- * Application scans through all existing COM ports and seeks for NMEA data. If
- * valid data is found, scanning stops and application starts printing out the
- * sentences it reads from the port.
- * <ul>
- * <li><a
- * href="http://www.oracle.com/technetwork/java/index-jsp-141752.html">Java
- * Communications API</a>
- * <li><a href="http://rxtx.qbang.org/">RXTX wiki</a>
- * </ul>
+ * Serial port example using GNU/RXTX libraries (see readme.txt). Scans through
+ * all COM ports and seeks for NMEA 0183 data with default settings (4800
+ * baud, 8 data bits, 1 stop bit and no parity). If NMEA data is found, starts
+ * printing out all sentences the device is broadcasting.
  * 
+ * Notice that on Linux you may need to set read/write privileges on correct
+ * port (e.g. <code>sudo chmod 666 /dev/ttyUSB0<code>) or add your user in
+ * dialout group before running this example.
+ *  
  * @author Kimmo Tuukkanen
  */
 public class SerialPortExample implements SentenceListener {
