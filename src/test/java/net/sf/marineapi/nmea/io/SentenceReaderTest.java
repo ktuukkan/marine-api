@@ -37,7 +37,7 @@ public class SentenceReaderTest {
 	private boolean paused;
 	private boolean started;
 	private boolean stopped;
-    private InputStream stream;
+    private InputStream stream;    
 
 	@Before
 	public void setUp() throws Exception {
@@ -45,15 +45,15 @@ public class SentenceReaderTest {
 		stream = new FileInputStream(file);
 		reader = new SentenceReader(stream);
 		
-		dummyListener = new DummyListener();
-		testListener = new TestListener();
+		dummyListener = new DummySentenceListener();
+		testListener = new TestSentenceListener();
 		reader.addSentenceListener(dummyListener);
 		reader.addSentenceListener(testListener, SentenceId.GGA);
 	}
 
 	@Test
 	public void testAddSentenceListenerSentenceListenerString() {
-		DummyListener dummy = new DummyListener();
+		DummySentenceListener dummy = new DummySentenceListener();
 		reader.addSentenceListener(dummy, "GLL");
 	}
 
@@ -156,42 +156,51 @@ public class SentenceReaderTest {
 	}
 
     @Test
-    @SuppressWarnings("all")
     public void testExceptionListener() {
-        final ArrayList<String> result=new ArrayList<String>();
+    	
         reader.setExceptionListener(new ExceptionListener() {
             @Override
             public void onException(Exception e) {
-                result.add("Was called");
+                assertTrue(e instanceof IOException);
+                assertEquals("Bad file descriptor", e.getMessage());
+                reader.stop();
             }
         });
 
         reader.start();
-
+        
         try {
             stream.close();
         } catch (IOException e) {
+        	fail("failed to close stream");
         }
-
-        try {
-            Thread.sleep(500);
-        } catch (InterruptedException e) {
-        }
-
-        if(result.size()==0)
-            fail("ExceptionListener wasn't called on closed stream");
-
-        reader.stop();
     }
+        
+    @Test
+    public void testDataListener() {
 
-	public class DummyListener implements SentenceListener {
+    	final String expected = "=~=~=~=~=~=~=~=~=~=~=~= PuTTY log 2010.02.13 13:08:23 =~=~=~=~=~=~=~=~=~=~=~=";
+    	
+    	DataListener listener = new DataListener() {
+			@Override
+			public void dataRead(String data) {
+				assertEquals(expected, data);
+				reader.stop();
+			}    		
+    	};
+    	reader.setDataListener(listener);
+    	reader.start();
+    }
+    
+
+	public class DummySentenceListener implements SentenceListener {
 		public void readingPaused() {}
 		public void readingStarted() {}
 		public void readingStopped() {}
 		public void sentenceRead(SentenceEvent event) {}
 	}
 
-	public class TestListener implements SentenceListener {
+	public class TestSentenceListener implements SentenceListener {
 		public void readingPaused() { paused = true; }
 		public void readingStarted() { started = true; }
 		public void readingStopped() { stopped = true; }
@@ -199,5 +208,4 @@ public class SentenceReaderTest {
 			sentence = event.getSentence();
 		}
 	}
-	
 }

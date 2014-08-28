@@ -84,6 +84,8 @@ abstract class AbstractDataReader implements DataReader {
 					monitor.refresh();
 					Sentence s = factory.createParser(data);
 					parent.fireSentenceEvent(s);
+				} else if (!SentenceValidator.isSentence(data)) {
+					parent.fireDataEvent(data);
 				}
 				monitor.tick();
 				Thread.sleep(50);

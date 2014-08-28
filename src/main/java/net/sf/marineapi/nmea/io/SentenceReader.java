@@ -71,9 +71,10 @@ public class SentenceReader {
 	private ConcurrentMap<String, List<SentenceListener>> listeners = new ConcurrentHashMap<String, List<SentenceListener>>();
 	// timeout for "reading paused" in ms
 	private volatile int pauseTimeout = DEFAULT_TIMEOUT;
-
-    //Exception listener (null means no listener and default printout)
-    private ExceptionListener exceptionListener=null;
+	// Non-NMEA data listener
+	private DataListener dataListener;
+	// Exception listener
+	private ExceptionListener exceptionListener=null;
 
 	/**
 	 * Creates a SentenceReader for UDP/DatagramSocket.
@@ -200,6 +201,19 @@ public class SentenceReader {
 			}
 		}
 	}
+	
+	/**
+	 * Pass data to DataListener.
+	 */
+	void fireDataEvent(String data) {
+		try {
+			if(dataListener != null) {
+				dataListener.dataRead(data);
+			}
+		} catch (Exception e) {
+			
+		}
+	}
 
 	/**
      * Returns the exception call-back listener.
@@ -281,6 +295,17 @@ public class SentenceReader {
 		reader = new UDPDataReader(socket, this);
 	}
 
+	/**
+	 * Set listener for any data that is not recognized as NMEA 0183. 
+	 * devices and environments that produce mixed content with both NMEA and
+	 * non-NMEA data.
+	 * 
+	 * @param listener Listener to set, <code>null</code> to remove.
+	 */
+	public void setDataListener(DataListener listener) {
+		this.dataListener = listener;
+	}
+	
 	/**
      * Set exception call-back listener.
      * 
