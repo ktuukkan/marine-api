@@ -307,13 +307,13 @@ public class SentenceReader {
 	}
 	
 	/**
-     * Set exception call-back listener.
-     * 
-     * @param exceptionListener Listener to set, or <code>null</code> to reset.
-     */
-    public void setExceptionListener(ExceptionListener exceptionListener) {
-        this.exceptionListener = exceptionListener;
-    }
+	 * Set exception call-back listener.
+	 * 
+	 * @param exceptionListener Listener to set, or <code>null</code> to reset.
+	 */
+	public void setExceptionListener(ExceptionListener exceptionListener) {
+		this.exceptionListener = exceptionListener;
+	}
 	
 	/**
 	 * Sets the InputStream to be used as data source. If reader is running, it

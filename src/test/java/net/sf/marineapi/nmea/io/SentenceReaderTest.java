@@ -29,7 +29,7 @@ public class SentenceReaderTest {
 
 	public final static String TEST_DATA =
 		"src/test/resources/data/Navibe-GM720.txt";
-	
+
 	private Sentence sentence;
 	private SentenceReader reader;
 	private SentenceListener dummyListener;
@@ -37,14 +37,14 @@ public class SentenceReaderTest {
 	private boolean paused;
 	private boolean started;
 	private boolean stopped;
-    private InputStream stream;    
+	private InputStream stream;
 
 	@Before
 	public void setUp() throws Exception {
 		File file = new File(TEST_DATA);
 		stream = new FileInputStream(file);
 		reader = new SentenceReader(stream);
-		
+
 		dummyListener = new DummySentenceListener();
 		testListener = new TestSentenceListener();
 		reader.addSentenceListener(dummyListener);
@@ -128,7 +128,7 @@ public class SentenceReaderTest {
 		reader.fireSentenceEvent(s);
 		assertNull(sentence);
 	}
-	
+
 	@Test
 	public void testStartAndStop() {
 		try {
@@ -136,18 +136,18 @@ public class SentenceReaderTest {
 			assertFalse(started);
 			assertFalse(paused);
 			assertFalse(stopped);
-			
+
 			reader.start();
 			Thread.sleep(500);
-			
+
 			assertNotNull(sentence);
 			assertTrue(started);
 			assertFalse(paused);
 			assertFalse(stopped);
-			
+
 			reader.stop();
 			Thread.sleep(100);
-			
+
 			assertFalse(paused);
 			assertTrue(stopped);
 		} catch (Exception e) {
@@ -155,55 +155,71 @@ public class SentenceReaderTest {
 		}
 	}
 
-    @Test
-    public void testExceptionListener() {
-    	
-        reader.setExceptionListener(new ExceptionListener() {
-            @Override
-            public void onException(Exception e) {
-                assertTrue(e instanceof IOException);
-                assertEquals("Bad file descriptor", e.getMessage());
-                reader.stop();
-            }
-        });
+	@Test
+	public void testExceptionListener() {
 
-        reader.start();
-        
-        try {
-            stream.close();
-        } catch (IOException e) {
-        	fail("failed to close stream");
-        }
-    }
-        
-    @Test
-    public void testDataListener() {
+		reader.setExceptionListener(new ExceptionListener() {
+			@Override
+			public void onException(Exception e) {
+				assertTrue(e instanceof IOException);
+				assertEquals("Bad file descriptor", e.getMessage());
+				reader.stop();
+			}
+		});
 
-    	final String expected = "=~=~=~=~=~=~=~=~=~=~=~= PuTTY log 2010.02.13 13:08:23 =~=~=~=~=~=~=~=~=~=~=~=";
-    	
-    	DataListener listener = new DataListener() {
+		reader.start();
+
+		try {
+			stream.close();
+		} catch (IOException e) {
+			fail("failed to close stream");
+		}
+	}
+
+	@Test
+	public void testDataListener() {
+
+		// expected non-NMEA line in TEST_DATA
+		final String expected = "=~=~=~=~=~=~=~=~=~=~=~= PuTTY log 2010.02.13 13:08:23 =~=~=~=~=~=~=~=~=~=~=~=";
+
+		DataListener listener = new DataListener() {
 			@Override
 			public void dataRead(String data) {
 				assertEquals(expected, data);
 				reader.stop();
-			}    		
-    	};
-    	reader.setDataListener(listener);
-    	reader.start();
-    }
-    
+			}
+		};
+		reader.setDataListener(listener);
+		reader.start();
+	}
 
 	public class DummySentenceListener implements SentenceListener {
-		public void readingPaused() {}
-		public void readingStarted() {}
-		public void readingStopped() {}
-		public void sentenceRead(SentenceEvent event) {}
+		public void readingPaused() {
+		}
+
+		public void readingStarted() {
+		}
+
+		public void readingStopped() {
+		}
+
+		public void sentenceRead(SentenceEvent event) {
+		}
 	}
 
 	public class TestSentenceListener implements SentenceListener {
-		public void readingPaused() { paused = true; }
-		public void readingStarted() { started = true; }
-		public void readingStopped() { stopped = true; }
+		public void readingPaused() {
+			paused = true;
+		}
+
+		public void readingStarted() {
+			started = true;
+		}
+
+		public void readingStopped() {
+			stopped = true;
+		}
+
 		public void sentenceRead(SentenceEvent event) {
 			sentence = event.getSentence();
 		}
