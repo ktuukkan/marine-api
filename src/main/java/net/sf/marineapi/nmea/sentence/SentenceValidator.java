@@ -30,10 +30,10 @@ import java.util.regex.Pattern;
 public final class SentenceValidator {
 
 	private static final Pattern reChecksum = Pattern.compile(
-		"^[$|!]{1}[A-Z0-9]{3,10}[,][\\x20-\\x7F]*[*][A-F0-9]{2}(\\r|(\\r\\n)|\\n){0,1}$");
+		"^[$|!]{1}[A-Z0-9]{3,10}[,][\\x20-\\x7F]*[*][A-F0-9]{2}(\\r|\\n|\\r\\n|\\n\\r){0,1}$");
 
 	private static final Pattern reNoChecksum = Pattern.compile(
-		"^[$|!]{1}[A-Z0-9]{3,10}[,][\\x20-\\x7F]*(\\r|(\\r\\n)|\\n){0,1}$");
+		"^[$|!]{1}[A-Z0-9]{3,10}[,][\\x20-\\x7F]*(\\r|\\n|\\r\\n|\\n\\r){0,1}$");
 
 	private SentenceValidator() {
 	}

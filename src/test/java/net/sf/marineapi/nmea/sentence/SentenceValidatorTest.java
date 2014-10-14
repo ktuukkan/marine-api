@@ -121,26 +121,11 @@ public class SentenceValidatorTest {
 	}
 
 	@Test
-	public void testSentenceWithChecksumValidation() {
-
-		String nmea = "$GPRMC,142312.000,V,,,,,,,080514,,*20\r\n";
+	public void testIsSentenceWithChecksum() {
+		
+		String nmea = "$GPRMC,142312.000,V,,,,,,,080514,,*20";
 		assertTrue(SentenceValidator.isSentence(nmea));
-
-		nmea = "$GPRMC,142312.000,V,,,,,,,080514,,*20";
-		assertTrue(SentenceValidator.isSentence(nmea));
-
-		nmea = "$GPRMC,142312.000,V,,,,,,,080514,,*20\r\n\r\n";
-		assertFalse(SentenceValidator.isSentence(nmea));
-
-		nmea = "$GPRMC,142312.000,V,,,,,,,080514,,*20\n\r";
-		assertFalse(SentenceValidator.isSentence(nmea));
-
-		nmea = "$GPRMC,142312.000,V,,,,,,,080514,,*20\r";
-		assertFalse(SentenceValidator.isSentence(nmea));
-
-		nmea = "$GPRMC,142312.000,V,,,,,,,080514,,*20\n";
-		assertFalse(SentenceValidator.isSentence(nmea));
-
+		
 		nmea = "$GPRMC,142312.000,V,,,,,,,080514,,*20xy";
 		assertFalse(SentenceValidator.isSentence(nmea));
 
@@ -153,26 +138,48 @@ public class SentenceValidatorTest {
 		nmea = "$GPRMC,142312.000,V,,,,,,,080514,,*";
 		assertFalse(SentenceValidator.isSentence(nmea));
 	}
-
+	
 	@Test
-	public void testSentenceWithoutChecksumValidation() {
+	public void testIsSentenceWithoutChecksum() {
+		String nmea = "$GPRMC,142312.000,V,,,,,,,080514,,";
+		assertTrue(SentenceValidator.isSentence(nmea));
+	}
+	
+	@Test
+	public void testIsSentenceWithChecksumAndNewline() {
+		
+		String nmea = "$GPRMC,142312.000,V,,,,,,,080514,,*20\r\n";
+		assertTrue(SentenceValidator.isSentence(nmea));
 
+		nmea = "$GPRMC,142312.000,V,,,,,,,080514,,*20\n\r";
+		assertTrue(SentenceValidator.isSentence(nmea));
+
+		nmea = "$GPRMC,142312.000,V,,,,,,,080514,,*20\r";
+		assertTrue(SentenceValidator.isSentence(nmea));
+
+		nmea = "$GPRMC,142312.000,V,,,,,,,080514,,*20\n";
+		assertTrue(SentenceValidator.isSentence(nmea));
+		
+		nmea = "$GPRMC,142312.000,V,,,,,,,080514,,*20\r\n\r\n";
+		assertFalse(SentenceValidator.isSentence(nmea));
+	}	
+	
+	@Test
+	public void testIsSentenceNoChecksumWithNewline() {
+		
 		String nmea = "$GPRMC,142312.000,V,,,,,,,080514,,\r\n";
 		assertTrue(SentenceValidator.isSentence(nmea));
 
-		nmea = "$GPRMC,142312.000,V,,,,,,,080514,,";
+		nmea = "$GPRMC,142312.000,V,,,,,,,080514,,\n\r";
 		assertTrue(SentenceValidator.isSentence(nmea));
 
-		nmea = "$GPRMC,142312.000,V,,,,,,,080514,,\r\n\r\n";
-		assertFalse(SentenceValidator.isSentence(nmea));
-
-		nmea = "$GPRMC,142312.000,V,,,,,,,080514,,\n\r";
-		assertFalse(SentenceValidator.isSentence(nmea));
-
 		nmea = "$GPRMC,142312.000,V,,,,,,,080514,,\r";
-		assertFalse(SentenceValidator.isSentence(nmea));
+		assertTrue(SentenceValidator.isSentence(nmea));
 
 		nmea = "$GPRMC,142312.000,V,,,,,,,080514,,\n";
+		assertTrue(SentenceValidator.isSentence(nmea));
+		
+		nmea = "$GPRMC,142312.000,V,,,,,,,080514,,\r\n\r\n";
 		assertFalse(SentenceValidator.isSentence(nmea));
 	}
 }
