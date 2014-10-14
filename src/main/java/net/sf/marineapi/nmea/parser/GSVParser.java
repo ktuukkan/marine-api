@@ -91,9 +91,10 @@ class GSVParser extends SentenceParser implements GSVSentence {
 				satellites.add(new SatelliteInfo(id, elev, azm, snr));
 			} catch (DataNotAvailableException e) {
 				// nevermind missing satellite info
-			} catch (IndexOutOfBoundsException e2) {
-                //also miss it since it not alway has 4 satellites
-            }
+			} catch (IndexOutOfBoundsException e) {
+				// less than four satellites, give up
+				break;
+			}
 		}
 
 		return satellites;

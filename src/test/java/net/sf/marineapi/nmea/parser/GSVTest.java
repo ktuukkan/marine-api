@@ -65,7 +65,38 @@ public class GSVTest {
 		testSatelliteInfo(sat.get(2), "18", 63, 58, 50);
 		testSatelliteInfo(sat.get(3), "21", 53, 329, 47);
 	}
+	
+	/**
+	 * Test method for
+	 * {@link net.sf.marineapi.nmea.parser.GSVParser#getSatelliteInfo()}.
+	 */
+	@Test
+	public void testGetSatelliteInfoWithEmptyFields() {
+		
+		GSVSentence g = new GSVParser("$GPGSV,3,2,12,15,56,182,51,17,38,163,47,18,,,,21,53,329,47");
+		List<SatelliteInfo> sat = g.getSatelliteInfo();
+		
+		assertEquals(3, sat.size());
+		testSatelliteInfo(sat.get(0), "15", 56, 182, 51);
+		testSatelliteInfo(sat.get(1), "17", 38, 163, 47);
+		testSatelliteInfo(sat.get(2), "21", 53, 329, 47);
+	}
 
+	/**
+	 * Test method for
+	 * {@link net.sf.marineapi.nmea.parser.GSVParser#getSatelliteInfo()}.
+	 */
+	@Test
+	public void testGetSatelliteInfoWithShortSentence() {
+		
+		GSVSentence g = new GSVParser("$GPGSV,3,2,12,15,56,182,51,17,38,163,47");
+		List<SatelliteInfo> sat = g.getSatelliteInfo();
+		
+		assertEquals(2, sat.size());
+		testSatelliteInfo(sat.get(0), "15", 56, 182, 51);
+		testSatelliteInfo(sat.get(1), "17", 38, 163, 47);
+	}
+	
 	/**
 	 * Test method for
 	 * {@link net.sf.marineapi.nmea.parser.GSVParser#getSentenceCount()}.
