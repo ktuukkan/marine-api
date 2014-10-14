@@ -5,5 +5,14 @@ Version @VERSION@ (b@BUILD_ID@)
 This is a pre-alpha release, major API changes may be introduced in future
 versions. Released on @RELEASE_DATE@.
 
-Patch to v0.8.0 where ExceptionListener visibility was accidentally set in
-package scope only, fixed back to public. Otherwise identical to v0.8.0.
+CHANGES
+
+ * SentenceValidator now accepts different combinations of newline and carriage
+   return characters.
+  
+ * GSV sentence may now contain less than four satellite infos.
+
+NEW FEATURES
+
+ * SentenceReader; DataListener interface for receiving any non-NMEA data that
+   has been read from current data source.
