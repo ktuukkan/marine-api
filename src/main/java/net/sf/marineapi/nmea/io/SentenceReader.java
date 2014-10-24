@@ -22,6 +22,8 @@ package net.sf.marineapi.nmea.io;
 
 import java.io.InputStream;
 import java.net.DatagramSocket;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -130,16 +132,27 @@ public class SentenceReader {
 	}
 
 	/**
+	 * Returns all currently registered SentenceListeners.
+	 * 
+	 * @return List of SentenceListeners or empty list.
+	 */
+	List<SentenceListener> getSentenceListeners() {
+		Set<SentenceListener> all = new HashSet<SentenceListener>();
+		for (List<SentenceListener> sl : listeners.values()) {
+			all.addAll(sl);
+		}
+		return new ArrayList<SentenceListener>(all);
+	}
+	
+	/**
 	 * Notifies all listeners that reader has paused due to timeout.
 	 */
 	void fireReadingPaused() {
-		for (List<SentenceListener> l : listeners.values()) {
-			for (SentenceListener listener : l) {
-				try {
-					listener.readingPaused();
-				} catch (Exception e) {
-					LOGGER.log(Level.WARNING, LOG_MSG, e);
-				}
+		for (SentenceListener listener : getSentenceListeners()) {
+			try {
+				listener.readingPaused();
+			} catch (Exception e) {
+				LOGGER.log(Level.WARNING, LOG_MSG, e);
 			}
 		}
 	}
@@ -149,13 +162,11 @@ public class SentenceReader {
 	 * events will be dispatched until stopped or timeout occurs.
 	 */
 	void fireReadingStarted() {
-		for (List<SentenceListener> l : listeners.values()) {
-			for (SentenceListener listener : l) {
-				try {
-					listener.readingStarted();
-				} catch (Exception e) {
-					LOGGER.log(Level.WARNING, LOG_MSG, e);
-				}
+		for (SentenceListener listener : getSentenceListeners()) {
+			try {
+				listener.readingStarted();
+			} catch (Exception e) {
+				LOGGER.log(Level.WARNING, LOG_MSG, e);
 			}
 		}
 	}
@@ -164,13 +175,11 @@ public class SentenceReader {
 	 * Notifies all listeners that data reading has stopped.
 	 */
 	void fireReadingStopped() {
-		for (List<SentenceListener> l : listeners.values()) {
-			for (SentenceListener listener : l) {
-				try {
-					listener.readingStopped();
-				} catch (Exception e) {
-					LOGGER.log(Level.WARNING, LOG_MSG, e);
-				}
+		for (SentenceListener listener : getSentenceListeners()) {
+			try {
+				listener.readingStopped();
+			} catch (Exception e) {
+				LOGGER.log(Level.WARNING, LOG_MSG, e);
 			}
 		}
 	}
