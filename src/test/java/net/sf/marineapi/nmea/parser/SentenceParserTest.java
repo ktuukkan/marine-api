@@ -556,5 +556,27 @@ public class SentenceParserTest {
 		assertEquals(8, parser.getFieldCount());
 		assertTrue(parser.toString().startsWith("$GPGGA,1,2,3,4,,,,*"));
 	}
-
+	
+	@Test
+	public void testSetStringValuesReplaceAll() {
+		SentenceParser parser = new SentenceParser("$GPGGA,1,2,3,4");
+		String[] values = { "5", "6", "7" };
+		parser.setStringValues(0, values);
+		assertEquals(3, parser.getFieldCount());
+		assertEquals("5", parser.getStringValue(0));
+		assertEquals("6", parser.getStringValue(1));
+		assertEquals("7", parser.getStringValue(2));
+	}
+	
+	@Test
+	public void testSetStringValuesReplaceTail() {
+		SentenceParser parser = new SentenceParser("$GPGGA,1,2,3,4");
+		String[] values = { "5", "6", "7" };
+		parser.setStringValues(1, values);
+		assertEquals(4, parser.getFieldCount());
+		assertEquals("1", parser.getStringValue(0));
+		assertEquals("5", parser.getStringValue(1));
+		assertEquals("6", parser.getStringValue(2));
+		assertEquals("7", parser.getStringValue(3));
+	}
 }

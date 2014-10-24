@@ -23,6 +23,7 @@ package net.sf.marineapi.nmea.parser;
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import net.sf.marineapi.nmea.sentence.Checksum;
@@ -70,7 +71,7 @@ public class SentenceParser implements Sentence {
 	private final String sentenceId;
 
 	// actual data fields (sentence id and checksum omitted)
-	private List<String> fields;
+	private List<String> fields = new ArrayList<String>();
 
 	/**
 	 * Creates a new instance of SentenceParser. Validates the input String and
@@ -93,20 +94,15 @@ public class SentenceParser implements Sentence {
 
 		// remove address field
 		int begin = nmea.indexOf(Sentence.FIELD_DELIMITER);
-		String temp = nmea.substring(begin + 1);
+		String csv = nmea.substring(begin + 1);
 
 		// remove checksum
-		if (temp.contains(String.valueOf(CHECKSUM_DELIMITER))) {
-			int end = temp.indexOf(CHECKSUM_DELIMITER);
-			temp = temp.substring(0, end);
+		if (csv.contains(String.valueOf(CHECKSUM_DELIMITER))) {
+			int end = csv.indexOf(CHECKSUM_DELIMITER);
+			csv = csv.substring(0, end);
 		}
-
-		// copy data fields to list
-		String[] temp2 = temp.split(String.valueOf(FIELD_DELIMITER), -1);
-		fields = new ArrayList<String>(temp2.length);
-		for (String s : temp2) {
-			fields.add(s);
-		}
+		
+		fields.addAll(Arrays.asList(csv.split(String.valueOf(FIELD_DELIMITER), -1)));
 	}
 
 	/**
@@ -588,20 +584,13 @@ public class SentenceParser implements Sentence {
 	 * @param newFields Array of Strings to set
 	 */
 	protected final void setStringValues(int first, String[] newFields) {
-
-		List<String> temp = new ArrayList<String>();
-		for (int i = 0; i < getFieldCount(); i++) {
-			if (i < first) {
-				temp.add(fields.get(i));
-			} else {
-				break;
-			}
-		}
-
+		
+		List<String> temp = new ArrayList<String>();		
+		temp.addAll(fields.subList(0, first));
+		
 		for (String field : newFields) {
 			temp.add(field == null ? "" : field);
 		}
-
 		fields.clear();
 		fields = temp;
 	}
