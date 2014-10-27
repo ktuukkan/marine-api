@@ -24,6 +24,7 @@ import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 import net.sf.marineapi.nmea.sentence.Checksum;
@@ -91,18 +92,14 @@ public class SentenceParser implements Sentence {
 		beginChar = nmea.charAt(0);
 		talkerId = TalkerId.parse(nmea);
 		sentenceId = SentenceId.parseStr(nmea);
-
-		// remove address field
-		int begin = nmea.indexOf(Sentence.FIELD_DELIMITER);
-		String csv = nmea.substring(begin + 1);
-
-		// remove checksum
-		if (csv.contains(String.valueOf(CHECKSUM_DELIMITER))) {
-			int end = csv.indexOf(CHECKSUM_DELIMITER);
-			csv = csv.substring(0, end);
-		}
 		
-		fields.addAll(Arrays.asList(csv.split(String.valueOf(FIELD_DELIMITER), -1)));
+		int begin = nmea.indexOf(Sentence.FIELD_DELIMITER) + 1;
+		int end = nmea.indexOf(CHECKSUM_DELIMITER) > 0 ?
+			nmea.indexOf(CHECKSUM_DELIMITER) : nmea.length();
+		
+		String csv = nmea.substring(begin, end);
+		String[] values = csv.split(String.valueOf(FIELD_DELIMITER), -1);
+		fields.addAll(Arrays.asList(values));
 	}
 
 	/**
@@ -124,14 +121,12 @@ public class SentenceParser implements Sentence {
 		if (type == null || "".equals(type)) {
 			throw new IllegalArgumentException("Sentence ID must be specified");
 		}
-
 		beginChar = begin;
 		talkerId = talker;
 		sentenceId = type;
-		fields = new ArrayList<String>(size);
-		for (int i = 0; i < size; i++) {
-			fields.add("");
-		}
+		String[] values = new String[size];
+		Arrays.fill(values, "");
+		fields.addAll(Arrays.asList(values));
 	}
 
 	/**
