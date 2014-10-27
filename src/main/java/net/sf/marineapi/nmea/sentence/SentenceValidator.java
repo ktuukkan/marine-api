@@ -68,7 +68,7 @@ public final class SentenceValidator {
 			return false;
 		}
 
-		if (nmea.indexOf(Sentence.CHECKSUM_DELIMITER) < 0) {
+		if (Checksum.index(nmea) == nmea.length()) {
 			return reNoChecksum.matcher(nmea).matches();
 		}
 

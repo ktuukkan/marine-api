@@ -21,6 +21,8 @@
 package net.sf.marineapi.nmea.parser;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 import net.sf.marineapi.nmea.sentence.Checksum;
 
 import org.junit.Test;
@@ -63,5 +65,10 @@ public class ChecksumTest {
 		assertEquals("58", Checksum.calculate(RMBTest.EXAMPLE));
 		assertEquals("25", Checksum.calculate(RTETest.EXAMPLE));
 	}
-
+	
+	@Test
+	public void testDelimiterIndex() {
+		assertEquals(13, Checksum.index("$GPGGA,,,,,,,"));
+		assertEquals(13, Checksum.index("$GPGGA,,,,,,,*00"));
+	}
 }

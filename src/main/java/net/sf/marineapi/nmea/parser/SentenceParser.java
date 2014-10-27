@@ -94,8 +94,7 @@ public class SentenceParser implements Sentence {
 		sentenceId = SentenceId.parseStr(nmea);
 		
 		int begin = nmea.indexOf(Sentence.FIELD_DELIMITER) + 1;
-		int end = nmea.indexOf(CHECKSUM_DELIMITER) > 0 ?
-			nmea.indexOf(CHECKSUM_DELIMITER) : nmea.length();
+		int end = Checksum.index(nmea);
 		
 		String csv = nmea.substring(begin, end);
 		String[] values = csv.split(String.valueOf(FIELD_DELIMITER), -1);
@@ -331,16 +330,20 @@ public class SentenceParser implements Sentence {
 	public String toString() {
 
 		StringBuilder sb = new StringBuilder(MAX_LENGTH);
-		sb.append(beginChar);
 		sb.append(talkerId.toString());
 		sb.append(sentenceId);
-
+		
 		for (String field : fields) {
 			sb.append(FIELD_DELIMITER);
 			sb.append(field == null ? "" : field);
 		}
+		
+		final String checksum = Checksum.xor(sb.toString());
+		sb.append(CHECKSUM_DELIMITER);
+		sb.append(checksum);
+		sb.insert(0, beginChar);
 
-		return Checksum.add(sb.toString());
+		return sb.toString();
 	}
 
 	/**
