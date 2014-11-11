@@ -1,6 +1,6 @@
 /*
  * SentenceReader.java
- * Copyright (C) 2010-2012 Kimmo Tuukkanen
+ * Copyright (C) 2010-2014 Kimmo Tuukkanen
  *
  * This file is part of Java Marine API.
  * <http://ktuukkan.github.io/marine-api/>
@@ -225,13 +225,13 @@ public class SentenceReader {
 	}
 
 	/**
-     * Returns the exception call-back listener.
-     * 
-     * @return Currently set ExceptionListener, or <code>null</code> if none.
-     */
-    public ExceptionListener getExceptionListener() {
-        return exceptionListener;
-    }
+	 * Returns the exception call-back listener.
+	 * 
+	 * @return Currently set ExceptionListener, or <code>null</code> if none.
+	 */
+	public ExceptionListener getExceptionListener() {
+		return exceptionListener;
+	}
 
 	/**
 	 * Returns the current reading paused timeout.
@@ -346,7 +346,7 @@ public class SentenceReader {
 		this.pauseTimeout = millis;
 	}
 
-    /**
+	/**
 	 * Starts reading the input stream and dispatching events.
 	 *
 	 * @throws IllegalStateException If reader is already running.
@@ -360,7 +360,7 @@ public class SentenceReader {
 		thread.start();
 	}
 
-    /**
+	/**
 	 * Stops the reader and event dispatching.
 	 */
 	public void stop() {
