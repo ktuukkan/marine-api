@@ -181,7 +181,7 @@ public class ZDATest {
 
 		GregorianCalendar cal = new GregorianCalendar();
 		cal.set(Calendar.YEAR, 2010);
-		cal.set(Calendar.MONTH, 6);
+		cal.set(Calendar.MONTH, 5);
 		cal.set(Calendar.DAY_OF_MONTH, 15);
 		cal.set(Calendar.HOUR_OF_DAY, 12);
 		cal.set(Calendar.MINUTE, 15);
