@@ -12,7 +12,10 @@ CHANGES
   
  * GSV sentence may now contain less than four satellite infos.
 
+ * Date class; fixed month index off-by-one in toDate() method. 
+ 
 NEW FEATURES
 
  * SentenceReader; DataListener interface for receiving any non-NMEA data that
    has been read from current data source.
+ 
