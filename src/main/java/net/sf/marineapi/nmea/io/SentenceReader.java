@@ -251,8 +251,9 @@ public class SentenceReader {
 	 * @param ex Exception to handle
 	 */
 	void handleException(String msg, Exception ex) {
-		LOGGER.log(Level.WARNING, msg, ex);
-		if(exceptionListener != null) {
+		if(exceptionListener == null) {
+			LOGGER.log(Level.WARNING, msg, ex);
+		} else {
 			try {
 				exceptionListener.onException(ex);
 			} catch (Exception e) {
