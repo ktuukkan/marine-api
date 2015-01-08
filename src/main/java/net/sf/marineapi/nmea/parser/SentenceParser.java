@@ -424,13 +424,7 @@ public class SentenceParser implements Sentence {
 	 * @return True if field contains value, otherwise false.
 	 */
 	protected final boolean hasValue(int index) {
-		boolean result = true;
-		try {
-			getStringValue(index);
-		} catch (Exception e) {
-			result = false;
-		}
-		return result;
+		return !("".equals(fields.get(index)) || fields.get(index) == null);
 	}
 
 	/**
