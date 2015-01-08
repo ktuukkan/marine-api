@@ -244,8 +244,8 @@ public class SentenceReader {
 	}
 
 	/**
-	 * Handles an exception by dispatching it to ExceptionHandler (if any) and
-	 * logs the error.
+	 * Handles an exception by passing it to ExceptionHandler. If no handler
+	 * is present, logs the error at level WARNING.
 	 * 
 	 * @param msg Error message for logging
 	 * @param ex Exception to handle
