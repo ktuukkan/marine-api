@@ -54,7 +54,9 @@ class DefaultDataReader extends AbstractDataReader {
 	public String read() {
 		String data = null;
 		try {
-			data = input.readLine();
+			if(input.ready()) {
+				data = input.readLine();
+			}
 		} catch (Exception e) {
 			getParent().handleException("InputStream read failed", e);
 		}
