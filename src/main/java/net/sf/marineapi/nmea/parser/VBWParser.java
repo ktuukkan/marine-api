@@ -23,24 +23,39 @@ package net.sf.marineapi.nmea.parser;
 import net.sf.marineapi.nmea.sentence.SentenceId;
 import net.sf.marineapi.nmea.sentence.TalkerId;
 import net.sf.marineapi.nmea.sentence.VBWSentence;
+import net.sf.marineapi.nmea.util.DataStatus;
 
 class VBWParser extends SentenceParser implements VBWSentence {
 
     public static final int LONG_WATERSPEED = 0;
     public static final int TRAV_WATERSPEED = 1;
+    public static final int WATER_SPEED_STATUS = 2;
     public static final int LONG_GROUNDSPEED = 3;
     public static final int TRAV_GROUNDSPEED = 4;
+    public static final int GROUND_SPEED_STATUS = 5;
+    public static final int STERN_WATERSPEED = 6;
+    public static final int STERN_SPEED_STATUS = 7;
+    public static final int STERN_GROUNDSPEED = 8;
+    public static final int STERN_GROUNDSPEED_STATUS = 9;
 
     public VBWParser(String nmea) {
         super(nmea, SentenceId.VBW);
     }
 
     public VBWParser(TalkerId talker) {
-        super(talker, SentenceId.VBW, 6);
+        super(talker, SentenceId.VBW, 10);
     }
 
     public double getLongWaterSpeed() {
         return getDoubleValue(LONG_WATERSPEED);
+    }
+
+    public DataStatus getWaterSpeedStatus() {
+        return DataStatus.valueOf(getCharValue(WATER_SPEED_STATUS));
+    }
+    
+    public DataStatus getGroundSpeedStatus() {
+        return DataStatus.valueOf(getCharValue(GROUND_SPEED_STATUS));
     }
 
     public double getLongGroundSpeed() {
@@ -54,4 +69,62 @@ class VBWParser extends SentenceParser implements VBWSentence {
     public double getTravGroundSpeed() {
         return getDoubleValue(TRAV_GROUNDSPEED);
     }
+    
+    public double getSternWaterSpeed() {
+        return getDoubleValue(STERN_WATERSPEED);
+    }
+    
+    public DataStatus getSternWaterSpeedStatus() {
+        return DataStatus.valueOf(getCharValue(STERN_SPEED_STATUS));
+    }
+    
+    public double getSternGroundSpeed() {
+        return getDoubleValue(STERN_GROUNDSPEED);
+    }
+    
+    public DataStatus getSternGroundSpeedStatus() {
+        return DataStatus.valueOf(getCharValue(STERN_GROUNDSPEED_STATUS));
+    }   
+
+    public void setLongWaterSpeed(double speed) {
+        setDoubleValue(LONG_WATERSPEED, speed, 2, 1);
+    }
+
+    public void setLongGroundSpeed(double speed) {
+       setDoubleValue(LONG_GROUNDSPEED, speed, 2, 1);
+    }
+
+    public void setTravWaterSpeed(double speed) {
+        setDoubleValue(TRAV_WATERSPEED, speed, 2, 1);
+    }
+
+    public void setTravGroundSpeed(double speed) {
+        setDoubleValue(TRAV_GROUNDSPEED, speed, 2, 1);
+    }
+
+    public void setWaterSpeedStatus(DataStatus status) {
+        setCharValue(WATER_SPEED_STATUS, status.toChar());
+    }
+
+    public void setGroundSpeedStatus(DataStatus status) {
+        setCharValue(GROUND_SPEED_STATUS, status.toChar());
+    }
+
+    public void setSternWaterSpeed(double speed) {
+        setDoubleValue(STERN_WATERSPEED, speed, 2, 1);
+    }
+
+    public void setSternWaterSpeedStatus(DataStatus status) {
+        setCharValue(STERN_SPEED_STATUS, status.toChar());
+    }
+
+    public void setSternGroundSpeed(double speed) {
+        setDoubleValue(STERN_GROUNDSPEED, speed, 2, 1);
+    }
+
+    public void setSternGroundSpeedStatus(DataStatus status) {
+       setCharValue(STERN_GROUNDSPEED_STATUS, status.toChar());
+    }
+    
+    
 }

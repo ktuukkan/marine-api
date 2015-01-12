@@ -18,6 +18,8 @@
  */
 package net.sf.marineapi.nmea.sentence;
  
+import net.sf.marineapi.nmea.util.DataStatus;
+
 public interface VBWSentence extends Sentence {
 
     double getLongWaterSpeed();
@@ -27,4 +29,37 @@ public interface VBWSentence extends Sentence {
     double getTravWaterSpeed();
 
     double getTravGroundSpeed();
+    
+    DataStatus getWaterSpeedStatus();
+    
+    DataStatus getGroundSpeedStatus();
+    
+    double getSternWaterSpeed();
+    
+    DataStatus getSternWaterSpeedStatus();
+    
+    double getSternGroundSpeed();
+    
+    DataStatus getSternGroundSpeedStatus();
+     
+    void setLongWaterSpeed(double speed);
+
+    void setLongGroundSpeed(double speed);
+
+    void setTravWaterSpeed(double speed);
+
+    void setTravGroundSpeed(double speed);
+    
+    void setWaterSpeedStatus(DataStatus status);
+    
+    void setGroundSpeedStatus(DataStatus status);
+    
+    void setSternWaterSpeed(double speed);
+    
+    void setSternWaterSpeedStatus(DataStatus status);
+    
+    void setSternGroundSpeed(double speed);
+    
+    void setSternGroundSpeedStatus(DataStatus status);
+
 }
