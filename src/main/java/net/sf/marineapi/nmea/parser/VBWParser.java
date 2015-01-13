@@ -38,14 +38,29 @@ class VBWParser extends SentenceParser implements VBWSentence {
     public static final int STERN_GROUNDSPEED = 8;
     public static final int STERN_GROUNDSPEED_STATUS = 9;
 
+    	/**
+	 * Create a new instance of VBWParser.
+	 *
+	 * @param nmea
+	 *            VBW sentence String.
+	 * @throws IllegalArgumentException
+	 *             If specified sentence is invalid.
+	 */
+    
     public VBWParser(String nmea) {
         super(nmea, SentenceId.VBW);
     }
-
+	/**
+	 * Create a VBW parser with an empty sentence.
+	 *
+	 * @param talker
+	 *            TalkerId to set
+	 */
     public VBWParser(TalkerId talker) {
         super(talker, SentenceId.VBW, 10);
     }
 
+    
     public double getLongWaterSpeed() {
         return getDoubleValue(LONG_WATERSPEED);
     }
