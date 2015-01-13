@@ -51,12 +51,12 @@ public interface DPTSentence extends DepthSentence {
 	 * 
 	 * @return Maximum depth, in meters.
 	 */
-	int getMaximum();
+	double getMaximum();
 
 	/**
 	 * Set maximum depth value the sounder can detect.
 	 * 
 	 * @param max Maximum depth, in meters.
 	 */
-	void setMaximum(int max);
+	void setMaximum(double max);
 }

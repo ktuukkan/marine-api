@@ -73,6 +73,7 @@ public enum SentenceId {
 	RTE,
 	/** Tracked target */
 	TTM,
+        VBW,
 	/** Set and drift, direction and speed of current. */
 	VDR,
 	/** Distance traveled through water, cumulative and since reset. */
