@@ -19,9 +19,12 @@ CHANGES
    
  * SentenceParser; hasValue() now checks fields content explicitly.
  
+ * DPTSentence; getMaximum() return value changed from int to double.
  
 NEW FEATURES
 
  * SentenceReader; DataListener interface for receiving any non-NMEA data that
    has been read from current data source.
+   
+ * Support for VBW sentences; dual ground/water speed.
    
