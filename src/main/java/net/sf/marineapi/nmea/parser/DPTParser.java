@@ -89,16 +89,16 @@ class DPTParser extends SentenceParser implements DPTSentence {
 	 * (non-Javadoc)
 	 * @see net.sf.marineapi.nmea.sentence.DPTSentence#getMaximum()
 	 */
-	public int getMaximum() {
-		return getIntValue(MAXIMUM);
+	public double getMaximum() {
+		return getDoubleValue(MAXIMUM);
 	}
 
 	/*
 	 * (non-Javadoc)
 	 * @see net.sf.marineapi.nmea.sentence.DPTSentence#setMaximum(int)
 	 */
-	public void setMaximum(int max) {
-		setIntValue(MAXIMUM, max);
+	public void setMaximum(double max) {
+		setDoubleValue(MAXIMUM, max);
 	}
 
 }
