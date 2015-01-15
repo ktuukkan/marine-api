@@ -73,7 +73,8 @@ public enum SentenceId {
 	RTE,
 	/** Tracked target */
 	TTM,
-        VBW,
+	/** Dual ground/water speed and stern ground/water speed. */
+	VBW,
 	/** Set and drift, direction and speed of current. */
 	VDR,
 	/** Distance traveled through water, cumulative and since reset. */
