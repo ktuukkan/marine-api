@@ -20,7 +20,6 @@
  */
 package net.sf.marineapi.nmea.sentence;
 
-import java.util.regex.Pattern;
 
 /**
  * Provides Sentence checksum calculation and utilities.

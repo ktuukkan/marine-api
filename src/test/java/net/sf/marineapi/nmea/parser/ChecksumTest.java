@@ -21,8 +21,6 @@
 package net.sf.marineapi.nmea.parser;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
 import net.sf.marineapi.nmea.sentence.Checksum;
 
 import org.junit.Test;
