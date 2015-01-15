@@ -28,3 +28,7 @@ NEW FEATURES
    
  * Support for VBW sentences; dual ground/water speed.
    
+ACKNOWLEDGEMENTS
+
+ * VBW sentence parser written by Jeremy Wilson / ESRG LLC.
+ 
