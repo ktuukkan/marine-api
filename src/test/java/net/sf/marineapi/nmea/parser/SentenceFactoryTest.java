@@ -5,6 +5,9 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
+
+import java.util.List;
+
 import net.sf.marineapi.nmea.sentence.BODSentence;
 import net.sf.marineapi.nmea.sentence.Sentence;
 import net.sf.marineapi.nmea.sentence.SentenceId;
@@ -228,6 +231,8 @@ public class SentenceFactoryTest {
 		assertTrue(s instanceof Sentence);
 		assertTrue(s instanceof SentenceParser);
 		assertTrue(s instanceof VDMParser);
+		instance.unregisterParser(VDMParser.class);
+		assertFalse(instance.hasParser("VDM"));
 	}
 
 	/**
@@ -269,6 +274,20 @@ public class SentenceFactoryTest {
 	public void testHasParser() {
 		assertTrue(instance.hasParser("GLL"));
 		assertFalse(instance.hasParser("ABC"));
+	}
+	
+	/**
+	 * Test method for
+	 * {@link net.sf.marineapi.nmea.parser.SentenceFactory#createParser(TalkerId, SentenceId)
+	 * .
+	 */
+	@Test
+	public void testListParsers() {
+		List<String> types = instance.listParsers();
+		assertEquals(SentenceId.values().length, types.size());
+		for (SentenceId id : SentenceId.values()) {
+			assertTrue(types.contains(id.name()));
+		}
 	}
 
 	/**

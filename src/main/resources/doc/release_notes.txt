@@ -27,7 +27,9 @@ NEW FEATURES
    has been read from current data source.
    
  * Support for VBW sentences; dual ground/water speed.
-   
+ 
+ * SentenceFactory; available can be listed with listParser() method.
+    
 ACKNOWLEDGEMENTS
 
  * VBW sentence parser written by Jeremy Wilson / ESRG LLC.

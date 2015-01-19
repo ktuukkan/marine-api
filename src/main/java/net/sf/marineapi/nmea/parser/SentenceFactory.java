@@ -22,8 +22,11 @@ package net.sf.marineapi.nmea.parser;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import net.sf.marineapi.nmea.sentence.Sentence;
 import net.sf.marineapi.nmea.sentence.SentenceId;
@@ -93,7 +96,7 @@ public final class SentenceFactory {
 		registerParser("RSA", RSAParser.class);
 		registerParser("VDR", VDRParser.class);
 		registerParser("TTM", TTMParser.class);
-                registerParser("VBW", VBWParser.class);
+		registerParser("VBW", VBWParser.class);
 		registerParser("VHW", VHWParser.class);
 		registerParser("VLW", VLWParser.class);
 		registerParser("VTG", VTGParser.class);
@@ -171,6 +174,16 @@ public final class SentenceFactory {
 	}
 
 	/**
+	 * Returns a list of currently parseable sentence types. 
+	 * 
+	 * @return List of sentence ids
+	 */
+	public List<String> listParsers() {
+		Set<String> keys = parsers.keySet();
+		return Arrays.asList(keys.toArray(new String[parsers.size()]));
+	}
+	
+	/**
 	 * Register a sentence parser to factory. After registration,
 	 * {@link #createParser(String)} method can be used to obtain instances of
 	 * registered parser.
@@ -214,7 +227,7 @@ public final class SentenceFactory {
 			}
 		}
 	}
-
+	
 	/**
 	 * Creates a new parser instance with specified parameters.
 	 * 
