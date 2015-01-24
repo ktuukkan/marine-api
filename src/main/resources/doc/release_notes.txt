@@ -21,6 +21,8 @@ CHANGES
  
  * DPTSentence; getMaximum() return value changed from int to double.
  
+ * XDRSentence; fixed fields indexing bug in getMeasurements(). 
+ 
 NEW FEATURES
 
  * SentenceReader; DataListener interface for receiving any non-NMEA data that
