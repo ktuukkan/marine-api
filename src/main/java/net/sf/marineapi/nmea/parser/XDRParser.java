@@ -95,17 +95,13 @@ class XDRParser extends SentenceParser implements XDRSentence {
 	 * @see net.sf.marineapi.nmea.sentence.XDRSentence#getMeasurements()
 	 */
 	public List<Measurement> getMeasurements() {
-		
-		int setCount = getFieldCount() / DATA_SET_LENGTH;
-		ArrayList<Measurement> result = new ArrayList<Measurement>(setCount);
-		
-		for (int i = 0; i <= setCount; i += DATA_SET_LENGTH) {
+		ArrayList<Measurement> result = new ArrayList<Measurement>();
+		for (int i = 0; i < getFieldCount(); i += DATA_SET_LENGTH) {
 			Measurement value = fetchValues(i);
 			if(!value.isEmpty()) {
 				result.add(value);
 			}
 		}
-		
 		return result;
 	}
 
