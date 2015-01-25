@@ -89,8 +89,10 @@ public enum SentenceId {
 	XDR,
 	/** Cross-track error, measured */
 	XTE,
-	/** UTC time and date with local time zone offset */
-	ZDA;
+    /** Meteorological Composite  */
+    MDA,
+    /** UTC time and date with local time zone offset */
+    ZDA;
 
 	/**
 	 * Parses the sentence id from specified sentence String and returns a
