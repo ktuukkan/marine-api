@@ -423,7 +423,7 @@ public class SentenceParser implements Sentence {
 	 * @return True if field contains value, otherwise false.
 	 */
 	protected final boolean hasValue(int index) {
-		return !("".equals(fields.get(index)) || fields.get(index) == null);
+		return fields.size() > index && !("".equals(fields.get(index)) || fields.get(index) == null);
 	}
 
 	/**
