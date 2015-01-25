@@ -89,6 +89,8 @@ public enum SentenceId {
 	XDR,
 	/** Cross-track error, measured */
 	XTE,
+	/** Wind speed and direction */
+    MWD,
 	/** UTC time and date with local time zone offset */
 	ZDA;
 
