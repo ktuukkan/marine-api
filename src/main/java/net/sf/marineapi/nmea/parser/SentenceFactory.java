@@ -105,6 +105,7 @@ public final class SentenceFactory {
 		registerParser("XDR", XDRParser.class);
         registerParser("ZDA", ZDAParser.class);
         registerParser("MDA", MDAParser.class);
+        registerParser("MWD", MWDParser.class);
 	}
 
 	/**
