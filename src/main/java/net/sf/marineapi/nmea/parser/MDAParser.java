@@ -269,7 +269,7 @@ public class MDAParser extends SentenceParser implements MDASentence {
      * @return Wind speed, knots. NaN if not available.
      */
     @Override
-    public double getWindSpeedKnot() {
+    public double getWindSpeedKnots() {
         if (hasValue(WIND_SPEED_KNOTS) && hasValue(WIND_SPEED_KNOTS_UNIT) && getStringValue(WIND_SPEED_KNOTS_UNIT).equalsIgnoreCase("N")) {
             return getDoubleValue(WIND_SPEED_KNOTS);
         } else {

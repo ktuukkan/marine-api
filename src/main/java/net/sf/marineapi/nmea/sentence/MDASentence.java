@@ -75,5 +75,5 @@ public interface MDASentence extends Sentence {
     /**
      * @return Wind speed, knots. NaN if not available.
      */
-    public double getWindSpeedKnot();
+    public double getWindSpeedKnots();
 }
