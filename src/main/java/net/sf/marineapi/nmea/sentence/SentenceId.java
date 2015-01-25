@@ -91,8 +91,10 @@ public enum SentenceId {
 	XTE,
     /** Meteorological Composite  */
     MDA,
-    /** UTC time and date with local time zone offset */
-    ZDA;
+	/** Wind speed and direction */
+    MWD,
+	/** UTC time and date with local time zone offset */
+	ZDA;
 
 	/**
 	 * Parses the sentence id from specified sentence String and returns a
