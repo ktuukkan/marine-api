@@ -44,6 +44,8 @@ public enum TalkerId {
 	AG,
 	/** Autopilot - Magnetic */
 	AP,
+	/** BeiDou - Chinese satellite navigation system */
+	BD,
 	/** Computer - Programmed Calculator (obsolete) */
 	@Deprecated
 	CC,
