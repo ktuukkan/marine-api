@@ -73,6 +73,8 @@ public enum SentenceId {
 	RTE,
 	/** Tracked target */
 	TTM,
+	/** AIS messages */
+	VDM,
 	/** Set and drift, direction and speed of current. */
 	VDR,
 	/** Distance traveled through water, cumulative and since reset. */

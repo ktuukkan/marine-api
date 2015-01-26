@@ -1,0 +1,31 @@
+# Syntactically correct sentences
+!AIVDM,1,1,,A,15RTgt0PAso;90TKcjM8h6g208CQ,0*4A
+!AIVDM,1,1,,A,16SteH0P00Jt63hHaa6SagvJ087r,0*42
+!AIVDM,1,1,,B,25Cjtd0Oj;Jp7ilG7=UkKBoB0<06,0*60
+!AIVDM,1,1,,A,38Id705000rRVJhE7cl9n;160000,0*40
+!AIVDM,1,1,,A,403OviQuMGCqWrRO9>E6fE700@GO,0*4D
+!AIVDM,2,1,1,A,55?MbV02;H;s<HtKR20EHE:0@T4@Dn2222222216L961O5Gf0NSQEp6ClRp8,0*1C
+!AIVDM,2,2,1,A,88888888880,2*25
+!AIVDM,1,1,,B,6B?n;be:cbapalgc;i6?Ow4,2*4A
+!AIVDM,1,1,,A,B52K>;h00Fc>jpUlNV@ikwpUoP06,0*4C
+!AIVDM,1,1,,A,B52KB8h006fu`Q6:g1McCwb5oP06,0*00
+!AIVDM,1,1,,B,B5O6hr00<veEKmUaMFdEow`UWP06,0*4F
+!AIVDM,1,1,,B,C5N3SRgPEnJGEBT>NhWAwwo862PaLELTBJ:V00000000S0D:R220,0*0B
+!AIVDM,1,1,,A,H42O55i18tMET00000000000000,2*6D
+!AIVDM,1,1,,A,H42O55lti4hhhilD3nink000?050,0*40
+
+# Non printable and control character in data or string fields
+!AIVDM,1,1,,A,647sBv00b=E006P9>0,4*1B
+# Type 4 with date/time set to N/A
+!AIVDM,1,1,,A,402Fha0000Htt<tSF0l4Q@000d20,0*65
+# Type 4 with YYYY/MM/DD OK, but HHmmSS N/A
+!AIVDM,1,1,,B,4028n@iuiPpttwIWI<Hl>8700PS:,0*60
+# Type 4 with year set to 10196 (0x27D4), idempotency used to fail on this one
+# It has a bad epfd as well.
+!AIVDM,1,1,,B,4>O7m7Iu@<9qUfbtm`vSnwvH20S8,0*46
+
+# simultaneous use of buffers of channels A & B
+!AIVDM,2,1,6,B,542M92h00001@<7;?G0PD4i@R0<tqA8tj37>220o0h:2240Ht50000000000,0*3B
+!AIVDM,2,1,2,A,542M92h00001@<7;?G0PD4i@R0<tqA8tj37>220o0h:2240Ht500000000000000,0*3C
+!AIVDM,2,2,2,A,0000002,2*24
+!AIVDM,2,2,6,B,00000000000,2*21

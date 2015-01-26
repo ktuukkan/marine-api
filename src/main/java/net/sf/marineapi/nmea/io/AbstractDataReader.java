@@ -26,6 +26,8 @@ import java.util.logging.Logger;
 import net.sf.marineapi.nmea.parser.SentenceFactory;
 import net.sf.marineapi.nmea.sentence.Sentence;
 import net.sf.marineapi.nmea.sentence.SentenceValidator;
+import net.sf.marineapi.nmea.sentence.TalkerId;
+import net.sf.marineapi.nmea.sentence.VDMSentence;
 
 /**
  * Base class for data readers; common methods and run-loop.
@@ -76,6 +78,7 @@ abstract class AbstractDataReader implements DataReader {
 
 		ActivityMonitor monitor = new ActivityMonitor(parent);
 		SentenceFactory factory = SentenceFactory.getInstance();
+		VDMSentence previous = null;
 
 		while (isRunning) {
 			try {
@@ -83,7 +86,41 @@ abstract class AbstractDataReader implements DataReader {
 				if (SentenceValidator.isValid(data)) {
 					monitor.refresh();
 					Sentence s = factory.createParser(data);
-					parent.fireSentenceEvent(s);
+					// AIS sentences are coming in fragments (multiple lines)
+					// which should be concatenated.
+					if (s.getTalkerId() == TalkerId.AI) {
+						VDMSentence vdm = (VDMSentence)s;
+						if (previous == null) {
+							// Check if message is a new one or incorrectly a continuation
+							// of a previous one (because of channel multiplexing)
+							if (vdm.getFragmentNumber() == 1)
+								previous = vdm;
+						}
+						else {
+							if (previous.isPartOfMessage(vdm)) {
+								// Continuation line (part of the previous fragment)
+								previous.add(vdm);
+							}
+							else {
+								// Out of sequence message (possibly a new start
+								// of message caused by channel multiplexing),
+								// so we throw the previous away and start a new one
+								previous = vdm;
+							}
+						}
+						if (previous != null && previous.isLastFragment()) {
+							// This is the last fragment, now we can interpret the message
+							try {
+								parent.fireSentenceEvent(previous);
+							}
+							catch (Exception e) {
+								LOG.log(Level.WARNING, "AIS decode failed", e);
+							}
+							previous = null;
+						}
+					}
+					else
+						parent.fireSentenceEvent(s);
 				} else if (!SentenceValidator.isSentence(data)) {
 					parent.fireDataEvent(data);
 				}
