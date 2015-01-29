@@ -55,7 +55,6 @@ public class VDMParser extends SentenceParser implements VDMSentence {
 	 */
 	public VDMParser(TalkerId talker) {
 		super(talker, "VDM", 6);
-		preparse();
 	}
 
 	private void preparse() {
