@@ -30,7 +30,9 @@ NEW FEATURES
    
  * Support for VBW sentences; dual ground/water speed.
  
- * SentenceFactory; available can be listed with listParser() method.
+ * SentenceFactory; listParser() method for listing registered parsers.
+ 
+ * SentenceFactory; reset() method for resetting the factory in initial state.
     
 ACKNOWLEDGEMENTS
 
