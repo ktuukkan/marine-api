@@ -35,11 +35,8 @@ import net.sf.marineapi.ais.parser.AISMessage18Parser;
 import net.sf.marineapi.ais.parser.AISMessage19Parser;
 import net.sf.marineapi.ais.util.MMSI;
 import net.sf.marineapi.ais.util.Violation;
-import net.sf.marineapi.nmea.event.SentenceEvent;
-import net.sf.marineapi.nmea.event.SentenceListener;
+import net.sf.marineapi.nmea.event.AbstractSentenceListener;
 import net.sf.marineapi.nmea.io.SentenceReader;
-import net.sf.marineapi.nmea.sentence.GGASentence;
-import net.sf.marineapi.nmea.sentence.SentenceId;
 import net.sf.marineapi.nmea.sentence.VDMSentence;
 
 /**
@@ -48,7 +45,7 @@ import net.sf.marineapi.nmea.sentence.VDMSentence;
  *
  * @author Jozéph Lázár
  */
-public class AISExample implements SentenceListener<VDMSentence> {
+public class AISExample extends AbstractSentenceListener<VDMSentence> {
 
 	private SentenceReader reader;
 
@@ -64,7 +61,7 @@ public class AISExample implements SentenceListener<VDMSentence> {
 		reader = new SentenceReader(stream);
 
 		// listen for for all AIS VDM messages
-		reader.addSentenceListener(this, SentenceId.VDM);
+		reader.addSentenceListener(this);
 		reader.start();
 	}
 
