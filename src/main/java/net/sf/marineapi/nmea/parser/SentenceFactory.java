@@ -64,7 +64,7 @@ import net.sf.marineapi.nmea.sentence.TalkerId;
 public final class SentenceFactory {
 
 	// map that holds registered sentence types and parser classes
-	private static Map<String, Class<? extends SentenceParser>> parsers = new HashMap<String, Class<? extends SentenceParser>>();
+	private static Map<String, Class<? extends SentenceParser>> parsers;
 
 	// singleton factory instance
 	private static volatile SentenceFactory instance;
@@ -73,39 +73,7 @@ public final class SentenceFactory {
 	 * Constructor.
 	 */
 	private SentenceFactory() {
-		registerParser("APB", APBParser.class);
-		registerParser("BOD", BODParser.class);
-		registerParser("DBT", DBTParser.class);
-		registerParser("DPT", DPTParser.class);
-		registerParser("DTM", DTMParser.class);
-		registerParser("GGA", GGAParser.class);
-		registerParser("GLL", GLLParser.class);
-		registerParser("GSA", GSAParser.class);
-		registerParser("GSV", GSVParser.class);
-		registerParser("HDG", HDGParser.class);
-		registerParser("HDM", HDMParser.class);
-		registerParser("HDT", HDTParser.class);
-		registerParser("MTA", MTAParser.class);
-		registerParser("MTW", MTWParser.class);
-		registerParser("MWV", MWVParser.class);
-		registerParser("RMB", RMBParser.class);
-		registerParser("RMC", RMCParser.class);
-		registerParser("RPM", RPMParser.class);
-		registerParser("ROT", ROTParser.class);
-		registerParser("RTE", RTEParser.class);
-		registerParser("RSA", RSAParser.class);
-		registerParser("VDR", VDRParser.class);
-		registerParser("TTM", TTMParser.class);
-		registerParser("VBW", VBWParser.class);
-		registerParser("VHW", VHWParser.class);
-		registerParser("VLW", VLWParser.class);
-		registerParser("VTG", VTGParser.class);
-		registerParser("WPL", WPLParser.class);
-		registerParser("XTE", XTEParser.class);
-		registerParser("XDR", XDRParser.class);
-        registerParser("ZDA", ZDAParser.class);
-        registerParser("MDA", MDAParser.class);
-        registerParser("MWD", MWDParser.class);
+	    reset();
 	}
 
 	/**
@@ -279,4 +247,45 @@ public final class SentenceFactory {
 		}
 		return instance;
 	}
+
+    /**
+     * Resets the factory in it's initial state, i.e. restores and removes all
+     * parsers the have been either removed or added.
+     */
+    public void reset() {
+        parsers = new HashMap<String, Class<? extends SentenceParser>>();
+        registerParser("APB", APBParser.class);
+        registerParser("BOD", BODParser.class);
+        registerParser("DBT", DBTParser.class);
+        registerParser("DPT", DPTParser.class);
+        registerParser("DTM", DTMParser.class);
+        registerParser("GGA", GGAParser.class);
+        registerParser("GLL", GLLParser.class);
+        registerParser("GSA", GSAParser.class);
+        registerParser("GSV", GSVParser.class);
+        registerParser("HDG", HDGParser.class);
+        registerParser("HDM", HDMParser.class);
+        registerParser("HDT", HDTParser.class);
+        registerParser("MTA", MTAParser.class);
+        registerParser("MTW", MTWParser.class);
+        registerParser("MWV", MWVParser.class);
+        registerParser("RMB", RMBParser.class);
+        registerParser("RMC", RMCParser.class);
+        registerParser("RPM", RPMParser.class);
+        registerParser("ROT", ROTParser.class);
+        registerParser("RTE", RTEParser.class);
+        registerParser("RSA", RSAParser.class);
+        registerParser("VDR", VDRParser.class);
+        registerParser("TTM", TTMParser.class);
+        registerParser("VBW", VBWParser.class);
+        registerParser("VHW", VHWParser.class);
+        registerParser("VLW", VLWParser.class);
+        registerParser("VTG", VTGParser.class);
+        registerParser("WPL", WPLParser.class);
+        registerParser("XTE", XTEParser.class);
+        registerParser("XDR", XDRParser.class);
+        registerParser("ZDA", ZDAParser.class);
+        registerParser("MDA", MDAParser.class);
+        registerParser("MWD", MWDParser.class);
+    }
 }

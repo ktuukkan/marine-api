@@ -25,14 +25,14 @@ import org.junit.Test;
  */
 public class SentenceFactoryTest {
 
-	private SentenceFactory instance;
+	private final SentenceFactory instance = SentenceFactory.getInstance();
 
 	/**
 	 * @throws java.lang.Exception
 	 */
 	@Before
 	public void setUp() throws Exception {
-		instance = SentenceFactory.getInstance();
+		instance.reset();
 	}
 
 	/**
