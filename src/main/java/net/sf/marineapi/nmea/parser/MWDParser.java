@@ -72,41 +72,29 @@ public class MWDParser extends SentenceParser implements MWDSentence {
     private static int WIND_SPEED_METERS_UNIT = 7;
 
     /**
-     * Creates a new instance of MWVParser.
+     * Creates a new instance of MWDParser.
      * 
-     * @param nmea
-     *            MWV sentence String
+     * @param nmea MWV sentence String
      */
     public MWDParser(String nmea) {
         super(nmea, SentenceId.MWD);
     }
 
     /**
-     * Creates a new empty instance of MWVParser.
+     * Creates a new empty instance of MWDParser.
      * 
-     * @param talker
-     *            Talker id to set
+     * @param talker Talker id to set
      */
     public MWDParser(TalkerId talker) {
         super(talker, SentenceId.MWD, 20);
+        setCharValue(WIND_DIRECTION_TRUE_UNIT, 'T');
+        setCharValue(WIND_DIRECTION_MAGNETIC_UNIT, 'M');
+        setCharValue(WIND_SPEED_METERS_UNIT, 'M');
+        setCharValue(WIND_SPEED_KNOTS_UNIT, 'K');
     }
 
-    /**
-     * @return Wind direction, degrees True, to the nearest 0,1 degree. NaN if
-     *         not available.
-     */
-    @Override
-    public double getTrueWindDirection() {
-        if (hasValue(WIND_DIRECTION_TRUE) && hasValue(WIND_DIRECTION_TRUE_UNIT) && getStringValue(WIND_DIRECTION_TRUE_UNIT).equalsIgnoreCase("T")) {
-            return getDoubleValue(WIND_DIRECTION_TRUE);
-        } else {
-            return Double.NaN;
-        }
-    }
-
-    /**
-     * @return Wind direction, degrees True, to the nearest 0,1 degree. NaN if
-     *         not available.
+    /* (non-Javadoc)
+     * @see net.sf.marineapi.nmea.sentence.MWDSentence#getMagneticWindDirection()
      */
     @Override
     public double getMagneticWindDirection() {
@@ -117,22 +105,20 @@ public class MWDParser extends SentenceParser implements MWDSentence {
         }
     }
 
-    /**
-     * @return Wind speed, in knots, to the nearest 0,1 m/s. NaN if not
-     *         available.
+    /* (non-Javadoc)
+     * @see net.sf.marineapi.nmea.sentence.MWDSentence#getTrueWindDirection()
      */
     @Override
-    public double getWindSpeedKnots() {
-        if (hasValue(WIND_SPEED_KNOTS) && hasValue(WIND_SPEED_KNOTS_UNIT) && getStringValue(WIND_SPEED_KNOTS_UNIT).equalsIgnoreCase("N")) {
-            return getDoubleValue(WIND_SPEED_KNOTS);
+    public double getTrueWindDirection() {
+        if (hasValue(WIND_DIRECTION_TRUE) && hasValue(WIND_DIRECTION_TRUE_UNIT) && getStringValue(WIND_DIRECTION_TRUE_UNIT).equalsIgnoreCase("T")) {
+            return getDoubleValue(WIND_DIRECTION_TRUE);
         } else {
             return Double.NaN;
         }
     }
 
-    /**
-     * @return Wind speed, meters per second, to the nearest 0,1 m/s. NaN if not
-     *         available.
+    /* (non-Javadoc)
+     * @see net.sf.marineapi.nmea.sentence.MWDSentence#getWindSpeed()
      */
     @Override
     public double getWindSpeed() {
@@ -143,4 +129,47 @@ public class MWDParser extends SentenceParser implements MWDSentence {
         }
     }
 
+    /* (non-Javadoc)
+     * @see net.sf.marineapi.nmea.sentence.MWDSentence#getWindSpeedKnots()
+     */
+    @Override
+    public double getWindSpeedKnots() {
+        if (hasValue(WIND_SPEED_KNOTS) && hasValue(WIND_SPEED_KNOTS_UNIT) && getStringValue(WIND_SPEED_KNOTS_UNIT).equalsIgnoreCase("N")) {
+            return getDoubleValue(WIND_SPEED_KNOTS);
+        } else {
+            return Double.NaN;
+        }
+    }
+
+    /* (non-Javadoc)
+     * @see net.sf.marineapi.nmea.sentence.MWDSentence#setMagneticWindDirections(double)
+     */
+    @Override
+    public void setMagneticWindDirection(double direction) {
+        setDegreesValue(WIND_DIRECTION_MAGNETIC, direction);
+    }
+
+    /* (non-Javadoc)
+     * @see net.sf.marineapi.nmea.sentence.MWDSentence#setTrueWindDirection(double)
+     */
+    @Override
+    public void setTrueWindDirection(double direction) {
+        setDegreesValue(WIND_DIRECTION_TRUE, direction);       
+    }
+
+    /* (non-Javadoc)
+     * @see net.sf.marineapi.nmea.sentence.MWDSentence#setWindSpeed(double)
+     */
+    @Override
+    public void setWindSpeed(double speed) {
+        setDoubleValue(WIND_SPEED_METERS, speed);        
+    }
+
+    /* (non-Javadoc)
+     * @see net.sf.marineapi.nmea.sentence.MWDSentence#setWindSpeedKnots(double)
+     */
+    @Override
+    public void setWindSpeedKnots(double speed) {
+        setDoubleValue(WIND_SPEED_KNOTS, speed);
+    }
 }
