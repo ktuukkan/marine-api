@@ -24,24 +24,23 @@ import net.sf.marineapi.nmea.sentence.Sentence;
 
 /**
  * Meteorological Composite - Barometric pressure, air and water temperature,
- * humidity, dew point and wind speed and direction relative to the surface
- * of the earth.
+ * humidity, dew point and wind speed and direction relative to the surface of
+ * the earth.
  * 
  * @author Richard van Nieuwenhoven
  */
 public interface MDASentence extends Sentence {
 
     /**
-     * @return Barometric pressure, bars, to the nearest .001 bar. NaN if not
-     *         available.
+     * @return Wind speed, knots. NaN if not available.
      */
-    double getBarometricPressure();
-    
+    public double getWindSpeedKnots();
+
     /**
-     * @return Barometric pressure, inches of mercury. NaN if not
-     *         available.
+     * @return Absolute humidity, percent, to the nearest 0,1 percent. NaN if
+     *         not available.
      */
-    double getBarometricPressureInHg();
+    double getAbsoluteHumidity();
 
     /**
      * @return Air temperature, degrees C, to the nearest 0,1 degree C. NaN if
@@ -50,22 +49,15 @@ public interface MDASentence extends Sentence {
     double getAirTemperature();
 
     /**
-     * @return Water temperature, degrees C. NaN if not
+     * @return Barometric pressure, bars, to the nearest .001 bar. NaN if not
      *         available.
      */
-    double getWaterTemperature();
+    double getBarometricPressure();
 
     /**
-     * @return Relative humidity, percent, to the nearest 0,1 percent. NaN if
-     *         not available.
+     * @return Barometric pressure, inches of mercury. NaN if not available.
      */
-    double getRelativeHumidity();
-
-    /**
-     * @return Absolute humidity, percent, to the nearest 0,1 percent. NaN if
-     *         not available.
-     */
-    double getAbsoluteHumidity();
+    double getBarometricPressureInHg();
 
     /**
      * @return Dew point, degrees C, to the nearest 0,1 degree C. NaN if not
@@ -77,13 +69,24 @@ public interface MDASentence extends Sentence {
      * @return Wind direction, degrees True, to the nearest 0,1 degree. NaN if
      *         not available.
      */
-    double getTrueWindDirection();
+    double getMagneticWindDirection();
+
+    /**
+     * @return Relative humidity, percent, to the nearest 0,1 percent. NaN if
+     *         not available.
+     */
+    double getRelativeHumidity();
 
     /**
      * @return Wind direction, degrees True, to the nearest 0,1 degree. NaN if
      *         not available.
      */
-    double getMagneticWindDirection();
+    double getTrueWindDirection();
+
+    /**
+     * @return Water temperature, degrees C. NaN if not available.
+     */
+    double getWaterTemperature();
 
     /**
      * @return Wind speed, meters per second, to the nearest 0,1 m/s. NaN if not
@@ -92,7 +95,80 @@ public interface MDASentence extends Sentence {
     double getWindSpeed();
 
     /**
-     * @return Wind speed, knots. NaN if not available.
+     * Sets the absolute humidity.
+     * 
+     * @param humitidy Humidity percent to set.
      */
-    public double getWindSpeedKnots();
+    void setAbsoluteHumidity(double humitidy);
+
+    /**
+     * Sets the air temperature.
+     * 
+     * @param temp Temperature to set, degrees Celsius.
+     */
+    void setAirTemperature(double temp);
+
+    /**
+     * Sets the barometric pressure (bars).
+     * 
+     * @param pressure Pressure to set, in bars.
+     */
+    void setBarometricPressure(double pressure);
+
+    /**
+     * Sets the barometric pressure (hg).
+     * 
+     * @param pressure Pressure value to set, in inches of mercury.
+     */
+    void setBarometricPressureInHg(double pressure);
+
+    /**
+     * Sets the dew point temperature.
+     * 
+     * @param dewPoint Dew point in degrees Celsius.
+     */
+    void setDewPoint(double dewPoint);
+
+    /**
+     * Sets the magnetic wind direction.
+     * 
+     * @param direction Direction to set, degrees Magnetic [0..360]
+     */
+    void setMagneticWindDirection(double direction);
+
+    /**
+     * Sets the relative humidity
+     * 
+     * @param humidity Humidity percent to set.
+     */
+    void setRelativeHumidity(double humidity);
+
+    /**
+     * Sets the True wind direction.
+     * 
+     * @param direction Direction to set, degrees True [0..360]
+     */
+    void setTrueWindDirection(double direction);
+
+    /**
+     * Sets the Water temperature.
+     * 
+     * @param temp Temperature in degrees Celsius.
+     */
+    void setWaterTemperature(double temp);
+
+    /**
+     * Sets the wind speed.
+     * 
+     * @param speed Wind speed in meters per second.
+     */
+    void setWindSpeed(double speed);
+
+    /**
+     * Sets the wind speed, in knots.
+     * 
+     * @param speed Wind speed in knots.
+     * @see #setWindSpeedKnots(double)
+     */
+    void setWindSpeedKnots(double speed);
 }
