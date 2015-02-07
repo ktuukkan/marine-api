@@ -27,17 +27,23 @@ CHANGES
    navigation system.
  
 NEW FEATURES
-
- * SentenceReader; DataListener interface for receiving any non-NMEA data that
-   has been read from current data source.
    
  * Support for VBW sentences; dual ground/water speed.
  
+ * Support for MDA sentences; meteorological composite.
+ 
+ * Support for MWD sentences; wind speed and direction.
+ 
+ * SentenceReader; DataListener interface for receiving any non-NMEA data that
+   has been read from current data source.
+
  * SentenceFactory; listParser() method for listing registered parsers.
  
  * SentenceFactory; reset() method for resetting the factory in initial state.
     
 ACKNOWLEDGEMENTS
 
- * VBW sentence parser written by Jeremy Wilson / ESRG LLC.
+ * VBW parser written by Jeremy Wilson / ESRG LLC.
+
+ * MWD and MDA parsers written by Richard van Nieuwenhoven / INDI for Java.
  
