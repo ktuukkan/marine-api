@@ -21,7 +21,10 @@ CHANGES
  
  * DPTSentence; getMaximum() return value changed from int to double.
  
- * XDRSentence; fixed fields indexing bug in getMeasurements(). 
+ * XDRSentence; fixed fields indexing bug in getMeasurements().
+ 
+ * TalkerId enum; added new id 'BD' to support Chinese BeiDou satellite
+   navigation system.
  
 NEW FEATURES
 
