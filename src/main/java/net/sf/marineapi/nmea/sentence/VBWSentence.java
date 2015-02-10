@@ -94,7 +94,7 @@ public interface VBWSentence extends Sentence {
 	 * Returns the Stern Ground Speed.
 	 * 
 	 * @return Stern Ground Speed
-	 * @see #setSternGroundSpeed()
+	 * @see #setSternGroundSpeed(double)
 	 */
 	double getSternGroundSpeed();
 
@@ -136,15 +136,14 @@ public interface VBWSentence extends Sentence {
 	/**
 	 * Sets Water Speed Status.
 	 * 
-	 * @param DataStatus status Water Speed Status
+	 * @param status Water Speed Status
 	 */
-
 	void setWaterSpeedStatus(DataStatus status);
 
 	/**
 	 * Sets Ground Speed Status.
 	 * 
-	 * @param DataStatus status Ground Speed Status
+	 * @param status Ground Speed Status
 	 */
 	void setGroundSpeedStatus(DataStatus status);
 
@@ -158,7 +157,7 @@ public interface VBWSentence extends Sentence {
 	/**
 	 * Sets Stern Water Speed Status.
 	 * 
-	 * @param DataStatus status Stern Water Speed Status.
+	 * @param status Stern Water Speed Status.
 	 */
 	void setSternWaterSpeedStatus(DataStatus status);
 
@@ -172,7 +171,7 @@ public interface VBWSentence extends Sentence {
 	/**
 	 * Sets Stern Ground Speed Status.
 	 * 
-	 * @param DataStatus status Stern Ground Speed Status.
+	 * @param status Stern Ground Speed Status.
 	 */
 	void setSternGroundSpeedStatus(DataStatus status);
 
