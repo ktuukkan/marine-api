@@ -29,7 +29,7 @@ import net.sf.marineapi.nmea.sentence.TalkerId;
  * 
  * @author Richard van Nieuwenhoven
  */
-public class MWDParser extends SentenceParser implements MWDSentence {
+class MWDParser extends SentenceParser implements MWDSentence {
 
     /**
      * Wind direction, degrees True, to the nearest 0,1 degree.
