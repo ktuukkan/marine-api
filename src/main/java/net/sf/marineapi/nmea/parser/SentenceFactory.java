@@ -170,8 +170,8 @@ public final class SentenceFactory {
 		Class<? extends SentenceParser> parser) {
 
 		try {
-			parser.getConstructor(String.class);
-			parser.getConstructor(TalkerId.class);
+			parser.getConstructor(new Class[] { String.class });
+			parser.getConstructor(new Class[] { TalkerId.class });
 			parsers.put(type, parser);
 		} catch (SecurityException e) {
 			String msg = "Unable to register parser due security violation";
