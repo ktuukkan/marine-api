@@ -18,7 +18,11 @@ public class MDATest {
 
     public static final String EXAMPLE = "$IIMDA,99700.0,P,1.00,B,3.2,C,,C,,,,C,295.19,T,,M,5.70,N,2.93,M*08";
 
+    public static final String EXAMPLE2 = "$IIMDA,30.0,I,1.0149,B,26.8,C,,C,64.2,16.4,19.5,C,,T,38.7,M,10.88,N,5.60,M*36";
+
     private MDASentence mda;
+
+    private MDASentence mda2;
 
     /**
      * @throws java.lang.Exception
@@ -26,6 +30,7 @@ public class MDATest {
     @Before
     public void setUp() throws Exception {
         mda = new MDAParser(EXAMPLE);
+        mda2 = new MDAParser(EXAMPLE2);
     }
 
     @Test
@@ -38,62 +43,73 @@ public class MDATest {
     @Test
     public void testGetMagneticWindDirection() {
         assertTrue(Double.isNaN(mda.getMagneticWindDirection()));
+        assertEquals(38.7, mda2.getMagneticWindDirection(), 0.1);
     }
 
     @Test
     public void testGetTrueWindDirection() {
         assertEquals(295.19, mda.getTrueWindDirection(), 0.1);
+        assertTrue(Double.isNaN(mda2.getTrueWindDirection()));
     }
 
     @Test
     public void testGetWindSpeed() {
         assertEquals(2.93, mda.getWindSpeed(), 0.1);
+        assertEquals(5.6, mda2.getWindSpeed(), 0.1);
     }
 
     @Test
     public void testGetWindSpeedKnots() {
         assertEquals(5.7, mda.getWindSpeedKnots(), 0.1);
+        assertEquals(10.88, mda2.getWindSpeedKnots(), 0.1);
     }
 
     @Test
     public void testGetAbsoluteHumidity() {
         assertTrue(Double.isNaN(mda.getAbsoluteHumidity()));
+        assertEquals(16.4, mda2.getAbsoluteHumidity(), 0.1);
     }
 
     @Test
     public void testGetAirTemperature() {
         assertEquals(3.2, mda.getAirTemperature(), 0.1);
+        assertEquals(26.8, mda2.getAirTemperature(), 0.1);
     }
 
     @Test
-    public void testGetBarometricPressure() {
-        assertEquals(1.0, mda.getBarometricPressure(), 0.1);
+    public void testGetSecondaryBarometricPressure() {
+        assertEquals(1.0, mda.getSecondaryBarometricPressure(), 0.1);
+        assertEquals('B', mda.getSecondaryBarometricPressureUnit());
+        assertEquals(1.0, mda2.getSecondaryBarometricPressure(), 0.1);
+        assertEquals('B', mda2.getSecondaryBarometricPressureUnit());
     }
 
     @Test
-    public void testGetBarometricPressureInHg() {
-        assertEquals(99700.0, mda.getBarometricPressureInHg(), 0.1);
+    public void testGetPrimaryBarometricPressure() {
+        assertEquals(99700.0, mda.getPrimaryBarometricPressure(), 0.1);
+        assertEquals('P', mda.getPrimaryBarometricPressureUnit());
+        assertEquals(30.0, mda2.getPrimaryBarometricPressure(), 0.1);
+        assertEquals('I', mda2.getPrimaryBarometricPressureUnit());
     }
 
     @Test
     public void testGetRelativeHumidity() {
         assertTrue(Double.isNaN(mda.getRelativeHumidity()));
+        assertEquals(64.2, mda2.getRelativeHumidity(), 0.1);
     }
 
     @Test
     public void testGetDewPoint() {
         assertTrue(Double.isNaN(mda.getDewPoint()));
+        assertEquals(19.5, mda2.getDewPoint(), 0.1);
     }
 
     @Test
     public void testGetWaterTemperature() {
         assertTrue(Double.isNaN(mda.getWaterTemperature()));
+        assertTrue(Double.isNaN(mda2.getWaterTemperature()));
     }
-    
-    
-    
-    
-    
+
     @Test
     public void testSetMagneticWindDirection() {
         mda.setMagneticWindDirection(123.4);
@@ -133,13 +149,13 @@ public class MDATest {
     @Test
     public void testSetBarometricPressure() {
         mda.setBarometricPressure(0.99);
-        assertEquals(0.99, mda.getBarometricPressure(), 0.01);
+        assertEquals(0.99, mda.getSecondaryBarometricPressure(), 0.01);
     }
 
     @Test
     public void testSetBarometricPressureInHg() {
         mda.setBarometricPressureInHg(29.53);
-        assertEquals(29.53, mda.getBarometricPressureInHg(), 0.01);
+        assertEquals(29.53, mda.getPrimaryBarometricPressure(), 0.01);
     }
 
     @Test

@@ -1,4 +1,4 @@
-/* 
+/*
  * MDAParser.java
  * Copyright (C) 2015 INDI for Java NMEA 0183 stream driver
  * 
@@ -137,7 +137,8 @@ public class MDAParser extends SentenceParser implements MDASentence {
     /**
      * Creates a new instance of MWVParser.
      * 
-     * @param nmea MWV sentence String
+     * @param nmea
+     *            MWV sentence String
      */
     public MDAParser(String nmea) {
         super(nmea, MDA_SENTENCE_ID);
@@ -146,7 +147,8 @@ public class MDAParser extends SentenceParser implements MDASentence {
     /**
      * Creates a new empty instance of MWVParser.
      * 
-     * @param talker Talker id to set
+     * @param talker
+     *            Talker id to set
      */
     public MDAParser(TalkerId talker) {
         super(talker, MDA_SENTENCE_ID, 20);
@@ -180,7 +182,21 @@ public class MDAParser extends SentenceParser implements MDASentence {
     }
 
     @Override
-    public double getBarometricPressure() {
+    public double getPrimaryBarometricPressure() {
+        if (hasValue(BAROMETRIC_PRESSURE_HG)) {
+            return getDoubleValue(BAROMETRIC_PRESSURE_HG);
+        } else {
+            return Double.NaN;
+        }
+    }
+
+    @Override
+    public char getPrimaryBarometricPressureUnit() {
+        return getCharValue(BAROMETRIC_PRESSURE_UNIT);
+    }
+
+    @Override
+    public double getSecondaryBarometricPressure() {
         if (hasValue(BAROMETRIC_PRESSURE_BARS)) {
             return getDoubleValue(BAROMETRIC_PRESSURE_BARS);
         } else {
@@ -189,12 +205,8 @@ public class MDAParser extends SentenceParser implements MDASentence {
     }
 
     @Override
-    public double getBarometricPressureInHg() {
-        if (hasValue(BAROMETRIC_PRESSURE_HG)) {
-            return getDoubleValue(BAROMETRIC_PRESSURE_HG);
-        } else {
-            return Double.NaN;
-        }
+    public char getSecondaryBarometricPressureUnit() {
+        return getCharValue(BAROMETRIC_PRESSURE_B_UNIT);
     }
 
     @Override
