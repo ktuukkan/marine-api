@@ -30,11 +30,6 @@ package net.sf.marineapi.nmea.sentence;
 public interface MDASentence extends Sentence {
 
     /**
-     * @return Wind speed, knots. NaN if not available.
-     */
-    public double getWindSpeedKnots();
-
-    /**
      * @return Absolute humidity, percent, to the nearest 0,1 percent. NaN if
      *         not available.
      */
@@ -45,29 +40,6 @@ public interface MDASentence extends Sentence {
      *         not available.
      */
     double getAirTemperature();
-
-    /**
-     * @return Barometric pressure, bars, to the nearest .001 bar. NaN if not
-     *         available.
-     */
-    double getSecondaryBarometricPressure();
-
-    /**
-     * @return B = bar I = inches of mercury (inHg) P = pascal (1 bar = 100000
-     *         Pa = 29,53 inHg). The secondary unit is almost always in bars.
-     */
-    char getSecondaryBarometricPressureUnit();
-
-    /**
-     * @return Barometric pressure, inches of mercury. NaN if not available.
-     */
-    double getPrimaryBarometricPressure();
-
-    /**
-     * @return B = bar I = inches of mercury (inHg) P = pascal (1 bar = 100000
-     *         Pa = 29,53 inHg).
-     */
-    char getPrimaryBarometricPressureUnit();
 
     /**
      * @return Dew point, degrees C, to the nearest 0,1 degree C. NaN if not
@@ -82,10 +54,33 @@ public interface MDASentence extends Sentence {
     double getMagneticWindDirection();
 
     /**
+     * @return Barometric pressure, inches of mercury. NaN if not available.
+     */
+    double getPrimaryBarometricPressure();
+
+    /**
+     * @return B = bar I = inches of mercury (inHg) P = pascal (1 bar = 100000
+     *         Pa = 29,53 inHg).
+     */
+    char getPrimaryBarometricPressureUnit();
+
+    /**
      * @return Relative humidity, percent, to the nearest 0,1 percent. NaN if
      *         not available.
      */
     double getRelativeHumidity();
+
+    /**
+     * @return Barometric pressure, bars, to the nearest .001 bar. NaN if not
+     *         available.
+     */
+    double getSecondaryBarometricPressure();
+
+    /**
+     * @return B = bar I = inches of mercury (inHg) P = pascal (1 bar = 100000
+     *         Pa = 29,53 inHg). The secondary unit is almost always in bars.
+     */
+    char getSecondaryBarometricPressureUnit();
 
     /**
      * @return Wind direction, degrees True, to the nearest 0,1 degree. NaN if
@@ -105,6 +100,11 @@ public interface MDASentence extends Sentence {
     double getWindSpeed();
 
     /**
+     * @return Wind speed, knots. NaN if not available.
+     */
+    public double getWindSpeedKnots();
+
+    /**
      * Sets the absolute humidity.
      * 
      * @param humitidy
@@ -121,22 +121,6 @@ public interface MDASentence extends Sentence {
     void setAirTemperature(double temp);
 
     /**
-     * Sets the barometric pressure (bars).
-     * 
-     * @param pressure
-     *            Pressure to set, in bars.
-     */
-    void setSecondaryBarometricPressure(double pressure);
-
-    /**
-     * Sets the barometric pressure (hg).
-     * 
-     * @param pressure
-     *            Pressure value to set, in inches of mercury.
-     */
-    void setPrimaryBarometricPressure(double pressure);
-
-    /**
      * Sets the dew point temperature.
      * 
      * @param dewPoint
@@ -151,7 +135,23 @@ public interface MDASentence extends Sentence {
      *            Direction to set, degrees Magnetic [0..360]
      */
     void setMagneticWindDirection(double direction);
+    
+    /**
+     * Sets the primary barometric pressure value.
+     * 
+     * @param pressure
+     *            Pressure value to set, usually in inches of mercury.
+     */
+    void setPrimaryBarometricPressure(double pressure);
 
+    /**
+     * Sets the barometric pressure unit.
+     * 
+     * @param pressure
+     *            Pressure unit to set, usually in inches of mercury 'I'.
+     */
+    void setPrimaryBarometricPressureUnit(char unit);
+    
     /**
      * Sets the relative humidity
      * 
@@ -159,6 +159,22 @@ public interface MDASentence extends Sentence {
      *            Humidity percent to set.
      */
     void setRelativeHumidity(double humidity);
+
+    /**
+     * Sets the barometric pressure value.
+     * 
+     * @param pressure
+     *            Pressure to set, usually in bars.
+     */
+    void setSecondaryBarometricPressure(double pressure);
+
+    /**
+     * Sets the secondary barometric pressure unit.
+     * 
+     * @param pressure
+     *            Pressure unit set, usually in bars 'B'.
+     */
+    void setSecondaryBarometricPressureUnit(char unit);
 
     /**
      * Sets the True wind direction.

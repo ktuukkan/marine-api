@@ -182,34 +182,6 @@ public class MDAParser extends SentenceParser implements MDASentence {
     }
 
     @Override
-    public double getPrimaryBarometricPressure() {
-        if (hasValue(PRIMARY_BAROMETRIC_PRESSURE)) {
-            return getDoubleValue(PRIMARY_BAROMETRIC_PRESSURE);
-        } else {
-            return Double.NaN;
-        }
-    }
-
-    @Override
-    public char getPrimaryBarometricPressureUnit() {
-        return getCharValue(PRIMARY_BAROMETRIC_PRESSURE_UNIT);
-    }
-
-    @Override
-    public double getSecondaryBarometricPressure() {
-        if (hasValue(SECONDARY_BAROMETRIC_PRESSURE)) {
-            return getDoubleValue(SECONDARY_BAROMETRIC_PRESSURE);
-        } else {
-            return Double.NaN;
-        }
-    }
-
-    @Override
-    public char getSecondaryBarometricPressureUnit() {
-        return getCharValue(SECONDARY_BAROMETRIC_PRESSURE_UNIT);
-    }
-
-    @Override
     public double getDewPoint() {
         if (hasValue(DEW_POINT)) {
             return getDoubleValue(DEW_POINT);
@@ -228,12 +200,40 @@ public class MDAParser extends SentenceParser implements MDASentence {
     }
 
     @Override
+    public double getPrimaryBarometricPressure() {
+        if (hasValue(PRIMARY_BAROMETRIC_PRESSURE)) {
+            return getDoubleValue(PRIMARY_BAROMETRIC_PRESSURE);
+        } else {
+            return Double.NaN;
+        }
+    }
+
+    @Override
+    public char getPrimaryBarometricPressureUnit() {
+        return getCharValue(PRIMARY_BAROMETRIC_PRESSURE_UNIT);
+    }
+
+    @Override
     public double getRelativeHumidity() {
         if (hasValue(RELATIVE_HUMIDITY)) {
             return getDoubleValue(RELATIVE_HUMIDITY);
         } else {
             return Double.NaN;
         }
+    }
+
+    @Override
+    public double getSecondaryBarometricPressure() {
+        if (hasValue(SECONDARY_BAROMETRIC_PRESSURE)) {
+            return getDoubleValue(SECONDARY_BAROMETRIC_PRESSURE);
+        } else {
+            return Double.NaN;
+        }
+    }
+
+    @Override
+    public char getSecondaryBarometricPressureUnit() {
+        return getCharValue(SECONDARY_BAROMETRIC_PRESSURE_UNIT);
     }
 
     @Override
@@ -283,17 +283,6 @@ public class MDAParser extends SentenceParser implements MDASentence {
     }
 
     @Override
-    public void setSecondaryBarometricPressure(double pressure) {
-        setDoubleValue(SECONDARY_BAROMETRIC_PRESSURE, pressure);
-    }
-
-    @Override
-    public void setPrimaryBarometricPressure(double pressure) {
-        setDoubleValue(PRIMARY_BAROMETRIC_PRESSURE, pressure);
-
-    }
-
-    @Override
     public void setDewPoint(double dewPoint) {
         setDoubleValue(DEW_POINT, dewPoint);
     }
@@ -304,9 +293,29 @@ public class MDAParser extends SentenceParser implements MDASentence {
     }
 
     @Override
+    public void setPrimaryBarometricPressure(double pressure) {
+        setDoubleValue(PRIMARY_BAROMETRIC_PRESSURE, pressure);
+    }
+
+    @Override
+	public void setPrimaryBarometricPressureUnit(char unit) {
+		setCharValue(PRIMARY_BAROMETRIC_PRESSURE_UNIT, unit);
+	}
+
+    @Override
     public void setRelativeHumidity(double humidity) {
         setDoubleValue(RELATIVE_HUMIDITY, humidity);
     }
+
+    @Override
+    public void setSecondaryBarometricPressure(double pressure) {
+        setDoubleValue(SECONDARY_BAROMETRIC_PRESSURE, pressure);
+    }
+
+    @Override
+	public void setSecondaryBarometricPressureUnit(char unit) {
+		setCharValue(SECONDARY_BAROMETRIC_PRESSURE_UNIT, unit);	
+	}
 
     @Override
     public void setTrueWindDirection(double direction) {
@@ -320,12 +329,12 @@ public class MDAParser extends SentenceParser implements MDASentence {
 
     }
 
-    @Override
+	@Override
     public void setWindSpeed(double speed) {
         setDoubleValue(WIND_SPEED_METERS, speed);
     }
 
-    @Override
+	@Override
     public void setWindSpeedKnots(double speed) {
         setDoubleValue(WIND_SPEED_KNOTS, speed);
     }
