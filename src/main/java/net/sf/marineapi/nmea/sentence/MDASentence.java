@@ -126,7 +126,7 @@ public interface MDASentence extends Sentence {
      * @param pressure
      *            Pressure to set, in bars.
      */
-    void setBarometricPressure(double pressure);
+    void setSecondaryBarometricPressure(double pressure);
 
     /**
      * Sets the barometric pressure (hg).
@@ -134,7 +134,7 @@ public interface MDASentence extends Sentence {
      * @param pressure
      *            Pressure value to set, in inches of mercury.
      */
-    void setBarometricPressureInHg(double pressure);
+    void setPrimaryBarometricPressure(double pressure);
 
     /**
      * Sets the dew point temperature.

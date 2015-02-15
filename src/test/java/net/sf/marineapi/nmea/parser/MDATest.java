@@ -148,13 +148,13 @@ public class MDATest {
 
     @Test
     public void testSetBarometricPressure() {
-        mda.setBarometricPressure(0.99);
+        mda.setSecondaryBarometricPressure(0.99);
         assertEquals(0.99, mda.getSecondaryBarometricPressure(), 0.01);
     }
 
     @Test
     public void testSetBarometricPressureInHg() {
-        mda.setBarometricPressureInHg(29.53);
+        mda.setPrimaryBarometricPressure(29.53);
         assertEquals(29.53, mda.getPrimaryBarometricPressure(), 0.01);
     }
 
