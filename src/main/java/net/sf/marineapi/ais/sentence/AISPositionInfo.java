@@ -5,8 +5,9 @@ package net.sf.marineapi.ais.sentence;
  * 
  * @author Lázár József
  */
-public interface AISPositionInfo {
-	/**
+public interface AISPositionInfo extends AISMessage {
+	
+    /**
 	 * Returns the position accuracy.
 	 */
 	public boolean getPositionAccuracy();

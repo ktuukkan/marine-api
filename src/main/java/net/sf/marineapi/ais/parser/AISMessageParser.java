@@ -3,6 +3,7 @@ package net.sf.marineapi.ais.parser;
 import java.util.ArrayList;
 import java.util.List;
 
+import net.sf.marineapi.ais.sentence.AISMessage;
 import net.sf.marineapi.ais.util.Violation;
 
 /**
@@ -12,7 +13,7 @@ import net.sf.marineapi.ais.util.Violation;
  * 
  * @author Lázár József
  */
-public class AISMessageParser {
+public class AISMessageParser implements AISMessage {
 
 	protected List<Violation> fViolations = new ArrayList<Violation>();
 	

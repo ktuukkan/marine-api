@@ -5,7 +5,7 @@ package net.sf.marineapi.ais.sentence;
  * 
  * @author Lázár József
  */
-public interface AISUTCReport {
+public interface AISUTCReport extends AISMessage {
 
 	/**
 	 * Returns the UTC year.
