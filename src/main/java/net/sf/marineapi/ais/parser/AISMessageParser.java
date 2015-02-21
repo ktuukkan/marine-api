@@ -12,7 +12,7 @@ import net.sf.marineapi.ais.util.Violation;
  * 
  * @author Lázár József
  */
-public class AISMessage {
+public class AISMessageParser {
 
 	protected List<Violation> fViolations = new ArrayList<Violation>();
 	

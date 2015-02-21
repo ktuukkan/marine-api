@@ -32,7 +32,7 @@ import net.sf.marineapi.ais.util.Sixbit;
  *                                               sum 424
  * @author Lázár József
  */
-public class AISMessage05Parser extends AISMessage implements AISMessage05 {
+public class AISMessage05Parser extends AISMessageParser implements AISMessage05 {
 
 	private final static String	SEPARATOR			= "\n\t";
 	private static final int	AISVERSION			= 0;

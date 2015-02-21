@@ -25,7 +25,7 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 
-import net.sf.marineapi.ais.parser.AISMessage;
+import net.sf.marineapi.ais.parser.AISMessageParser;
 import net.sf.marineapi.ais.parser.AISMessage01Parser;
 import net.sf.marineapi.ais.parser.AISMessage02Parser;
 import net.sf.marineapi.ais.parser.AISMessage03Parser;
@@ -73,7 +73,7 @@ public class AISExample extends AbstractSentenceListener<VDMSentence> {
 	public void sentenceRead(VDMSentence s) {
 
 		try {
-			AISMessage mes = null;
+			AISMessageParser mes = null;
 			switch (s.getMessageType()) {
 			case 1:
 				mes = new AISMessage01Parser(s.getMessageBody());

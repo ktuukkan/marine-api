@@ -34,7 +34,7 @@ import net.sf.marineapi.ais.util.Sixbit;
  *                                                  sum  168
  * @author Lázár József
  */
-public class AISUTCParser extends AISMessage implements AISUTCReport {
+public class AISUTCParser extends AISMessageParser implements AISUTCReport {
 
 	private final static String	SEPARATOR			= "\n\t";
 	private static final int	UTC_YEAR			= 0;
