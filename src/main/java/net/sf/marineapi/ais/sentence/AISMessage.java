@@ -20,8 +20,6 @@
  */
 package net.sf.marineapi.ais.sentence;
 
-import net.sf.marineapi.nmea.sentence.VDMSentence;
-
 /**
  * Common base interface of AIS messages.
  * 
