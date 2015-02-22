@@ -3,11 +3,9 @@
  */
 package net.sf.marineapi.nmea.sentence;
 
-import net.sf.marineapi.ais.util.Sixbit;
-
-
 /**
- * AIS sentence. It contains only the common part of the message.
+ * AIS/VDM sentence. This is the NMEA layer of AIS that carries the actual
+ * payload data as 6-bit decoded message.
  * 
  * @author Lázár József
  */
@@ -15,88 +13,85 @@ public interface VDMSentence extends Sentence {
 
 	/**
 	 * Count of fragments in the currently accumulating message.
+	 * 
 	 * @return number of fragments.
 	 */
 	public int getNumberOfFragments();
 
 	/**
 	 * Returns the fragment number of this sentence (1 based). 
+	 * 
 	 * @return fragment index
 	 */
 	public int getFragmentNumber();
 
 	/**
 	 * Returns the sequential message ID for multi-sentence messages.
+	 * 
 	 * @return sequential message ID
 	 */
-	public String getMessageID();
+	public String getMessageId();
 
 	/**
-	 * Returns the radio channel information of the messsage
+	 * Returns the radio channel information of the messsage.
+	 * 
 	 * @return radio channel id
 	 */
 	public String getRadioChannel();
 
 	/**
-	 * The AIS messaeg itself.
+	 * Returns the raw 6-bit decoded message.
+	 * 
 	 * @return message body
 	 */
 	public String getPayload();
 
 	/**
-	 * Returns the number of fill bits requires to pad the data payload to a
+	 * Returns the number of fill bits required to pad the data payload to a
 	 * 6 bit boundary, ranging from 0 to 5.
 	 * 
 	 * Equivalently, subtracting 5 from this tells how many least significant
 	 * bits of the last 6-bit nibble in the data payload should be ignored.
-	 * @return fill bits
+	 * 
+	 * @return number of fill bits
 	 */
-	public int getFillbits();
+	public int getFillBits();
 
 	/**
+	 * Tells if the AIS message is being delivered over multiple sentences.
 	 * 
-	 * @return true if this line is the last part of a sequence of fragments.
+	 * @return true if this sentence is part of a sequence
+	 */
+	public boolean isFragmented();
+
+	/**
+	 * Tells if this is the first fragment in message sequence.
+	 * 
+	 * @return true if first fragment in sequence
+	 */
+	public boolean isFirstFragment();
+
+	/**
+	 * Tells if this is the last fragment in message sequence.
+	 * 
+	 * @return true if last part of a sequence
 	 */
 	public boolean isLastFragment();
 
 	/**
+	 * <p>Returns whether given sentence is part of message sequence.</p>
 	 * 
-	 * @return true if line is part if this sequence of fragments.
+	 * <p>Sentences are considered to belong in same sequence when:</p>
+	 * <ul>
+	 *   <li>Same number of fragments, higher fragment #, same channel and same
+	 *       messageId</li>
+	 *   <li>Same number of fragments, next fragment #, and either same channel
+	 *       or same messageId</li>
+	 * </ul>
+	 * 
+	 * @param line VDMSentence to compare with.
+	 * @return true if this and given sentence belong in same sequence
 	 */
 	public boolean isPartOfMessage(VDMSentence line);
 
-	/**
-	 * Adds the payload of line into the current message.
-	 */
-	public void add(VDMSentence line);
-
-	/* ------------- Common AIS part -----------------------------------*/
-	/**
-	 * Returns the message type.
-	 * Users of this interface should query first the message type and then
-	 * instantiate the corresponding message class.
-	 * For example, if the message type is 5 then the <code>AISMessage05</code>
-	 * class should be created with the message body. 
-	 * @return message types in the range from 1 to 27.
-	 */
-	public int getMessageType() throws Exception;
-
-	/**
-	 * Returns the repeat indicator which tells how many times this message
-	 * has been repeated. 
-	 * @return the integer repeat indicator
-	 */
-	public int getRepeatIndicator() throws Exception;
-	
-	/**
-	 * Returns the  unique identifier (MMSI number) of the transmitting ship.
-	 * @return the MMSI as an integer.
-	 */
-	public int getMMSI() throws Exception;
-
-	/**
-	 * Returns the message body as a sixbit encoded array.
-	 * @return the message as a sixbit encoded array.
-	 */
-	public Sixbit getMessageBody() throws Exception;
 }

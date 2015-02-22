@@ -86,6 +86,8 @@ abstract class AbstractDataReader implements DataReader {
 				if (SentenceValidator.isValid(data)) {
 					monitor.refresh();
 					Sentence s = factory.createParser(data);
+					
+					/****** TODO move outside reader
 					// AIS sentences are coming in fragments (multiple lines)
 					// which should be concatenated.
 					if (s.getTalkerId() == TalkerId.AI) {
@@ -120,6 +122,7 @@ abstract class AbstractDataReader implements DataReader {
 						}
 					}
 					else
+					*********/
 						parent.fireSentenceEvent(s);
 				} else if (!SentenceValidator.isSentence(data)) {
 					parent.fireDataEvent(data);

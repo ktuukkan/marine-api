@@ -72,6 +72,7 @@ public class AISExample extends AbstractSentenceListener<VDMSentence> {
 	 */
 	public void sentenceRead(VDMSentence s) {
 
+	    /** TODO: needs a pre-processor for concatenating AIS fragments
 		try {
 			AISMessageParser mes = null;
 			switch (s.getMessageType()) {
@@ -98,8 +99,8 @@ public class AISExample extends AbstractSentenceListener<VDMSentence> {
 				break;
 			}
 			if (mes != null) {
-				System.out.println("AIS" + s.getMessageType() +
-						" MMSI: " + s.getMMSI() + " " + MMSI.toString(s.getMMSI()));
+				System.out.println("AIS" + mes.getMessageType() +
+						" MMSI: " + mes.getMMSI() + " " + MMSI.toString(mes.getMMSI()));
 				System.out.println("Violations: " + mes.getNrOfViolations());
 				if (mes.getNrOfViolations() > 0) {
 					for (Violation v : mes.getViolations())
@@ -110,6 +111,8 @@ public class AISExample extends AbstractSentenceListener<VDMSentence> {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		
+		*/
 	}
 
 	/**

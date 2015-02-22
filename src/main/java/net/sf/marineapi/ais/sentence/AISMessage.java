@@ -20,11 +20,40 @@
  */
 package net.sf.marineapi.ais.sentence;
 
+import net.sf.marineapi.nmea.sentence.VDMSentence;
+
 /**
  * Common base interface of AIS messages.
  * 
  * @author Kimmo Tuukkanen
  */
 public interface AISMessage {
-    
+
+	/**
+	 * Returns the message type.
+	 * Users of this interface should query first the message type and then
+	 * instantiate the corresponding message class.
+	 * For example, if the message type is 5 then the <code>AISMessage05</code>
+	 * class should be created with the message body. 
+	 * @return message types in the range from 1 to 27.
+	 */
+	public int getMessageType() throws Exception;
+
+	/**
+	 * Returns the repeat indicator which tells how many times this message
+	 * has been repeated. 
+	 * @return the integer repeat indicator
+	 */
+	public int getRepeatIndicator() throws Exception;
+
+	/**
+	 * Returns the  unique identifier (MMSI number) of the transmitting ship.
+	 * @return the MMSI as an integer.
+	 */
+	public int getMMSI() throws Exception;
+
+	/**
+	 * Appends a payload fragment into the current message.
+	 */
+	public void append(String fragment, int index, int fillBits);
 }
