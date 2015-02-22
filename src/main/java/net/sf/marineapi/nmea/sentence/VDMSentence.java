@@ -5,7 +5,7 @@ package net.sf.marineapi.nmea.sentence;
 
 /**
  * AIS/VDM sentence. This is the NMEA layer of AIS that carries the actual
- * payload data as 6-bit decoded message.
+ * payload message as 6-bit encoded String.
  * 
  * @author Lázár József
  */
