@@ -5,7 +5,7 @@ package net.sf.marineapi.ais.sentence;
  * 
  * @author Lázár József
  */
-public interface AISBPositionReport extends AISPositionInfo {
+public interface AISPositionReportB extends AISPositionInfo {
 
 	/**
 	 * Returns the speed over ground.

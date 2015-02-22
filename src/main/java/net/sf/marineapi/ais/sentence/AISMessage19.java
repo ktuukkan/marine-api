@@ -4,7 +4,7 @@ package net.sf.marineapi.ais.sentence;
 *
 * @author Lázár József
 */
-public interface AISMessage19 extends AISBPositionReport {
+public interface AISMessage19 extends AISPositionReportB {
 
 	/**
 	 * Returns the name of the transmitting ship.

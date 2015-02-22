@@ -25,7 +25,7 @@ import net.sf.marineapi.ais.util.Sixbit;
  *                                             sum  312
  * @author Lázár József
  */
-public class AISMessage19Parser extends AISBPositionReportParser implements AISMessage19 {
+public class AISMessage19Parser extends AISPositionReportBParser implements AISMessage19 {
 
 	private static final int	NAME				= 0;
 	private static final int	TYPEOFSHIPANDCARGO	= 1;

@@ -2,7 +2,7 @@ package net.sf.marineapi.ais.parser;
 
 import java.text.DecimalFormat;
 
-import net.sf.marineapi.ais.sentence.AISBPositionReport;
+import net.sf.marineapi.ais.sentence.AISPositionReportB;
 import net.sf.marineapi.ais.util.AISRuleViolation;
 import net.sf.marineapi.ais.util.Angle12;
 import net.sf.marineapi.ais.util.Angle9;
@@ -31,7 +31,7 @@ import net.sf.marineapi.ais.util.TimeStamp;
  *
  * @author Lázár József
  */
-public class AISBPositionReportParser extends AISMessageParser implements AISBPositionReport {
+public class AISPositionReportBParser extends AISMessageParser implements AISPositionReportB {
 
 	protected final static String	SEPARATOR			= "\n\t";
 
@@ -55,7 +55,7 @@ public class AISBPositionReportParser extends AISMessageParser implements AISBPo
 	private int		fTrueHeading;
 	private int		fTimeStamp;
 
-	public AISBPositionReportParser(Sixbit content) {
+	public AISPositionReportBParser(Sixbit content) {
 		fSOG = content.getInt(FROM[SPEEDOVERGROUND], TO[SPEEDOVERGROUND]);
 		fPositionAccuracy = content.getBoolean(FROM[POSITIONACCURACY]);
 		fLongitude = Longitude28.toDegrees(content.getAs28BitInt(FROM[LONGITUDE], TO[LONGITUDE]));
