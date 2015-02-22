@@ -15,10 +15,10 @@ public class Sixbit {
 	private BitVector		fBitVector;
 	private int				fFillBits;	      // Number of padding bits at end
 	
-	public Sixbit(String payload, int fillBits) throws Exception {
+	public Sixbit(String payload, int fillBits) {
 		fPayload = payload;
 		if (!isValidString(fPayload))
-			throw new Exception("Invalid payload characters");
+			throw new IllegalArgumentException("Invalid payload characters");
 
 		fBitVector = new BitVector(fPayload.length() * BITSPERCHAR);
 		for (int i = 0; i < fPayload.length(); i++) {
@@ -72,9 +72,9 @@ public class Sixbit {
 	 * @param ascii character to decode
 	 * @return decoded value in 6-bit binary representation
 	 */
-	private int transportToBinary(char ascii) throws Exception {
+	private int transportToBinary(char ascii) {
 		if (!isValidCharacter(ascii))
-			throw new Exception("Invalid transport character: " + ascii);
+			throw new IllegalArgumentException("Invalid transport character: " + ascii);
 		int retval;
 		if (ascii < 0x60)
 			retval = (ascii - 0x30);

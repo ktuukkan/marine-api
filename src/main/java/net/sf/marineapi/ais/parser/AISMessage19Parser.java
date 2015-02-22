@@ -50,10 +50,10 @@ public class AISMessage19Parser extends AISPositionReportBParser implements AISM
 	private int			fStarboard;
 	private int			fTypeOfEPFD;
 
-	public AISMessage19Parser(Sixbit content) throws Exception {
+	public AISMessage19Parser(Sixbit content) {
 		super(content);
 		if (content.length() != 312)
-			throw new Exception("Wrong message length");
+			throw new IllegalArgumentException("Wrong message length");
 
 		fName = content.getString(FROM[NAME], TO[NAME]);
 		fShipAndCargoType = content.getInt(FROM[TYPEOFSHIPANDCARGO], TO[TYPEOFSHIPANDCARGO]);

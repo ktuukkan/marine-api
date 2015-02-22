@@ -66,9 +66,9 @@ public class AISUTCParser extends AISMessageParser implements AISUTCReport {
 	private double	fLatitude;
 	private int		fTypeOfEPFD;
 
-	public AISUTCParser(Sixbit content) throws Exception {
+	public AISUTCParser(Sixbit content) {
 		if (content.length() != 168)
-			throw new Exception("Wrong message length");
+			throw new IllegalArgumentException("Wrong message length");
 		
 	    fUTCYear = content.getInt(FROM[UTC_YEAR], TO[UTC_YEAR]);
 	    fUTCMonth = content.getInt(FROM[UTC_MONTH], TO[UTC_MONTH]);

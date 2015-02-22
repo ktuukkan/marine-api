@@ -76,9 +76,9 @@ public class AISMessage05Parser extends AISMessageParser implements AISMessage05
 	private int			fMaximumDraught;
 	private String		fDestination;
 
-	public AISMessage05Parser(Sixbit content) throws Exception {
+	public AISMessage05Parser(Sixbit content) {
 		if (content.length() != 424)
-			throw new Exception("Wrong message length");
+			throw new IllegalArgumentException("Wrong message length");
 		
 		fAISVersion = content.getInt(FROM[AISVERSION], TO[AISVERSION]);
 		fIMONumber = content.getInt(FROM[IMONUMBER],IMONUMBER);

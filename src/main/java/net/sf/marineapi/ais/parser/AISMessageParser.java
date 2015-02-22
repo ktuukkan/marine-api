@@ -47,22 +47,22 @@ public class AISMessageParser implements AISMessage {
 		return fViolations;
 	}
 
-	public int getMessageType() throws Exception {
+	public int getMessageType() {
 		parseAIS();
 		return messageType;
 	}
 
-	public int getRepeatIndicator() throws Exception {
+	public int getRepeatIndicator() {
 		parseAIS();
 		return repeatIndicator;
 	}
 
-	public int getMMSI() throws Exception {
+	public int getMMSI() {
 		parseAIS();
 		return mmsi;
 	}
 
-	public Sixbit getMessageBody() throws Exception {
+	public Sixbit getMessageBody() {
 		parseAIS();
 		return decoder;
 	}
@@ -75,7 +75,7 @@ public class AISMessageParser implements AISMessage {
 	}
 
 	// TODO lazy parsing
-	private void parseAIS() throws Exception {
+	private void parseAIS() {
 		if (decoder == null) {
 			decoder = new Sixbit(message, fillbits);
 			messageType = decoder.getInt(FROM[MESSAGE_TYPE], TO[MESSAGE_TYPE]);

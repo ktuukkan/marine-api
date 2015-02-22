@@ -33,7 +33,7 @@ import net.sf.marineapi.ais.util.Sixbit;
  */
 public class AISMessage01Parser extends AISPositionReportParser implements AISMessage01 {
 
-	public AISMessage01Parser(Sixbit content) throws Exception {
+	public AISMessage01Parser(Sixbit content) {
 		super(content);
 	}
 }

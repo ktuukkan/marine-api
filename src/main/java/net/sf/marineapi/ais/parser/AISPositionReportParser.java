@@ -75,9 +75,9 @@ public class AISPositionReportParser extends AISMessageParser implements AISPosi
 	/**
 	 * Constructs an AIS Message Position Report parser.
 	 */
-	public AISPositionReportParser(Sixbit content) throws Exception {
+	public AISPositionReportParser(Sixbit content) {
 		if (content.length() != 168)
-			throw new Exception("Wrong message length");
+			throw new IllegalArgumentException("Wrong message length");
 		
 	    fNavigationalStatus = content.getInt(FROM[NAVIGATIONALSTATUS], TO[NAVIGATIONALSTATUS]);
 	    if (!NavigationalStatus.isCorrect(fNavigationalStatus))

@@ -34,7 +34,7 @@ import net.sf.marineapi.ais.util.Sixbit;
  */
 public class AISMessage04Parser extends AISUTCParser implements AISMessage04 {
 
-	public AISMessage04Parser(Sixbit content) throws Exception {
+	public AISMessage04Parser(Sixbit content) {
 		super(content);
 	}
 }
