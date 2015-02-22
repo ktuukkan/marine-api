@@ -6,6 +6,7 @@ import net.sf.marineapi.ais.util.Sixbit;
 /**
  * AIS Message 2 implementation: Position report.
  *
+ * <pre>
  * Field  Name                                      Bits    (from, to )
  * ------------------------------------------------------------------------
  *  1	  messageID                               	   6	(   1,   6)
@@ -26,6 +27,8 @@ import net.sf.marineapi.ais.util.Sixbit;
  * 16	  communicationState                      	  19	( 150, 168)
  *                                                   ---- +
  *                                               sum 168
+ * </pre>
+ * 
  * @author Lázár József
  */
 public class AISMessage02Parser extends AISPositionReportParser implements AISMessage02 {

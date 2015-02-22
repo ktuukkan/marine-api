@@ -8,8 +8,9 @@ import net.sf.marineapi.ais.util.Sixbit;
 /**
  * AIS Message 19 implementation: Extended Class B Equipment Position Report.
  * 
- * The first part of the message is handled by AISBPositionReportParser.
- *
+ * The first part of the message is handled by AISPositionReportBParser.
+ * 
+ * <pre>
  * Field   Name                                    Bits    (from, to )
  * ------------------------------------------------------------------------
  * 12      spare2                                     4    ( 140, 143)
@@ -23,6 +24,8 @@ import net.sf.marineapi.ais.util.Sixbit;
  * 20      spare3                                     4    ( 309, 312)
  *                                                ---- +
  *                                             sum  312
+ * </pre>
+ * 
  * @author Lázár József
  */
 public class AISMessage19Parser extends AISPositionReportBParser implements AISMessage19 {

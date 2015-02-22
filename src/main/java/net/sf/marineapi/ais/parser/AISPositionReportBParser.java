@@ -14,7 +14,8 @@ import net.sf.marineapi.ais.util.TimeStamp;
 
 /**
  * Implementation for AIS Message 18 and 19:  Class B Equipment Position Report.
- *
+ * 
+ * <pre>
  * Field    Name                                    Bits    (from, to )
  * ------------------------------------------------------------------------
  *  1       messageID                                  6    (   1,   6)
@@ -28,7 +29,8 @@ import net.sf.marineapi.ais.util.TimeStamp;
  *  9       courseOverGround                          12    ( 113, 124)
  * 10       trueHeading                                9    ( 125, 133)
  * 11       timeStamp                                  6    ( 134, 139)
- *
+ * </pre>
+ * 
  * @author Lázár József
  */
 public class AISPositionReportBParser extends AISMessageParser implements AISPositionReportB {

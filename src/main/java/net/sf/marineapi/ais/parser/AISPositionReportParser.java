@@ -17,7 +17,8 @@ import net.sf.marineapi.ais.util.TimeStamp;
 
 /**
  * Parser for all position report messages.
- *
+ * 
+ * <pre>
  * Field Name                                    Bits    (from,  to)
  * ------------------------------------------------------------------------
  *  1    messageID                                  6    (   1,   6)
@@ -38,6 +39,8 @@ import net.sf.marineapi.ais.util.TimeStamp;
  * 16    communicationState                        19    ( 150, 168)
  *                                               ---- +
  *                                          sum   168
+ * </pre>
+ * 
  * @author Lázár József
  */
 public class AISPositionReportParser extends AISMessageParser implements AISPositionReport {

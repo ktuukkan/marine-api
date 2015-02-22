@@ -10,7 +10,8 @@ import net.sf.marineapi.ais.util.Sixbit;
 
 /**
  * AIS Base station and Mobile Station UTC reporting
- *
+ * 
+ * <pre>
  * Field  Name                                          Bits    (from, to )
  * ------------------------------------------------------------------------
  *  1	  messageID                        		       	   6	(   1,   6)
@@ -32,6 +33,8 @@ import net.sf.marineapi.ais.util.Sixbit;
  * 17	  communicationState                      		  19	( 150, 168)
  *                                                      ---- +
  *                                                  sum  168
+ * </pre>
+ * 
  * @author Lázár József
  */
 public class AISUTCParser extends AISMessageParser implements AISUTCReport {

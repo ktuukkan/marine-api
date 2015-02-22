@@ -8,6 +8,7 @@ import net.sf.marineapi.ais.util.Sixbit;
 /**
  * AIS Message 5 implementation: Ship Static and Voyage Related Data.
  *
+ * <pre>
  * Field  Name                                      Bits    (from, to )
  * ------------------------------------------------------------------------
  *  1	  messageID                               	   6	(   1,   6)
@@ -30,6 +31,8 @@ import net.sf.marineapi.ais.util.Sixbit;
  * 15	  spare                                   	   1	( 424, 424)
  *                                                  ---- +
  *                                               sum 424
+ * </pre>
+ * 
  * @author Lázár József
  */
 public class AISMessage05Parser extends AISMessageParser implements AISMessage05 {
