@@ -43,9 +43,14 @@ public class AISMessageFactory {
 	 * Hidden constructor.
 	 */
 	private AISMessageFactory() {
-		parsers = new HashMap<Integer, Class<? extends AISMessage>>();
+		parsers = new HashMap<Integer, Class<? extends AISMessage>>(7);
 		parsers.put(1, AISMessage01Parser.class);
-		// TODO
+		parsers.put(2, AISMessage02Parser.class);
+		parsers.put(3, AISMessage03Parser.class);
+		parsers.put(4, AISMessage04Parser.class);
+		parsers.put(5, AISMessage05Parser.class);
+		parsers.put(18, AISMessage18Parser.class);
+		parsers.put(19, AISMessage19Parser.class);
 	}
 	
 	
