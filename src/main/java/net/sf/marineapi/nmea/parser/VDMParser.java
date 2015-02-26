@@ -35,7 +35,7 @@ public class VDMParser extends SentenceParser implements VDMSentence {
 	 * @param talker TalkerId to set
 	 */
 	public VDMParser(TalkerId talker) {
-		super(talker, SentenceId.VDM, 6);
+		super('!', talker, "VDM", 6);
 	}
 	
 	@Override
