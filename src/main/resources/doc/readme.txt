@@ -83,7 +83,7 @@ documents publicly available in the Internet (URLs checked on 2013-09-08):
 
  * RT Intertial+ NMEA Description (rev. 100720) by Oxford Technical Solutions
    <http://www.oxts.com/Downloads/Products/Inertial2/nmeaman.pdf>
-   
+
  * Trimble BD9xx GNSS Receivers Help
    <http://www.trimble.com/OEM_ReceiverHelp/V4.44/en/>
 
@@ -92,16 +92,6 @@ documents publicly available in the Internet (URLs checked on 2013-09-08):
 
  * NMEA 0183 Sentences Not Recommended for New Designs by NMEA
    <http://www.nmea.org/Assets/100108_nmea_0183_sentences_not_recommended_for_new_designs.pdf>
-   
- * NMEA Sentence Information by Glenn Baddeley
-   <http://home.mira.net/~gnb/gps/nmea.html>
-
- * NMEA Data by Dale DePriest
-   <http://www.gpsinformation.org/dale/nmea.htm>
-
- * The NMEA FAQ by Peter Bennett
-   <http://vancouver-webpages.com/peter/nmeafaq.txt> (not found)
-   <http://www.eoss.org/pubs/nmeafaq.htm> (archived older version)
 
  * NMEA Sentence Information by Glenn Baddeley
    <http://home.mira.net/~gnb/gps/nmea.html>
