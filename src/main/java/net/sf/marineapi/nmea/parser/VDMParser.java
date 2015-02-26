@@ -2,7 +2,7 @@ package net.sf.marineapi.nmea.parser;
 
 import net.sf.marineapi.nmea.sentence.SentenceId;
 import net.sf.marineapi.nmea.sentence.TalkerId;
-import net.sf.marineapi.nmea.sentence.VDMSentence;
+import net.sf.marineapi.nmea.sentence.AISSentence;
 
 /**
  * AIS VDM sentence parser, contains only the NMEA layer. The actual payload
@@ -10,7 +10,7 @@ import net.sf.marineapi.nmea.sentence.VDMSentence;
  * 
  * @author Lázár József
  */
-public class VDMParser extends SentenceParser implements VDMSentence {
+public class VDMParser extends SentenceParser implements AISSentence {
 
 	// NMEA message fields
 	private static final int NUMBER_OF_FRAGMENTS	= 0;
@@ -84,7 +84,7 @@ public class VDMParser extends SentenceParser implements VDMSentence {
 	}
 
     @Override
-	public boolean isPartOfMessage(VDMSentence line) {
+	public boolean isPartOfMessage(AISSentence line) {
 		if (getNumberOfFragments() == line.getNumberOfFragments() &&
 		        getFragmentNumber() < line.getFragmentNumber()) {
 			

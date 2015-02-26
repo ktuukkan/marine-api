@@ -26,7 +26,7 @@ import java.util.logging.Logger;
 import net.sf.marineapi.nmea.parser.SentenceFactory;
 import net.sf.marineapi.nmea.sentence.Sentence;
 import net.sf.marineapi.nmea.sentence.SentenceValidator;
-import net.sf.marineapi.nmea.sentence.VDMSentence;
+import net.sf.marineapi.nmea.sentence.AISSentence;
 
 /**
  * Base class for data readers; common methods and run-loop.
@@ -77,7 +77,7 @@ abstract class AbstractDataReader implements DataReader {
 
 		ActivityMonitor monitor = new ActivityMonitor(parent);
 		SentenceFactory factory = SentenceFactory.getInstance();
-		VDMSentence previous = null;
+		AISSentence previous = null;
 
 		while (isRunning) {
 			try {

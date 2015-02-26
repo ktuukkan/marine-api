@@ -4,7 +4,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import net.sf.marineapi.nmea.sentence.TalkerId;
-import net.sf.marineapi.nmea.sentence.VDMSentence;
+import net.sf.marineapi.nmea.sentence.AISSentence;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -18,9 +18,9 @@ public class VDMTest {
 	public static final String PART1 = "!AIVDM,2,1,1,A,55?MbV02;H;s<HtKR20EHE:0@T4@Dn2222222216L961O5Gf0NSQEp6ClRp8,0*1C";
 	public static final String PART2 = "!AIVDM,2,2,1,A,88888888880,2*25";
 
-	private VDMSentence vdm;
-	private VDMSentence frag1;
-	private VDMSentence frag2;
+	private AISSentence vdm;
+	private AISSentence frag1;
+	private AISSentence frag2;
 
 	/**
 	 * @throws java.lang.Exception
@@ -39,7 +39,7 @@ public class VDMTest {
 	 */
 	@Test
 	public void testVDMParserTalkerId() {
-		VDMSentence empty = new VDMParser(TalkerId.AI);
+		AISSentence empty = new VDMParser(TalkerId.AI);
 		assertEquals(TalkerId.AI, empty.getTalkerId());
 		assertEquals("VDM", empty.getSentenceId());
 		assertEquals(6, empty.getFieldCount());
@@ -144,7 +144,7 @@ public class VDMTest {
 
 	/**
 	 * Test method for
-	 * {@link net.sf.marineapi.nmea.parser.VDMParser#isPartOfMessage(net.sf.marineapi.nmea.sentence.VDMSentence)}
+	 * {@link net.sf.marineapi.nmea.parser.VDMParser#isPartOfMessage(net.sf.marineapi.nmea.sentence.AISSentence)}
 	 * .
 	 */
 	@Test
@@ -159,8 +159,8 @@ public class VDMTest {
 
 	@Test
 	public void testToStringWithAIS() {
-		VDMSentence vdm = new VDMParser(EXAMPLE);
-		VDMSentence empty = new VDMParser(TalkerId.AI);
+		AISSentence vdm = new VDMParser(EXAMPLE);
+		AISSentence empty = new VDMParser(TalkerId.AI);
 		assertEquals(EXAMPLE, vdm.toString());
 		assertEquals("!AIVDM,,,,,,*57", empty.toString());
 	}

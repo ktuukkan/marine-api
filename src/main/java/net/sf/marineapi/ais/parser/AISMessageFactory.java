@@ -26,7 +26,7 @@ import java.util.Map;
 
 import net.sf.marineapi.ais.sentence.AISMessage;
 import net.sf.marineapi.ais.util.Sixbit;
-import net.sf.marineapi.nmea.sentence.VDMSentence;
+import net.sf.marineapi.nmea.sentence.AISSentence;
 
 /**
  * Factory for creating AIS message parsers.
@@ -60,11 +60,11 @@ public class AISMessageFactory {
 	 * @param vdm
 	 * @return
 	 */
-	public AISMessage create(VDMSentence... vdm) {
+	public AISMessage create(AISSentence... vdm) {
 		
 		AISMessageParser p = new AISMessageParser();
 		
-		for(VDMSentence v : vdm) {
+		for(AISSentence v : vdm) {
 			p.append(v.getPayload(), v.getFragmentNumber(), v.getFillBits());
 		}
 		

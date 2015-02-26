@@ -37,7 +37,7 @@ import net.sf.marineapi.ais.util.MMSI;
 import net.sf.marineapi.ais.util.Violation;
 import net.sf.marineapi.nmea.event.AbstractSentenceListener;
 import net.sf.marineapi.nmea.io.SentenceReader;
-import net.sf.marineapi.nmea.sentence.VDMSentence;
+import net.sf.marineapi.nmea.sentence.AISSentence;
 
 /**
  * Simple example application that takes a filename as command-line argument
@@ -45,7 +45,7 @@ import net.sf.marineapi.nmea.sentence.VDMSentence;
  *
  * @author Jozéph Lázár
  */
-public class AISExample extends AbstractSentenceListener<VDMSentence> {
+public class AISExample extends AbstractSentenceListener<AISSentence> {
 
 	private SentenceReader reader;
 
@@ -70,7 +70,7 @@ public class AISExample extends AbstractSentenceListener<VDMSentence> {
 	 * @see
 	 * net.sf.marineapi.nmea.event.SentenceListener#sentenceRead(T)
 	 */
-	public void sentenceRead(VDMSentence s) {
+	public void sentenceRead(AISSentence s) {
 
 	    /** TODO: needs a pre-processor for concatenating AIS fragments
 		try {
