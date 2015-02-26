@@ -14,7 +14,7 @@ import net.sf.marineapi.ais.util.Violation;
  */
 public class AISMessageParser implements AISMessage {
 
-	private String message;
+	private String message = "";
 	private int fillbits;
 	private int lastFragmentNr;
 
@@ -79,8 +79,7 @@ public class AISMessageParser implements AISMessage {
 		if (decoder == null) {
 			decoder = new Sixbit(message, fillbits);
 			messageType = decoder.getInt(FROM[MESSAGE_TYPE], TO[MESSAGE_TYPE]);
-			repeatIndicator = decoder.getInt(FROM[REPEAT_INDICATOR],
-					TO[REPEAT_INDICATOR]);
+			repeatIndicator = decoder.getInt(FROM[REPEAT_INDICATOR], TO[REPEAT_INDICATOR]);
 			mmsi = decoder.getInt(FROM[MMSI], TO[MMSI]);
 		}
 	}
