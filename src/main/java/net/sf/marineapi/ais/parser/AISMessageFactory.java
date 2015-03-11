@@ -78,7 +78,7 @@ public class AISMessageFactory {
 			Constructor<? extends AISMessage> c = clazz.getConstructor(Sixbit.class);
 			result = c.newInstance(p.getMessageBody());
 		} catch (Exception e) {
-			throw new IllegalStateException("AISMessageFactory: " + e.getMessage());
+			throw new IllegalStateException(e.getCause());
 		}
 
 		return result;

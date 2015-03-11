@@ -25,7 +25,7 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 
-import net.sf.marineapi.ais.message.AISMessage05;
+import net.sf.marineapi.ais.message.AISMessage01;
 import net.sf.marineapi.ais.event.AbstractAISMessageListener;
 import net.sf.marineapi.nmea.io.SentenceReader;
 
@@ -35,7 +35,7 @@ import net.sf.marineapi.nmea.io.SentenceReader;
  * 
  * @author Jozéph Lázár
  */
-public class AISListenerExample extends AbstractAISMessageListener<AISMessage05> {
+public class AISListenerExample extends AbstractAISMessageListener<AISMessage01> {
 
 	private SentenceReader reader;
 
@@ -63,7 +63,7 @@ public class AISListenerExample extends AbstractAISMessageListener<AISMessage05>
 	 * .sf.marineapi.ais.sentence.AISMessage)
 	 */
 	@Override
-	public void onMessage(AISMessage05 msg) {
+	public void onMessage(AISMessage01 msg) {
 		System.out.println("onMessage: " + msg.toString());
 	}
 
