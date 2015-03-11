@@ -61,25 +61,30 @@ public class AISMessageFactory {
 	 * @return
 	 */
 	public AISMessage create(AISSentence... vdm) {
-		
+
 		AISMessageParser p = new AISMessageParser();
-		
-		for(AISSentence v : vdm) {
+
+		for (AISSentence v : vdm) {
 			p.append(v.getPayload(), v.getFragmentNumber(), v.getFillBits());
 		}
-		
+
+		if (!parsers.containsKey(p.getMessageType())) {
+			String msg = String.format("no parser for message type %d", p.getMessageType());
+			throw new IllegalArgumentException(msg);
+		}
+
+		AISMessage result = null;
 		Class<? extends AISMessage> clazz = parsers.get(p.getMessageType());
-		
 		try {
 			Constructor<? extends AISMessage> c = clazz.getConstructor(Sixbit.class);
-			return c.newInstance(p.getMessageBody());
+			result = c.newInstance(p.getMessageBody());
 		} catch (Exception e) {
-			e.printStackTrace();
+			//e.printStackTrace();
+			throw new IllegalStateException(e.getMessage());
 		}
-		
-		return null;
+
+		return result;
 	}
-	
 	
 	/**
 	 * Returns the factory singleton.
