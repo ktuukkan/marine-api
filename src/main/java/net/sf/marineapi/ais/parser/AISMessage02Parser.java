@@ -1,6 +1,6 @@
 package net.sf.marineapi.ais.parser;
 
-import net.sf.marineapi.ais.sentence.AISMessage02;
+import net.sf.marineapi.ais.message.AISMessage02;
 import net.sf.marineapi.ais.util.Sixbit;
 
 /**

@@ -1,6 +1,6 @@
 package net.sf.marineapi.ais.parser;
 
-import net.sf.marineapi.ais.sentence.AISMessage05;
+import net.sf.marineapi.ais.message.AISMessage05;
 import net.sf.marineapi.ais.util.PositioningDevice;
 import net.sf.marineapi.ais.util.ShipType;
 import net.sf.marineapi.ais.util.Sixbit;

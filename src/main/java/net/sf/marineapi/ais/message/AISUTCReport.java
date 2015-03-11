@@ -1,4 +1,4 @@
-package net.sf.marineapi.ais.sentence;
+package net.sf.marineapi.ais.message;
 
 /**
  * Common interface for all UTC time and position providing AIS messages.

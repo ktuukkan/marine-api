@@ -1,6 +1,6 @@
 package net.sf.marineapi.ais.parser;
 
-import net.sf.marineapi.ais.sentence.AISUTCReport;
+import net.sf.marineapi.ais.message.AISUTCReport;
 import net.sf.marineapi.ais.util.AISRuleViolation;
 import net.sf.marineapi.ais.util.Latitude27;
 import net.sf.marineapi.ais.util.Longitude28;

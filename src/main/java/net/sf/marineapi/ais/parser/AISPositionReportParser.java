@@ -2,7 +2,7 @@ package net.sf.marineapi.ais.parser;
 
 import java.text.DecimalFormat;
 
-import net.sf.marineapi.ais.sentence.AISPositionReport;
+import net.sf.marineapi.ais.message.AISPositionReport;
 import net.sf.marineapi.ais.util.AISRuleViolation;
 import net.sf.marineapi.ais.util.Angle12;
 import net.sf.marineapi.ais.util.Angle9;

@@ -3,7 +3,7 @@ package net.sf.marineapi.ais.parser;
 import java.util.ArrayList;
 import java.util.List;
 
-import net.sf.marineapi.ais.sentence.AISMessage;
+import net.sf.marineapi.ais.message.AISMessage;
 import net.sf.marineapi.ais.util.Sixbit;
 import net.sf.marineapi.ais.util.Violation;
 

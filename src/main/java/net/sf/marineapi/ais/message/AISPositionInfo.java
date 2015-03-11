@@ -1,4 +1,4 @@
-package net.sf.marineapi.ais.sentence;
+package net.sf.marineapi.ais.message;
 
 /**
  * Interface for all position information.

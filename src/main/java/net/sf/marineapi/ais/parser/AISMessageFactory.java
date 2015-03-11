@@ -24,7 +24,7 @@ import java.lang.reflect.Constructor;
 import java.util.HashMap;
 import java.util.Map;
 
-import net.sf.marineapi.ais.sentence.AISMessage;
+import net.sf.marineapi.ais.message.AISMessage;
 import net.sf.marineapi.ais.util.Sixbit;
 import net.sf.marineapi.nmea.sentence.AISSentence;
 
