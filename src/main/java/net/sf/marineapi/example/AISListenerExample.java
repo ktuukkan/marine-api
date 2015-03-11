@@ -26,7 +26,7 @@ import java.io.IOException;
 import java.io.InputStream;
 
 import net.sf.marineapi.ais.message.AISMessage05;
-import net.sf.marineapi.nmea.event.AbstractAISMessageListener;
+import net.sf.marineapi.ais.event.AbstractAISMessageListener;
 import net.sf.marineapi.nmea.io.SentenceReader;
 
 /**
@@ -59,7 +59,7 @@ public class AISListenerExample extends AbstractAISMessageListener<AISMessage05>
 	 * (non-Javadoc)
 	 * 
 	 * @see
-	 * net.sf.marineapi.nmea.event.AbstractAISMessageListener#onMessage(net
+	 * net.sf.marineapi.ais.event.AbstractAISMessageListener#onMessage(net
 	 * .sf.marineapi.ais.sentence.AISMessage)
 	 */
 	@Override

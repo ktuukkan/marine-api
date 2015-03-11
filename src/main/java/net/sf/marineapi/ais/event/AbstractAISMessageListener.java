@@ -1,7 +1,9 @@
-package net.sf.marineapi.nmea.event;
+package net.sf.marineapi.ais.event;
 
 import net.sf.marineapi.ais.parser.AISMessageFactory;
 import net.sf.marineapi.ais.message.AISMessage;
+import net.sf.marineapi.nmea.event.SentenceEvent;
+import net.sf.marineapi.nmea.event.SentenceListener;
 import net.sf.marineapi.nmea.sentence.AISSentence;
 import net.sf.marineapi.nmea.sentence.Sentence;
 
