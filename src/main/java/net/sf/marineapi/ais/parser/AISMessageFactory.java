@@ -36,7 +36,6 @@ import net.sf.marineapi.nmea.sentence.AISSentence;
 public class AISMessageFactory {
 
 	private static AISMessageFactory instance;
-	
 	private Map<Integer, Class<? extends AISMessage>> parsers;
 	
 	/**
@@ -57,8 +56,8 @@ public class AISMessageFactory {
 	/**
 	 * Creates a new AIS message parser based on given sentences.
 	 *  
-	 * @param vdm
-	 * @return
+	 * @param vdm One or more AIS sentences in correct sequence order.
+	 * @return AISMessage instance
 	 */
 	public AISMessage create(AISSentence... vdm) {
 
@@ -73,14 +72,13 @@ public class AISMessageFactory {
 			throw new IllegalArgumentException(msg);
 		}
 
-		AISMessage result = null;
+		AISMessage result;
 		Class<? extends AISMessage> clazz = parsers.get(p.getMessageType());
 		try {
 			Constructor<? extends AISMessage> c = clazz.getConstructor(Sixbit.class);
 			result = c.newInstance(p.getMessageBody());
 		} catch (Exception e) {
-			//e.printStackTrace();
-			throw new IllegalStateException(e.getMessage());
+			throw new IllegalStateException("AISMessageFactory: " + e.getMessage());
 		}
 
 		return result;
