@@ -13,12 +13,11 @@ import java.util.Queue;
 
 /**
  * Abstract base listener for AIS messages. Extend this class to create listener
- * for specific AIS message type.
+ * for a specific AIS message type.
  *
  * @author Kimmo Tuukkanen
  */
-public abstract class AbstractAISMessageListener<T extends AISMessage>
-		implements SentenceListener {
+public abstract class AbstractAISMessageListener<T extends AISMessage> implements SentenceListener {
 
 	private final Type expectedMessageType;
 	private Queue<AISSentence> queue = new LinkedList<AISSentence>();
@@ -47,8 +46,6 @@ public abstract class AbstractAISMessageListener<T extends AISMessage>
 	 */
 	private void preParse(AISSentence sentence) {
 
-		System.out.println("sentenceRead: " + sentence.getSentenceId());
-
 		if (sentence.isFirstFragment()) {
 			queue.clear();
 		}
@@ -56,17 +53,13 @@ public abstract class AbstractAISMessageListener<T extends AISMessage>
 		queue.add(sentence);
 
 		if (sentence.isLastFragment()) {
-
 			AISSentence[] sentences = queue.toArray(new AISSentence[queue.size()]);
 			AISMessage message = factory.create(sentences);
-
 			if (message != null) {
 				Class<?>[] interfaces = message.getClass().getInterfaces();
 				if (Arrays.asList(interfaces).contains(expectedMessageType)) {
 					onMessage((T) message);
 				}
-				System.out.println("message type: " + message.getMessageType());
-				System.out.println("message interface: " + interfaces[0]);
 			}
 		}
 	}
