@@ -17,7 +17,7 @@ import java.util.Queue;
  *
  * @author Kimmo Tuukkanen
  */
-public abstract class AbstractAISSentenceListener<T extends AISMessage>
+public abstract class AbstractAISMessageListener<T extends AISMessage>
 		implements SentenceListener {
 
 	private final Type expectedMessageType;
@@ -27,7 +27,7 @@ public abstract class AbstractAISSentenceListener<T extends AISMessage>
 	/**
 	 * Constructor
 	 */
-	public AbstractAISSentenceListener() {
+	public AbstractAISMessageListener() {
 		// TODO: not DRY
 		ParameterizedType superClass = (ParameterizedType) getClass().getGenericSuperclass();
 		Type[] superClassTypeArgs = superClass.getActualTypeArguments();

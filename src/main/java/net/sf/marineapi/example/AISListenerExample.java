@@ -25,11 +25,9 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 
-import net.sf.marineapi.ais.sentence.AISMessage01;
 import net.sf.marineapi.ais.sentence.AISMessage04;
-import net.sf.marineapi.nmea.event.AbstractAISSentenceListener;
+import net.sf.marineapi.nmea.event.AbstractAISMessageListener;
 import net.sf.marineapi.nmea.io.SentenceReader;
-import net.sf.marineapi.nmea.sentence.AISSentence;
 
 /**
  * Simple example application that takes a filename as command-line argument and
@@ -37,7 +35,7 @@ import net.sf.marineapi.nmea.sentence.AISSentence;
  * 
  * @author Jozéph Lázár
  */
-public class AISListenerExample extends AbstractAISSentenceListener<AISMessage04> {
+public class AISListenerExample extends AbstractAISMessageListener<AISMessage04> {
 
 	private SentenceReader reader;
 
@@ -61,7 +59,7 @@ public class AISListenerExample extends AbstractAISSentenceListener<AISMessage04
 	 * (non-Javadoc)
 	 * 
 	 * @see
-	 * net.sf.marineapi.nmea.event.AbstractAISSentenceListener#onMessage(net
+	 * net.sf.marineapi.nmea.event.AbstractAISMessageListener#onMessage(net
 	 * .sf.marineapi.ais.sentence.AISMessage)
 	 */
 	@Override
