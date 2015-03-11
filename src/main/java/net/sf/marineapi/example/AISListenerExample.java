@@ -90,5 +90,4 @@ public class AISListenerExample extends AbstractAISSentenceListener<AISMessage04
 			System.exit(1);
 		}
 	}
-
 }
