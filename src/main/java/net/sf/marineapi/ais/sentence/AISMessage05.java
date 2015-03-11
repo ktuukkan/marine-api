@@ -4,7 +4,7 @@ package net.sf.marineapi.ais.sentence;
  *
  * @author Lázár József
  */
-public interface AISMessage05 {
+public interface AISMessage05 extends AISMessage {
 
 	/**
 	 * Returns the AIS version indicator for the current message.
