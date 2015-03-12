@@ -58,6 +58,7 @@ public class AISPositionReportBParser extends AISMessageParser implements AISPos
 	private int		fTimeStamp;
 
 	public AISPositionReportBParser(Sixbit content) {
+		super(content);
 		fSOG = content.getInt(FROM[SPEEDOVERGROUND], TO[SPEEDOVERGROUND]);
 		fPositionAccuracy = content.getBoolean(FROM[POSITIONACCURACY]);
 		fLongitude = Longitude28.toDegrees(content.getAs28BitInt(FROM[LONGITUDE], TO[LONGITUDE]));

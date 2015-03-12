@@ -76,6 +76,7 @@ public class AISPositionReportParser extends AISMessageParser implements AISPosi
 	 * Constructs an AIS Message Position Report parser.
 	 */
 	public AISPositionReportParser(Sixbit content) {
+		super(content);
 		if (content.length() != 168)
 			throw new IllegalArgumentException("Wrong message length");
 		

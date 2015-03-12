@@ -77,6 +77,7 @@ public class AISMessage05Parser extends AISMessageParser implements AISMessage05
 	private String		fDestination;
 
 	public AISMessage05Parser(Sixbit content) {
+		super(content);
 		if (content.length() != 424)
 			throw new IllegalArgumentException("Wrong message length");
 		

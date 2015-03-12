@@ -67,6 +67,7 @@ public class AISUTCParser extends AISMessageParser implements AISUTCReport {
 	private int		fTypeOfEPFD;
 
 	public AISUTCParser(Sixbit content) {
+		super(content);
 		if (content.length() != 168)
 			throw new IllegalArgumentException("Wrong message length");
 		

@@ -53,6 +53,22 @@ public class AISMessageParser implements AISMessage {
 
 	protected List<Violation> fViolations = new ArrayList<Violation>();
 
+
+	/**
+	 * Default constructor.
+	 */
+	public AISMessageParser() {
+	}
+
+	/**
+	 * Constucor with Sixbit content decoder.
+	 *
+	 * @param sb Content decoder
+	 */
+	protected AISMessageParser(Sixbit sb) {
+		this.decoder = sb;
+	}
+
 	/**
 	 * Add a new rule violation to this message
 	 */
