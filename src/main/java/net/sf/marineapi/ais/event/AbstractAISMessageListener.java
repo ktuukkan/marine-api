@@ -35,7 +35,11 @@ import java.util.Queue;
 
 /**
  * Abstract base listener for AIS messages. Extend this class to create listener
- * for a specific AIS message type.
+ * for a specific AIS message type. For listening all available AIS sentences,
+ * extend <code>AbstractSentenceListener&lt;AISSentence&gt;</code> or implement
+ * SentenceListener interface. However, in this case you should also implement
+ * AIS message concatenation to combine and parse messages that are deliverd over
+ * multiple sentences.
  *
  * @author Kimmo Tuukkanen
  */
@@ -58,7 +62,7 @@ public abstract class AbstractAISMessageListener<T extends AISMessage> implement
 	@Override
 	public void sentenceRead(SentenceEvent event) {
 		Sentence s = event.getSentence();
-		if (s instanceof AISSentence) {
+		if (s.isAISSentence()) {
 			preParse((AISSentence) s);
 		}
 	}
