@@ -63,14 +63,14 @@ public abstract class AbstractAISMessageListener<T extends AISMessage> implement
 	public void sentenceRead(SentenceEvent event) {
 		Sentence s = event.getSentence();
 		if (s.isAISSentence()) {
-			preParse((AISSentence) s);
+			handleAIS((AISSentence) s);
 		}
 	}
 
 	/**
 	 * Concatenate and pre-parse AIS sentences/messages.
 	 */
-	private void preParse(AISSentence sentence) {
+	private void handleAIS(AISSentence sentence) {
 
 		if (sentence.isFirstFragment()) {
 			queue.clear();
@@ -80,12 +80,16 @@ public abstract class AbstractAISMessageListener<T extends AISMessage> implement
 
 		if (sentence.isLastFragment()) {
 			AISSentence[] sentences = queue.toArray(new AISSentence[queue.size()]);
-			AISMessage message = factory.create(sentences);
-			if (message != null) {
-				Class<?>[] interfaces = message.getClass().getInterfaces();
-				if (Arrays.asList(interfaces).contains(expectedMessageType)) {
-					onMessage((T) message);
+			try {
+				AISMessage message = factory.create(sentences);
+				if (message != null) {
+					Class<?>[] interfaces = message.getClass().getInterfaces();
+					if (Arrays.asList(interfaces).contains(expectedMessageType)) {
+						onMessage((T) message);
+					}
 				}
+			} catch (IllegalArgumentException iae) {
+				// nevermind unsupported message types
 			}
 		}
 	}
