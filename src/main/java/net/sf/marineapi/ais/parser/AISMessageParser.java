@@ -89,21 +89,29 @@ public class AISMessageParser implements AISMessage {
 		return fViolations;
 	}
 
+	@Override
 	public int getMessageType() {
 		parseAIS();
 		return messageType;
 	}
 
+	@Override
 	public int getRepeatIndicator() {
 		parseAIS();
 		return repeatIndicator;
 	}
 
+	@Override
 	public int getMMSI() {
 		parseAIS();
 		return mmsi;
 	}
 
+	/**
+	 * Returns the message sixbit decoder.
+	 *
+	 * @return Sixbit
+	 */
 	public Sixbit getMessageBody() {
 		parseAIS();
 		return decoder;
@@ -118,6 +126,7 @@ public class AISMessageParser implements AISMessage {
 	 * @param fillBits Number of additional fill-bits
 	 */
 	public void append(String fragment, int fragmentIndex, int fillBits) {
+		// TODO check correct fragment order and if all fragments are appended
 		lastFragmentNr = fragmentIndex;
 		message += fragment;
 		fillbits = fillBits; // we always use the last
