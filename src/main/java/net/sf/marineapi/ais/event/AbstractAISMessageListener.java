@@ -45,7 +45,7 @@ import java.util.Queue;
  */
 public abstract class AbstractAISMessageListener<T extends AISMessage> implements SentenceListener {
 
-	private final Type expectedMessageType;
+	private final Class<? extends AISMessage> expectedMessageType;
 	private Queue<AISSentence> queue = new LinkedList<AISSentence>();
 	private final AISMessageFactory factory = AISMessageFactory.getInstance();
 
@@ -56,7 +56,7 @@ public abstract class AbstractAISMessageListener<T extends AISMessage> implement
 		// TODO: not DRY
 		ParameterizedType superClass = (ParameterizedType) getClass().getGenericSuperclass();
 		Type[] superClassTypeArgs = superClass.getActualTypeArguments();
-		this.expectedMessageType = superClassTypeArgs[0];
+		this.expectedMessageType = (Class<T>)superClassTypeArgs[0];
 	}
 
 	@Override
