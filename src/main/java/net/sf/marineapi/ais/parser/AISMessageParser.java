@@ -34,7 +34,6 @@ import net.sf.marineapi.ais.util.Violation;
  */
 public class AISMessageParser implements AISMessage {
 
-	// TODO sub-classes are not passing message/Sixbit up here
 	private String message = "";
 	private int fillbits;
 	private int lastFragmentNr;
@@ -76,10 +75,16 @@ public class AISMessageParser implements AISMessage {
 		fViolations.add(v);
 	}
 
+	/**
+	 * Returns the number of violations.
+	 */
 	public int getNrOfViolations() {
 		return fViolations.size();
 	}
 
+	/**
+	 * Returns list of discoverd data violations.
+	 */
 	public List<Violation> getViolations() {
 		return fViolations;
 	}
