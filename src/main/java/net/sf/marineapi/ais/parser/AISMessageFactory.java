@@ -56,27 +56,26 @@ public class AISMessageFactory {
 	/**
 	 * Creates a new AIS message parser based on given sentences.
 	 *  
-	 * @param vdm One or more AIS sentences in correct sequence order.
+	 * @param sentences One or more AIS sentences in correct sequence order.
 	 * @return AISMessage instance
 	 */
-	public AISMessage create(AISSentence... vdm) {
+	public AISMessage create(AISSentence... sentences) {
 
-		AISMessageParser p = new AISMessageParser();
-
-		for (AISSentence v : vdm) {
-			p.append(v.getPayload(), v.getFragmentNumber(), v.getFillBits());
+		AISMessageParser parser = new AISMessageParser();
+		for (AISSentence v : sentences) {
+			parser.append(v.getPayload(), v.getFragmentNumber(), v.getFillBits());
 		}
 
-		if (!parsers.containsKey(p.getMessageType())) {
-			String msg = String.format("no parser for message type %d", p.getMessageType());
+		if (!parsers.containsKey(parser.getMessageType())) {
+			String msg = String.format("no parser for message type %d", parser.getMessageType());
 			throw new IllegalArgumentException(msg);
 		}
 
 		AISMessage result;
-		Class<? extends AISMessage> clazz = parsers.get(p.getMessageType());
+		Class<? extends AISMessage> clazz = parsers.get(parser.getMessageType());
 		try {
 			Constructor<? extends AISMessage> c = clazz.getConstructor(Sixbit.class);
-			result = c.newInstance(p.getMessageBody());
+			result = c.newInstance(parser.getMessageBody());
 		} catch (Exception e) {
 			throw new IllegalStateException(e.getCause());
 		}
