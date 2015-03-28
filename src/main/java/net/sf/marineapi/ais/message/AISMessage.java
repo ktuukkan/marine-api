@@ -48,9 +48,4 @@ public interface AISMessage {
 	 * @return the MMSI as an integer.
 	 */
 	int getMMSI();
-
-	/**
-	 * Appends a payload fragment into the current message.
-	 */
-	void append(String fragment, int index, int fillBits);
 }

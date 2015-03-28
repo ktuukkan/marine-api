@@ -104,7 +104,14 @@ public class AISMessageParser implements AISMessage {
 		return decoder;
 	}
 
-	@Override
+	/**
+	 * Append a paylod fragment to combine messages devivered over multiple
+	 * sentences.
+	 *
+	 * @param fragment Data fragment in sixbit encoded format
+	 * @param fragmentIndex Fragment number within the fragments sequence
+	 * @param fillBits Number of additional fill-bits
+	 */
 	public void append(String fragment, int fragmentIndex, int fillBits) {
 		lastFragmentNr = fragmentIndex;
 		message += fragment;
