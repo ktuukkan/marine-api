@@ -155,24 +155,21 @@ public class SentenceReaderTest {
 	}
 
 	@Test
-	public void testExceptionListener() {
+	public void testHandleException() {
+
+		final String MESSAGE = "test error";
 
 		reader.setExceptionListener(new ExceptionListener() {
+			private int calls = 0;
 			@Override
 			public void onException(Exception e) {
-				assertTrue(e instanceof IOException);
-				assertEquals("Bad file descriptor", e.getMessage());
-				reader.stop();
+				assertEquals(calls++, 0);
+				assertTrue(e instanceof IllegalStateException);
+				assertEquals(MESSAGE, e.getMessage());
 			}
 		});
 
-		reader.start();
-
-		try {
-			stream.close();
-		} catch (IOException e) {
-			fail("failed to close stream");
-		}
+		reader.handleException("test message", new IllegalStateException(MESSAGE));
 	}
 
 	@Test
