@@ -24,7 +24,13 @@ CHANGES
  * XDRSentence; fixed fields indexing bug in getMeasurements(). 
  
 NEW FEATURES
-
+ 
+ * Support for AIS (Automatic Identification System); interfaces for AIS message
+   types 1, 2, 3, 4, 5, 18 and 19 and listener base class for receiving updates
+   on each type, including utility classes for extracted data.
+ 
+ * Support for VDM sentences; NMEA layer for AIS messages.
+ 
  * SentenceReader; DataListener interface for receiving any non-NMEA data that
    has been read from current data source.
    
