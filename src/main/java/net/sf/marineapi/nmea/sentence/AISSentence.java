@@ -22,14 +22,14 @@ package net.sf.marineapi.nmea.sentence;
 
 /**
  * <p>
- * Base interface for all AIS sentences. Notice that &quot;AIS&quot; does not
- * refer to a single sentence type, but another system/standard that transmits
- * it's messages using NMEA 0183 format (Automatic Identification System).
+ * Base interface for all AIS sentences (Automatic Identification System).
+ * Notice that &quot;AIS&quot; does not refer to NMEA sentence type, but another
+ * system/standard that transmits it's messages using NMEA 0183.
  * </p>
  * <p>
- * Because AIS sentences are parsed in two-phases, they all share the same NMEA
- * sentence layout. Thus, there is only one interface for AIS sentences (this
- * one).
+ * AIS sentences are parsed in two phases and they all share the same NMEA
+ * sentence layout, so there is no dedicated interfaces for each AIS sentence
+ * type (VDM, VDO etc).
  * </p>
  * 
  * @author Lázár József, Kimmo Tuukkanen
@@ -37,14 +37,14 @@ package net.sf.marineapi.nmea.sentence;
 public interface AISSentence extends Sentence {
 
 	/**
-	 * Count of fragments in the currently accumulating message.
+	 * Number of fragments in the currently accumulating message.
 	 * 
 	 * @return number of fragments.
 	 */
 	public int getNumberOfFragments();
 
 	/**
-	 * Returns the fragment number of this sentence (1 based).
+	 * Returns the fragment number of this sentence (1-based).
 	 * 
 	 * @return fragment index
 	 */
@@ -105,22 +105,22 @@ public interface AISSentence extends Sentence {
 
 	/**
 	 * <p>
-	 * Returns whether given sentence is part of message sequence.
+	 * Tells if given sentence is part of message sequence.
 	 * </p>
-	 * 
 	 * <p>
-	 * Sentences are considered to belong in same sequence when:
+	 * Sentences are considered to belong in same sequence when the given
+	 * sentence meets the following conditions:
 	 * </p>
 	 * <ul>
 	 * <li>Same number of fragments, higher fragment #, same channel and same
-	 * messageId</li>
+	 * message id</li>
 	 * <li>Same number of fragments, next fragment #, and either same channel or
-	 * same messageId</li>
+	 * same message id</li>
 	 * </ul>
 	 * 
-	 * @param line VDMSentence to compare with.
+	 * @param sentence AISSentence to compare with.
 	 * @return true if this and given sentence belong in same sequence
 	 */
-	public boolean isPartOfMessage(AISSentence line);
+	public boolean isPartOfMessage(AISSentence sentence);
 
 }
