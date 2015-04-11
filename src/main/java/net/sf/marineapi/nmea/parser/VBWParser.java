@@ -2,6 +2,8 @@
  * VBWParser.java
  * Copyright (C) 2015 ESRG LLC.
  * 
+ * This file is part of Java Marine API.
+ * <http://ktuukkan.github.io/marine-api/>
  * 
  * Java Marine API is free software: you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by the
@@ -14,7 +16,7 @@
  * for more details.
  * 
  * You should have received a copy of the GNU Lesser General Public License
- * along with NMEA Java Marine API. If not, see <http://www.gnu.org/licenses/>.
+ * along with Java Marine API. If not, see <http://www.gnu.org/licenses/>.
  */
 package net.sf.marineapi.nmea.parser;
 
