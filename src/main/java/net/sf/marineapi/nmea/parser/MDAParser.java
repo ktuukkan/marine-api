@@ -9,9 +9,8 @@ import net.sf.marineapi.nmea.sentence.TalkerId;
  * of the earth.
  * 
  * @author Richard van Nieuwenhoven
- *
  */
-public class MDAParser extends SentenceParser implements MDASentence {
+class MDAParser extends SentenceParser implements MDASentence {
 
     public static final String MDASentenceId = "MDA";
 
