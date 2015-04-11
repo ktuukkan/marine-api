@@ -1,8 +1,9 @@
 package net.sf.marineapi.ais.message;
 
 /**
-*
-* @author Lázár József
-*/
+ * Position Report Class A (Response to interrogation).
+ * 
+ * @author Lázár József
+ */
 public interface AISMessage03 extends AISPositionReport {
 }

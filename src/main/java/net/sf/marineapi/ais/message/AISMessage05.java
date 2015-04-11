@@ -1,7 +1,8 @@
 package net.sf.marineapi.ais.message;
 
 /**
- *
+ * Static and Voyage Related Data.
+ * 
  * @author Lázár József
  */
 public interface AISMessage05 extends AISMessage {

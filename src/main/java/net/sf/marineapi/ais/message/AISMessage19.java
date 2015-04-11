@@ -1,19 +1,22 @@
 package net.sf.marineapi.ais.message;
 
 /**
-*
-* @author Lázár József
-*/
+ * Extended Class B Equipment Position Report.
+ *  
+ * @author Lázár József
+ */
 public interface AISMessage19 extends AISPositionReportB {
 
 	/**
 	 * Returns the name of the transmitting ship.
+	 * 
 	 * @return maximum 20 characters, representing the name
 	 */
 	public String getName();
 
 	/**
 	 * Returns the type of ship and cargo.
+	 * 
 	 * @return an integer value representing the type of ship and cargo
 	 */
 	public int getTypeOfShipAndCargoType();
@@ -28,14 +31,15 @@ public interface AISMessage19 extends AISPositionReportB {
 	 */
 	public int getStern();
 
-
 	/**
-	 * Returns the distance from the reference point to the port side of the ship.
+	 * Returns the distance from the reference point to the port side of the
+	 * ship.
 	 */
 	public int getPort();
 
 	/**
 	 * Returns the type of electronic position fixing device.
+	 * 
 	 * @return an integer value the the type of EPFD
 	 */
 	public int getTypeOfEPFD();
