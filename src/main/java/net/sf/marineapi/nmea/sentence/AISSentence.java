@@ -31,6 +31,8 @@ package net.sf.marineapi.nmea.sentence;
  * sentence layout, so there is no dedicated interfaces for each AIS sentence
  * type (VDM, VDO etc).
  * </p>
+ * <p>Example:</br>
+ * <code>!AIVDM,1,1,,B,177KQJ5000G?tO`K>RA1wUbN0TKH,0*5C</code></p>
  * 
  * @author Lázár József, Kimmo Tuukkanen
  */
