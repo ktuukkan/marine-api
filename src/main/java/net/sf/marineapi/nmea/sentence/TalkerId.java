@@ -1,4 +1,4 @@
-/* 
+/*
  * TalkerId.java
  * Copyright (C) 2010 Kimmo Tuukkanen
  * 
@@ -25,27 +25,39 @@ package net.sf.marineapi.nmea.sentence;
  * address field. For example, <code>GP</code> in <code>$GPGGA</code>. Notice
  * that proprietary sentences are identified by single character {@link #P}.
  * <p>
- * This enum contains also non-NMEA IDs to enable parsing AIS messages;
- * {@link #AI}, {@link #AB} and {@link #BS}. However, the correct meaning of
- * these are still unconfirmed.
+ * This enum contains also non-NMEA IDs to enable parsing AIS messages, see for
+ * more details in <a href="http://catb.org/gpsd/AIVDM.html">AIVDM/AIVDO
+ * protocol decoding</a> by Eric S. Raymond.
  * 
  * @author Kimmo Tuukkanen
  * @see net.sf.marineapi.nmea.sentence.SentenceId
  */
 public enum TalkerId {
 
-	/** AIS (to support <code>AIVDM</code> and <code>AIVDO</code>) */
-	AI,
-	/** AIS "Broadcast" message (to support <code>ABVDM</code>) */
+	/** NMEA 4.0 Base AIS station */
 	AB,
-	/** AIS "Base Station" message (to support <code>BSVDM</code>) */
-	BS,
+	/** MMEA 4.0 Dependent AIS Base Station */
+	AD,
 	/** Autopilot - General */
 	AG,
+	/** Mobile AIS station */
+	AI,
+	/** NMEA 4.0 Aid to Navigation AIS station */
+	AN,
 	/** Autopilot - Magnetic */
 	AP,
+	/** NMEA 4.0 AIS Receiving Station */
+	AR,
+	/** NMEA 4.0 Limited AIS Base Station */
+	AS,
+	/** NMEA 4.0 AIS Transmitting Station */
+	AT,
+	/** NMEA 4.0 Repeater AIS station */
+	AX,
 	/** BeiDou - Chinese satellite navigation system */
 	BD,
+	/** Base AIS station (deprecated in NMEA 4.0) */
+	BS,
 	/** Computer - Programmed Calculator (obsolete) */
 	@Deprecated
 	CC,
@@ -54,8 +66,8 @@ public enum TalkerId {
 	/** Computer - Memory Data (obsolete) */
 	@Deprecated
 	CM,
-    /** Channel Pilot (Navicom Dynamics proprietary) */
-    CP,
+	/** Channel Pilot (Navicom Dynamics proprietary) */
+	CP,
 	/** Communications - Satellite */
 	CS,
 	/** Communications - Radio-Telephone (MF/HF) */
@@ -108,10 +120,12 @@ public enum TalkerId {
 	/** Distress Alarm System (obsolete) */
 	@Deprecated
 	OS,
-	/** Proprietary sentence format (does not define the talker device). */
+	/** Proprietary sentence (does not define the talker device). */
 	P,
 	/** RADAR and/or ARPA */
 	RA,
+	/** NMEA 4.0 Physical Shore AIS Station */
+	SA,
 	/** Sounder, Depth */
 	SD,
 	/** Electronic Positioning System, other/general */
