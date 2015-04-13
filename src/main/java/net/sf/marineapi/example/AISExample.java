@@ -25,16 +25,6 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 
-import net.sf.marineapi.ais.parser.AISMessageParser;
-import net.sf.marineapi.ais.parser.AISMessage01Parser;
-import net.sf.marineapi.ais.parser.AISMessage02Parser;
-import net.sf.marineapi.ais.parser.AISMessage03Parser;
-import net.sf.marineapi.ais.parser.AISMessage04Parser;
-import net.sf.marineapi.ais.parser.AISMessage05Parser;
-import net.sf.marineapi.ais.parser.AISMessage18Parser;
-import net.sf.marineapi.ais.parser.AISMessage19Parser;
-import net.sf.marineapi.ais.util.MMSI;
-import net.sf.marineapi.ais.util.Violation;
 import net.sf.marineapi.nmea.event.AbstractSentenceListener;
 import net.sf.marineapi.nmea.io.SentenceReader;
 import net.sf.marineapi.nmea.sentence.AISSentence;

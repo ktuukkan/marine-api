@@ -31,7 +31,7 @@ import net.sf.marineapi.ais.util.Sixbit;
  * 
  * @author Lázár József
  */
-public class AISMessage01Parser extends AISPositionReportParser implements AISMessage01 {
+class AISMessage01Parser extends AISPositionReportParser implements AISMessage01 {
 
 	public AISMessage01Parser(Sixbit content) {
 		super(content);

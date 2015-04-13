@@ -43,7 +43,7 @@ import net.sf.marineapi.ais.util.TimeStamp;
  * 
  * @author Lázár József
  */
-public class AISPositionReportParser extends AISMessageParser implements AISPositionReport {
+class AISPositionReportParser extends AISMessageParser implements AISPositionReport {
 
 	private final static String	SEPARATOR				= "\n\t";
 	private final static int	NAVIGATIONALSTATUS		= 0;

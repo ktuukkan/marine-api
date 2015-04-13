@@ -32,7 +32,7 @@ import net.sf.marineapi.ais.util.Sixbit;
  * 
  * @author Lázár József
  */
-public class AISMessage04Parser extends AISUTCParser implements AISMessage04 {
+class AISMessage04Parser extends AISUTCParser implements AISMessage04 {
 
 	public AISMessage04Parser(Sixbit content) {
 		super(content);
