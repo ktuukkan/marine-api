@@ -1,5 +1,5 @@
 /*
- * AISExample.java
+ * AISListenerExample.java
  * Copyright (C) 2015 Jozéph Lázár
  *
  * This file is part of Java Marine API.
@@ -64,6 +64,7 @@ public class AISListenerExample extends AbstractAISMessageListener<AISMessage01>
 	 */
 	@Override
 	public void onMessage(AISMessage01 msg) {
+		System.out.println(msg.getMMSI() + ": " + msg.getLatitudeInDegrees());
 		System.out.println("onMessage: " + msg.toString());
 	}
 
