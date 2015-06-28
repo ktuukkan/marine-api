@@ -277,6 +277,8 @@ public final class SentenceFactory {
 		registerParser("HDG", HDGParser.class);
 		registerParser("HDM", HDMParser.class);
 		registerParser("HDT", HDTParser.class);
+		registerParser("HTC", HTCParser.class);
+		registerParser("HTD", HTDParser.class);
 		registerParser("MHU", MHUParser.class);
 		registerParser("MMB", MMBParser.class);
 		registerParser("MTA", MTAParser.class);
