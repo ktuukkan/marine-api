@@ -124,6 +124,8 @@ public enum TalkerId {
 	TR,
 	/** Velocity Sensor, Doppler, other/general */
 	VD,
+	/** Velocity Sensor, Speed Log, Water, Magnetic */
+	VM,
 	/** Velocity Sensor, Speed Log, Water, Mechanical */
 	VW,
 	/** Weather Instruments */
