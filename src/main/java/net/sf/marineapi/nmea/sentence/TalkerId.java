@@ -112,6 +112,8 @@ public enum TalkerId {
 	P,
 	/** RADAR and/or ARPA */
 	RA,
+	/** Propulsion Remote Control System */
+	RC,
 	/** Sounder, Depth */
 	SD,
 	/** Electronic Positioning System, other/general */
