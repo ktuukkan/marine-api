@@ -23,8 +23,7 @@ CHANGES
  
  * XDRSentence; fixed fields indexing bug in getMeasurements().
  
- * TalkerId enum; added new id 'BD' to support Chinese BeiDou satellite
-   navigation system.
+ * TalkerId enum; added ids BD, GA, GB, GI, GQ, IR, QZ, RC and VM.
  
 NEW FEATURES
    

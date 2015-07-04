@@ -90,6 +90,9 @@ documents publicly available in the Internet (URLs checked on 2013-09-08):
  * Eye4Software GPS Toolkit - Description of supported NMEA0183 sentences
    <http://www.eye4software.com/products/gpstoolkit/nmea/>
 
+ * NMEA International Conference & Expo - Standards Update October 2014 by Steve Spitzer
+   <http://www.nmea.org/Assets/20141004%20nmea%20standards%20update%20for%202014%20conference.pdf>
+
  * NMEA 0183 Sentences Not Recommended for New Designs by NMEA
    <http://www.nmea.org/Assets/100108_nmea_0183_sentences_not_recommended_for_new_designs.pdf>
 

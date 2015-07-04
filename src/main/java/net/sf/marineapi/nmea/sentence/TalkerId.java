@@ -77,6 +77,8 @@ public enum TalkerId {
 	EP,
 	/** Engine Room Monitoring Systems */
 	ER,
+	/** Galileo satellite navigation system (European) */
+	GA,
 	/** Beidou satellite navigation system (Chinese) */
 	GB,
 	/** Indian Regional Navigation Satellite System (IRNSS) */
@@ -116,6 +118,8 @@ public enum TalkerId {
 	OS,
 	/** Proprietary sentence format (does not define the talker device). */
 	P,
+	/** QZSS regional GPS augmentation system (Japan) */
+	QZ,
 	/** RADAR and/or ARPA */
 	RA,
 	/** Propulsion Remote Control System */
