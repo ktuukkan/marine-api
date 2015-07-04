@@ -44,7 +44,7 @@ public enum TalkerId {
 	AG,
 	/** Autopilot - Magnetic */
 	AP,
-	/** BeiDou - Chinese satellite navigation system */
+	/** Beidou satellite navigation system (Chinese) */
 	BD,
 	/** Computer - Programmed Calculator (obsolete) */
 	@Deprecated
@@ -77,12 +77,18 @@ public enum TalkerId {
 	EP,
 	/** Engine Room Monitoring Systems */
 	ER,
+	/** Beidou satellite navigation system (Chinese) */
+	GB,
+	/** Indian Regional Navigation Satellite System (IRNSS) */
+	GI,
 	/** GLONASS (according to IEIC 61162-1) */
 	GL,
 	/** Mixed GLONASS and GPS data (according to IEIC 61162-1) */
 	GN,
 	/** Global Positioning System (GPS) */
 	GP,
+	/** Quasi Zenith Satellite System (QXSS, Japanese) */
+	GQ,
 	/** Heading - Magnetic Compass */
 	HC,
 	/** Heading - North Seeking Gyro */
@@ -114,6 +120,8 @@ public enum TalkerId {
 	RA,
 	/** Propulsion Remote Control System */
 	RC,
+	/** Indian Regional Navigation Satellite System (IRNSS) */
+	IR,
 	/** Sounder, Depth */
 	SD,
 	/** Electronic Positioning System, other/general */
