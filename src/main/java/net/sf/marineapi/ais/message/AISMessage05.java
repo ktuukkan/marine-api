@@ -64,14 +64,27 @@ public interface AISMessage05 extends AISMessage {
 	int getTypeOfEPFD();
 
 	/**
-	 * Returns the month, day, hour and minute parts of the estimated time of arrival (ETA).
+	 * Returns the month of the estimated time of arrival.
+	 * @return month 1..12 (0 for n/a)
 	 */
 	int getETAMonth();
 
+	/**
+	 * Returns the day of estimated time of arrival.
+	 * @return day number 1..31 (0 for n/a)
+	 */
 	int getETADay();
-	
+
+	/**
+	 * Returns the hour of estimated time of arrival.
+	 * @return hour 0..23 (24 for n/a)
+	 */
 	int getETAHour();
-	
+
+	/**
+	 * Return the minute of estimated time of arrival.
+	 * @return minute 0..59 (60 for n/a)
+	 */
 	int getETAMinute();
 	
 	/**
