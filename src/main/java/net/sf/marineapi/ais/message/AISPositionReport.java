@@ -10,35 +10,35 @@ public interface AISPositionReport extends AISPositionInfo {
 	/**
 	 * Returns the navigational status.
 	 */
-	public int getNavigationalStatus();
+	int getNavigationalStatus();
 
 	/**
 	 * Returns the rate of turn.
 	 */
-	public int getRateOfTurn();
+	int getRateOfTurn();
 
 	/**
 	 * Returns the speed over ground.
 	 */
-	public int getSpeedOverGround();
+	int getSpeedOverGround();
 
 	/**
 	 * Returns the course over ground.
 	 */
-	public int getCourseOverGround();
+	int getCourseOverGround();
 
 	/**
 	 * Returns the true heading.
 	 */
-	public int getTrueHeading();
+	int getTrueHeading();
 
 	/**
 	 * Returns the time stamp contained in the message.
 	 */
-	public int getTimeStamp();
+	int getTimeStamp();
 
 	/**
 	 * Returns the manouver indicator.
 	 */
-	public int getManouverIndicator();
+	int getManouverIndicator();
 }

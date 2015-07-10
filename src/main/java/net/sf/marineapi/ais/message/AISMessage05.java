@@ -11,78 +11,78 @@ public interface AISMessage05 extends AISMessage {
 	 * Returns the AIS version indicator for the current message.
 	 * @return AIS version indicator
 	 */
-	public int getAISVersionIndicator();
+	int getAISVersionIndicator();
 
 	/**
 	 * Returns the IMO number of the transmitting ship.
 	 * @return an integer value representing the IMO number (1-999999999)
 	 */
-	public int getIMONumber();
+	int getIMONumber();
 
 	/**
 	 * Returns the call sign of the transmitting ship.
 	 * @return at most 7 characters, representing the call sign
 	 */
-	public String getCallSign();
+	String getCallSign();
 
 	/**
 	 * Returns the name of the transmitting ship.
 	 * @return maximum 20 characters, representing the name
 	 */
-	public String getName();
+	String getName();
 
 	/**
 	 * Returns the type of ship and cargo.
 	 * @return an integer value representing the type of ship and cargo
 	 */
-	public int getTypeOfShipAndCargoType();
+	int getTypeOfShipAndCargoType();
 
 	/**
 	 * Returns the distance from the reference point to the bow.
 	 */
-	public int getBow();
+	int getBow();
 
 	/**
 	 * Returns the distance from the reference point to the stern of the ship.
 	 */
-	public int getStern();
+	int getStern();
 
 	/**
 	 * Returns the distance from the reference point to the port side of the ship.
 	 */
-	public int getPort();
+	int getPort();
 
 	/**
 	 * Returns the distance from the reference point to the starboard side of the ship.
 	 */
-	public int getStarboard();
+	int getStarboard();
 
 	/**
 	 * Returns the type of electronic position fixing device.
 	 * @return an integer value the the type of EPFD
 	 */
-	public int getTypeOfEPFD();
+	int getTypeOfEPFD();
 
 	/**
 	 * Returns the month, day, hour and minute parts of the estimated time of arrival (ETA).
 	 */
-	public int getETAMonth();
+	int getETAMonth();
 
-	public int getETADay();
+	int getETADay();
 	
-	public int getETAHour();
+	int getETAHour();
 	
-	public int getETAMinute();
+	int getETAMinute();
 	
 	/**
 	 * Returns the maximum draught.
 	 * @return an integer value of the maximum static draught in 1/10 m
 	 */
-	public int getMaximumDraught();
+	int getMaximumDraught();
 
 	/**
 	 * Returns the destination.
 	 * @return maximum 20 characters, representing the destination
 	 */
-	public String getDestination();
+	String getDestination();
 }

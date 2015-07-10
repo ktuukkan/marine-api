@@ -12,35 +12,35 @@ public interface AISMessage19 extends AISPositionReportB {
 	 * 
 	 * @return maximum 20 characters, representing the name
 	 */
-	public String getName();
+	String getName();
 
 	/**
 	 * Returns the type of ship and cargo.
 	 * 
 	 * @return an integer value representing the type of ship and cargo
 	 */
-	public int getTypeOfShipAndCargoType();
+	int getTypeOfShipAndCargoType();
 
 	/**
 	 * Returns the distance from the reference point to the bow.
 	 */
-	public int getBow();
+	int getBow();
 
 	/**
 	 * Returns the distance from the reference point to the stern of the ship.
 	 */
-	public int getStern();
+	int getStern();
 
 	/**
 	 * Returns the distance from the reference point to the port side of the
 	 * ship.
 	 */
-	public int getPort();
+	int getPort();
 
 	/**
 	 * Returns the type of electronic position fixing device.
 	 * 
 	 * @return an integer value the the type of EPFD
 	 */
-	public int getTypeOfEPFD();
+	int getTypeOfEPFD();
 }

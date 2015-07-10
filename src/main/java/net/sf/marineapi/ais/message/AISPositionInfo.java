@@ -5,20 +5,20 @@ package net.sf.marineapi.ais.message;
  * 
  * @author Lázár József
  */
-public interface AISPositionInfo extends AISMessage {
+interface AISPositionInfo extends AISMessage {
 	
     /**
 	 * Returns the position accuracy.
 	 */
-	public boolean getPositionAccuracy();
+	boolean getPositionAccuracy();
 
 	/**
 	 * Returns the longitude in degrees.
 	 */
-	public double getLongitudeInDegrees();
+	double getLongitudeInDegrees();
 	
 	/**
 	 * Returns the latitude in degrees.
 	 */
-	public double getLatitudeInDegrees();
+	double getLatitudeInDegrees();
 }
