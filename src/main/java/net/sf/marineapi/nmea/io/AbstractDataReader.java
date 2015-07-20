@@ -20,12 +20,12 @@
  */
 package net.sf.marineapi.nmea.io;
 
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
 import net.sf.marineapi.nmea.parser.SentenceFactory;
 import net.sf.marineapi.nmea.sentence.Sentence;
 import net.sf.marineapi.nmea.sentence.SentenceValidator;
+
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * Base class for data readers; common methods and run-loop.
@@ -88,7 +88,10 @@ abstract class AbstractDataReader implements DataReader {
 					parent.fireDataEvent(data);
 				}
 				monitor.tick();
-				Thread.sleep(50);
+				final int millisToSleep = delayBetweenReads();
+				if (millisToSleep > 0) {
+					Thread.sleep(millisToSleep);
+				}
 			} catch (Exception e) {
 				LOG.log(Level.WARNING, "Data read failed", e);
 			}
@@ -103,6 +106,12 @@ abstract class AbstractDataReader implements DataReader {
 	 * @return String or <code>null</code> if nothing was read.
 	 */
 	public abstract String read();
+
+	/**
+	 *
+	 * @return The number of milliseconds to wait between each reading.
+	 */
+	public abstract int delayBetweenReads();
 
 	/**
 	 * Returns the parent SentenceReader.
