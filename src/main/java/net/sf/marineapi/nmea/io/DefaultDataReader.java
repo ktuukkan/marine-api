@@ -62,4 +62,9 @@ class DefaultDataReader extends AbstractDataReader {
 		}
 		return data;
 	}
+
+	@Override
+	public int delayBetweenReads() {
+		return 0;
+	}
 }

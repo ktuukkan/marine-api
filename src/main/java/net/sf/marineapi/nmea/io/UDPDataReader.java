@@ -58,6 +58,11 @@ class UDPDataReader extends AbstractDataReader {
 		return queue.poll();
 	}
 
+	@Override
+	public int delayBetweenReads() {
+		return 50;
+	}
+
 	/**
 	 * Receive UDP packet and return as String
 	 */
