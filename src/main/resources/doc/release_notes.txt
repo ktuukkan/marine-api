@@ -36,6 +36,8 @@ NEW FEATURES
  * SentenceReader; DataListener interface for receiving any non-NMEA data that
    has been read from current data source.
 
+ * SentenceReader; read interval is now configurable.
+
  * SentenceFactory; listParser() method for listing registered parsers.
  
  * SentenceFactory; reset() method for resetting the factory in initial state.
