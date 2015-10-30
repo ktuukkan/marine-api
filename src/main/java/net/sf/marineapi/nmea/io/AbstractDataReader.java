@@ -39,6 +39,7 @@ abstract class AbstractDataReader implements DataReader {
 
 	private final SentenceReader parent;
 	private volatile boolean isRunning = true;
+	private int interval = SentenceReader.DEFAULT_INTERVAL;
 
 	/**
 	 * Creates a new instance.
@@ -47,6 +48,20 @@ abstract class AbstractDataReader implements DataReader {
 	 */
 	public AbstractDataReader(SentenceReader parent) {
 		this.parent = parent;
+	}
+
+	/* (non-Javadoc)
+	 * @see net.sf.marineapi.nmea.io.DataReader#getInterval()
+	 */
+	public int getInterval() {
+		return this.interval;
+	}
+
+	/**
+	 * Returns the parent SentenceReader.
+	 */
+	protected SentenceReader getParent() {
+		return this.parent;
 	}
 
 	/*
@@ -58,14 +73,12 @@ abstract class AbstractDataReader implements DataReader {
 		return isRunning;
 	}
 
-	/*
-	 * (non-Javadoc)
+	/**
+	 * Read one line from the data source.
 	 * 
-	 * @see net.sf.marineapi.nmea.io.DataReader#stop()
+	 * @return String or <code>null</code> if nothing was read.
 	 */
-	public void stop() {
-		isRunning = false;
-	}
+	public abstract String read();
 
 	/*
 	 * (non-Javadoc)
@@ -88,7 +101,7 @@ abstract class AbstractDataReader implements DataReader {
 					parent.fireDataEvent(data);
 				}
 				monitor.tick();
-				Thread.sleep(50);
+				Thread.sleep(this.interval);
 			} catch (Exception e) {
 				LOG.log(Level.WARNING, "Data read failed", e);
 			}
@@ -96,18 +109,20 @@ abstract class AbstractDataReader implements DataReader {
 		monitor.reset();
 		parent.fireReadingStopped();
 	}
-
-	/**
-	 * Read one line from the data source.
+	
+	/* (non-Javadoc)
+	 * @see net.sf.marineapi.nmea.io.DataReader#setInterval(int)
+	 */
+	public void setInterval(int interval) {
+		this.interval = interval;
+	}
+	
+	/*
+	 * (non-Javadoc)
 	 * 
-	 * @return String or <code>null</code> if nothing was read.
+	 * @see net.sf.marineapi.nmea.io.DataReader#stop()
 	 */
-	public abstract String read();
-
-	/**
-	 * Returns the parent SentenceReader.
-	 */
-	protected SentenceReader getParent() {
-		return this.parent;
+	public void stop() {
+		isRunning = false;
 	}
 }

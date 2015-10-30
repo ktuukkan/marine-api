@@ -56,6 +56,9 @@ public class SentenceReader {
 	/** Default timeout value in milliseconds. */
 	public static final int DEFAULT_TIMEOUT = 5000;
 
+	/** Default reader interval, pause between read attempts (50ms) */
+	public static final int DEFAULT_INTERVAL = 50;
+	
 	// Map key for listeners that listen any kind of sentences, type
 	// specific listeners are registered with sentence type String
 	private static final String DISPATCH_ALL = "DISPATCH_ALL";
@@ -131,16 +134,16 @@ public class SentenceReader {
 	}
 
 	/**
-	 * Returns all currently registered SentenceListeners.
-	 * 
-	 * @return List of SentenceListeners or empty list.
+	 * Pass data to DataListener.
 	 */
-	List<SentenceListener> getSentenceListeners() {
-		Set<SentenceListener> all = new HashSet<SentenceListener>();
-		for (List<SentenceListener> sl : listeners.values()) {
-			all.addAll(sl);
+	void fireDataEvent(String data) {
+		try {
+			if(dataListener != null) {
+				dataListener.dataRead(data);
+			}
+		} catch (Exception e) {
+			
 		}
-		return new ArrayList<SentenceListener>(all);
 	}
 	
 	/**
@@ -211,25 +214,20 @@ public class SentenceReader {
 	}
 	
 	/**
-	 * Pass data to DataListener.
-	 */
-	void fireDataEvent(String data) {
-		try {
-			if(dataListener != null) {
-				dataListener.dataRead(data);
-			}
-		} catch (Exception e) {
-			
-		}
-	}
-
-	/**
 	 * Returns the exception call-back listener.
 	 * 
 	 * @return Currently set ExceptionListener, or <code>null</code> if none.
 	 */
 	public ExceptionListener getExceptionListener() {
 		return exceptionListener;
+	}
+
+	/**
+	 * Returns the current reader interval.
+	 * @return Current reader interval in milliseconds.
+	 */
+	public int getInterval() {
+		return reader.getInterval();
 	}
 
 	/**
@@ -240,6 +238,19 @@ public class SentenceReader {
 	 */
 	public int getPauseTimeout() {
 		return this.pauseTimeout;
+	}
+
+	/**
+	 * Returns all currently registered SentenceListeners.
+	 * 
+	 * @return List of SentenceListeners or empty list.
+	 */
+	List<SentenceListener> getSentenceListeners() {
+		Set<SentenceListener> all = new HashSet<SentenceListener>();
+		for (List<SentenceListener> sl : listeners.values()) {
+			all.addAll(sl);
+		}
+		return new ArrayList<SentenceListener>(all);
 	}
 
 	/**
@@ -303,7 +314,7 @@ public class SentenceReader {
 		}
 		reader = new UDPDataReader(socket, this);
 	}
-
+	
 	/**
 	 * Set listener for any data that is not recognized as NMEA 0183. 
 	 * devices and environments that produce mixed content with both NMEA and
@@ -323,7 +334,7 @@ public class SentenceReader {
 	public void setExceptionListener(ExceptionListener exceptionListener) {
 		this.exceptionListener = exceptionListener;
 	}
-	
+
 	/**
 	 * Sets the InputStream to be used as data source. If reader is running, it
 	 * is first stopped and you must call {@link #start()} to resume reading.
@@ -338,6 +349,20 @@ public class SentenceReader {
 	}
 
 	/**
+	 * Sets the reader interval, i.e. pause time between read attempts. Setting
+	 * lower value speeds up the reader, for example for faster file processing.
+	 * Notice that when reading from actual device, setting value too high may
+	 * result in reader not being able to keep up with latest data. Also,
+	 * setting value too low may reserve CPU unnecessarily.
+	 * 
+	 * @param interval Interval time to set, in milliseconds.
+	 * @see #DEFAULT_INTERVAL
+	 */
+	public void setInterval(int interval) {
+		reader.setInterval(interval);
+	}
+
+	/**
 	 * Set timeout time for reading paused events. Default is 5000 ms.
 	 *
 	 * @param millis Timeout in milliseconds.
@@ -345,7 +370,7 @@ public class SentenceReader {
 	public void setPauseTimeout(int millis) {
 		this.pauseTimeout = millis;
 	}
-
+	
 	/**
 	 * Starts reading the input stream and dispatching events.
 	 *
@@ -359,7 +384,7 @@ public class SentenceReader {
 		thread = new Thread(reader);
 		thread.start();
 	}
-
+	
 	/**
 	 * Stops the reader and event dispatching.
 	 */

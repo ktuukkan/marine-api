@@ -54,6 +54,7 @@ public class FileExample implements SentenceListener {
 
 		// register self as a listener for GGA sentences
 		reader.addSentenceListener(this, SentenceId.GGA);
+		reader.setInterval(10);
 		reader.start();
 	}
 

@@ -21,11 +21,18 @@
 package net.sf.marineapi.nmea.io;
 
 /**
- * Interface for data readers.
+ * Common interface for data readers.
  * 
  * @author Kimmo Tuukkanen
  */
 interface DataReader extends Runnable {
+
+	/**
+	 * Returns the current pause time between read attempts.
+	 * 
+	 * @return Reader interval in milliseconds.
+	 */
+	int getInterval();
 
 	/**
 	 * Tells if the reader is running and actively scanning the data source for
@@ -33,10 +40,17 @@ interface DataReader extends Runnable {
 	 * 
 	 * @return <code>true</code> if running, otherwise <code>false</code>.
 	 */
-	public abstract boolean isRunning();
+	boolean isRunning();
+
+	/**
+	 * Set reader pause time between read attempts.
+	 * 
+	 * @param interval Interval in milliseconds.
+	 */
+	void setInterval(int interval);
 
 	/**
 	 * Stops the reader permanently.
 	 */
-	public abstract void stop();
+	void stop();
 }
