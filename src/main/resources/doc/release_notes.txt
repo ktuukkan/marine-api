@@ -7,23 +7,7 @@ versions. Released on @RELEASE_DATE@.
 
 CHANGES
 
- * SentenceValidator now accepts different combinations of newline and carriage
-   return characters.
-  
- * GSV sentence may now contain less than four satellite infos.
-
- * Date class; fixed month index off-by-one in toDate() method.
- 
- * SentenceReader; I/O exceptions are logged only when ExceptionHandler is not
-   set. InputStream is now checked with ready() before reading.
-   
- * SentenceParser; hasValue() now checks fields content explicitly.
- 
- * DPTSentence; getMaximum() return value changed from int to double.
- 
- * XDRSentence; fixed fields indexing bug in getMeasurements().
- 
- * TalkerId enum; added ids BD, GA, GB, GI, GQ, IR, QZ, RC and VM.
+ * TODO
 
 NEW FEATURES
 
@@ -33,17 +17,6 @@ NEW FEATURES
 
  * Support for VDM sentences; the NMEA 0183 layer of AIS messages.
 
- * SentenceReader; DataListener interface for receiving any non-NMEA data that
-   has been read from current data source.
-
- * SentenceReader; read interval is now configurable.
-
- * SentenceFactory; listParser() method for listing registered parsers.
- 
- * SentenceFactory; reset() method for resetting the factory in initial state.
-    
 ACKNOWLEDGEMENTS
 
- * VBW sentence parser written by Jeremy Wilson / ESRG LLC.
-
- * AIS support written by József Lázár.
+ * Majority of AIS support written by József Lázár.
