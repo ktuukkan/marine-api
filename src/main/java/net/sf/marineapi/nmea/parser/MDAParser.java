@@ -30,7 +30,7 @@ import net.sf.marineapi.nmea.sentence.TalkerId;
  * 
  * @author Richard van Nieuwenhoven
  */
-public class MDAParser extends SentenceParser implements MDASentence {
+class MDAParser extends SentenceParser implements MDASentence {
 
     public static final String MDA_SENTENCE_ID = "MDA";
 
