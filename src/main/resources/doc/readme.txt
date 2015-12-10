@@ -8,7 +8,7 @@ weather instruments.
 
 SYSTEM REQUIREMENTS
 
- * Java 2 SE JRE/JDK (1.6+ recommended)
+ * Java 2 SE JRE/JDK (1.7+ recommended)
 
  For serial port communication (choose one):
 
