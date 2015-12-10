@@ -156,7 +156,7 @@ public class SentenceReaderTest {
 	@Test
 	public void testHandleException() {
 
-		final String MESSAGE = "test error";
+		final String ERR_MSG = "test error";
 
 		reader.setExceptionListener(new ExceptionListener() {
 			private int calls = 0;
@@ -164,11 +164,11 @@ public class SentenceReaderTest {
 			public void onException(Exception e) {
 				assertEquals(calls++, 0);
 				assertTrue(e instanceof IllegalStateException);
-				assertEquals(MESSAGE, e.getMessage());
+				assertEquals(ERR_MSG, e.getMessage());
 			}
 		});
 
-		reader.handleException("test message", new IllegalStateException(MESSAGE));
+		reader.handleException("test", new IllegalStateException(ERR_MSG));
 	}
 
 	@Test

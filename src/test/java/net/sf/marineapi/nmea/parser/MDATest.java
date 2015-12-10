@@ -10,9 +10,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 /**
- * 
  * @author Richard van Nieuwenhoven
- *
  */
 public class MDATest {
 
@@ -147,15 +145,19 @@ public class MDATest {
     }
 
     @Test
-    public void testSetBarometricPressure() {
+    public void testSetSecondaryBarometricPressure() {
         mda.setSecondaryBarometricPressure(0.99);
+        mda.setSecondaryBarometricPressureUnit('B');
         assertEquals(0.99, mda.getSecondaryBarometricPressure(), 0.01);
+        assertEquals('B', mda.getSecondaryBarometricPressureUnit());
     }
 
     @Test
-    public void testSetBarometricPressureInHg() {
+    public void testSetPrimaryBarometricPressure() {
         mda.setPrimaryBarometricPressure(29.53);
+        mda.setPrimaryBarometricPressureUnit('I');
         assertEquals(29.53, mda.getPrimaryBarometricPressure(), 0.01);
+        assertEquals('I', mda.getPrimaryBarometricPressureUnit());
     }
 
     @Test
