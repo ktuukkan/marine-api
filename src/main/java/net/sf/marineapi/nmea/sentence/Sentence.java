@@ -94,6 +94,13 @@ public interface Sentence {
 	TalkerId getTalkerId();
 
 	/**
+	 * Tells if this is an AIS sentence.
+	 *
+	 * @return True if AIS sentence, otherwise false.
+	 */
+	public boolean isAISSentence();
+
+	/**
 	 * Tells if the sentence is of proprietary format.
 	 *
 	 * @return True if proprietary, otherwise false.

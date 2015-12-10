@@ -247,6 +247,11 @@ public class SentenceParser implements Sentence {
 		return toString().hashCode();
 	}
 
+	public boolean isAISSentence() {
+		final String[] types = {"VDO", "VDM"};
+		return Arrays.asList(types).contains(getSentenceId());
+	}
+
 	/*
 	 * (non-Javadoc)
 	 * @see net.sf.marineapi.nmea.sentence.Sentence#isProprietary()

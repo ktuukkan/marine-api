@@ -1,20 +1,20 @@
-/* 
+/*
  * SentenceFactory.java
  * Copyright (C) 2010 Kimmo Tuukkanen
- * 
+ *
  * This file is part of Java Marine API.
  * <http://ktuukkan.github.io/marine-api/>
- * 
+ *
  * Java Marine API is free software: you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by the
  * Free Software Foundation, either version 3 of the License, or (at your
  * option) any later version.
- * 
+ *
  * Java Marine API is distributed in the hope that it will be useful, but
  * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
  * FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License
  * for more details.
- * 
+ *
  * You should have received a copy of the GNU Lesser General Public License
  * along with Java Marine API. If not, see <http://www.gnu.org/licenses/>.
  */
@@ -58,7 +58,7 @@ import net.sf.marineapi.nmea.sentence.TalkerId;
  * will dispatch instances of <code>XYZSentence</code> when "XYZ" sentences are
  * read from data source.</li>
  * </ol>
- * 
+ *
  * @author Kimmo Tuukkanen
  */
 public final class SentenceFactory {
@@ -82,7 +82,7 @@ public final class SentenceFactory {
 	 * type. The returned instance must be cast in to correct sentence
 	 * interface, for which the type should first be checked by using the
 	 * {@link Sentence#getSentenceId()} method.
-	 * 
+	 *
 	 * @param nmea NMEA 0183 sentence String
 	 * @return Sentence parser instance for specified sentence
 	 * @throws IllegalArgumentException If there is no parser registered for the
@@ -98,7 +98,7 @@ public final class SentenceFactory {
 	/**
  	 * Creates a parser for specified talker and sentence type. The returned
  	 * instance needs to be cast to corresponding sentence interface.
- 	 * 
+ 	 *
 	 * @param talker Sentence talker id
 	 * @param type Sentence type
 	 * @return Sentence parser of requested type.
@@ -109,13 +109,13 @@ public final class SentenceFactory {
 	public Sentence createParser(TalkerId talker, SentenceId type) {
 		return createParser(talker, type.toString());
 	}
-	
+
 	/**
 	 * Creates a parser for specified talker and sentence type. This method is
 	 * mainly intended to be used when custom parsers have been registered in
 	 * the factory. The returned instance needs to be cast to corresponding
 	 * sentence interface.
-	 * 
+	 *
 	 * @param talker Talker ID to use in parser
 	 * @param type Type of the parser to create
 	 * @return Sentence parser for requested type
@@ -130,12 +130,12 @@ public final class SentenceFactory {
 		}
 		return createParserImpl(type, talker);
 	}
-	
+
 	/**
 	 * Tells if the factory is able to create parser for specified sentence
 	 * type. All {@link SentenceId} enum values should result returning
 	 * <code>true</code> at all times.
-	 * 
+	 *
 	 * @param type Sentence type id, e.g. "GLL" or "GGA".
 	 * @return true if type is supported, otherwise false.
 	 */
@@ -144,15 +144,15 @@ public final class SentenceFactory {
 	}
 
 	/**
-	 * Returns a list of currently parseable sentence types. 
-	 * 
+	 * Returns a list of currently parseable sentence types.
+	 *
 	 * @return List of sentence ids
 	 */
 	public List<String> listParsers() {
 		Set<String> keys = parsers.keySet();
 		return Arrays.asList(keys.toArray(new String[parsers.size()]));
 	}
-	
+
 	/**
 	 * Register a sentence parser to factory. After registration,
 	 * {@link #createParser(String)} method can be used to obtain instances of
@@ -162,7 +162,7 @@ public final class SentenceFactory {
 	 * can be overridden simply be registering a new parser implementation for
 	 * chosen sentence type. That is, each sentence type can have only one
 	 * parser registered at a time.
-	 * 
+	 *
 	 * @param type Sentence type id, e.g. "GGA" or "GLL".
 	 * @param parser Class of parser implementation for given <code>type</code>.
 	 */
@@ -185,7 +185,7 @@ public final class SentenceFactory {
 	/**
 	 * Unregisters a parser class, regardless of sentence type(s) it is
 	 * registered for.
-	 * 
+	 *
 	 * @param parser Parser implementation class for <code>type</code>.
 	 * @see #registerParser(String, Class)
 	 */
@@ -197,10 +197,10 @@ public final class SentenceFactory {
 			}
 		}
 	}
-	
+
 	/**
 	 * Creates a new parser instance with specified parameters.
-	 * 
+	 *
 	 * @param sid Sentence/parser type ID, e.g. "GGA" or "GLL"
 	 * @param param Object to pass as parameter to parser constructor
 	 * @return Sentence parser
@@ -238,7 +238,7 @@ public final class SentenceFactory {
 
 	/**
 	 * Returns the singleton instance of <code>SentenceFactory</code>.
-	 * 
+	 *
 	 * @return SentenceFactory instance
 	 */
 	public static SentenceFactory getInstance() {
@@ -275,6 +275,7 @@ public final class SentenceFactory {
         registerParser("ROT", ROTParser.class);
         registerParser("RTE", RTEParser.class);
         registerParser("RSA", RSAParser.class);
+        registerParser("VDM", VDMParser.class);
         registerParser("VDR", VDRParser.class);
         registerParser("TTM", TTMParser.class);
         registerParser("VBW", VBWParser.class);

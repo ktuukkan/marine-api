@@ -24,15 +24,15 @@ CHANGES
  * XDRSentence; fixed fields indexing bug in getMeasurements().
  
  * TalkerId enum; added ids BD, GA, GB, GI, GQ, IR, QZ, RC and VM.
- 
+
 NEW FEATURES
-   
- * Support for VBW sentences; dual ground/water speed.
- 
- * Support for MDA sentences; meteorological composite.
- 
- * Support for MWD sentences; wind speed and direction.
- 
+
+ * Partial support for AIS (Automatic Identification System); decoding of AIS
+   messages 1, 2, 3, 4, 5, 18 and 19 and listener base class for receiving
+   updates on each, including utility classes for extracted data.
+
+ * Support for VDM sentences; the NMEA 0183 layer of AIS messages.
+
  * SentenceReader; DataListener interface for receiving any non-NMEA data that
    has been read from current data source.
 
@@ -44,7 +44,6 @@ NEW FEATURES
     
 ACKNOWLEDGEMENTS
 
- * VBW parser written by Jeremy Wilson / ESRG LLC.
+ * VBW sentence parser written by Jeremy Wilson / ESRG LLC.
 
- * MWD and MDA parsers written by Richard van Nieuwenhoven / INDI for Java.
- 
+ * AIS support written by József Lázár.
