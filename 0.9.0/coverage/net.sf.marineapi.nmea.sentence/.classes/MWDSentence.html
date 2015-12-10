@@ -1,0 +1,129 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: MWDSentence</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">net.sf.marineapi.nmea.sentence</a> ]
+</div>
+
+<h1>Coverage Summary for Class: MWDSentence (net.sf.marineapi.nmea.sentence)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+</tr>
+<tr>
+  <td class="name">MWDSentence</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;/*
+<i>2</i>&nbsp; * MWDSentence.java
+<i>3</i>&nbsp; * Copyright (C) 2015 INDI for Java NMEA 0183 stream driver
+<i>4</i>&nbsp; *  
+<i>5</i>&nbsp; * This file is part of Java Marine API.
+<i>6</i>&nbsp; * &lt;http://ktuukkan.github.io/marine-api/&gt;
+<i>7</i>&nbsp; * 
+<i>8</i>&nbsp; * Java Marine API is free software: you can redistribute it and/or modify it
+<i>9</i>&nbsp; * under the terms of the GNU Lesser General Public License as published by the
+<i>10</i>&nbsp; * Free Software Foundation, either version 3 of the License, or (at your
+<i>11</i>&nbsp; * option) any later version.
+<i>12</i>&nbsp; * 
+<i>13</i>&nbsp; * Java Marine API is distributed in the hope that it will be useful, but
+<i>14</i>&nbsp; * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+<i>15</i>&nbsp; * FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License
+<i>16</i>&nbsp; * for more details.
+<i>17</i>&nbsp; * 
+<i>18</i>&nbsp; * You should have received a copy of the GNU Lesser General Public License
+<i>19</i>&nbsp; * along with Java Marine API. If not, see &lt;http://www.gnu.org/licenses/&gt;.
+<i>20</i>&nbsp; */
+<i>21</i>&nbsp;package net.sf.marineapi.nmea.sentence;
+<i>22</i>&nbsp;
+<i>23</i>&nbsp;/**
+<i>24</i>&nbsp; * Wind speed and true/magnetic direction, speed given in meters per second and
+<i>25</i>&nbsp; * knots.
+<i>26</i>&nbsp; * 
+<i>27</i>&nbsp; * @author Richard van Nieuwenhoven
+<i>28</i>&nbsp; */
+<i>29</i>&nbsp;public interface MWDSentence {
+<i>30</i>&nbsp;
+<i>31</i>&nbsp;    /**
+<i>32</i>&nbsp;     * @return Wind direction, degrees True, to the nearest 0,1 degree. NaN if
+<i>33</i>&nbsp;     *         not available.
+<i>34</i>&nbsp;     */
+<i>35</i>&nbsp;    double getMagneticWindDirection();
+<i>36</i>&nbsp;
+<i>37</i>&nbsp;    /**
+<i>38</i>&nbsp;     * @return Wind direction, degrees True, to the nearest 0,1 degree. NaN if
+<i>39</i>&nbsp;     *         not available.
+<i>40</i>&nbsp;     */
+<i>41</i>&nbsp;    double getTrueWindDirection();
+<i>42</i>&nbsp;    
+<i>43</i>&nbsp;    /**
+<i>44</i>&nbsp;     * @return Wind speed, meters per second, to the nearest 0,1 m/s. NaN if not
+<i>45</i>&nbsp;     *         available.
+<i>46</i>&nbsp;     */
+<i>47</i>&nbsp;    double getWindSpeed();
+<i>48</i>&nbsp;
+<i>49</i>&nbsp;    /**
+<i>50</i>&nbsp;     * @return Wind speed, in knots, to the nearest 0,1 m/s. NaN if not
+<i>51</i>&nbsp;     *         available.
+<i>52</i>&nbsp;     */
+<i>53</i>&nbsp;    double getWindSpeedKnots();
+<i>54</i>&nbsp;    
+<i>55</i>&nbsp;    /**
+<i>56</i>&nbsp;     * Sets the magnetic wind direction.
+<i>57</i>&nbsp;     * 
+<i>58</i>&nbsp;     * @param direction Wind direction in degrees [0..360]
+<i>59</i>&nbsp;     */
+<i>60</i>&nbsp;    void setMagneticWindDirection(double direction);
+<i>61</i>&nbsp;
+<i>62</i>&nbsp;    /**
+<i>63</i>&nbsp;     * Sets the true wind direction.
+<i>64</i>&nbsp;     * 
+<i>65</i>&nbsp;     * @param direction Wind direction in degrees [0..360].
+<i>66</i>&nbsp;     */
+<i>67</i>&nbsp;    void setTrueWindDirection(double direction);
+<i>68</i>&nbsp;    
+<i>69</i>&nbsp;    /**
+<i>70</i>&nbsp;     * Sets the wind speed in meters per second.
+<i>71</i>&nbsp;     * 
+<i>72</i>&nbsp;     * @param speed Wind speed to set.
+<i>73</i>&nbsp;     */
+<i>74</i>&nbsp;    void setWindSpeed(double speed);
+<i>75</i>&nbsp;    
+<i>76</i>&nbsp;    /**
+<i>77</i>&nbsp;     * Sets the wind speed in knots.
+<i>78</i>&nbsp;     * 
+<i>79</i>&nbsp;     * @param speed Wind speed to set.
+<i>80</i>&nbsp;     */
+<i>81</i>&nbsp;    void setWindSpeedKnots(double speed);
+<i>82</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2015-12-10 21:40</div>
+</div>
+</body>
+</html>

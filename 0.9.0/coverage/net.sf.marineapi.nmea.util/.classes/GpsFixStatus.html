@@ -1,0 +1,153 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: GpsFixStatus</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">net.sf.marineapi.nmea.util</a> ]
+</div>
+
+<h1>Coverage Summary for Class: GpsFixStatus (net.sf.marineapi.nmea.util)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">GpsFixStatus</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/ 1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (5/ 5)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    91.7%
+  </span>
+  <span class="absValue">
+    (11/ 12)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;/* 
+<i>2</i>&nbsp; * GpsFixStatus.java
+<i>3</i>&nbsp; * Copyright (C) 2010 Kimmo Tuukkanen
+<i>4</i>&nbsp; * 
+<i>5</i>&nbsp; * This file is part of Java Marine API.
+<i>6</i>&nbsp; * &lt;http://ktuukkan.github.io/marine-api/&gt;
+<i>7</i>&nbsp; * 
+<i>8</i>&nbsp; * Java Marine API is free software: you can redistribute it and/or modify it
+<i>9</i>&nbsp; * under the terms of the GNU Lesser General Public License as published by the
+<i>10</i>&nbsp; * Free Software Foundation, either version 3 of the License, or (at your
+<i>11</i>&nbsp; * option) any later version.
+<i>12</i>&nbsp; * 
+<i>13</i>&nbsp; * Java Marine API is distributed in the hope that it will be useful, but
+<i>14</i>&nbsp; * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+<i>15</i>&nbsp; * FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License
+<i>16</i>&nbsp; * for more details.
+<i>17</i>&nbsp; * 
+<i>18</i>&nbsp; * You should have received a copy of the GNU Lesser General Public License
+<i>19</i>&nbsp; * along with Java Marine API. If not, see &lt;http://www.gnu.org/licenses/&gt;.
+<i>20</i>&nbsp; */
+<i>21</i>&nbsp;package net.sf.marineapi.nmea.util;
+<i>22</i>&nbsp;
+<i>23</i>&nbsp;/**
+<i>24</i>&nbsp; * GpsFixStatus defines the status of current GPS fix.
+<i>25</i>&nbsp; * 
+<i>26</i>&nbsp; * @author Kimmo Tuukkanen
+<i>27</i>&nbsp; * @see FaaMode
+<i>28</i>&nbsp; * @see GpsFixQuality
+<i>29</i>&nbsp; * @see DataStatus
+<i>30</i>&nbsp; */
+<b class="fc"><i>31</i>&nbsp;public enum GpsFixStatus {</b>
+<i>32</i>&nbsp;
+<i>33</i>&nbsp;	/** No GPS fix available */
+<b class="fc"><i>34</i>&nbsp;	GPS_NA(1),</b>
+<i>35</i>&nbsp;	/** 2D GPS fix (lat/lon) */
+<b class="fc"><i>36</i>&nbsp;	GPS_2D(2),</b>
+<i>37</i>&nbsp;	/** 3D GPS fix (lat/lon/alt) */
+<b class="fc"><i>38</i>&nbsp;	GPS_3D(3);</b>
+<i>39</i>&nbsp;
+<i>40</i>&nbsp;	private final int status;
+<i>41</i>&nbsp;
+<b class="fc"><i>42</i>&nbsp;	GpsFixStatus(int intVal) {</b>
+<b class="fc"><i>43</i>&nbsp;		status = intVal;</b>
+<b class="fc"><i>44</i>&nbsp;	}</b>
+<i>45</i>&nbsp;
+<i>46</i>&nbsp;	/**
+<i>47</i>&nbsp;	 * Returns the corresponding int value for fix status enum.
+<i>48</i>&nbsp;	 * 
+<i>49</i>&nbsp;	 * @return Fix status integer values as in sentences
+<i>50</i>&nbsp;	 */
+<i>51</i>&nbsp;	public int toInt() {
+<b class="fc"><i>52</i>&nbsp;		return status;</b>
+<i>53</i>&nbsp;	}
+<i>54</i>&nbsp;
+<i>55</i>&nbsp;	/**
+<i>56</i>&nbsp;	 * Returns the GpsFixStatus enum corresponding to actual int identifier used
+<i>57</i>&nbsp;	 * in the sentences.
+<i>58</i>&nbsp;	 * 
+<i>59</i>&nbsp;	 * @param val Fix status indentifier int
+<i>60</i>&nbsp;	 * @return GpsFixStatus enum
+<i>61</i>&nbsp;	 */
+<i>62</i>&nbsp;	public static GpsFixStatus valueOf(int val) {
+<b class="fc"><i>63</i>&nbsp;		for (GpsFixStatus st : values()) {</b>
+<b class="fc"><i>64</i>&nbsp;			if (st.toInt() == val) {</b>
+<b class="fc"><i>65</i>&nbsp;				return st;</b>
+<i>66</i>&nbsp;			}
+<i>67</i>&nbsp;		}
+<b class="nc"><i>68</i>&nbsp;		return valueOf(String.valueOf(val));</b>
+<i>69</i>&nbsp;	}
+<i>70</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2015-12-10 21:41</div>
+</div>
+</body>
+</html>

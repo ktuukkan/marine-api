@@ -1,0 +1,216 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: Sentence</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">net.sf.marineapi.nmea.sentence</a> ]
+</div>
+
+<h1>Coverage Summary for Class: Sentence (net.sf.marineapi.nmea.sentence)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+</tr>
+<tr>
+  <td class="name">Sentence</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;/*
+<i>2</i>&nbsp; * Sentence.java
+<i>3</i>&nbsp; * Copyright (C) 2010 Kimmo Tuukkanen
+<i>4</i>&nbsp; *
+<i>5</i>&nbsp; * This file is part of Java Marine API.
+<i>6</i>&nbsp; * &lt;http://ktuukkan.github.io/marine-api/&gt;
+<i>7</i>&nbsp; *
+<i>8</i>&nbsp; * Java Marine API is free software: you can redistribute it and/or modify it
+<i>9</i>&nbsp; * under the terms of the GNU Lesser General Public License as published by the
+<i>10</i>&nbsp; * Free Software Foundation, either version 3 of the License, or (at your
+<i>11</i>&nbsp; * option) any later version.
+<i>12</i>&nbsp; *
+<i>13</i>&nbsp; * Java Marine API is distributed in the hope that it will be useful, but
+<i>14</i>&nbsp; * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+<i>15</i>&nbsp; * FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License
+<i>16</i>&nbsp; * for more details.
+<i>17</i>&nbsp; *
+<i>18</i>&nbsp; * You should have received a copy of the GNU Lesser General Public License
+<i>19</i>&nbsp; * along with Java Marine API. If not, see &lt;http://www.gnu.org/licenses/&gt;.
+<i>20</i>&nbsp; */
+<i>21</i>&nbsp;package net.sf.marineapi.nmea.sentence;
+<i>22</i>&nbsp;
+<i>23</i>&nbsp;/**
+<i>24</i>&nbsp; * Base interface and constants for NMEA 0183 sentences.
+<i>25</i>&nbsp; *
+<i>26</i>&nbsp; * @author Kimmo Tuukkanen
+<i>27</i>&nbsp; */
+<i>28</i>&nbsp;public interface Sentence {
+<i>29</i>&nbsp;
+<i>30</i>&nbsp;	/**
+<i>31</i>&nbsp;	 * Alternative sentence begin character used in VDO and VDM sentences.
+<i>32</i>&nbsp;	 */
+<i>33</i>&nbsp;	char ALTERNATIVE_BEGIN_CHAR = &#39;!&#39;;
+<i>34</i>&nbsp;
+<i>35</i>&nbsp;	/**
+<i>36</i>&nbsp;	 * Sentence begin character
+<i>37</i>&nbsp;	 */
+<i>38</i>&nbsp;	char BEGIN_CHAR = &#39;$&#39;;
+<i>39</i>&nbsp;
+<i>40</i>&nbsp;	/**
+<i>41</i>&nbsp;	 * Checksum field delimiter char
+<i>42</i>&nbsp;	 */
+<i>43</i>&nbsp;	char CHECKSUM_DELIMITER = &#39;*&#39;;
+<i>44</i>&nbsp;
+<i>45</i>&nbsp;	/**
+<i>46</i>&nbsp;	 * Sentence data fields delimiter char
+<i>47</i>&nbsp;	 */
+<i>48</i>&nbsp;	char FIELD_DELIMITER = &#39;,&#39;;
+<i>49</i>&nbsp;
+<i>50</i>&nbsp;	/**
+<i>51</i>&nbsp;	 * Maximum length of NMEA 0183 sentences, including &lt;code&gt;BEGIN_CHAR&lt;/code&gt;
+<i>52</i>&nbsp;	 * and &lt;code&gt;TERMINATOR&lt;/code&gt;.
+<i>53</i>&nbsp;	 */
+<i>54</i>&nbsp;	int MAX_LENGTH = 82;
+<i>55</i>&nbsp;
+<i>56</i>&nbsp;	/**
+<i>57</i>&nbsp;	 * Sentence terminator &lt;code&gt;&amp;lt;CR&amp;gt;&amp;lt;LF&amp;gt;&lt;/code&gt;.
+<i>58</i>&nbsp;	 */
+<i>59</i>&nbsp;	String TERMINATOR = &quot;\r\n&quot;;
+<i>60</i>&nbsp;
+<i>61</i>&nbsp;	/**
+<i>62</i>&nbsp;	 * Get the sentence begin character. Although most of the sentences start
+<i>63</i>&nbsp;	 * with &#39;$&#39;, some of them use &#39;!&#39; as begin character.
+<i>64</i>&nbsp;	 *
+<i>65</i>&nbsp;	 * @return Sentence begin char, e.g. &quot;$&quot; or &quot;!&quot;.
+<i>66</i>&nbsp;	 */
+<i>67</i>&nbsp;	char getBeginChar();
+<i>68</i>&nbsp;
+<i>69</i>&nbsp;	/**
+<i>70</i>&nbsp;	 * Returns the current number of data fields in sentence, excluding ID field
+<i>71</i>&nbsp;	 * and checksum.
+<i>72</i>&nbsp;	 *
+<i>73</i>&nbsp;	 * @return Data field count
+<i>74</i>&nbsp;	 */
+<i>75</i>&nbsp;	int getFieldCount();
+<i>76</i>&nbsp;
+<i>77</i>&nbsp;	/**
+<i>78</i>&nbsp;	 * Get the sentence ID that specifies the sentence type and data it holds.
+<i>79</i>&nbsp;	 * ID is the last three characters in address field. For example, in case of
+<i>80</i>&nbsp;	 * &lt;code&gt;$GPGGA&lt;/code&gt; the method returns {@link SentenceId#GGA}.
+<i>81</i>&nbsp;	 *
+<i>82</i>&nbsp;	 * @return Sentence id String, e.g. &quot;GLL&quot; or &quot;GGA&quot;.
+<i>83</i>&nbsp;	 * @see SentenceId
+<i>84</i>&nbsp;	 */
+<i>85</i>&nbsp;	String getSentenceId();
+<i>86</i>&nbsp;
+<i>87</i>&nbsp;	/**
+<i>88</i>&nbsp;	 * Gets the talker ID of the sentence. Talker ID is the next two characters
+<i>89</i>&nbsp;	 * after &lt;code&gt;$&lt;/code&gt; in sentence address field. For example, in case of
+<i>90</i>&nbsp;	 * &lt;code&gt;$GPGGA&lt;/code&gt;, the method returns {@link TalkerId#GP}.
+<i>91</i>&nbsp;	 *
+<i>92</i>&nbsp;	 * @return Talker id enum.
+<i>93</i>&nbsp;	 */
+<i>94</i>&nbsp;	TalkerId getTalkerId();
+<i>95</i>&nbsp;
+<i>96</i>&nbsp;	/**
+<i>97</i>&nbsp;	 * Tells if the sentence is of proprietary format.
+<i>98</i>&nbsp;	 *
+<i>99</i>&nbsp;	 * @return True if proprietary, otherwise false.
+<i>100</i>&nbsp;	 */
+<i>101</i>&nbsp;	boolean isProprietary();
+<i>102</i>&nbsp;
+<i>103</i>&nbsp;	/**
+<i>104</i>&nbsp;	 * Tells if the sentence formatting matches NMEA 0183 format.
+<i>105</i>&nbsp;	 *
+<i>106</i>&nbsp;	 * @return True if validly formatted, otherwise false.
+<i>107</i>&nbsp;	 */
+<i>108</i>&nbsp;	boolean isValid();
+<i>109</i>&nbsp;
+<i>110</i>&nbsp;	/**
+<i>111</i>&nbsp;	 * Resets the sentence contents, i.e. removes all existing values from data
+<i>112</i>&nbsp;	 * fields. After resetting, address field remains as is and checksum is
+<i>113</i>&nbsp;	 * calculated according to empty data fields.
+<i>114</i>&nbsp;	 */
+<i>115</i>&nbsp;	void reset();
+<i>116</i>&nbsp;
+<i>117</i>&nbsp;	/**
+<i>118</i>&nbsp;	 * Set the sentence begin character. Although most of the sentences start
+<i>119</i>&nbsp;	 * with &#39;$&#39;, some of them use &#39;!&#39; as begin character.
+<i>120</i>&nbsp;	 *
+<i>121</i>&nbsp;	 * @param ch Sentence begin char to set (&#39;$&#39; or &#39;!&#39;)
+<i>122</i>&nbsp;	 * @see Sentence#BEGIN_CHAR
+<i>123</i>&nbsp;	 * @see Sentence#ALTERNATIVE_BEGIN_CHAR
+<i>124</i>&nbsp;	 */
+<i>125</i>&nbsp;	void setBeginChar(char ch);
+<i>126</i>&nbsp;
+<i>127</i>&nbsp;	/**
+<i>128</i>&nbsp;	 * Set the talker ID of the sentence. Typically, the ID might be changed if
+<i>129</i>&nbsp;	 * the sentence is to be sent from a computer to an NMEA device.
+<i>130</i>&nbsp;	 *
+<i>131</i>&nbsp;	 * @param id TalkerId to set
+<i>132</i>&nbsp;	 */
+<i>133</i>&nbsp;	void setTalkerId(TalkerId id);
+<i>134</i>&nbsp;
+<i>135</i>&nbsp;	/**
+<i>136</i>&nbsp;	 * Formats and validates the String representation of sentence. Throws an
+<i>137</i>&nbsp;	 * exception if result is not considered a valid sentence. As validation is
+<i>138</i>&nbsp;	 * done by {@link net.sf.marineapi.nmea.sentence.SentenceValidator}, notice
+<i>139</i>&nbsp;	 * that resulting sentence length is not checked. To also validate the
+<i>140</i>&nbsp;	 * length, use {@link #toSentence(int)}.
+<i>141</i>&nbsp;	 *
+<i>142</i>&nbsp;	 * @see #toString()
+<i>143</i>&nbsp;	 * @return Sentence as String, equal to &lt;code&gt;toString()&lt;/code&gt;.
+<i>144</i>&nbsp;	 * @throws IllegalStateException If formatting results in invalid sentence.
+<i>145</i>&nbsp;	 */
+<i>146</i>&nbsp;	String toSentence();
+<i>147</i>&nbsp;
+<i>148</i>&nbsp;	/**
+<i>149</i>&nbsp;	 * Formats and validates the sentence like {@link #toSentence()}, but checks
+<i>150</i>&nbsp;	 * also that resulting String does not exceed specified length.
+<i>151</i>&nbsp;	 *
+<i>152</i>&nbsp;	 * @see #toSentence()
+<i>153</i>&nbsp;	 * @see #MAX_LENGTH
+<i>154</i>&nbsp;	 * @return Sentence as String, equal to &lt;code&gt;toString()&lt;/code&gt;.
+<i>155</i>&nbsp;	 * @throws IllegalStateException If formatting results in invalid sentence
+<i>156</i>&nbsp;	 *           or specified maximum length is exceeded.
+<i>157</i>&nbsp;	 */
+<i>158</i>&nbsp;	String toSentence(int maxLength);
+<i>159</i>&nbsp;
+<i>160</i>&nbsp;	/**
+<i>161</i>&nbsp;	 * Returns the String representation of the sentence, without line
+<i>162</i>&nbsp;	 * terminator &lt;code&gt;CR/LR&lt;/code&gt;. Checksum is calculated and appended at the
+<i>163</i>&nbsp;	 * end of the sentence, but no validation is done. Use {@link #toSentence()}
+<i>164</i>&nbsp;	 * to also validate the result.
+<i>165</i>&nbsp;	 *
+<i>166</i>&nbsp;	 * @return String representation of sentence
+<i>167</i>&nbsp;	 */
+<i>168</i>&nbsp;	String toString();
+<i>169</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2015-12-10 21:40</div>
+</div>
+</body>
+</html>

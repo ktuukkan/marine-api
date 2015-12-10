@@ -1,0 +1,170 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: GSVSentence</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">net.sf.marineapi.nmea.sentence</a> ]
+</div>
+
+<h1>Coverage Summary for Class: GSVSentence (net.sf.marineapi.nmea.sentence)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+</tr>
+<tr>
+  <td class="name">GSVSentence</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;/* 
+<i>2</i>&nbsp; * GSVSentence.java
+<i>3</i>&nbsp; * Copyright (C) 2010 Kimmo Tuukkanen
+<i>4</i>&nbsp; * 
+<i>5</i>&nbsp; * This file is part of Java Marine API.
+<i>6</i>&nbsp; * &lt;http://ktuukkan.github.io/marine-api/&gt;
+<i>7</i>&nbsp; * 
+<i>8</i>&nbsp; * Java Marine API is free software: you can redistribute it and/or modify it
+<i>9</i>&nbsp; * under the terms of the GNU Lesser General Public License as published by the
+<i>10</i>&nbsp; * Free Software Foundation, either version 3 of the License, or (at your
+<i>11</i>&nbsp; * option) any later version.
+<i>12</i>&nbsp; * 
+<i>13</i>&nbsp; * Java Marine API is distributed in the hope that it will be useful, but
+<i>14</i>&nbsp; * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+<i>15</i>&nbsp; * FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License
+<i>16</i>&nbsp; * for more details.
+<i>17</i>&nbsp; * 
+<i>18</i>&nbsp; * You should have received a copy of the GNU Lesser General Public License
+<i>19</i>&nbsp; * along with Java Marine API. If not, see &lt;http://www.gnu.org/licenses/&gt;.
+<i>20</i>&nbsp; */
+<i>21</i>&nbsp;package net.sf.marineapi.nmea.sentence;
+<i>22</i>&nbsp;
+<i>23</i>&nbsp;import java.util.List;
+<i>24</i>&nbsp;
+<i>25</i>&nbsp;import net.sf.marineapi.nmea.util.SatelliteInfo;
+<i>26</i>&nbsp;
+<i>27</i>&nbsp;/**
+<i>28</i>&nbsp; * Detailed GPS satellite data; satellites in view, satellite elevation, azimuth
+<i>29</i>&nbsp; * and signal noise ratio (SNR). GSV sentences are transmitted typically in
+<i>30</i>&nbsp; * groups of two or three sentences, depending on the number of satellites in
+<i>31</i>&nbsp; * view. Each GSV sentence may contain information about up to four satellites.
+<i>32</i>&nbsp; * The last sentence in sequence may contain empty satellite information fields.
+<i>33</i>&nbsp; * The empty fields may also be omitted, depending on the device model and
+<i>34</i>&nbsp; * manufacturer.
+<i>35</i>&nbsp; * &lt;p&gt;
+<i>36</i>&nbsp; * Example: &lt;br&gt;
+<i>37</i>&nbsp; * &lt;code&gt;$GPGSV,3,2,12,15,56,182,51,17,38,163,47,18,63,058,50,21,53,329,47*73&lt;/code&gt;
+<i>38</i>&nbsp; * 
+<i>39</i>&nbsp; * @author Kimmo Tuukkanen
+<i>40</i>&nbsp; */
+<i>41</i>&nbsp;public interface GSVSentence extends Sentence {
+<i>42</i>&nbsp;
+<i>43</i>&nbsp;	/**
+<i>44</i>&nbsp;	 * Get the number of satellites in view.
+<i>45</i>&nbsp;	 * 
+<i>46</i>&nbsp;	 * @return Satellite count
+<i>47</i>&nbsp;	 */
+<i>48</i>&nbsp;	int getSatelliteCount();
+<i>49</i>&nbsp;
+<i>50</i>&nbsp;	/**
+<i>51</i>&nbsp;	 * Get the satellites information.
+<i>52</i>&nbsp;	 * 
+<i>53</i>&nbsp;	 * @return List of SatelliteInfo objects.
+<i>54</i>&nbsp;	 */
+<i>55</i>&nbsp;	List&lt;SatelliteInfo&gt; getSatelliteInfo();
+<i>56</i>&nbsp;
+<i>57</i>&nbsp;	/**
+<i>58</i>&nbsp;	 * Get the total number of sentences in GSV sequence.
+<i>59</i>&nbsp;	 * 
+<i>60</i>&nbsp;	 * @return Number of sentences
+<i>61</i>&nbsp;	 */
+<i>62</i>&nbsp;	int getSentenceCount();
+<i>63</i>&nbsp;
+<i>64</i>&nbsp;	/**
+<i>65</i>&nbsp;	 * Get the index of this sentence in GSV sequence.
+<i>66</i>&nbsp;	 * 
+<i>67</i>&nbsp;	 * @return Sentence index
+<i>68</i>&nbsp;	 */
+<i>69</i>&nbsp;	int getSentenceIndex();
+<i>70</i>&nbsp;
+<i>71</i>&nbsp;	/**
+<i>72</i>&nbsp;	 * Tells if this is the first sentence in GSV sequence.
+<i>73</i>&nbsp;	 * 
+<i>74</i>&nbsp;	 * @return true if first, otherwise false.
+<i>75</i>&nbsp;	 * @see #getSentenceCount()
+<i>76</i>&nbsp;	 * @see #getSentenceIndex()
+<i>77</i>&nbsp;	 */
+<i>78</i>&nbsp;	boolean isFirst();
+<i>79</i>&nbsp;
+<i>80</i>&nbsp;	/**
+<i>81</i>&nbsp;	 * Tells if this is the last sentence in GSV sequence. This is a convenience
+<i>82</i>&nbsp;	 * method for comparison of
+<i>83</i>&nbsp;	 * &lt;code&gt;({@link #getSentenceCount()} == {@link #getSentenceIndex()})&lt;/code&gt;
+<i>84</i>&nbsp;	 * .
+<i>85</i>&nbsp;	 * 
+<i>86</i>&nbsp;	 * @return &lt;code&gt;true&lt;/code&gt; if first, otherwise &lt;code&gt;false&lt;/code&gt;.
+<i>87</i>&nbsp;	 */
+<i>88</i>&nbsp;	boolean isLast();
+<i>89</i>&nbsp;
+<i>90</i>&nbsp;	/**
+<i>91</i>&nbsp;	 * Set the number of satellites in view.
+<i>92</i>&nbsp;	 * 
+<i>93</i>&nbsp;	 * @param count Satellite count
+<i>94</i>&nbsp;	 * @throws IllegalArgumentException If specified number is negative
+<i>95</i>&nbsp;	 */
+<i>96</i>&nbsp;	void setSatelliteCount(int count);
+<i>97</i>&nbsp;
+<i>98</i>&nbsp;	/**
+<i>99</i>&nbsp;	 * Set the satellite information.
+<i>100</i>&nbsp;	 * 
+<i>101</i>&nbsp;	 * @param info List of SatelliteInfo objects, size from 0 to 4.
+<i>102</i>&nbsp;	 * @throws IllegalArgumentException If specified list size is greater that
+<i>103</i>&nbsp;	 *             maximum allowed number of satellites per sentence (4).
+<i>104</i>&nbsp;	 */
+<i>105</i>&nbsp;	void setSatelliteInfo(List&lt;SatelliteInfo&gt; info);
+<i>106</i>&nbsp;
+<i>107</i>&nbsp;	/**
+<i>108</i>&nbsp;	 * Set the total number of sentences in GSV sequence.
+<i>109</i>&nbsp;	 * 
+<i>110</i>&nbsp;	 * @param count Number of sentences
+<i>111</i>&nbsp;	 * @throws IllegalArgumentException If specified count is negative
+<i>112</i>&nbsp;	 */
+<i>113</i>&nbsp;	void setSentenceCount(int count);
+<i>114</i>&nbsp;
+<i>115</i>&nbsp;	/**
+<i>116</i>&nbsp;	 * Set the index of this sentence in GSV sequence.
+<i>117</i>&nbsp;	 * 
+<i>118</i>&nbsp;	 * @param index Sentence index to set
+<i>119</i>&nbsp;	 * @throws IllegalArgumentException If specified index is negative
+<i>120</i>&nbsp;	 */
+<i>121</i>&nbsp;	void setSentenceIndex(int index);
+<i>122</i>&nbsp;
+<i>123</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2015-12-10 21:40</div>
+</div>
+</body>
+</html>

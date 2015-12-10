@@ -1,0 +1,227 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: HDGParser</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">net.sf.marineapi.nmea.parser</a> ]
+</div>
+
+<h1>Coverage Summary for Class: HDGParser (net.sf.marineapi.nmea.parser)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">HDGParser</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/ 1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (9/ 9)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    88.9%
+  </span>
+  <span class="absValue">
+    (32/ 36)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;/* 
+<i>2</i>&nbsp; * HDGParser.java
+<i>3</i>&nbsp; * Copyright (C) 2011 Kimmo Tuukkanen
+<i>4</i>&nbsp; * 
+<i>5</i>&nbsp; * This file is part of Java Marine API.
+<i>6</i>&nbsp; * &lt;http://ktuukkan.github.io/marine-api/&gt;
+<i>7</i>&nbsp; * 
+<i>8</i>&nbsp; * Java Marine API is free software: you can redistribute it and/or modify it
+<i>9</i>&nbsp; * under the terms of the GNU Lesser General Public License as published by the
+<i>10</i>&nbsp; * Free Software Foundation, either version 3 of the License, or (at your
+<i>11</i>&nbsp; * option) any later version.
+<i>12</i>&nbsp; * 
+<i>13</i>&nbsp; * Java Marine API is distributed in the hope that it will be useful, but
+<i>14</i>&nbsp; * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+<i>15</i>&nbsp; * FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License
+<i>16</i>&nbsp; * for more details.
+<i>17</i>&nbsp; * 
+<i>18</i>&nbsp; * You should have received a copy of the GNU Lesser General Public License
+<i>19</i>&nbsp; * along with Java Marine API. If not, see &lt;http://www.gnu.org/licenses/&gt;.
+<i>20</i>&nbsp; */
+<i>21</i>&nbsp;package net.sf.marineapi.nmea.parser;
+<i>22</i>&nbsp;
+<i>23</i>&nbsp;import net.sf.marineapi.nmea.sentence.HDGSentence;
+<i>24</i>&nbsp;import net.sf.marineapi.nmea.sentence.SentenceId;
+<i>25</i>&nbsp;import net.sf.marineapi.nmea.sentence.TalkerId;
+<i>26</i>&nbsp;import net.sf.marineapi.nmea.util.CompassPoint;
+<i>27</i>&nbsp;
+<i>28</i>&nbsp;/**
+<i>29</i>&nbsp; * HDG sentence parser.
+<i>30</i>&nbsp; * 
+<i>31</i>&nbsp; * @author Kimmo Tuukkanen
+<i>32</i>&nbsp; */
+<i>33</i>&nbsp;class HDGParser extends SentenceParser implements HDGSentence {
+<i>34</i>&nbsp;
+<i>35</i>&nbsp;	private static final int HEADING = 0;
+<i>36</i>&nbsp;	private static final int DEVIATION = 1;
+<i>37</i>&nbsp;	private static final int DEV_DIRECTION = 2;
+<i>38</i>&nbsp;	private static final int VARIATION = 3;
+<i>39</i>&nbsp;	private static final int VAR_DIRECTION = 4;
+<i>40</i>&nbsp;
+<i>41</i>&nbsp;	/**
+<i>42</i>&nbsp;	 * Creates a new HDG parser.
+<i>43</i>&nbsp;	 * 
+<i>44</i>&nbsp;	 * @param nmea HDG sentence String
+<i>45</i>&nbsp;	 */
+<i>46</i>&nbsp;	public HDGParser(String nmea) {
+<b class="fc"><i>47</i>&nbsp;		super(nmea, SentenceId.HDG);</b>
+<b class="fc"><i>48</i>&nbsp;	}</b>
+<i>49</i>&nbsp;
+<i>50</i>&nbsp;	/**
+<i>51</i>&nbsp;	 * Creates a new empty HDG parser.
+<i>52</i>&nbsp;	 * 
+<i>53</i>&nbsp;	 * @param talker Talker id to set
+<i>54</i>&nbsp;	 */
+<i>55</i>&nbsp;	public HDGParser(TalkerId talker) {
+<b class="fc"><i>56</i>&nbsp;		super(talker, SentenceId.HDG, 5);</b>
+<b class="fc"><i>57</i>&nbsp;	}</b>
+<i>58</i>&nbsp;
+<i>59</i>&nbsp;	/*
+<i>60</i>&nbsp;	 * (non-Javadoc)
+<i>61</i>&nbsp;	 * @see net.sf.marineapi.nmea.sentence.HDGSentence#getDeviation()
+<i>62</i>&nbsp;	 */
+<i>63</i>&nbsp;	public double getDeviation() {
+<b class="fc"><i>64</i>&nbsp;		double dev = getDoubleValue(DEVIATION);</b>
+<b class="fc"><i>65</i>&nbsp;		if (dev == 0) {</b>
+<b class="nc"><i>66</i>&nbsp;			return dev;</b>
+<i>67</i>&nbsp;		}
+<b class="fc"><i>68</i>&nbsp;		CompassPoint dir = CompassPoint.valueOf(getCharValue(DEV_DIRECTION));</b>
+<b class="fc"><i>69</i>&nbsp;		return dir == CompassPoint.WEST ? -dev : dev;</b>
+<i>70</i>&nbsp;	}
+<i>71</i>&nbsp;
+<i>72</i>&nbsp;	/*
+<i>73</i>&nbsp;	 * (non-Javadoc)
+<i>74</i>&nbsp;	 * @see net.sf.marineapi.nmea.sentence.HDGSentence#getHeading()
+<i>75</i>&nbsp;	 */
+<i>76</i>&nbsp;	public double getHeading() {
+<b class="fc"><i>77</i>&nbsp;		return getDoubleValue(HEADING);</b>
+<i>78</i>&nbsp;	}
+<i>79</i>&nbsp;
+<i>80</i>&nbsp;	/*
+<i>81</i>&nbsp;	 * (non-Javadoc)
+<i>82</i>&nbsp;	 * @see net.sf.marineapi.nmea.sentence.HDGSentence#getVariation()
+<i>83</i>&nbsp;	 */
+<i>84</i>&nbsp;	public double getVariation() {
+<b class="fc"><i>85</i>&nbsp;		double var = getDoubleValue(VARIATION);</b>
+<b class="fc"><i>86</i>&nbsp;		if (var == 0) {</b>
+<b class="nc"><i>87</i>&nbsp;			return var;</b>
+<i>88</i>&nbsp;		}
+<b class="fc"><i>89</i>&nbsp;		CompassPoint dir = CompassPoint.valueOf(getCharValue(VAR_DIRECTION));</b>
+<b class="fc"><i>90</i>&nbsp;		return dir == CompassPoint.WEST ? -var : var;</b>
+<i>91</i>&nbsp;	}
+<i>92</i>&nbsp;
+<i>93</i>&nbsp;	/*
+<i>94</i>&nbsp;	 * (non-Javadoc)
+<i>95</i>&nbsp;	 * @see net.sf.marineapi.nmea.sentence.HeadingSentence#isTrue()
+<i>96</i>&nbsp;	 */
+<i>97</i>&nbsp;	public boolean isTrue() {
+<b class="fc"><i>98</i>&nbsp;		return false;</b>
+<i>99</i>&nbsp;	}
+<i>100</i>&nbsp;
+<i>101</i>&nbsp;	/*
+<i>102</i>&nbsp;	 * (non-Javadoc)
+<i>103</i>&nbsp;	 * @see net.sf.marineapi.nmea.sentence.HDGSentence#setDeviation(double)
+<i>104</i>&nbsp;	 */
+<i>105</i>&nbsp;	public void setDeviation(double deviation) {
+<b class="fc"><i>106</i>&nbsp;		if (deviation &lt; -180 || deviation &gt; 180) {</b>
+<b class="fc"><i>107</i>&nbsp;			throw new IllegalArgumentException(&quot;Value out of range [-180..180]&quot;);</b>
+<i>108</i>&nbsp;		}
+<b class="fc"><i>109</i>&nbsp;		if (deviation &gt; 0) {</b>
+<b class="fc"><i>110</i>&nbsp;			setCharValue(DEV_DIRECTION, CompassPoint.EAST.toChar());</b>
+<b class="fc"><i>111</i>&nbsp;		} else if (deviation &lt; 0) {</b>
+<b class="fc"><i>112</i>&nbsp;			setCharValue(DEV_DIRECTION, CompassPoint.WEST.toChar());</b>
+<i>113</i>&nbsp;		} else {
+<b class="nc"><i>114</i>&nbsp;			setStringValue(DEV_DIRECTION, &quot;&quot;);</b>
+<i>115</i>&nbsp;		}
+<b class="fc"><i>116</i>&nbsp;		setDoubleValue(DEVIATION, Math.abs(deviation), 3, 1);</b>
+<b class="fc"><i>117</i>&nbsp;	}</b>
+<i>118</i>&nbsp;
+<i>119</i>&nbsp;	/*
+<i>120</i>&nbsp;	 * (non-Javadoc)
+<i>121</i>&nbsp;	 * @see net.sf.marineapi.nmea.sentence.HDGSentence#setHeading(double)
+<i>122</i>&nbsp;	 */
+<i>123</i>&nbsp;	public void setHeading(double heading) {
+<b class="fc"><i>124</i>&nbsp;		setDegreesValue(HEADING, heading);</b>
+<b class="fc"><i>125</i>&nbsp;	}</b>
+<i>126</i>&nbsp;
+<i>127</i>&nbsp;	/*
+<i>128</i>&nbsp;	 * (non-Javadoc)
+<i>129</i>&nbsp;	 * @see net.sf.marineapi.nmea.sentence.HDGSentence#setVariation(double)
+<i>130</i>&nbsp;	 */
+<i>131</i>&nbsp;	public void setVariation(double variation) {
+<b class="fc"><i>132</i>&nbsp;		if (variation &lt; -180 || variation &gt; 180) {</b>
+<b class="fc"><i>133</i>&nbsp;			throw new IllegalArgumentException(&quot;Value out of range [-180..180]&quot;);</b>
+<i>134</i>&nbsp;		}
+<b class="fc"><i>135</i>&nbsp;		if (variation &gt; 0) {</b>
+<b class="fc"><i>136</i>&nbsp;			setCharValue(VAR_DIRECTION, CompassPoint.EAST.toChar());</b>
+<b class="fc"><i>137</i>&nbsp;		} else if (variation &lt; 0) {</b>
+<b class="fc"><i>138</i>&nbsp;			setCharValue(VAR_DIRECTION, CompassPoint.WEST.toChar());</b>
+<i>139</i>&nbsp;		} else {
+<b class="nc"><i>140</i>&nbsp;			setStringValue(VAR_DIRECTION, &quot;&quot;);</b>
+<i>141</i>&nbsp;		}
+<b class="fc"><i>142</i>&nbsp;		setDoubleValue(VARIATION, Math.abs(variation), 3, 1);</b>
+<b class="fc"><i>143</i>&nbsp;	}</b>
+<i>144</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2015-12-10 21:41</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,258 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: XDRParser</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">net.sf.marineapi.nmea.parser</a> ]
+</div>
+
+<h1>Coverage Summary for Class: XDRParser (net.sf.marineapi.nmea.parser)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">XDRParser</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/ 1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (9/ 9)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (45/ 45)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;/*
+<i>2</i>&nbsp; * XDRParser.java
+<i>3</i>&nbsp; * Copyright (C) 2013 Robert Huitema, Kimmo Tuukkanen
+<i>4</i>&nbsp; * 
+<i>5</i>&nbsp; * This file is part of Java Marine API.
+<i>6</i>&nbsp; * &lt;http://ktuukkan.github.io/marine-api/&gt;
+<i>7</i>&nbsp; * 
+<i>8</i>&nbsp; * Java Marine API is free software: you can redistribute it and/or modify it
+<i>9</i>&nbsp; * under the terms of the GNU Lesser General Public License as published by the
+<i>10</i>&nbsp; * Free Software Foundation, either version 3 of the License, or (at your
+<i>11</i>&nbsp; * option) any later version.
+<i>12</i>&nbsp; * 
+<i>13</i>&nbsp; * Java Marine API is distributed in the hope that it will be useful, but
+<i>14</i>&nbsp; * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+<i>15</i>&nbsp; * FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License
+<i>16</i>&nbsp; * for more details.
+<i>17</i>&nbsp; * 
+<i>18</i>&nbsp; * You should have received a copy of the GNU Lesser General Public License
+<i>19</i>&nbsp; * along with Java Marine API. If not, see &lt;http://www.gnu.org/licenses/&gt;.
+<i>20</i>&nbsp; */
+<i>21</i>&nbsp;package net.sf.marineapi.nmea.parser;
+<i>22</i>&nbsp;
+<i>23</i>&nbsp;import java.util.ArrayList;
+<i>24</i>&nbsp;import java.util.Arrays;
+<i>25</i>&nbsp;import java.util.List;
+<i>26</i>&nbsp;
+<i>27</i>&nbsp;import net.sf.marineapi.nmea.sentence.SentenceId;
+<i>28</i>&nbsp;import net.sf.marineapi.nmea.sentence.TalkerId;
+<i>29</i>&nbsp;import net.sf.marineapi.nmea.sentence.XDRSentence;
+<i>30</i>&nbsp;import net.sf.marineapi.nmea.util.Measurement;
+<i>31</i>&nbsp;
+<i>32</i>&nbsp;/**
+<i>33</i>&nbsp; * &lt;p&gt;
+<i>34</i>&nbsp; * Transducer measurements.
+<i>35</i>&nbsp; * &lt;pre&gt;
+<i>36</i>&nbsp; *         1 2   3 4            n
+<i>37</i>&nbsp; *         | |   | |            |
+<i>38</i>&nbsp; *  $--XDR,a,x.x,a,c--c, ..... *hh&lt;CR&gt;&lt;LF&gt;
+<i>39</i>&nbsp; * &lt;/pre&gt;
+<i>40</i>&nbsp; * &lt;p&gt;
+<i>41</i>&nbsp; * Where: 
+<i>42</i>&nbsp; * &lt;ol&gt;
+<i>43</i>&nbsp; * &lt;li&gt;Transducer Type
+<i>44</i>&nbsp; * &lt;li&gt;Measurement Data
+<i>45</i>&nbsp; * &lt;li&gt;Units of measurement
+<i>46</i>&nbsp; * &lt;li&gt;Name of transducer
+<i>47</i>&nbsp; * &lt;/ol&gt;
+<i>48</i>&nbsp; * &lt;p&gt;
+<i>49</i>&nbsp; * There may be any number of quadruplets like this, each describing a
+<i>50</i>&nbsp; * sensor. The last field will be a checksum as usual.
+<i>51</i>&nbsp; * 
+<i>52</i>&nbsp; * @author Robert Huitema, Kimmo Tuukkanen
+<i>53</i>&nbsp; */
+<i>54</i>&nbsp;class XDRParser extends SentenceParser implements XDRSentence {
+<i>55</i>&nbsp;
+<i>56</i>&nbsp;	// length of each data set is 4 fields
+<b class="fc"><i>57</i>&nbsp;	private static int DATA_SET_LENGTH = 4;</b>
+<i>58</i>&nbsp;	
+<i>59</i>&nbsp;	// data set field indices, relative to first field of each set
+<b class="fc"><i>60</i>&nbsp;	private static int TYPE_INDEX = 0;</b>
+<b class="fc"><i>61</i>&nbsp;	private static int VALUE_INDEX = 1;</b>
+<b class="fc"><i>62</i>&nbsp;	private static int UNITS_INDEX = 2;</b>
+<b class="fc"><i>63</i>&nbsp;	private static int NAME_INDEX = 3;</b>
+<i>64</i>&nbsp;	
+<i>65</i>&nbsp;	/**
+<i>66</i>&nbsp;	 * Creates new instance of XDRParser.
+<i>67</i>&nbsp;	 * 
+<i>68</i>&nbsp;	 * @param nmea XDR sentence string
+<i>69</i>&nbsp;	 */
+<i>70</i>&nbsp;	public XDRParser(String nmea) {
+<b class="fc"><i>71</i>&nbsp;		super(nmea, SentenceId.XDR);</b>
+<b class="fc"><i>72</i>&nbsp;	}</b>
+<i>73</i>&nbsp;
+<i>74</i>&nbsp;	/**
+<i>75</i>&nbsp;	 * Creates XDR parser with empty sentence.
+<i>76</i>&nbsp;	 * 
+<i>77</i>&nbsp;	 * @param talker TalkerId to set
+<i>78</i>&nbsp;	 */
+<i>79</i>&nbsp;	public XDRParser(TalkerId talker) {
+<b class="fc"><i>80</i>&nbsp;		super(talker, SentenceId.XDR, DATA_SET_LENGTH);</b>
+<b class="fc"><i>81</i>&nbsp;	}</b>
+<i>82</i>&nbsp;
+<i>83</i>&nbsp;
+<i>84</i>&nbsp;
+<i>85</i>&nbsp;	/* (non-Javadoc)
+<i>86</i>&nbsp;	 * @see net.sf.marineapi.nmea.sentence.XDRSentence#addMeasurement(net.sf.marineapi.nmea.util.Measurement[])
+<i>87</i>&nbsp;	 */
+<i>88</i>&nbsp;	public void addMeasurement(Measurement... m) {
+<b class="fc"><i>89</i>&nbsp;		List&lt;Measurement&gt; ms = getMeasurements();</b>
+<b class="fc"><i>90</i>&nbsp;		ms.addAll(Arrays.asList(m));</b>
+<b class="fc"><i>91</i>&nbsp;		setMeasurements(ms);		</b>
+<b class="fc"><i>92</i>&nbsp;	}</b>
+<i>93</i>&nbsp;
+<i>94</i>&nbsp;	/* (non-Javadoc)
+<i>95</i>&nbsp;	 * @see net.sf.marineapi.nmea.sentence.XDRSentence#getMeasurements()
+<i>96</i>&nbsp;	 */
+<i>97</i>&nbsp;	public List&lt;Measurement&gt; getMeasurements() {
+<b class="fc"><i>98</i>&nbsp;		ArrayList&lt;Measurement&gt; result = new ArrayList&lt;Measurement&gt;();</b>
+<b class="fc"><i>99</i>&nbsp;		for (int i = 0; i &lt; getFieldCount(); i += DATA_SET_LENGTH) {</b>
+<b class="fc"><i>100</i>&nbsp;			Measurement value = fetchValues(i);</b>
+<b class="fc"><i>101</i>&nbsp;			if(!value.isEmpty()) {</b>
+<b class="fc"><i>102</i>&nbsp;				result.add(value);</b>
+<i>103</i>&nbsp;			}
+<i>104</i>&nbsp;		}
+<b class="fc"><i>105</i>&nbsp;		return result;</b>
+<i>106</i>&nbsp;	}
+<i>107</i>&nbsp;
+<i>108</i>&nbsp;	/* (non-Javadoc)
+<i>109</i>&nbsp;	 * @see net.sf.marineapi.nmea.sentence.XDRSentence#setMeasurement(net.sf.marineapi.nmea.util.Measurement)
+<i>110</i>&nbsp;	 */
+<i>111</i>&nbsp;	public void setMeasurement(Measurement m) {
+<b class="fc"><i>112</i>&nbsp;		setFieldCount(DATA_SET_LENGTH);</b>
+<b class="fc"><i>113</i>&nbsp;		insertValues(TYPE_INDEX, m);</b>
+<b class="fc"><i>114</i>&nbsp;	}</b>
+<i>115</i>&nbsp;	
+<i>116</i>&nbsp;	/* (non-Javadoc)
+<i>117</i>&nbsp;	 * @see net.sf.marineapi.nmea.sentence.XDRSentence#setMeasurements(java.util.List)
+<i>118</i>&nbsp;	 */
+<i>119</i>&nbsp;	public void setMeasurements(List&lt;Measurement&gt; measurements) {
+<i>120</i>&nbsp;				
+<b class="fc"><i>121</i>&nbsp;		setFieldCount(measurements.size() * DATA_SET_LENGTH);</b>
+<i>122</i>&nbsp;
+<b class="fc"><i>123</i>&nbsp;		int i = 0;</b>
+<b class="fc"><i>124</i>&nbsp;		for(Measurement m : measurements) {</b>
+<b class="fc"><i>125</i>&nbsp;			insertValues(i, m);</b>
+<b class="fc"><i>126</i>&nbsp;			i += DATA_SET_LENGTH;</b>
+<b class="fc"><i>127</i>&nbsp;		}</b>
+<b class="fc"><i>128</i>&nbsp;	}</b>
+<i>129</i>&nbsp;
+<i>130</i>&nbsp;	/**
+<i>131</i>&nbsp;	 * Fetch data set starting at given index.
+<i>132</i>&nbsp;	 *  
+<i>133</i>&nbsp;	 * @param i Start position of data set, i.e. index of first data field.
+<i>134</i>&nbsp;	 * @return XDRValue object
+<i>135</i>&nbsp;	 */
+<i>136</i>&nbsp;	private Measurement fetchValues(int i) {
+<i>137</i>&nbsp;		
+<b class="fc"><i>138</i>&nbsp;		Measurement m = new Measurement();</b>
+<i>139</i>&nbsp;		
+<b class="fc"><i>140</i>&nbsp;		if(hasValue(i)) {</b>
+<b class="fc"><i>141</i>&nbsp;			m.setType(getStringValue(i));</b>
+<i>142</i>&nbsp;		}
+<i>143</i>&nbsp;		
+<b class="fc"><i>144</i>&nbsp;		if(hasValue(i + VALUE_INDEX)) {</b>
+<b class="fc"><i>145</i>&nbsp;			m.setValue(getDoubleValue(i + VALUE_INDEX));</b>
+<i>146</i>&nbsp;		}
+<i>147</i>&nbsp;		
+<b class="fc"><i>148</i>&nbsp;		if(hasValue(i + UNITS_INDEX)) {</b>
+<b class="fc"><i>149</i>&nbsp;			m.setUnits(getStringValue(i + UNITS_INDEX));</b>
+<i>150</i>&nbsp;		}
+<i>151</i>&nbsp;		
+<b class="fc"><i>152</i>&nbsp;		if(hasValue(i + NAME_INDEX)) {</b>
+<b class="fc"><i>153</i>&nbsp;			m.setName(getStringValue(i + NAME_INDEX));</b>
+<i>154</i>&nbsp;		}
+<i>155</i>&nbsp;
+<b class="fc"><i>156</i>&nbsp;		return m;</b>
+<i>157</i>&nbsp;	}
+<i>158</i>&nbsp;
+<i>159</i>&nbsp;	/**
+<i>160</i>&nbsp;	 * Inserts the given data set beginning at given index. Before inserting,
+<i>161</i>&nbsp;	 * make sure the sentence has enough fields for it.
+<i>162</i>&nbsp;	 * 
+<i>163</i>&nbsp;	 * @param i Start position of data set, i.e. index of first data field.
+<i>164</i>&nbsp;	 * @param m XDR data set to insert
+<i>165</i>&nbsp;	 */
+<i>166</i>&nbsp;	private void insertValues(int i, Measurement m) {
+<i>167</i>&nbsp;		
+<b class="fc"><i>168</i>&nbsp;		if(m != null) {</b>
+<b class="fc"><i>169</i>&nbsp;			setStringValue((i), m.getType());</b>
+<b class="fc"><i>170</i>&nbsp;			setDoubleValue((i + VALUE_INDEX), m.getValue());</b>
+<b class="fc"><i>171</i>&nbsp;			setStringValue((i + UNITS_INDEX), m.getUnits());</b>
+<b class="fc"><i>172</i>&nbsp;			setStringValue((i + NAME_INDEX), m.getName());</b>
+<i>173</i>&nbsp;		}
+<b class="fc"><i>174</i>&nbsp;	}</b>
+<i>175</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2015-12-10 21:41</div>
+</div>
+</body>
+</html>

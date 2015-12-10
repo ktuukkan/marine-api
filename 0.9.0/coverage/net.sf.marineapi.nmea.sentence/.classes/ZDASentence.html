@@ -1,0 +1,137 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: ZDASentence</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">net.sf.marineapi.nmea.sentence</a> ]
+</div>
+
+<h1>Coverage Summary for Class: ZDASentence (net.sf.marineapi.nmea.sentence)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+</tr>
+<tr>
+  <td class="name">ZDASentence</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;/*
+<i>2</i>&nbsp; * ZDASentence.java
+<i>3</i>&nbsp; * Copyright (C) 2010 Kimmo Tuukkanen
+<i>4</i>&nbsp; *
+<i>5</i>&nbsp; * This file is part of Java Marine API.
+<i>6</i>&nbsp; * &lt;http://ktuukkan.github.io/marine-api/&gt;
+<i>7</i>&nbsp; *
+<i>8</i>&nbsp; * Java Marine API is free software: you can redistribute it and/or modify it
+<i>9</i>&nbsp; * under the terms of the GNU Lesser General Public License as published by the
+<i>10</i>&nbsp; * Free Software Foundation, either version 3 of the License, or (at your
+<i>11</i>&nbsp; * option) any later version.
+<i>12</i>&nbsp; *
+<i>13</i>&nbsp; * Java Marine API is distributed in the hope that it will be useful, but
+<i>14</i>&nbsp; * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+<i>15</i>&nbsp; * FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License
+<i>16</i>&nbsp; * for more details.
+<i>17</i>&nbsp; *
+<i>18</i>&nbsp; * You should have received a copy of the GNU Lesser General Public License
+<i>19</i>&nbsp; * along with Java Marine API. If not, see &lt;http://www.gnu.org/licenses/&gt;.
+<i>20</i>&nbsp; */
+<i>21</i>&nbsp;package net.sf.marineapi.nmea.sentence;
+<i>22</i>&nbsp;
+<i>23</i>&nbsp;import java.util.Date;
+<i>24</i>&nbsp;
+<i>25</i>&nbsp;import net.sf.marineapi.nmea.util.Time;
+<i>26</i>&nbsp;
+<i>27</i>&nbsp;/**
+<i>28</i>&nbsp; * UTC time and date with local time zone offset.
+<i>29</i>&nbsp; * &lt;p&gt;
+<i>30</i>&nbsp; * Example: &lt;br&gt;
+<i>31</i>&nbsp; * &lt;code&gt;$GPZDA,032915,07,08,2004,00,00*4D&lt;/code&gt;
+<i>32</i>&nbsp; *
+<i>33</i>&nbsp; * @author Kimmo Tuukkanen
+<i>34</i>&nbsp; */
+<i>35</i>&nbsp;public interface ZDASentence extends TimeSentence, DateSentence {
+<i>36</i>&nbsp;
+<i>37</i>&nbsp;	/**
+<i>38</i>&nbsp;	 * Get offset to local time zone in hours, from 0 to +/- 13 hours.
+<i>39</i>&nbsp;	 *
+<i>40</i>&nbsp;	 * @return Time zone offset
+<i>41</i>&nbsp;	 * @throws net.sf.marineapi.nmea.parser.DataNotAvailableException If the data is
+<i>42</i>&nbsp;	 *             not available.
+<i>43</i>&nbsp;	 * @throws net.sf.marineapi.nmea.parser.ParseException If the field contains
+<i>44</i>&nbsp;	 *             unexpected or illegal value.
+<i>45</i>&nbsp;	 */
+<i>46</i>&nbsp;	int getLocalZoneHours();
+<i>47</i>&nbsp;
+<i>48</i>&nbsp;	/**
+<i>49</i>&nbsp;	 * Get offset to local time zone in minutes, from 0 to +/- 59.
+<i>50</i>&nbsp;	 *
+<i>51</i>&nbsp;	 * @return Time zone offset
+<i>52</i>&nbsp;	 * @throws net.sf.marineapi.nmea.parser.DataNotAvailableException If the data is
+<i>53</i>&nbsp;	 *             not available.
+<i>54</i>&nbsp;	 * @throws net.sf.marineapi.nmea.parser.ParseException If the field contains
+<i>55</i>&nbsp;	 *             unexpected or illegal value.
+<i>56</i>&nbsp;	 */
+<i>57</i>&nbsp;	int getLocalZoneMinutes();
+<i>58</i>&nbsp;
+<i>59</i>&nbsp;	/**
+<i>60</i>&nbsp;	 * Set offset to local time zone in hours.
+<i>61</i>&nbsp;	 *
+<i>62</i>&nbsp;	 * @param hours Offset, from 0 to +/- 13 hours.
+<i>63</i>&nbsp;	 */
+<i>64</i>&nbsp;	void setLocalZoneHours(int hours);
+<i>65</i>&nbsp;
+<i>66</i>&nbsp;	/**
+<i>67</i>&nbsp;	 * Set offset to local time zone in minutes.
+<i>68</i>&nbsp;	 *
+<i>69</i>&nbsp;	 * @param minutes Offset, from 0 to +/- 59 minutes.
+<i>70</i>&nbsp;	 */
+<i>71</i>&nbsp;	void setLocalZoneMinutes(int minutes);
+<i>72</i>&nbsp;
+<i>73</i>&nbsp;	/**
+<i>74</i>&nbsp;	 * Set time and local time zone hours and minutes.
+<i>75</i>&nbsp;	 *
+<i>76</i>&nbsp;	 * @param t Time to be inserted in sentence.
+<i>77</i>&nbsp;	 */
+<i>78</i>&nbsp;	void setTimeAndLocalZone(Time t);
+<i>79</i>&nbsp;
+<i>80</i>&nbsp;	/**
+<i>81</i>&nbsp;	 * Get date and time as {@link java.util.Date}.
+<i>82</i>&nbsp;	 *
+<i>83</i>&nbsp;	 * @return {@link java.util.Date}
+<i>84</i>&nbsp;	 * @throws net.sf.marineapi.nmea.parser.DataNotAvailableException If any of the
+<i>85</i>&nbsp;	 *             date/time values is not available.
+<i>86</i>&nbsp;	 * @throws net.sf.marineapi.nmea.parser.ParseException If the any of the
+<i>87</i>&nbsp;	 *             date/time fields contains invalid value.
+<i>88</i>&nbsp;	 */
+<i>89</i>&nbsp;	Date toDate();
+<i>90</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2015-12-10 21:40</div>
+</div>
+</body>
+</html>

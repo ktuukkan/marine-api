@@ -1,0 +1,288 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: TalkerId</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">net.sf.marineapi.nmea.sentence</a> ]
+</div>
+
+<h1>Coverage Summary for Class: TalkerId (net.sf.marineapi.nmea.sentence)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">TalkerId</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/ 1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (3/ 3)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    98.6%
+  </span>
+  <span class="absValue">
+    (71/ 72)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;/* 
+<i>2</i>&nbsp; * TalkerId.java
+<i>3</i>&nbsp; * Copyright (C) 2010 Kimmo Tuukkanen
+<i>4</i>&nbsp; * 
+<i>5</i>&nbsp; * This file is part of Java Marine API.
+<i>6</i>&nbsp; * &lt;http://ktuukkan.github.io/marine-api/&gt;
+<i>7</i>&nbsp; * 
+<i>8</i>&nbsp; * Java Marine API is free software: you can redistribute it and/or modify it
+<i>9</i>&nbsp; * under the terms of the GNU Lesser General Public License as published by the
+<i>10</i>&nbsp; * Free Software Foundation, either version 3 of the License, or (at your
+<i>11</i>&nbsp; * option) any later version.
+<i>12</i>&nbsp; * 
+<i>13</i>&nbsp; * Java Marine API is distributed in the hope that it will be useful, but
+<i>14</i>&nbsp; * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+<i>15</i>&nbsp; * FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License
+<i>16</i>&nbsp; * for more details.
+<i>17</i>&nbsp; * 
+<i>18</i>&nbsp; * You should have received a copy of the GNU Lesser General Public License
+<i>19</i>&nbsp; * along with Java Marine API. If not, see &lt;http://www.gnu.org/licenses/&gt;.
+<i>20</i>&nbsp; */
+<i>21</i>&nbsp;package net.sf.marineapi.nmea.sentence;
+<i>22</i>&nbsp;
+<i>23</i>&nbsp;/**
+<i>24</i>&nbsp; * The enumeration of Talker IDs, i.e. the first two characters in sentence&#39;s
+<i>25</i>&nbsp; * address field. For example, &lt;code&gt;GP&lt;/code&gt; in &lt;code&gt;$GPGGA&lt;/code&gt;. Notice
+<i>26</i>&nbsp; * that proprietary sentences are identified by single character {@link #P}.
+<i>27</i>&nbsp; * &lt;p&gt;
+<i>28</i>&nbsp; * This enum contains also non-NMEA IDs to enable parsing AIS messages;
+<i>29</i>&nbsp; * {@link #AI}, {@link #AB} and {@link #BS}. However, the correct meaning of
+<i>30</i>&nbsp; * these are still unconfirmed.
+<i>31</i>&nbsp; * 
+<i>32</i>&nbsp; * @author Kimmo Tuukkanen
+<i>33</i>&nbsp; * @see net.sf.marineapi.nmea.sentence.SentenceId
+<i>34</i>&nbsp; */
+<b class="fc"><i>35</i>&nbsp;public enum TalkerId {</b>
+<i>36</i>&nbsp;
+<i>37</i>&nbsp;	/** AIS (to support &lt;code&gt;AIVDM&lt;/code&gt; and &lt;code&gt;AIVDO&lt;/code&gt;) */
+<b class="fc"><i>38</i>&nbsp;	AI,</b>
+<i>39</i>&nbsp;	/** AIS &quot;Broadcast&quot; message (to support &lt;code&gt;ABVDM&lt;/code&gt;) */
+<b class="fc"><i>40</i>&nbsp;	AB,</b>
+<i>41</i>&nbsp;	/** AIS &quot;Base Station&quot; message (to support &lt;code&gt;BSVDM&lt;/code&gt;) */
+<b class="fc"><i>42</i>&nbsp;	BS,</b>
+<i>43</i>&nbsp;	/** Autopilot - General */
+<b class="fc"><i>44</i>&nbsp;	AG,</b>
+<i>45</i>&nbsp;	/** Autopilot - Magnetic */
+<b class="fc"><i>46</i>&nbsp;	AP,</b>
+<i>47</i>&nbsp;	/** Beidou satellite navigation system (Chinese) */
+<b class="fc"><i>48</i>&nbsp;	BD,</b>
+<i>49</i>&nbsp;	/** Computer - Programmed Calculator (obsolete) */
+<b class="fc"><i>50</i>&nbsp;	@Deprecated</b>
+<i>51</i>&nbsp;	CC,
+<i>52</i>&nbsp;	/** Communications - Digital Selective Calling (DSC) */
+<b class="fc"><i>53</i>&nbsp;	CD,</b>
+<i>54</i>&nbsp;	/** Computer - Memory Data (obsolete) */
+<b class="fc"><i>55</i>&nbsp;	@Deprecated</b>
+<i>56</i>&nbsp;	CM,
+<i>57</i>&nbsp;    /** Channel Pilot (Navicom Dynamics proprietary) */
+<b class="fc"><i>58</i>&nbsp;    CP,</b>
+<i>59</i>&nbsp;	/** Communications - Satellite */
+<b class="fc"><i>60</i>&nbsp;	CS,</b>
+<i>61</i>&nbsp;	/** Communications - Radio-Telephone (MF/HF) */
+<b class="fc"><i>62</i>&nbsp;	CT,</b>
+<i>63</i>&nbsp;	/** Communications - Radio-Telephone (VHF) */
+<b class="fc"><i>64</i>&nbsp;	CV,</b>
+<i>65</i>&nbsp;	/** Communications - Scanning Receiver */
+<b class="fc"><i>66</i>&nbsp;	CX,</b>
+<i>67</i>&nbsp;	/** DECCA Navigation (obsolete) */
+<b class="fc"><i>68</i>&nbsp;	@Deprecated</b>
+<i>69</i>&nbsp;	DE,
+<i>70</i>&nbsp;	/** Direction Finder */
+<b class="fc"><i>71</i>&nbsp;	DF,</b>
+<i>72</i>&nbsp;	/** Velocity Sensor, Speed Log, Water, Magnetic */
+<b class="fc"><i>73</i>&nbsp;	DM,</b>
+<i>74</i>&nbsp;	/** Electronic Chart Display &amp;lt; Information System (ECDIS) */
+<b class="fc"><i>75</i>&nbsp;	EC,</b>
+<i>76</i>&nbsp;	/** Emergency Position Indicating Beacon (EPIRB) */
+<b class="fc"><i>77</i>&nbsp;	EP,</b>
+<i>78</i>&nbsp;	/** Engine Room Monitoring Systems */
+<b class="fc"><i>79</i>&nbsp;	ER,</b>
+<i>80</i>&nbsp;	/** Galileo satellite navigation system (European) */
+<b class="fc"><i>81</i>&nbsp;	GA,</b>
+<i>82</i>&nbsp;	/** Beidou satellite navigation system (Chinese) */
+<b class="fc"><i>83</i>&nbsp;	GB,</b>
+<i>84</i>&nbsp;	/** Indian Regional Navigation Satellite System (IRNSS) */
+<b class="fc"><i>85</i>&nbsp;	GI,</b>
+<i>86</i>&nbsp;	/** GLONASS (according to IEIC 61162-1) */
+<b class="fc"><i>87</i>&nbsp;	GL,</b>
+<i>88</i>&nbsp;	/** Mixed GLONASS and GPS data (according to IEIC 61162-1) */
+<b class="fc"><i>89</i>&nbsp;	GN,</b>
+<i>90</i>&nbsp;	/** Global Positioning System (GPS) */
+<b class="fc"><i>91</i>&nbsp;	GP,</b>
+<i>92</i>&nbsp;	/** Quasi Zenith Satellite System (QXSS, Japanese) */
+<b class="fc"><i>93</i>&nbsp;	GQ,</b>
+<i>94</i>&nbsp;	/** Heading - Magnetic Compass */
+<b class="fc"><i>95</i>&nbsp;	HC,</b>
+<i>96</i>&nbsp;	/** Heading - North Seeking Gyro */
+<b class="fc"><i>97</i>&nbsp;	HE,</b>
+<i>98</i>&nbsp;	/** Heading - Non North Seeking Gyro */
+<b class="fc"><i>99</i>&nbsp;	HN,</b>
+<i>100</i>&nbsp;	/** Integrated Instrumentation */
+<b class="fc"><i>101</i>&nbsp;	II,</b>
+<i>102</i>&nbsp;	/** Integrated Navigation */
+<b class="fc"><i>103</i>&nbsp;	IN,</b>
+<i>104</i>&nbsp;	/** Loran A (obsolete) */
+<b class="fc"><i>105</i>&nbsp;	@Deprecated</b>
+<i>106</i>&nbsp;	LA,
+<i>107</i>&nbsp;	/** Loran C (obsolete) */
+<b class="fc"><i>108</i>&nbsp;	@Deprecated</b>
+<i>109</i>&nbsp;	LC,
+<i>110</i>&nbsp;	/** Microwave Positioning System (obsolete) */
+<b class="fc"><i>111</i>&nbsp;	@Deprecated</b>
+<i>112</i>&nbsp;	MP,
+<i>113</i>&nbsp;	/** OMEGA Navigation System (obsolete) */
+<b class="fc"><i>114</i>&nbsp;	@Deprecated</b>
+<i>115</i>&nbsp;	OM,
+<i>116</i>&nbsp;	/** Distress Alarm System (obsolete) */
+<b class="fc"><i>117</i>&nbsp;	@Deprecated</b>
+<i>118</i>&nbsp;	OS,
+<i>119</i>&nbsp;	/** Proprietary sentence format (does not define the talker device). */
+<b class="fc"><i>120</i>&nbsp;	P,</b>
+<i>121</i>&nbsp;	/** QZSS regional GPS augmentation system (Japan) */
+<b class="fc"><i>122</i>&nbsp;	QZ,</b>
+<i>123</i>&nbsp;	/** RADAR and/or ARPA */
+<b class="fc"><i>124</i>&nbsp;	RA,</b>
+<i>125</i>&nbsp;	/** Propulsion Remote Control System */
+<b class="fc"><i>126</i>&nbsp;	RC,</b>
+<i>127</i>&nbsp;	/** Indian Regional Navigation Satellite System (IRNSS) */
+<b class="fc"><i>128</i>&nbsp;	IR,</b>
+<i>129</i>&nbsp;	/** Sounder, Depth */
+<b class="fc"><i>130</i>&nbsp;	SD,</b>
+<i>131</i>&nbsp;	/** Electronic Positioning System, other/general */
+<b class="fc"><i>132</i>&nbsp;	SN,</b>
+<i>133</i>&nbsp;	/** Sounder, Scanning */
+<b class="fc"><i>134</i>&nbsp;	SS,</b>
+<i>135</i>&nbsp;	/** Turn Rate Indicator */
+<b class="fc"><i>136</i>&nbsp;	TI,</b>
+<i>137</i>&nbsp;	/** TRANSIT Navigation System */
+<b class="fc"><i>138</i>&nbsp;	TR,</b>
+<i>139</i>&nbsp;	/** Velocity Sensor, Doppler, other/general */
+<b class="fc"><i>140</i>&nbsp;	VD,</b>
+<i>141</i>&nbsp;	/** Velocity Sensor, Speed Log, Water, Magnetic */
+<b class="fc"><i>142</i>&nbsp;	VM,</b>
+<i>143</i>&nbsp;	/** Velocity Sensor, Speed Log, Water, Mechanical */
+<b class="fc"><i>144</i>&nbsp;	VW,</b>
+<i>145</i>&nbsp;	/** Weather Instruments */
+<b class="fc"><i>146</i>&nbsp;	WI,</b>
+<i>147</i>&nbsp;	/** Transducer - Temperature (obsolete) */
+<b class="fc"><i>148</i>&nbsp;	@Deprecated</b>
+<i>149</i>&nbsp;	YC,
+<i>150</i>&nbsp;	/** Transducer - Displacement, Angular or Linear (obsolete) */
+<b class="fc"><i>151</i>&nbsp;	@Deprecated</b>
+<i>152</i>&nbsp;	YD,
+<i>153</i>&nbsp;	/** Transducer - Frequency (obsolete) */
+<b class="fc"><i>154</i>&nbsp;	@Deprecated</b>
+<i>155</i>&nbsp;	YF,
+<i>156</i>&nbsp;	/** Transducer - Level (obsolete) */
+<b class="fc"><i>157</i>&nbsp;	@Deprecated</b>
+<i>158</i>&nbsp;	YL,
+<i>159</i>&nbsp;	/** Transducer - Pressure (obsolete) */
+<b class="fc"><i>160</i>&nbsp;	@Deprecated</b>
+<i>161</i>&nbsp;	YP,
+<i>162</i>&nbsp;	/** Transducer - Flow Rate (obsolete) */
+<b class="fc"><i>163</i>&nbsp;	@Deprecated</b>
+<i>164</i>&nbsp;	YR,
+<i>165</i>&nbsp;	/** Transducer - Tachometer (obsolete) */
+<b class="fc"><i>166</i>&nbsp;	@Deprecated</b>
+<i>167</i>&nbsp;	YT,
+<i>168</i>&nbsp;	/** Transducer - Volume (obsolete) */
+<b class="fc"><i>169</i>&nbsp;	@Deprecated</b>
+<i>170</i>&nbsp;	YV,
+<i>171</i>&nbsp;	/** Transducer */
+<b class="fc"><i>172</i>&nbsp;	YX,</b>
+<i>173</i>&nbsp;	/** Timekeeper - Atomic Clock */
+<b class="fc"><i>174</i>&nbsp;	ZA,</b>
+<i>175</i>&nbsp;	/** Timekeeper - Chronometer */
+<b class="fc"><i>176</i>&nbsp;	ZC,</b>
+<i>177</i>&nbsp;	/** Timekeeper - Quartz */
+<b class="fc"><i>178</i>&nbsp;	ZQ,</b>
+<i>179</i>&nbsp;	/** Timekeeper - Radio Update, WWV or WWVH */
+<b class="fc"><i>180</i>&nbsp;	ZV;</b>
+<i>181</i>&nbsp;
+<i>182</i>&nbsp;	/**
+<i>183</i>&nbsp;	 * Parses the talker id from specified sentence String and returns the
+<i>184</i>&nbsp;	 * corresponding TalkerId enum using the {@link #valueOf(String)} method.
+<i>185</i>&nbsp;	 * 
+<i>186</i>&nbsp;	 * @param nmea Sentence String
+<i>187</i>&nbsp;	 * @return TalkerId enum
+<i>188</i>&nbsp;	 * @throws IllegalArgumentException If specified String is not recognized as
+<i>189</i>&nbsp;	 *             NMEA sentence
+<i>190</i>&nbsp;	 */
+<i>191</i>&nbsp;	public static TalkerId parse(String nmea) {
+<i>192</i>&nbsp;
+<b class="fc"><i>193</i>&nbsp;		if (!SentenceValidator.isSentence(nmea)) {</b>
+<b class="nc"><i>194</i>&nbsp;			throw new IllegalArgumentException(&quot;String is not a sentence&quot;);</b>
+<i>195</i>&nbsp;		}
+<i>196</i>&nbsp;
+<b class="fc"><i>197</i>&nbsp;		String tid = &quot;&quot;;</b>
+<b class="fc"><i>198</i>&nbsp;		if (nmea.startsWith(&quot;$P&quot;)) {</b>
+<b class="fc"><i>199</i>&nbsp;			tid = &quot;P&quot;;</b>
+<i>200</i>&nbsp;		} else {
+<b class="fc"><i>201</i>&nbsp;			tid = nmea.substring(1, 3);</b>
+<i>202</i>&nbsp;		}
+<b class="fc"><i>203</i>&nbsp;		return TalkerId.valueOf(tid);</b>
+<i>204</i>&nbsp;	}
+<i>205</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2015-12-10 21:40</div>
+</div>
+</body>
+</html>

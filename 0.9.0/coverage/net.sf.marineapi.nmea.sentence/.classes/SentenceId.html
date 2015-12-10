@@ -1,0 +1,219 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: SentenceId</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">net.sf.marineapi.nmea.sentence</a> ]
+</div>
+
+<h1>Coverage Summary for Class: SentenceId (net.sf.marineapi.nmea.sentence)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">SentenceId</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/ 1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (4/ 4)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (43/ 43)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;/* 
+<i>2</i>&nbsp; * SentenceId.java
+<i>3</i>&nbsp; * Copyright (C) 2010 Kimmo Tuukkanen
+<i>4</i>&nbsp; * 
+<i>5</i>&nbsp; * This file is part of Java Marine API.
+<i>6</i>&nbsp; * &lt;http://ktuukkan.github.io/marine-api/&gt;
+<i>7</i>&nbsp; * 
+<i>8</i>&nbsp; * Java Marine API is free software: you can redistribute it and/or modify it
+<i>9</i>&nbsp; * under the terms of the GNU Lesser General Public License as published by the
+<i>10</i>&nbsp; * Free Software Foundation, either version 3 of the License, or (at your
+<i>11</i>&nbsp; * option) any later version.
+<i>12</i>&nbsp; * 
+<i>13</i>&nbsp; * Java Marine API is distributed in the hope that it will be useful, but
+<i>14</i>&nbsp; * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+<i>15</i>&nbsp; * FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License
+<i>16</i>&nbsp; * for more details.
+<i>17</i>&nbsp; * 
+<i>18</i>&nbsp; * You should have received a copy of the GNU Lesser General Public License
+<i>19</i>&nbsp; * along with Java Marine API. If not, see &lt;http://www.gnu.org/licenses/&gt;.
+<i>20</i>&nbsp; */
+<i>21</i>&nbsp;package net.sf.marineapi.nmea.sentence;
+<i>22</i>&nbsp;
+<i>23</i>&nbsp;/**
+<i>24</i>&nbsp; * Defines the supported NMEA 0831 sentence types. Sentence address field is a
+<i>25</i>&nbsp; * combination of talker and sentence IDs, for example GPBOD, GPGGA or GPGGL.
+<i>26</i>&nbsp; * 
+<i>27</i>&nbsp; * @author Kimmo Tuukkanen
+<i>28</i>&nbsp; * @see net.sf.marineapi.nmea.sentence.TalkerId
+<i>29</i>&nbsp; */
+<b class="fc"><i>30</i>&nbsp;public enum SentenceId {</b>
+<i>31</i>&nbsp;
+<i>32</i>&nbsp;	/** Autopilot sentence &quot;B&quot;; xte, bearings and heading toward destination */
+<b class="fc"><i>33</i>&nbsp;	APB,</b>
+<i>34</i>&nbsp;	/** Bearing Origin to Destination */
+<b class="fc"><i>35</i>&nbsp;	BOD,</b>
+<i>36</i>&nbsp;	/** Depth of water below transducer; in meters, feet and fathoms */
+<b class="fc"><i>37</i>&nbsp;	DBT,</b>
+<i>38</i>&nbsp;	/** Depth of water below transducer; in meters. */
+<b class="fc"><i>39</i>&nbsp;	DPT,</b>
+<i>40</i>&nbsp;	/** Datum reference. */
+<b class="fc"><i>41</i>&nbsp;	DTM,</b>
+<i>42</i>&nbsp;	/** Global Positioning System fix data */
+<b class="fc"><i>43</i>&nbsp;	GGA,</b>
+<i>44</i>&nbsp;	/** Geographic position (latitude/longitude) */
+<b class="fc"><i>45</i>&nbsp;	GLL,</b>
+<i>46</i>&nbsp;	/** Dilution of precision (DOP) of GPS fix and active satellites */
+<b class="fc"><i>47</i>&nbsp;	GSA,</b>
+<i>48</i>&nbsp;	/** Detailed satellite data */
+<b class="fc"><i>49</i>&nbsp;	GSV,</b>
+<i>50</i>&nbsp;	/** Vessel heading in degrees with magnetic variation and deviation. */
+<b class="fc"><i>51</i>&nbsp;	HDG,</b>
+<i>52</i>&nbsp;	/** Vessel heading in degrees with respect to true north. */
+<b class="fc"><i>53</i>&nbsp;	HDM,</b>
+<i>54</i>&nbsp;	/** Vessel heading in degrees true */
+<b class="fc"><i>55</i>&nbsp;	HDT,</b>
+<i>56</i>&nbsp;	/** Air temperature in degrees centigrade (Celsius). */
+<b class="fc"><i>57</i>&nbsp;	MTA,</b>
+<i>58</i>&nbsp;	/** Water temperature in degrees centigrade (Celsius). */
+<b class="fc"><i>59</i>&nbsp;	MTW,</b>
+<i>60</i>&nbsp;	/** Wind speed and angle */
+<b class="fc"><i>61</i>&nbsp;	MWV,</b>
+<i>62</i>&nbsp;	/** Recommended minimum navigation information */
+<b class="fc"><i>63</i>&nbsp;	RMB,</b>
+<i>64</i>&nbsp;	/** Recommended minimum specific GPS/TRANSIT data */
+<b class="fc"><i>65</i>&nbsp;	RMC,</b>
+<i>66</i>&nbsp;	/** Rate of Turn */
+<b class="fc"><i>67</i>&nbsp;	ROT,</b>
+<i>68</i>&nbsp;	/** Revolutions measured from engine or shaft. */
+<b class="fc"><i>69</i>&nbsp;	RPM,</b>
+<i>70</i>&nbsp;	/** Rudder angle, measured in degrees */
+<b class="fc"><i>71</i>&nbsp;	RSA,</b>
+<i>72</i>&nbsp;	/** Route data and waypoint list */
+<b class="fc"><i>73</i>&nbsp;	RTE,</b>
+<i>74</i>&nbsp;	/** Tracked target */
+<b class="fc"><i>75</i>&nbsp;	TTM,</b>
+<i>76</i>&nbsp;	/** Dual ground/water speed and stern ground/water speed. */
+<b class="fc"><i>77</i>&nbsp;	VBW,</b>
+<i>78</i>&nbsp;	/** Set and drift, direction and speed of current. */
+<b class="fc"><i>79</i>&nbsp;	VDR,</b>
+<i>80</i>&nbsp;	/** Distance traveled through water, cumulative and since reset. */
+<b class="fc"><i>81</i>&nbsp;	VLW,</b>
+<i>82</i>&nbsp;	/** Track made good and ground speed */
+<b class="fc"><i>83</i>&nbsp;	VTG,</b>
+<i>84</i>&nbsp;	/** Water speed and heading */
+<b class="fc"><i>85</i>&nbsp;	VHW,</b>
+<i>86</i>&nbsp;	/** Waypoint location (latitude/longitude) */
+<b class="fc"><i>87</i>&nbsp;	WPL,</b>
+<i>88</i>&nbsp;	/** Transducer measurements (sensor data) */
+<b class="fc"><i>89</i>&nbsp;	XDR,</b>
+<i>90</i>&nbsp;	/** Cross-track error, measured */
+<b class="fc"><i>91</i>&nbsp;	XTE,</b>
+<i>92</i>&nbsp;    /** Meteorological Composite  */
+<b class="fc"><i>93</i>&nbsp;    MDA,</b>
+<i>94</i>&nbsp;	/** Wind speed and direction */
+<b class="fc"><i>95</i>&nbsp;    MWD,</b>
+<i>96</i>&nbsp;	/** UTC time and date with local time zone offset */
+<b class="fc"><i>97</i>&nbsp;	ZDA;</b>
+<i>98</i>&nbsp;
+<i>99</i>&nbsp;	/**
+<i>100</i>&nbsp;	 * Parses the sentence id from specified sentence String and returns a
+<i>101</i>&nbsp;	 * corresponding &lt;code&gt;SentenceId&lt;/code&gt; enum (assuming it exists).
+<i>102</i>&nbsp;	 * 
+<i>103</i>&nbsp;	 * @param nmea Sentence String
+<i>104</i>&nbsp;	 * @return SentenceId enum
+<i>105</i>&nbsp;	 * @throws IllegalArgumentException If specified String is not valid
+<i>106</i>&nbsp;	 *             sentence
+<i>107</i>&nbsp;	 */
+<i>108</i>&nbsp;	public static SentenceId parse(String nmea) {
+<b class="fc"><i>109</i>&nbsp;		String sid = parseStr(nmea);</b>
+<b class="fc"><i>110</i>&nbsp;		return SentenceId.valueOf(sid);</b>
+<i>111</i>&nbsp;	}
+<i>112</i>&nbsp;
+<i>113</i>&nbsp;	/**
+<i>114</i>&nbsp;	 * Parses the sentence id from specified sentence String and returns it as
+<i>115</i>&nbsp;	 * String.
+<i>116</i>&nbsp;	 * 
+<i>117</i>&nbsp;	 * @param nmea Sentence String
+<i>118</i>&nbsp;	 * @return Sentence Id, e.g. &quot;GGA&quot; or &quot;GLL&quot;
+<i>119</i>&nbsp;	 * @throws IllegalArgumentException If specified String is not recognized as
+<i>120</i>&nbsp;	 *             NMEA sentence
+<i>121</i>&nbsp;	 */
+<i>122</i>&nbsp;	public static String parseStr(String nmea) {
+<i>123</i>&nbsp;
+<b class="fc"><i>124</i>&nbsp;		if (!SentenceValidator.isSentence(nmea)) {</b>
+<b class="fc"><i>125</i>&nbsp;			throw new IllegalArgumentException(&quot;String is not a sentence&quot;);</b>
+<i>126</i>&nbsp;		}
+<i>127</i>&nbsp;
+<b class="fc"><i>128</i>&nbsp;		String id = null;</b>
+<b class="fc"><i>129</i>&nbsp;		if (nmea.startsWith(&quot;$P&quot;)) {</b>
+<b class="fc"><i>130</i>&nbsp;			id = nmea.substring(2, nmea.indexOf(&#39;,&#39;));</b>
+<i>131</i>&nbsp;		} else {
+<b class="fc"><i>132</i>&nbsp;			id = nmea.substring(3, nmea.indexOf(&#39;,&#39;));</b>
+<i>133</i>&nbsp;		}
+<b class="fc"><i>134</i>&nbsp;		return id;</b>
+<i>135</i>&nbsp;	}
+<i>136</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2015-12-10 21:41</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,271 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: RMBSentence</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">net.sf.marineapi.nmea.sentence</a> ]
+</div>
+
+<h1>Coverage Summary for Class: RMBSentence (net.sf.marineapi.nmea.sentence)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+</tr>
+<tr>
+  <td class="name">RMBSentence</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;/* 
+<i>2</i>&nbsp; * RMBSentence.java
+<i>3</i>&nbsp; * Copyright (C) 2010 Kimmo Tuukkanen
+<i>4</i>&nbsp; * 
+<i>5</i>&nbsp; * This file is part of Java Marine API.
+<i>6</i>&nbsp; * &lt;http://ktuukkan.github.io/marine-api/&gt;
+<i>7</i>&nbsp; * 
+<i>8</i>&nbsp; * Java Marine API is free software: you can redistribute it and/or modify it
+<i>9</i>&nbsp; * under the terms of the GNU Lesser General Public License as published by the
+<i>10</i>&nbsp; * Free Software Foundation, either version 3 of the License, or (at your
+<i>11</i>&nbsp; * option) any later version.
+<i>12</i>&nbsp; * 
+<i>13</i>&nbsp; * Java Marine API is distributed in the hope that it will be useful, but
+<i>14</i>&nbsp; * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+<i>15</i>&nbsp; * FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License
+<i>16</i>&nbsp; * for more details.
+<i>17</i>&nbsp; * 
+<i>18</i>&nbsp; * You should have received a copy of the GNU Lesser General Public License
+<i>19</i>&nbsp; * along with Java Marine API. If not, see &lt;http://www.gnu.org/licenses/&gt;.
+<i>20</i>&nbsp; */
+<i>21</i>&nbsp;package net.sf.marineapi.nmea.sentence;
+<i>22</i>&nbsp;
+<i>23</i>&nbsp;import net.sf.marineapi.nmea.util.DataStatus;
+<i>24</i>&nbsp;import net.sf.marineapi.nmea.util.Direction;
+<i>25</i>&nbsp;import net.sf.marineapi.nmea.util.Waypoint;
+<i>26</i>&nbsp;
+<i>27</i>&nbsp;/**
+<i>28</i>&nbsp; * Recommended minimum navigation information. This sentence is transmitted by a
+<i>29</i>&nbsp; * GPS receiver when a destination waypoint is active (GOTO mode).
+<i>30</i>&nbsp; * &lt;p&gt;
+<i>31</i>&nbsp; * Example:&lt;br&gt;
+<i>32</i>&nbsp; * &lt;code&gt;$GPRMB,A,0.00,R,,RUSKI,5536.200,N,01436.500,E,432.3,234.9,,V*58&lt;/code&gt;
+<i>33</i>&nbsp; * 
+<i>34</i>&nbsp; * @author Kimmo Tuukkanen
+<i>35</i>&nbsp; */
+<i>36</i>&nbsp;public interface RMBSentence extends Sentence {
+<i>37</i>&nbsp;
+<i>38</i>&nbsp;	/**
+<i>39</i>&nbsp;	 * Get the arrival to waypoint status. Status is {@link DataStatus#VOID}
+<i>40</i>&nbsp;	 * (false) while not arrived at destination, otherwise
+<i>41</i>&nbsp;	 * {@link DataStatus#ACTIVE} (true).
+<i>42</i>&nbsp;	 * 
+<i>43</i>&nbsp;	 * @return {@link DataStatus#ACTIVE} or {@link DataStatus#VOID}
+<i>44</i>&nbsp;	 * @see #hasArrived()
+<i>45</i>&nbsp;	 * @throws net.sf.marineapi.nmea.parser.DataNotAvailableException If the data is
+<i>46</i>&nbsp;	 *             not available.
+<i>47</i>&nbsp;	 * @throws net.sf.marineapi.nmea.parser.ParseException If the field contains
+<i>48</i>&nbsp;	 *             unexpected or illegal value.
+<i>49</i>&nbsp;	 */
+<i>50</i>&nbsp;	DataStatus getArrivalStatus();
+<i>51</i>&nbsp;
+<i>52</i>&nbsp;	/**
+<i>53</i>&nbsp;	 * Get true bearing to destination.
+<i>54</i>&nbsp;	 * 
+<i>55</i>&nbsp;	 * @return True bearing in degrees.
+<i>56</i>&nbsp;	 * @throws net.sf.marineapi.nmea.parser.DataNotAvailableException If the data is
+<i>57</i>&nbsp;	 *             not available.
+<i>58</i>&nbsp;	 * @throws net.sf.marineapi.nmea.parser.ParseException If the field contains
+<i>59</i>&nbsp;	 *             unexpected or illegal value.
+<i>60</i>&nbsp;	 */
+<i>61</i>&nbsp;	double getBearing();
+<i>62</i>&nbsp;
+<i>63</i>&nbsp;	/**
+<i>64</i>&nbsp;	 * Get cross track error (XTE).
+<i>65</i>&nbsp;	 * 
+<i>66</i>&nbsp;	 * @return Cross track error, in nautical miles.
+<i>67</i>&nbsp;	 * @throws net.sf.marineapi.nmea.parser.DataNotAvailableException If the data is
+<i>68</i>&nbsp;	 *             not available.
+<i>69</i>&nbsp;	 * @throws net.sf.marineapi.nmea.parser.ParseException If the field contains
+<i>70</i>&nbsp;	 *             unexpected or illegal value.
+<i>71</i>&nbsp;	 */
+<i>72</i>&nbsp;	double getCrossTrackError();
+<i>73</i>&nbsp;
+<i>74</i>&nbsp;	/**
+<i>75</i>&nbsp;	 * Get the destination waypoint.
+<i>76</i>&nbsp;	 * 
+<i>77</i>&nbsp;	 * @return Waypoint
+<i>78</i>&nbsp;	 * @throws net.sf.marineapi.nmea.parser.DataNotAvailableException If the data is
+<i>79</i>&nbsp;	 *             not available.
+<i>80</i>&nbsp;	 * @throws net.sf.marineapi.nmea.parser.ParseException If the field contains
+<i>81</i>&nbsp;	 *             unexpected or illegal value.
+<i>82</i>&nbsp;	 */
+<i>83</i>&nbsp;	Waypoint getDestination();
+<i>84</i>&nbsp;
+<i>85</i>&nbsp;	/**
+<i>86</i>&nbsp;	 * Get the ID of origin waypoint.
+<i>87</i>&nbsp;	 * 
+<i>88</i>&nbsp;	 * @return Id String.
+<i>89</i>&nbsp;	 * @throws net.sf.marineapi.nmea.parser.DataNotAvailableException If the data is
+<i>90</i>&nbsp;	 *             not available.
+<i>91</i>&nbsp;	 * @throws net.sf.marineapi.nmea.parser.ParseException If the field contains
+<i>92</i>&nbsp;	 *             unexpected or illegal value.
+<i>93</i>&nbsp;	 */
+<i>94</i>&nbsp;	String getOriginId();
+<i>95</i>&nbsp;
+<i>96</i>&nbsp;	/**
+<i>97</i>&nbsp;	 * Get range to destination waypoint.
+<i>98</i>&nbsp;	 * 
+<i>99</i>&nbsp;	 * @return Range to destination, in nautical miles.
+<i>100</i>&nbsp;	 * @throws net.sf.marineapi.nmea.parser.DataNotAvailableException If the data is
+<i>101</i>&nbsp;	 *             not available.
+<i>102</i>&nbsp;	 * @throws net.sf.marineapi.nmea.parser.ParseException If the field contains
+<i>103</i>&nbsp;	 *             unexpected or illegal value.
+<i>104</i>&nbsp;	 */
+<i>105</i>&nbsp;	double getRange();
+<i>106</i>&nbsp;
+<i>107</i>&nbsp;	/**
+<i>108</i>&nbsp;	 * Get the sentence data status, valid or invalid.
+<i>109</i>&nbsp;	 * 
+<i>110</i>&nbsp;	 * @return {@link DataStatus#ACTIVE} or {@link DataStatus#VOID}
+<i>111</i>&nbsp;	 * @throws net.sf.marineapi.nmea.parser.DataNotAvailableException If the data is
+<i>112</i>&nbsp;	 *             not available.
+<i>113</i>&nbsp;	 * @throws net.sf.marineapi.nmea.parser.ParseException If the field contains
+<i>114</i>&nbsp;	 *             unexpected or illegal value.
+<i>115</i>&nbsp;	 */
+<i>116</i>&nbsp;	DataStatus getStatus();
+<i>117</i>&nbsp;
+<i>118</i>&nbsp;	/**
+<i>119</i>&nbsp;	 * Get the direction to steer to correct error (left/right).
+<i>120</i>&nbsp;	 * 
+<i>121</i>&nbsp;	 * @return Direction.LEFT or Direction.RIGHT
+<i>122</i>&nbsp;	 * @throws net.sf.marineapi.nmea.parser.DataNotAvailableException If the data is
+<i>123</i>&nbsp;	 *             not available.
+<i>124</i>&nbsp;	 * @throws net.sf.marineapi.nmea.parser.ParseException If the field contains
+<i>125</i>&nbsp;	 *             unexpected or illegal value.
+<i>126</i>&nbsp;	 */
+<i>127</i>&nbsp;	Direction getSteerTo();
+<i>128</i>&nbsp;
+<i>129</i>&nbsp;	/**
+<i>130</i>&nbsp;	 * Get velocity towards destination. Notice that returned value may also be
+<i>131</i>&nbsp;	 * negative if vehicle is moving away from destination.
+<i>132</i>&nbsp;	 * 
+<i>133</i>&nbsp;	 * @return Velocity value, in knots (nautical miles per hour).
+<i>134</i>&nbsp;	 * @throws net.sf.marineapi.nmea.parser.DataNotAvailableException If the data is
+<i>135</i>&nbsp;	 *             not available.
+<i>136</i>&nbsp;	 * @throws net.sf.marineapi.nmea.parser.ParseException If the field contains
+<i>137</i>&nbsp;	 *             unexpected or illegal value.
+<i>138</i>&nbsp;	 */
+<i>139</i>&nbsp;	double getVelocity();
+<i>140</i>&nbsp;
+<i>141</i>&nbsp;	/**
+<i>142</i>&nbsp;	 * Tells if the destination waypoint has been reached or not.
+<i>143</i>&nbsp;	 * 
+<i>144</i>&nbsp;	 * @return True if has arrived to waypoint, otherwise false.
+<i>145</i>&nbsp;	 * @throws net.sf.marineapi.nmea.parser.DataNotAvailableException If arrival
+<i>146</i>&nbsp;	 *             status is not available.
+<i>147</i>&nbsp;	 * @throws net.sf.marineapi.nmea.parser.ParseException If the field contains
+<i>148</i>&nbsp;	 *             unexpected or illegal value.
+<i>149</i>&nbsp;	 */
+<i>150</i>&nbsp;	boolean hasArrived();
+<i>151</i>&nbsp;
+<i>152</i>&nbsp;	/**
+<i>153</i>&nbsp;	 * Set the arrival to waypoint status. Set {@link DataStatus#VOID} if not
+<i>154</i>&nbsp;	 * arrived at destination, otherwise {@link DataStatus#ACTIVE}.
+<i>155</i>&nbsp;	 * 
+<i>156</i>&nbsp;	 * @param status {@link DataStatus#VOID} or {@link DataStatus#ACTIVE}.
+<i>157</i>&nbsp;	 * @throws IllegalArgumentException If status is &lt;code&gt;null&lt;/code&gt;.
+<i>158</i>&nbsp;	 */
+<i>159</i>&nbsp;	void setArrivalStatus(DataStatus status);
+<i>160</i>&nbsp;
+<i>161</i>&nbsp;	/**
+<i>162</i>&nbsp;	 * Set true bearing to destination, in degrees.
+<i>163</i>&nbsp;	 * 
+<i>164</i>&nbsp;	 * @param bearing Bearing value, will be rounded to one decimal.
+<i>165</i>&nbsp;	 * @throws IllegalArgumentException If bearing value is out of bounds 0..360
+<i>166</i>&nbsp;	 *             degrees.
+<i>167</i>&nbsp;	 */
+<i>168</i>&nbsp;	void setBearing(double bearing);
+<i>169</i>&nbsp;
+<i>170</i>&nbsp;	/**
+<i>171</i>&nbsp;	 * Set cross track error (XTE), in nautical miles. Negative values are
+<i>172</i>&nbsp;	 * translated to positive, set Steer-To to indicate the direction of error.
+<i>173</i>&nbsp;	 * 
+<i>174</i>&nbsp;	 * @param xte Cross track error value, will be rounded to one decimal.
+<i>175</i>&nbsp;	 * @see #setSteerTo(Direction)
+<i>176</i>&nbsp;	 */
+<i>177</i>&nbsp;	void setCrossTrackError(double xte);
+<i>178</i>&nbsp;
+<i>179</i>&nbsp;	/**
+<i>180</i>&nbsp;	 * Set the destination waypoint.
+<i>181</i>&nbsp;	 * 
+<i>182</i>&nbsp;	 * @param dest Waypoint to set
+<i>183</i>&nbsp;	 */
+<i>184</i>&nbsp;	void setDestination(Waypoint dest);
+<i>185</i>&nbsp;
+<i>186</i>&nbsp;	/**
+<i>187</i>&nbsp;	 * Set the ID of origin waypoint.
+<i>188</i>&nbsp;	 * 
+<i>189</i>&nbsp;	 * @param id ID to set
+<i>190</i>&nbsp;	 */
+<i>191</i>&nbsp;	void setOriginId(String id);
+<i>192</i>&nbsp;
+<i>193</i>&nbsp;	/**
+<i>194</i>&nbsp;	 * Set range to destination waypoint.
+<i>195</i>&nbsp;	 * 
+<i>196</i>&nbsp;	 * @param range Range value, in nautical miles.
+<i>197</i>&nbsp;	 */
+<i>198</i>&nbsp;	void setRange(double range);
+<i>199</i>&nbsp;
+<i>200</i>&nbsp;	/**
+<i>201</i>&nbsp;	 * Set status of sentence data, valid or invalid.
+<i>202</i>&nbsp;	 * 
+<i>203</i>&nbsp;	 * @param status {@link DataStatus#ACTIVE} or {@link DataStatus#VOID}
+<i>204</i>&nbsp;	 */
+<i>205</i>&nbsp;	void setStatus(DataStatus status);
+<i>206</i>&nbsp;
+<i>207</i>&nbsp;	/**
+<i>208</i>&nbsp;	 * Set the direction to steer to correct error (left/right).
+<i>209</i>&nbsp;	 * 
+<i>210</i>&nbsp;	 * @param steerTo {@link Direction#LEFT} or {@link Direction#RIGHT}
+<i>211</i>&nbsp;	 * @throws IllegalArgumentException If specified direction is any other than
+<i>212</i>&nbsp;	 *             defined valid for param &lt;code&gt;steer&lt;/code&gt;.
+<i>213</i>&nbsp;	 */
+<i>214</i>&nbsp;	void setSteerTo(Direction steerTo);
+<i>215</i>&nbsp;
+<i>216</i>&nbsp;	/**
+<i>217</i>&nbsp;	 * Set velocity towards destination. Notice that value may also be negative
+<i>218</i>&nbsp;	 * if vehicle is moving away from the destination.
+<i>219</i>&nbsp;	 * 
+<i>220</i>&nbsp;	 * @param velocity Velocity, in knots (nautical miles per hour).
+<i>221</i>&nbsp;	 */
+<i>222</i>&nbsp;	void setVelocity(double velocity);
+<i>223</i>&nbsp;
+<i>224</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2015-12-10 21:40</div>
+</div>
+</body>
+</html>

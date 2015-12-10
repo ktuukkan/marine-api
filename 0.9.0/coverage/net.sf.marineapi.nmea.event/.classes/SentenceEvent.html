@@ -1,0 +1,157 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: SentenceEvent</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">net.sf.marineapi.nmea.event</a> ]
+</div>
+
+<h1>Coverage Summary for Class: SentenceEvent (net.sf.marineapi.nmea.event)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">SentenceEvent</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/ 1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (3/ 3)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    87.5%
+  </span>
+  <span class="absValue">
+    (7/ 8)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;/* 
+<i>2</i>&nbsp; * SentenceEvent.java
+<i>3</i>&nbsp; * Copyright (C) 2010 Kimmo Tuukkanen
+<i>4</i>&nbsp; * 
+<i>5</i>&nbsp; * This file is part of Java Marine API.
+<i>6</i>&nbsp; * &lt;http://ktuukkan.github.io/marine-api/&gt;
+<i>7</i>&nbsp; * 
+<i>8</i>&nbsp; * Java Marine API is free software: you can redistribute it and/or modify it
+<i>9</i>&nbsp; * under the terms of the GNU Lesser General Public License as published by the
+<i>10</i>&nbsp; * Free Software Foundation, either version 3 of the License, or (at your
+<i>11</i>&nbsp; * option) any later version.
+<i>12</i>&nbsp; * 
+<i>13</i>&nbsp; * Java Marine API is distributed in the hope that it will be useful, but
+<i>14</i>&nbsp; * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+<i>15</i>&nbsp; * FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License
+<i>16</i>&nbsp; * for more details.
+<i>17</i>&nbsp; * 
+<i>18</i>&nbsp; * You should have received a copy of the GNU Lesser General Public License
+<i>19</i>&nbsp; * along with Java Marine API. If not, see &lt;http://www.gnu.org/licenses/&gt;.
+<i>20</i>&nbsp; */
+<i>21</i>&nbsp;package net.sf.marineapi.nmea.event;
+<i>22</i>&nbsp;
+<i>23</i>&nbsp;import java.util.EventObject;
+<i>24</i>&nbsp;
+<i>25</i>&nbsp;import net.sf.marineapi.nmea.sentence.Sentence;
+<i>26</i>&nbsp;
+<i>27</i>&nbsp;/**
+<i>28</i>&nbsp; * Sentence events occur when a valid NMEA 0183 sentence has been read from the
+<i>29</i>&nbsp; * data source.
+<i>30</i>&nbsp; * 
+<i>31</i>&nbsp; * @author Kimmo Tuukkanen
+<i>32</i>&nbsp; * @see SentenceListener
+<i>33</i>&nbsp; * @see net.sf.marineapi.nmea.io.SentenceReader
+<i>34</i>&nbsp; */
+<i>35</i>&nbsp;public class SentenceEvent extends EventObject {
+<i>36</i>&nbsp;
+<i>37</i>&nbsp;	private static final long serialVersionUID = -2756954014186470514L;
+<b class="fc"><i>38</i>&nbsp;	private final long timestamp = System.currentTimeMillis();</b>
+<i>39</i>&nbsp;	private final Sentence sentence;
+<i>40</i>&nbsp;
+<i>41</i>&nbsp;	/**
+<i>42</i>&nbsp;	 * Creates a new SentenceEvent object.
+<i>43</i>&nbsp;	 * 
+<i>44</i>&nbsp;	 * @param src Object that fired the event
+<i>45</i>&nbsp;	 * @param s Sentence that triggered the event
+<i>46</i>&nbsp;	 * @throws IllegalArgumentException If specified sentence is
+<i>47</i>&nbsp;	 *             &lt;code&gt;null&lt;/code&gt;
+<i>48</i>&nbsp;	 */
+<i>49</i>&nbsp;	public SentenceEvent(Object src, Sentence s) {
+<b class="fc"><i>50</i>&nbsp;		super(src);</b>
+<b class="fc"><i>51</i>&nbsp;		if (s == null) {</b>
+<b class="nc"><i>52</i>&nbsp;			throw new IllegalArgumentException(&quot;Sentence cannot be null&quot;);</b>
+<i>53</i>&nbsp;		}
+<b class="fc"><i>54</i>&nbsp;		this.sentence = s;</b>
+<b class="fc"><i>55</i>&nbsp;	}</b>
+<i>56</i>&nbsp;
+<i>57</i>&nbsp;	/**
+<i>58</i>&nbsp;	 * Gets the Sentence object that triggered the event.
+<i>59</i>&nbsp;	 * 
+<i>60</i>&nbsp;	 * @return Sentence object
+<i>61</i>&nbsp;	 */
+<i>62</i>&nbsp;	public Sentence getSentence() {
+<b class="fc"><i>63</i>&nbsp;		return sentence;</b>
+<i>64</i>&nbsp;	}
+<i>65</i>&nbsp;
+<i>66</i>&nbsp;	/**
+<i>67</i>&nbsp;	 * Get system time when this event was created.
+<i>68</i>&nbsp;	 * 
+<i>69</i>&nbsp;	 * @return Milliseconds timestamp
+<i>70</i>&nbsp;	 */
+<i>71</i>&nbsp;	public long getTimeStamp() {
+<b class="fc"><i>72</i>&nbsp;		return timestamp;</b>
+<i>73</i>&nbsp;	}
+<i>74</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2015-12-10 21:41</div>
+</div>
+</body>
+</html>

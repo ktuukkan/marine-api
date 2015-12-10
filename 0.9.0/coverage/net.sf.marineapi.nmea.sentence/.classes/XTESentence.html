@@ -1,0 +1,149 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: XTESentence</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">net.sf.marineapi.nmea.sentence</a> ]
+</div>
+
+<h1>Coverage Summary for Class: XTESentence (net.sf.marineapi.nmea.sentence)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+</tr>
+<tr>
+  <td class="name">XTESentence</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;/*
+<i>2</i>&nbsp; * XTESentence.java
+<i>3</i>&nbsp; * Copyright (C) 2014 Kimmo Tuukkanen
+<i>4</i>&nbsp; * 
+<i>5</i>&nbsp; * This file is part of Java Marine API.
+<i>6</i>&nbsp; * &lt;http://Kimmo Tuukkanenkkan.github.io/marine-api/&gt;
+<i>7</i>&nbsp; * 
+<i>8</i>&nbsp; * Java Marine API is free software: you can redistribute it and/or modify it
+<i>9</i>&nbsp; * under the terms of the GNU Lesser General Public License as published by the
+<i>10</i>&nbsp; * Free Software Foundation, either version 3 of the License, or (at your
+<i>11</i>&nbsp; * option) any later version.
+<i>12</i>&nbsp; * 
+<i>13</i>&nbsp; * Java Marine API is distributed in the hope that it will be useful, but
+<i>14</i>&nbsp; * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+<i>15</i>&nbsp; * FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License
+<i>16</i>&nbsp; * for more details.
+<i>17</i>&nbsp; * 
+<i>18</i>&nbsp; * You should have received a copy of the GNU Lesser General Public License
+<i>19</i>&nbsp; * along with Java Marine API. If not, see &lt;http://www.gnu.org/licenses/&gt;.
+<i>20</i>&nbsp; */
+<i>21</i>&nbsp;package net.sf.marineapi.nmea.sentence;
+<i>22</i>&nbsp;
+<i>23</i>&nbsp;import net.sf.marineapi.nmea.util.DataStatus;
+<i>24</i>&nbsp;import net.sf.marineapi.nmea.util.Direction;
+<i>25</i>&nbsp;import net.sf.marineapi.nmea.util.FaaMode;
+<i>26</i>&nbsp;
+<i>27</i>&nbsp;/**
+<i>28</i>&nbsp; * Measured cross-track error when navigating towards waypoint.
+<i>29</i>&nbsp; * 
+<i>30</i>&nbsp; * @author Kimmo Tuukkanen
+<i>31</i>&nbsp; */
+<i>32</i>&nbsp;public interface XTESentence extends Sentence {
+<i>33</i>&nbsp;
+<i>34</i>&nbsp;	/**
+<i>35</i>&nbsp;	 * Returns the Loran-C cycle lock status, not used for GPS.
+<i>36</i>&nbsp;	 */
+<i>37</i>&nbsp;	DataStatus getCycleLockStatus();
+<i>38</i>&nbsp;
+<i>39</i>&nbsp;	/**
+<i>40</i>&nbsp;	 * Returns the cross-track error magnitude/distance.
+<i>41</i>&nbsp;	 * 
+<i>42</i>&nbsp;	 * @return Cross-track error distance in nautical miles
+<i>43</i>&nbsp;	 */
+<i>44</i>&nbsp;	double getMagnitude();
+<i>45</i>&nbsp;
+<i>46</i>&nbsp;	/**
+<i>47</i>&nbsp;	 * Returns the FAA mode. Optional, NMEA 2.3 and later.
+<i>48</i>&nbsp;	 * 
+<i>49</i>&nbsp;	 * @return FaaMode
+<i>50</i>&nbsp;	 */
+<i>51</i>&nbsp;	FaaMode getMode();
+<i>52</i>&nbsp;
+<i>53</i>&nbsp;	/**
+<i>54</i>&nbsp;	 * Returns the signal/fix status.
+<i>55</i>&nbsp;	 * 
+<i>56</i>&nbsp;	 * @return DataStatus
+<i>57</i>&nbsp;	 */
+<i>58</i>&nbsp;	DataStatus getStatus();
+<i>59</i>&nbsp;
+<i>60</i>&nbsp;	/**
+<i>61</i>&nbsp;	 * Returns the direction in which to steer in order to get back on route.
+<i>62</i>&nbsp;	 * 
+<i>63</i>&nbsp;	 * @return {@link Direction#LEFT} or {@link Direction#RIGHT}
+<i>64</i>&nbsp;	 */
+<i>65</i>&nbsp;	Direction getSteerTo();
+<i>66</i>&nbsp;
+<i>67</i>&nbsp;	/**
+<i>68</i>&nbsp;	 * Sets the Loran-C cycle lock status. Not used for GPS, may be omitted or
+<i>69</i>&nbsp;	 * {@link DataStatus#VOID}.
+<i>70</i>&nbsp;	 * 
+<i>71</i>&nbsp;	 * @param status DataStatus to set
+<i>72</i>&nbsp;	 */
+<i>73</i>&nbsp;	void setCycleLockStatus(DataStatus status);
+<i>74</i>&nbsp;
+<i>75</i>&nbsp;	/**
+<i>76</i>&nbsp;	 * Sets the cross-track error magnitude/distance.
+<i>77</i>&nbsp;	 * 
+<i>78</i>&nbsp;	 * @param distance Cross-track error distance in nautical miles
+<i>79</i>&nbsp;	 */
+<i>80</i>&nbsp;	void setMagnitude(double distance);
+<i>81</i>&nbsp;
+<i>82</i>&nbsp;	/**
+<i>83</i>&nbsp;	 * Sets the FAA mode. Optional, NMEA 2.3 and later.
+<i>84</i>&nbsp;	 * 
+<i>85</i>&nbsp;	 * @param mode FaaMode to set
+<i>86</i>&nbsp;	 */
+<i>87</i>&nbsp;	void setMode(FaaMode mode);
+<i>88</i>&nbsp;
+<i>89</i>&nbsp;	/**
+<i>90</i>&nbsp;	 * Sets the signal/fix status.
+<i>91</i>&nbsp;	 * 
+<i>92</i>&nbsp;	 * @param status DataStatus to set
+<i>93</i>&nbsp;	 */
+<i>94</i>&nbsp;	void setStatus(DataStatus status);
+<i>95</i>&nbsp;
+<i>96</i>&nbsp;	/**
+<i>97</i>&nbsp;	 * Set direction in which to steer in order to get back on route.
+<i>98</i>&nbsp;	 * 
+<i>99</i>&nbsp;	 * @param direction {@link Direction#RIGHT} or {@link Direction#LEFT}
+<i>100</i>&nbsp;	 */
+<i>101</i>&nbsp;	void setSteerTo(Direction direction);
+<i>102</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2015-12-10 21:40</div>
+</div>
+</body>
+</html>

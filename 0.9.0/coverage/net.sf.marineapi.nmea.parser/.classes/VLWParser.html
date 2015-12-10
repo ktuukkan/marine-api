@@ -1,0 +1,233 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: VLWParser</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">net.sf.marineapi.nmea.parser</a> ]
+</div>
+
+<h1>Coverage Summary for Class: VLWParser (net.sf.marineapi.nmea.parser)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">VLWParser</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/ 1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (11/ 11)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    95%
+  </span>
+  <span class="absValue">
+    (19/ 20)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;/*
+<i>2</i>&nbsp; * VLWParser.java
+<i>3</i>&nbsp; * Copyright (C) 2014 ktuu
+<i>4</i>&nbsp; * 
+<i>5</i>&nbsp; * This file is part of Java Marine API.
+<i>6</i>&nbsp; * &lt;http://ktuukkan.github.io/marine-api/&gt;
+<i>7</i>&nbsp; * 
+<i>8</i>&nbsp; * Java Marine API is free software: you can redistribute it and/or modify it
+<i>9</i>&nbsp; * under the terms of the GNU Lesser General Public License as published by the
+<i>10</i>&nbsp; * Free Software Foundation, either version 3 of the License, or (at your
+<i>11</i>&nbsp; * option) any later version.
+<i>12</i>&nbsp; * 
+<i>13</i>&nbsp; * Java Marine API is distributed in the hope that it will be useful, but
+<i>14</i>&nbsp; * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+<i>15</i>&nbsp; * FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License
+<i>16</i>&nbsp; * for more details.
+<i>17</i>&nbsp; * 
+<i>18</i>&nbsp; * You should have received a copy of the GNU Lesser General Public License
+<i>19</i>&nbsp; * along with Java Marine API. If not, see &lt;http://www.gnu.org/licenses/&gt;.
+<i>20</i>&nbsp; */
+<i>21</i>&nbsp;package net.sf.marineapi.nmea.parser;
+<i>22</i>&nbsp;
+<i>23</i>&nbsp;import net.sf.marineapi.nmea.sentence.TalkerId;
+<i>24</i>&nbsp;import net.sf.marineapi.nmea.sentence.VLWSentence;
+<i>25</i>&nbsp;
+<i>26</i>&nbsp;/**
+<i>27</i>&nbsp; * VLW sentence parser.
+<i>28</i>&nbsp; * 
+<i>29</i>&nbsp; * @author Kimmo Tuukkanen
+<i>30</i>&nbsp; */
+<i>31</i>&nbsp;class VLWParser extends SentenceParser implements VLWSentence {
+<i>32</i>&nbsp;
+<i>33</i>&nbsp;	private static final int TOTAL = 0;
+<i>34</i>&nbsp;	private static final int TOTAL_UNITS = 1;
+<i>35</i>&nbsp;	private static final int TRIP = 2;
+<i>36</i>&nbsp;	private static final int TRIP_UNITS = 3;
+<i>37</i>&nbsp;
+<i>38</i>&nbsp;	/**
+<i>39</i>&nbsp;	 * Creates a new instance of VLWParser.
+<i>40</i>&nbsp;	 * 
+<i>41</i>&nbsp;	 * @param nmea NMEA sentence STring.
+<i>42</i>&nbsp;	 */
+<i>43</i>&nbsp;	public VLWParser(String nmea) {
+<b class="fc"><i>44</i>&nbsp;		super(nmea);</b>
+<b class="fc"><i>45</i>&nbsp;	}</b>
+<i>46</i>&nbsp;
+<i>47</i>&nbsp;	/**
+<i>48</i>&nbsp;	 * Creates a new empty instance of VLWParser.
+<i>49</i>&nbsp;	 * 
+<i>50</i>&nbsp;	 * @param talker TalkerId to set.
+<i>51</i>&nbsp;	 */
+<i>52</i>&nbsp;	public VLWParser(TalkerId talker) {
+<b class="fc"><i>53</i>&nbsp;		super(talker, &quot;VLW&quot;, 4);</b>
+<b class="fc"><i>54</i>&nbsp;	}</b>
+<i>55</i>&nbsp;
+<i>56</i>&nbsp;	/*
+<i>57</i>&nbsp;	 * (non-Javadoc)
+<i>58</i>&nbsp;	 * 
+<i>59</i>&nbsp;	 * @see net.sf.marineapi.nmea.sentence.VLWSentence#getTotal()
+<i>60</i>&nbsp;	 */
+<i>61</i>&nbsp;	@Override
+<i>62</i>&nbsp;	public double getTotal() {
+<b class="fc"><i>63</i>&nbsp;		return getDoubleValue(TOTAL);</b>
+<i>64</i>&nbsp;	}
+<i>65</i>&nbsp;
+<i>66</i>&nbsp;	/*
+<i>67</i>&nbsp;	 * (non-Javadoc)
+<i>68</i>&nbsp;	 * 
+<i>69</i>&nbsp;	 * @see net.sf.marineapi.nmea.sentence.VLWSentence#getTotalUnits()
+<i>70</i>&nbsp;	 */
+<i>71</i>&nbsp;	@Override
+<i>72</i>&nbsp;	public char getTotalUnits() {
+<b class="fc"><i>73</i>&nbsp;		return getCharValue(TOTAL_UNITS);</b>
+<i>74</i>&nbsp;	}
+<i>75</i>&nbsp;
+<i>76</i>&nbsp;	/*
+<i>77</i>&nbsp;	 * (non-Javadoc)
+<i>78</i>&nbsp;	 * 
+<i>79</i>&nbsp;	 * @see net.sf.marineapi.nmea.sentence.VLWSentence#getTrip()
+<i>80</i>&nbsp;	 */
+<i>81</i>&nbsp;	@Override
+<i>82</i>&nbsp;	public double getTrip() {
+<b class="fc"><i>83</i>&nbsp;		return getDoubleValue(TRIP);</b>
+<i>84</i>&nbsp;	}
+<i>85</i>&nbsp;
+<i>86</i>&nbsp;	/*
+<i>87</i>&nbsp;	 * (non-Javadoc)
+<i>88</i>&nbsp;	 * 
+<i>89</i>&nbsp;	 * @see net.sf.marineapi.nmea.sentence.VLWSentence#getTripUnits()
+<i>90</i>&nbsp;	 */
+<i>91</i>&nbsp;	@Override
+<i>92</i>&nbsp;	public char getTripUnits() {
+<b class="fc"><i>93</i>&nbsp;		return getCharValue(TRIP_UNITS);</b>
+<i>94</i>&nbsp;	}
+<i>95</i>&nbsp;
+<i>96</i>&nbsp;	/*
+<i>97</i>&nbsp;	 * (non-Javadoc)
+<i>98</i>&nbsp;	 * 
+<i>99</i>&nbsp;	 * @see net.sf.marineapi.nmea.sentence.VLWSentence#setTotal(double)
+<i>100</i>&nbsp;	 */
+<i>101</i>&nbsp;	@Override
+<i>102</i>&nbsp;	public void setTotal(double distance) {
+<b class="fc"><i>103</i>&nbsp;		setDoubleValue(TOTAL, distance, 1, 1);</b>
+<b class="fc"><i>104</i>&nbsp;	}</b>
+<i>105</i>&nbsp;
+<i>106</i>&nbsp;	/*
+<i>107</i>&nbsp;	 * (non-Javadoc)
+<i>108</i>&nbsp;	 * 
+<i>109</i>&nbsp;	 * @see net.sf.marineapi.nmea.sentence.VLWSentence#setTotalUnits(char)
+<i>110</i>&nbsp;	 */
+<i>111</i>&nbsp;	@Override
+<i>112</i>&nbsp;	public void setTotalUnits(char unit) {
+<b class="fc"><i>113</i>&nbsp;		setUnit(TOTAL_UNITS, unit);</b>
+<b class="fc"><i>114</i>&nbsp;	}</b>
+<i>115</i>&nbsp;
+<i>116</i>&nbsp;	/*
+<i>117</i>&nbsp;	 * (non-Javadoc)
+<i>118</i>&nbsp;	 * 
+<i>119</i>&nbsp;	 * @see net.sf.marineapi.nmea.sentence.VLWSentence#setTrip(double)
+<i>120</i>&nbsp;	 */
+<i>121</i>&nbsp;	@Override
+<i>122</i>&nbsp;	public void setTrip(double distance) {
+<b class="fc"><i>123</i>&nbsp;		setDoubleValue(TRIP, distance, 1, 1);</b>
+<b class="fc"><i>124</i>&nbsp;	}</b>
+<i>125</i>&nbsp;
+<i>126</i>&nbsp;	/*
+<i>127</i>&nbsp;	 * (non-Javadoc)
+<i>128</i>&nbsp;	 * 
+<i>129</i>&nbsp;	 * @see net.sf.marineapi.nmea.sentence.VLWSentence#setTripUnits(char)
+<i>130</i>&nbsp;	 */
+<i>131</i>&nbsp;	@Override
+<i>132</i>&nbsp;	public void setTripUnits(char unit) {
+<b class="fc"><i>133</i>&nbsp;		setUnit(TRIP_UNITS, unit);</b>
+<b class="fc"><i>134</i>&nbsp;	}</b>
+<i>135</i>&nbsp;
+<i>136</i>&nbsp;	/**
+<i>137</i>&nbsp;	 * Set and validate unit char.
+<i>138</i>&nbsp;	 * 
+<i>139</i>&nbsp;	 * @param index Field index
+<i>140</i>&nbsp;	 * @param unit Unit char
+<i>141</i>&nbsp;	 */
+<i>142</i>&nbsp;	private void setUnit(int index, char unit) {
+<b class="fc"><i>143</i>&nbsp;		if (unit != VLWSentence.KM &amp;&amp; unit != VLWSentence.NM) {</b>
+<b class="nc"><i>144</i>&nbsp;			throw new IllegalArgumentException(</b>
+<i>145</i>&nbsp;				&quot;Invalid distance unit, expected &#39;N&#39; or &#39;K&#39;&quot;);
+<i>146</i>&nbsp;		}
+<b class="fc"><i>147</i>&nbsp;		setCharValue(index, unit);</b>
+<b class="fc"><i>148</i>&nbsp;	}</b>
+<i>149</i>&nbsp;
+<i>150</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2015-12-10 21:41</div>
+</div>
+</body>
+</html>

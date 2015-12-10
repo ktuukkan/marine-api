@@ -1,0 +1,273 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: MDASentence</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">net.sf.marineapi.nmea.sentence</a> ]
+</div>
+
+<h1>Coverage Summary for Class: MDASentence (net.sf.marineapi.nmea.sentence)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+</tr>
+<tr>
+  <td class="name">MDASentence</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;/*
+<i>2</i>&nbsp; * MDASentence.java
+<i>3</i>&nbsp; * Copyright (C) 2015 INDI for Java NMEA 0183 stream driver
+<i>4</i>&nbsp; * 
+<i>5</i>&nbsp; * This file is part of Java Marine API.
+<i>6</i>&nbsp; * &lt;http://ktuukkan.github.io/marine-api/&gt;
+<i>7</i>&nbsp; * 
+<i>8</i>&nbsp; * Java Marine API is free software: you can redistribute it and/or modify it
+<i>9</i>&nbsp; * under the terms of the GNU Lesser General Public License as published by the
+<i>10</i>&nbsp; * Free Software Foundation, either version 3 of the License, or (at your
+<i>11</i>&nbsp; * option) any later version.
+<i>12</i>&nbsp; * 
+<i>13</i>&nbsp; * Java Marine API is distributed in the hope that it will be useful, but
+<i>14</i>&nbsp; * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+<i>15</i>&nbsp; * FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License
+<i>16</i>&nbsp; * for more details.
+<i>17</i>&nbsp; * 
+<i>18</i>&nbsp; * You should have received a copy of the GNU Lesser General Public License
+<i>19</i>&nbsp; * along with Java Marine API. If not, see &lt;http://www.gnu.org/licenses/&gt;.
+<i>20</i>&nbsp; */
+<i>21</i>&nbsp;package net.sf.marineapi.nmea.sentence;
+<i>22</i>&nbsp;
+<i>23</i>&nbsp;/**
+<i>24</i>&nbsp; * Meteorological Composite - Barometric pressure, air and water temperature,
+<i>25</i>&nbsp; * humidity, dew point and wind speed and direction relative to the surface of
+<i>26</i>&nbsp; * the earth.
+<i>27</i>&nbsp; *
+<i>28</i>&nbsp; * @author Richard van Nieuwenhoven
+<i>29</i>&nbsp; */
+<i>30</i>&nbsp;public interface MDASentence extends Sentence {
+<i>31</i>&nbsp;
+<i>32</i>&nbsp;    /**
+<i>33</i>&nbsp;     * Returns the absolute humidity.
+<i>34</i>&nbsp;     *
+<i>35</i>&nbsp;     * @return Absolute humidity, percent, to the nearest 0,1 percent. NaN if
+<i>36</i>&nbsp;     * not available.
+<i>37</i>&nbsp;     */
+<i>38</i>&nbsp;    double getAbsoluteHumidity();
+<i>39</i>&nbsp;
+<i>40</i>&nbsp;    /**
+<i>41</i>&nbsp;     * Returns the air temperature.
+<i>42</i>&nbsp;     *
+<i>43</i>&nbsp;     * @return Air temperature, degrees C, to the nearest 0,1 degree C. NaN if
+<i>44</i>&nbsp;     * not available.
+<i>45</i>&nbsp;     */
+<i>46</i>&nbsp;    double getAirTemperature();
+<i>47</i>&nbsp;
+<i>48</i>&nbsp;    /**
+<i>49</i>&nbsp;     * Returns the dew point.
+<i>50</i>&nbsp;     *
+<i>51</i>&nbsp;     * @return Dew point, degrees C, to the nearest 0,1 degree C. NaN if not
+<i>52</i>&nbsp;     * available.
+<i>53</i>&nbsp;     */
+<i>54</i>&nbsp;    double getDewPoint();
+<i>55</i>&nbsp;
+<i>56</i>&nbsp;    /**
+<i>57</i>&nbsp;     * Returns the magnetic wind direction.
+<i>58</i>&nbsp;     *
+<i>59</i>&nbsp;     * @return Wind direction, degrees True, to the nearest 0,1 degree. NaN if
+<i>60</i>&nbsp;     * not available.
+<i>61</i>&nbsp;     */
+<i>62</i>&nbsp;    double getMagneticWindDirection();
+<i>63</i>&nbsp;
+<i>64</i>&nbsp;    /**
+<i>65</i>&nbsp;     * Returns the primary barometric pressure.
+<i>66</i>&nbsp;     *
+<i>67</i>&nbsp;     * @return Barometric pressure, inches of mercury. NaN if not available.
+<i>68</i>&nbsp;     */
+<i>69</i>&nbsp;    double getPrimaryBarometricPressure();
+<i>70</i>&nbsp;
+<i>71</i>&nbsp;    /**
+<i>72</i>&nbsp;     * Returns the unit of primary barometric pressure.
+<i>73</i>&nbsp;     *
+<i>74</i>&nbsp;     * @return B = bar I = inches of mercury (inHg) P = pascal (1 bar = 100000
+<i>75</i>&nbsp;     * Pa = 29,53 inHg).
+<i>76</i>&nbsp;     */
+<i>77</i>&nbsp;    char getPrimaryBarometricPressureUnit();
+<i>78</i>&nbsp;
+<i>79</i>&nbsp;    /**
+<i>80</i>&nbsp;     * Returns the relative humidity.
+<i>81</i>&nbsp;     *
+<i>82</i>&nbsp;     * @return Relative humidity, percent, to the nearest 0,1 percent. NaN if
+<i>83</i>&nbsp;     * not available.
+<i>84</i>&nbsp;     */
+<i>85</i>&nbsp;    double getRelativeHumidity();
+<i>86</i>&nbsp;
+<i>87</i>&nbsp;    /**
+<i>88</i>&nbsp;     * Returns the secondary barometric pressure.
+<i>89</i>&nbsp;     *
+<i>90</i>&nbsp;     * @return Barometric pressure, bars, to the nearest .001 bar. NaN if not
+<i>91</i>&nbsp;     * available.
+<i>92</i>&nbsp;     */
+<i>93</i>&nbsp;    double getSecondaryBarometricPressure();
+<i>94</i>&nbsp;
+<i>95</i>&nbsp;    /**
+<i>96</i>&nbsp;     * Returns the unit of secondary barometric pressure.
+<i>97</i>&nbsp;     *
+<i>98</i>&nbsp;     * @return B = bar I = inches of mercury (inHg) P = pascal (1 bar = 100000
+<i>99</i>&nbsp;     * Pa = 29,53 inHg). The secondary unit is almost always in bars.
+<i>100</i>&nbsp;     */
+<i>101</i>&nbsp;    char getSecondaryBarometricPressureUnit();
+<i>102</i>&nbsp;
+<i>103</i>&nbsp;    /**
+<i>104</i>&nbsp;     * Returns the wind direction.
+<i>105</i>&nbsp;     *
+<i>106</i>&nbsp;     * @return Wind direction, degrees True, to the nearest 0,1 degree. NaN if
+<i>107</i>&nbsp;     * not available.
+<i>108</i>&nbsp;     */
+<i>109</i>&nbsp;    double getTrueWindDirection();
+<i>110</i>&nbsp;
+<i>111</i>&nbsp;    /**
+<i>112</i>&nbsp;     * Returns the water temperature.
+<i>113</i>&nbsp;     *
+<i>114</i>&nbsp;     * @return Water temperature, degrees C. NaN if not available.
+<i>115</i>&nbsp;     */
+<i>116</i>&nbsp;    double getWaterTemperature();
+<i>117</i>&nbsp;
+<i>118</i>&nbsp;    /**
+<i>119</i>&nbsp;     * Returns the wind speed.
+<i>120</i>&nbsp;     *
+<i>121</i>&nbsp;     * @return Wind speed, meters per second, to the nearest 0,1 m/s. NaN if not
+<i>122</i>&nbsp;     * available.
+<i>123</i>&nbsp;     */
+<i>124</i>&nbsp;    double getWindSpeed();
+<i>125</i>&nbsp;
+<i>126</i>&nbsp;    /**
+<i>127</i>&nbsp;     * Returns the wind speed.
+<i>128</i>&nbsp;     *
+<i>129</i>&nbsp;     * @return Wind speed, knots. NaN if not available.
+<i>130</i>&nbsp;     */
+<i>131</i>&nbsp;    double getWindSpeedKnots();
+<i>132</i>&nbsp;
+<i>133</i>&nbsp;    /**
+<i>134</i>&nbsp;     * Sets the absolute humidity.
+<i>135</i>&nbsp;     *
+<i>136</i>&nbsp;     * @param humitidy Humidity percent to set.
+<i>137</i>&nbsp;     */
+<i>138</i>&nbsp;    void setAbsoluteHumidity(double humitidy);
+<i>139</i>&nbsp;
+<i>140</i>&nbsp;    /**
+<i>141</i>&nbsp;     * Sets the air temperature.
+<i>142</i>&nbsp;     *
+<i>143</i>&nbsp;     * @param temp Temperature to set, degrees Celsius.
+<i>144</i>&nbsp;     */
+<i>145</i>&nbsp;    void setAirTemperature(double temp);
+<i>146</i>&nbsp;
+<i>147</i>&nbsp;    /**
+<i>148</i>&nbsp;     * Sets the dew point temperature.
+<i>149</i>&nbsp;     *
+<i>150</i>&nbsp;     * @param dewPoint Dew point in degrees Celsius.
+<i>151</i>&nbsp;     */
+<i>152</i>&nbsp;    void setDewPoint(double dewPoint);
+<i>153</i>&nbsp;
+<i>154</i>&nbsp;    /**
+<i>155</i>&nbsp;     * Sets the magnetic wind direction.
+<i>156</i>&nbsp;     *
+<i>157</i>&nbsp;     * @param direction Direction to set, degrees Magnetic [0..360]
+<i>158</i>&nbsp;     */
+<i>159</i>&nbsp;    void setMagneticWindDirection(double direction);
+<i>160</i>&nbsp;
+<i>161</i>&nbsp;    /**
+<i>162</i>&nbsp;     * Sets the primary barometric pressure value.
+<i>163</i>&nbsp;     *
+<i>164</i>&nbsp;     * @param pressure Pressure value to set, usually in inches of mercury.
+<i>165</i>&nbsp;     * @see #setPrimaryBarometricPressureUnit(char)
+<i>166</i>&nbsp;     */
+<i>167</i>&nbsp;    void setPrimaryBarometricPressure(double pressure);
+<i>168</i>&nbsp;
+<i>169</i>&nbsp;    /**
+<i>170</i>&nbsp;     * Sets the barometric pressure unit.
+<i>171</i>&nbsp;     *
+<i>172</i>&nbsp;     * @param unit Pressure unit to set, usually in inches of mercury &#39;I&#39;.
+<i>173</i>&nbsp;     * @see #setSecondaryBarometricPressureUnit(char)
+<i>174</i>&nbsp;     */
+<i>175</i>&nbsp;    void setPrimaryBarometricPressureUnit(char unit);
+<i>176</i>&nbsp;
+<i>177</i>&nbsp;    /**
+<i>178</i>&nbsp;     * Sets the relative humidity
+<i>179</i>&nbsp;     *
+<i>180</i>&nbsp;     * @param humidity Humidity percent to set.
+<i>181</i>&nbsp;     */
+<i>182</i>&nbsp;    void setRelativeHumidity(double humidity);
+<i>183</i>&nbsp;
+<i>184</i>&nbsp;    /**
+<i>185</i>&nbsp;     * Sets the barometric pressure value.
+<i>186</i>&nbsp;     *
+<i>187</i>&nbsp;     * @param pressure Pressure to set, usually in bars.
+<i>188</i>&nbsp;     */
+<i>189</i>&nbsp;    void setSecondaryBarometricPressure(double pressure);
+<i>190</i>&nbsp;
+<i>191</i>&nbsp;    /**
+<i>192</i>&nbsp;     * Sets the secondary barometric pressure unit.
+<i>193</i>&nbsp;     *
+<i>194</i>&nbsp;     * @param unit Pressure unit set, usually in bars &#39;B&#39;.
+<i>195</i>&nbsp;     */
+<i>196</i>&nbsp;    void setSecondaryBarometricPressureUnit(char unit);
+<i>197</i>&nbsp;
+<i>198</i>&nbsp;    /**
+<i>199</i>&nbsp;     * Sets the True wind direction.
+<i>200</i>&nbsp;     *
+<i>201</i>&nbsp;     * @param direction Direction to set, degrees True [0..360]
+<i>202</i>&nbsp;     */
+<i>203</i>&nbsp;    void setTrueWindDirection(double direction);
+<i>204</i>&nbsp;
+<i>205</i>&nbsp;    /**
+<i>206</i>&nbsp;     * Sets the Water temperature.
+<i>207</i>&nbsp;     *
+<i>208</i>&nbsp;     * @param temp Temperature in degrees Celsius.
+<i>209</i>&nbsp;     */
+<i>210</i>&nbsp;    void setWaterTemperature(double temp);
+<i>211</i>&nbsp;
+<i>212</i>&nbsp;    /**
+<i>213</i>&nbsp;     * Sets the wind speed.
+<i>214</i>&nbsp;     *
+<i>215</i>&nbsp;     * @param speed Wind speed in meters per second.
+<i>216</i>&nbsp;     */
+<i>217</i>&nbsp;    void setWindSpeed(double speed);
+<i>218</i>&nbsp;
+<i>219</i>&nbsp;    /**
+<i>220</i>&nbsp;     * Sets the wind speed, in knots.
+<i>221</i>&nbsp;     *
+<i>222</i>&nbsp;     * @param speed Wind speed in knots.
+<i>223</i>&nbsp;     * @see #setWindSpeedKnots(double)
+<i>224</i>&nbsp;     */
+<i>225</i>&nbsp;    void setWindSpeedKnots(double speed);
+<i>226</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2015-12-10 21:40</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,317 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: PositionParser</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">net.sf.marineapi.nmea.parser</a> ]
+</div>
+
+<h1>Coverage Summary for Class: PositionParser (net.sf.marineapi.nmea.parser)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">PositionParser</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/ 1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (12/ 12)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    93.5%
+  </span>
+  <span class="absValue">
+    (58/ 62)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;/* 
+<i>2</i>&nbsp; * PositionParser.java
+<i>3</i>&nbsp; * Copyright (C) 2010 Kimmo Tuukkanen
+<i>4</i>&nbsp; * 
+<i>5</i>&nbsp; * This file is part of Java Marine API.
+<i>6</i>&nbsp; * &lt;http://ktuukkan.github.io/marine-api/&gt;
+<i>7</i>&nbsp; * 
+<i>8</i>&nbsp; * Java Marine API is free software: you can redistribute it and/or modify it
+<i>9</i>&nbsp; * under the terms of the GNU Lesser General Public License as published by the
+<i>10</i>&nbsp; * Free Software Foundation, either version 3 of the License, or (at your
+<i>11</i>&nbsp; * option) any later version.
+<i>12</i>&nbsp; * 
+<i>13</i>&nbsp; * Java Marine API is distributed in the hope that it will be useful, but
+<i>14</i>&nbsp; * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+<i>15</i>&nbsp; * FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License
+<i>16</i>&nbsp; * for more details.
+<i>17</i>&nbsp; * 
+<i>18</i>&nbsp; * You should have received a copy of the GNU Lesser General Public License
+<i>19</i>&nbsp; * along with Java Marine API. If not, see &lt;http://www.gnu.org/licenses/&gt;.
+<i>20</i>&nbsp; */
+<i>21</i>&nbsp;package net.sf.marineapi.nmea.parser;
+<i>22</i>&nbsp;
+<i>23</i>&nbsp;import java.text.DecimalFormat;
+<i>24</i>&nbsp;import java.text.DecimalFormatSymbols;
+<i>25</i>&nbsp;
+<i>26</i>&nbsp;import net.sf.marineapi.nmea.sentence.SentenceId;
+<i>27</i>&nbsp;import net.sf.marineapi.nmea.sentence.TalkerId;
+<i>28</i>&nbsp;import net.sf.marineapi.nmea.util.CompassPoint;
+<i>29</i>&nbsp;import net.sf.marineapi.nmea.util.Position;
+<i>30</i>&nbsp;
+<i>31</i>&nbsp;/**
+<i>32</i>&nbsp; * Abstract base class for sentence parsers that provide geographic position or
+<i>33</i>&nbsp; * waypoint data, and thus need to parse lat/lon values. However, notice that
+<i>34</i>&nbsp; * {@link net.sf.marineapi.nmea.sentence.PositionSentence} interface is not
+<i>35</i>&nbsp; * implemented by this parser because the extending parser may not always
+<i>36</i>&nbsp; * provide current location.
+<i>37</i>&nbsp; * 
+<i>38</i>&nbsp; * @author Kimmo Tuukkanen
+<i>39</i>&nbsp; */
+<i>40</i>&nbsp;abstract class PositionParser extends SentenceParser {
+<i>41</i>&nbsp;
+<i>42</i>&nbsp;	/**
+<i>43</i>&nbsp;	 * @see SentenceParser#SentenceParser(String, SentenceId)
+<i>44</i>&nbsp;	 */
+<i>45</i>&nbsp;	protected PositionParser(String nmea, SentenceId type) {
+<b class="fc"><i>46</i>&nbsp;		super(nmea, type);</b>
+<b class="fc"><i>47</i>&nbsp;	}</b>
+<i>48</i>&nbsp;
+<i>49</i>&nbsp;	/**
+<i>50</i>&nbsp;	 * @see SentenceParser#SentenceParser(TalkerId, SentenceId, int)
+<i>51</i>&nbsp;	 */
+<i>52</i>&nbsp;	protected PositionParser(TalkerId talker, SentenceId type, int size) {
+<b class="fc"><i>53</i>&nbsp;		super(talker, type, size);</b>
+<b class="fc"><i>54</i>&nbsp;	}</b>
+<i>55</i>&nbsp;
+<i>56</i>&nbsp;	/**
+<i>57</i>&nbsp;	 * Parses the hemisphere of latitude from specified field.
+<i>58</i>&nbsp;	 * 
+<i>59</i>&nbsp;	 * @param index Index of field that contains the latitude hemisphere value.
+<i>60</i>&nbsp;	 * @return Hemisphere of latitude
+<i>61</i>&nbsp;	 */
+<i>62</i>&nbsp;	protected CompassPoint parseHemisphereLat(int index) {
+<b class="fc"><i>63</i>&nbsp;		char ch = getCharValue(index);</b>
+<b class="fc"><i>64</i>&nbsp;		CompassPoint d = CompassPoint.valueOf(ch);</b>
+<b class="fc"><i>65</i>&nbsp;		if (d != CompassPoint.NORTH &amp;&amp; d != CompassPoint.SOUTH) {</b>
+<b class="nc"><i>66</i>&nbsp;			throw new ParseException(&quot;Invalid latitude hemisphere &#39;&quot; + ch + &quot;&#39;&quot;);</b>
+<i>67</i>&nbsp;		}
+<b class="fc"><i>68</i>&nbsp;		return d;</b>
+<i>69</i>&nbsp;	}
+<i>70</i>&nbsp;
+<i>71</i>&nbsp;	/**
+<i>72</i>&nbsp;	 * Parses the hemisphere of longitude from the specified field.
+<i>73</i>&nbsp;	 * 
+<i>74</i>&nbsp;	 * @param index Field index for longitude hemisphere indicator
+<i>75</i>&nbsp;	 * @return Hemisphere of longitude
+<i>76</i>&nbsp;	 */
+<i>77</i>&nbsp;	protected CompassPoint parseHemisphereLon(int index) {
+<b class="fc"><i>78</i>&nbsp;		char ch = getCharValue(index);</b>
+<b class="fc"><i>79</i>&nbsp;		CompassPoint d = CompassPoint.valueOf(ch);</b>
+<b class="fc"><i>80</i>&nbsp;		if (d != CompassPoint.EAST &amp;&amp; d != CompassPoint.WEST) {</b>
+<b class="nc"><i>81</i>&nbsp;			throw new ParseException(&quot;Invalid longitude hemisphere &quot; + ch + &quot;&#39;&quot;);</b>
+<i>82</i>&nbsp;		}
+<b class="fc"><i>83</i>&nbsp;		return d;</b>
+<i>84</i>&nbsp;	}
+<i>85</i>&nbsp;
+<i>86</i>&nbsp;	/**
+<i>87</i>&nbsp;	 * Parses the latitude degrees from the specified field. The assumed String
+<i>88</i>&nbsp;	 * format for latitude is &lt;code&gt;ddmm.mmm&lt;/code&gt;.
+<i>89</i>&nbsp;	 * 
+<i>90</i>&nbsp;	 * @param index Index of field containing the latitude value.
+<i>91</i>&nbsp;	 * @return Latitude value in degrees
+<i>92</i>&nbsp;	 */
+<i>93</i>&nbsp;	protected double parseLatitude(int index) {
+<b class="fc"><i>94</i>&nbsp;		String field = getStringValue(index);</b>
+<b class="fc"><i>95</i>&nbsp;		int deg = Integer.parseInt(field.substring(0, 2));</b>
+<b class="fc"><i>96</i>&nbsp;		double min = Double.parseDouble(field.substring(2));</b>
+<b class="fc"><i>97</i>&nbsp;		return deg + (min / 60);</b>
+<i>98</i>&nbsp;	}
+<i>99</i>&nbsp;
+<i>100</i>&nbsp;	/**
+<i>101</i>&nbsp;	 * Parses the longitude degrees from the specified field. The assumed String
+<i>102</i>&nbsp;	 * format for longitude is &lt;code&gt;dddmm.mmm&lt;/code&gt;.
+<i>103</i>&nbsp;	 * 
+<i>104</i>&nbsp;	 * @param index Index of field containing the longitude value.
+<i>105</i>&nbsp;	 * @return Longitude value in degrees
+<i>106</i>&nbsp;	 */
+<i>107</i>&nbsp;	protected double parseLongitude(int index) {
+<b class="fc"><i>108</i>&nbsp;		String field = getStringValue(index);</b>
+<b class="fc"><i>109</i>&nbsp;		int deg = Integer.parseInt(field.substring(0, 3));</b>
+<b class="fc"><i>110</i>&nbsp;		double min = Double.parseDouble(field.substring(3));</b>
+<b class="fc"><i>111</i>&nbsp;		return deg + (min / 60);</b>
+<i>112</i>&nbsp;	}
+<i>113</i>&nbsp;
+<i>114</i>&nbsp;	/**
+<i>115</i>&nbsp;	 * Parses a &lt;code&gt;Position&lt;/code&gt; from specified fields.
+<i>116</i>&nbsp;	 * 
+<i>117</i>&nbsp;	 * @param latIndex Latitude field index
+<i>118</i>&nbsp;	 * @param latHemIndex Latitude hemisphere field index
+<i>119</i>&nbsp;	 * @param lonIndex Longitude field index
+<i>120</i>&nbsp;	 * @param lonHemIndex Longitude hemisphere field index
+<i>121</i>&nbsp;	 * @return Position object
+<i>122</i>&nbsp;	 */
+<i>123</i>&nbsp;	protected Position parsePosition(int latIndex, int latHemIndex,
+<i>124</i>&nbsp;		int lonIndex, int lonHemIndex) {
+<i>125</i>&nbsp;
+<b class="fc"><i>126</i>&nbsp;		double lat = parseLatitude(latIndex);</b>
+<b class="fc"><i>127</i>&nbsp;		double lon = parseLongitude(lonIndex);</b>
+<b class="fc"><i>128</i>&nbsp;		CompassPoint lath = parseHemisphereLat(latHemIndex);</b>
+<b class="fc"><i>129</i>&nbsp;		CompassPoint lonh = parseHemisphereLon(lonHemIndex);</b>
+<b class="fc"><i>130</i>&nbsp;		if (lath.equals(CompassPoint.SOUTH)) {</b>
+<b class="fc"><i>131</i>&nbsp;			lat = -lat;</b>
+<i>132</i>&nbsp;		}
+<b class="fc"><i>133</i>&nbsp;		if (lonh.equals(CompassPoint.WEST)) {</b>
+<b class="fc"><i>134</i>&nbsp;			lon = -lon;</b>
+<i>135</i>&nbsp;		}
+<b class="fc"><i>136</i>&nbsp;		return new Position(lat, lon);</b>
+<i>137</i>&nbsp;	}
+<i>138</i>&nbsp;
+<i>139</i>&nbsp;	/**
+<i>140</i>&nbsp;	 * Set the hemisphere of latitude in specified field.
+<i>141</i>&nbsp;	 * 
+<i>142</i>&nbsp;	 * @param field Field index
+<i>143</i>&nbsp;	 * @param hem Direction.NORTH or Direction.SOUTH
+<i>144</i>&nbsp;	 * @throws IllegalArgumentException If specified Direction is other than
+<i>145</i>&nbsp;	 *             NORTH or SOUTH.
+<i>146</i>&nbsp;	 */
+<i>147</i>&nbsp;	protected void setLatHemisphere(int field, CompassPoint hem) {
+<b class="fc"><i>148</i>&nbsp;		if (hem != CompassPoint.NORTH &amp;&amp; hem != CompassPoint.SOUTH) {</b>
+<b class="nc"><i>149</i>&nbsp;			throw new IllegalArgumentException(&quot;Invalid latitude hemisphere: &quot;</b>
+<i>150</i>&nbsp;				+ hem);
+<i>151</i>&nbsp;		}
+<b class="fc"><i>152</i>&nbsp;		setCharValue(field, hem.toChar());</b>
+<b class="fc"><i>153</i>&nbsp;	}</b>
+<i>154</i>&nbsp;
+<i>155</i>&nbsp;	/**
+<i>156</i>&nbsp;	 * Sets the latitude value in specified field, formatted in &quot;ddmm.mmm&quot;.
+<i>157</i>&nbsp;	 * 
+<i>158</i>&nbsp;	 * @param index Field index
+<i>159</i>&nbsp;	 * @param lat Latitude value in degrees
+<i>160</i>&nbsp;	 */
+<i>161</i>&nbsp;	protected void setLatitude(int index, double lat) {
+<i>162</i>&nbsp;
+<b class="fc"><i>163</i>&nbsp;		int deg = (int) Math.floor(lat);</b>
+<b class="fc"><i>164</i>&nbsp;		double min = (lat - deg) * 60;</b>
+<i>165</i>&nbsp;
+<b class="fc"><i>166</i>&nbsp;		DecimalFormat df = new DecimalFormat(&quot;00.000&quot;);</b>
+<b class="fc"><i>167</i>&nbsp;		DecimalFormatSymbols dfs = new DecimalFormatSymbols();</b>
+<b class="fc"><i>168</i>&nbsp;		dfs.setDecimalSeparator(&#39;.&#39;);</b>
+<b class="fc"><i>169</i>&nbsp;		df.setDecimalFormatSymbols(dfs);</b>
+<i>170</i>&nbsp;
+<b class="fc"><i>171</i>&nbsp;		String result = String.format(&quot;%02d%s&quot;, deg, df.format(min));</b>
+<b class="fc"><i>172</i>&nbsp;		setStringValue(index, result);</b>
+<b class="fc"><i>173</i>&nbsp;	}</b>
+<i>174</i>&nbsp;
+<i>175</i>&nbsp;	/**
+<i>176</i>&nbsp;	 * Sets the longitude value in specified field, formatted in &quot;dddmm.mmm&quot;.
+<i>177</i>&nbsp;	 * Does not check if the given value is logically correct to current
+<i>178</i>&nbsp;	 * longitude hemisphere.
+<i>179</i>&nbsp;	 * 
+<i>180</i>&nbsp;	 * @param index Field index
+<i>181</i>&nbsp;	 * @param lon Longitude value in degrees
+<i>182</i>&nbsp;	 */
+<i>183</i>&nbsp;	protected void setLongitude(int index, double lon) {
+<i>184</i>&nbsp;
+<b class="fc"><i>185</i>&nbsp;		int deg = (int) Math.floor(lon);</b>
+<b class="fc"><i>186</i>&nbsp;		double min = (lon - deg) * 60;</b>
+<i>187</i>&nbsp;
+<b class="fc"><i>188</i>&nbsp;		DecimalFormat nf = new DecimalFormat(&quot;00.000&quot;);</b>
+<b class="fc"><i>189</i>&nbsp;		DecimalFormatSymbols dfs = new DecimalFormatSymbols();</b>
+<b class="fc"><i>190</i>&nbsp;		dfs.setDecimalSeparator(&#39;.&#39;);</b>
+<b class="fc"><i>191</i>&nbsp;		nf.setDecimalFormatSymbols(dfs);</b>
+<i>192</i>&nbsp;
+<b class="fc"><i>193</i>&nbsp;		String result = String.format(&quot;%03d%s&quot;, deg, nf.format(min));</b>
+<b class="fc"><i>194</i>&nbsp;		setStringValue(index, result);</b>
+<b class="fc"><i>195</i>&nbsp;	}</b>
+<i>196</i>&nbsp;
+<i>197</i>&nbsp;	/**
+<i>198</i>&nbsp;	 * Set the hemisphere of longitude in specified field. Does not check if the
+<i>199</i>&nbsp;	 * given value is logically correct to current longitude value.
+<i>200</i>&nbsp;	 * 
+<i>201</i>&nbsp;	 * @param field Field index
+<i>202</i>&nbsp;	 * @param hem Direction.EAST or Direction.WEST
+<i>203</i>&nbsp;	 * @throws IllegalArgumentException If specified Direction is other than
+<i>204</i>&nbsp;	 *             EAST or WEST.
+<i>205</i>&nbsp;	 */
+<i>206</i>&nbsp;	protected void setLonHemisphere(int field, CompassPoint hem) {
+<b class="fc"><i>207</i>&nbsp;		if (hem != CompassPoint.EAST &amp;&amp; hem != CompassPoint.WEST) {</b>
+<b class="nc"><i>208</i>&nbsp;			throw new IllegalArgumentException(&quot;Invalid longitude hemisphere: &quot;</b>
+<i>209</i>&nbsp;				+ hem);
+<i>210</i>&nbsp;		}
+<b class="fc"><i>211</i>&nbsp;		setCharValue(field, hem.toChar());</b>
+<b class="fc"><i>212</i>&nbsp;	}</b>
+<i>213</i>&nbsp;
+<i>214</i>&nbsp;	/**
+<i>215</i>&nbsp;	 * Sets the values from specified &lt;code&gt;Position&lt;/code&gt; according to given
+<i>216</i>&nbsp;	 * field indices. Sets the absolute values of latitude and longitude, and
+<i>217</i>&nbsp;	 * hemisphere indicators as given by &lt;code&gt;Position&lt;/code&gt;. Does not set
+<i>218</i>&nbsp;	 * altitude.
+<i>219</i>&nbsp;	 * 
+<i>220</i>&nbsp;	 * @param p Position to set
+<i>221</i>&nbsp;	 * @param latIndex Index of latitude field
+<i>222</i>&nbsp;	 * @param latHemIndex Index of latitude hemisphere field
+<i>223</i>&nbsp;	 * @param lonIndex Index of longitude field
+<i>224</i>&nbsp;	 * @param lonHemIndex Index of longitude hemisphere field
+<i>225</i>&nbsp;	 */
+<i>226</i>&nbsp;	protected void setPositionValues(Position p, int latIndex, int latHemIndex,
+<i>227</i>&nbsp;		int lonIndex, int lonHemIndex) {
+<i>228</i>&nbsp;
+<b class="fc"><i>229</i>&nbsp;		setLatitude(latIndex, Math.abs(p.getLatitude()));</b>
+<b class="fc"><i>230</i>&nbsp;		setLongitude(lonIndex, Math.abs(p.getLongitude()));</b>
+<b class="fc"><i>231</i>&nbsp;		setLatHemisphere(latHemIndex, p.getLatitudeHemisphere());</b>
+<b class="fc"><i>232</i>&nbsp;		setLonHemisphere(lonHemIndex, p.getLongitudeHemisphere());</b>
+<b class="fc"><i>233</i>&nbsp;	}</b>
+<i>234</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2015-12-10 21:41</div>
+</div>
+</body>
+</html>

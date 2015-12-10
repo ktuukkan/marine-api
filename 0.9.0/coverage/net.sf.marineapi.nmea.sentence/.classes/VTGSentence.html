@@ -1,0 +1,192 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: VTGSentence</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">net.sf.marineapi.nmea.sentence</a> ]
+</div>
+
+<h1>Coverage Summary for Class: VTGSentence (net.sf.marineapi.nmea.sentence)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+</tr>
+<tr>
+  <td class="name">VTGSentence</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;/* 
+<i>2</i>&nbsp; * VTGSentence.java
+<i>3</i>&nbsp; * Copyright (C) 2010 Kimmo Tuukkanen
+<i>4</i>&nbsp; * 
+<i>5</i>&nbsp; * This file is part of Java Marine API.
+<i>6</i>&nbsp; * &lt;http://ktuukkan.github.io/marine-api/&gt;
+<i>7</i>&nbsp; * 
+<i>8</i>&nbsp; * Java Marine API is free software: you can redistribute it and/or modify it
+<i>9</i>&nbsp; * under the terms of the GNU Lesser General Public License as published by the
+<i>10</i>&nbsp; * Free Software Foundation, either version 3 of the License, or (at your
+<i>11</i>&nbsp; * option) any later version.
+<i>12</i>&nbsp; * 
+<i>13</i>&nbsp; * Java Marine API is distributed in the hope that it will be useful, but
+<i>14</i>&nbsp; * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+<i>15</i>&nbsp; * FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License
+<i>16</i>&nbsp; * for more details.
+<i>17</i>&nbsp; * 
+<i>18</i>&nbsp; * You should have received a copy of the GNU Lesser General Public License
+<i>19</i>&nbsp; * along with Java Marine API. If not, see &lt;http://www.gnu.org/licenses/&gt;.
+<i>20</i>&nbsp; */
+<i>21</i>&nbsp;package net.sf.marineapi.nmea.sentence;
+<i>22</i>&nbsp;
+<i>23</i>&nbsp;import net.sf.marineapi.nmea.util.FaaMode;
+<i>24</i>&nbsp;
+<i>25</i>&nbsp;/**
+<i>26</i>&nbsp; * Course and speed over the ground. True and magnetic COG, speed provided in
+<i>27</i>&nbsp; * km/h and knots. Mode (the last &quot;A&quot; in example sentence) was added in NMEA 2.3
+<i>28</i>&nbsp; * and may not always be available.
+<i>29</i>&nbsp; * &lt;p&gt;
+<i>30</i>&nbsp; * Example: &lt;br&gt;
+<i>31</i>&nbsp; * &lt;code&gt;$GPVTG,46.96,T,,,16.89,N,31.28,K,A*43&lt;/code&gt;
+<i>32</i>&nbsp; * 
+<i>33</i>&nbsp; * @author Kimmo Tuukkanen
+<i>34</i>&nbsp; */
+<i>35</i>&nbsp;public interface VTGSentence extends Sentence {
+<i>36</i>&nbsp;
+<i>37</i>&nbsp;	/** Char indicator for &quot;true&quot; */
+<i>38</i>&nbsp;	char TRUE = &#39;T&#39;;
+<i>39</i>&nbsp;	/** Char indicator for &quot;magnetic&quot; */
+<i>40</i>&nbsp;	char MAGNETIC = &#39;M&#39;;
+<i>41</i>&nbsp;	/** Units indicator for kilometers per hour */
+<i>42</i>&nbsp;	char KMPH = &#39;K&#39;;
+<i>43</i>&nbsp;	/** Units indicator for knots (nautical miles per hour) */
+<i>44</i>&nbsp;	char KNOT = &#39;N&#39;;
+<i>45</i>&nbsp;	/** Operating in manual mode (forced 2D or 3D). */
+<i>46</i>&nbsp;	char MODE_MANUAL = &#39;M&#39;;
+<i>47</i>&nbsp;	/** Operating in automatic mode (2D/3D). */
+<i>48</i>&nbsp;	char MODE_AUTOMATIC = &#39;A&#39;;
+<i>49</i>&nbsp;
+<i>50</i>&nbsp;	/**
+<i>51</i>&nbsp;	 * Get the magnetic course over ground.
+<i>52</i>&nbsp;	 * 
+<i>53</i>&nbsp;	 * @return Magnetic course
+<i>54</i>&nbsp;	 * @throws net.sf.marineapi.nmea.parser.DataNotAvailableException If the data is
+<i>55</i>&nbsp;	 *             not available.
+<i>56</i>&nbsp;	 * @throws net.sf.marineapi.nmea.parser.ParseException If the field contains
+<i>57</i>&nbsp;	 *             unexpected or illegal value.
+<i>58</i>&nbsp;	 */
+<i>59</i>&nbsp;	double getMagneticCourse();
+<i>60</i>&nbsp;
+<i>61</i>&nbsp;	/**
+<i>62</i>&nbsp;	 * Get the FAA operating mode of GPS receiver. The field may not be
+<i>63</i>&nbsp;	 * available, depending on the NMEA version.
+<i>64</i>&nbsp;	 * 
+<i>65</i>&nbsp;	 * @since NMEA 2.3
+<i>66</i>&nbsp;	 * @return {@link FaaMode} enum
+<i>67</i>&nbsp;	 * @throws net.sf.marineapi.nmea.parser.DataNotAvailableException If the data is
+<i>68</i>&nbsp;	 *             not available.
+<i>69</i>&nbsp;	 * @throws net.sf.marineapi.nmea.parser.ParseException If the field contains
+<i>70</i>&nbsp;	 *             unexpected or illegal value.
+<i>71</i>&nbsp;	 */
+<i>72</i>&nbsp;	FaaMode getMode();
+<i>73</i>&nbsp;
+<i>74</i>&nbsp;	/**
+<i>75</i>&nbsp;	 * Get current speed over ground, in kilometers per hour.
+<i>76</i>&nbsp;	 * 
+<i>77</i>&nbsp;	 * @return Speed in km/h
+<i>78</i>&nbsp;	 * @throws net.sf.marineapi.nmea.parser.DataNotAvailableException If the data is
+<i>79</i>&nbsp;	 *             not available.
+<i>80</i>&nbsp;	 * @throws net.sf.marineapi.nmea.parser.ParseException If the field contains
+<i>81</i>&nbsp;	 *             unexpected or illegal value.
+<i>82</i>&nbsp;	 */
+<i>83</i>&nbsp;	double getSpeedKmh();
+<i>84</i>&nbsp;
+<i>85</i>&nbsp;	/**
+<i>86</i>&nbsp;	 * Get speed over ground in knots.
+<i>87</i>&nbsp;	 * 
+<i>88</i>&nbsp;	 * @return Speed in knots (nautical miles per hour)
+<i>89</i>&nbsp;	 * @throws net.sf.marineapi.nmea.parser.DataNotAvailableException If the data is
+<i>90</i>&nbsp;	 *             not available.
+<i>91</i>&nbsp;	 * @throws net.sf.marineapi.nmea.parser.ParseException If the field contains
+<i>92</i>&nbsp;	 *             unexpected or illegal value.
+<i>93</i>&nbsp;	 */
+<i>94</i>&nbsp;	double getSpeedKnots();
+<i>95</i>&nbsp;
+<i>96</i>&nbsp;	/**
+<i>97</i>&nbsp;	 * Get the true course over ground.
+<i>98</i>&nbsp;	 * 
+<i>99</i>&nbsp;	 * @return True course, in degrees
+<i>100</i>&nbsp;	 * @throws net.sf.marineapi.nmea.parser.DataNotAvailableException If the data is
+<i>101</i>&nbsp;	 *             not available.
+<i>102</i>&nbsp;	 * @throws net.sf.marineapi.nmea.parser.ParseException If the field contains
+<i>103</i>&nbsp;	 *             unexpected or illegal value.
+<i>104</i>&nbsp;	 */
+<i>105</i>&nbsp;	double getTrueCourse();
+<i>106</i>&nbsp;
+<i>107</i>&nbsp;	/**
+<i>108</i>&nbsp;	 * Set the magnetic course over ground.
+<i>109</i>&nbsp;	 * 
+<i>110</i>&nbsp;	 * @param mcog Course in degrees.
+<i>111</i>&nbsp;	 */
+<i>112</i>&nbsp;	void setMagneticCourse(double mcog);
+<i>113</i>&nbsp;
+<i>114</i>&nbsp;	/**
+<i>115</i>&nbsp;	 * Set the FAA operating mode of GPS receiver.
+<i>116</i>&nbsp;	 * 
+<i>117</i>&nbsp;	 * @param mode Mode to set
+<i>118</i>&nbsp;	 * @since NMEA 2.3
+<i>119</i>&nbsp;	 */
+<i>120</i>&nbsp;	void setMode(FaaMode mode);
+<i>121</i>&nbsp;
+<i>122</i>&nbsp;	/**
+<i>123</i>&nbsp;	 * Set the current speed over ground.
+<i>124</i>&nbsp;	 * 
+<i>125</i>&nbsp;	 * @param kmh Speed in kilometers per hour (km/h).
+<i>126</i>&nbsp;	 */
+<i>127</i>&nbsp;	void setSpeedKmh(double kmh);
+<i>128</i>&nbsp;
+<i>129</i>&nbsp;	/**
+<i>130</i>&nbsp;	 * Set the speed over ground, in knots.
+<i>131</i>&nbsp;	 * 
+<i>132</i>&nbsp;	 * @param knots Speed in knots (nautical miles per hour)
+<i>133</i>&nbsp;	 */
+<i>134</i>&nbsp;	void setSpeedKnots(double knots);
+<i>135</i>&nbsp;
+<i>136</i>&nbsp;	/**
+<i>137</i>&nbsp;	 * Set the true course over ground.
+<i>138</i>&nbsp;	 * 
+<i>139</i>&nbsp;	 * @param tcog True course, in degrees
+<i>140</i>&nbsp;	 * @throws IllegalArgumentException If specified course is out of bounds
+<i>141</i>&nbsp;	 *             0..360 degrees.
+<i>142</i>&nbsp;	 */
+<i>143</i>&nbsp;	void setTrueCourse(double tcog);
+<i>144</i>&nbsp;
+<i>145</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2015-12-10 21:40</div>
+</div>
+</body>
+</html>

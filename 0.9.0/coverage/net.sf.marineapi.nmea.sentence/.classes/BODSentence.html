@@ -1,0 +1,166 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: BODSentence</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">net.sf.marineapi.nmea.sentence</a> ]
+</div>
+
+<h1>Coverage Summary for Class: BODSentence (net.sf.marineapi.nmea.sentence)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+</tr>
+<tr>
+  <td class="name">BODSentence</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;/* 
+<i>2</i>&nbsp; * BODSentence.java
+<i>3</i>&nbsp; * Copyright (C) 2010 Kimmo Tuukkanen
+<i>4</i>&nbsp; * 
+<i>5</i>&nbsp; * This file is part of Java Marine API.
+<i>6</i>&nbsp; * &lt;http://ktuukkan.github.io/marine-api/&gt;
+<i>7</i>&nbsp; * 
+<i>8</i>&nbsp; * Java Marine API is free software: you can redistribute it and/or modify it
+<i>9</i>&nbsp; * under the terms of the GNU Lesser General Public License as published by the
+<i>10</i>&nbsp; * Free Software Foundation, either version 3 of the License, or (at your
+<i>11</i>&nbsp; * option) any later version.
+<i>12</i>&nbsp; * 
+<i>13</i>&nbsp; * Java Marine API is distributed in the hope that it will be useful, but
+<i>14</i>&nbsp; * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+<i>15</i>&nbsp; * FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License
+<i>16</i>&nbsp; * for more details.
+<i>17</i>&nbsp; * 
+<i>18</i>&nbsp; * You should have received a copy of the GNU Lesser General Public License
+<i>19</i>&nbsp; * along with Java Marine API. If not, see &lt;http://www.gnu.org/licenses/&gt;.
+<i>20</i>&nbsp; */
+<i>21</i>&nbsp;package net.sf.marineapi.nmea.sentence;
+<i>22</i>&nbsp;
+<i>23</i>&nbsp;/**
+<i>24</i>&nbsp; * True and magnetic bearing from origin to destination in degrees. This
+<i>25</i>&nbsp; * sentence is transmitted by a GPS in the GOTO mode (with or without active
+<i>26</i>&nbsp; * route).
+<i>27</i>&nbsp; * &lt;p&gt;
+<i>28</i>&nbsp; * Example:&lt;br&gt;
+<i>29</i>&nbsp; * &lt;code&gt;$GPBOD,234.9,T,228.8,M,RUSKI,*1D&lt;/code&gt;
+<i>30</i>&nbsp; * 
+<i>31</i>&nbsp; * @author Kimmo Tuukkanen
+<i>32</i>&nbsp; */
+<i>33</i>&nbsp;public interface BODSentence extends Sentence {
+<i>34</i>&nbsp;
+<i>35</i>&nbsp;	/**
+<i>36</i>&nbsp;	 * Get the ID of destination waypoint. This field should be always available
+<i>37</i>&nbsp;	 * in GOTO mode.
+<i>38</i>&nbsp;	 * 
+<i>39</i>&nbsp;	 * @return waypoint id
+<i>40</i>&nbsp;	 * @throws net.sf.marineapi.nmea.parser.DataNotAvailableException If the data is
+<i>41</i>&nbsp;	 *             not available.
+<i>42</i>&nbsp;	 * @throws net.sf.marineapi.nmea.parser.ParseException If the field contains
+<i>43</i>&nbsp;	 *             unexpected or illegal value.
+<i>44</i>&nbsp;	 */
+<i>45</i>&nbsp;	String getDestinationWaypointId();
+<i>46</i>&nbsp;
+<i>47</i>&nbsp;	/**
+<i>48</i>&nbsp;	 * Get the magnetic bearing from origin to destination.
+<i>49</i>&nbsp;	 * &lt;p&gt;
+<i>50</i>&nbsp;	 * &lt;i&gt;Notice: The bearing is calculated from the origin when GOTO is
+<i>51</i>&nbsp;	 * activated and it is &lt;b&gt;not&lt;/b&gt; updated dynamically.&lt;/i&gt;
+<i>52</i>&nbsp;	 * 
+<i>53</i>&nbsp;	 * @return magnetic bearing value
+<i>54</i>&nbsp;	 * @throws net.sf.marineapi.nmea.parser.DataNotAvailableException If the data is
+<i>55</i>&nbsp;	 *             not available.
+<i>56</i>&nbsp;	 * @throws net.sf.marineapi.nmea.parser.ParseException If the field contains
+<i>57</i>&nbsp;	 *             unexpected or illegal value.
+<i>58</i>&nbsp;	 */
+<i>59</i>&nbsp;	double getMagneticBearing();
+<i>60</i>&nbsp;
+<i>61</i>&nbsp;	/**
+<i>62</i>&nbsp;	 * Get the ID of origin waypoint. This field is available only when route is
+<i>63</i>&nbsp;	 * active.
+<i>64</i>&nbsp;	 * 
+<i>65</i>&nbsp;	 * @return waypoint id
+<i>66</i>&nbsp;	 * @throws net.sf.marineapi.nmea.parser.DataNotAvailableException If the data is
+<i>67</i>&nbsp;	 *             not available.
+<i>68</i>&nbsp;	 * @throws net.sf.marineapi.nmea.parser.ParseException If the field contains
+<i>69</i>&nbsp;	 *             unexpected or illegal value.
+<i>70</i>&nbsp;	 */
+<i>71</i>&nbsp;	String getOriginWaypointId();
+<i>72</i>&nbsp;
+<i>73</i>&nbsp;	/**
+<i>74</i>&nbsp;	 * Get the true bearing from origin to destination.
+<i>75</i>&nbsp;	 * &lt;p&gt;
+<i>76</i>&nbsp;	 * &lt;i&gt;Notice: Typically the bearing is calculated when GOTO mode is
+<i>77</i>&nbsp;	 * activated and it is &lt;strong&gt;not&lt;/strong&gt; updated dynamically.&lt;/i&gt;
+<i>78</i>&nbsp;	 * 
+<i>79</i>&nbsp;	 * @return True bearing
+<i>80</i>&nbsp;	 * @throws net.sf.marineapi.nmea.parser.DataNotAvailableException If the data is
+<i>81</i>&nbsp;	 *             not available.
+<i>82</i>&nbsp;	 * @throws net.sf.marineapi.nmea.parser.ParseException If the field contains
+<i>83</i>&nbsp;	 *             unexpected or illegal value.
+<i>84</i>&nbsp;	 */
+<i>85</i>&nbsp;	double getTrueBearing();
+<i>86</i>&nbsp;
+<i>87</i>&nbsp;	/**
+<i>88</i>&nbsp;	 * Sets the destination waypoint ID.
+<i>89</i>&nbsp;	 * 
+<i>90</i>&nbsp;	 * @param id ID to set
+<i>91</i>&nbsp;	 */
+<i>92</i>&nbsp;	void setDestinationWaypointId(String id);
+<i>93</i>&nbsp;
+<i>94</i>&nbsp;	/**
+<i>95</i>&nbsp;	 * Sets the true bearing from origin to destination, in degrees.
+<i>96</i>&nbsp;	 * 
+<i>97</i>&nbsp;	 * @param bearing Bearing value
+<i>98</i>&nbsp;	 * @throws IllegalArgumentException If bearing value out range 0..360
+<i>99</i>&nbsp;	 *             degrees.
+<i>100</i>&nbsp;	 */
+<i>101</i>&nbsp;	void setMagneticBearing(double bearing);
+<i>102</i>&nbsp;
+<i>103</i>&nbsp;	/**
+<i>104</i>&nbsp;	 * Sets the ID of origin waypoint.
+<i>105</i>&nbsp;	 * 
+<i>106</i>&nbsp;	 * @param id ID to set.
+<i>107</i>&nbsp;	 */
+<i>108</i>&nbsp;	void setOriginWaypointId(String id);
+<i>109</i>&nbsp;
+<i>110</i>&nbsp;	/**
+<i>111</i>&nbsp;	 * Sets the true bearing from origin to destination, in degrees.
+<i>112</i>&nbsp;	 * 
+<i>113</i>&nbsp;	 * @param bearing Bearing value
+<i>114</i>&nbsp;	 * @throws IllegalArgumentException If bearing value out range 0..360
+<i>115</i>&nbsp;	 *             degrees.
+<i>116</i>&nbsp;	 */
+<i>117</i>&nbsp;	void setTrueBearing(double bearing);
+<i>118</i>&nbsp;
+<i>119</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2015-12-10 21:40</div>
+</div>
+</body>
+</html>

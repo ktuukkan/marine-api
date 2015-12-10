@@ -1,0 +1,192 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: GSASentence</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">net.sf.marineapi.nmea.sentence</a> ]
+</div>
+
+<h1>Coverage Summary for Class: GSASentence (net.sf.marineapi.nmea.sentence)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+</tr>
+<tr>
+  <td class="name">GSASentence</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;/* 
+<i>2</i>&nbsp; * GSASentence.java
+<i>3</i>&nbsp; * Copyright (C) 2010 Kimmo Tuukkanen
+<i>4</i>&nbsp; * 
+<i>5</i>&nbsp; * This file is part of Java Marine API.
+<i>6</i>&nbsp; * &lt;http://ktuukkan.github.io/marine-api/&gt;
+<i>7</i>&nbsp; * 
+<i>8</i>&nbsp; * Java Marine API is free software: you can redistribute it and/or modify it
+<i>9</i>&nbsp; * under the terms of the GNU Lesser General Public License as published by the
+<i>10</i>&nbsp; * Free Software Foundation, either version 3 of the License, or (at your
+<i>11</i>&nbsp; * option) any later version.
+<i>12</i>&nbsp; * 
+<i>13</i>&nbsp; * Java Marine API is distributed in the hope that it will be useful, but
+<i>14</i>&nbsp; * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+<i>15</i>&nbsp; * FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License
+<i>16</i>&nbsp; * for more details.
+<i>17</i>&nbsp; * 
+<i>18</i>&nbsp; * You should have received a copy of the GNU Lesser General Public License
+<i>19</i>&nbsp; * along with Java Marine API. If not, see &lt;http://www.gnu.org/licenses/&gt;.
+<i>20</i>&nbsp; */
+<i>21</i>&nbsp;package net.sf.marineapi.nmea.sentence;
+<i>22</i>&nbsp;
+<i>23</i>&nbsp;import net.sf.marineapi.nmea.util.FaaMode;
+<i>24</i>&nbsp;import net.sf.marineapi.nmea.util.GpsFixStatus;
+<i>25</i>&nbsp;
+<i>26</i>&nbsp;/**
+<i>27</i>&nbsp; * Precision of GPS fix and list of active satellites. Dilution of precision
+<i>28</i>&nbsp; * (DOP) is an indication of the effect of satellite geometry on the accuracy of
+<i>29</i>&nbsp; * the fix. It is a unitless number where smaller is better.
+<i>30</i>&nbsp; * &lt;p&gt;
+<i>31</i>&nbsp; * Example:&lt;br&gt;
+<i>32</i>&nbsp; * &lt;code&gt;$GPGSA,A,3,02,,,07,,09,24,26,,,,,1.6,1.6,1.0*3D&lt;/code&gt;
+<i>33</i>&nbsp; * 
+<i>34</i>&nbsp; * @author Kimmo Tuukkanen
+<i>35</i>&nbsp; */
+<i>36</i>&nbsp;public interface GSASentence extends Sentence {
+<i>37</i>&nbsp;
+<i>38</i>&nbsp;	/**
+<i>39</i>&nbsp;	 * Get the GPS fix mode; 2D, 3D or no fix.
+<i>40</i>&nbsp;	 * 
+<i>41</i>&nbsp;	 * @return GpsFixStatus enum
+<i>42</i>&nbsp;	 * @throws net.sf.marineapi.nmea.parser.DataNotAvailableException If the data is
+<i>43</i>&nbsp;	 *             not available.
+<i>44</i>&nbsp;	 * @throws net.sf.marineapi.nmea.parser.ParseException If the field contains
+<i>45</i>&nbsp;	 *             unexpected or illegal value.
+<i>46</i>&nbsp;	 */
+<i>47</i>&nbsp;	GpsFixStatus getFixStatus();
+<i>48</i>&nbsp;
+<i>49</i>&nbsp;	/**
+<i>50</i>&nbsp;	 * Get the horizontal dilution Of precision (HDOP).
+<i>51</i>&nbsp;	 * 
+<i>52</i>&nbsp;	 * @return double
+<i>53</i>&nbsp;	 * @throws net.sf.marineapi.nmea.parser.DataNotAvailableException If the data is
+<i>54</i>&nbsp;	 *             not available.
+<i>55</i>&nbsp;	 * @throws net.sf.marineapi.nmea.parser.ParseException If the field contains
+<i>56</i>&nbsp;	 *             unexpected or illegal value.
+<i>57</i>&nbsp;	 */
+<i>58</i>&nbsp;	double getHorizontalDOP();
+<i>59</i>&nbsp;
+<i>60</i>&nbsp;	/**
+<i>61</i>&nbsp;	 * Get the FAA operation mode of GPS.
+<i>62</i>&nbsp;	 * 
+<i>63</i>&nbsp;	 * @return FaaMode enum
+<i>64</i>&nbsp;	 * @throws net.sf.marineapi.nmea.parser.DataNotAvailableException If the data is
+<i>65</i>&nbsp;	 *             not available.
+<i>66</i>&nbsp;	 * @throws net.sf.marineapi.nmea.parser.ParseException If the field contains
+<i>67</i>&nbsp;	 *             unexpected or illegal value.
+<i>68</i>&nbsp;	 */
+<i>69</i>&nbsp;	FaaMode getMode();
+<i>70</i>&nbsp;
+<i>71</i>&nbsp;	/**
+<i>72</i>&nbsp;	 * Get the dilution of precision (PDOP) for position.
+<i>73</i>&nbsp;	 * 
+<i>74</i>&nbsp;	 * @return double
+<i>75</i>&nbsp;	 * @throws net.sf.marineapi.nmea.parser.DataNotAvailableException If the data is
+<i>76</i>&nbsp;	 *             not available.
+<i>77</i>&nbsp;	 * @throws net.sf.marineapi.nmea.parser.ParseException If the field contains
+<i>78</i>&nbsp;	 *             unexpected or illegal value.
+<i>79</i>&nbsp;	 */
+<i>80</i>&nbsp;	double getPositionDOP();
+<i>81</i>&nbsp;
+<i>82</i>&nbsp;	/**
+<i>83</i>&nbsp;	 * Get list of satellites used for acquiring the GPS fix.
+<i>84</i>&nbsp;	 * 
+<i>85</i>&nbsp;	 * @return String array containing satellite IDs.
+<i>86</i>&nbsp;	 * @throws net.sf.marineapi.nmea.parser.DataNotAvailableException If the data is
+<i>87</i>&nbsp;	 *             not available.
+<i>88</i>&nbsp;	 * @throws net.sf.marineapi.nmea.parser.ParseException If the field contains
+<i>89</i>&nbsp;	 *             unexpected or illegal value.
+<i>90</i>&nbsp;	 */
+<i>91</i>&nbsp;	String[] getSatelliteIds();
+<i>92</i>&nbsp;
+<i>93</i>&nbsp;	/**
+<i>94</i>&nbsp;	 * Get the vertical dilution of precision (VDOP).
+<i>95</i>&nbsp;	 * 
+<i>96</i>&nbsp;	 * @return double
+<i>97</i>&nbsp;	 * @throws net.sf.marineapi.nmea.parser.DataNotAvailableException If the data is
+<i>98</i>&nbsp;	 *             not available.
+<i>99</i>&nbsp;	 * @throws net.sf.marineapi.nmea.parser.ParseException If the field contains
+<i>100</i>&nbsp;	 *             unexpected or illegal value.
+<i>101</i>&nbsp;	 */
+<i>102</i>&nbsp;	double getVerticalDOP();
+<i>103</i>&nbsp;
+<i>104</i>&nbsp;	/**
+<i>105</i>&nbsp;	 * Set the GPS fix mode; 2D, 3D or no fix.
+<i>106</i>&nbsp;	 * 
+<i>107</i>&nbsp;	 * @param status Status to set
+<i>108</i>&nbsp;	 */
+<i>109</i>&nbsp;	void setFixStatus(GpsFixStatus status);
+<i>110</i>&nbsp;
+<i>111</i>&nbsp;	/**
+<i>112</i>&nbsp;	 * Set the horizontal dilution of precision (HDOP).
+<i>113</i>&nbsp;	 * 
+<i>114</i>&nbsp;	 * @param hdop Precision value to set
+<i>115</i>&nbsp;	 */
+<i>116</i>&nbsp;	void setHorizontalDOP(double hdop);
+<i>117</i>&nbsp;
+<i>118</i>&nbsp;	/**
+<i>119</i>&nbsp;	 * Set the FAA operation mode of GPS.
+<i>120</i>&nbsp;	 * 
+<i>121</i>&nbsp;	 * @param mode Mode to set
+<i>122</i>&nbsp;	 */
+<i>123</i>&nbsp;	void setMode(FaaMode mode);
+<i>124</i>&nbsp;
+<i>125</i>&nbsp;	/**
+<i>126</i>&nbsp;	 * Set the dilution of precision for position.
+<i>127</i>&nbsp;	 * 
+<i>128</i>&nbsp;	 * @param pdop Precision value to set
+<i>129</i>&nbsp;	 */
+<i>130</i>&nbsp;	void setPositionDOP(double pdop);
+<i>131</i>&nbsp;
+<i>132</i>&nbsp;	/**
+<i>133</i>&nbsp;	 * Set list of satellites used for acquiring the GPS fix.
+<i>134</i>&nbsp;	 * 
+<i>135</i>&nbsp;	 * @param ids List of satellite IDs, maximum length of array is 12.
+<i>136</i>&nbsp;	 */
+<i>137</i>&nbsp;	void setSatelliteIds(String[] ids);
+<i>138</i>&nbsp;
+<i>139</i>&nbsp;	/**
+<i>140</i>&nbsp;	 * Set the vertical dilution of precision (VDOP).
+<i>141</i>&nbsp;	 * 
+<i>142</i>&nbsp;	 * @param vdop Precision value to set
+<i>143</i>&nbsp;	 */
+<i>144</i>&nbsp;	void setVerticalDOP(double vdop);
+<i>145</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2015-12-10 21:41</div>
+</div>
+</body>
+</html>

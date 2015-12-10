@@ -1,0 +1,255 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: GGASentence</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">net.sf.marineapi.nmea.sentence</a> ]
+</div>
+
+<h1>Coverage Summary for Class: GGASentence (net.sf.marineapi.nmea.sentence)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+</tr>
+<tr>
+  <td class="name">GGASentence</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;/* 
+<i>2</i>&nbsp; * GGASentence.java
+<i>3</i>&nbsp; * Copyright (C) 2010 Kimmo Tuukkanen
+<i>4</i>&nbsp; * 
+<i>5</i>&nbsp; * This file is part of Java Marine API.
+<i>6</i>&nbsp; * &lt;http://ktuukkan.github.io/marine-api/&gt;
+<i>7</i>&nbsp; * 
+<i>8</i>&nbsp; * Java Marine API is free software: you can redistribute it and/or modify it
+<i>9</i>&nbsp; * under the terms of the GNU Lesser General Public License as published by the
+<i>10</i>&nbsp; * Free Software Foundation, either version 3 of the License, or (at your
+<i>11</i>&nbsp; * option) any later version.
+<i>12</i>&nbsp; * 
+<i>13</i>&nbsp; * Java Marine API is distributed in the hope that it will be useful, but
+<i>14</i>&nbsp; * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+<i>15</i>&nbsp; * FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License
+<i>16</i>&nbsp; * for more details.
+<i>17</i>&nbsp; * 
+<i>18</i>&nbsp; * You should have received a copy of the GNU Lesser General Public License
+<i>19</i>&nbsp; * along with Java Marine API. If not, see &lt;http://www.gnu.org/licenses/&gt;.
+<i>20</i>&nbsp; */
+<i>21</i>&nbsp;package net.sf.marineapi.nmea.sentence;
+<i>22</i>&nbsp;
+<i>23</i>&nbsp;import net.sf.marineapi.nmea.util.GpsFixQuality;
+<i>24</i>&nbsp;import net.sf.marineapi.nmea.util.Units;
+<i>25</i>&nbsp;
+<i>26</i>&nbsp;/**
+<i>27</i>&nbsp; * Global Positioning System fix data. Current position, time and other fix
+<i>28</i>&nbsp; * related data for a GPS receiver.
+<i>29</i>&nbsp; * &lt;p&gt;
+<i>30</i>&nbsp; * Example:&lt;br&gt;
+<i>31</i>&nbsp; * &lt;code&gt;$GPGGA,120044,6011.552,N,02501.941,E,1,00,2.0,28.0,M,19.6,M,,*79&lt;/code&gt;
+<i>32</i>&nbsp; * 
+<i>33</i>&nbsp; * @author Kimmo Tuukkanen
+<i>34</i>&nbsp; */
+<i>35</i>&nbsp;public interface GGASentence extends PositionSentence, TimeSentence {
+<i>36</i>&nbsp;
+<i>37</i>&nbsp;	/**
+<i>38</i>&nbsp;	 * Altitude presented in meters.
+<i>39</i>&nbsp;	 */
+<i>40</i>&nbsp;	char ALT_UNIT_METERS = &#39;M&#39;;
+<i>41</i>&nbsp;
+<i>42</i>&nbsp;	/**
+<i>43</i>&nbsp;	 * Altitude presented in feet.
+<i>44</i>&nbsp;	 */
+<i>45</i>&nbsp;	char ALT_UNIT_FEET = &#39;f&#39;;
+<i>46</i>&nbsp;
+<i>47</i>&nbsp;	/**
+<i>48</i>&nbsp;	 * Get antenna altitude above mean sea level.
+<i>49</i>&nbsp;	 * 
+<i>50</i>&nbsp;	 * @return Altitude value
+<i>51</i>&nbsp;	 * @throws net.sf.marineapi.nmea.parser.DataNotAvailableException If the data is
+<i>52</i>&nbsp;	 *             not available.
+<i>53</i>&nbsp;	 * @throws net.sf.marineapi.nmea.parser.ParseException If the field contains
+<i>54</i>&nbsp;	 *             unexpected or illegal value.
+<i>55</i>&nbsp;	 */
+<i>56</i>&nbsp;	double getAltitude();
+<i>57</i>&nbsp;
+<i>58</i>&nbsp;	/**
+<i>59</i>&nbsp;	 * Gets the altitude units, meters or feet.
+<i>60</i>&nbsp;	 * 
+<i>61</i>&nbsp;	 * @return Units enum
+<i>62</i>&nbsp;	 * @throws net.sf.marineapi.nmea.parser.DataNotAvailableException If the data is
+<i>63</i>&nbsp;	 *             not available.
+<i>64</i>&nbsp;	 * @throws net.sf.marineapi.nmea.parser.ParseException If the field contains
+<i>65</i>&nbsp;	 *             unexpected or illegal value.
+<i>66</i>&nbsp;	 */
+<i>67</i>&nbsp;	Units getAltitudeUnits();
+<i>68</i>&nbsp;
+<i>69</i>&nbsp;	/**
+<i>70</i>&nbsp;	 * Gets the age of differential GPS data (DGPS).
+<i>71</i>&nbsp;	 * 
+<i>72</i>&nbsp;	 * @return Seconds since last valid RTCM transmission
+<i>73</i>&nbsp;	 * @throws net.sf.marineapi.nmea.parser.DataNotAvailableException If the data is
+<i>74</i>&nbsp;	 *             not available.
+<i>75</i>&nbsp;	 * @throws net.sf.marineapi.nmea.parser.ParseException If the field contains
+<i>76</i>&nbsp;	 *             unexpected or illegal value.
+<i>77</i>&nbsp;	 */
+<i>78</i>&nbsp;	double getDgpsAge();
+<i>79</i>&nbsp;
+<i>80</i>&nbsp;	/**
+<i>81</i>&nbsp;	 * Gets the ID of DGPS station.
+<i>82</i>&nbsp;	 * 
+<i>83</i>&nbsp;	 * @return Station ID (0000-1024)
+<i>84</i>&nbsp;	 * @throws net.sf.marineapi.nmea.parser.DataNotAvailableException If the data is
+<i>85</i>&nbsp;	 *             not available.
+<i>86</i>&nbsp;	 * @throws net.sf.marineapi.nmea.parser.ParseException If the field contains
+<i>87</i>&nbsp;	 *             unexpected or illegal value.
+<i>88</i>&nbsp;	 */
+<i>89</i>&nbsp;	String getDgpsStationId();
+<i>90</i>&nbsp;
+<i>91</i>&nbsp;	/**
+<i>92</i>&nbsp;	 * Get the GPS fix quality.
+<i>93</i>&nbsp;	 * 
+<i>94</i>&nbsp;	 * @return GpsFixQuality enum
+<i>95</i>&nbsp;	 * @throws net.sf.marineapi.nmea.parser.DataNotAvailableException If the data is
+<i>96</i>&nbsp;	 *             not available.
+<i>97</i>&nbsp;	 * @throws net.sf.marineapi.nmea.parser.ParseException If the field contains
+<i>98</i>&nbsp;	 *             unexpected or illegal value.
+<i>99</i>&nbsp;	 */
+<i>100</i>&nbsp;	GpsFixQuality getFixQuality();
+<i>101</i>&nbsp;
+<i>102</i>&nbsp;	/**
+<i>103</i>&nbsp;	 * Get height/separation of geoid above WGS84 ellipsoid, i.e. difference
+<i>104</i>&nbsp;	 * between WGS-84 earth ellipsoid and mean sea level. Negative values are
+<i>105</i>&nbsp;	 * below WGS-84 ellipsoid.
+<i>106</i>&nbsp;	 * 
+<i>107</i>&nbsp;	 * @return Height value
+<i>108</i>&nbsp;	 * @throws net.sf.marineapi.nmea.parser.DataNotAvailableException If the data is
+<i>109</i>&nbsp;	 *             not available.
+<i>110</i>&nbsp;	 * @throws net.sf.marineapi.nmea.parser.ParseException If the field contains
+<i>111</i>&nbsp;	 *             unexpected or illegal value.
+<i>112</i>&nbsp;	 */
+<i>113</i>&nbsp;	double getGeoidalHeight();
+<i>114</i>&nbsp;
+<i>115</i>&nbsp;	/**
+<i>116</i>&nbsp;	 * Get units of height above geoid.
+<i>117</i>&nbsp;	 * 
+<i>118</i>&nbsp;	 * @return Units of geoidal height value
+<i>119</i>&nbsp;	 * @throws net.sf.marineapi.nmea.parser.DataNotAvailableException If the data is
+<i>120</i>&nbsp;	 *             not available.
+<i>121</i>&nbsp;	 * @throws net.sf.marineapi.nmea.parser.ParseException If the field contains
+<i>122</i>&nbsp;	 *             unexpected or illegal value.
+<i>123</i>&nbsp;	 */
+<i>124</i>&nbsp;	Units getGeoidalHeightUnits();
+<i>125</i>&nbsp;
+<i>126</i>&nbsp;	/**
+<i>127</i>&nbsp;	 * Get the horizontal dilution of precision (HDOP), i.e. the relative
+<i>128</i>&nbsp;	 * accuracy of horizontal position.
+<i>129</i>&nbsp;	 * 
+<i>130</i>&nbsp;	 * @return Horizontal dilution
+<i>131</i>&nbsp;	 * @throws net.sf.marineapi.nmea.parser.DataNotAvailableException If the data is
+<i>132</i>&nbsp;	 *             not available.
+<i>133</i>&nbsp;	 * @throws net.sf.marineapi.nmea.parser.ParseException If the field contains
+<i>134</i>&nbsp;	 *             unexpected or illegal value.
+<i>135</i>&nbsp;	 */
+<i>136</i>&nbsp;	double getHorizontalDOP();
+<i>137</i>&nbsp;
+<i>138</i>&nbsp;	/**
+<i>139</i>&nbsp;	 * Get the number of active satellites in use.
+<i>140</i>&nbsp;	 * 
+<i>141</i>&nbsp;	 * @return Number of satellites
+<i>142</i>&nbsp;	 * @throws net.sf.marineapi.nmea.parser.DataNotAvailableException If the data is
+<i>143</i>&nbsp;	 *             not available.
+<i>144</i>&nbsp;	 * @throws net.sf.marineapi.nmea.parser.ParseException If the field contains
+<i>145</i>&nbsp;	 *             unexpected or illegal value.
+<i>146</i>&nbsp;	 */
+<i>147</i>&nbsp;	int getSatelliteCount();
+<i>148</i>&nbsp;
+<i>149</i>&nbsp;	/**
+<i>150</i>&nbsp;	 * Set the antenna altitude.
+<i>151</i>&nbsp;	 * 
+<i>152</i>&nbsp;	 * @param alt Altitude to set
+<i>153</i>&nbsp;	 */
+<i>154</i>&nbsp;	void setAltitude(double alt);
+<i>155</i>&nbsp;
+<i>156</i>&nbsp;	/**
+<i>157</i>&nbsp;	 * Sets the unit of altitude.
+<i>158</i>&nbsp;	 * 
+<i>159</i>&nbsp;	 * @param unit Units to set
+<i>160</i>&nbsp;	 */
+<i>161</i>&nbsp;	void setAltitudeUnits(Units unit);
+<i>162</i>&nbsp;
+<i>163</i>&nbsp;	/**
+<i>164</i>&nbsp;	 * Sets the age of differential GPS data (DGPS).
+<i>165</i>&nbsp;	 * 
+<i>166</i>&nbsp;	 * @param age Seconds since last valid RTCM transmission to set.
+<i>167</i>&nbsp;	 */
+<i>168</i>&nbsp;	void setDgpsAge(double age);
+<i>169</i>&nbsp;
+<i>170</i>&nbsp;	/**
+<i>171</i>&nbsp;	 * Sets the ID of DGPS station.
+<i>172</i>&nbsp;	 * 
+<i>173</i>&nbsp;	 * @param id Station ID to set
+<i>174</i>&nbsp;	 */
+<i>175</i>&nbsp;	void setDgpsStationId(String id);
+<i>176</i>&nbsp;
+<i>177</i>&nbsp;	/**
+<i>178</i>&nbsp;	 * Sets the GPS fix quality.
+<i>179</i>&nbsp;	 * 
+<i>180</i>&nbsp;	 * @param quality Fix quality to set
+<i>181</i>&nbsp;	 */
+<i>182</i>&nbsp;	void setFixQuality(GpsFixQuality quality);
+<i>183</i>&nbsp;
+<i>184</i>&nbsp;	/**
+<i>185</i>&nbsp;	 * Set height/separation of geoid above WGS84 ellipsoid, i.e. difference
+<i>186</i>&nbsp;	 * between WGS-84 earth ellipsoid and mean sea level. Negative values are
+<i>187</i>&nbsp;	 * below WGS-84 ellipsoid.
+<i>188</i>&nbsp;	 * 
+<i>189</i>&nbsp;	 * @param height Height value to set
+<i>190</i>&nbsp;	 */
+<i>191</i>&nbsp;	void setGeoidalHeight(double height);
+<i>192</i>&nbsp;
+<i>193</i>&nbsp;	/**
+<i>194</i>&nbsp;	 * Get unit of height above geoid.
+<i>195</i>&nbsp;	 * 
+<i>196</i>&nbsp;	 * @param unit Unit to set
+<i>197</i>&nbsp;	 */
+<i>198</i>&nbsp;	void setGeoidalHeightUnits(Units unit);
+<i>199</i>&nbsp;
+<i>200</i>&nbsp;	/**
+<i>201</i>&nbsp;	 * Set the horizontal dilution of precision (HDOP), i.e. the relative
+<i>202</i>&nbsp;	 * accuracy of horizontal position.
+<i>203</i>&nbsp;	 * 
+<i>204</i>&nbsp;	 * @param hdop Horizontal dilution
+<i>205</i>&nbsp;	 */
+<i>206</i>&nbsp;	void setHorizontalDOP(double hdop);
+<i>207</i>&nbsp;
+<i>208</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2015-12-10 21:41</div>
+</div>
+</body>
+</html>

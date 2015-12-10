@@ -1,0 +1,424 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: MDAParser</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">net.sf.marineapi.nmea.parser</a> ]
+</div>
+
+<h1>Coverage Summary for Class: MDAParser (net.sf.marineapi.nmea.parser)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">MDAParser</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/ 1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (29/ 29)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    94.7%
+  </span>
+  <span class="absValue">
+    (89/ 94)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;/*
+<i>2</i>&nbsp; * MDAParser.java
+<i>3</i>&nbsp; * Copyright (C) 2015 INDI for Java NMEA 0183 stream driver
+<i>4</i>&nbsp; * 
+<i>5</i>&nbsp; * This file is part of Java Marine API.
+<i>6</i>&nbsp; * &lt;http://ktuukkan.github.io/marine-api/&gt;
+<i>7</i>&nbsp; * 
+<i>8</i>&nbsp; * Java Marine API is free software: you can redistribute it and/or modify it
+<i>9</i>&nbsp; * under the terms of the GNU Lesser General Public License as published by the
+<i>10</i>&nbsp; * Free Software Foundation, either version 3 of the License, or (at your
+<i>11</i>&nbsp; * option) any later version.
+<i>12</i>&nbsp; * 
+<i>13</i>&nbsp; * Java Marine API is distributed in the hope that it will be useful, but
+<i>14</i>&nbsp; * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+<i>15</i>&nbsp; * FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License
+<i>16</i>&nbsp; * for more details.
+<i>17</i>&nbsp; * 
+<i>18</i>&nbsp; * You should have received a copy of the GNU Lesser General Public License
+<i>19</i>&nbsp; * along with Java Marine API. If not, see &lt;http://www.gnu.org/licenses/&gt;.
+<i>20</i>&nbsp; */
+<i>21</i>&nbsp;package net.sf.marineapi.nmea.parser;
+<i>22</i>&nbsp;
+<i>23</i>&nbsp;import net.sf.marineapi.nmea.sentence.MDASentence;
+<i>24</i>&nbsp;import net.sf.marineapi.nmea.sentence.TalkerId;
+<i>25</i>&nbsp;
+<i>26</i>&nbsp;/**
+<i>27</i>&nbsp; * Meteorological Composite - Barometric pressure, air and water temperature,
+<i>28</i>&nbsp; * humidity, dew point and wind speed and direction relative to the surface of
+<i>29</i>&nbsp; * the earth.
+<i>30</i>&nbsp; * 
+<i>31</i>&nbsp; * @author Richard van Nieuwenhoven
+<i>32</i>&nbsp; */
+<i>33</i>&nbsp;class MDAParser extends SentenceParser implements MDASentence {
+<i>34</i>&nbsp;
+<i>35</i>&nbsp;    public static final String MDA_SENTENCE_ID = &quot;MDA&quot;;
+<i>36</i>&nbsp;
+<i>37</i>&nbsp;    /**
+<i>38</i>&nbsp;     * Barometric pressure, inches of mercury, to the nearest 0,01 inch.
+<i>39</i>&nbsp;     */
+<b class="fc"><i>40</i>&nbsp;    private static int PRIMARY_BAROMETRIC_PRESSURE = 0;</b>
+<i>41</i>&nbsp;
+<i>42</i>&nbsp;    /**
+<i>43</i>&nbsp;     * I = inches of mercury (inHg) P = pascal (1 bar = 100000 Pa = 29,53 inHg).
+<i>44</i>&nbsp;     */
+<b class="fc"><i>45</i>&nbsp;    private static int PRIMARY_BAROMETRIC_PRESSURE_UNIT = 1;</b>
+<i>46</i>&nbsp;
+<i>47</i>&nbsp;    /**
+<i>48</i>&nbsp;     * Barometric pressure, bars, to the nearest .001 bar.
+<i>49</i>&nbsp;     */
+<b class="fc"><i>50</i>&nbsp;    private static int SECONDARY_BAROMETRIC_PRESSURE = 2;</b>
+<i>51</i>&nbsp;
+<i>52</i>&nbsp;    /**
+<i>53</i>&nbsp;     * B = bars.
+<i>54</i>&nbsp;     */
+<b class="fc"><i>55</i>&nbsp;    private static int SECONDARY_BAROMETRIC_PRESSURE_UNIT = 3;</b>
+<i>56</i>&nbsp;
+<i>57</i>&nbsp;    /**
+<i>58</i>&nbsp;     * Air temperature, degrees C, to the nearest 0,1 degree C.
+<i>59</i>&nbsp;     */
+<b class="fc"><i>60</i>&nbsp;    private static int AIR_TEMPERATURE = 4;</b>
+<i>61</i>&nbsp;
+<i>62</i>&nbsp;    /**
+<i>63</i>&nbsp;     * C = degrees C.
+<i>64</i>&nbsp;     */
+<b class="fc"><i>65</i>&nbsp;    private static int AIR_TEMPERATURE_UNIT = 5;</b>
+<i>66</i>&nbsp;
+<i>67</i>&nbsp;    /**
+<i>68</i>&nbsp;     * Water temperature, degrees C.
+<i>69</i>&nbsp;     */
+<b class="fc"><i>70</i>&nbsp;    private static int WATER_TEMPERATURE = 6;</b>
+<i>71</i>&nbsp;
+<i>72</i>&nbsp;    /**
+<i>73</i>&nbsp;     * C = degrees C.
+<i>74</i>&nbsp;     */
+<b class="fc"><i>75</i>&nbsp;    private static int WATER_TEMPERATURE_UNIT = 7;</b>
+<i>76</i>&nbsp;
+<i>77</i>&nbsp;    /**
+<i>78</i>&nbsp;     * Relative humidity, percent, to the nearest 0,1 percent.
+<i>79</i>&nbsp;     */
+<b class="fc"><i>80</i>&nbsp;    private static int RELATIVE_HUMIDITY = 8;</b>
+<i>81</i>&nbsp;
+<i>82</i>&nbsp;    /**
+<i>83</i>&nbsp;     * Absolute humidity, percent .
+<i>84</i>&nbsp;     */
+<b class="fc"><i>85</i>&nbsp;    private static int ABSOLUTE_HUMIDITY = 9;</b>
+<i>86</i>&nbsp;
+<i>87</i>&nbsp;    /**
+<i>88</i>&nbsp;     * Dew point, degrees C, to the nearest 0,1 degree C.
+<i>89</i>&nbsp;     */
+<b class="fc"><i>90</i>&nbsp;    private static int DEW_POINT = 10;</b>
+<i>91</i>&nbsp;
+<i>92</i>&nbsp;    /**
+<i>93</i>&nbsp;     * C = degrees C.
+<i>94</i>&nbsp;     */
+<b class="fc"><i>95</i>&nbsp;    private static int DEW_POINT_UNIT = 11;</b>
+<i>96</i>&nbsp;
+<i>97</i>&nbsp;    /**
+<i>98</i>&nbsp;     * Wind direction, degrees True, to the nearest 0,1 degree.
+<i>99</i>&nbsp;     */
+<b class="fc"><i>100</i>&nbsp;    private static int WIND_DIRECTION_TRUE = 12;</b>
+<i>101</i>&nbsp;
+<i>102</i>&nbsp;    /**
+<i>103</i>&nbsp;     * T = true
+<i>104</i>&nbsp;     */
+<b class="fc"><i>105</i>&nbsp;    private static int WIND_DIRECTION_TRUE_UNIT = 13;</b>
+<i>106</i>&nbsp;
+<i>107</i>&nbsp;    /**
+<i>108</i>&nbsp;     * Wind direction, degrees Magnetic, to the nearest 0,1 degree.
+<i>109</i>&nbsp;     */
+<b class="fc"><i>110</i>&nbsp;    private static int WIND_DIRECTION_MAGNETIC = 14;</b>
+<i>111</i>&nbsp;
+<i>112</i>&nbsp;    /**
+<i>113</i>&nbsp;     * M = magnetic.
+<i>114</i>&nbsp;     */
+<b class="fc"><i>115</i>&nbsp;    private static int WIND_DIRECTION_MAGNETIC_UNIT = 15;</b>
+<i>116</i>&nbsp;
+<i>117</i>&nbsp;    /**
+<i>118</i>&nbsp;     * Wind speed, knots, to the nearest 0,1 knot.
+<i>119</i>&nbsp;     */
+<b class="fc"><i>120</i>&nbsp;    private static int WIND_SPEED_KNOTS = 16;</b>
+<i>121</i>&nbsp;
+<i>122</i>&nbsp;    /**
+<i>123</i>&nbsp;     * N = knots.
+<i>124</i>&nbsp;     */
+<b class="fc"><i>125</i>&nbsp;    private static int WIND_SPEED_KNOTS_UNIT = 17;</b>
+<i>126</i>&nbsp;
+<i>127</i>&nbsp;    /**
+<i>128</i>&nbsp;     * Wind speed, meters per second, to the nearest 0,1 m/s.
+<i>129</i>&nbsp;     */
+<b class="fc"><i>130</i>&nbsp;    private static int WIND_SPEED_METERS = 18;</b>
+<i>131</i>&nbsp;
+<i>132</i>&nbsp;    /**
+<i>133</i>&nbsp;     * M = meters per second
+<i>134</i>&nbsp;     */
+<b class="fc"><i>135</i>&nbsp;    private static int WIND_SPEED_METERS_UNIT = 19;</b>
+<i>136</i>&nbsp;
+<i>137</i>&nbsp;    /**
+<i>138</i>&nbsp;     * Creates a new instance of MWVParser.
+<i>139</i>&nbsp;     * 
+<i>140</i>&nbsp;     * @param nmea
+<i>141</i>&nbsp;     *            MWV sentence String
+<i>142</i>&nbsp;     */
+<i>143</i>&nbsp;    public MDAParser(String nmea) {
+<b class="fc"><i>144</i>&nbsp;        super(nmea, MDA_SENTENCE_ID);</b>
+<b class="fc"><i>145</i>&nbsp;    }</b>
+<i>146</i>&nbsp;
+<i>147</i>&nbsp;    /**
+<i>148</i>&nbsp;     * Creates a new empty instance of MWVParser.
+<i>149</i>&nbsp;     * 
+<i>150</i>&nbsp;     * @param talker
+<i>151</i>&nbsp;     *            Talker id to set
+<i>152</i>&nbsp;     */
+<i>153</i>&nbsp;    public MDAParser(TalkerId talker) {
+<b class="fc"><i>154</i>&nbsp;        super(talker, MDA_SENTENCE_ID, 20);</b>
+<b class="fc"><i>155</i>&nbsp;        setCharValue(AIR_TEMPERATURE_UNIT, &#39;C&#39;);</b>
+<b class="fc"><i>156</i>&nbsp;        setCharValue(WATER_TEMPERATURE_UNIT, &#39;C&#39;);</b>
+<b class="fc"><i>157</i>&nbsp;        setCharValue(DEW_POINT_UNIT, &#39;C&#39;);</b>
+<b class="fc"><i>158</i>&nbsp;        setCharValue(WIND_DIRECTION_TRUE_UNIT, &#39;T&#39;);</b>
+<b class="fc"><i>159</i>&nbsp;        setCharValue(WIND_DIRECTION_MAGNETIC_UNIT, &#39;M&#39;);</b>
+<b class="fc"><i>160</i>&nbsp;        setCharValue(WIND_SPEED_KNOTS_UNIT, &#39;K&#39;);</b>
+<b class="fc"><i>161</i>&nbsp;        setCharValue(WIND_SPEED_METERS_UNIT, &#39;M&#39;);</b>
+<b class="fc"><i>162</i>&nbsp;        setCharValue(PRIMARY_BAROMETRIC_PRESSURE_UNIT, &#39;I&#39;);</b>
+<b class="fc"><i>163</i>&nbsp;        setCharValue(SECONDARY_BAROMETRIC_PRESSURE_UNIT, &#39;B&#39;);</b>
+<b class="fc"><i>164</i>&nbsp;    }</b>
+<i>165</i>&nbsp;
+<i>166</i>&nbsp;    @Override
+<i>167</i>&nbsp;    public double getAbsoluteHumidity() {
+<b class="fc"><i>168</i>&nbsp;        if (hasValue(ABSOLUTE_HUMIDITY)) {</b>
+<b class="fc"><i>169</i>&nbsp;            return getDoubleValue(ABSOLUTE_HUMIDITY);</b>
+<i>170</i>&nbsp;        } else {
+<b class="fc"><i>171</i>&nbsp;            return Double.NaN;</b>
+<i>172</i>&nbsp;        }
+<i>173</i>&nbsp;    }
+<i>174</i>&nbsp;
+<i>175</i>&nbsp;    @Override
+<i>176</i>&nbsp;    public double getAirTemperature() {
+<b class="fc"><i>177</i>&nbsp;        if (hasValue(AIR_TEMPERATURE)) {</b>
+<b class="fc"><i>178</i>&nbsp;            return getDoubleValue(AIR_TEMPERATURE);</b>
+<i>179</i>&nbsp;        } else {
+<b class="nc"><i>180</i>&nbsp;            return Double.NaN;</b>
+<i>181</i>&nbsp;        }
+<i>182</i>&nbsp;    }
+<i>183</i>&nbsp;
+<i>184</i>&nbsp;    @Override
+<i>185</i>&nbsp;    public double getDewPoint() {
+<b class="fc"><i>186</i>&nbsp;        if (hasValue(DEW_POINT)) {</b>
+<b class="fc"><i>187</i>&nbsp;            return getDoubleValue(DEW_POINT);</b>
+<i>188</i>&nbsp;        } else {
+<b class="fc"><i>189</i>&nbsp;            return Double.NaN;</b>
+<i>190</i>&nbsp;        }
+<i>191</i>&nbsp;    }
+<i>192</i>&nbsp;
+<i>193</i>&nbsp;    @Override
+<i>194</i>&nbsp;    public double getMagneticWindDirection() {
+<b class="fc"><i>195</i>&nbsp;        if (hasValue(WIND_DIRECTION_MAGNETIC)) {</b>
+<b class="fc"><i>196</i>&nbsp;            return getDoubleValue(WIND_DIRECTION_MAGNETIC);</b>
+<i>197</i>&nbsp;        } else {
+<b class="fc"><i>198</i>&nbsp;            return Double.NaN;</b>
+<i>199</i>&nbsp;        }
+<i>200</i>&nbsp;    }
+<i>201</i>&nbsp;
+<i>202</i>&nbsp;    @Override
+<i>203</i>&nbsp;    public double getPrimaryBarometricPressure() {
+<b class="fc"><i>204</i>&nbsp;        if (hasValue(PRIMARY_BAROMETRIC_PRESSURE)) {</b>
+<b class="fc"><i>205</i>&nbsp;            return getDoubleValue(PRIMARY_BAROMETRIC_PRESSURE);</b>
+<i>206</i>&nbsp;        } else {
+<b class="nc"><i>207</i>&nbsp;            return Double.NaN;</b>
+<i>208</i>&nbsp;        }
+<i>209</i>&nbsp;    }
+<i>210</i>&nbsp;
+<i>211</i>&nbsp;    @Override
+<i>212</i>&nbsp;    public char getPrimaryBarometricPressureUnit() {
+<b class="fc"><i>213</i>&nbsp;        return getCharValue(PRIMARY_BAROMETRIC_PRESSURE_UNIT);</b>
+<i>214</i>&nbsp;    }
+<i>215</i>&nbsp;
+<i>216</i>&nbsp;    @Override
+<i>217</i>&nbsp;    public double getRelativeHumidity() {
+<b class="fc"><i>218</i>&nbsp;        if (hasValue(RELATIVE_HUMIDITY)) {</b>
+<b class="fc"><i>219</i>&nbsp;            return getDoubleValue(RELATIVE_HUMIDITY);</b>
+<i>220</i>&nbsp;        } else {
+<b class="fc"><i>221</i>&nbsp;            return Double.NaN;</b>
+<i>222</i>&nbsp;        }
+<i>223</i>&nbsp;    }
+<i>224</i>&nbsp;
+<i>225</i>&nbsp;    @Override
+<i>226</i>&nbsp;    public double getSecondaryBarometricPressure() {
+<b class="fc"><i>227</i>&nbsp;        if (hasValue(SECONDARY_BAROMETRIC_PRESSURE)) {</b>
+<b class="fc"><i>228</i>&nbsp;            return getDoubleValue(SECONDARY_BAROMETRIC_PRESSURE);</b>
+<i>229</i>&nbsp;        } else {
+<b class="nc"><i>230</i>&nbsp;            return Double.NaN;</b>
+<i>231</i>&nbsp;        }
+<i>232</i>&nbsp;    }
+<i>233</i>&nbsp;
+<i>234</i>&nbsp;    @Override
+<i>235</i>&nbsp;    public char getSecondaryBarometricPressureUnit() {
+<b class="fc"><i>236</i>&nbsp;        return getCharValue(SECONDARY_BAROMETRIC_PRESSURE_UNIT);</b>
+<i>237</i>&nbsp;    }
+<i>238</i>&nbsp;
+<i>239</i>&nbsp;    @Override
+<i>240</i>&nbsp;    public double getTrueWindDirection() {
+<b class="fc"><i>241</i>&nbsp;        if (hasValue(WIND_DIRECTION_TRUE)) {</b>
+<b class="fc"><i>242</i>&nbsp;            return getDoubleValue(WIND_DIRECTION_TRUE);</b>
+<i>243</i>&nbsp;        } else {
+<b class="fc"><i>244</i>&nbsp;            return Double.NaN;</b>
+<i>245</i>&nbsp;        }
+<i>246</i>&nbsp;    }
+<i>247</i>&nbsp;
+<i>248</i>&nbsp;    @Override
+<i>249</i>&nbsp;    public double getWaterTemperature() {
+<b class="fc"><i>250</i>&nbsp;        if (hasValue(WATER_TEMPERATURE)) {</b>
+<b class="fc"><i>251</i>&nbsp;            return getDoubleValue(WATER_TEMPERATURE);</b>
+<i>252</i>&nbsp;        } else {
+<b class="fc"><i>253</i>&nbsp;            return Double.NaN;</b>
+<i>254</i>&nbsp;        }
+<i>255</i>&nbsp;    }
+<i>256</i>&nbsp;
+<i>257</i>&nbsp;    @Override
+<i>258</i>&nbsp;    public double getWindSpeed() {
+<b class="fc"><i>259</i>&nbsp;        if (hasValue(WIND_SPEED_METERS)) {</b>
+<b class="fc"><i>260</i>&nbsp;            return getDoubleValue(WIND_SPEED_METERS);</b>
+<i>261</i>&nbsp;        } else {
+<b class="nc"><i>262</i>&nbsp;            return Double.NaN;</b>
+<i>263</i>&nbsp;        }
+<i>264</i>&nbsp;    }
+<i>265</i>&nbsp;
+<i>266</i>&nbsp;    @Override
+<i>267</i>&nbsp;    public double getWindSpeedKnots() {
+<b class="fc"><i>268</i>&nbsp;        if (hasValue(WIND_SPEED_KNOTS)) {</b>
+<b class="fc"><i>269</i>&nbsp;            return getDoubleValue(WIND_SPEED_KNOTS);</b>
+<i>270</i>&nbsp;        } else {
+<b class="nc"><i>271</i>&nbsp;            return Double.NaN;</b>
+<i>272</i>&nbsp;        }
+<i>273</i>&nbsp;    }
+<i>274</i>&nbsp;
+<i>275</i>&nbsp;    @Override
+<i>276</i>&nbsp;    public void setAbsoluteHumidity(double humitidy) {
+<b class="fc"><i>277</i>&nbsp;        setDoubleValue(ABSOLUTE_HUMIDITY, humitidy);</b>
+<b class="fc"><i>278</i>&nbsp;    }</b>
+<i>279</i>&nbsp;
+<i>280</i>&nbsp;    @Override
+<i>281</i>&nbsp;    public void setAirTemperature(double temp) {
+<b class="fc"><i>282</i>&nbsp;        setDoubleValue(AIR_TEMPERATURE, temp);</b>
+<b class="fc"><i>283</i>&nbsp;    }</b>
+<i>284</i>&nbsp;
+<i>285</i>&nbsp;    @Override
+<i>286</i>&nbsp;    public void setDewPoint(double dewPoint) {
+<b class="fc"><i>287</i>&nbsp;        setDoubleValue(DEW_POINT, dewPoint);</b>
+<b class="fc"><i>288</i>&nbsp;    }</b>
+<i>289</i>&nbsp;
+<i>290</i>&nbsp;    @Override
+<i>291</i>&nbsp;    public void setMagneticWindDirection(double direction) {
+<b class="fc"><i>292</i>&nbsp;        setDoubleValue(WIND_DIRECTION_MAGNETIC, direction);</b>
+<b class="fc"><i>293</i>&nbsp;    }</b>
+<i>294</i>&nbsp;
+<i>295</i>&nbsp;    @Override
+<i>296</i>&nbsp;    public void setPrimaryBarometricPressure(double pressure) {
+<b class="fc"><i>297</i>&nbsp;        setDoubleValue(PRIMARY_BAROMETRIC_PRESSURE, pressure);</b>
+<b class="fc"><i>298</i>&nbsp;    }</b>
+<i>299</i>&nbsp;
+<i>300</i>&nbsp;    @Override
+<i>301</i>&nbsp;	public void setPrimaryBarometricPressureUnit(char unit) {
+<b class="fc"><i>302</i>&nbsp;		setCharValue(PRIMARY_BAROMETRIC_PRESSURE_UNIT, unit);</b>
+<b class="fc"><i>303</i>&nbsp;	}</b>
+<i>304</i>&nbsp;
+<i>305</i>&nbsp;    @Override
+<i>306</i>&nbsp;    public void setRelativeHumidity(double humidity) {
+<b class="fc"><i>307</i>&nbsp;        setDoubleValue(RELATIVE_HUMIDITY, humidity);</b>
+<b class="fc"><i>308</i>&nbsp;    }</b>
+<i>309</i>&nbsp;
+<i>310</i>&nbsp;    @Override
+<i>311</i>&nbsp;    public void setSecondaryBarometricPressure(double pressure) {
+<b class="fc"><i>312</i>&nbsp;        setDoubleValue(SECONDARY_BAROMETRIC_PRESSURE, pressure);</b>
+<b class="fc"><i>313</i>&nbsp;    }</b>
+<i>314</i>&nbsp;
+<i>315</i>&nbsp;    @Override
+<i>316</i>&nbsp;	public void setSecondaryBarometricPressureUnit(char unit) {
+<b class="fc"><i>317</i>&nbsp;		setCharValue(SECONDARY_BAROMETRIC_PRESSURE_UNIT, unit);	</b>
+<b class="fc"><i>318</i>&nbsp;	}</b>
+<i>319</i>&nbsp;
+<i>320</i>&nbsp;    @Override
+<i>321</i>&nbsp;    public void setTrueWindDirection(double direction) {
+<b class="fc"><i>322</i>&nbsp;        setDoubleValue(WIND_DIRECTION_TRUE, direction);</b>
+<i>323</i>&nbsp;
+<b class="fc"><i>324</i>&nbsp;    }</b>
+<i>325</i>&nbsp;
+<i>326</i>&nbsp;    @Override
+<i>327</i>&nbsp;    public void setWaterTemperature(double temp) {
+<b class="fc"><i>328</i>&nbsp;        setDoubleValue(WATER_TEMPERATURE, temp);</b>
+<i>329</i>&nbsp;
+<b class="fc"><i>330</i>&nbsp;    }</b>
+<i>331</i>&nbsp;
+<i>332</i>&nbsp;	@Override
+<i>333</i>&nbsp;    public void setWindSpeed(double speed) {
+<b class="fc"><i>334</i>&nbsp;        setDoubleValue(WIND_SPEED_METERS, speed);</b>
+<b class="fc"><i>335</i>&nbsp;    }</b>
+<i>336</i>&nbsp;
+<i>337</i>&nbsp;	@Override
+<i>338</i>&nbsp;    public void setWindSpeedKnots(double speed) {
+<b class="fc"><i>339</i>&nbsp;        setDoubleValue(WIND_SPEED_KNOTS, speed);</b>
+<b class="fc"><i>340</i>&nbsp;    }</b>
+<i>341</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2015-12-10 21:41</div>
+</div>
+</body>
+</html>

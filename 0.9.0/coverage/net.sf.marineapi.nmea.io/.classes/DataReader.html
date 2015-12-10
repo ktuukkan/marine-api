@@ -1,0 +1,103 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: DataReader</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">net.sf.marineapi.nmea.io</a> ]
+</div>
+
+<h1>Coverage Summary for Class: DataReader (net.sf.marineapi.nmea.io)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+</tr>
+<tr>
+  <td class="name">DataReader</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;/*
+<i>2</i>&nbsp; * DataReader.java
+<i>3</i>&nbsp; * Copyright (C) 2012 Kimmo Tuukkanen
+<i>4</i>&nbsp; * 
+<i>5</i>&nbsp; * This file is part of Java Marine API.
+<i>6</i>&nbsp; * &lt;http://ktuukkan.github.io/marine-api/&gt;
+<i>7</i>&nbsp; * 
+<i>8</i>&nbsp; * Java Marine API is free software: you can redistribute it and/or modify it
+<i>9</i>&nbsp; * under the terms of the GNU Lesser General Public License as published by the
+<i>10</i>&nbsp; * Free Software Foundation, either version 3 of the License, or (at your
+<i>11</i>&nbsp; * option) any later version.
+<i>12</i>&nbsp; * 
+<i>13</i>&nbsp; * Java Marine API is distributed in the hope that it will be useful, but
+<i>14</i>&nbsp; * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+<i>15</i>&nbsp; * FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License
+<i>16</i>&nbsp; * for more details.
+<i>17</i>&nbsp; * 
+<i>18</i>&nbsp; * You should have received a copy of the GNU Lesser General Public License
+<i>19</i>&nbsp; * along with Java Marine API. If not, see &lt;http://www.gnu.org/licenses/&gt;.
+<i>20</i>&nbsp; */
+<i>21</i>&nbsp;package net.sf.marineapi.nmea.io;
+<i>22</i>&nbsp;
+<i>23</i>&nbsp;/**
+<i>24</i>&nbsp; * Common interface for data readers.
+<i>25</i>&nbsp; * 
+<i>26</i>&nbsp; * @author Kimmo Tuukkanen
+<i>27</i>&nbsp; */
+<i>28</i>&nbsp;interface DataReader extends Runnable {
+<i>29</i>&nbsp;
+<i>30</i>&nbsp;	/**
+<i>31</i>&nbsp;	 * Returns the current pause time between read attempts.
+<i>32</i>&nbsp;	 * 
+<i>33</i>&nbsp;	 * @return Reader interval in milliseconds.
+<i>34</i>&nbsp;	 */
+<i>35</i>&nbsp;	int getInterval();
+<i>36</i>&nbsp;
+<i>37</i>&nbsp;	/**
+<i>38</i>&nbsp;	 * Tells if the reader is running and actively scanning the data source for
+<i>39</i>&nbsp;	 * new data.
+<i>40</i>&nbsp;	 * 
+<i>41</i>&nbsp;	 * @return &lt;code&gt;true&lt;/code&gt; if running, otherwise &lt;code&gt;false&lt;/code&gt;.
+<i>42</i>&nbsp;	 */
+<i>43</i>&nbsp;	boolean isRunning();
+<i>44</i>&nbsp;
+<i>45</i>&nbsp;	/**
+<i>46</i>&nbsp;	 * Set reader pause time between read attempts.
+<i>47</i>&nbsp;	 * 
+<i>48</i>&nbsp;	 * @param interval Interval in milliseconds.
+<i>49</i>&nbsp;	 */
+<i>50</i>&nbsp;	void setInterval(int interval);
+<i>51</i>&nbsp;
+<i>52</i>&nbsp;	/**
+<i>53</i>&nbsp;	 * Stops the reader permanently.
+<i>54</i>&nbsp;	 */
+<i>55</i>&nbsp;	void stop();
+<i>56</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2015-12-10 21:41</div>
+</div>
+</body>
+</html>

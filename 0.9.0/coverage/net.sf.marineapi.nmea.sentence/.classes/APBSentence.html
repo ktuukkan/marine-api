@@ -1,0 +1,294 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: APBSentence</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">net.sf.marineapi.nmea.sentence</a> ]
+</div>
+
+<h1>Coverage Summary for Class: APBSentence (net.sf.marineapi.nmea.sentence)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+</tr>
+<tr>
+  <td class="name">APBSentence</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;/*
+<i>2</i>&nbsp; * APBSentence.java
+<i>3</i>&nbsp; * Copyright (C) 2014 ktuu
+<i>4</i>&nbsp; * 
+<i>5</i>&nbsp; * This file is part of Java Marine API.
+<i>6</i>&nbsp; * &lt;http://ktuukkan.github.io/marine-api/&gt;
+<i>7</i>&nbsp; * 
+<i>8</i>&nbsp; * Java Marine API is free software: you can redistribute it and/or modify it
+<i>9</i>&nbsp; * under the terms of the GNU Lesser General Public License as published by the
+<i>10</i>&nbsp; * Free Software Foundation, either version 3 of the License, or (at your
+<i>11</i>&nbsp; * option) any later version.
+<i>12</i>&nbsp; * 
+<i>13</i>&nbsp; * Java Marine API is distributed in the hope that it will be useful, but
+<i>14</i>&nbsp; * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+<i>15</i>&nbsp; * FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License
+<i>16</i>&nbsp; * for more details.
+<i>17</i>&nbsp; * 
+<i>18</i>&nbsp; * You should have received a copy of the GNU Lesser General Public License
+<i>19</i>&nbsp; * along with Java Marine API. If not, see &lt;http://www.gnu.org/licenses/&gt;.
+<i>20</i>&nbsp; */
+<i>21</i>&nbsp;package net.sf.marineapi.nmea.sentence;
+<i>22</i>&nbsp;
+<i>23</i>&nbsp;import net.sf.marineapi.nmea.util.DataStatus;
+<i>24</i>&nbsp;import net.sf.marineapi.nmea.util.Direction;
+<i>25</i>&nbsp;
+<i>26</i>&nbsp;/**
+<i>27</i>&nbsp; * &lt;p&gt;
+<i>28</i>&nbsp; * Autopilot sentence &quot;type B&quot;, cross-track error, bearings and heading towards
+<i>29</i>&nbsp; * destination waypoint. This is a fixed form of the APA sentence with some
+<i>30</i>&nbsp; * ambiguities removed.
+<i>31</i>&nbsp; * &lt;/p&gt;
+<i>32</i>&nbsp; * &lt;p&gt;
+<i>33</i>&nbsp; * Note: Some autopilots, Robertson in particular, misinterpret
+<i>34</i>&nbsp; * &quot;bearing from origin to destination&quot; as &quot;bearing from present position to
+<i>35</i>&nbsp; * destination&quot;.
+<i>36</i>&nbsp; * &lt;/p&gt;
+<i>37</i>&nbsp; * 
+<i>38</i>&nbsp; * &lt;p&gt;Example:&lt;br/&gt;
+<i>39</i>&nbsp; * &lt;code&gt;$GPAPB,A,A,0.10,R,N,V,V,011,M,DEST,011,M,011,M*82&lt;/code&gt;&lt;/p&gt;
+<i>40</i>&nbsp; * 
+<i>41</i>&nbsp; * @author Kimmo Tuukkanen
+<i>42</i>&nbsp; */
+<i>43</i>&nbsp;public interface APBSentence extends Sentence {
+<i>44</i>&nbsp;
+<i>45</i>&nbsp;	/** Kilometers */
+<i>46</i>&nbsp;	public static final char KM = &#39;K&#39;;
+<i>47</i>&nbsp;
+<i>48</i>&nbsp;	/** Nautical miles */
+<i>49</i>&nbsp;	public static final char NM = &#39;N&#39;;
+<i>50</i>&nbsp;
+<i>51</i>&nbsp;	/**
+<i>52</i>&nbsp;	 * Returns the bearing from current position to destination waypoint.
+<i>53</i>&nbsp;	 * 
+<i>54</i>&nbsp;	 * @return bearing in degrees
+<i>55</i>&nbsp;	 */
+<i>56</i>&nbsp;	double getBearingPositionToDestination();
+<i>57</i>&nbsp;
+<i>58</i>&nbsp;	/**
+<i>59</i>&nbsp;	 * Returns bearing from origin to destination.
+<i>60</i>&nbsp;	 * 
+<i>61</i>&nbsp;	 * @return bearing in degrees
+<i>62</i>&nbsp;	 */
+<i>63</i>&nbsp;	double getBearingOriginToDestination();
+<i>64</i>&nbsp;
+<i>65</i>&nbsp;	/**
+<i>66</i>&nbsp;	 * Returns the cross-track error magnitude/distance.
+<i>67</i>&nbsp;	 * 
+<i>68</i>&nbsp;	 * @return Cross-track error distance in nautical miles
+<i>69</i>&nbsp;	 */
+<i>70</i>&nbsp;	double getCrossTrackError();
+<i>71</i>&nbsp;
+<i>72</i>&nbsp;	/**
+<i>73</i>&nbsp;	 * Returns the unit of cross-track error.
+<i>74</i>&nbsp;	 * 
+<i>75</i>&nbsp;	 * @return Unit char indicator
+<i>76</i>&nbsp;	 */
+<i>77</i>&nbsp;	char getCrossTrackUnits();
+<i>78</i>&nbsp;
+<i>79</i>&nbsp;	/**
+<i>80</i>&nbsp;	 * Returns the Loran-C cycle lock status, not used for GPS.
+<i>81</i>&nbsp;	 */
+<i>82</i>&nbsp;	DataStatus getCycleLockStatus();
+<i>83</i>&nbsp;
+<i>84</i>&nbsp;	/**
+<i>85</i>&nbsp;	 * Returns the destination waypoint id/name.
+<i>86</i>&nbsp;	 * 
+<i>87</i>&nbsp;	 * @return Waypoint id
+<i>88</i>&nbsp;	 */
+<i>89</i>&nbsp;	String getDestionationWaypointId();
+<i>90</i>&nbsp;
+<i>91</i>&nbsp;	/**
+<i>92</i>&nbsp;	 * Returns the heading to steer to destination waypoint.
+<i>93</i>&nbsp;	 * 
+<i>94</i>&nbsp;	 * @return Heading in degrees
+<i>95</i>&nbsp;	 */
+<i>96</i>&nbsp;	double getHeadingToDestionation();
+<i>97</i>&nbsp;
+<i>98</i>&nbsp;	/**
+<i>99</i>&nbsp;	 * Returns the signal/fix status, LORAN-C Blink or SNR warning.
+<i>100</i>&nbsp;	 * 
+<i>101</i>&nbsp;	 * @return DataStatus
+<i>102</i>&nbsp;	 */
+<i>103</i>&nbsp;	DataStatus getStatus();
+<i>104</i>&nbsp;
+<i>105</i>&nbsp;	/**
+<i>106</i>&nbsp;	 * Returns the direction in which to steer in order to get back on route.
+<i>107</i>&nbsp;	 * 
+<i>108</i>&nbsp;	 * @return {@link Direction#LEFT} or {@link Direction#RIGHT}
+<i>109</i>&nbsp;	 */
+<i>110</i>&nbsp;	Direction getSteerTo();
+<i>111</i>&nbsp;
+<i>112</i>&nbsp;	/**
+<i>113</i>&nbsp;	 * Tells if vessel has entered the arrival circle.
+<i>114</i>&nbsp;	 * 
+<i>115</i>&nbsp;	 * @return True if entered, otherwise false.
+<i>116</i>&nbsp;	 */
+<i>117</i>&nbsp;	boolean isArrivalCircleEntered();
+<i>118</i>&nbsp;
+<i>119</i>&nbsp;	/**
+<i>120</i>&nbsp;	 * Tells if the bearing from origin to destination is true or magnetic.
+<i>121</i>&nbsp;	 * 
+<i>122</i>&nbsp;	 * @return True if true heading, false for magnetic.
+<i>123</i>&nbsp;	 */
+<i>124</i>&nbsp;	boolean isBearingOriginToDestionationTrue();
+<i>125</i>&nbsp;
+<i>126</i>&nbsp;	/**
+<i>127</i>&nbsp;	 * Tells if the bearing from current position to destionation is true or
+<i>128</i>&nbsp;	 * magnetic.
+<i>129</i>&nbsp;	 * 
+<i>130</i>&nbsp;	 * @return True if true heading, false for magnetic.
+<i>131</i>&nbsp;	 */
+<i>132</i>&nbsp;	boolean isBearingPositionToDestinationTrue();
+<i>133</i>&nbsp;
+<i>134</i>&nbsp;	/**
+<i>135</i>&nbsp;	 * Tells if the heading to destionation is true or magnetic.
+<i>136</i>&nbsp;	 * 
+<i>137</i>&nbsp;	 * @return True if true heading, false for magnetic.
+<i>138</i>&nbsp;	 */
+<i>139</i>&nbsp;	boolean isHeadingToDestinationTrue();
+<i>140</i>&nbsp;
+<i>141</i>&nbsp;	/**
+<i>142</i>&nbsp;	 * Tells if vessel has passed perpendicular at waypoint.
+<i>143</i>&nbsp;	 * 
+<i>144</i>&nbsp;	 * @return True if passed, otherwise false.
+<i>145</i>&nbsp;	 */
+<i>146</i>&nbsp;	boolean isPerpendicularPassed();
+<i>147</i>&nbsp;
+<i>148</i>&nbsp;	/**
+<i>149</i>&nbsp;	 * Sets the arrival circle enter status.
+<i>150</i>&nbsp;	 * 
+<i>151</i>&nbsp;	 * @param isEntered True if entered, otherwise false.
+<i>152</i>&nbsp;	 */
+<i>153</i>&nbsp;	void setArrivalCircleEntered(boolean isEntered);
+<i>154</i>&nbsp;
+<i>155</i>&nbsp;	/**
+<i>156</i>&nbsp;	 * Sets the bearing from origin to destination.
+<i>157</i>&nbsp;	 * 
+<i>158</i>&nbsp;	 * @param bearing bearing in degrees
+<i>159</i>&nbsp;	 */
+<i>160</i>&nbsp;	void setBearingOriginToDestination(double bearing);
+<i>161</i>&nbsp;
+<i>162</i>&nbsp;	/**
+<i>163</i>&nbsp;	 * Sets the bearing from origin to destination true or magnetic.
+<i>164</i>&nbsp;	 * 
+<i>165</i>&nbsp;	 * @param isTrue True if true bearing, false for magnetic.
+<i>166</i>&nbsp;	 */
+<i>167</i>&nbsp;	void setBearingOriginToDestionationTrue(boolean isTrue);
+<i>168</i>&nbsp;
+<i>169</i>&nbsp;	/**
+<i>170</i>&nbsp;	 * Sets the bearing from current position to destination waypoint.
+<i>171</i>&nbsp;	 * 
+<i>172</i>&nbsp;	 * @param bearing bearing in degrees
+<i>173</i>&nbsp;	 */
+<i>174</i>&nbsp;	void setBearingPositionToDestination(double bearing);
+<i>175</i>&nbsp;
+<i>176</i>&nbsp;	/**
+<i>177</i>&nbsp;	 * Sets the bearing from current position to destination true or magnetic.
+<i>178</i>&nbsp;	 * 
+<i>179</i>&nbsp;	 * @param isTrue True if true bearing, false for magnetic.
+<i>180</i>&nbsp;	 */
+<i>181</i>&nbsp;	void setBearingPositionToDestinationTrue(boolean isTrue);
+<i>182</i>&nbsp;
+<i>183</i>&nbsp;	/**
+<i>184</i>&nbsp;	 * Sets the cross-track error magnitude/distance.
+<i>185</i>&nbsp;	 * 
+<i>186</i>&nbsp;	 * @param distance Cross-track error distance in nautical miles
+<i>187</i>&nbsp;	 */
+<i>188</i>&nbsp;	void setCrossTrackError(double distance);
+<i>189</i>&nbsp;
+<i>190</i>&nbsp;	/**
+<i>191</i>&nbsp;	 * Sets the unit of cross-track error.
+<i>192</i>&nbsp;	 * 
+<i>193</i>&nbsp;	 * @param unit Unit char to set
+<i>194</i>&nbsp;	 */
+<i>195</i>&nbsp;	void setCrossTrackUnits(char unit);
+<i>196</i>&nbsp;
+<i>197</i>&nbsp;	/**
+<i>198</i>&nbsp;	 * Sets the Loran-C cycle lock status. Not used for GPS, may be omitted or
+<i>199</i>&nbsp;	 * {@link DataStatus#VOID}.
+<i>200</i>&nbsp;	 * 
+<i>201</i>&nbsp;	 * @param status DataStatus to set
+<i>202</i>&nbsp;	 */
+<i>203</i>&nbsp;	void setCycleLockStatus(DataStatus status);
+<i>204</i>&nbsp;
+<i>205</i>&nbsp;	/**
+<i>206</i>&nbsp;	 * Returns the destination waypoint id/name.
+<i>207</i>&nbsp;	 * 
+<i>208</i>&nbsp;	 * @param id Waypoint ID to set.
+<i>209</i>&nbsp;	 */
+<i>210</i>&nbsp;	void setDestinationWaypointId(String id);
+<i>211</i>&nbsp;
+<i>212</i>&nbsp;	/**
+<i>213</i>&nbsp;	 * Sets the heading to destination waypoint.
+<i>214</i>&nbsp;	 * 
+<i>215</i>&nbsp;	 * @param heading heading in degrees
+<i>216</i>&nbsp;	 */
+<i>217</i>&nbsp;	void setHeadingToDestination(double heading);
+<i>218</i>&nbsp;
+<i>219</i>&nbsp;	/**
+<i>220</i>&nbsp;	 * Sets the heading to destionation true or magnetic.
+<i>221</i>&nbsp;	 * 
+<i>222</i>&nbsp;	 * @param isTrue True if true heading, false for magnetic.
+<i>223</i>&nbsp;	 */
+<i>224</i>&nbsp;	void setHeadingToDestinationTrue(boolean isTrue);
+<i>225</i>&nbsp;
+<i>226</i>&nbsp;	/**
+<i>227</i>&nbsp;	 * Sets the perpendicular to waypoint pass status.
+<i>228</i>&nbsp;	 * 
+<i>229</i>&nbsp;	 * @param isPassed True if passed, otherwise false.
+<i>230</i>&nbsp;	 */
+<i>231</i>&nbsp;	void setPerpendicularPassed(boolean isPassed);
+<i>232</i>&nbsp;
+<i>233</i>&nbsp;	/**
+<i>234</i>&nbsp;	 * Sets the signal/fix status, LORAN-C Blink or SNR warning.
+<i>235</i>&nbsp;	 * 
+<i>236</i>&nbsp;	 * @param status DataStatus to set.
+<i>237</i>&nbsp;	 */
+<i>238</i>&nbsp;	void setStatus(DataStatus status);
+<i>239</i>&nbsp;
+<i>240</i>&nbsp;	/**
+<i>241</i>&nbsp;	 * Set direction in which to steer in order to get back on route.
+<i>242</i>&nbsp;	 * 
+<i>243</i>&nbsp;	 * @param direction {@link Direction#RIGHT} or {@link Direction#LEFT}
+<i>244</i>&nbsp;	 */
+<i>245</i>&nbsp;	void setSteerTo(Direction direction);
+<i>246</i>&nbsp;
+<i>247</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2015-12-10 21:40</div>
+</div>
+</body>
+</html>

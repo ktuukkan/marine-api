@@ -1,0 +1,225 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: VBWSentence</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">net.sf.marineapi.nmea.sentence</a> ]
+</div>
+
+<h1>Coverage Summary for Class: VBWSentence (net.sf.marineapi.nmea.sentence)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+</tr>
+<tr>
+  <td class="name">VBWSentence</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;/*
+<i>2</i>&nbsp; * VBWSentence.java
+<i>3</i>&nbsp; * Copyright (C) 2015 ESRG LLC.
+<i>4</i>&nbsp; * 
+<i>5</i>&nbsp; * 
+<i>6</i>&nbsp; * Java Marine API is free software: you can redistribute it and/or modify it
+<i>7</i>&nbsp; * under the terms of the GNU Lesser General Public License as published by the
+<i>8</i>&nbsp; * Free Software Foundation, either version 3 of the License, or (at your
+<i>9</i>&nbsp; * option) any later version.
+<i>10</i>&nbsp; * 
+<i>11</i>&nbsp; * Java Marine API is distributed in the hope that it will be useful, but
+<i>12</i>&nbsp; * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+<i>13</i>&nbsp; * FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License
+<i>14</i>&nbsp; * for more details.
+<i>15</i>&nbsp; * 
+<i>16</i>&nbsp; * You should have received a copy of the GNU Lesser General Public License
+<i>17</i>&nbsp; * along with NMEA Java Marine API. If not, see &lt;http://www.gnu.org/licenses/&gt;.
+<i>18</i>&nbsp; */
+<i>19</i>&nbsp;package net.sf.marineapi.nmea.sentence;
+<i>20</i>&nbsp;
+<i>21</i>&nbsp;import net.sf.marineapi.nmea.util.DataStatus;
+<i>22</i>&nbsp;
+<i>23</i>&nbsp;/**
+<i>24</i>&nbsp; * &lt;p&gt;
+<i>25</i>&nbsp; * VBW Dual Ground/Water Speed Longitudinal, Transverse and Stern Ground/Water
+<i>26</i>&nbsp; * Speed with Status.
+<i>27</i>&nbsp; * &lt;/p&gt;
+<i>28</i>&nbsp; * &lt;p&gt;
+<i>29</i>&nbsp; * Example:&lt;br&gt;
+<i>30</i>&nbsp; * &lt;code&gt;$IIVBW,11.0,02.0,A,06.0,03.0,A,05.3,A,01.0,A*43&lt;/code&gt;
+<i>31</i>&nbsp; * &lt;/p&gt;
+<i>32</i>&nbsp; * 
+<i>33</i>&nbsp; * @author Jeremy Wilson
+<i>34</i>&nbsp; */
+<i>35</i>&nbsp;public interface VBWSentence extends Sentence {
+<i>36</i>&nbsp;
+<i>37</i>&nbsp;	/**
+<i>38</i>&nbsp;	 * Returns the Longitudinal Water Speed.
+<i>39</i>&nbsp;	 * 
+<i>40</i>&nbsp;	 * @return Longitudinal Water Speed
+<i>41</i>&nbsp;	 */
+<i>42</i>&nbsp;	double getLongWaterSpeed();
+<i>43</i>&nbsp;
+<i>44</i>&nbsp;	/**
+<i>45</i>&nbsp;	 * Returns the Longitudinal Ground Speed.
+<i>46</i>&nbsp;	 * 
+<i>47</i>&nbsp;	 * @return Longitudinal Ground Speed
+<i>48</i>&nbsp;	 */
+<i>49</i>&nbsp;	double getLongGroundSpeed();
+<i>50</i>&nbsp;
+<i>51</i>&nbsp;	/**
+<i>52</i>&nbsp;	 * Returns the Transverse Water Speed.
+<i>53</i>&nbsp;	 * 
+<i>54</i>&nbsp;	 * @return Transverse Water Speed
+<i>55</i>&nbsp;	 */
+<i>56</i>&nbsp;	double getTravWaterSpeed();
+<i>57</i>&nbsp;
+<i>58</i>&nbsp;	/**
+<i>59</i>&nbsp;	 * Returns the Transverse Ground Speed.
+<i>60</i>&nbsp;	 * 
+<i>61</i>&nbsp;	 * @return Transverse Ground Speed
+<i>62</i>&nbsp;	 */
+<i>63</i>&nbsp;	double getTravGroundSpeed();
+<i>64</i>&nbsp;
+<i>65</i>&nbsp;	/**
+<i>66</i>&nbsp;	 * Returns the Water Speed Status.
+<i>67</i>&nbsp;	 * 
+<i>68</i>&nbsp;	 * @return DataStatus Water Speed Status
+<i>69</i>&nbsp;	 */
+<i>70</i>&nbsp;	DataStatus getWaterSpeedStatus();
+<i>71</i>&nbsp;
+<i>72</i>&nbsp;	/**
+<i>73</i>&nbsp;	 * Returns the Ground Speed Status.
+<i>74</i>&nbsp;	 * 
+<i>75</i>&nbsp;	 * @return DataStatus Ground Speed Status
+<i>76</i>&nbsp;	 */
+<i>77</i>&nbsp;	DataStatus getGroundSpeedStatus();
+<i>78</i>&nbsp;
+<i>79</i>&nbsp;	/**
+<i>80</i>&nbsp;	 * Returns the Stern Water Speed.
+<i>81</i>&nbsp;	 * 
+<i>82</i>&nbsp;	 * @return Stern Water Speed
+<i>83</i>&nbsp;	 */
+<i>84</i>&nbsp;	double getSternWaterSpeed();
+<i>85</i>&nbsp;
+<i>86</i>&nbsp;	/**
+<i>87</i>&nbsp;	 * Returns the Stern Water Speed Status.
+<i>88</i>&nbsp;	 * 
+<i>89</i>&nbsp;	 * @return DataStatus Stern Water Speed Status
+<i>90</i>&nbsp;	 */
+<i>91</i>&nbsp;	DataStatus getSternWaterSpeedStatus();
+<i>92</i>&nbsp;
+<i>93</i>&nbsp;	/**
+<i>94</i>&nbsp;	 * Returns the Stern Ground Speed.
+<i>95</i>&nbsp;	 * 
+<i>96</i>&nbsp;	 * @return Stern Ground Speed
+<i>97</i>&nbsp;	 * @see #setSternGroundSpeed(double)
+<i>98</i>&nbsp;	 */
+<i>99</i>&nbsp;	double getSternGroundSpeed();
+<i>100</i>&nbsp;
+<i>101</i>&nbsp;	/**
+<i>102</i>&nbsp;	 * Returns the Stern Ground Speed Status.
+<i>103</i>&nbsp;	 * 
+<i>104</i>&nbsp;	 * @return DataStatus Stern Ground Speed Status
+<i>105</i>&nbsp;	 */
+<i>106</i>&nbsp;	DataStatus getSternGroundSpeedStatus();
+<i>107</i>&nbsp;
+<i>108</i>&nbsp;	/**
+<i>109</i>&nbsp;	 * Sets Longitudinal Water Speed.
+<i>110</i>&nbsp;	 * 
+<i>111</i>&nbsp;	 * @param speed Longitudinal Water Speed.
+<i>112</i>&nbsp;	 */
+<i>113</i>&nbsp;	void setLongWaterSpeed(double speed);
+<i>114</i>&nbsp;
+<i>115</i>&nbsp;	/**
+<i>116</i>&nbsp;	 * Sets Longitudinal Ground Speed.
+<i>117</i>&nbsp;	 * 
+<i>118</i>&nbsp;	 * @param speed Longitudinal Ground Speed.
+<i>119</i>&nbsp;	 */
+<i>120</i>&nbsp;	void setLongGroundSpeed(double speed);
+<i>121</i>&nbsp;
+<i>122</i>&nbsp;	/**
+<i>123</i>&nbsp;	 * Sets Transverse Water Speed.
+<i>124</i>&nbsp;	 * 
+<i>125</i>&nbsp;	 * @param speed Transverse Water Speed.
+<i>126</i>&nbsp;	 */
+<i>127</i>&nbsp;	void setTravWaterSpeed(double speed);
+<i>128</i>&nbsp;
+<i>129</i>&nbsp;	/**
+<i>130</i>&nbsp;	 * Sets Transverse Ground Speed.
+<i>131</i>&nbsp;	 * 
+<i>132</i>&nbsp;	 * @param speed Transverse Ground Speed.
+<i>133</i>&nbsp;	 */
+<i>134</i>&nbsp;	void setTravGroundSpeed(double speed);
+<i>135</i>&nbsp;
+<i>136</i>&nbsp;	/**
+<i>137</i>&nbsp;	 * Sets Water Speed Status.
+<i>138</i>&nbsp;	 * 
+<i>139</i>&nbsp;	 * @param status Water Speed Status
+<i>140</i>&nbsp;	 */
+<i>141</i>&nbsp;	void setWaterSpeedStatus(DataStatus status);
+<i>142</i>&nbsp;
+<i>143</i>&nbsp;	/**
+<i>144</i>&nbsp;	 * Sets Ground Speed Status.
+<i>145</i>&nbsp;	 * 
+<i>146</i>&nbsp;	 * @param status Ground Speed Status
+<i>147</i>&nbsp;	 */
+<i>148</i>&nbsp;	void setGroundSpeedStatus(DataStatus status);
+<i>149</i>&nbsp;
+<i>150</i>&nbsp;	/**
+<i>151</i>&nbsp;	 * Sets Stern Water Speed.
+<i>152</i>&nbsp;	 * 
+<i>153</i>&nbsp;	 * @param speed Stern Water Speed.
+<i>154</i>&nbsp;	 */
+<i>155</i>&nbsp;	void setSternWaterSpeed(double speed);
+<i>156</i>&nbsp;
+<i>157</i>&nbsp;	/**
+<i>158</i>&nbsp;	 * Sets Stern Water Speed Status.
+<i>159</i>&nbsp;	 * 
+<i>160</i>&nbsp;	 * @param status Stern Water Speed Status.
+<i>161</i>&nbsp;	 */
+<i>162</i>&nbsp;	void setSternWaterSpeedStatus(DataStatus status);
+<i>163</i>&nbsp;
+<i>164</i>&nbsp;	/**
+<i>165</i>&nbsp;	 * Sets Stern Ground Speed.
+<i>166</i>&nbsp;	 * 
+<i>167</i>&nbsp;	 * @param speed Stern Ground Speed.
+<i>168</i>&nbsp;	 */
+<i>169</i>&nbsp;	void setSternGroundSpeed(double speed);
+<i>170</i>&nbsp;
+<i>171</i>&nbsp;	/**
+<i>172</i>&nbsp;	 * Sets Stern Ground Speed Status.
+<i>173</i>&nbsp;	 * 
+<i>174</i>&nbsp;	 * @param status Stern Ground Speed Status.
+<i>175</i>&nbsp;	 */
+<i>176</i>&nbsp;	void setSternGroundSpeedStatus(DataStatus status);
+<i>177</i>&nbsp;
+<i>178</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2015-12-10 21:41</div>
+</div>
+</body>
+</html>

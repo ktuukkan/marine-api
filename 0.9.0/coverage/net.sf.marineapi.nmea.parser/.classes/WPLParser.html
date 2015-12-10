@@ -1,0 +1,167 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: WPLParser</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">net.sf.marineapi.nmea.parser</a> ]
+</div>
+
+<h1>Coverage Summary for Class: WPLParser (net.sf.marineapi.nmea.parser)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">WPLParser</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/ 1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (4/ 4)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (10/ 10)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;/* 
+<i>2</i>&nbsp; * WPLParser.java
+<i>3</i>&nbsp; * Copyright (C) 2010 Kimmo Tuukkanen
+<i>4</i>&nbsp; * 
+<i>5</i>&nbsp; * This file is part of Java Marine API.
+<i>6</i>&nbsp; * &lt;http://ktuukkan.github.io/marine-api/&gt;
+<i>7</i>&nbsp; * 
+<i>8</i>&nbsp; * Java Marine API is free software: you can redistribute it and/or modify it
+<i>9</i>&nbsp; * under the terms of the GNU Lesser General Public License as published by the
+<i>10</i>&nbsp; * Free Software Foundation, either version 3 of the License, or (at your
+<i>11</i>&nbsp; * option) any later version.
+<i>12</i>&nbsp; * 
+<i>13</i>&nbsp; * Java Marine API is distributed in the hope that it will be useful, but
+<i>14</i>&nbsp; * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+<i>15</i>&nbsp; * FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License
+<i>16</i>&nbsp; * for more details.
+<i>17</i>&nbsp; * 
+<i>18</i>&nbsp; * You should have received a copy of the GNU Lesser General Public License
+<i>19</i>&nbsp; * along with Java Marine API. If not, see &lt;http://www.gnu.org/licenses/&gt;.
+<i>20</i>&nbsp; */
+<i>21</i>&nbsp;package net.sf.marineapi.nmea.parser;
+<i>22</i>&nbsp;
+<i>23</i>&nbsp;import net.sf.marineapi.nmea.sentence.SentenceId;
+<i>24</i>&nbsp;import net.sf.marineapi.nmea.sentence.TalkerId;
+<i>25</i>&nbsp;import net.sf.marineapi.nmea.sentence.WPLSentence;
+<i>26</i>&nbsp;import net.sf.marineapi.nmea.util.Position;
+<i>27</i>&nbsp;import net.sf.marineapi.nmea.util.Waypoint;
+<i>28</i>&nbsp;
+<i>29</i>&nbsp;/**
+<i>30</i>&nbsp; * WPL sentence parser.
+<i>31</i>&nbsp; * 
+<i>32</i>&nbsp; * @author Kimmo Tuukkanen
+<i>33</i>&nbsp; */
+<i>34</i>&nbsp;class WPLParser extends PositionParser implements WPLSentence {
+<i>35</i>&nbsp;
+<i>36</i>&nbsp;	// field ids
+<i>37</i>&nbsp;	private static final int LATITUDE = 0;
+<i>38</i>&nbsp;	private static final int LAT_HEMISPHERE = 1;
+<i>39</i>&nbsp;	private static final int LONGITUDE = 2;
+<i>40</i>&nbsp;	private static final int LON_HEMISPHERE = 3;
+<i>41</i>&nbsp;	private static final int WAYPOINT_ID = 4;
+<i>42</i>&nbsp;
+<i>43</i>&nbsp;	/**
+<i>44</i>&nbsp;	 * Creates a new instance of WPLParser.
+<i>45</i>&nbsp;	 * 
+<i>46</i>&nbsp;	 * @param nmea WPL sentence String.
+<i>47</i>&nbsp;	 * @throws IllegalArgumentException If specified sentence is invalid.
+<i>48</i>&nbsp;	 */
+<i>49</i>&nbsp;	public WPLParser(String nmea) {
+<b class="fc"><i>50</i>&nbsp;		super(nmea, SentenceId.WPL);</b>
+<b class="fc"><i>51</i>&nbsp;	}</b>
+<i>52</i>&nbsp;
+<i>53</i>&nbsp;	/**
+<i>54</i>&nbsp;	 * Creates WPL parser with empty sentence.
+<i>55</i>&nbsp;	 * 
+<i>56</i>&nbsp;	 * @param talker TalkerId to set
+<i>57</i>&nbsp;	 */
+<i>58</i>&nbsp;	public WPLParser(TalkerId talker) {
+<b class="fc"><i>59</i>&nbsp;		super(talker, SentenceId.WPL, 5);</b>
+<b class="fc"><i>60</i>&nbsp;	}</b>
+<i>61</i>&nbsp;
+<i>62</i>&nbsp;	/*
+<i>63</i>&nbsp;	 * (non-Javadoc)
+<i>64</i>&nbsp;	 * @see net.sf.marineapi.nmea.sentence.WPLSentence#getWaypoint()
+<i>65</i>&nbsp;	 */
+<i>66</i>&nbsp;	public Waypoint getWaypoint() {
+<b class="fc"><i>67</i>&nbsp;		String id = getStringValue(WAYPOINT_ID);</b>
+<b class="fc"><i>68</i>&nbsp;		Position p = parsePosition(</b>
+<i>69</i>&nbsp;			LATITUDE, LAT_HEMISPHERE, LONGITUDE, LON_HEMISPHERE);
+<i>70</i>&nbsp;		
+<b class="fc"><i>71</i>&nbsp;		return p.toWaypoint(id);</b>
+<i>72</i>&nbsp;	}
+<i>73</i>&nbsp;
+<i>74</i>&nbsp;	/*
+<i>75</i>&nbsp;	 * (non-Javadoc)
+<i>76</i>&nbsp;	 * @see
+<i>77</i>&nbsp;	 * net.sf.marineapi.nmea.sentence.WPLSentence#setWaypoint(net.sf.marineapi
+<i>78</i>&nbsp;	 * .nmea.util.Waypoint)
+<i>79</i>&nbsp;	 */
+<i>80</i>&nbsp;	public void setWaypoint(Waypoint wp) {
+<b class="fc"><i>81</i>&nbsp;		setStringValue(WAYPOINT_ID, wp.getId());</b>
+<b class="fc"><i>82</i>&nbsp;		setPositionValues(wp, LATITUDE, LAT_HEMISPHERE, LONGITUDE, LON_HEMISPHERE);</b>
+<b class="fc"><i>83</i>&nbsp;	}</b>
+<i>84</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2015-12-10 21:41</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,268 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: TTMSentence</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">net.sf.marineapi.nmea.sentence</a> ]
+</div>
+
+<h1>Coverage Summary for Class: TTMSentence (net.sf.marineapi.nmea.sentence)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+</tr>
+<tr>
+  <td class="name">TTMSentence</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;/*
+<i>2</i>&nbsp; * TTMSentence.java
+<i>3</i>&nbsp; * Copyright (C) 2014 Johan Bergkvist
+<i>4</i>&nbsp; *
+<i>5</i>&nbsp; * This file is part of Java Marine API.
+<i>6</i>&nbsp; * &lt;http://ktuukkan.github.io/marine-api/&gt;
+<i>7</i>&nbsp; *
+<i>8</i>&nbsp; * Java Marine API is free software: you can redistribute it and/or modify it
+<i>9</i>&nbsp; * under the terms of the GNU Lesser General Public License as published by the
+<i>10</i>&nbsp; * Free Software Foundation, either version 3 of the License, or (at your
+<i>11</i>&nbsp; * option) any later version.
+<i>12</i>&nbsp; *
+<i>13</i>&nbsp; * Java Marine API is distributed in the hope that it will be useful, but
+<i>14</i>&nbsp; * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+<i>15</i>&nbsp; * FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License
+<i>16</i>&nbsp; * for more details.
+<i>17</i>&nbsp; *
+<i>18</i>&nbsp; * You should have received a copy of the GNU Lesser General Public License
+<i>19</i>&nbsp; * along with Java Marine API. If not, see &lt;http://www.gnu.org/licenses/&gt;.
+<i>20</i>&nbsp; */
+<i>21</i>&nbsp;package net.sf.marineapi.nmea.sentence;
+<i>22</i>&nbsp;
+<i>23</i>&nbsp;import net.sf.marineapi.nmea.util.AcquisitionType;
+<i>24</i>&nbsp;import net.sf.marineapi.nmea.util.TargetStatus;
+<i>25</i>&nbsp;import net.sf.marineapi.nmea.util.Units;
+<i>26</i>&nbsp;
+<i>27</i>&nbsp;/**
+<i>28</i>&nbsp; * Tracked Target Message. Range and bearing from radar to target. Course and
+<i>29</i>&nbsp; * speed of target. One message per target.
+<i>30</i>&nbsp; * &lt;p&gt;
+<i>31</i>&nbsp; * Example:&lt;br&gt;
+<i>32</i>&nbsp; * &lt;code&gt;$RATTM,11,11.4,13.6,T,7.0,20.0,T,0.0,0.0,N,,Q,,154125.82,A,*17&lt;/code&gt;
+<i>33</i>&nbsp; *
+<i>34</i>&nbsp; * @author Johan Bergkvist
+<i>35</i>&nbsp; */
+<i>36</i>&nbsp;public interface TTMSentence extends TimeSentence {
+<i>37</i>&nbsp;
+<i>38</i>&nbsp;	/**
+<i>39</i>&nbsp;	 * Get the number assigned to this target by the radar. The TTM sentence
+<i>40</i>&nbsp;	 * mandate a two digit number, so valid numbers are 0 to 99 inclusive.
+<i>41</i>&nbsp;	 *
+<i>42</i>&nbsp;	 * @return Target number in the range 0 - 99.
+<i>43</i>&nbsp;	 * @throws net.sf.marineapi.nmea.parser.DataNotAvailableException
+<i>44</i>&nbsp;	 *             If the data is not available.
+<i>45</i>&nbsp;	 */
+<i>46</i>&nbsp;	int getNumber();
+<i>47</i>&nbsp;
+<i>48</i>&nbsp;	/**
+<i>49</i>&nbsp;	 * Get the distance from the radar to the target.
+<i>50</i>&nbsp;	 *
+<i>51</i>&nbsp;	 * @return Distance to target in nautical miles.
+<i>52</i>&nbsp;	 */
+<i>53</i>&nbsp;	double getDistance();
+<i>54</i>&nbsp;
+<i>55</i>&nbsp;	/**
+<i>56</i>&nbsp;	 * Get the true bearing from the radar to the target.
+<i>57</i>&nbsp;	 *
+<i>58</i>&nbsp;	 * @return True bearing in degrees.
+<i>59</i>&nbsp;	 */
+<i>60</i>&nbsp;	double getBearing();
+<i>61</i>&nbsp;
+<i>62</i>&nbsp;	/**
+<i>63</i>&nbsp;	 * Get the speed the target.
+<i>64</i>&nbsp;	 *
+<i>65</i>&nbsp;	 * @return Speed in kts (nautical miles per hour).
+<i>66</i>&nbsp;	 */
+<i>67</i>&nbsp;	double getSpeed();
+<i>68</i>&nbsp;
+<i>69</i>&nbsp;	/**
+<i>70</i>&nbsp;	 * Get the course the target is maintaining.
+<i>71</i>&nbsp;	 *
+<i>72</i>&nbsp;	 * @return True course in degrees.
+<i>73</i>&nbsp;	 */
+<i>74</i>&nbsp;	double getCourse();
+<i>75</i>&nbsp;
+<i>76</i>&nbsp;	/**
+<i>77</i>&nbsp;	 * Get the distance at the Closest Point of Approach (CPA).
+<i>78</i>&nbsp;	 *
+<i>79</i>&nbsp;	 * @return The distance in nautical miles.
+<i>80</i>&nbsp;	 */
+<i>81</i>&nbsp;	double getDistanceOfCPA();
+<i>82</i>&nbsp;
+<i>83</i>&nbsp;	/**
+<i>84</i>&nbsp;	 * Get the time to the Closest Point of Approach (CPA).
+<i>85</i>&nbsp;	 *
+<i>86</i>&nbsp;	 * @return The time in minutes.
+<i>87</i>&nbsp;	 */
+<i>88</i>&nbsp;	double getTimeToCPA();
+<i>89</i>&nbsp;
+<i>90</i>&nbsp;	/**
+<i>91</i>&nbsp;	 * Get the unit of measure used for distance and speeds.
+<i>92</i>&nbsp;	 *
+<i>93</i>&nbsp;	 * @return The unit of measure.
+<i>94</i>&nbsp;	 */
+<i>95</i>&nbsp;	Units getUnits();
+<i>96</i>&nbsp;
+<i>97</i>&nbsp;	/**
+<i>98</i>&nbsp;	 * Get the name of the target as assigned by the radar.
+<i>99</i>&nbsp;	 *
+<i>100</i>&nbsp;	 * @return Name.
+<i>101</i>&nbsp;	 */
+<i>102</i>&nbsp;	String getName();
+<i>103</i>&nbsp;
+<i>104</i>&nbsp;	/**
+<i>105</i>&nbsp;	 * Get the status of the target. A target is first in state QUERY while the
+<i>106</i>&nbsp;	 * radar works out firm data of the target. At first the calculated course
+<i>107</i>&nbsp;	 * and speed are rough and varies a lot; with time they settle at which
+<i>108</i>&nbsp;	 * point the target becomes TRACKING. A target no longer detected becomes
+<i>109</i>&nbsp;	 * LOST before TTM sentences will not be sent at all for the target.
+<i>110</i>&nbsp;	 *
+<i>111</i>&nbsp;	 * @return The state (QUERY, TRACKING, LOST)
+<i>112</i>&nbsp;	 */
+<i>113</i>&nbsp;	TargetStatus getStatus();
+<i>114</i>&nbsp;
+<i>115</i>&nbsp;	/**
+<i>116</i>&nbsp;	 * A target may be used to calculate own ship position.
+<i>117</i>&nbsp;	 *
+<i>118</i>&nbsp;	 * @return True if this target is used to calculate own ship position.
+<i>119</i>&nbsp;	 */
+<i>120</i>&nbsp;	boolean getReference();
+<i>121</i>&nbsp;
+<i>122</i>&nbsp;	/**
+<i>123</i>&nbsp;	 * Get the acquisition type of the target. AUTO indicates that the radar
+<i>124</i>&nbsp;	 * initiated the target. MANUAL indicates that the radar operator initiated
+<i>125</i>&nbsp;	 * the target in the radar. REPORTED indicates that the target came from
+<i>126</i>&nbsp;	 * another source. TODO: Is that true?
+<i>127</i>&nbsp;	 *
+<i>128</i>&nbsp;	 * @return The acquisition type (AUTO, MANUAL, REPORTED)
+<i>129</i>&nbsp;	 */
+<i>130</i>&nbsp;	AcquisitionType getAcquisitionType();
+<i>131</i>&nbsp;
+<i>132</i>&nbsp;	/**
+<i>133</i>&nbsp;	 * Set the number of the target. Uniquely identifies the target.
+<i>134</i>&nbsp;	 *
+<i>135</i>&nbsp;	 * @param number
+<i>136</i>&nbsp;	 *            The number in the range 0 to 99 inclusive.
+<i>137</i>&nbsp;	 */
+<i>138</i>&nbsp;	void setNumber(int number);
+<i>139</i>&nbsp;
+<i>140</i>&nbsp;	/**
+<i>141</i>&nbsp;	 * Set the distance from the radar to the target.
+<i>142</i>&nbsp;	 *
+<i>143</i>&nbsp;	 * @param distance
+<i>144</i>&nbsp;	 *            Distance in nautical miles.
+<i>145</i>&nbsp;	 */
+<i>146</i>&nbsp;	void setDistance(double distance);
+<i>147</i>&nbsp;
+<i>148</i>&nbsp;	/**
+<i>149</i>&nbsp;	 * Set the true bearing from the radar to the target.
+<i>150</i>&nbsp;	 *
+<i>151</i>&nbsp;	 * @param bearing
+<i>152</i>&nbsp;	 *            True bearing in degrees.
+<i>153</i>&nbsp;	 */
+<i>154</i>&nbsp;	void setBearing(double bearing);
+<i>155</i>&nbsp;
+<i>156</i>&nbsp;	/**
+<i>157</i>&nbsp;	 * Set the speed of the target.
+<i>158</i>&nbsp;	 *
+<i>159</i>&nbsp;	 * @param speed
+<i>160</i>&nbsp;	 *            Speed in kts (nautical miles per hour).
+<i>161</i>&nbsp;	 */
+<i>162</i>&nbsp;	void setSpeed(double speed);
+<i>163</i>&nbsp;
+<i>164</i>&nbsp;	/**
+<i>165</i>&nbsp;	 * Set the course of the target.
+<i>166</i>&nbsp;	 *
+<i>167</i>&nbsp;	 * @param course
+<i>168</i>&nbsp;	 *            True course in degrees.
+<i>169</i>&nbsp;	 */
+<i>170</i>&nbsp;	void setCourse(double course);
+<i>171</i>&nbsp;
+<i>172</i>&nbsp;	/**
+<i>173</i>&nbsp;	 * Set the distance at CPA.
+<i>174</i>&nbsp;	 *
+<i>175</i>&nbsp;	 * @param distance
+<i>176</i>&nbsp;	 *            Distance in nautical miles
+<i>177</i>&nbsp;	 */
+<i>178</i>&nbsp;	void setDistanceOfCPA(double distance);
+<i>179</i>&nbsp;
+<i>180</i>&nbsp;	/**
+<i>181</i>&nbsp;	 * Set the time to CPA.
+<i>182</i>&nbsp;	 *
+<i>183</i>&nbsp;	 * @param minutes
+<i>184</i>&nbsp;	 *            Time to CPA in minutes.
+<i>185</i>&nbsp;	 */
+<i>186</i>&nbsp;	void setTimeToCPA(double minutes);
+<i>187</i>&nbsp;
+<i>188</i>&nbsp;	/**
+<i>189</i>&nbsp;	 * Set the name of the target.
+<i>190</i>&nbsp;	 *
+<i>191</i>&nbsp;	 * @param name
+<i>192</i>&nbsp;	 *            The name as a string, probably not too long...
+<i>193</i>&nbsp;	 */
+<i>194</i>&nbsp;	void setName(String name);
+<i>195</i>&nbsp;
+<i>196</i>&nbsp;	/**
+<i>197</i>&nbsp;	 * Set the Status of the target.
+<i>198</i>&nbsp;	 *
+<i>199</i>&nbsp;	 * @see net.sf.marineapi.nmea.sentence.TTMSentence#getStatus()
+<i>200</i>&nbsp;	 * @param status
+<i>201</i>&nbsp;	 *            The status
+<i>202</i>&nbsp;	 */
+<i>203</i>&nbsp;	void setStatus(TargetStatus status);
+<i>204</i>&nbsp;
+<i>205</i>&nbsp;	/**
+<i>206</i>&nbsp;	 * A target may be used to calculate own ship position.
+<i>207</i>&nbsp;	 *
+<i>208</i>&nbsp;	 * @param isReference
+<i>209</i>&nbsp;	 *            True if this target is used to calculate own ship position.
+<i>210</i>&nbsp;	 */
+<i>211</i>&nbsp;	void setReference(boolean isReference);
+<i>212</i>&nbsp;
+<i>213</i>&nbsp;	/**
+<i>214</i>&nbsp;	 * Set the acquisition type of the target.
+<i>215</i>&nbsp;	 *
+<i>216</i>&nbsp;	 * @see net.sf.marineapi.nmea.sentence.TTMSentence#getAcquisitionType()
+<i>217</i>&nbsp;	 * @param acquisitionType
+<i>218</i>&nbsp;	 *            The acquisition type.
+<i>219</i>&nbsp;	 */
+<i>220</i>&nbsp;	void setAcquisitionType(AcquisitionType acquisitionType);
+<i>221</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2015-12-10 21:40</div>
+</div>
+</body>
+</html>

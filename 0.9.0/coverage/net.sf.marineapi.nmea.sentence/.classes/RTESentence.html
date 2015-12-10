@@ -1,0 +1,229 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: RTESentence</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">net.sf.marineapi.nmea.sentence</a> ]
+</div>
+
+<h1>Coverage Summary for Class: RTESentence (net.sf.marineapi.nmea.sentence)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+</tr>
+<tr>
+  <td class="name">RTESentence</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;/* 
+<i>2</i>&nbsp; * RTESentence.java
+<i>3</i>&nbsp; * Copyright (C) 2010 Kimmo Tuukkanen
+<i>4</i>&nbsp; * 
+<i>5</i>&nbsp; * This file is part of Java Marine API.
+<i>6</i>&nbsp; * &lt;http://ktuukkan.github.io/marine-api/&gt;
+<i>7</i>&nbsp; * 
+<i>8</i>&nbsp; * Java Marine API is free software: you can redistribute it and/or modify it
+<i>9</i>&nbsp; * under the terms of the GNU Lesser General Public License as published by the
+<i>10</i>&nbsp; * Free Software Foundation, either version 3 of the License, or (at your
+<i>11</i>&nbsp; * option) any later version.
+<i>12</i>&nbsp; * 
+<i>13</i>&nbsp; * Java Marine API is distributed in the hope that it will be useful, but
+<i>14</i>&nbsp; * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+<i>15</i>&nbsp; * FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License
+<i>16</i>&nbsp; * for more details.
+<i>17</i>&nbsp; * 
+<i>18</i>&nbsp; * You should have received a copy of the GNU Lesser General Public License
+<i>19</i>&nbsp; * along with Java Marine API. If not, see &lt;http://www.gnu.org/licenses/&gt;.
+<i>20</i>&nbsp; */
+<i>21</i>&nbsp;package net.sf.marineapi.nmea.sentence;
+<i>22</i>&nbsp;
+<i>23</i>&nbsp;import net.sf.marineapi.nmea.util.RouteType;
+<i>24</i>&nbsp;
+<i>25</i>&nbsp;/**
+<i>26</i>&nbsp; * GPS route data and list of waypoints.
+<i>27</i>&nbsp; * &lt;p&gt;
+<i>28</i>&nbsp; * Example:&lt;br&gt;
+<i>29</i>&nbsp; * &lt;code&gt;$GPRTE,1,1,c,0,MELIN,RUSKI,KNUDAN*25&lt;/code&gt;
+<i>30</i>&nbsp; * 
+<i>31</i>&nbsp; * @author Kimmo Tuukkanen
+<i>32</i>&nbsp; */
+<i>33</i>&nbsp;public interface RTESentence extends Sentence {
+<i>34</i>&nbsp;
+<i>35</i>&nbsp;	/**
+<i>36</i>&nbsp;	 * Add a waypoint ID at the end of waypoint list. The number of waypoint id
+<i>37</i>&nbsp;	 * fields is increased by one on each addition.
+<i>38</i>&nbsp;	 * 
+<i>39</i>&nbsp;	 * @param id Waypoint ID to add.
+<i>40</i>&nbsp;	 * @return The total number of waypoint IDs after addition.
+<i>41</i>&nbsp;	 */
+<i>42</i>&nbsp;	int addWaypointId(String id);
+<i>43</i>&nbsp;
+<i>44</i>&nbsp;	/**
+<i>45</i>&nbsp;	 * Get the number or name of the route.
+<i>46</i>&nbsp;	 * 
+<i>47</i>&nbsp;	 * @return Route ID or name as String
+<i>48</i>&nbsp;	 * @throws net.sf.marineapi.nmea.parser.DataNotAvailableException If the data is
+<i>49</i>&nbsp;	 *             not available.
+<i>50</i>&nbsp;	 * @throws net.sf.marineapi.nmea.parser.ParseException If the field contains
+<i>51</i>&nbsp;	 *             unexpected or illegal value.
+<i>52</i>&nbsp;	 */
+<i>53</i>&nbsp;	String getRouteId();
+<i>54</i>&nbsp;
+<i>55</i>&nbsp;	/**
+<i>56</i>&nbsp;	 * Get the number of sentences in RTE sequence.
+<i>57</i>&nbsp;	 * 
+<i>58</i>&nbsp;	 * @return integer
+<i>59</i>&nbsp;	 * @see #getSentenceIndex()
+<i>60</i>&nbsp;	 * @throws net.sf.marineapi.nmea.parser.DataNotAvailableException If the data is
+<i>61</i>&nbsp;	 *             not available.
+<i>62</i>&nbsp;	 * @throws net.sf.marineapi.nmea.parser.ParseException If the field contains
+<i>63</i>&nbsp;	 *             unexpected or illegal value.
+<i>64</i>&nbsp;	 */
+<i>65</i>&nbsp;	int getSentenceCount();
+<i>66</i>&nbsp;
+<i>67</i>&nbsp;	/**
+<i>68</i>&nbsp;	 * Get the index of sentence in RTE sequence.
+<i>69</i>&nbsp;	 * 
+<i>70</i>&nbsp;	 * @return integer
+<i>71</i>&nbsp;	 * @see #getSentenceCount()
+<i>72</i>&nbsp;	 * @throws net.sf.marineapi.nmea.parser.DataNotAvailableException If the data is
+<i>73</i>&nbsp;	 *             not available.
+<i>74</i>&nbsp;	 * @throws net.sf.marineapi.nmea.parser.ParseException If the field contains
+<i>75</i>&nbsp;	 *             unexpected or illegal value.
+<i>76</i>&nbsp;	 */
+<i>77</i>&nbsp;	int getSentenceIndex();
+<i>78</i>&nbsp;
+<i>79</i>&nbsp;	/**
+<i>80</i>&nbsp;	 * Get the number of waypoints IDs in this sentence.
+<i>81</i>&nbsp;	 * 
+<i>82</i>&nbsp;	 * @return Waypoint count
+<i>83</i>&nbsp;	 * @throws net.sf.marineapi.nmea.parser.DataNotAvailableException If the data is
+<i>84</i>&nbsp;	 *             not available.
+<i>85</i>&nbsp;	 * @throws net.sf.marineapi.nmea.parser.ParseException If the field contains
+<i>86</i>&nbsp;	 *             unexpected or illegal value.
+<i>87</i>&nbsp;	 */
+<i>88</i>&nbsp;	int getWaypointCount();
+<i>89</i>&nbsp;
+<i>90</i>&nbsp;	/**
+<i>91</i>&nbsp;	 * Get the list of route waypoints.
+<i>92</i>&nbsp;	 * 
+<i>93</i>&nbsp;	 * @return Waypoint IDs as String array
+<i>94</i>&nbsp;	 * @throws net.sf.marineapi.nmea.parser.DataNotAvailableException If the data is
+<i>95</i>&nbsp;	 *             not available.
+<i>96</i>&nbsp;	 * @throws net.sf.marineapi.nmea.parser.ParseException If the field contains
+<i>97</i>&nbsp;	 *             unexpected or illegal value.
+<i>98</i>&nbsp;	 */
+<i>99</i>&nbsp;	String[] getWaypointIds();
+<i>100</i>&nbsp;
+<i>101</i>&nbsp;	/**
+<i>102</i>&nbsp;	 * Tells if the sentence holds a current active route data.
+<i>103</i>&nbsp;	 * 
+<i>104</i>&nbsp;	 * @return true if active route, otherwise false.
+<i>105</i>&nbsp;	 * @throws net.sf.marineapi.nmea.parser.DataNotAvailableException If the data is
+<i>106</i>&nbsp;	 *             not available.
+<i>107</i>&nbsp;	 * @throws net.sf.marineapi.nmea.parser.ParseException If the field contains
+<i>108</i>&nbsp;	 *             unexpected or illegal value.
+<i>109</i>&nbsp;	 */
+<i>110</i>&nbsp;	boolean isActiveRoute();
+<i>111</i>&nbsp;
+<i>112</i>&nbsp;	/**
+<i>113</i>&nbsp;	 * Tells if this is the first sentence in RTE sequence.
+<i>114</i>&nbsp;	 * 
+<i>115</i>&nbsp;	 * @return true if there&#39;s no sentences left, otherwise false.
+<i>116</i>&nbsp;	 * @throws net.sf.marineapi.nmea.parser.DataNotAvailableException If the sentence
+<i>117</i>&nbsp;	 *             index or sentence count is not available.
+<i>118</i>&nbsp;	 * @throws net.sf.marineapi.nmea.parser.ParseException If sentence index or count
+<i>119</i>&nbsp;	 *             fields contain unexpected or illegal value.
+<i>120</i>&nbsp;	 */
+<i>121</i>&nbsp;	boolean isFirst();
+<i>122</i>&nbsp;
+<i>123</i>&nbsp;	/**
+<i>124</i>&nbsp;	 * Tells if this is the last sentence in RTE sequence.
+<i>125</i>&nbsp;	 * 
+<i>126</i>&nbsp;	 * @return true if there&#39;s no sentences left, otherwise false.
+<i>127</i>&nbsp;	 * @throws net.sf.marineapi.nmea.parser.DataNotAvailableException If the sentence
+<i>128</i>&nbsp;	 *             index or sentence count is not available.
+<i>129</i>&nbsp;	 * @throws net.sf.marineapi.nmea.parser.ParseException If sentence index or count
+<i>130</i>&nbsp;	 *             fields contain unexpected or illegal value.
+<i>131</i>&nbsp;	 */
+<i>132</i>&nbsp;	boolean isLast();
+<i>133</i>&nbsp;
+<i>134</i>&nbsp;	/**
+<i>135</i>&nbsp;	 * Tells if the sentence holds a current working route data.
+<i>136</i>&nbsp;	 * 
+<i>137</i>&nbsp;	 * @return true if working route, otherwise false.
+<i>138</i>&nbsp;	 * @throws net.sf.marineapi.nmea.parser.DataNotAvailableException If the data is
+<i>139</i>&nbsp;	 *             not available.
+<i>140</i>&nbsp;	 * @throws net.sf.marineapi.nmea.parser.ParseException If status field contains
+<i>141</i>&nbsp;	 *             illegal value.
+<i>142</i>&nbsp;	 */
+<i>143</i>&nbsp;	boolean isWorkingRoute();
+<i>144</i>&nbsp;
+<i>145</i>&nbsp;	/**
+<i>146</i>&nbsp;	 * Set the route name or number.
+<i>147</i>&nbsp;	 * 
+<i>148</i>&nbsp;	 * @param id Route ID or name as String
+<i>149</i>&nbsp;	 */
+<i>150</i>&nbsp;	void setRouteId(String id);
+<i>151</i>&nbsp;
+<i>152</i>&nbsp;	/**
+<i>153</i>&nbsp;	 * Set the type of route.
+<i>154</i>&nbsp;	 * 
+<i>155</i>&nbsp;	 * @param type RouteType to set
+<i>156</i>&nbsp;	 */
+<i>157</i>&nbsp;	void setRouteType(RouteType type);
+<i>158</i>&nbsp;
+<i>159</i>&nbsp;	/**
+<i>160</i>&nbsp;	 * Set the number of sentences in RTE sequence.
+<i>161</i>&nbsp;	 * 
+<i>162</i>&nbsp;	 * @param count Sentence count in sequence
+<i>163</i>&nbsp;	 * @throws IllegalArgumentException If the specified count is negative.
+<i>164</i>&nbsp;	 */
+<i>165</i>&nbsp;	void setSentenceCount(int count);
+<i>166</i>&nbsp;
+<i>167</i>&nbsp;	/**
+<i>168</i>&nbsp;	 * Set the index of sentence in RTE sequence.
+<i>169</i>&nbsp;	 * 
+<i>170</i>&nbsp;	 * @param index Sentence index in sequence
+<i>171</i>&nbsp;	 * @throws IllegalArgumentException If specified index is negative.
+<i>172</i>&nbsp;	 */
+<i>173</i>&nbsp;	void setSentenceIndex(int index);
+<i>174</i>&nbsp;
+<i>175</i>&nbsp;	/**
+<i>176</i>&nbsp;	 * Set the list of route waypoints.
+<i>177</i>&nbsp;	 * 
+<i>178</i>&nbsp;	 * @param ids String array of waypoint IDs
+<i>179</i>&nbsp;	 */
+<i>180</i>&nbsp;	void setWaypointIds(String[] ids);
+<i>181</i>&nbsp;
+<i>182</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2015-12-10 21:40</div>
+</div>
+</body>
+</html>

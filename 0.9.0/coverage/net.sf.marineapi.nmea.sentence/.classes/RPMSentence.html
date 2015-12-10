@@ -1,0 +1,162 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: RPMSentence</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">net.sf.marineapi.nmea.sentence</a> ]
+</div>
+
+<h1>Coverage Summary for Class: RPMSentence (net.sf.marineapi.nmea.sentence)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+</tr>
+<tr>
+  <td class="name">RPMSentence</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;/*
+<i>2</i>&nbsp; * RPMSentence.java
+<i>3</i>&nbsp; * Copyright (C) 2014 Kimmo Tuukkanen
+<i>4</i>&nbsp; * 
+<i>5</i>&nbsp; * This file is part of Java Marine API.
+<i>6</i>&nbsp; * &lt;http://ktuukkan.github.io/marine-api/&gt;
+<i>7</i>&nbsp; * 
+<i>8</i>&nbsp; * Java Marine API is free software: you can redistribute it and/or modify it
+<i>9</i>&nbsp; * under the terms of the GNU Lesser General Public License as published by the
+<i>10</i>&nbsp; * Free Software Foundation, either version 3 of the License, or (at your
+<i>11</i>&nbsp; * option) any later version.
+<i>12</i>&nbsp; * 
+<i>13</i>&nbsp; * Java Marine API is distributed in the hope that it will be useful, but
+<i>14</i>&nbsp; * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+<i>15</i>&nbsp; * FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License
+<i>16</i>&nbsp; * for more details.
+<i>17</i>&nbsp; * 
+<i>18</i>&nbsp; * You should have received a copy of the GNU Lesser General Public License
+<i>19</i>&nbsp; * along with Java Marine API. If not, see &lt;http://www.gnu.org/licenses/&gt;.
+<i>20</i>&nbsp; */
+<i>21</i>&nbsp;package net.sf.marineapi.nmea.sentence;
+<i>22</i>&nbsp;
+<i>23</i>&nbsp;import net.sf.marineapi.nmea.util.DataStatus;
+<i>24</i>&nbsp;
+<i>25</i>&nbsp;/**
+<i>26</i>&nbsp; * Revolutions, measured from shaft or engine.
+<i>27</i>&nbsp; * 
+<i>28</i>&nbsp; * @author Kimmo Tuukkanen
+<i>29</i>&nbsp; */
+<i>30</i>&nbsp;public interface RPMSentence extends Sentence {
+<i>31</i>&nbsp;
+<i>32</i>&nbsp;	/** Source indicator for engine */
+<i>33</i>&nbsp;	public static final char ENGINE = &#39;E&#39;;
+<i>34</i>&nbsp;	
+<i>35</i>&nbsp;	/** Source indicator for shaft */
+<i>36</i>&nbsp;	public static final char SHAFT = &#39;S&#39;;
+<i>37</i>&nbsp;
+<i>38</i>&nbsp;	/**
+<i>39</i>&nbsp;	 * Returns the engine or shaft number/id.
+<i>40</i>&nbsp;	 * 
+<i>41</i>&nbsp;	 * @return Engine of shaft number
+<i>42</i>&nbsp;	 */
+<i>43</i>&nbsp;	int getId();
+<i>44</i>&nbsp;
+<i>45</i>&nbsp;	/**
+<i>46</i>&nbsp;	 * Returns the propeller pitch, % of maximum.
+<i>47</i>&nbsp;	 * 
+<i>48</i>&nbsp;	 * @return Pitch value, negative values denote astern.
+<i>49</i>&nbsp;	 */
+<i>50</i>&nbsp;	double getPitch();
+<i>51</i>&nbsp;
+<i>52</i>&nbsp;	/**
+<i>53</i>&nbsp;	 * Returns the revolutions value.
+<i>54</i>&nbsp;	 * 
+<i>55</i>&nbsp;	 * @return Speed, revolutions per minute.
+<i>56</i>&nbsp;	 */
+<i>57</i>&nbsp;	double getRPM();
+<i>58</i>&nbsp;
+<i>59</i>&nbsp;	/**
+<i>60</i>&nbsp;	 * Returns the measurement source, engine or shaft.
+<i>61</i>&nbsp;	 * 
+<i>62</i>&nbsp;	 * @return &#39;E&#39; for engine, &#39;S&#39; for shaft.
+<i>63</i>&nbsp;	 */
+<i>64</i>&nbsp;	char getSource();
+<i>65</i>&nbsp;
+<i>66</i>&nbsp;	/**
+<i>67</i>&nbsp;	 * Returns the data validity status.
+<i>68</i>&nbsp;	 * 
+<i>69</i>&nbsp;	 * @return DataStatus
+<i>70</i>&nbsp;	 */
+<i>71</i>&nbsp;	DataStatus getStatus();
+<i>72</i>&nbsp;
+<i>73</i>&nbsp;	/**
+<i>74</i>&nbsp;	 * Tells if the data source is engine.
+<i>75</i>&nbsp;	 * 
+<i>76</i>&nbsp;	 * @return True if engine, otherwise false.
+<i>77</i>&nbsp;	 */
+<i>78</i>&nbsp;	boolean isEngine();
+<i>79</i>&nbsp;
+<i>80</i>&nbsp;	/**
+<i>81</i>&nbsp;	 * Tells if the data source is shaft.
+<i>82</i>&nbsp;	 * 
+<i>83</i>&nbsp;	 * @return True for shaft, otherwise false.
+<i>84</i>&nbsp;	 */
+<i>85</i>&nbsp;	boolean isShaft();
+<i>86</i>&nbsp;
+<i>87</i>&nbsp;	/**
+<i>88</i>&nbsp;	 * Sets the engine or shaft number/id.
+<i>89</i>&nbsp;	 * 
+<i>90</i>&nbsp;	 * @param id ID to set.
+<i>91</i>&nbsp;	 */
+<i>92</i>&nbsp;	void setId(int id);
+<i>93</i>&nbsp;
+<i>94</i>&nbsp;	/**
+<i>95</i>&nbsp;	 * Sets the propeller pitch, % of maximum.
+<i>96</i>&nbsp;	 * 
+<i>97</i>&nbsp;	 * @param pitch Pitch value to set, negative values denote astern.
+<i>98</i>&nbsp;	 */
+<i>99</i>&nbsp;	void setPitch(double pitch);
+<i>100</i>&nbsp;
+<i>101</i>&nbsp;	/**
+<i>102</i>&nbsp;	 * Sets the source indicator, engine or shaft.
+<i>103</i>&nbsp;	 * 
+<i>104</i>&nbsp;	 * @param source &#39;E&#39; for engine or &#39;S&#39; for shaft.
+<i>105</i>&nbsp;	 * @throws IllegalArgumentException If specified char is not &#39;E&#39; or &#39;S&#39;.
+<i>106</i>&nbsp;	 */
+<i>107</i>&nbsp;	void setSource(char source);
+<i>108</i>&nbsp;
+<i>109</i>&nbsp;	/**
+<i>110</i>&nbsp;	 * Sets the data validity status.
+<i>111</i>&nbsp;	 * 
+<i>112</i>&nbsp;	 * @param status DataStatus to set.
+<i>113</i>&nbsp;	 */
+<i>114</i>&nbsp;	void setStatus(DataStatus status);
+<i>115</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2015-12-10 21:40</div>
+</div>
+</body>
+</html>

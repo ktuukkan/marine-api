@@ -1,0 +1,432 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: TTMParser</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">net.sf.marineapi.nmea.parser</a> ]
+</div>
+
+<h1>Coverage Summary for Class: TTMParser (net.sf.marineapi.nmea.parser)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">TTMParser</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/ 1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    88.9%
+  </span>
+  <span class="absValue">
+    (24/ 27)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    90.7%
+  </span>
+  <span class="absValue">
+    (49/ 54)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;/*
+<i>2</i>&nbsp; * TTMParser.java
+<i>3</i>&nbsp; * Copyright (C) 2014 Johan Bergkvist
+<i>4</i>&nbsp; *
+<i>5</i>&nbsp; * This file is part of Java Marine API.
+<i>6</i>&nbsp; * &lt;http://ktuukkan.github.io/marine-api/&gt;
+<i>7</i>&nbsp; *
+<i>8</i>&nbsp; * Java Marine API is free software: you can redistribute it and/or modify it
+<i>9</i>&nbsp; * under the terms of the GNU Lesser General Public License as published by the
+<i>10</i>&nbsp; * Free Software Foundation, either version 3 of the License, or (at your
+<i>11</i>&nbsp; * option) any later version.
+<i>12</i>&nbsp; *
+<i>13</i>&nbsp; * Java Marine API is distributed in the hope that it will be useful, but
+<i>14</i>&nbsp; * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+<i>15</i>&nbsp; * FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License
+<i>16</i>&nbsp; * for more details.
+<i>17</i>&nbsp; *
+<i>18</i>&nbsp; * You should have received a copy of the GNU Lesser General Public License
+<i>19</i>&nbsp; * along with Java Marine API. If not, see &lt;http://www.gnu.org/licenses/&gt;.
+<i>20</i>&nbsp; */
+<i>21</i>&nbsp;package net.sf.marineapi.nmea.parser;
+<i>22</i>&nbsp;
+<i>23</i>&nbsp;import java.text.DecimalFormat;
+<i>24</i>&nbsp;import java.text.DecimalFormatSymbols;
+<i>25</i>&nbsp;
+<i>26</i>&nbsp;import net.sf.marineapi.nmea.sentence.SentenceId;
+<i>27</i>&nbsp;import net.sf.marineapi.nmea.sentence.TTMSentence;
+<i>28</i>&nbsp;import net.sf.marineapi.nmea.sentence.TalkerId;
+<i>29</i>&nbsp;import net.sf.marineapi.nmea.util.AcquisitionType;
+<i>30</i>&nbsp;import net.sf.marineapi.nmea.util.TargetStatus;
+<i>31</i>&nbsp;import net.sf.marineapi.nmea.util.Time;
+<i>32</i>&nbsp;import net.sf.marineapi.nmea.util.Units;
+<i>33</i>&nbsp;
+<i>34</i>&nbsp;/**
+<i>35</i>&nbsp; * TTM sentence parser.
+<i>36</i>&nbsp; *
+<i>37</i>&nbsp; * @author Johan Bergkvist
+<i>38</i>&nbsp; */
+<i>39</i>&nbsp;class TTMParser extends SentenceParser implements TTMSentence {
+<i>40</i>&nbsp;
+<i>41</i>&nbsp;	private static final int NUMBER = 0;
+<i>42</i>&nbsp;	private static final int DISTANCE = 1;
+<i>43</i>&nbsp;	private static final int BEARING = 2;
+<i>44</i>&nbsp;	private static final int BEARING_TRUE_REL = 3;
+<i>45</i>&nbsp;	private static final int SPEED = 4;
+<i>46</i>&nbsp;	private static final int COURSE = 5;
+<i>47</i>&nbsp;	private static final int COURSE_TRUE_REL = 6;
+<i>48</i>&nbsp;	private static final int DISTANCE_CPA = 7;
+<i>49</i>&nbsp;	private static final int TIME_CPA = 8;
+<i>50</i>&nbsp;	private static final int UNITS = 9;
+<i>51</i>&nbsp;	private static final int NAME = 10;
+<i>52</i>&nbsp;	private static final int STATUS = 11;
+<i>53</i>&nbsp;	private static final int REFERENCE = 12;
+<i>54</i>&nbsp;	private static final int UTC_TIME = 13;
+<i>55</i>&nbsp;	private static final int ACQUISITON_TYPE = 14;
+<i>56</i>&nbsp;
+<i>57</i>&nbsp;	/**
+<i>58</i>&nbsp;	 * Create a new instance of TTMParser.
+<i>59</i>&nbsp;	 *
+<i>60</i>&nbsp;	 * @param nmea
+<i>61</i>&nbsp;	 *            TTM sentence String.
+<i>62</i>&nbsp;	 * @throws IllegalArgumentException
+<i>63</i>&nbsp;	 *             If specified sentence is invalid.
+<i>64</i>&nbsp;	 */
+<i>65</i>&nbsp;	public TTMParser(String nmea) {
+<b class="fc"><i>66</i>&nbsp;		super(nmea, SentenceId.TTM);</b>
+<b class="fc"><i>67</i>&nbsp;	}</b>
+<i>68</i>&nbsp;
+<i>69</i>&nbsp;	/**
+<i>70</i>&nbsp;	 * Create a TTM parser with an empty sentence.
+<i>71</i>&nbsp;	 *
+<i>72</i>&nbsp;	 * @param talker
+<i>73</i>&nbsp;	 *            TalkerId to set
+<i>74</i>&nbsp;	 */
+<i>75</i>&nbsp;	public TTMParser(TalkerId talker) {
+<b class="fc"><i>76</i>&nbsp;		super(talker, SentenceId.TTM, 15);</b>
+<b class="fc"><i>77</i>&nbsp;	}</b>
+<i>78</i>&nbsp;
+<i>79</i>&nbsp;	/*
+<i>80</i>&nbsp;	 * (non-Javadoc)
+<i>81</i>&nbsp;	 *
+<i>82</i>&nbsp;	 * @see net.sf.marineapi.nmea.sentence.TimeSentence#getTime()
+<i>83</i>&nbsp;	 */
+<i>84</i>&nbsp;	@Override
+<i>85</i>&nbsp;	public Time getTime() {
+<b class="fc"><i>86</i>&nbsp;		String str = getStringValue(UTC_TIME);</b>
+<b class="fc"><i>87</i>&nbsp;		return new Time(str);</b>
+<i>88</i>&nbsp;	}
+<i>89</i>&nbsp;
+<i>90</i>&nbsp;	/*
+<i>91</i>&nbsp;	 * (non-Javadoc)
+<i>92</i>&nbsp;	 *
+<i>93</i>&nbsp;	 * @see net.sf.marineapi.nmea.sentence.TimeSentence#setTime()
+<i>94</i>&nbsp;	 */
+<i>95</i>&nbsp;	@Override
+<i>96</i>&nbsp;	public void setTime(Time t) {
+<i>97</i>&nbsp;		/*
+<i>98</i>&nbsp;		 * The TTM specification calls for seconds with TWO decimals, not the
+<i>99</i>&nbsp;		 * usual three implemented by the Time.toString(). So we create our own
+<i>100</i>&nbsp;		 * string.
+<i>101</i>&nbsp;		 */
+<b class="fc"><i>102</i>&nbsp;		String str = String.format(&quot;%02d%02d&quot;, t.getHour(), t.getMinutes());</b>
+<i>103</i>&nbsp;
+<b class="fc"><i>104</i>&nbsp;		DecimalFormat nf = new DecimalFormat(&quot;00.00&quot;);</b>
+<b class="fc"><i>105</i>&nbsp;		DecimalFormatSymbols dfs = new DecimalFormatSymbols();</b>
+<b class="fc"><i>106</i>&nbsp;		dfs.setDecimalSeparator(&#39;.&#39;);</b>
+<b class="fc"><i>107</i>&nbsp;		nf.setDecimalFormatSymbols(dfs);</b>
+<i>108</i>&nbsp;
+<b class="fc"><i>109</i>&nbsp;		str += nf.format(t.getSeconds());</b>
+<b class="fc"><i>110</i>&nbsp;		setStringValue(UTC_TIME, str);</b>
+<b class="fc"><i>111</i>&nbsp;	}</b>
+<i>112</i>&nbsp;
+<i>113</i>&nbsp;	/*
+<i>114</i>&nbsp;	 * (non-Javadoc)
+<i>115</i>&nbsp;	 *
+<i>116</i>&nbsp;	 * @see net.sf.marineapi.nmea.sentence.TTMSentence#getNumber()
+<i>117</i>&nbsp;	 */
+<i>118</i>&nbsp;	@Override
+<i>119</i>&nbsp;	public int getNumber() {
+<b class="fc"><i>120</i>&nbsp;		return getIntValue(NUMBER);</b>
+<i>121</i>&nbsp;	}
+<i>122</i>&nbsp;
+<i>123</i>&nbsp;	/*
+<i>124</i>&nbsp;	 * (non-Javadoc)
+<i>125</i>&nbsp;	 *
+<i>126</i>&nbsp;	 * @see net.sf.marineapi.nmea.sentence.TTMSentence#getDistance()
+<i>127</i>&nbsp;	 */
+<i>128</i>&nbsp;	@Override
+<i>129</i>&nbsp;	public double getDistance() {
+<b class="fc"><i>130</i>&nbsp;		return getDoubleValue(DISTANCE);</b>
+<i>131</i>&nbsp;	}
+<i>132</i>&nbsp;
+<i>133</i>&nbsp;	/*
+<i>134</i>&nbsp;	 * (non-Javadoc)
+<i>135</i>&nbsp;	 *
+<i>136</i>&nbsp;	 * @see net.sf.marineapi.nmea.sentence.TTMSentence#getBearing()
+<i>137</i>&nbsp;	 */
+<i>138</i>&nbsp;	@Override
+<i>139</i>&nbsp;	public double getBearing() {
+<b class="fc"><i>140</i>&nbsp;		return getDoubleValue(BEARING);</b>
+<i>141</i>&nbsp;	}
+<i>142</i>&nbsp;
+<i>143</i>&nbsp;	/*
+<i>144</i>&nbsp;	 * (non-Javadoc)
+<i>145</i>&nbsp;	 *
+<i>146</i>&nbsp;	 * @see net.sf.marineapi.nmea.sentence.TTMSentence#getSpeed()
+<i>147</i>&nbsp;	 */
+<i>148</i>&nbsp;	@Override
+<i>149</i>&nbsp;	public double getSpeed() {
+<b class="fc"><i>150</i>&nbsp;		return getDoubleValue(SPEED);</b>
+<i>151</i>&nbsp;	}
+<i>152</i>&nbsp;
+<i>153</i>&nbsp;	/*
+<i>154</i>&nbsp;	 * (non-Javadoc)
+<i>155</i>&nbsp;	 *
+<i>156</i>&nbsp;	 * @see net.sf.marineapi.nmea.sentence.TTMSentence#getCourse()
+<i>157</i>&nbsp;	 */
+<i>158</i>&nbsp;	@Override
+<i>159</i>&nbsp;	public double getCourse() {
+<b class="fc"><i>160</i>&nbsp;		return getDoubleValue(COURSE);</b>
+<i>161</i>&nbsp;	}
+<i>162</i>&nbsp;
+<i>163</i>&nbsp;	/*
+<i>164</i>&nbsp;	 * (non-Javadoc)
+<i>165</i>&nbsp;	 *
+<i>166</i>&nbsp;	 * @see net.sf.marineapi.nmea.sentence.TTMSentence#getDistanceOfCPA()
+<i>167</i>&nbsp;	 */
+<i>168</i>&nbsp;	@Override
+<i>169</i>&nbsp;	public double getDistanceOfCPA() {
+<b class="fc"><i>170</i>&nbsp;		return getDoubleValue(DISTANCE_CPA);</b>
+<i>171</i>&nbsp;	}
+<i>172</i>&nbsp;
+<i>173</i>&nbsp;	/*
+<i>174</i>&nbsp;	 * (non-Javadoc)
+<i>175</i>&nbsp;	 *
+<i>176</i>&nbsp;	 * @see net.sf.marineapi.nmea.sentence.TTMSentence#getTimeToCPA()
+<i>177</i>&nbsp;	 */
+<i>178</i>&nbsp;	@Override
+<i>179</i>&nbsp;	public double getTimeToCPA() {
+<b class="fc"><i>180</i>&nbsp;		return getDoubleValue(TIME_CPA);</b>
+<i>181</i>&nbsp;	}
+<i>182</i>&nbsp;
+<i>183</i>&nbsp;	/*
+<i>184</i>&nbsp;	 * (non-Javadoc)
+<i>185</i>&nbsp;	 *
+<i>186</i>&nbsp;	 * @see net.sf.marineapi.nmea.sentence.TTMSentence#getTimeToCPA()
+<i>187</i>&nbsp;	 */
+<i>188</i>&nbsp;	@Override
+<i>189</i>&nbsp;	public Units getUnits() {
+<b class="nc"><i>190</i>&nbsp;		return Units.valueOf(getCharValue(UNITS));</b>
+<i>191</i>&nbsp;	}
+<i>192</i>&nbsp;
+<i>193</i>&nbsp;	/*
+<i>194</i>&nbsp;	 * (non-Javadoc)
+<i>195</i>&nbsp;	 *
+<i>196</i>&nbsp;	 * @see net.sf.marineapi.nmea.sentence.TTMSentence#getName()
+<i>197</i>&nbsp;	 */
+<i>198</i>&nbsp;	@Override
+<i>199</i>&nbsp;	public String getName() {
+<b class="fc"><i>200</i>&nbsp;		return getStringValue(NAME);</b>
+<i>201</i>&nbsp;	}
+<i>202</i>&nbsp;
+<i>203</i>&nbsp;	/*
+<i>204</i>&nbsp;	 * (non-Javadoc)
+<i>205</i>&nbsp;	 *
+<i>206</i>&nbsp;	 * @see net.sf.marineapi.nmea.sentence.TTMSentence#getStatus()
+<i>207</i>&nbsp;	 */
+<i>208</i>&nbsp;	@Override
+<i>209</i>&nbsp;	public TargetStatus getStatus() {
+<b class="fc"><i>210</i>&nbsp;		return TargetStatus.valueOf(getCharValue(STATUS));</b>
+<i>211</i>&nbsp;	}
+<i>212</i>&nbsp;
+<i>213</i>&nbsp;	/*
+<i>214</i>&nbsp;	 * (non-Javadoc)
+<i>215</i>&nbsp;	 *
+<i>216</i>&nbsp;	 * @see net.sf.marineapi.nmea.sentence.TTMSentence#getAcquisitionType()
+<i>217</i>&nbsp;	 */
+<i>218</i>&nbsp;	@Override
+<i>219</i>&nbsp;	public AcquisitionType getAcquisitionType() {
+<b class="fc"><i>220</i>&nbsp;		return AcquisitionType.valueOf(getCharValue(ACQUISITON_TYPE));</b>
+<i>221</i>&nbsp;	}
+<i>222</i>&nbsp;
+<i>223</i>&nbsp;	/*
+<i>224</i>&nbsp;	 * (non-Javadoc)
+<i>225</i>&nbsp;	 *
+<i>226</i>&nbsp;	 * @see net.sf.marineapi.nmea.sentence.TTMSentence#getReference()
+<i>227</i>&nbsp;	 */
+<i>228</i>&nbsp;	@Override
+<i>229</i>&nbsp;	public boolean getReference() {
+<b class="nc"><i>230</i>&nbsp;		return getCharValue(REFERENCE) == &#39;R&#39;;</b>
+<i>231</i>&nbsp;	}
+<i>232</i>&nbsp;
+<i>233</i>&nbsp;	/*
+<i>234</i>&nbsp;	 * (non-Javadoc)
+<i>235</i>&nbsp;	 *
+<i>236</i>&nbsp;	 * @see net.sf.marineapi.nmea.sentence.TTMSentence#setNumber()
+<i>237</i>&nbsp;	 */
+<i>238</i>&nbsp;	@Override
+<i>239</i>&nbsp;	public void setNumber(int number) {
+<b class="fc"><i>240</i>&nbsp;		setIntValue(NUMBER, number, 2);</b>
+<b class="fc"><i>241</i>&nbsp;	}</b>
+<i>242</i>&nbsp;
+<i>243</i>&nbsp;	/*
+<i>244</i>&nbsp;	 * (non-Javadoc)
+<i>245</i>&nbsp;	 *
+<i>246</i>&nbsp;	 * @see net.sf.marineapi.nmea.sentence.TTMSentence#setDistance()
+<i>247</i>&nbsp;	 */
+<i>248</i>&nbsp;	@Override
+<i>249</i>&nbsp;	public void setDistance(double distance) {
+<b class="fc"><i>250</i>&nbsp;		setDoubleValue(DISTANCE, distance, 1, 1);</b>
+<b class="fc"><i>251</i>&nbsp;		setCharValue(UNITS, &#39;N&#39;);</b>
+<b class="fc"><i>252</i>&nbsp;	}</b>
+<i>253</i>&nbsp;
+<i>254</i>&nbsp;	/*
+<i>255</i>&nbsp;	 * (non-Javadoc)
+<i>256</i>&nbsp;	 *
+<i>257</i>&nbsp;	 * @see net.sf.marineapi.nmea.sentence.TTMSentence#setBearing()
+<i>258</i>&nbsp;	 */
+<i>259</i>&nbsp;	@Override
+<i>260</i>&nbsp;	public void setBearing(double bearing) {
+<b class="fc"><i>261</i>&nbsp;		setDoubleValue(BEARING, bearing, 1, 1);</b>
+<b class="fc"><i>262</i>&nbsp;		setCharValue(BEARING_TRUE_REL, &#39;T&#39;);</b>
+<b class="fc"><i>263</i>&nbsp;	}</b>
+<i>264</i>&nbsp;
+<i>265</i>&nbsp;	/*
+<i>266</i>&nbsp;	 * (non-Javadoc)
+<i>267</i>&nbsp;	 *
+<i>268</i>&nbsp;	 * @see net.sf.marineapi.nmea.sentence.TTMSentence#setSpeed()
+<i>269</i>&nbsp;	 */
+<i>270</i>&nbsp;	@Override
+<i>271</i>&nbsp;	public void setSpeed(double speed) {
+<b class="nc"><i>272</i>&nbsp;		setDoubleValue(SPEED, speed, 1, 1);</b>
+<b class="nc"><i>273</i>&nbsp;		setCharValue(UNITS, &#39;N&#39;);</b>
+<b class="nc"><i>274</i>&nbsp;	}</b>
+<i>275</i>&nbsp;
+<i>276</i>&nbsp;	/*
+<i>277</i>&nbsp;	 * (non-Javadoc)
+<i>278</i>&nbsp;	 *
+<i>279</i>&nbsp;	 * @see net.sf.marineapi.nmea.sentence.TTMSentence#setCourse()
+<i>280</i>&nbsp;	 */
+<i>281</i>&nbsp;	@Override
+<i>282</i>&nbsp;	public void setCourse(double course) {
+<b class="fc"><i>283</i>&nbsp;		setDoubleValue(COURSE, course, 1, 1);</b>
+<b class="fc"><i>284</i>&nbsp;		setCharValue(COURSE_TRUE_REL, &#39;T&#39;);</b>
+<b class="fc"><i>285</i>&nbsp;	}</b>
+<i>286</i>&nbsp;
+<i>287</i>&nbsp;	/*
+<i>288</i>&nbsp;	 * (non-Javadoc)
+<i>289</i>&nbsp;	 *
+<i>290</i>&nbsp;	 * @see net.sf.marineapi.nmea.sentence.TTMSentence#setDistanceOfCPA()
+<i>291</i>&nbsp;	 */
+<i>292</i>&nbsp;	@Override
+<i>293</i>&nbsp;	public void setDistanceOfCPA(double distance) {
+<b class="fc"><i>294</i>&nbsp;		setDoubleValue(DISTANCE_CPA, distance, 1, 1);</b>
+<b class="fc"><i>295</i>&nbsp;		setCharValue(UNITS, &#39;N&#39;);</b>
+<b class="fc"><i>296</i>&nbsp;	}</b>
+<i>297</i>&nbsp;
+<i>298</i>&nbsp;	/*
+<i>299</i>&nbsp;	 * (non-Javadoc)
+<i>300</i>&nbsp;	 *
+<i>301</i>&nbsp;	 * @see net.sf.marineapi.nmea.sentence.TTMSentence#setTimeToCPA()
+<i>302</i>&nbsp;	 */
+<i>303</i>&nbsp;	@Override
+<i>304</i>&nbsp;	public void setTimeToCPA(double minutes) {
+<b class="fc"><i>305</i>&nbsp;		setDoubleValue(TIME_CPA, minutes, 1, 1);</b>
+<b class="fc"><i>306</i>&nbsp;	}</b>
+<i>307</i>&nbsp;
+<i>308</i>&nbsp;	/*
+<i>309</i>&nbsp;	 * (non-Javadoc)
+<i>310</i>&nbsp;	 *
+<i>311</i>&nbsp;	 * @see net.sf.marineapi.nmea.sentence.TTMSentence#setName()
+<i>312</i>&nbsp;	 */
+<i>313</i>&nbsp;	@Override
+<i>314</i>&nbsp;	public void setName(String name) {
+<b class="fc"><i>315</i>&nbsp;		setStringValue(NAME, name);</b>
+<b class="fc"><i>316</i>&nbsp;	}</b>
+<i>317</i>&nbsp;
+<i>318</i>&nbsp;	/*
+<i>319</i>&nbsp;	 * (non-Javadoc)
+<i>320</i>&nbsp;	 *
+<i>321</i>&nbsp;	 * @see net.sf.marineapi.nmea.sentence.TTMSentence#setStatus()
+<i>322</i>&nbsp;	 */
+<i>323</i>&nbsp;	@Override
+<i>324</i>&nbsp;	public void setStatus(TargetStatus status) {
+<b class="fc"><i>325</i>&nbsp;		setCharValue(STATUS, status.toChar());</b>
+<b class="fc"><i>326</i>&nbsp;	}</b>
+<i>327</i>&nbsp;
+<i>328</i>&nbsp;	/*
+<i>329</i>&nbsp;	 * (non-Javadoc)
+<i>330</i>&nbsp;	 *
+<i>331</i>&nbsp;	 * @see net.sf.marineapi.nmea.sentence.TTMSentence#setReference()
+<i>332</i>&nbsp;	 */
+<i>333</i>&nbsp;	@Override
+<i>334</i>&nbsp;	public void setReference(boolean isReference) {
+<b class="fc"><i>335</i>&nbsp;		if (isReference) {</b>
+<b class="fc"><i>336</i>&nbsp;			setCharValue(REFERENCE, &#39;R&#39;);</b>
+<i>337</i>&nbsp;		}
+<b class="fc"><i>338</i>&nbsp;	}</b>
+<i>339</i>&nbsp;
+<i>340</i>&nbsp;	/*
+<i>341</i>&nbsp;	 * (non-Javadoc)
+<i>342</i>&nbsp;	 *
+<i>343</i>&nbsp;	 * @see net.sf.marineapi.nmea.sentence.TTMSentence#setAcquisitionType()
+<i>344</i>&nbsp;	 */
+<i>345</i>&nbsp;	@Override
+<i>346</i>&nbsp;	public void setAcquisitionType(AcquisitionType acquisitionType) {
+<b class="fc"><i>347</i>&nbsp;		setCharValue(ACQUISITON_TYPE, acquisitionType.toChar());</b>
+<b class="fc"><i>348</i>&nbsp;	}</b>
+<i>349</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2015-12-10 21:41</div>
+</div>
+</body>
+</html>

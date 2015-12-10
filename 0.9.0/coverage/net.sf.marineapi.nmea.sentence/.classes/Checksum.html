@@ -1,0 +1,166 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: Checksum</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">net.sf.marineapi.nmea.sentence</a> ]
+</div>
+
+<h1>Coverage Summary for Class: Checksum (net.sf.marineapi.nmea.sentence)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">Checksum</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/ 1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    80%
+  </span>
+  <span class="absValue">
+    (4/ 5)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    81.8%
+  </span>
+  <span class="absValue">
+    (9/ 11)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;/*
+<i>2</i>&nbsp; * Checksum.java
+<i>3</i>&nbsp; * Copyright (C) 2010 Kimmo Tuukkanen
+<i>4</i>&nbsp; * 
+<i>5</i>&nbsp; * This file is part of Java Marine API.
+<i>6</i>&nbsp; * &lt;http://ktuukkan.github.io/marine-api/&gt;
+<i>7</i>&nbsp; * 
+<i>8</i>&nbsp; * Java Marine API is free software: you can redistribute it and/or modify it
+<i>9</i>&nbsp; * under the terms of the GNU Lesser General Public License as published by the
+<i>10</i>&nbsp; * Free Software Foundation, either version 3 of the License, or (at your
+<i>11</i>&nbsp; * option) any later version.
+<i>12</i>&nbsp; * 
+<i>13</i>&nbsp; * Java Marine API is distributed in the hope that it will be useful, but
+<i>14</i>&nbsp; * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+<i>15</i>&nbsp; * FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License
+<i>16</i>&nbsp; * for more details.
+<i>17</i>&nbsp; * 
+<i>18</i>&nbsp; * You should have received a copy of the GNU Lesser General Public License
+<i>19</i>&nbsp; * along with Java Marine API. If not, see &lt;http://www.gnu.org/licenses/&gt;.
+<i>20</i>&nbsp; */
+<i>21</i>&nbsp;package net.sf.marineapi.nmea.sentence;
+<i>22</i>&nbsp;
+<i>23</i>&nbsp;
+<i>24</i>&nbsp;/**
+<i>25</i>&nbsp; * Provides Sentence checksum calculation and utilities.
+<i>26</i>&nbsp; * 
+<i>27</i>&nbsp; * @author Kimmo Tuukkanen
+<i>28</i>&nbsp; */
+<i>29</i>&nbsp;public final class Checksum {
+<i>30</i>&nbsp;
+<b class="nc"><i>31</i>&nbsp;	private Checksum() {</b>
+<b class="nc"><i>32</i>&nbsp;	}</b>
+<i>33</i>&nbsp;
+<i>34</i>&nbsp;	/**
+<i>35</i>&nbsp;	 * Append or replace existing checksum in specified NMEA sentence.
+<i>36</i>&nbsp;	 * 
+<i>37</i>&nbsp;	 * @param nmea Sentence in String representation
+<i>38</i>&nbsp;	 * @return The specified String with checksum added.
+<i>39</i>&nbsp;	 */
+<i>40</i>&nbsp;	public static String add(String nmea) {
+<b class="fc"><i>41</i>&nbsp;		String str = nmea.substring(0, index(nmea));</b>
+<b class="fc"><i>42</i>&nbsp;		String sum = calculate(str);</b>
+<b class="fc"><i>43</i>&nbsp;		return String.format(&quot;%s%c%s&quot;, str, Sentence.CHECKSUM_DELIMITER, sum);</b>
+<i>44</i>&nbsp;	}
+<i>45</i>&nbsp;
+<i>46</i>&nbsp;	/**
+<i>47</i>&nbsp;	 * Calculates checksum for given NMEA sentence, i.e. XOR of each
+<i>48</i>&nbsp;	 * character between &#39;$&#39; and &#39;*&#39; characters (exclusive).
+<i>49</i>&nbsp;	 * 
+<i>50</i>&nbsp;	 * @param nmea Sentence String with or without checksum.
+<i>51</i>&nbsp;	 * @return Hexadecimal checksum
+<i>52</i>&nbsp;	 */
+<i>53</i>&nbsp;	public static String calculate(String nmea) {
+<b class="fc"><i>54</i>&nbsp;		return xor(nmea.substring(1, index(nmea)));</b>
+<i>55</i>&nbsp;	}
+<i>56</i>&nbsp;
+<i>57</i>&nbsp;	/**
+<i>58</i>&nbsp;	 * Calculates XOR checksum of given String. Resulting hex value is returned
+<i>59</i>&nbsp;	 * as a String in two digit format, padded with a leading zero if necessary.
+<i>60</i>&nbsp;	 * 
+<i>61</i>&nbsp;	 * @param str String to calculate checksum for.
+<i>62</i>&nbsp;	 * @return Hexadecimal checksum
+<i>63</i>&nbsp;	 */
+<i>64</i>&nbsp;	public static String xor(String str) {
+<b class="fc"><i>65</i>&nbsp;		int sum = 0;</b>
+<b class="fc"><i>66</i>&nbsp;		for (int i = 0; i &lt; str.length(); i++) {</b>
+<b class="fc"><i>67</i>&nbsp;			sum ^= (byte) str.charAt(i);</b>
+<i>68</i>&nbsp;		}
+<b class="fc"><i>69</i>&nbsp;		return String.format(&quot;%02X&quot;, sum);</b>
+<i>70</i>&nbsp;	}
+<i>71</i>&nbsp;
+<i>72</i>&nbsp;	/**
+<i>73</i>&nbsp;	 * Returns the index of checksum separator char in specified NMEA sentence.
+<i>74</i>&nbsp;	 * If separator is not found, returns the String length.
+<i>75</i>&nbsp;	 * 
+<i>76</i>&nbsp;	 * @param nmea Sentence String
+<i>77</i>&nbsp;	 * @return Index of checksum separator or String length.
+<i>78</i>&nbsp;	 */
+<i>79</i>&nbsp;	public static int index(String nmea) {
+<b class="fc"><i>80</i>&nbsp;		return nmea.indexOf(Sentence.CHECKSUM_DELIMITER) &gt; 0 ?</b>
+<i>81</i>&nbsp;			nmea.indexOf(Sentence.CHECKSUM_DELIMITER) : nmea.length();
+<i>82</i>&nbsp;	}
+<i>83</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2015-12-10 21:40</div>
+</div>
+</body>
+</html>

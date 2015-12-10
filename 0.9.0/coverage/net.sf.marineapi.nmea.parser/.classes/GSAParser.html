@@ -1,0 +1,266 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: GSAParser</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">net.sf.marineapi.nmea.parser</a> ]
+</div>
+
+<h1>Coverage Summary for Class: GSAParser (net.sf.marineapi.nmea.parser)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">GSAParser</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/ 1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (14/ 14)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    96.8%
+  </span>
+  <span class="absValue">
+    (30/ 31)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;/* 
+<i>2</i>&nbsp; * GSAParser.java
+<i>3</i>&nbsp; * Copyright (C) 2010 Kimmo Tuukkanen
+<i>4</i>&nbsp; * 
+<i>5</i>&nbsp; * This file is part of Java Marine API.
+<i>6</i>&nbsp; * &lt;http://ktuukkan.github.io/marine-api/&gt;
+<i>7</i>&nbsp; * 
+<i>8</i>&nbsp; * Java Marine API is free software: you can redistribute it and/or modify it
+<i>9</i>&nbsp; * under the terms of the GNU Lesser General Public License as published by the
+<i>10</i>&nbsp; * Free Software Foundation, either version 3 of the License, or (at your
+<i>11</i>&nbsp; * option) any later version.
+<i>12</i>&nbsp; * 
+<i>13</i>&nbsp; * Java Marine API is distributed in the hope that it will be useful, but
+<i>14</i>&nbsp; * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+<i>15</i>&nbsp; * FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License
+<i>16</i>&nbsp; * for more details.
+<i>17</i>&nbsp; * 
+<i>18</i>&nbsp; * You should have received a copy of the GNU Lesser General Public License
+<i>19</i>&nbsp; * along with Java Marine API. If not, see &lt;http://www.gnu.org/licenses/&gt;.
+<i>20</i>&nbsp; */
+<i>21</i>&nbsp;package net.sf.marineapi.nmea.parser;
+<i>22</i>&nbsp;
+<i>23</i>&nbsp;import java.util.ArrayList;
+<i>24</i>&nbsp;import java.util.List;
+<i>25</i>&nbsp;
+<i>26</i>&nbsp;import net.sf.marineapi.nmea.sentence.GSASentence;
+<i>27</i>&nbsp;import net.sf.marineapi.nmea.sentence.SentenceId;
+<i>28</i>&nbsp;import net.sf.marineapi.nmea.sentence.TalkerId;
+<i>29</i>&nbsp;import net.sf.marineapi.nmea.util.FaaMode;
+<i>30</i>&nbsp;import net.sf.marineapi.nmea.util.GpsFixStatus;
+<i>31</i>&nbsp;
+<i>32</i>&nbsp;/**
+<i>33</i>&nbsp; * GSA sentence parser.
+<i>34</i>&nbsp; * 
+<i>35</i>&nbsp; * @author Kimmo Tuukkanen
+<i>36</i>&nbsp; */
+<i>37</i>&nbsp;class GSAParser extends SentenceParser implements GSASentence {
+<i>38</i>&nbsp;
+<i>39</i>&nbsp;	// field indices
+<i>40</i>&nbsp;	private static final int GPS_MODE = 0;
+<i>41</i>&nbsp;	private static final int FIX_MODE = 1;
+<i>42</i>&nbsp;	private static final int FIRST_SV = 2;
+<i>43</i>&nbsp;	private static final int LAST_SV = 13;
+<i>44</i>&nbsp;	private static final int POSITION_DOP = 14;
+<i>45</i>&nbsp;	private static final int HORIZONTAL_DOP = 15;
+<i>46</i>&nbsp;	private static final int VERTICAL_DOP = 16;
+<i>47</i>&nbsp;
+<i>48</i>&nbsp;	/**
+<i>49</i>&nbsp;	 * Creates a new instance of GSA parser.
+<i>50</i>&nbsp;	 * 
+<i>51</i>&nbsp;	 * @param nmea GSA sentence String
+<i>52</i>&nbsp;	 * @throws IllegalArgumentException If specified sentence is invalid.
+<i>53</i>&nbsp;	 */
+<i>54</i>&nbsp;	public GSAParser(String nmea) {
+<b class="fc"><i>55</i>&nbsp;		super(nmea, SentenceId.GSA);</b>
+<b class="fc"><i>56</i>&nbsp;	}</b>
+<i>57</i>&nbsp;
+<i>58</i>&nbsp;	/**
+<i>59</i>&nbsp;	 * Creates GSA parser with empty sentence.
+<i>60</i>&nbsp;	 * 
+<i>61</i>&nbsp;	 * @param talker TalkerId to set
+<i>62</i>&nbsp;	 */
+<i>63</i>&nbsp;	public GSAParser(TalkerId talker) {
+<b class="fc"><i>64</i>&nbsp;		super(talker, SentenceId.GSA, 17);</b>
+<b class="fc"><i>65</i>&nbsp;	}</b>
+<i>66</i>&nbsp;
+<i>67</i>&nbsp;	/*
+<i>68</i>&nbsp;	 * (non-Javadoc)
+<i>69</i>&nbsp;	 * @see net.sf.marineapi.nmea.sentence.GSASentence#getFixStatus()
+<i>70</i>&nbsp;	 */
+<i>71</i>&nbsp;	public GpsFixStatus getFixStatus() {
+<b class="fc"><i>72</i>&nbsp;		return GpsFixStatus.valueOf(getIntValue(FIX_MODE));</b>
+<i>73</i>&nbsp;	}
+<i>74</i>&nbsp;
+<i>75</i>&nbsp;	/*
+<i>76</i>&nbsp;	 * (non-Javadoc)
+<i>77</i>&nbsp;	 * @see net.sf.marineapi.nmea.sentence.GSASentence#getHorizontalDOP()
+<i>78</i>&nbsp;	 */
+<i>79</i>&nbsp;	public double getHorizontalDOP() {
+<b class="fc"><i>80</i>&nbsp;		return getDoubleValue(HORIZONTAL_DOP);</b>
+<i>81</i>&nbsp;	}
+<i>82</i>&nbsp;
+<i>83</i>&nbsp;	/*
+<i>84</i>&nbsp;	 * (non-Javadoc)
+<i>85</i>&nbsp;	 * @see net.sf.marineapi.nmea.sentence.GSASentence#getMode()
+<i>86</i>&nbsp;	 */
+<i>87</i>&nbsp;	public FaaMode getMode() {
+<b class="fc"><i>88</i>&nbsp;		return FaaMode.valueOf(getCharValue(GPS_MODE));</b>
+<i>89</i>&nbsp;	}
+<i>90</i>&nbsp;
+<i>91</i>&nbsp;	/*
+<i>92</i>&nbsp;	 * (non-Javadoc)
+<i>93</i>&nbsp;	 * @see net.sf.marineapi.nmea.sentence.GSASentence#getPositionDOP()
+<i>94</i>&nbsp;	 */
+<i>95</i>&nbsp;	public double getPositionDOP() {
+<b class="fc"><i>96</i>&nbsp;		return getDoubleValue(POSITION_DOP);</b>
+<i>97</i>&nbsp;	}
+<i>98</i>&nbsp;
+<i>99</i>&nbsp;	/*
+<i>100</i>&nbsp;	 * (non-Javadoc)
+<i>101</i>&nbsp;	 * @see net.sf.marineapi.nmea.sentence.GSASentence#getSatelliteIds()
+<i>102</i>&nbsp;	 */
+<i>103</i>&nbsp;	public String[] getSatelliteIds() {
+<b class="fc"><i>104</i>&nbsp;		List&lt;String&gt; result = new ArrayList&lt;String&gt;();</b>
+<b class="fc"><i>105</i>&nbsp;		for (int i = FIRST_SV; i &lt;= LAST_SV; i++) {</b>
+<b class="fc"><i>106</i>&nbsp;			if (hasValue(i)) {</b>
+<b class="fc"><i>107</i>&nbsp;				result.add(getStringValue(i));</b>
+<i>108</i>&nbsp;			}
+<i>109</i>&nbsp;		}
+<b class="fc"><i>110</i>&nbsp;		return result.toArray(new String[result.size()]);</b>
+<i>111</i>&nbsp;	}
+<i>112</i>&nbsp;
+<i>113</i>&nbsp;	/*
+<i>114</i>&nbsp;	 * (non-Javadoc)
+<i>115</i>&nbsp;	 * @see net.sf.marineapi.nmea.sentence.GSASentence#getVerticalDOP()
+<i>116</i>&nbsp;	 */
+<i>117</i>&nbsp;	public double getVerticalDOP() {
+<b class="fc"><i>118</i>&nbsp;		return getDoubleValue(VERTICAL_DOP);</b>
+<i>119</i>&nbsp;	}
+<i>120</i>&nbsp;
+<i>121</i>&nbsp;	/*
+<i>122</i>&nbsp;	 * (non-Javadoc)
+<i>123</i>&nbsp;	 * @see
+<i>124</i>&nbsp;	 * net.sf.marineapi.nmea.sentence.GSASentence#setFixStatus(net.sf.marineapi
+<i>125</i>&nbsp;	 * .nmea.util.GpsFixStatus)
+<i>126</i>&nbsp;	 */
+<i>127</i>&nbsp;	public void setFixStatus(GpsFixStatus status) {
+<b class="fc"><i>128</i>&nbsp;		setIntValue(FIX_MODE, status.toInt());</b>
+<b class="fc"><i>129</i>&nbsp;	}</b>
+<i>130</i>&nbsp;
+<i>131</i>&nbsp;	/*
+<i>132</i>&nbsp;	 * (non-Javadoc)
+<i>133</i>&nbsp;	 * @see
+<i>134</i>&nbsp;	 * net.sf.marineapi.nmea.sentence.GSASentence#setHorizontalPrecision(double)
+<i>135</i>&nbsp;	 */
+<i>136</i>&nbsp;	public void setHorizontalDOP(double hdop) {
+<b class="fc"><i>137</i>&nbsp;		setDoubleValue(HORIZONTAL_DOP, hdop, 1, 1);</b>
+<b class="fc"><i>138</i>&nbsp;	}</b>
+<i>139</i>&nbsp;
+<i>140</i>&nbsp;	/*
+<i>141</i>&nbsp;	 * (non-Javadoc)
+<i>142</i>&nbsp;	 * @see
+<i>143</i>&nbsp;	 * net.sf.marineapi.nmea.sentence.GSASentence#setFaaMode(net.sf.marineapi
+<i>144</i>&nbsp;	 * .nmea.util.FaaMode)
+<i>145</i>&nbsp;	 */
+<i>146</i>&nbsp;	public void setMode(FaaMode mode) {
+<b class="fc"><i>147</i>&nbsp;		setCharValue(GPS_MODE, mode.toChar());</b>
+<b class="fc"><i>148</i>&nbsp;	}</b>
+<i>149</i>&nbsp;
+<i>150</i>&nbsp;	/*
+<i>151</i>&nbsp;	 * (non-Javadoc)
+<i>152</i>&nbsp;	 * @see net.sf.marineapi.nmea.sentence.GSASentence#setPositionDOP(double)
+<i>153</i>&nbsp;	 */
+<i>154</i>&nbsp;	public void setPositionDOP(double pdop) {
+<b class="fc"><i>155</i>&nbsp;		setDoubleValue(POSITION_DOP, pdop, 1, 1);</b>
+<b class="fc"><i>156</i>&nbsp;	}</b>
+<i>157</i>&nbsp;
+<i>158</i>&nbsp;	/*
+<i>159</i>&nbsp;	 * (non-Javadoc)
+<i>160</i>&nbsp;	 * @see
+<i>161</i>&nbsp;	 * net.sf.marineapi.nmea.sentence.GSASentence#setSatelliteIds(java.lang.
+<i>162</i>&nbsp;	 * String[])
+<i>163</i>&nbsp;	 */
+<i>164</i>&nbsp;	public void setSatelliteIds(String[] ids) {
+<b class="fc"><i>165</i>&nbsp;		if (ids.length &gt; (LAST_SV - FIRST_SV + 1)) {</b>
+<b class="nc"><i>166</i>&nbsp;			throw new IllegalArgumentException(&quot;List length exceeded (12)&quot;);</b>
+<i>167</i>&nbsp;		}
+<b class="fc"><i>168</i>&nbsp;		int j = 0;</b>
+<b class="fc"><i>169</i>&nbsp;		for (int i = FIRST_SV; i &lt;= LAST_SV; i++) {</b>
+<b class="fc"><i>170</i>&nbsp;			String id = (j &lt; ids.length) ? ids[j++] : &quot;&quot;;</b>
+<b class="fc"><i>171</i>&nbsp;			setStringValue(i, id);</b>
+<i>172</i>&nbsp;		}
+<b class="fc"><i>173</i>&nbsp;	}</b>
+<i>174</i>&nbsp;
+<i>175</i>&nbsp;	/*
+<i>176</i>&nbsp;	 * (non-Javadoc)
+<i>177</i>&nbsp;	 * @see net.sf.marineapi.nmea.sentence.GSASentence#setVerticalDOP(double)
+<i>178</i>&nbsp;	 */
+<i>179</i>&nbsp;	public void setVerticalDOP(double vdop) {
+<b class="fc"><i>180</i>&nbsp;		setDoubleValue(VERTICAL_DOP, vdop, 1, 1);</b>
+<b class="fc"><i>181</i>&nbsp;	}</b>
+<i>182</i>&nbsp;
+<i>183</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2015-12-10 21:41</div>
+</div>
+</body>
+</html>

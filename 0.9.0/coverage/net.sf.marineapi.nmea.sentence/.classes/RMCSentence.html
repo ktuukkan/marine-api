@@ -1,0 +1,212 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: RMCSentence</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">net.sf.marineapi.nmea.sentence</a> ]
+</div>
+
+<h1>Coverage Summary for Class: RMCSentence (net.sf.marineapi.nmea.sentence)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+</tr>
+<tr>
+  <td class="name">RMCSentence</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;/* 
+<i>2</i>&nbsp; * RMCSentence.java
+<i>3</i>&nbsp; * Copyright (C) 2010 Kimmo Tuukkanen
+<i>4</i>&nbsp; * 
+<i>5</i>&nbsp; * This file is part of Java Marine API.
+<i>6</i>&nbsp; * &lt;http://ktuukkan.github.io/marine-api/&gt;
+<i>7</i>&nbsp; * 
+<i>8</i>&nbsp; * Java Marine API is free software: you can redistribute it and/or modify it
+<i>9</i>&nbsp; * under the terms of the GNU Lesser General Public License as published by the
+<i>10</i>&nbsp; * Free Software Foundation, either version 3 of the License, or (at your
+<i>11</i>&nbsp; * option) any later version.
+<i>12</i>&nbsp; * 
+<i>13</i>&nbsp; * Java Marine API is distributed in the hope that it will be useful, but
+<i>14</i>&nbsp; * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+<i>15</i>&nbsp; * FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License
+<i>16</i>&nbsp; * for more details.
+<i>17</i>&nbsp; * 
+<i>18</i>&nbsp; * You should have received a copy of the GNU Lesser General Public License
+<i>19</i>&nbsp; * along with Java Marine API. If not, see &lt;http://www.gnu.org/licenses/&gt;.
+<i>20</i>&nbsp; */
+<i>21</i>&nbsp;package net.sf.marineapi.nmea.sentence;
+<i>22</i>&nbsp;
+<i>23</i>&nbsp;import net.sf.marineapi.nmea.util.CompassPoint;
+<i>24</i>&nbsp;import net.sf.marineapi.nmea.util.DataStatus;
+<i>25</i>&nbsp;import net.sf.marineapi.nmea.util.FaaMode;
+<i>26</i>&nbsp;
+<i>27</i>&nbsp;/**
+<i>28</i>&nbsp; * Recommended minimum navigation information type C. Current time and date,
+<i>29</i>&nbsp; * position, speed over ground, true course over ground and magnetic variation.
+<i>30</i>&nbsp; * &lt;p&gt;
+<i>31</i>&nbsp; * Example:&lt;br&gt;
+<i>32</i>&nbsp; * &lt;code&gt;$GPRMC,120044,A,6011.552,N,02501.941,E,000.0,360.0,160705,006.1,E*7C&lt;/code&gt;
+<i>33</i>&nbsp; * 
+<i>34</i>&nbsp; * @author Kimmo Tuukkanen
+<i>35</i>&nbsp; */
+<i>36</i>&nbsp;public interface RMCSentence extends PositionSentence, TimeSentence,
+<i>37</i>&nbsp;		DateSentence {
+<i>38</i>&nbsp;
+<i>39</i>&nbsp;	/**
+<i>40</i>&nbsp;	 * Get the corrected course over ground. Correction is done by subtracting
+<i>41</i>&nbsp;	 * or adding the magnetic variation from true course (easterly variation
+<i>42</i>&nbsp;	 * subtracted and westerly added).
+<i>43</i>&nbsp;	 * 
+<i>44</i>&nbsp;	 * @return Corrected true course
+<i>45</i>&nbsp;	 * @see #getCourse()
+<i>46</i>&nbsp;	 * @see #getVariation()
+<i>47</i>&nbsp;	 * @throws net.sf.marineapi.nmea.parser.DataNotAvailableException If course or
+<i>48</i>&nbsp;	 *             variation data is not available.
+<i>49</i>&nbsp;	 * @throws net.sf.marineapi.nmea.parser.ParseException If course or variation
+<i>50</i>&nbsp;	 *             field contains unexpected or illegal value.
+<i>51</i>&nbsp;	 */
+<i>52</i>&nbsp;	double getCorrectedCourse();
+<i>53</i>&nbsp;
+<i>54</i>&nbsp;	/**
+<i>55</i>&nbsp;	 * Get true course over ground (COG).
+<i>56</i>&nbsp;	 * 
+<i>57</i>&nbsp;	 * @return True course in degrees
+<i>58</i>&nbsp;	 * @throws net.sf.marineapi.nmea.parser.DataNotAvailableException If the data is
+<i>59</i>&nbsp;	 *             not available.
+<i>60</i>&nbsp;	 * @throws net.sf.marineapi.nmea.parser.ParseException If the field contains
+<i>61</i>&nbsp;	 *             unexpected or illegal value.
+<i>62</i>&nbsp;	 */
+<i>63</i>&nbsp;	double getCourse();
+<i>64</i>&nbsp;
+<i>65</i>&nbsp;	/**
+<i>66</i>&nbsp;	 * Get the direction of magnetic variation; east or west.
+<i>67</i>&nbsp;	 * 
+<i>68</i>&nbsp;	 * @return Direction.EAST or Direction.WEST
+<i>69</i>&nbsp;	 * @throws net.sf.marineapi.nmea.parser.DataNotAvailableException If the data is
+<i>70</i>&nbsp;	 *             not available.
+<i>71</i>&nbsp;	 * @throws net.sf.marineapi.nmea.parser.ParseException If the field contains
+<i>72</i>&nbsp;	 *             unexpected or illegal value.
+<i>73</i>&nbsp;	 */
+<i>74</i>&nbsp;	CompassPoint getDirectionOfVariation();
+<i>75</i>&nbsp;
+<i>76</i>&nbsp;	/**
+<i>77</i>&nbsp;	 * Get the FAA operating mode for GPS.
+<i>78</i>&nbsp;	 * 
+<i>79</i>&nbsp;	 * @return FaaMode enum
+<i>80</i>&nbsp;	 * @throws net.sf.marineapi.nmea.parser.DataNotAvailableException If the data is
+<i>81</i>&nbsp;	 *             not available.
+<i>82</i>&nbsp;	 * @throws net.sf.marineapi.nmea.parser.ParseException If the field contains
+<i>83</i>&nbsp;	 *             unexpected or illegal value.
+<i>84</i>&nbsp;	 */
+<i>85</i>&nbsp;	FaaMode getMode();
+<i>86</i>&nbsp;
+<i>87</i>&nbsp;	/**
+<i>88</i>&nbsp;	 * Get current speed over ground (SOG).
+<i>89</i>&nbsp;	 * 
+<i>90</i>&nbsp;	 * @return Speed in knots (nautical miles per hour).
+<i>91</i>&nbsp;	 * @throws net.sf.marineapi.nmea.parser.DataNotAvailableException If the data is
+<i>92</i>&nbsp;	 *             not available.
+<i>93</i>&nbsp;	 * @throws net.sf.marineapi.nmea.parser.ParseException If the field contains
+<i>94</i>&nbsp;	 *             unexpected or illegal value.
+<i>95</i>&nbsp;	 */
+<i>96</i>&nbsp;	double getSpeed();
+<i>97</i>&nbsp;
+<i>98</i>&nbsp;	/**
+<i>99</i>&nbsp;	 * Gets the data status, valid or invalid.
+<i>100</i>&nbsp;	 * 
+<i>101</i>&nbsp;	 * @return {@link DataStatus#ACTIVE} or {@link DataStatus#VOID}
+<i>102</i>&nbsp;	 * @throws net.sf.marineapi.nmea.parser.DataNotAvailableException If the data is
+<i>103</i>&nbsp;	 *             not available.
+<i>104</i>&nbsp;	 * @throws net.sf.marineapi.nmea.parser.ParseException If the field contains
+<i>105</i>&nbsp;	 *             unexpected or illegal value.
+<i>106</i>&nbsp;	 */
+<i>107</i>&nbsp;	DataStatus getStatus();
+<i>108</i>&nbsp;
+<i>109</i>&nbsp;	/**
+<i>110</i>&nbsp;	 * Get the magnetic variation. Easterly variation subtracts from true
+<i>111</i>&nbsp;	 * course, and is thus returned as negative value. Otherwise, the value is
+<i>112</i>&nbsp;	 * positive.
+<i>113</i>&nbsp;	 * 
+<i>114</i>&nbsp;	 * @return Magnetic variation in degrees
+<i>115</i>&nbsp;	 * @throws net.sf.marineapi.nmea.parser.DataNotAvailableException If the data is
+<i>116</i>&nbsp;	 *             not available.
+<i>117</i>&nbsp;	 * @throws net.sf.marineapi.nmea.parser.ParseException If the field contains
+<i>118</i>&nbsp;	 *             unexpected or illegal value.
+<i>119</i>&nbsp;	 */
+<i>120</i>&nbsp;	double getVariation();
+<i>121</i>&nbsp;
+<i>122</i>&nbsp;	/**
+<i>123</i>&nbsp;	 * Set true course over ground (COG).
+<i>124</i>&nbsp;	 * 
+<i>125</i>&nbsp;	 * @param cog True course in degrees
+<i>126</i>&nbsp;	 */
+<i>127</i>&nbsp;	void setCourse(double cog);
+<i>128</i>&nbsp;
+<i>129</i>&nbsp;	/**
+<i>130</i>&nbsp;	 * Set the direction of magnetic variation, east or west.
+<i>131</i>&nbsp;	 * 
+<i>132</i>&nbsp;	 * @param dir {@link CompassPoint#EAST} or {@link CompassPoint#WEST}
+<i>133</i>&nbsp;	 * @throws IllegalArgumentException If specified Direction is other than
+<i>134</i>&nbsp;	 *             defined as valid for param &lt;code&gt;dir&lt;/code&gt;.
+<i>135</i>&nbsp;	 */
+<i>136</i>&nbsp;	void setDirectionOfVariation(CompassPoint dir);
+<i>137</i>&nbsp;
+<i>138</i>&nbsp;	/**
+<i>139</i>&nbsp;	 * Set the FAA operation mode of GPS.
+<i>140</i>&nbsp;	 * 
+<i>141</i>&nbsp;	 * @param mode Mode to set
+<i>142</i>&nbsp;	 */
+<i>143</i>&nbsp;	void setMode(FaaMode mode);
+<i>144</i>&nbsp;
+<i>145</i>&nbsp;	/**
+<i>146</i>&nbsp;	 * Set current speed over ground (SOG).
+<i>147</i>&nbsp;	 * 
+<i>148</i>&nbsp;	 * @param sog Speed in knots (nautical miles per hour).
+<i>149</i>&nbsp;	 */
+<i>150</i>&nbsp;	void setSpeed(double sog);
+<i>151</i>&nbsp;
+<i>152</i>&nbsp;	/**
+<i>153</i>&nbsp;	 * Set the data status, valid or invalid.
+<i>154</i>&nbsp;	 * 
+<i>155</i>&nbsp;	 * @param status {@link DataStatus#ACTIVE} or {@link DataStatus#VOID}
+<i>156</i>&nbsp;	 */
+<i>157</i>&nbsp;	void setStatus(DataStatus status);
+<i>158</i>&nbsp;
+<i>159</i>&nbsp;	/**
+<i>160</i>&nbsp;	 * Set the magnetic variation.
+<i>161</i>&nbsp;	 * 
+<i>162</i>&nbsp;	 * @param var Magnetic variation in degrees
+<i>163</i>&nbsp;	 */
+<i>164</i>&nbsp;	void setVariation(double var);
+<i>165</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2015-12-10 21:40</div>
+</div>
+</body>
+</html>

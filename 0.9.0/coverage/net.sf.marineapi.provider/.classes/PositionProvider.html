@@ -1,0 +1,226 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: PositionProvider</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">net.sf.marineapi.provider</a> ]
+</div>
+
+<h1>Coverage Summary for Class: PositionProvider (net.sf.marineapi.provider)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">PositionProvider</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/ 1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (4/ 4)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    91.1%
+  </span>
+  <span class="absValue">
+    (41/ 45)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;/* 
+<i>2</i>&nbsp; * PositionProvider.java
+<i>3</i>&nbsp; * Copyright (C) 2011 Kimmo Tuukkanen
+<i>4</i>&nbsp; * 
+<i>5</i>&nbsp; * This file is part of Java Marine API.
+<i>6</i>&nbsp; * &lt;http://ktuukkan.github.io/marine-api/&gt;
+<i>7</i>&nbsp; * 
+<i>8</i>&nbsp; * Java Marine API is free software: you can redistribute it and/or modify it
+<i>9</i>&nbsp; * under the terms of the GNU Lesser General Public License as published by the
+<i>10</i>&nbsp; * Free Software Foundation, either version 3 of the License, or (at your
+<i>11</i>&nbsp; * option) any later version.
+<i>12</i>&nbsp; * 
+<i>13</i>&nbsp; * Java Marine API is distributed in the hope that it will be useful, but
+<i>14</i>&nbsp; * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+<i>15</i>&nbsp; * FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License
+<i>16</i>&nbsp; * for more details.
+<i>17</i>&nbsp; * 
+<i>18</i>&nbsp; * You should have received a copy of the GNU Lesser General Public License
+<i>19</i>&nbsp; * along with Java Marine API. If not, see &lt;http://www.gnu.org/licenses/&gt;.
+<i>20</i>&nbsp; */
+<i>21</i>&nbsp;package net.sf.marineapi.provider;
+<i>22</i>&nbsp;
+<i>23</i>&nbsp;import net.sf.marineapi.nmea.io.SentenceReader;
+<i>24</i>&nbsp;import net.sf.marineapi.nmea.sentence.GGASentence;
+<i>25</i>&nbsp;import net.sf.marineapi.nmea.sentence.GLLSentence;
+<i>26</i>&nbsp;import net.sf.marineapi.nmea.sentence.RMCSentence;
+<i>27</i>&nbsp;import net.sf.marineapi.nmea.sentence.Sentence;
+<i>28</i>&nbsp;import net.sf.marineapi.nmea.sentence.SentenceId;
+<i>29</i>&nbsp;import net.sf.marineapi.nmea.util.DataStatus;
+<i>30</i>&nbsp;import net.sf.marineapi.nmea.util.Date;
+<i>31</i>&nbsp;import net.sf.marineapi.nmea.util.FaaMode;
+<i>32</i>&nbsp;import net.sf.marineapi.nmea.util.GpsFixQuality;
+<i>33</i>&nbsp;import net.sf.marineapi.nmea.util.Position;
+<i>34</i>&nbsp;import net.sf.marineapi.nmea.util.Time;
+<i>35</i>&nbsp;import net.sf.marineapi.provider.event.PositionEvent;
+<i>36</i>&nbsp;
+<i>37</i>&nbsp;/**
+<i>38</i>&nbsp; * &lt;p&gt;
+<i>39</i>&nbsp; * Provides Time, Position and Velocity reports from GPS. Data is captured from
+<i>40</i>&nbsp; * RMC, GGA and GLL sentences. RMC is used for date/time, speed and course. GGA
+<i>41</i>&nbsp; * is used as primary source for position as it contains also the altitude. When
+<i>42</i>&nbsp; * GGA is not available, position may be taken from GLL or RMC. If this is the
+<i>43</i>&nbsp; * case, there is no altitude included in the
+<i>44</i>&nbsp; * {@link net.sf.marineapi.nmea.util.Position}. GPS data statuses are also
+<i>45</i>&nbsp; * captured and events are dispatched only when sentences report
+<i>46</i>&nbsp; * {@link net.sf.marineapi.nmea.util.DataStatus#ACTIVE}.
+<i>47</i>&nbsp; *  
+<i>48</i>&nbsp; * @author Kimmo Tuukkanen
+<i>49</i>&nbsp; * @see net.sf.marineapi.provider.event.PositionListener
+<i>50</i>&nbsp; * @see net.sf.marineapi.provider.event.PositionEvent
+<i>51</i>&nbsp; * @see net.sf.marineapi.nmea.io.SentenceReader
+<i>52</i>&nbsp; */
+<i>53</i>&nbsp;public class PositionProvider extends AbstractProvider&lt;PositionEvent&gt; {
+<i>54</i>&nbsp;
+<i>55</i>&nbsp;	/**
+<i>56</i>&nbsp;	 * Creates a new instance of PositionProvider.
+<i>57</i>&nbsp;	 * 
+<i>58</i>&nbsp;	 * @param reader SentenceReader that provides the required sentences.
+<i>59</i>&nbsp;	 */
+<i>60</i>&nbsp;	public PositionProvider(SentenceReader reader) {
+<b class="fc"><i>61</i>&nbsp;		super(reader, SentenceId.RMC, SentenceId.GGA, SentenceId.GLL);</b>
+<b class="fc"><i>62</i>&nbsp;	}</b>
+<i>63</i>&nbsp;
+<i>64</i>&nbsp;	/*
+<i>65</i>&nbsp;	 * (non-Javadoc)
+<i>66</i>&nbsp;	 * @see net.sf.marineapi.provider.AbstractProvider#createProviderEvent()
+<i>67</i>&nbsp;	 */
+<i>68</i>&nbsp;	@Override
+<i>69</i>&nbsp;	protected PositionEvent createProviderEvent() {
+<b class="fc"><i>70</i>&nbsp;		Position p = null;</b>
+<b class="fc"><i>71</i>&nbsp;		Double sog = null;</b>
+<b class="fc"><i>72</i>&nbsp;		Double cog = null;</b>
+<b class="fc"><i>73</i>&nbsp;		Date d = null;</b>
+<b class="fc"><i>74</i>&nbsp;		Time t = null;</b>
+<b class="fc"><i>75</i>&nbsp;		FaaMode mode = null;</b>
+<b class="fc"><i>76</i>&nbsp;		GpsFixQuality fix = null;</b>
+<i>77</i>&nbsp;
+<b class="fc"><i>78</i>&nbsp;		for (Sentence s : getSentences()) {</b>
+<b class="fc"><i>79</i>&nbsp;			if (s instanceof RMCSentence) {</b>
+<b class="fc"><i>80</i>&nbsp;				RMCSentence rmc = (RMCSentence) s;</b>
+<b class="fc"><i>81</i>&nbsp;				sog = rmc.getSpeed();</b>
+<b class="fc"><i>82</i>&nbsp;				cog = rmc.getCourse();</b>
+<b class="fc"><i>83</i>&nbsp;				d = rmc.getDate();</b>
+<b class="fc"><i>84</i>&nbsp;				t = rmc.getTime();</b>
+<b class="fc"><i>85</i>&nbsp;				mode = rmc.getMode();</b>
+<b class="fc"><i>86</i>&nbsp;				if (p == null) {</b>
+<b class="nc"><i>87</i>&nbsp;					p = rmc.getPosition();</b>
+<i>88</i>&nbsp;				}
+<b class="fc"><i>89</i>&nbsp;			} else if (s instanceof GGASentence) {</b>
+<i>90</i>&nbsp;				// Using GGA as primary position source as it contains both
+<i>91</i>&nbsp;				// position and altitude
+<b class="fc"><i>92</i>&nbsp;				GGASentence gga = (GGASentence) s;</b>
+<b class="fc"><i>93</i>&nbsp;				p = gga.getPosition();</b>
+<b class="fc"><i>94</i>&nbsp;				fix = gga.getFixQuality();</b>
+<b class="fc"><i>95</i>&nbsp;			} else if (s instanceof GLLSentence &amp;&amp; p == null) {</b>
+<b class="fc"><i>96</i>&nbsp;				GLLSentence gll = (GLLSentence) s;</b>
+<b class="fc"><i>97</i>&nbsp;				p = gll.getPosition();</b>
+<i>98</i>&nbsp;			}
+<b class="fc"><i>99</i>&nbsp;		}</b>
+<i>100</i>&nbsp;
+<b class="fc"><i>101</i>&nbsp;		return new PositionEvent(this, p, sog, cog, d, t, mode, fix);</b>
+<i>102</i>&nbsp;	}
+<i>103</i>&nbsp;
+<i>104</i>&nbsp;	/*
+<i>105</i>&nbsp;	 * (non-Javadoc)
+<i>106</i>&nbsp;	 * @see net.sf.marineapi.provider.AbstractProvider#isReady()
+<i>107</i>&nbsp;	 */
+<i>108</i>&nbsp;	@Override
+<i>109</i>&nbsp;	protected boolean isReady() {
+<b class="fc"><i>110</i>&nbsp;		return hasOne(&quot;RMC&quot;) &amp;&amp; hasOne(&quot;GGA&quot;, &quot;GLL&quot;);</b>
+<i>111</i>&nbsp;	}
+<i>112</i>&nbsp;
+<i>113</i>&nbsp;	/*
+<i>114</i>&nbsp;	 * (non-Javadoc)
+<i>115</i>&nbsp;	 * @see net.sf.marineapi.provider.AbstractProvider#isValid()
+<i>116</i>&nbsp;	 */
+<i>117</i>&nbsp;	@Override
+<i>118</i>&nbsp;	protected boolean isValid() {
+<i>119</i>&nbsp;
+<b class="fc"><i>120</i>&nbsp;		for (Sentence s : getSentences()) {</b>
+<i>121</i>&nbsp;
+<b class="fc"><i>122</i>&nbsp;			if (s instanceof RMCSentence) {</b>
+<b class="fc"><i>123</i>&nbsp;				DataStatus ds = ((RMCSentence) s).getStatus();</b>
+<b class="fc"><i>124</i>&nbsp;				FaaMode gm = ((RMCSentence) s).getMode();</b>
+<b class="fc"><i>125</i>&nbsp;				if (DataStatus.VOID.equals(ds) || FaaMode.NONE.equals(gm)) {</b>
+<b class="nc"><i>126</i>&nbsp;					return false;</b>
+<i>127</i>&nbsp;				}
+<b class="fc"><i>128</i>&nbsp;			} else if (s instanceof GGASentence) {</b>
+<b class="fc"><i>129</i>&nbsp;				GpsFixQuality fq = ((GGASentence) s).getFixQuality();</b>
+<b class="fc"><i>130</i>&nbsp;				if (GpsFixQuality.INVALID.equals(fq)) {</b>
+<b class="nc"><i>131</i>&nbsp;					return false;</b>
+<i>132</i>&nbsp;				}
+<b class="fc"><i>133</i>&nbsp;			} else if (s instanceof GLLSentence) {</b>
+<b class="fc"><i>134</i>&nbsp;				DataStatus ds = ((GLLSentence) s).getStatus();</b>
+<b class="fc"><i>135</i>&nbsp;				if (DataStatus.VOID.equals(ds)) {</b>
+<b class="nc"><i>136</i>&nbsp;					return false;</b>
+<i>137</i>&nbsp;				}
+<i>138</i>&nbsp;			}
+<b class="fc"><i>139</i>&nbsp;		}</b>
+<i>140</i>&nbsp;
+<b class="fc"><i>141</i>&nbsp;		return true;</b>
+<i>142</i>&nbsp;	}
+<i>143</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2015-12-10 21:41</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,159 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: UDPDataReader</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">net.sf.marineapi.nmea.io</a> ]
+</div>
+
+<h1>Coverage Summary for Class: UDPDataReader (net.sf.marineapi.nmea.io)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">UDPDataReader</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 3)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 17)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;/*
+<i>2</i>&nbsp; * UDPDataReader.java
+<i>3</i>&nbsp; * Copyright (C) 2010-2014 Kimmo Tuukkanen, Ludovic Drouineau
+<i>4</i>&nbsp; * 
+<i>5</i>&nbsp; * This file is part of Java Marine API.
+<i>6</i>&nbsp; * &lt;http://ktuukkan.github.io/marine-api/&gt;
+<i>7</i>&nbsp; * 
+<i>8</i>&nbsp; * Java Marine API is free software: you can redistribute it and/or modify it
+<i>9</i>&nbsp; * under the terms of the GNU Lesser General Public License as published by the
+<i>10</i>&nbsp; * Free Software Foundation, either version 3 of the License, or (at your
+<i>11</i>&nbsp; * option) any later version.
+<i>12</i>&nbsp; * 
+<i>13</i>&nbsp; * Java Marine API is distributed in the hope that it will be useful, but
+<i>14</i>&nbsp; * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+<i>15</i>&nbsp; * FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License
+<i>16</i>&nbsp; * for more details.
+<i>17</i>&nbsp; * 
+<i>18</i>&nbsp; * You should have received a copy of the GNU Lesser General Public License
+<i>19</i>&nbsp; * along with Java Marine API. If not, see &lt;http://www.gnu.org/licenses/&gt;.
+<i>20</i>&nbsp; */
+<i>21</i>&nbsp;package net.sf.marineapi.nmea.io;
+<i>22</i>&nbsp;
+<i>23</i>&nbsp;import java.net.DatagramPacket;
+<i>24</i>&nbsp;import java.net.DatagramSocket;
+<i>25</i>&nbsp;import java.util.Arrays;
+<i>26</i>&nbsp;import java.util.LinkedList;
+<i>27</i>&nbsp;import java.util.Queue;
+<i>28</i>&nbsp;
+<i>29</i>&nbsp;/**
+<i>30</i>&nbsp; * DataReader implementation using DatagramSocket as data source.
+<i>31</i>&nbsp; * 
+<i>32</i>&nbsp; * @author Kimmo Tuukkanen, Ludovic Drouineau
+<i>33</i>&nbsp; */
+<i>34</i>&nbsp;class UDPDataReader extends AbstractDataReader {
+<i>35</i>&nbsp;
+<i>36</i>&nbsp;	private DatagramSocket socket;
+<b class="nc"><i>37</i>&nbsp;	private byte[] buffer = new byte[1024];</b>
+<b class="nc"><i>38</i>&nbsp;	private Queue&lt;String&gt; queue = new LinkedList&lt;String&gt;();</b>
+<i>39</i>&nbsp;
+<i>40</i>&nbsp;	/**
+<i>41</i>&nbsp;	 * Creates a new instance of StreamReader.
+<i>42</i>&nbsp;	 * 
+<i>43</i>&nbsp;	 * @param socket DatagramSocket to be used as data source.
+<i>44</i>&nbsp;	 * @param parent SentenceReader dispatching events for this reader.
+<i>45</i>&nbsp;	 */
+<i>46</i>&nbsp;	public UDPDataReader(DatagramSocket socket, SentenceReader parent) {
+<b class="nc"><i>47</i>&nbsp;		super(parent);</b>
+<b class="nc"><i>48</i>&nbsp;		this.socket = socket;</b>
+<i>49</i>&nbsp;	}
+<i>50</i>&nbsp;
+<i>51</i>&nbsp;	@Override
+<i>52</i>&nbsp;	public String read() {
+<b class="nc"><i>53</i>&nbsp;		String data = receive();</b>
+<b class="nc"><i>54</i>&nbsp;		if (data != null) {</b>
+<b class="nc"><i>55</i>&nbsp;			String[] lines = data.split(&quot;\\r?\\n&quot;);</b>
+<b class="nc"><i>56</i>&nbsp;			queue.addAll(Arrays.asList(lines));</b>
+<i>57</i>&nbsp;		}
+<b class="nc"><i>58</i>&nbsp;		return queue.poll();</b>
+<i>59</i>&nbsp;	}
+<i>60</i>&nbsp;
+<i>61</i>&nbsp;	/**
+<i>62</i>&nbsp;	 * Receive UDP packet and return as String
+<i>63</i>&nbsp;	 */
+<i>64</i>&nbsp;	private String receive() {
+<b class="nc"><i>65</i>&nbsp;		String data = null;</b>
+<i>66</i>&nbsp;		try {
+<b class="nc"><i>67</i>&nbsp;			DatagramPacket pkg = new DatagramPacket(buffer, buffer.length);</b>
+<b class="nc"><i>68</i>&nbsp;			socket.receive(pkg);</b>
+<b class="nc"><i>69</i>&nbsp;			data = new String(pkg.getData(), 0, pkg.getLength());</b>
+<b class="nc"><i>70</i>&nbsp;		} catch (Exception e) {</b>
+<b class="nc"><i>71</i>&nbsp;			getParent().handleException(&quot;UDP receive failed&quot;, e);</b>
+<b class="nc"><i>72</i>&nbsp;		}</b>
+<b class="nc"><i>73</i>&nbsp;		return data;</b>
+<i>74</i>&nbsp;	}
+<i>75</i>&nbsp;
+<i>76</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2015-12-10 21:41</div>
+</div>
+</body>
+</html>
