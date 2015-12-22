@@ -7,20 +7,19 @@ Also, basic support for decoding [AIS messages](https://en.wikipedia.org/wiki/Au
 
 **Usage**
 
-The API has been designed generic and easy to use instead for particular purpose and NMEA stream translates into event/listener model. For example,
+The API has been designed generic and easy to use instead for particular purpose. The NMEA stream translates into event/listener model. For example,
 
-    reader = new SentenceReader(new FileInputStream(file));
-    reader.addSentenceListener(this);
+    SentenceReader reader = new SentenceReader(new FileInputStream(file)); // any stream will do
+    reader.addSentenceListener(this); // "this" extends or implements sentence listener
     reader.start();
 
-reads through a file and passes all or filtered sentences to registered listeners:
+reads through a file and passes all or filtered sentences to listeners:
 
     public void sentenceRead(GGASentence gga) {
         System.out.println(gga.getPosition());
     }
 
 See [examples](https://github.com/ktuukkan/marine-api/tree/master/src/main/java/net/sf/marineapi/example) for more.
-
 
 **Snapshots**
 
