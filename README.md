@@ -5,6 +5,23 @@ Java Marine API is an [NMEA 0183](http://en.wikipedia.org/wiki/NMEA_0183) parser
 
 Also, basic support for decoding [AIS messages](https://en.wikipedia.org/wiki/Automatic_Identification_System) is under development and included in latest snapshots for preview. As this is quite a large new feature, all feedback and contribution is much appreciated!
 
+**Usage**
+
+The API has been designed generic and easy to use instead for particular purpose and NMEA stream translates into event/listener model. For example,
+
+    reader = new SentenceReader(new FileInputStream(file));
+    reader.addSentenceListener(this);
+    reader.start();
+
+reads through a file and passes all or filtered sentences to registered listeners:
+
+    public void sentenceRead(GGASentence gga) {
+        System.out.println(gga.getPosition());
+    }
+
+See [examples](https://github.com/ktuukkan/marine-api/tree/master/src/main/java/net/sf/marineapi/example) for more.
+
+
 **Snapshots**
 
 Maven snapshots are deployed to [Central Repository](https://search.maven.org/) every now and then. Notice that although they should be mostly stable, they are still work-in-progress.
