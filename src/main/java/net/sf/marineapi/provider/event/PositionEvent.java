@@ -52,7 +52,7 @@ public class PositionEvent extends ProviderEvent implements Cloneable {
 	 * 
 	 * @param source Source object of event
 	 */
-	public PositionEvent(Object source, Position p, double sog, double cog, Date d,
+	public PositionEvent(Object source, Position p, double sog, Double cog, Date d,
 			Time t, FaaMode m, GpsFixQuality fq) {
 		super(source);
 		position = p;
