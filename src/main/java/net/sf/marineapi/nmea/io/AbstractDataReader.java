@@ -39,7 +39,6 @@ abstract class AbstractDataReader implements DataReader {
 
 	private final SentenceReader parent;
 	private volatile boolean isRunning = true;
-	private int interval = SentenceReader.DEFAULT_INTERVAL;
 
 	/**
 	 * Creates a new instance.
@@ -54,7 +53,7 @@ abstract class AbstractDataReader implements DataReader {
 	 * @see net.sf.marineapi.nmea.io.DataReader#getInterval()
 	 */
 	public int getInterval() {
-		return this.interval;
+		return 0;
 	}
 
 	/**
@@ -78,7 +77,7 @@ abstract class AbstractDataReader implements DataReader {
 	 * 
 	 * @return String or <code>null</code> if nothing was read.
 	 */
-	public abstract String read();
+	public abstract String read() throws Exception;
 
 	/*
 	 * (non-Javadoc)
@@ -91,8 +90,16 @@ abstract class AbstractDataReader implements DataReader {
 		SentenceFactory factory = SentenceFactory.getInstance();
 
 		while (isRunning) {
+			String data;
 			try {
-				String data = read();
+				data = read();
+			} catch (Exception e) {
+				LOG.log(Level.WARNING, "Data read failed. Stopping reader.", e);
+				isRunning = false;
+				break;
+			}
+
+			try {
 				if (SentenceValidator.isValid(data)) {
 					monitor.refresh();
 					Sentence s = factory.createParser(data);
@@ -101,9 +108,8 @@ abstract class AbstractDataReader implements DataReader {
 					parent.fireDataEvent(data);
 				}
 				monitor.tick();
-				Thread.sleep(this.interval);
 			} catch (Exception e) {
-				LOG.log(Level.WARNING, "Data read failed", e);
+				LOG.log(Level.WARNING, "Data decode failed", e);
 			}
 		}
 		monitor.reset();
@@ -114,7 +120,6 @@ abstract class AbstractDataReader implements DataReader {
 	 * @see net.sf.marineapi.nmea.io.DataReader#setInterval(int)
 	 */
 	public void setInterval(int interval) {
-		this.interval = interval;
 	}
 	
 	/*
