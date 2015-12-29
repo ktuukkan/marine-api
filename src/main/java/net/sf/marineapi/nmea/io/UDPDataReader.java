@@ -49,28 +49,25 @@ class UDPDataReader extends AbstractDataReader {
 	}
 
 	@Override
-	public String read() {
-		String data = receive();
-		if (data != null) {
+	public String read() throws Exception {
+		while (true) {
+			String data = queue.poll();
+			if (data != null)
+				return data;
+
+			data = receive();
 			String[] lines = data.split("\\r?\\n");
 			queue.addAll(Arrays.asList(lines));
 		}
-		return queue.poll();
 	}
 
 	/**
 	 * Receive UDP packet and return as String
 	 */
-	private String receive() {
-		String data = null;
-		try {
-			DatagramPacket pkg = new DatagramPacket(buffer, buffer.length);
-			socket.receive(pkg);
-			data = new String(pkg.getData(), 0, pkg.getLength());
-		} catch (Exception e) {
-			getParent().handleException("UDP receive failed", e);
-		}
-		return data;
+	private String receive() throws Exception {
+		DatagramPacket pkg = new DatagramPacket(buffer, buffer.length);
+		socket.receive(pkg);
+		return new String(pkg.getData(), 0, pkg.getLength());
 	}
 
 }
