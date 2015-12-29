@@ -43,7 +43,7 @@ interface DataReader extends Runnable {
 	boolean isRunning();
 
 	/**
-	 * Set reader pause time between read attempts.
+	 * Does nothing. This method exists for backward compatibility only.
 	 * 
 	 * @param interval Interval in milliseconds.
 	 */

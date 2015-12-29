@@ -51,15 +51,7 @@ class DefaultDataReader extends AbstractDataReader {
 	 * @see net.sf.marineapi.nmea.io.AbstractDataReader#read()
 	 */
 	@Override
-	public String read() {
-		String data = null;
-		try {
-			if(input.ready()) {
-				data = input.readLine();
-			}
-		} catch (Exception e) {
-			getParent().handleException("InputStream read failed", e);
-		}
-		return data;
+	public String read() throws Exception {
+		return input.readLine();
 	}
 }
