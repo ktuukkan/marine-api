@@ -107,10 +107,10 @@ public class PositionProvider extends AbstractProvider<PositionEvent> {
 				p = gga.getPosition();
 				fix = gga.getFixQuality();
 
-                // Some receivers do not provide RMC message
-                if (t == null) {
-                    t = gga.getTime();
-                }
+				// Some receivers do not provide RMC message
+				if (t == null) {
+					t = gga.getTime();
+				}
 			} else if (s instanceof GLLSentence && p == null) {
 				GLLSentence gll = (GLLSentence) s;
 				p = gll.getPosition();
