@@ -21,9 +21,11 @@
 package net.sf.marineapi.provider;
 
 import net.sf.marineapi.nmea.io.SentenceReader;
+import net.sf.marineapi.nmea.parser.DataNotAvailableException;
 import net.sf.marineapi.nmea.sentence.GGASentence;
 import net.sf.marineapi.nmea.sentence.GLLSentence;
 import net.sf.marineapi.nmea.sentence.RMCSentence;
+import net.sf.marineapi.nmea.sentence.VTGSentence;
 import net.sf.marineapi.nmea.sentence.Sentence;
 import net.sf.marineapi.nmea.sentence.SentenceId;
 import net.sf.marineapi.nmea.util.DataStatus;
@@ -58,7 +60,7 @@ public class PositionProvider extends AbstractProvider<PositionEvent> {
 	 * @param reader SentenceReader that provides the required sentences.
 	 */
 	public PositionProvider(SentenceReader reader) {
-		super(reader, SentenceId.RMC, SentenceId.GGA, SentenceId.GLL);
+		super(reader, SentenceId.RMC, SentenceId.GGA, SentenceId.GLL, SentenceId.VTG);
 	}
 
 	/*
@@ -79,12 +81,24 @@ public class PositionProvider extends AbstractProvider<PositionEvent> {
 			if (s instanceof RMCSentence) {
 				RMCSentence rmc = (RMCSentence) s;
 				sog = rmc.getSpeed();
-				cog = rmc.getCourse();
+				try {
+					cog = rmc.getCourse();
+				} catch (DataNotAvailableException e) {
+					// If we are not moving, cource can be undefined. Leave null in that case.
+				}
 				d = rmc.getDate();
 				t = rmc.getTime();
 				mode = rmc.getMode();
 				if (p == null) {
 					p = rmc.getPosition();
+				}
+			} else if (s instanceof VTGSentence) {
+				VTGSentence vtg = (VTGSentence) s;
+				sog = vtg.getSpeedKnots();
+				try {
+					cog = vtg.getTrueCourse();
+				} catch (DataNotAvailableException e) {
+					// If we are not moving, cource can be undefined. Leave null in that case.
 				}
 			} else if (s instanceof GGASentence) {
 				// Using GGA as primary position source as it contains both
@@ -92,11 +106,20 @@ public class PositionProvider extends AbstractProvider<PositionEvent> {
 				GGASentence gga = (GGASentence) s;
 				p = gga.getPosition();
 				fix = gga.getFixQuality();
+
+				// Some receivers do not provide RMC message
+				if (t == null) {
+					t = gga.getTime();
+				}
 			} else if (s instanceof GLLSentence && p == null) {
 				GLLSentence gll = (GLLSentence) s;
 				p = gll.getPosition();
 			}
 		}
+
+		// Ag-Star reciever does not provide RMC sentence. So we have to guess what date it it is
+		if (d == null)
+			d = new Date();
 
 		return new PositionEvent(this, p, sog, cog, d, t, mode, fix);
 	}
@@ -107,7 +130,7 @@ public class PositionProvider extends AbstractProvider<PositionEvent> {
 	 */
 	@Override
 	protected boolean isReady() {
-		return hasOne("RMC") && hasOne("GGA", "GLL");
+		return hasOne("RMC", "VTG") && hasOne("GGA", "GLL");
 	}
 
 	/*
