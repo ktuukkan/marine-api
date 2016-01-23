@@ -78,7 +78,7 @@ abstract class AbstractDataReader implements DataReader {
 	 * 
 	 * @return String or <code>null</code> if nothing was read.
 	 */
-	public abstract String read();
+	public abstract String read() throws Exception;
 
 	/*
 	 * (non-Javadoc)
@@ -93,6 +93,13 @@ abstract class AbstractDataReader implements DataReader {
 		while (isRunning) {
 			try {
 				String data = read();
+				if (data == null) {
+					// Data source is exausted. It will not produce any more data.
+					// To avoid busy loop we stop reader thread.
+					isRunning = false;
+					break;
+				}
+
 				if (SentenceValidator.isValid(data)) {
 					monitor.refresh();
 					Sentence s = factory.createParser(data);
@@ -101,9 +108,14 @@ abstract class AbstractDataReader implements DataReader {
 					parent.fireDataEvent(data);
 				}
 				monitor.tick();
-				Thread.sleep(this.interval);
 			} catch (Exception e) {
 				LOG.log(Level.WARNING, "Data read failed", e);
+				parent.handleException("Data read failed", e);
+
+				// To avoid busy loop in case of repeatable error we wait here a bit.
+				try {
+					Thread.sleep(this.interval);
+				} catch (InterruptedException interruptException) {}
 			}
 		}
 		monitor.reset();

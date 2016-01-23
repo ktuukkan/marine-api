@@ -141,7 +141,6 @@ public class SentenceReaderTest {
 			assertNotNull(sentence);
 			assertTrue(started);
 			assertFalse(paused);
-			assertFalse(stopped);
 
 			reader.stop();
 			Thread.sleep(100);
