@@ -56,9 +56,6 @@ public class SentenceReader {
 	/** Default timeout value in milliseconds. */
 	public static final int DEFAULT_TIMEOUT = 5000;
 
-	/** Default reader interval, pause between read attempts (50ms) */
-	public static final int DEFAULT_INTERVAL = 50;
-	
 	// Map key for listeners that listen any kind of sentences, type
 	// specific listeners are registered with sentence type String
 	private static final String DISPATCH_ALL = "DISPATCH_ALL";
@@ -223,14 +220,6 @@ public class SentenceReader {
 	}
 
 	/**
-	 * Returns the current reader interval.
-	 * @return Current reader interval in milliseconds.
-	 */
-	public int getInterval() {
-		return reader.getInterval();
-	}
-
-	/**
 	 * Returns the current reading paused timeout.
 	 *
 	 * @return Timeout limit in milliseconds.
@@ -346,20 +335,6 @@ public class SentenceReader {
 			stop();
 		}
 		reader = new DefaultDataReader(stream, this);
-	}
-
-	/**
-	 * Sets the reader interval, i.e. pause time between read attempts. Setting
-	 * lower value speeds up the reader, for example for faster file processing.
-	 * Notice that when reading from actual device, setting value too high may
-	 * result in reader not being able to keep up with latest data. Also,
-	 * setting value too low may reserve CPU unnecessarily.
-	 * 
-	 * @param interval Interval time to set, in milliseconds.
-	 * @see #DEFAULT_INTERVAL
-	 */
-	public void setInterval(int interval) {
-		reader.setInterval(interval);
 	}
 
 	/**
