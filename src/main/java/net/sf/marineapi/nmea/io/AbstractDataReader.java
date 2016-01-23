@@ -102,7 +102,6 @@ abstract class AbstractDataReader implements DataReader {
 				} else if (!SentenceValidator.isSentence(data)) {
 					parent.fireDataEvent(data);
 				}
-				monitor.tick();
 			} catch (Exception e) {
 				LOG.log(Level.WARNING, "Data read failed", e);
 				parent.handleException("Data read failed", e);
@@ -111,6 +110,8 @@ abstract class AbstractDataReader implements DataReader {
 				try {
 					Thread.sleep(this.interval);
 				} catch (InterruptedException interruptException) {}
+			} finally {
+				monitor.tick();
 			}
 		}
 		monitor.reset();
