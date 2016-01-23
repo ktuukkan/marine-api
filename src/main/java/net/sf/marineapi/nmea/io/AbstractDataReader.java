@@ -94,13 +94,8 @@ abstract class AbstractDataReader implements DataReader {
 			try {
 				String data = read();
 				if (data == null) {
-					// Data source is exausted. It will not produce any more data.
-					// To avoid busy loop we stop reader thread.
-					isRunning = false;
-					break;
-				}
-
-				if (SentenceValidator.isValid(data)) {
+					Thread.sleep(interval);
+				} else if (SentenceValidator.isValid(data)) {
 					monitor.refresh();
 					Sentence s = factory.createParser(data);
 					parent.fireSentenceEvent(s);
