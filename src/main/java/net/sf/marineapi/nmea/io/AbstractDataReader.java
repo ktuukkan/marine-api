@@ -20,9 +20,6 @@
  */
 package net.sf.marineapi.nmea.io;
 
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
 import net.sf.marineapi.nmea.parser.SentenceFactory;
 import net.sf.marineapi.nmea.sentence.Sentence;
 import net.sf.marineapi.nmea.sentence.SentenceValidator;
@@ -33,9 +30,6 @@ import net.sf.marineapi.nmea.sentence.SentenceValidator;
  * @author Kimmo Tuukkanen
  */
 abstract class AbstractDataReader implements DataReader {
-
-	private static final Logger LOG =
-		Logger.getLogger(AbstractDataReader.class.getName());
 
 	private final SentenceReader parent;
 	private volatile boolean isRunning = true;
@@ -103,10 +97,7 @@ abstract class AbstractDataReader implements DataReader {
 					parent.fireDataEvent(data);
 				}
 			} catch (Exception e) {
-				LOG.log(Level.WARNING, "Data read failed", e);
 				parent.handleException("Data read failed", e);
-
-				// To avoid busy loop in case of repeatable error we wait here a bit.
 				try {
 					Thread.sleep(this.interval);
 				} catch (InterruptedException interruptException) {}
