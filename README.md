@@ -27,7 +27,7 @@ Maven snapshots are deployed to [Central Repository](https://search.maven.org/) 
 
 * [Snapshots repository](https://oss.sonatype.org/content/repositories/snapshots/net/sf/marineapi/marineapi/)
 
-Notice that you may need to [tweak your Maven settings](https://gist.github.com/ktuukkan/8cf2de1e915185118c60) to enable snapshot dependencies.
+Notice that you may need to [tweak your Maven settings](https://gist.github.com/ktuukkan/8cf2de1e915185118c60) to enable snapshot dependencies. Check the current SNAPSHOT version e.g. in [build.properties](https://github.com/ktuukkan/marine-api/blob/master/build.properties).
 
 **Sourceforge**
 
