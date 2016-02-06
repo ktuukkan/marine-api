@@ -84,8 +84,11 @@ documents publicly available in the Internet (URLs checked on 2013-09-08):
  * RT Intertial+ NMEA Description (rev. 100720) by Oxford Technical Solutions
    <http://www.oxts.com/Downloads/Products/Inertial2/nmeaman.pdf>
 
- * Trimble BD9xx GNSS Receivers Help
+ * BD9xx GNSS Receivers Help by Trimble Navigation Limited
    <http://www.trimble.com/OEM_ReceiverHelp/V4.44/en/>
+
+ * NMEA-0183 Messages - Guide for AgGPS Receivers by Trimble Navigation Limited
+   <http://trl.trimble.com/docushare/dsweb/Get/Document-159714/NMEA_Messages_RevA_Guide_ENG.pdf>
 
  * Eye4Software GPS Toolkit - Description of supported NMEA0183 sentences
    <http://www.eye4software.com/products/gpstoolkit/nmea/>
