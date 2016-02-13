@@ -53,6 +53,8 @@ public enum SentenceId {
 	HDM,
 	/** Vessel heading in degrees true */
 	HDT,
+	/** Relative and absolute humidity with dew point */
+	MHU,
 	/** Air temperature in degrees centigrade (Celsius). */
 	MTA,
 	/** Water temperature in degrees centigrade (Celsius). */

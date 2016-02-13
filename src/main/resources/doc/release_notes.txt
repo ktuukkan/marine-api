@@ -17,6 +17,8 @@ NEW FEATURES
 
  * Support for VDM sentences; the NMEA 0183 layer of AIS messages.
 
+ * Support for MHU sentences; relative and absolute humidity with dew point.
+
 ACKNOWLEDGEMENTS
 
  * Majority of AIS support written by József Lázár.
