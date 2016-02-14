@@ -55,6 +55,8 @@ public enum SentenceId {
 	HDT,
 	/** Relative and absolute humidity with dew point */
 	MHU,
+	/** Barometric pressure in inches of mercury and bars. */
+	MMB,
 	/** Air temperature in degrees centigrade (Celsius). */
 	MTA,
 	/** Water temperature in degrees centigrade (Celsius). */

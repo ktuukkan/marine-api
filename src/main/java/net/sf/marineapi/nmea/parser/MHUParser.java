@@ -27,6 +27,8 @@ import net.sf.marineapi.nmea.sentence.TalkerId;
 /**
  * MHUParser - Humidity & dew point.
  *
+ * $--MHU,x.x,x.x,x.x,C*hh<CR><LF>
+ *
  * @author Kimmo Tuukkanen
  */
 class MHUParser extends SentenceParser implements MHUSentence {
