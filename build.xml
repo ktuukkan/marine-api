@@ -163,6 +163,7 @@ $Revision$
 		<mkdir dir="${build.dir.dist}/examples" />
 
 		<copy todir="${build.dir.dist}" file="${jar.file}" />
+		<copy todir="${build.dir.dist}/doc/" file="changelog.txt" />
 		<copy todir="${build.dir.dist}/doc/">
 			<fileset dir="${doc.dir}" excludes="**/html/**" />
 		</copy>
@@ -185,15 +186,6 @@ $Revision$
 			file="${build.dir.dist}/doc/readme.txt" />
 		<replace token="@YEAR@" value="${year}"
 			file="${build.dir.dist}/doc/readme.txt" />
-
-		<replace token="@VERSION@" value="${version}"
-			file="${build.dir.dist}/doc/release_notes.txt" />
-		<replace token="@BUILD_ID@" value="${build.id}"
-			file="${build.dir.dist}/doc/release_notes.txt" />
-		<replace token="@RELEASE_DATE@" value="${date}"
-			file="${build.dir.dist}/doc/release_notes.txt" />
-		<replace token="@YEAR@" value="${year}"
-			file="${build.dir.dist}/doc/release_notes.txt" />
 
 		<jar destfile="${maven-sources-jar}">
 			<fileset dir="${src.dir}" includes="**/*.java" excludes="**/example/*" />
