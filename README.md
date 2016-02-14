@@ -23,11 +23,11 @@ See [examples](https://github.com/ktuukkan/marine-api/tree/master/src/main/java/
 
 **Snapshots**
 
-Development snapshots are deployed to [Maven Central Repository](https://search.maven.org/#search%7Cga%7C1%7Cg%3A%22net.sf.marineapi%22) every now and then. Notice that although they should be mostly stable, they are still work-in-progress.
+Development snapshots are deployed to [Maven Central Repository](https://search.maven.org/#search%7Cga%7C1%7Cg%3A%22net.sf.marineapi%22) every now and then. Although they should be mostly stable, they are still work-in-progress.
 
 * [Snapshots repository](https://oss.sonatype.org/content/repositories/snapshots/net/sf/marineapi/marineapi/)
 
-Notice that you may need to [tweak your Maven settings](https://gist.github.com/ktuukkan/8cf2de1e915185118c60) to enable snapshot dependencies. Check the current SNAPSHOT version e.g. in [build.properties](https://github.com/ktuukkan/marine-api/blob/master/build.properties).
+Notice, that you may need to [tweak your Maven settings](https://gist.github.com/ktuukkan/8cf2de1e915185118c60) to enable snapshot dependencies. Check the current SNAPSHOT version [changelog](https://github.com/ktuukkan/marine-api/blob/master/changelog.txt).
 
 **Sourceforge**
 
