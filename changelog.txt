@@ -8,6 +8,7 @@ Version 0.10.0-SNAPSHOT
     updates on each, including utility classes for extracted data.
   - Support for VDM sentences; the NMEA-0183 layer of AIS messages.
   - Support for MHU sentences; relative and absolute humidity with dew point.
+  - Support for MMB sentences; barometric pressure.
   - PositionProvider may now use VTG sentence to acquire needed values.
   - SentenceReader performance improvements. Removed read interval and related
     methods, i.e. incoming data is now read immediately.
