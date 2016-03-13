@@ -12,6 +12,7 @@ Version 0.10.0-SNAPSHOT
   - PositionProvider may now use VTG sentence to acquire needed values.
   - SentenceReader performance improvements. Removed read interval and related
     methods, i.e. incoming data is now read immediately.
+  - Fixed missing base interface in MWDSentence
 
   Contributions:
   - Majority of AIS support written by József Lázár.
