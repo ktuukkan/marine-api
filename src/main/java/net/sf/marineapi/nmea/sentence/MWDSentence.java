@@ -26,7 +26,7 @@ package net.sf.marineapi.nmea.sentence;
  * 
  * @author Richard van Nieuwenhoven
  */
-public interface MWDSentence {
+public interface MWDSentence extends Sentence {
 
     /**
      * @return Wind direction, degrees True, to the nearest 0,1 degree. NaN if
