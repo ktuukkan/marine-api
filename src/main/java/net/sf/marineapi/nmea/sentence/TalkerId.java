@@ -34,11 +34,23 @@ package net.sf.marineapi.nmea.sentence;
  */
 public enum TalkerId {
 
-	/** AIS (to support <code>AIVDM</code> and <code>AIVDO</code>) */
+	/** AIS - Mobile AIS station */
 	AI,
-	/** AIS "Broadcast" message (to support <code>ABVDM</code>) */
+	/** AIS - NMEA 4.0 Base AIS station */
 	AB,
-	/** AIS "Base Station" message (to support <code>BSVDM</code>) */
+	/** AIS - NMEA 4.0 Dependent AIS Base Station */
+	AD,
+	/** AIS - NMEA 4.0 Aid to Navigation AIS station */
+	AN,
+	/** AIS - NMEA 4.0 AIS Receiving Station */
+	AR,
+	/** AIS - NMEA 4.0 Limited Base Station */
+	AS,
+	/** AIS - NMEA 4.0 AIS Transmitting Station */
+	AT,
+	/** AIS - NMEA 4.0 Repeater AIS station */
+	AX,
+	/** AIS - Base AIS station (deprecated in NMEA 4.0) */
 	BS,
 	/** Autopilot - General */
 	AG,
@@ -126,6 +138,8 @@ public enum TalkerId {
 	RC,
 	/** Indian Regional Navigation Satellite System (IRNSS) */
 	IR,
+	/** AIS - NMEA 4.0 Physical Shore AIS Station */
+	SA,
 	/** Sounder, Depth */
 	SD,
 	/** Electronic Positioning System, other/general */
