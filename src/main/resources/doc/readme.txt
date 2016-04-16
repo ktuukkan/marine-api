@@ -75,6 +75,9 @@ documents publicly available in the Internet (URLs checked on 2013-09-08):
  * NMEA Revealed by Eric S. Raymond
    <http://catb.org/gpsd/NMEA.html>
 
+ * SiRF NMEA Reference Manual (Rev. 2.1, Dec 2007) by SiRF Technology, Inc.
+   <https://www.sparkfun.com/datasheets/GPS/NMEA%20Reference%20Manual-Rev2.1-Dec07.pdf>
+
  * The NMEA Information Sheet (issue 3, 25th Feb 2011) by Actisense
    <http://www.actisense.com/products/nmea-0183/opto-4/downloads-opto-4.html>
 
