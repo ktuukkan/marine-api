@@ -3,21 +3,27 @@ Java Marine API - changelog
 
 Version 0.10.0-SNAPSHOT
 
-  - Partial support for AIS (Automatic Identification System); decoding of AIS
-    messages 1, 2, 3, 4, 5, 18 and 19 and listener base class for receiving
-    updates on each, including utility classes for extracted data.
-  - Support for VDM sentences; the NMEA-0183 layer of AIS messages.
+  - Basic support for AIS (Automatic Identification System)
+    - decoding of messages 1, 2, 3, 4, 5, 9, 18, 19, 21 and 24
+    - listener intefaces and classes for receiving messages
+    - some utility classes for extracted data
+  - Support for VDM and VDO sentences; the NMEA-0183 layer of AIS messages.
   - Support for MHU sentences; relative and absolute humidity with dew point.
   - Support for MMB sentences; barometric pressure.
-  - PositionProvider may now use VTG sentence to acquire needed values.
+  - Support for CUR sentences; Water currents information.
+  - Support for VWR sentences; Relative wind speed and angle.
+  - Support for VWT sentences; True wind speed and angle.
   - SentenceReader performance improvements. Removed read interval and related
     methods, i.e. incoming data is now read immediately.
+  - PositionProvider may now use VTG sentence to acquire needed values.
   - Fixed missing base interface in MWDSentence
 
   Contributions:
-  - Majority of AIS support written by József Lázár.
+  - Majority of AIS support written by József Lázár. Messages 9, 21 and 24 by
+    Henri Laurent (sailgrib.com). AIS features refactoring and alignment with
+    code base by Kimmo Tuukkanen.
   - PositionProvider and SentenceReader improvements by Alexey Guseynov.
-
+  - CUR, VDO, VWR and VWT sentence parsers by Henri Laurent (sailgrib.com)
 
 Version 0.9.0 (2015-12-10)
 
