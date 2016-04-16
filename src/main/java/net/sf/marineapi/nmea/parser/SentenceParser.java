@@ -101,13 +101,26 @@ public class SentenceParser implements Sentence {
 	}
 
 	/**
-	 * Creates a new empty sentence with specified begin character, talker and
-	 * sentence IDs.
+	 * Creates a new empty sentence with specified begin char, talker id,
+	 * sentence id and number of fields.
+	 *
+	 * @param begin Begin char, $ or !
+	 * @param tid TalkerId to set
+	 * @param sid SentenceId to set
+	 * @param size Number of sentence data fields
+	 */
+	protected SentenceParser(char begin, TalkerId tid, SentenceId sid, int size) {
+		this(begin, tid, sid.toString(), size);
+	}
+
+	/**
+	 * Creates a new empty sentence with specified begin char, talker id,
+	 * sentence id and number of fields.
 	 * 
 	 * @param begin The begin character, e.g. '$' or '!'
-	 * @param talker Talker type Id, e.g. "GP" or "LC".
-	 * @param type Sentence type Id, e.g. "GGA or "GLL".
-	 * @param size Number of data fields
+	 * @param talker TalkerId to set
+	 * @param type Sentence id as String, e.g. "GGA or "GLL".
+	 * @param size Number of sentence data fields
 	 */
 	protected SentenceParser(char begin, TalkerId talker, String type, int size) {
 		if (size < 1) {
@@ -133,7 +146,7 @@ public class SentenceParser implements Sentence {
 	 * specified <code>type</code>.
 	 * <p>
 	 * For example, GGA sentence parser should specify "GGA" as the type.
-	 * 
+	 *
 	 * @param nmea NMEA 0183 sentence String
 	 * @param type Expected type of the sentence in <code>nmea</code> parameter
 	 * @throws IllegalArgumentException If the specified sentence is not a valid
