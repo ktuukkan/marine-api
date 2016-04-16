@@ -4,10 +4,11 @@ Java Marine API - changelog
 Version 0.10.0-SNAPSHOT
 
   - Basic support for AIS (Automatic Identification System)
+    - Support for VDM and VDO sentences; the NMEA-0183 layer of AIS messages
     - decoding of messages 1, 2, 3, 4, 5, 9, 18, 19, 21 and 24
     - listener intefaces and classes for receiving messages
-    - some utility classes for extracted data
-  - Support for VDM and VDO sentences; the NMEA-0183 layer of AIS messages.
+    - TalkerId enum; added AD, AN, AR, AS, AT, AX an SA to support AIS talkers
+    - utility classes for extracted data
   - Support for MHU sentences; relative and absolute humidity with dew point.
   - Support for MMB sentences; barometric pressure.
   - Support for CUR sentences; Water currents information.
