@@ -33,6 +33,8 @@ public enum SentenceId {
 	APB,
 	/** Bearing Origin to Destination */
 	BOD,
+	/** Current */
+	CUR,
 	/** Depth of water below transducer; in meters, feet and fathoms */
 	DBT,
 	/** Depth of water below transducer; in meters. */
@@ -79,8 +81,10 @@ public enum SentenceId {
 	TTM,
 	/** Dual ground/water speed and stern ground/water speed. */
 	VBW,
-	/** AIS messages */
+	/** AIS - Received data from other vessels */
 	VDM,
+	/** AIS - Own vessel data */
+	VDO,
 	/** Set and drift, direction and speed of current. */
 	VDR,
 	/** Distance traveled through water, cumulative and since reset. */
@@ -91,6 +95,10 @@ public enum SentenceId {
 	VHW,
 	/** Waypoint location (latitude/longitude) */
 	WPL,
+	/** Relative Wind Speed and Angle */
+	VWR,
+	/** True Wind Speed and Angle */
+	VWT,
 	/** Transducer measurements (sensor data) */
 	XDR,
 	/** Cross-track error, measured */
