@@ -20,6 +20,8 @@
  */
 package net.sf.marineapi.nmea.util;
 
+import java.text.DecimalFormat;
+
 /**
  * Represents a geographic position. Default datum is WGS84 as generally in NMEA
  * 0183. Notice that datum is only informative and it does not affect
@@ -234,13 +236,15 @@ public class Position {
 	 */
 	@Override
 	public String toString() {
+		DecimalFormat df = new DecimalFormat("00.0000000");
 		StringBuilder sb = new StringBuilder();
 		sb.append("[");
-		sb.append(String.format("%02.04f", Math.abs(getLatitude())));
+		sb.append(df.format(Math.abs(getLatitude())));
 		sb.append(" ");
 		sb.append(getLatitudeHemisphere().toChar());
 		sb.append(", ");
-		sb.append(String.format("%03.04f", Math.abs(getLongitude())));
+		df.applyPattern("000.0000000");
+		sb.append(df.format(Math.abs(getLongitude())));
 		sb.append(" ");
 		sb.append(getLongitudeHemisphere().toChar());
 		sb.append(", ");
