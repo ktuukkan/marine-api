@@ -186,6 +186,8 @@ $Revision$
 			file="${build.dir.dist}/doc/readme.txt" />
 		<replace token="@YEAR@" value="${year}"
 			file="${build.dir.dist}/doc/readme.txt" />
+		<replace token="-SNAPSHOT" value=" (${date})"
+				 file="${build.dir.dist}/doc/changelog.txt" />
 
 		<jar destfile="${maven-sources-jar}">
 			<fileset dir="${src.dir}" includes="**/*.java" excludes="**/example/*" />
