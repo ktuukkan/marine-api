@@ -3,7 +3,9 @@ Java Marine API [![Build Status](https://travis-ci.org/ktuukkan/marine-api.png)]
 
 Java Marine API is an [NMEA 0183](http://en.wikipedia.org/wiki/NMEA_0183) parser library for Java. See project [webpage](http://ktuukkan.github.io/marine-api/) for more info and documentation.
 
-Also, basic support for decoding [AIS messages](https://en.wikipedia.org/wiki/Automatic_Identification_System) is under development and included in latest snapshots for preview. As this is quite a large new feature, all feedback and contribution is much appreciated!
+Basic support for decoding [AIS messages](https://en.wikipedia.org/wiki/Automatic_Identification_System) is also under development and included in latest snapshots for preview. As this is quite a large new feature, all feedback and contribution is much appreciated.
+
+License: [LGPL](https://github.com/ktuukkan/marine-api/blob/master/src/main/resources/doc/lgpl.txt)
 
 **Usage**
 
