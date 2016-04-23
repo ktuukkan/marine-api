@@ -33,7 +33,7 @@ import net.sf.marineapi.nmea.sentence.TalkerId;
  * @see VDOParser
  * @see VDMParser
  */
-public abstract class AISParser extends SentenceParser implements AISSentence {
+abstract class AISParser extends SentenceParser implements AISSentence {
 
     // NMEA message fields
     private static final int NUMBER_OF_FRAGMENTS = 0;

@@ -31,7 +31,7 @@ import net.sf.marineapi.nmea.sentence.TalkerId;
  *
  * @author Kimmo Tuukkanen
  */
-public class MMBParser extends SentenceParser implements MMBSentence {
+class MMBParser extends SentenceParser implements MMBSentence {
 
     private static final int PRESSURE_INHG = 0;
     private static final int UNIT_INHG = 1;
