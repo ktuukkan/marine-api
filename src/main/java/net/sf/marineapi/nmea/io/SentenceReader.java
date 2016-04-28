@@ -139,7 +139,7 @@ public class SentenceReader {
 				dataListener.dataRead(data);
 			}
 		} catch (Exception e) {
-            handleException(LOG_MSG, e);
+        		handleException(LOG_MSG, e);
 		}
 	}
 	
@@ -151,7 +151,7 @@ public class SentenceReader {
 			try {
 				listener.readingPaused();
 			} catch (Exception e) {
-                handleException(LOG_MSG, e);
+        			handleException(LOG_MSG, e);
 			}
 		}
 	}
@@ -165,7 +165,7 @@ public class SentenceReader {
 			try {
 				listener.readingStarted();
 			} catch (Exception e) {
-                handleException(LOG_MSG, e);
+        			handleException(LOG_MSG, e);
 			}
 		}
 	}
@@ -178,7 +178,7 @@ public class SentenceReader {
 			try {
 				listener.readingStopped();
 			} catch (Exception e) {
-                handleException(LOG_MSG, e);
+        			handleException(LOG_MSG, e);
 			}
 		}
 	}
@@ -205,7 +205,7 @@ public class SentenceReader {
 				SentenceEvent se = new SentenceEvent(this, sentence);
 				listener.sentenceRead(se);
 			} catch (Exception e) {
-			    handleException(LOG_MSG, e);
+				handleException(LOG_MSG, e);
 			}
 		}
 	}
