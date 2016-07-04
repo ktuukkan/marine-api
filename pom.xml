@@ -72,12 +72,12 @@ along with Java Marine API. If not, see <http://www.gnu.org/licenses/>.
 		<repository>
 			<id>sonatype-nexus-staging</id>
 			<name>Sonatype Staging Repository</name>
-			<url>http://oss.sonatype.org/service/local/staging/deploy/maven2</url>
+			<url>https://oss.sonatype.org/service/local/staging/deploy/maven2</url>
 		</repository>
 		<snapshotRepository>
 			<id>sonatype-nexus-snapshots</id>
 			<name>Sonatype Nexus Snapshots</name>
-			<url>http://oss.sonatype.org/content/repositories/snapshots</url>
+			<url>https://oss.sonatype.org/content/repositories/snapshots</url>
 		</snapshotRepository>
 	</distributionManagement>
 
