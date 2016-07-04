@@ -45,7 +45,9 @@ import net.sf.marineapi.provider.event.PositionEvent;
  * case, there is no altitude included in the
  * {@link net.sf.marineapi.nmea.util.Position}. GPS data statuses are also
  * captured and events are dispatched only when sentences report
- * {@link net.sf.marineapi.nmea.util.DataStatus#ACTIVE}.
+ * {@link net.sf.marineapi.nmea.util.DataStatus#ACTIVE}. FAA mode transmitted in
+ * RMC is also checked and captured when available, but may be <code>null</code>
+ * depending on used NMEA version.
  *  
  * @author Kimmo Tuukkanen
  * @see net.sf.marineapi.provider.event.PositionListener
@@ -88,9 +90,11 @@ public class PositionProvider extends AbstractProvider<PositionEvent> {
 				}
 				d = rmc.getDate();
 				t = rmc.getTime();
-				mode = rmc.getMode();
 				if (p == null) {
 					p = rmc.getPosition();
+					if(rmc.getFieldCount() > 11) {
+						mode = rmc.getMode();
+					}
 				}
 			} else if (s instanceof VTGSentence) {
 				VTGSentence vtg = (VTGSentence) s;
@@ -117,9 +121,10 @@ public class PositionProvider extends AbstractProvider<PositionEvent> {
 			}
 		}
 
-		// Ag-Star reciever does not provide RMC sentence. So we have to guess what date it it is
-		if (d == null)
+		// Ag-Star reciever does not provide RMC sentence. So we have to guess what date it is
+		if (d == null) {
 			d = new Date();
+		}
 
 		return new PositionEvent(this, p, sog, cog, d, t, mode, fix);
 	}
@@ -143,9 +148,10 @@ public class PositionProvider extends AbstractProvider<PositionEvent> {
 		for (Sentence s : getSentences()) {
 
 			if (s instanceof RMCSentence) {
-				DataStatus ds = ((RMCSentence) s).getStatus();
-				FaaMode gm = ((RMCSentence) s).getMode();
-				if (DataStatus.VOID.equals(ds) || FaaMode.NONE.equals(gm)) {
+				RMCSentence rmc = (RMCSentence)s;
+				DataStatus ds = rmc.getStatus();
+				if (DataStatus.VOID.equals(ds) ||
+					(rmc.getFieldCount() > 11 && FaaMode.NONE.equals(rmc.getMode()))) {
 					return false;
 				}
 			} else if (s instanceof GGASentence) {

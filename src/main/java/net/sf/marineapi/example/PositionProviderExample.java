@@ -26,6 +26,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 
+import net.sf.marineapi.nmea.io.ExceptionListener;
 import net.sf.marineapi.nmea.io.SentenceReader;
 import net.sf.marineapi.provider.PositionProvider;
 import net.sf.marineapi.provider.event.PositionEvent;
@@ -37,13 +38,14 @@ import net.sf.marineapi.provider.event.PositionListener;
  * @author Kimmo Tuukkanen
  * @see PositionProvider
  */
-public class PositionProviderExample implements PositionListener {
+public class PositionProviderExample implements PositionListener, ExceptionListener {
 
 	PositionProvider provider;
 
 	public PositionProviderExample(File f) throws FileNotFoundException {
 		InputStream stream = new FileInputStream(f);
 		SentenceReader reader = new SentenceReader(stream);
+		reader.setExceptionListener(this);
 		provider = new PositionProvider(reader);
 		provider.addListener(this);
 		reader.start();
@@ -58,6 +60,10 @@ public class PositionProviderExample implements PositionListener {
 	public void providerUpdate(PositionEvent evt) {
 		// do something with the data..
 		System.out.println("TPV: " + evt.toString());
+	}
+
+	public void onException(Exception e) {
+		// supress warnings..
 	}
 
 	/**

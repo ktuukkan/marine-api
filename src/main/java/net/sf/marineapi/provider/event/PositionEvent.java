@@ -102,7 +102,9 @@ public class PositionEvent extends ProviderEvent implements Cloneable {
 	}
 
 	/**
-	 * Returns the current FAA operating mode of GPS receiver.
+	 * <p>Returns the current FAA operating mode of GPS receiver.</p>
+	 * <p>Notice: may be always <code>null</code>, depending on the NMEA version
+	 * in use.</p>
 	 * 
 	 * @return FaaMode
 	 */

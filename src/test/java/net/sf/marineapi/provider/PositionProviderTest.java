@@ -112,6 +112,22 @@ public class PositionProviderTest implements PositionListener {
 
 	}
 
+	@Test
+	public void testSentenceReadWithLegacyRMC() {
+
+		SentenceFactory sf = SentenceFactory.getInstance();
+		Sentence gll = sf.createParser(GLLTest.EXAMPLE);
+
+		assertNull(event);
+		instance.sentenceRead(new SentenceEvent(this, gll));
+		assertNull(event);
+
+		Sentence rmc = sf.createParser(RMCTest.EXAMPLE_LEGACY);
+		instance.sentenceRead(new SentenceEvent(this, rmc));
+		assertNotNull(event);
+
+	}
+
 	/*
 	 * (non-Javadoc)
 	 * @see

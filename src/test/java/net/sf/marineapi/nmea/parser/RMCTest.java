@@ -25,14 +25,19 @@ public class RMCTest {
 	/** Example sentence */
 	public static final String EXAMPLE = "$GPRMC,120044.567,A,6011.552,N,02501.941,E,000.0,360.0,160705,006.1,E,A*0B";
 
+	/** Example of legacy format (short by one field) */
+	public static final String EXAMPLE_LEGACY = "$GPRMC,183729,A,3907.356,N,12102.482,W,000.0,360.0,080301,015.5,E*6F";
+
 	RMCParser empty;
 	RMCParser rmc;
+	RMCParser legacy;
 
 	@Before
 	public void setUp() {
 		try {
 			empty = new RMCParser(TalkerId.GP);
 			rmc = new RMCParser(EXAMPLE);
+			legacy = new RMCParser(EXAMPLE_LEGACY);
 		} catch (Exception e) {
 			fail(e.getMessage());
 		}
@@ -41,6 +46,7 @@ public class RMCTest {
 	@Test
 	public void testConstructor() {
 		assertEquals(12, empty.getFieldCount());
+		assertEquals(11, legacy.getFieldCount());
 	}
 
 	/**
