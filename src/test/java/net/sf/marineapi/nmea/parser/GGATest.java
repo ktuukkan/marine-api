@@ -225,4 +225,21 @@ public class GGATest {
 		assertTrue(gga.toString().contains("GPGGA,010203.456,6011"));
 	}
 
+	@Test
+	public void testSetNumberOfSatellites() {
+		gga.setSatelliteCount(5);
+		assertEquals(5, gga.getSatelliteCount());
+		assertTrue(gga.toString().contains(",E,1,05,2.0,28.0,"));
+	}
+
+	@Test
+	public void testSetNumberOfSatellitesThrows() {
+		try {
+			gga.setSatelliteCount(-1);
+			fail("setSatelliteCount() did not throw exception");
+		} catch(IllegalArgumentException e) {
+			assertEquals(0, gga.getSatelliteCount());
+			assertEquals("Satelite count cannot be negative", e.getMessage());
+		}
+	}
 }

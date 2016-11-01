@@ -205,4 +205,12 @@ public interface GGASentence extends PositionSentence, TimeSentence {
 	 */
 	void setHorizontalDOP(double hdop);
 
+	/**
+	 * Sets the number of active satellites in use.
+	 *
+	 * @param count Number of satellites to set.
+	 * @throws IllegalArgumentException If given count is negative.
+	 */
+	void setSatelliteCount(int count);
+
 }

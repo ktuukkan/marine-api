@@ -264,6 +264,18 @@ class GGAParser extends PositionParser implements GGASentence {
 	}
 
 	/*
+ 	 * (non-Javadoc)
+ 	 * @see net.sf.marineapi.nmea.sentence.GGASentence#setSatelliteCount(int)
+ 	 */
+	@Override
+	public void setSatelliteCount(int count) {
+		if(count < 0) {
+			throw new IllegalArgumentException("Satelite count cannot be negative");
+		}
+		setIntValue(SATELLITES_IN_USE, count, 2);
+	}
+
+	/*
 	 * (non-Javadoc)
 	 * @see
 	 * net.sf.marineapi.nmea.sentence.TimeSentence#setTime(net.sf.marineapi.
