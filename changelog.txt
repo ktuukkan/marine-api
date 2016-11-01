@@ -18,6 +18,7 @@ Version 0.10.0-SNAPSHOT
     methods, i.e. incoming data is now read immediately.
   - PositionProvider may now use VTG sentence to acquire needed values.
   - Fixed missing base interface in MWDSentence
+  - Added missing setSatelliteCount() in GGASentence
 
   Contributions:
   - Majority of AIS support written by József Lázár. Messages 9, 21 and 24 by
