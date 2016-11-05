@@ -48,6 +48,9 @@ public enum FaaMode {
 	/** Operating in estimating mode (dead-reckoning). */
 	ESTIMATED('E'),
 
+	/** Operating in precise mode, no degradation like Selective Availability (NMEA 4.00 and later). */
+	PRECISE('P'),
+
 	/** Simulated data (running in simulator/demo mode) */
 	SIMULATED('S'),
 

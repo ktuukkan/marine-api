@@ -19,6 +19,7 @@ Version 0.10.0-SNAPSHOT
   - PositionProvider may now use VTG sentence to acquire needed values.
   - Fixed missing base interface in MWDSentence
   - Added missing setSatelliteCount() in GGASentence
+  - Added precise mode in FaaMode enum ('P')
 
   Contributions:
   - Majority of AIS support written by József Lázár. Messages 9, 21 and 24 by
