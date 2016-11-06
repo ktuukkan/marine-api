@@ -45,6 +45,8 @@ public enum SentenceId {
 	GGA,
 	/** Geographic position (latitude/longitude) */
 	GLL,
+	/** GNSS fix data (GPS, GLONASS and future constellations). */
+	GNS,
 	/** Dilution of precision (DOP) of GPS fix and active satellites */
 	GSA,
 	/** Detailed satellite data */

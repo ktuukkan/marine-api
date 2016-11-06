@@ -248,51 +248,52 @@ public final class SentenceFactory {
 		return instance;
 	}
 
-    /**
-     * Resets the factory in it's initial state, i.e. restores and removes all
-     * parsers the have been either removed or added.
-     */
-    public void reset() {
-        parsers = new HashMap<String, Class<? extends SentenceParser>>();
-        registerParser("APB", APBParser.class);
-        registerParser("BOD", BODParser.class);
+	/**
+	 * Resets the factory in it's initial state, i.e. restores and removes all
+	 * parsers the have been either removed or added.
+	 */
+	public void reset() {
+		parsers = new HashMap<String, Class<? extends SentenceParser>>();
+		registerParser("APB", APBParser.class);
+		registerParser("BOD", BODParser.class);
 		registerParser("CUR", CURParser.class);
 		registerParser("DBT", DBTParser.class);
-        registerParser("DPT", DPTParser.class);
-        registerParser("DTM", DTMParser.class);
-        registerParser("GGA", GGAParser.class);
-        registerParser("GLL", GLLParser.class);
-        registerParser("GSA", GSAParser.class);
-        registerParser("GSV", GSVParser.class);
-        registerParser("HDG", HDGParser.class);
-        registerParser("HDM", HDMParser.class);
-        registerParser("HDT", HDTParser.class);
-        registerParser("MHU", MHUParser.class);
-        registerParser("MMB", MMBParser.class);
-        registerParser("MTA", MTAParser.class);
-        registerParser("MTW", MTWParser.class);
-        registerParser("MWV", MWVParser.class);
-        registerParser("RMB", RMBParser.class);
-        registerParser("RMC", RMCParser.class);
-        registerParser("RPM", RPMParser.class);
-        registerParser("ROT", ROTParser.class);
-        registerParser("RTE", RTEParser.class);
-        registerParser("RSA", RSAParser.class);
-        registerParser("TTM", TTMParser.class);
-        registerParser("VBW", VBWParser.class);
+		registerParser("DPT", DPTParser.class);
+		registerParser("DTM", DTMParser.class);
+		registerParser("GGA", GGAParser.class);
+		registerParser("GLL", GLLParser.class);
+		registerParser("GNS", GNSParser.class);
+		registerParser("GSA", GSAParser.class);
+		registerParser("GSV", GSVParser.class);
+		registerParser("HDG", HDGParser.class);
+		registerParser("HDM", HDMParser.class);
+		registerParser("HDT", HDTParser.class);
+		registerParser("MHU", MHUParser.class);
+		registerParser("MMB", MMBParser.class);
+		registerParser("MTA", MTAParser.class);
+		registerParser("MTW", MTWParser.class);
+		registerParser("MWV", MWVParser.class);
+		registerParser("RMB", RMBParser.class);
+		registerParser("RMC", RMCParser.class);
+		registerParser("RPM", RPMParser.class);
+		registerParser("ROT", ROTParser.class);
+		registerParser("RTE", RTEParser.class);
+		registerParser("RSA", RSAParser.class);
+		registerParser("TTM", TTMParser.class);
+		registerParser("VBW", VBWParser.class);
 		registerParser("VDM", VDMParser.class);
 		registerParser("VDO", VDOParser.class);
 		registerParser("VDR", VDRParser.class);
 		registerParser("VHW", VHWParser.class);
-        registerParser("VLW", VLWParser.class);
-        registerParser("VTG", VTGParser.class);
+		registerParser("VLW", VLWParser.class);
+		registerParser("VTG", VTGParser.class);
 		registerParser("VWR", VWRParser.class);
 		registerParser("VWT", VWTParser.class);
 		registerParser("WPL", WPLParser.class);
-        registerParser("XTE", XTEParser.class);
-        registerParser("XDR", XDRParser.class);
-        registerParser("ZDA", ZDAParser.class);
-        registerParser("MDA", MDAParser.class);
-        registerParser("MWD", MWDParser.class);
-    }
+		registerParser("XTE", XTEParser.class);
+		registerParser("XDR", XDRParser.class);
+		registerParser("ZDA", ZDAParser.class);
+		registerParser("MDA", MDAParser.class);
+		registerParser("MWD", MWDParser.class);
+	}
 }
