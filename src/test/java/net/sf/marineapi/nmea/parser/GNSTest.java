@@ -179,8 +179,8 @@ public class GNSTest {
 
     @Test
     public void setOrthometricHeight() throws Exception {
-        gns.setOrthometricHeight(12.345);
-        assertEquals(12.35, gns.getOrthometricHeight(), 0.0001);
+        gns.setOrthometricHeight(12.342);
+        assertEquals(12.34, gns.getOrthometricHeight(), 0.0001);
     }
 
     @Test
