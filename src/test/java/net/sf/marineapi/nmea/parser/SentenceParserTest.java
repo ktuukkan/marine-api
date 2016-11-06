@@ -401,6 +401,22 @@ public class SentenceParserTest {
 		assertEquals(".91", instance.getStringValue(0));
 	}
 
+	@Test
+	public void testSetDoubleValueJDK7RoundingIssue() {
+
+		// 2016-11-06: open-jdk7 has rounding issues that were not caught by this test
+		// until now. All good in jdk8, thus testing conditionally.
+		// https://bugs.openjdk.java.net/browse/JDK-8029896
+		// https://bugs.openjdk.java.net/browse/JDK-8039915
+
+		String version = System.getProperty("java.version");
+		org.junit.Assume.assumeTrue(!version.startsWith("1.7."));
+
+		// would fail in jdk7 claiming "12.35" not equal to "12.34"
+		instance.setDoubleValue(0, 12.345, 1, 2);
+		assertEquals("12.35", instance.getStringValue(0));
+	}
+
 	/**
 	 * Test method for
 	 * {@link net.sf.marineapi.nmea.parser.SentenceParser#setIntValue(int, int, int)}
