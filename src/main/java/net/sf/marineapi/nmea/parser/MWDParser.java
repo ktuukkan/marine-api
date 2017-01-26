@@ -90,7 +90,7 @@ class MWDParser extends SentenceParser implements MWDSentence {
         setCharValue(WIND_DIRECTION_TRUE_UNIT, 'T');
         setCharValue(WIND_DIRECTION_MAGNETIC_UNIT, 'M');
         setCharValue(WIND_SPEED_METERS_UNIT, 'M');
-        setCharValue(WIND_SPEED_KNOTS_UNIT, 'K');
+        setCharValue(WIND_SPEED_KNOTS_UNIT, 'N');
     }
 
     /* (non-Javadoc)
