@@ -18,16 +18,18 @@ Version 0.10.0-SNAPSHOT
   - SentenceReader performance improvements. Removed read interval and related
     methods, i.e. incoming data is now read immediately.
   - PositionProvider may now use VTG sentence to acquire needed values.
-  - Fixed missing base interface in MWDSentence
+  - MWDSentence; fixed missing base interface, incorrect field count and knots indicator char.
   - Added missing setSatelliteCount() in GGASentence
   - Added precise mode in FaaMode enum ('P')
+  - TalkerId; added OC to support OpenPlotter (sailoog.com)
 
   Contributions:
-  - Majority of AIS support written by József Lázár. Messages 9, 21 and 24 by
+  - Majority of AIS support written by József Lázár (@techhead2). Messages 9, 21 and 24 by
     Henri Laurent (sailgrib.com). AIS features refactoring and alignment with
     code base by Kimmo Tuukkanen.
-  - PositionProvider and SentenceReader improvements by Alexey Guseynov.
+  - PositionProvider and SentenceReader improvements by Alexey Guseynov (@kibergus).
   - CUR, VDO, VWR and VWT sentence parsers by Henri Laurent (sailgrib.com)
+  - MWD bug fixes by Andrea Boni (@titio72)
 
 Version 0.9.0 (2015-12-10)
 
