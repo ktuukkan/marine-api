@@ -86,11 +86,11 @@ class MWDParser extends SentenceParser implements MWDSentence {
      * @param talker Talker id to set
      */
     public MWDParser(TalkerId talker) {
-        super(talker, SentenceId.MWD, 20);
+        super(talker, SentenceId.MWD, 8);
         setCharValue(WIND_DIRECTION_TRUE_UNIT, 'T');
         setCharValue(WIND_DIRECTION_MAGNETIC_UNIT, 'M');
         setCharValue(WIND_SPEED_METERS_UNIT, 'M');
-        setCharValue(WIND_SPEED_KNOTS_UNIT, 'K');
+        setCharValue(WIND_SPEED_KNOTS_UNIT, 'N');
     }
 
     /* (non-Javadoc)

@@ -122,6 +122,8 @@ public enum TalkerId {
 	/** Microwave Positioning System (obsolete) */
 	@Deprecated
 	MP,
+	/** OpenPlotter calculated */
+	OC,
 	/** OMEGA Navigation System (obsolete) */
 	@Deprecated
 	OM,
