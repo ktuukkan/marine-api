@@ -101,9 +101,15 @@ public abstract class AbstractSentenceListener<T extends Sentence>
 	@SuppressWarnings("unchecked")
 	public void sentenceRead(SentenceEvent event) {
 		Sentence sentence = event.getSentence();
-		Class<?>[] interfaces = sentence.getClass().getInterfaces();
-		if (Arrays.asList(interfaces).contains(this.expectedType)) {
-			sentenceRead((T) sentence);
+		if (this.expectedType instanceof Class<?>) {
+			if (((Class<?>) this.expectedType).isAssignableFrom(sentence.getClass())) {
+				sentenceRead((T) sentence);
+			}
+		} else {
+			Class<?>[] interfaces = sentence.getClass().getInterfaces();
+			if (Arrays.asList(interfaces).contains(this.expectedType)) {
+				sentenceRead((T) sentence);
+			}
 		}
 	}
 
