@@ -36,6 +36,7 @@ public class AISMessageParser implements AISMessage {
 
 	private String message = "";
 	private int fillbits;
+	@SuppressWarnings("unused")
 	private int lastFragmentNr;
 
 	private Sixbit decoder;

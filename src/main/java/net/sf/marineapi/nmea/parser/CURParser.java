@@ -33,14 +33,20 @@ import net.sf.marineapi.nmea.sentence.TalkerId;
 class CURParser extends SentenceParser implements CURSentence {
 
 	// field indices
+        @SuppressWarnings("unused")
 	private static final int DATA_STATUS = 0;
+        @SuppressWarnings("unused")
 	private static final int DATA_SET = 1;
+        @SuppressWarnings("unused")
 	private static final int LAYER = 2;
+	@SuppressWarnings("unused")
 	private static final int CURRENT_DEPTH = 3; // in meters
 	private static final int CURRENT_DIRECTION = 4; // in degrees
 	private static final int DIRECTION_REFERENCE = 5; // True/Relative T/R
 	private static final int CURRENT_SPEED = 6; // in knots
+	@SuppressWarnings("unused")
 	private static final int REFERENCE_LAYER_DEPTH = 7; // in meters
+	@SuppressWarnings("unused")
 	private static final int CURRENT_HEADING = 8;
 	private static final int HEADING_REFERENCE = 9; // True/Magentic T/M
 	private static final int SPEED_REFERENCE = 10; // Bottom/Water/Positioning system B/W/P
