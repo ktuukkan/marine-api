@@ -62,6 +62,10 @@ abstract class AbstractDataReader implements DataReader {
 		return isRunning;
 	}
 
+	protected void setRunning(boolean running) {
+	        isRunning = running;
+	}
+	
 	/**
 	 * Read one line from the data source.
 	 * 
@@ -83,7 +87,9 @@ abstract class AbstractDataReader implements DataReader {
 			try {
 				String data = read();
 				if (data == null) {
-					Thread.sleep(SLEEP_TIME);
+    				        if (isRunning()) {
+    				                Thread.sleep(SLEEP_TIME);
+    				        }
 				} else if (SentenceValidator.isValid(data)) {
 					monitor.refresh();
 					Sentence s = factory.createParser(data);
