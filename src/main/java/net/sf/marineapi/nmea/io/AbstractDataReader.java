@@ -62,10 +62,6 @@ abstract class AbstractDataReader implements DataReader {
 		return isRunning;
 	}
 
-	protected void setRunning(boolean running) {
-	        isRunning = running;
-	}
-	
 	/**
 	 * Read one line from the data source.
 	 * 

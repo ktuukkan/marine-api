@@ -54,7 +54,7 @@ class DefaultDataReader extends AbstractDataReader {
 	public String read() throws Exception {
 		final String result = input.readLine();
 		if (result == null) {
-		    setRunning(false);
+			stop();
 		}
 		return result;
 	}
