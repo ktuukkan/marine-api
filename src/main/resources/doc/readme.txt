@@ -112,8 +112,15 @@ documents publicly available in the Internet (URLs checked on 2013-09-08):
    <http://vancouver-webpages.com/peter/nmeafaq.txt> (not found)
    <http://www.eoss.org/pubs/nmeafaq.htm> (archived older version)
    
- * Automatic Identification System Overview by Navigation Center of U.S. Department of Homeland Security
+ * Automatic Identification System Overview by Navigation Center of U.S.
+   Department of Homeland Security
    <http://www.navcen.uscg.gov/?pageName=AISMessages>
+
+ * SeaTalk Technical Reference (revision 3.22) by Thomas Knauf
+   <http://www.thomasknauf.de/seatalk.htm>
+
+ * RS232 SeaTalk <-> NMEA Converter installation and operation manual by gadgetPool
+   <http://www.gadgetpool.de/nuke/downloads/ManualRS232.pdf>
 
 All warnings concerning the accuracy of information in above documents apply
 equally to Java Marine API.

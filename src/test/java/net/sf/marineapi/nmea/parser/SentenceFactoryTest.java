@@ -71,11 +71,11 @@ public class SentenceFactoryTest {
 	@Test
 	public void testCreateEmptyParserWithSentenceId() {
 		for (SentenceId id : SentenceId.values()) {
-			Sentence s = instance.createParser(TalkerId.II, id);
+			Sentence s = instance.createParser(TalkerId.ST, id);
 			assertNotNull(s);
 			assertTrue(s instanceof Sentence);
 			assertTrue(s instanceof SentenceParser);
-			assertEquals(TalkerId.II, s.getTalkerId());
+			assertEquals(TalkerId.ST, s.getTalkerId());
 			assertEquals(id.name(), s.getSentenceId());
 		}
 	}
@@ -88,7 +88,7 @@ public class SentenceFactoryTest {
 	@Test
 	public void testCreateEmptyParserWithSentenceIdStr() {
 		for (SentenceId id : SentenceId.values()) {
-			Sentence s = instance.createParser(TalkerId.II, id.name());
+			Sentence s = instance.createParser(TalkerId.ST, id.name());
 			assertNotNull(s);
 			assertTrue(s instanceof Sentence);
 			assertTrue(s instanceof SentenceParser);
