@@ -15,6 +15,7 @@ Version 0.10.0-SNAPSHOT
   - Support for VWR sentences; Relative wind speed and angle.
   - Support for VWT sentences; True wind speed and angle.
   - Support for GNS sentences; GNSS fix data.
+  - Support for $STALK sentences; the NMEA layer of Raymarine SeaTalk protocol.
   - SentenceReader performance improvements. Removed read interval and related
     methods, i.e. incoming data is now read immediately.
   - PositionProvider may now use VTG sentence to acquire needed values.
