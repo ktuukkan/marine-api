@@ -24,7 +24,7 @@ along with Java Marine API. If not, see <http://www.gnu.org/licenses/>.
 	<groupId>net.sf.marineapi</groupId>
 	<artifactId>marineapi</artifactId>
 	<version>0.10.0-SNAPSHOT</version>
-	<packaging>jar</packaging>
+	<packaging>bundle</packaging>
 
 	<name>Java Marine API</name>
 	<url>http://ktuukkan.github.io/marine-api/</url>
@@ -109,6 +109,18 @@ along with Java Marine API. If not, see <http://www.gnu.org/licenses/>.
 
 	<build>
 		<plugins>
+			<plugin>
+				<groupId>org.apache.felix</groupId>
+				<artifactId>maven-bundle-plugin</artifactId>
+				<version>3.2.0</version>
+				<extensions>true</extensions>
+				<configuration>
+					<instructions>
+						<Export-Package>net.sf.marineapi.*</Export-Package>
+						<Import-Package />
+					</instructions>
+				</configuration>
+			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-javadoc-plugin</artifactId>
