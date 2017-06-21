@@ -1,0 +1,11 @@
+net.sf.marineapi.ais.event
+net.sf.marineapi.ais.message
+net.sf.marineapi.ais.parser
+net.sf.marineapi.ais.util
+net.sf.marineapi.nmea.event
+net.sf.marineapi.nmea.io
+net.sf.marineapi.nmea.parser
+net.sf.marineapi.nmea.sentence
+net.sf.marineapi.nmea.util
+net.sf.marineapi.provider
+net.sf.marineapi.provider.event

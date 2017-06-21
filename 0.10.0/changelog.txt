@@ -1,0 +1,253 @@
+Java Marine API - changelog
+<http://ktuukkan.github.io/marine-api/>
+
+Version 0.10.0 (2017-06-21)
+
+  - Preliminary support for AIS (Automatic Identification System)
+    - Support for VDM and VDO sentences; the NMEA-0183 layer of AIS messages
+    - decoding of messages 1, 2, 3, 4, 5, 9, 18, 19, 21 and 24
+    - listener intefaces and classes for receiving messages
+    - TalkerId enum; added AD, AN, AR, AS, AT, AX an SA to support AIS talkers
+    - utility classes for extracted data
+  - Support for MHU sentences; relative and absolute humidity with dew point.
+  - Support for MMB sentences; barometric pressure.
+  - Support for CUR sentences; Water currents information.
+  - Support for VWR sentences; Relative wind speed and angle.
+  - Support for VWT sentences; True wind speed and angle.
+  - Support for GNS sentences; GNSS fix data.
+  - SentenceReader performance improvements. Removed read interval and related
+    methods, i.e. incoming data is now read immediately.
+  - PositionProvider may now use VTG sentence to acquire needed values.
+  - MWDSentence; fixed missing base interface, incorrect field count and knots indicator char.
+  - Added missing setSatelliteCount() in GGASentence
+  - Added precise mode in FaaMode enum ('P')
+  - TalkerId; added OC to support OpenPlotter (sailoog.com)
+
+  Contributions:
+  - Majority of AIS support written by József Lázár (@techhead2). Messages 9, 21 and 24 by
+    Henri Laurent (sailgrib.com). AIS features refactoring and alignment with
+    code base by Kimmo Tuukkanen.
+  - PositionProvider and SentenceReader improvements by Alexey Guseynov (@kibergus).
+  - CUR, VDO, VWR and VWT sentence parsers by Henri Laurent (sailgrib.com)
+  - MWD bug fixes by Andrea Boni (@titio72)
+
+Version 0.9.0 (2015-12-10)
+
+ - SentenceValidator now accepts different combinations of newline and carriage
+   return characters.
+ - GSV sentence may now contain less than four satellite infos.
+ - Date class; fixed month index off-by-one in toDate() method.
+ - SentenceReader; I/O exceptions are logged only when ExceptionHandler is not
+   set. InputStream is now checked with ready() before reading.
+ - SentenceParser; hasValue() now checks fields content explicitly.
+ - DPTSentence; getMaximum() return value changed from int to double.
+ - XDRSentence; fixed fields indexing bug in getMeasurements().
+ - TalkerId enum; added ids BD, GA, GB, GI, GQ, IR, QZ, RC and VM.
+ - Support for VBW sentences; dual ground/water speed.
+ - Support for MDA sentences; meteorological composite.
+ - Support for MWD sentences; wind speed and direction.
+ - SentenceReader; Added DataListener interface for receiving any non-NMEA data
+   that has been read from current data source.
+ - SentenceReader; read interval is now configurable.
+ - SentenceFactory; listParser() method for listing registered parsers.
+ - SentenceFactory; reset() method for resetting the factory in initial state.
+
+ Contributions:
+ - VBW parser written by Jeremy Wilson / ESRG LLC.
+ - MWD and MDA parsers written by Richard van Nieuwenhoven / INDI for Java.
+
+
+Version 0.8.1 (2014-06-08)
+
+ - ExceptionListener visibility was accidentally set in package scope only,
+   fixed back to public. Otherwise identical to v0.8.0.
+
+
+Version 0.8.0 (2014-06-07)
+
+ - Support for RSA sentences; rudder angle in degrees.
+ - Support for XTE sentences; measured cross-track error.
+ - Support for VDR sentences; set and drift.
+ - Support for TTM sentences; tracked target message.
+ - Support for DTM sentences; datum reference.
+ - Support for RPM sentences; engine or shaft revolutions.
+ - Support for VLW sentences; distance traveled through water.
+ - Support for APB sentences; autopilot destination, bearings and heading.
+ - SentenceReader; exception listener for detecting i/o errors.
+ - TalkerId; added ids 'GL' and 'GN' for GLONASS sentences.
+ - SentenceReader; UDP packet may now contain multiple lines/sentences.
+ - SentenceParser; setFieldCount() now preserves existing/remaining values.
+ - RMCParser, VTGParser; if optional FAA mode was omitted, sentence field count
+   is now adjusted before setting the mode.
+ - SentenceValidator; sentences including line terminator <CR><LF> did not pass
+   validation. Fixed by adding optional newline in sentence format regexp.
+
+ Contributions:
+ - József Lázár helped resolving UDP issues and wrote most of RSA parser.
+ - TTM parser written by Johan Bergkvist.
+ - SentenceReader exception handling added by Johan Riisberg-Jensen.
+
+
+Version 0.7.0 (2014-02-21)
+
+ - AbstractSentenceListener; base class for creating listeners with automatic
+   sentence type resolving and casting.
+ - Support for ROT sentences; vessel's rate of turn.
+ - SentenceId; fixed a bug in parseStr(), sentence id length was assumed to be
+   exactly three chars. This prevented parsing proprietary sentences that may
+   have ids of different lenghts.
+ - PositionEvent; fixed speed returned in knots instead of km/h.
+ - TalkerId; added new id 'CP' (Channel Pilot).
+ - SentenceReader; refactored and removed duplicate code.
+ - Javadoc improvements
+
+
+Version 0.6.0 (2013-10-15)
+
+ - SentenceReader; refactored to better support diffrent data sources, including
+   some performance tweaks (should take less CPU now). When dispatching events,
+   all exceptions thrown by SentenceListeners are now logged using the default
+   java.util.logging.Logger on level WARNING.
+ - SentenceValidator; performance tweaks in regular expressions. Sentence length
+   is no longer strictly checked, sentence IDs may contain now 3-10 chars.
+ - SentenceParser; due to changes in SentenceValidator, toSentence() does not
+   automatically check sentence length anymore. Added toSentence(int) method
+   for validating the length. Added reset() and setFieldCount(int) methods for
+   resetting and adjusting the number of data fields.
+ - TPVProvider and related classes renamed to PositionProvider.
+ - GSASentence; getSatellitesIds() renamed to getSatelliteIds().
+ - Sentence; removed unused constant ADDRESS_FIELD.
+ - Date, Time; fractions of second are now handled. Moved common date/time
+   parsing and formatting in Date and Time classes. Fixed a bug in Time.toDate()
+   causing incorrect hour of day. Added time zones and ISO 8601 formatting.
+ - GLL, GGA, RMC and ZDA parsers; fractions of second are now parsed and
+   formatted in timestamp fields. When setting/formatting values, three decimals
+   is used regardless of given precision (padded with zeros as needed).
+ - Position; refactored and removed explicit hemisphere indicators. Hemispheres
+   are now handled more automatically and indicated by positive and negative
+   values of latitude and longitude. Affected classes are PositionParser,
+   GGAParser, GLLParser, RMAParser, RMCParser, WPLParser and Waypoint.
+ - UDP/DatagramSocket support in SentenceReader.
+ - SatelliteInfoProvider; reports all GPS satellite information in single event.
+ - PositionParser; parsePosition(Position) and setPositionValues(Position)
+   methods.
+ - ZDASentence; setTimeAndLocalZone(Time t) for setting time and offset.
+ - Support for XDR sentences; transducer measurements.
+
+ Contributions:
+ - Thanks to Ludovic Drouineau for UDP implementation of SentenceReader.
+ - Thanks to Robert Huitema (www.42.co.nz) and Vladimir Loginov for performance
+   tweaks. Robert also provided base work for XDR parser.
+
+
+Version 0.5.1 (2015-05-11)
+
+ - Converted to Maven project, otherwise identical to v0.5.0. Not published as
+   zip package. Thanks to Amanda Fenech / marssa.org for migrating the project
+   in Maven layout and setting up the initial release in Central Repository.
+
+
+Version 0.5 (2012-05-08)
+
+ - GpsMode enum; renamed to FaaMode
+ - SentenceValidator; separated sentence format validation and checksum checking
+   in different methods by adding isSentence(String) method.
+ - SentenceFactory; DBT and HDT parsers were registered incorrectly, fixed.
+ - DPTSentence; added maximum depth setter/getter.
+ - Extracted AbstractProvider base class from TPVProvider, may be used to
+   implement custom providers. Added also base classes for provider events and
+   listeners.
+ - SentenceParser/SentenceValidator; added support for alternative begin
+   character '!' to enable parsing AIS sentences.
+ - Added new ids AI, AB and BS in TalkerId enum to support parsing AIS messages.
+ - Fixed a precision problem in ZDA parser.
+ - Improvements and fixes in Javadocs.
+ - Support for MWV sentences; wind speed and angle.
+ - Support for MTA sentences; air temperature.
+ - Support for MTW sentences; water temperature.
+ - Support for HDT sentences; current true heading.
+ - Support for HDM sentences; current magnetic heading.
+ - Support for HDG sentences; current magnetic heading with variation/deviation.
+ - Support for VHW sentences; water speed and heading.
+ - HeadingSentence interface for sentences providing current heading.
+ - HeadingProvider that reports current heading.
+ - SentenceFactory; added method for creating parsers without input data.
+ - SentenceParser; setDegreesValue(double) method for bearing, course etc,
+   validates the value to be within 0..360 degrees.
+
+ Contributions:
+ - Thanks to Warren Zahra / marssa.org for contributing in VHW and MTW parsers.
+ - Thanks to Josué Alcalde González for adding support for '!' begin char.
+
+
+Version 0.4 (2011-07-12)
+
+ - SentenceFactory; DPT parser was not automatically registered, fixed.
+ - Parsing methods in SentenceId now validates the given String before parsing
+   the id.
+ - Double values are now rounded to certain decimal precision by setters. Also,
+   course and bearing values are padded with leading zeros.
+ - SentenceReader; reader now invokes SentenceLister.readingPaused() when data
+   flow is paused, but reader is still running. The readingStopped() is now
+   called only when reader has permanently stopped. Pause timeout can be set
+   using the SentenceReader.setPauseTimeout() method.
+ - SentenceValidator; fixed regular expressions to match all printable ASCII
+   characters. Added also '!' as acceptable begin character.
+ - TalkerId; Added more complete list of talker ids.
+ - SentenceEvent; creation time stamp is now returned as plain long value.
+ - Date; constructor was setting month off by one, fixed.
+ - Added method for unregistering parsers in SentenceFactory.
+ - Added TPVProvider that reports time, position, altitude, velocity and course
+   from GPS in a single event. Report is constructed by capturing the required
+   data from several sentences. This is also the initial implementation and
+   preview of high level APIs that focus on actual data instead of sentences.
+ - SentenceParser; added methods for setting double and integer values with
+   leading zeros. Double values can also be rounded to certain precision.
+ - SentenceListener; added readingPaused() notification.
+ - Sentence; added convenience methods isValid() and isProprietary().
+
+
+Version 0.3 (2011-05-08)
+
+ - Refactored and moved sentence id parsing to TalkerId and SentenceId enums.
+ - GSA parser; refactored the satellite data parsing. The values were parsed
+   once and cached, which resulted in inconsistency if setters had been used.
+   Now, all values are parsed for each getter call.
+ - SentenceParser no longer uses SentenceId enum to identify different sentence
+   types. Plain Strings are used instead, e.g. "GGA" or "GLL", which enables
+   extending the SentenceParser and thus creating custom parsers for unsupported
+   sentence types.
+ - Various small improvements and bug fixes.
+ - SentenceReader notifies when data reading and event dispatching has started
+   and stopped.
+ - Support for DPT and DBT sentences, i.e. depth of water.
+ - Support for parsing proprietary sentences (TalkerId.P)
+
+
+Version 0.2 (2010-12-08)
+
+ - SentenceReader does not start automatically anymore. Use start() and stop()
+   methods to control reader.
+ - Removed NMEA class; moved checksum calculation to Checksum class and sentence
+   validation to SentenceValidator class.
+ - PositionParser is no longer public (unlikely to have any use).
+ - GpsFixQuality enum; added RTK, FRTK, ESTIMATED, MANUAL and SIMULATED.
+ - DataStatus enum; renamed VALID/INVALID to ACTIVE/VOID to better reflect the
+   actual char values 'A' and 'V'.
+ - Sentence interface; added getFieldCount() method.
+ - Position class; added toString() method.
+ - RTESentence interface; added addWaypointId() method.
+ - ZDASentence; added toDate() method.
+ - Various small improvements and bug fixes
+ - SentenceReader; SentenceListeners can be registered for specific sentence
+   type. Added setter for changing the input stream.
+ - Date class for handling date information
+
+
+Version 0.1 (2010-08-21)
+
+ - SentenceReader for reading NMEA sentences from a stream
+ - SentenceEvent/Listener for receiving NMEA updates
+ - SentenceFactory for creating sentence parsers
+ - Interfaces and parsers for following sentence types:
+   BOD, GGA, GLL, GSA, GSV, RMB, RMC, RTE, VTG, WPL and ZDA
