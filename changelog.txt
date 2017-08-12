@@ -1,9 +1,9 @@
 Java Marine API - changelog
 <http://ktuukkan.github.io/marine-api/>
 
-Version 0.10.0-SNAPSHOT
+Version 0.10.0 (2017-06-21)
 
-  - Basic support for AIS (Automatic Identification System)
+  - Preliminary support for AIS (Automatic Identification System)
     - Support for VDM and VDO sentences; the NMEA-0183 layer of AIS messages
     - decoding of messages 1, 2, 3, 4, 5, 9, 18, 19, 21 and 24
     - listener intefaces and classes for receiving messages

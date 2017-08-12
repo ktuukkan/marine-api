@@ -3,7 +3,7 @@ Apache Maven script for Java Marine API
 Copyright (C) 2012- Amanda Fenech, Kimmo Tuukkanen
 
 This file is part of Java Marine API.
-<http://ktuukkan.github.io/marine-api/>
+<http://ktuukkan.github.io/marine-api />
 
 Java Marine API is free software: you can redistribute it and/or modify it
 under the terms of the GNU Lesser General Public License as published by the
@@ -16,15 +16,15 @@ FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License
 for more details.
 
 You should have received a copy of the GNU Lesser General Public License
-along with Java Marine API. If not, see <http://www.gnu.org/licenses/>.
+along with Java Marine API. If not, see <http://www.gnu.org/licenses />.
 -->
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>net.sf.marineapi</groupId>
 	<artifactId>marineapi</artifactId>
-	<version>0.10.0-SNAPSHOT</version>
-	<packaging>jar</packaging>
+	<version>0.11.0-SNAPSHOT</version>
+	<packaging>bundle</packaging>
 
 	<name>Java Marine API</name>
 	<url>http://ktuukkan.github.io/marine-api/</url>
@@ -110,6 +110,18 @@ along with Java Marine API. If not, see <http://www.gnu.org/licenses/>.
 	<build>
 		<plugins>
 			<plugin>
+				<groupId>org.apache.felix</groupId>
+				<artifactId>maven-bundle-plugin</artifactId>
+				<version>3.2.0</version>
+				<extensions>true</extensions>
+				<configuration>
+					<instructions>
+						<Export-Package>net.sf.marineapi.*</Export-Package>
+						<Import-Package />
+					</instructions>
+				</configuration>
+			</plugin>
+			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-javadoc-plugin</artifactId>
 				<version>2.8.1</version>
@@ -151,8 +163,8 @@ along with Java Marine API. If not, see <http://www.gnu.org/licenses/>.
 				<artifactId>maven-compiler-plugin</artifactId>
 				<version>2.4</version>
 				<configuration>
-					<source>1.7</source>
-					<target>1.7</target>
+					<source>1.8</source>
+					<target>1.8</target>
 				</configuration>
 			</plugin>
 			<plugin>
