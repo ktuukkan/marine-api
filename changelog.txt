@@ -1,6 +1,10 @@
 Java Marine API - changelog
 <http://ktuukkan.github.io/marine-api/>
 
+Version 0.11.0-SNAPSHOT
+
+- Support for $STALK sentences; the NMEA layer of Raymarine SeaTalk protocol.
+
 Version 0.10.0 (2017-06-21)
 
   - Preliminary support for AIS (Automatic Identification System)

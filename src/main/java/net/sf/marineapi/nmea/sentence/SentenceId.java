@@ -29,6 +29,8 @@ package net.sf.marineapi.nmea.sentence;
  */
 public enum SentenceId {
 
+	/** Raymarine SeaTalk ($STALK). */
+	ALK,
 	/** Autopilot sentence "B"; xte, bearings and heading toward destination */
 	APB,
 	/** Bearing Origin to Destination */
