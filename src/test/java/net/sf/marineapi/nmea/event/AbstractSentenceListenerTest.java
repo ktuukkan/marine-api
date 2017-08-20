@@ -12,7 +12,6 @@ import net.sf.marineapi.nmea.parser.GGATest;
 import net.sf.marineapi.nmea.parser.SentenceFactory;
 import net.sf.marineapi.nmea.sentence.BODSentence;
 import net.sf.marineapi.nmea.sentence.Sentence;
-import net.sf.marineapi.nmea.sentence.TimeSentence;
 
 public class AbstractSentenceListenerTest {
 
