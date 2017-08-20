@@ -139,7 +139,7 @@ public abstract class AbstractSentenceListener<T extends Sentence>
 		} else {
 		    Class<?>[] interfaces = sentence.getClass().getInterfaces();
 		    if (Arrays.asList(interfaces).contains(this.expectedType)) {
-			sentenceRead((T) sentence);
+		    	sentenceRead((T) sentence);
 		    }
 		}
 	}
