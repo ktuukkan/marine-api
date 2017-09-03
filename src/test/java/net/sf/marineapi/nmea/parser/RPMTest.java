@@ -14,10 +14,10 @@ import org.junit.Test;
 public class RPMTest {
 
 	public static final String EXAMPLE = "$IIRPM,E,1,2418.2,10.5,A";
-	
+
 	RPMSentence rpm;
 	RPMSentence empty;
-	
+
 	@Before
 	public void setUp() throws Exception {
 		rpm = new RPMParser(EXAMPLE);
@@ -86,12 +86,18 @@ public class RPMTest {
 	}
 
 	@Test
+	public void testSetRPM() {
+		empty.setRPM(1234.56);
+		assertEquals(1234.56, empty.getRPM(), 0.01);
+	}
+
+	@Test
 	public void testSetSource() {
 		empty.setSource(RPMSentence.SHAFT);
 		assertTrue(empty.isShaft());
 		assertEquals(RPMSentence.SHAFT, empty.getSource());
 	}
-	
+
 	@Test
 	public void testSetInvalidSource() {
 		try {
@@ -101,7 +107,7 @@ public class RPMTest {
 			// pass
 		}
 	}
-	
+
 	@Test
 	public void testSetStatus() {
 		empty.setStatus(DataStatus.VOID);
