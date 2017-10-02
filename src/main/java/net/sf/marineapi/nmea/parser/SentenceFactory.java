@@ -265,6 +265,7 @@ public final class SentenceFactory {
 		registerParser("GLL", GLLParser.class);
 		registerParser("GNS", GNSParser.class);
 		registerParser("GSA", GSAParser.class);
+		registerParser("GST", GSTParser.class);
 		registerParser("GSV", GSVParser.class);
 		registerParser("HDG", HDGParser.class);
 		registerParser("HDM", HDMParser.class);
