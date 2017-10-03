@@ -37,12 +37,12 @@ class GSTParser extends SentenceParser implements GSTSentence {
 	// GST field indices
 	private static final int UTC_TIME = 0;
 	private static final int PSEUDORANGE_RESIDUALS_RMS = 1;
-	private static final int ERROR_ELLIPSE_SEMI_MAJOR_1_SIGMA = 2;
-	private static final int ERROR_ELLIPSE_SEMI_MINOR_1_SIGMA = 3;
+	private static final int ERROR_ELLIPSE_SEMI_MAJOR = 2;
+	private static final int ERROR_ELLIPSE_SEMI_MINOR = 3;
 	private static final int ERROR_ELLIPSE_ORIENTATION = 4;
-	private static final int LATITUDE_1_SIGMA_ERROR = 5;
-	private static final int LONGITUDE_1_SIGMA_ERROR = 6;
-	private static final int HEIGHT_1_SIGMA_ERROR = 7;
+	private static final int LATITUDE_ERROR = 5;
+	private static final int LONGITUDE_ERROR = 6;
+	private static final int ALTITUDE_ERROR = 7;
 
 	/**
 	 * Creates a new instance of GST parser.
@@ -83,18 +83,18 @@ class GSTParser extends SentenceParser implements GSTSentence {
 
 	/*
 	 * (non-Javadoc)
-	 * @see net.sf.marineapi.nmea.sentence.GSTSentence#getErrorEllipseSemiMajorAxis1SigmaError
+	 * @see net.sf.marineapi.nmea.sentence.GSTSentence#getSemiMajorError
 	 */
-	public double getErrorEllipseSemiMajorAxis1SigmaError() {
-		return getDoubleValue(ERROR_ELLIPSE_SEMI_MAJOR_1_SIGMA);
+	public double getSemiMajorError() {
+		return getDoubleValue(ERROR_ELLIPSE_SEMI_MAJOR);
 	}
 
 	/*
 	 * (non-Javadoc)
-	 * @see net.sf.marineapi.nmea.sentence.GSTSentence#getErrorEllipseSemiMinorAxis1SigmaError
+	 * @see net.sf.marineapi.nmea.sentence.GSTSentence#getSemiMinorError
 	 */
-	public double getErrorEllipseSemiMinorAxis1SigmaError() {
-		return getDoubleValue(ERROR_ELLIPSE_SEMI_MINOR_1_SIGMA);
+	public double getSemiMinorError() {
+		return getDoubleValue(ERROR_ELLIPSE_SEMI_MINOR);
 	}
 
 
@@ -109,33 +109,32 @@ class GSTParser extends SentenceParser implements GSTSentence {
 
 	/*
 	 * (non-Javadoc)
-	 * @see net.sf.marineapi.nmea.sentence.GSTSentence#getLatitude1SigmaError
+	 * @see net.sf.marineapi.nmea.sentence.GSTSentence#getLatitudeError
 	 */
-	public double getLatitude1SigmaError() {
-		return getDoubleValue(LATITUDE_1_SIGMA_ERROR);
+	public double getLatitudeError() {
+		return getDoubleValue(LATITUDE_ERROR);
 	}
 
 	/*
 	 * (non-Javadoc)
-	 * @see net.sf.marineapi.nmea.sentence.GSTSentence#getLongitude1SigmaError
+	 * @see net.sf.marineapi.nmea.sentence.GSTSentence#getLongitudeError
 	 */
-	public double getLongitude1SigmaError() {
-		return getDoubleValue(LONGITUDE_1_SIGMA_ERROR);
+	public double getLongitudeError() {
+		return getDoubleValue(LONGITUDE_ERROR);
 	}
 
 	/*
 	 * (non-Javadoc)
-	 * @see net.sf.marineapi.nmea.sentence.GSTSentence#getHeight1SigmaError
+	 * @see net.sf.marineapi.nmea.sentence.GSTSentence#getAltitudeError
 	 */
-	public double getHeight1SigmaError() {
-		return getDoubleValue(HEIGHT_1_SIGMA_ERROR);
+	public double getAltitudeError() {
+		return getDoubleValue(ALTITUDE_ERROR);
 	}
 
 	/*
 	 * (non-Javadoc)
 	 * @see
-	 * net.sf.marineapi.nmea.sentence.TimeSentence#setTime(net.sf.marineapi.
-	 * nmea.util.Time)
+	 * net.sf.marineapi.nmea.sentence.TimeSentence#setTime(net.sf.marineapi.nmea.util.Time)
 	 */
 	public void setTime(Time t) {
 		setStringValue(UTC_TIME, t.toString());
@@ -151,19 +150,19 @@ class GSTParser extends SentenceParser implements GSTSentence {
  
 	/*
 	 * (non-Javadoc)
-	 * @see net.sf.marineapi.nmea.sentence.GSTSentence#setErrorEllipseSemiMajorAxis1SigmaError
+	 * @see net.sf.marineapi.nmea.sentence.GSTSentence#setSemiMajorError
 	 */
-	public void setErrorEllipseSemiMajorAxis1SigmaError(double error) {
-		setDoubleValue(ERROR_ELLIPSE_SEMI_MAJOR_1_SIGMA, error);
-	} 
+	public void setSemiMajorError(double error) {
+		setDoubleValue(ERROR_ELLIPSE_SEMI_MAJOR, error);
+	}
 
 /*
 	 * (non-Javadoc)
-	 * @see net.sf.marineapi.nmea.sentence.GSTSentence#setErrorEllipseSemiMinorAxis1SigmaError
+	 * @see net.sf.marineapi.nmea.sentence.GSTSentence#setSemiMinorError
 	 */
-	public void setErrorEllipseSemiMinorAxis1SigmaError(double error) {
-		setDoubleValue(ERROR_ELLIPSE_SEMI_MINOR_1_SIGMA, error);
-	} 
+	public void setSemiMinorError(double error) {
+		setDoubleValue(ERROR_ELLIPSE_SEMI_MINOR, error);
+	}
 
 	/*
 	 * (non-Javadoc)
@@ -175,25 +174,25 @@ class GSTParser extends SentenceParser implements GSTSentence {
 
 	/*
 	 * (non-Javadoc)
-	 * @see net.sf.marineapi.nmea.sentence.GSTSentence#setLatitude1SigmaError
+	 * @see net.sf.marineapi.nmea.sentence.GSTSentence#setLatitudeError
 	 */
-	public void setLatitude1SigmaError(double error) {
-		setDoubleValue(LATITUDE_1_SIGMA_ERROR, error);
+	public void setLatitudeError(double error) {
+		setDoubleValue(LATITUDE_ERROR, error);
 	}
 
 	/*
 	 * (non-Javadoc)
-	 * @see net.sf.marineapi.nmea.sentence.GSTSentence#setLongitude1SigmaError
+	 * @see net.sf.marineapi.nmea.sentence.GSTSentence#setLongitudeError
 	 */
-	public void setLongitude1SigmaError(double error) {
-		setDoubleValue(LONGITUDE_1_SIGMA_ERROR, error);
+	public void setLongitudeError(double error) {
+		setDoubleValue(LONGITUDE_ERROR, error);
 	}
 
 	/*
 	 * (non-Javadoc)
-	 * @see net.sf.marineapi.nmea.sentence.GSTSentence#setHeight1SigmaError
+	 * @see net.sf.marineapi.nmea.sentence.GSTSentence#setAltitudeError
 	 */
-	public void setHeight1SigmaError(double error) {
-		setDoubleValue(HEIGHT_1_SIGMA_ERROR, error);
+	public void setAltitudeError(double error) {
+		setDoubleValue(ALTITUDE_ERROR, error);
 	}
 }

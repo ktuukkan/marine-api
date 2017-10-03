@@ -49,13 +49,13 @@ public class GSTTest {
 	}
 
 	@Test
-	public void testGetErrorEllipseSemiMajorAxis1SigmaError() {
-		assertEquals(0.023, gst.getErrorEllipseSemiMajorAxis1SigmaError(), 0.001);
+	public void testGetSemiMajorError() {
+		assertEquals(0.023, gst.getSemiMajorError(), 0.001);
 	}
 
 	@Test
-	public void testGetErrorEllipseSemiMinorAxis1SigmaError() {
-		assertEquals(0.020, gst.getErrorEllipseSemiMinorAxis1SigmaError(), 0.001);
+	public void testGetSemiMinorError() {
+		assertEquals(0.020, gst.getSemiMinorError(), 0.001);
 	}
 
 	@Test
@@ -64,19 +64,19 @@ public class GSTTest {
 	}
 
 	@Test
-	public void testGetLatitude1SigmaError() {
-		assertEquals(0.023, gst.getLatitude1SigmaError(), 0.001);
+	public void testGetLatitudeError() {
+		assertEquals(0.023, gst.getLatitudeError(), 0.001);
 	}
 
 	@Test
-	public void testGetLongitude1SigmaError() {
-		assertEquals(0.020, gst.getLongitude1SigmaError(), 0.001);
+	public void testGetLongitudeError() {
+		assertEquals(0.020, gst.getLongitudeError(), 0.001);
 	}
 
 
 	@Test
-	public void testGetHeight1SigmaError() {
-		assertEquals(0.031, gst.getHeight1SigmaError(), 0.001);
+	public void testGetAltitudeError() {
+		assertEquals(0.031, gst.getAltitudeError(), 0.001);
 	}
 
 	@Test
@@ -101,15 +101,15 @@ public class GSTTest {
 	}
 
 	@Test
-	public void testSetErrorEllipseSemiMajorAxis1SigmaError() {
-		gst.setErrorEllipseSemiMajorAxis1SigmaError(0.015);
-		assertEquals(0.015, gst.getErrorEllipseSemiMajorAxis1SigmaError(), 0.001);
+	public void testSetSemiMajorError() {
+		gst.setSemiMajorError(0.015);
+		assertEquals(0.015, gst.getSemiMajorError(), 0.001);
 	}
 
 	@Test
-	public void testSetErrorEllipseSemiMinorAxis1SigmaError() {
-		gst.setErrorEllipseSemiMinorAxis1SigmaError(0.032);
-		assertEquals(0.032, gst.getErrorEllipseSemiMinorAxis1SigmaError(), 0.001);
+	public void testSetSemiMinorError() {
+		gst.setSemiMinorError(0.032);
+		assertEquals(0.032, gst.getSemiMinorError(), 0.001);
 	}
 
 	@Test
@@ -119,22 +119,22 @@ public class GSTTest {
 	}
 
 	@Test
-	public void testSetLatitude1SigmaError() {
-		gst.setLatitude1SigmaError(0.068);
-		assertEquals(0.068, gst.getLatitude1SigmaError(), 0.001);
+	public void testSetLatitudeError() {
+		gst.setLatitudeError(0.068);
+		assertEquals(0.068, gst.getLatitudeError(), 0.001);
 	}
 
 	@Test
-	public void testSetLongitude1SigmaError() {
-		gst.setLongitude1SigmaError(0.011);
-		assertEquals(0.011, gst.getLongitude1SigmaError(), 0.001);
+	public void testSetLongitudeError() {
+		gst.setLongitudeError(0.011);
+		assertEquals(0.011, gst.getLongitudeError(), 0.001);
 	}
 
 
 	@Test
-	public void testSetHeight1SigmaError() {
-		gst.setHeight1SigmaError(0.013);
-		assertEquals(0.013, gst.getHeight1SigmaError(), 0.001);
+	public void testSetAltitudeError() {
+		gst.setAltitudeError(0.013);
+		assertEquals(0.013, gst.getAltitudeError(), 0.001);
 	}
 
 	@Test

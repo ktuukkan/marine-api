@@ -31,9 +31,9 @@ package net.sf.marineapi.nmea.sentence;
  */
 public interface GSTSentence extends TimeSentence {
 
-	/**
-	 * Get RMS value of the pseudorange residuals; includes carrier phase 
-	 * residuals during periods of RTK (float) and RTK (fixed) processing
+	/** 
+	 * Get total RMS standard deviation of ranges inputs to the navigation
+	 * solution.
 	 * 
 	 * @return RMS value
 	 * @throws net.sf.marineapi.nmea.parser.DataNotAvailableException If the data is
@@ -44,7 +44,7 @@ public interface GSTSentence extends TimeSentence {
 	double getPseudoRangeResidualsRMS();
 
 	/** 
-	 * Get Error ellipse semi-major axis 1 sigma error, in meters.
+	 * Get standard deviation (meters) of semi-major axis of error ellipse.
 	 * 
 	 * @return error ellipse error value
 	 * @throws net.sf.marineapi.nmea.parser.DataNotAvailableException If the data is
@@ -52,10 +52,10 @@ public interface GSTSentence extends TimeSentence {
 	 * @throws net.sf.marineapi.nmea.parser.ParseException If the field contains
 	 *             unexpected or illegal value.
 	*/
-	double getErrorEllipseSemiMajorAxis1SigmaError();
+	double getSemiMajorError();
 
 	/** 
-	 * Get Error ellipse semi-minor axis 1 sigma error, in meters.
+	 * Get standard deviation (meters) of semi-minor axis of error ellipse.
 	 * 
 	 * @return error ellipse error value
 	 * @throws net.sf.marineapi.nmea.parser.DataNotAvailableException If the data is
@@ -63,10 +63,10 @@ public interface GSTSentence extends TimeSentence {
 	 * @throws net.sf.marineapi.nmea.parser.ParseException If the field contains
 	 *             unexpected or illegal value.
 	*/
-	double getErrorEllipseSemiMinorAxis1SigmaError();
+	double getSemiMinorError();
 
 	/** 
-	 * Get Error ellipse orientation, degrees from true north
+	 * Get error ellipse orientation, degrees from true north
 	 * 
 	 * @return error ellipse orientation
 	 * @throws net.sf.marineapi.nmea.parser.DataNotAvailableException If the data is
@@ -77,7 +77,7 @@ public interface GSTSentence extends TimeSentence {
 	double getErrorEllipseOrientation();
 
 	/** 
-	 * Get Latitude 1 sigma error, in meters
+	 * Get standard deviation (meters) of latitude error.
 	 * 
 	 * @return latitude 1 sigma error
 	 * @throws net.sf.marineapi.nmea.parser.DataNotAvailableException If the data is
@@ -85,29 +85,29 @@ public interface GSTSentence extends TimeSentence {
 	 * @throws net.sf.marineapi.nmea.parser.ParseException If the field contains
 	 *             unexpected or illegal value.
 	*/
-	double getLatitude1SigmaError();
+	double getLatitudeError();
 
 	/** 
-	 * Get Longitude 1 sigma error, in meters
+	 * Get standard deviation (meters) of longitude error.
 	 * 
-	 * @return longitude 1 sigma error
+	 * @return longitude error
 	 * @throws net.sf.marineapi.nmea.parser.DataNotAvailableException If the data is
 	 *             not available.
 	 * @throws net.sf.marineapi.nmea.parser.ParseException If the field contains
 	 *             unexpected or illegal value.
 	*/
-	double getLongitude1SigmaError();
+	double getLongitudeError();
 
 	/** 
-	 * Get Height 1 sigma error, in meters
+	 * Get standard deviation (meters) of altitude error.
 	 * 
-	 * @return height 1 sigma error
+	 * @return altitude error
 	 * @throws net.sf.marineapi.nmea.parser.DataNotAvailableException If the data is
 	 *             not available.
 	 * @throws net.sf.marineapi.nmea.parser.ParseException If the field contains
 	 *             unexpected or illegal value.
 	*/
-	double getHeight1SigmaError();
+	double getAltitudeError();
 
 
 	/**
@@ -119,44 +119,44 @@ public interface GSTSentence extends TimeSentence {
 	void setPseudoRangeResidualsRMS(double rms);
 
 	/** 
-	 * Sets the error ellipse semi-major axis 1 sigma error, in meters.
+	 * Sets the standard deviation (meters) of semi-major axis of error ellipse.
 	 *
 	 * @param error semi-major error ellipse error
 	*/
-	void setErrorEllipseSemiMajorAxis1SigmaError(double error);
+	void setSemiMajorError(double error);
 
 	/** 
-	 * Sets the error ellipse semi-minor axis 1 sigma error, in meters.
+	 * Sets the standard deviation (meters) of semi-minor axis of error ellipse.
 	 *
 	 * @param error semi-minor error ellipse error
 	*/
-	void setErrorEllipseSemiMinorAxis1SigmaError(double error);
+	void setSemiMinorError(double error);
 
 	/** 
-	 * Sets the error ellipse orientation, degrees from true north
+	 * Sets the error ellipse orientation, degrees from true north.
 	 *
 	 * @param orientation error ellipse orientation
 	*/
 	void setErrorEllipseOrientation(double orientation);
 
 	/** 
-	 * Sets the latitude 1 sigma error, in meters
+	 * Sets the standard deviation (meters) of latitude error.
 	 *
 	 * @param error latitude 1 sigma error
 	*/
-	void setLatitude1SigmaError(double error);
+	void setLatitudeError(double error);
 
 	/** 
-	 * Sets the longitude 1 sigma error, in meters
+	 * Sets the standard deviation (meters) of longitude error.
 	 * 
 	 * @param error longitude 1 sigma error
 	*/
-	void setLongitude1SigmaError(double error);
+	void setLongitudeError(double error);
 
 	/** 
-	 * Sets the height 1 sigma error, in meters
+	 * Sets the standard deviation (meters) of altitude error.
 	 *
 	 * @param error height 1 sigma error 
 	*/
-	void setHeight1SigmaError(double error);
+	void setAltitudeError(double error);
 }
