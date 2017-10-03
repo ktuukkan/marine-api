@@ -7,6 +7,10 @@ Version 0.11.0-SNAPSHOT
   - RPMSentence; added missing RPM setter
   - ROTSentence; negative rate of turn values are now allowed. Also, the value
     may now exceed -/+360 degrees.
+  - Support for GST sentences; GPS Pseudorange Noise Statistics
+
+  Contributions:
+  - GST parser written by Tero Laitinen (@tlaitinen)
 
 Version 0.10.0 (2017-06-21)
 
