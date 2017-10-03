@@ -53,6 +53,8 @@ public enum SentenceId {
 	GSA,
 	/** Detailed satellite data */
 	GSV,
+	/** Pseudorange Noise Statistics */
+	GST,
 	/** Vessel heading in degrees with magnetic variation and deviation. */
 	HDG,
 	/** Vessel heading in degrees with respect to true north. */
