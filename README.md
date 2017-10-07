@@ -24,17 +24,16 @@ reads through a file and passes all or filtered sentences to listeners:
 
 See [examples](https://github.com/ktuukkan/marine-api/tree/master/src/main/java/net/sf/marineapi/example) for more.
 
-**Snapshots**
+**Downloads**
 
-Development snapshots are deployed to [Maven Central Repository](https://search.maven.org/#search%7Cga%7C1%7Cg%3A%22net.sf.marineapi%22) every now and then. Although they should be mostly stable, they are still work-in-progress.
+Pre-built jars may be downloaded from [releases](https://github.com/ktuukkan/marine-api/releases) and [Sourceforge.net](https://sourceforge.net/projects/marineapi/files/Releases/). Project was originally published in Sourceforge, hence the `net.sf.marineapi` package naming.
+
+[![Download Java Marine API](https://img.shields.io/sourceforge/dm/marineapi.svg)](https://sourceforge.net/projects/marineapi/files/latest/download)
+
+**Maven**
+
+Development snapshots and releases are deployed to [Maven Central Repository](https://search.maven.org/#search%7Cga%7C1%7Cg%3A%22net.sf.marineapi%22) every now and then. However, there is no plan or schedule for this. Also, notice that although the snapshots should be mostly stable, they are still work-in-progress.
 
 * [Snapshots repository](https://oss.sonatype.org/content/repositories/snapshots/net/sf/marineapi/marineapi/)
 
-Check [changelog](https://github.com/ktuukkan/marine-api/blob/master/changelog.txt) for current <code>SNAPSHOT</code> version. You may also need to tweak your [Maven settings](https://gist.github.com/ktuukkan/8cf2de1e915185118c60) to enable snapshot dependencies.
-
-**Sourceforge**
-
-Project was originally published in Sourceforge.net, hence the net.sf package naming.
-
-* [Project page](http://sf.net/projects/marineapi/)
-* [Downloads](https://sourceforge.net/projects/marineapi/files/Releases/)
+See [changelog](https://github.com/ktuukkan/marine-api/blob/master/changelog.txt) for current <code>SNAPSHOT</code> version. You may also need to tweak your [Maven settings](https://gist.github.com/ktuukkan/8cf2de1e915185118c60) to enable snapshot dependencies.
