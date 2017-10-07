@@ -43,92 +43,98 @@ public class AISMessageParser implements AISMessage {
 
     private Sixbit decoder;
     private String message = "";
-    private int fillbits = 0;
+    private int fillBits = 0;
     private int lastFragmentNr = 0;
 
     protected List<Violation> fViolations = new ArrayList<Violation>();
 
 
-	/**
-	 * Default constructor.
-	 */
-	public AISMessageParser() {
-	}
+    /**
+     * Default constructor.
+     */
+    public AISMessageParser() {
+    }
 
-	/**
-	 * Constucor with Sixbit content decoder.
-	 *
-	 * @param sb Content decoder
-	 */
-	protected AISMessageParser(Sixbit sb) {
-		if (sb.length() <= 0) {
-			throw new IllegalArgumentException("Sixbit decoder is empty!");
-		}
-		this.decoder = sb;
-	}
+    /**
+     * Constucor with Sixbit content decoder.
+     *
+     * @param sb Content decoder
+     */
+    protected AISMessageParser(Sixbit sb) {
+        if (sb.length() <= 0) {
+            throw new IllegalArgumentException("Sixbit decoder is empty!");
+        }
+        this.decoder = sb;
+    }
 
-	/**
-	 * Add a new rule violation to this message
-	 */
-	public void addViolation(Violation v) {
-		fViolations.add(v);
-	}
+    /**
+     * Add a new rule violation to this message
+     */
+    public void addViolation(Violation v) {
+        fViolations.add(v);
+    }
 
-	/**
-	 * Returns the number of violations.
-	 */
-	public int getNrOfViolations() {
-		return fViolations.size();
-	}
+    /**
+     * Returns the number of violations.
+     */
+    public int getNrOfViolations() {
+        return fViolations.size();
+    }
 
-	/**
-	 * Returns list of discoverd data violations.
-	 */
-	public List<Violation> getViolations() {
-		return fViolations;
-	}
+    /**
+     * Returns list of discoverd data violations.
+     */
+    public List<Violation> getViolations() {
+        return fViolations;
+    }
 
-	@Override
-	public int getMessageType() {
-		return getSixbit().getInt(FROM[MESSAGE_TYPE], TO[MESSAGE_TYPE]);
-	}
+    @Override
+    public int getMessageType() {
+        return getSixbit().getInt(FROM[MESSAGE_TYPE], TO[MESSAGE_TYPE]);
+    }
 
-	@Override
-	public int getRepeatIndicator() {
-		return getSixbit().getInt(FROM[REPEAT_INDICATOR], TO[REPEAT_INDICATOR]);
-	}
+    @Override
+    public int getRepeatIndicator() {
+        return getSixbit().getInt(FROM[REPEAT_INDICATOR], TO[REPEAT_INDICATOR]);
+    }
 
-	@Override
-	public int getMMSI() {
-		return getSixbit().getInt(FROM[MMSI], TO[MMSI]);
-	}
+    @Override
+    public int getMMSI() {
+        return getSixbit().getInt(FROM[MMSI], TO[MMSI]);
+    }
 
-	/**
-	 * Returns the six-bit decoder of message.
-	 *
-	 * @return Sixbit decoder.
-	 */
+    /**
+     * Returns the six-bit decoder of message.
+     *
+     * @return Sixbit decoder.
+     */
     Sixbit getSixbit() {
         if (decoder == null) {
-            decoder = new Sixbit(message, fillbits);
+            decoder = new Sixbit(message, fillBits);
         }
         return decoder;
     }
 
-	/**
-	 * Append a paylod fragment to combine messages devivered over multiple
-	 * sentences.
-	 *
-	 * @param fragment Data fragment in sixbit encoded format
-	 * @param fragmentIndex Fragment number within the fragments sequence
-	 * @param fillBits Number of additional fill-bits
-	 */
-	void append(String fragment, int fragmentIndex, int fillBits) {
-	    if (fragmentIndex != (lastFragmentNr + 1)) {
-	        throw new IllegalArgumentException("Incorrect order of message fragments");
+    /**
+     * Append a paylod fragment to combine messages devivered over multiple
+     * sentences.
+     *
+     * @param fragment Data fragment in sixbit encoded format
+     * @param fragmentIndex Fragment number within the fragments sequence
+     * @param fillBits Number of additional fill-bits
+     */
+    void append(String fragment, int fragmentIndex, int fillBits) {
+        if (fragment == null || fragment.isEmpty()) {
+            throw new IllegalArgumentException("Message fragment cannot be null or empty");
         }
-		lastFragmentNr = fragmentIndex;
-		message += fragment;
-		fillbits = fillBits; // we always use the last
-	}
+        if (fragmentIndex != (lastFragmentNr + 1)) {
+            throw new IllegalArgumentException("Incorrect order of message fragments");
+        }
+        if (fillBits < 0) {
+            throw new IllegalArgumentException("Fill bits cannot be negative");
+        }
+        lastFragmentNr = fragmentIndex;
+        message += fragment;
+        this.fillBits = fillBits; // we always use the last
+    }
 }
