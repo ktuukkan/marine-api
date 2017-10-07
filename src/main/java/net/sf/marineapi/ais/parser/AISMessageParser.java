@@ -29,7 +29,7 @@ import net.sf.marineapi.ais.util.Violation;
 
 /**
  * Base class for all AIS messages.
- * 
+ *
  * @author Lázár József, Kimmo Tuukkanen
  */
 public class AISMessageParser implements AISMessage {
@@ -65,6 +65,9 @@ public class AISMessageParser implements AISMessage {
 	 * @param sb Content decoder
 	 */
 	protected AISMessageParser(Sixbit sb) {
+		if (sb.length() <= 0) {
+			throw new IllegalArgumentException("Sixbit decoder is empty!");
+		}
 		this.decoder = sb;
 	}
 
@@ -136,9 +139,9 @@ public class AISMessageParser implements AISMessage {
 	private void parseAIS() {
 		if (decoder == null) {
 			decoder = new Sixbit(message, fillbits);
-			messageType = decoder.getInt(FROM[MESSAGE_TYPE], TO[MESSAGE_TYPE]);
-			repeatIndicator = decoder.getInt(FROM[REPEAT_INDICATOR], TO[REPEAT_INDICATOR]);
-			mmsi = decoder.getInt(FROM[MMSI], TO[MMSI]);
 		}
+		messageType = decoder.getInt(FROM[MESSAGE_TYPE], TO[MESSAGE_TYPE]);
+		repeatIndicator = decoder.getInt(FROM[REPEAT_INDICATOR], TO[REPEAT_INDICATOR]);
+		mmsi = decoder.getInt(FROM[MMSI], TO[MMSI]);
 	}
 }

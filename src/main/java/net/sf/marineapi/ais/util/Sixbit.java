@@ -186,4 +186,13 @@ public class Sixbit {
 		}
 		return orig.substring(0, end + 1);
 	}
+
+    /**
+     * Returns the full message String in sixbit encoded format.
+     *
+     * @return Sixbit encoded String.
+     */
+    public String getPayload() {
+        return fPayload;
+    }
 }
