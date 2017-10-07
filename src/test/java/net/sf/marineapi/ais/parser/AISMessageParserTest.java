@@ -31,7 +31,7 @@ public class AISMessageParserTest {
     }
 
     @Test
-    public void testGetMessageBody() {
+    public void testGetSixbit() {
         Sixbit decoder = parser.getSixbit();
         assertEquals(sixbit.getPayload(), decoder.getPayload());
     }
@@ -43,8 +43,21 @@ public class AISMessageParserTest {
         assertEquals(1, msg.getMessageType());
         assertEquals(0, msg.getRepeatIndicator());
         assertEquals(244670316, msg.getMMSI());
-        assertEquals(sixbit.getPayload(), msg.getSixbit().getPayload());
+        assertEquals(payload, msg.getSixbit().getPayload());
     }
+
+    @Test
+    public void testAppendIncorrectOrder() {
+        try {
+            AISMessageParser msg = new AISMessageParser();
+            msg.append(payload, 2, 0);
+        } catch (IllegalArgumentException iae) {
+            assertEquals("Invalid fragment index or sequence order", iae.getMessage());
+        } catch (Exception e) {
+            fail("Unexpected exception was thrown; " + e.getMessage());
+        }
+    }
+
 
     @Test
     public void testAppendInvalidTail() {
@@ -54,10 +67,75 @@ public class AISMessageParserTest {
             msg.append(payload, 1, 0);
             fail("AISMessageParser.append() did not throw exception");
         } catch (IllegalArgumentException iae) {
-            assertEquals("Incorrect order of message fragments", iae.getMessage());
+            assertEquals("Invalid fragment index or sequence order", iae.getMessage());
         } catch (Exception e) {
             fail("Unexpected exception thrown from AISMessageParser.append()");
         }
 
+    }
+
+    @Test
+    public void testAppendEmptyString() {
+        try {
+            AISMessageParser msg = new AISMessageParser();
+            msg.append("", 1, 0);
+            fail("AISMessageParser.append() did not throw exception");
+        } catch (IllegalArgumentException iae) {
+            assertEquals("Message fragment cannot be null or empty", iae.getMessage());
+        } catch (Exception e) {
+            fail("Unexpected exception thrown from AISMessageParser.append()");
+        }
+    }
+
+    @Test
+    public void testAppendNull() {
+        try {
+            AISMessageParser msg = new AISMessageParser();
+            msg.append(null, 1, 0);
+            fail("AISMessageParser.append() did not throw exception");
+        } catch (IllegalArgumentException iae) {
+            assertEquals("Message fragment cannot be null or empty", iae.getMessage());
+        } catch (Exception e) {
+            fail("Unexpected exception thrown from AISMessageParser.append()");
+        }
+    }
+
+    @Test
+    public void testAppendNegativeFillBits() {
+        try {
+            AISMessageParser msg = new AISMessageParser();
+            msg.append(payload, 1, -1);
+            fail("AISMessageParser.append() did not throw exception");
+        } catch (IllegalArgumentException iae) {
+            assertEquals("Fill bits cannot be negative", iae.getMessage());
+        } catch (Exception e) {
+            fail("Unexpected exception thrown from AISMessageParser.append()");
+        }
+    }
+
+    @Test
+    public void testAppendInvalidIndex() {
+        try {
+            AISMessageParser msg = new AISMessageParser();
+            msg.append(payload, 0, 0);
+            fail("AISMessageParser.append() did not throw exception");
+        } catch (IllegalArgumentException iae) {
+            assertEquals("Invalid fragment index or sequence order", iae.getMessage());
+        } catch (Exception e) {
+            fail("Unexpected exception thrown from AISMessageParser.append()");
+        }
+    }
+
+    @Test
+    public void testGetWithoutMessage() {
+        try {
+            AISMessageParser msg = new AISMessageParser();
+            msg.getMMSI();
+            fail("Getter did not throw exception");
+        } catch (IllegalStateException ise) {
+            assertEquals("Message is empty!", ise.getMessage());
+        } catch (Exception e) {
+            fail("Unexpected exception: " + e.getMessage());
+        }
     }
 }

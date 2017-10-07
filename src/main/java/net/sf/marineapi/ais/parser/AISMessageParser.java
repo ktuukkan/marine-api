@@ -107,12 +107,14 @@ public class AISMessageParser implements AISMessage {
      * Returns the six-bit decoder of message.
      *
      * @return Sixbit decoder.
+     * @throws IllegalStateException When message payload has not been appended
+     *     or Sixbit decoder has not been provided as constructor parameter.
      */
     Sixbit getSixbit() {
-        if (decoder == null) {
-            decoder = new Sixbit(message, fillBits);
+        if (decoder == null && message.isEmpty()) {
+            throw new IllegalStateException("Message is empty!");
         }
-        return decoder;
+        return decoder == null ? new Sixbit(message, fillBits) : decoder;
     }
 
     /**
@@ -120,21 +122,21 @@ public class AISMessageParser implements AISMessage {
      * sentences.
      *
      * @param fragment Data fragment in sixbit encoded format
-     * @param fragmentIndex Fragment number within the fragments sequence
+     * @param fragmentIndex Fragment number within the fragments sequence (1-based)
      * @param fillBits Number of additional fill-bits
      */
     void append(String fragment, int fragmentIndex, int fillBits) {
         if (fragment == null || fragment.isEmpty()) {
             throw new IllegalArgumentException("Message fragment cannot be null or empty");
         }
-        if (fragmentIndex != (lastFragmentNr + 1)) {
-            throw new IllegalArgumentException("Incorrect order of message fragments");
+        if (fragmentIndex < 1 || fragmentIndex != (lastFragmentNr + 1)) {
+            throw new IllegalArgumentException("Invalid fragment index or sequence order");
         }
         if (fillBits < 0) {
             throw new IllegalArgumentException("Fill bits cannot be negative");
         }
-        lastFragmentNr = fragmentIndex;
-        message += fragment;
+        this.lastFragmentNr = fragmentIndex;
+        this.message += fragment;
         this.fillBits = fillBits; // we always use the last
     }
 }
