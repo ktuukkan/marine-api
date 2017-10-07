@@ -4,6 +4,7 @@ import net.sf.marineapi.ais.util.Sixbit;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.fail;
 
 /**
  * Test common AIS message parser.
@@ -31,17 +32,32 @@ public class AISMessageParserTest {
 
     @Test
     public void testGetMessageBody() {
-        Sixbit body = parser.getMessageBody();
-        assertEquals(sixbit.getPayload(), body.getPayload());
+        Sixbit decoder = parser.getSixbit();
+        assertEquals(sixbit.getPayload(), decoder.getPayload());
     }
 
     @Test
     public void testAppend() {
-
+        AISMessageParser msg = new AISMessageParser();
+        msg.append(payload, 1, 0);
+        assertEquals(1, msg.getMessageType());
+        assertEquals(0, msg.getRepeatIndicator());
+        assertEquals(244670316, msg.getMMSI());
+        assertEquals(sixbit.getPayload(), msg.getSixbit().getPayload());
     }
 
     @Test
     public void testAppendInvalidTail() {
+        try {
+            AISMessageParser msg = new AISMessageParser();
+            msg.append(payload, 1, 0);
+            msg.append(payload, 1, 0);
+            fail("AISMessageParser.append() did not throw exception");
+        } catch (IllegalArgumentException iae) {
+            assertEquals("Incorrect order of message fragments", iae.getMessage());
+        } catch (Exception e) {
+            fail("Unexpected exception thrown from AISMessageParser.append()");
+        }
 
     }
 }

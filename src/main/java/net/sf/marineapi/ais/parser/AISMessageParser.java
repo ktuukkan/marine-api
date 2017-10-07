@@ -34,23 +34,19 @@ import net.sf.marineapi.ais.util.Violation;
  */
 public class AISMessageParser implements AISMessage {
 
-	private String message = "";
-	private int fillbits;
-	private int lastFragmentNr;
+    // Common AIS message part
+    private static final int MESSAGE_TYPE = 0;
+    private static final int REPEAT_INDICATOR = 1;
+    private static final int MMSI = 2;
+    private static final int[] FROM = { 0, 6, 8 };
+    private static final int[] TO = { 6, 8, 38 };
 
-	private Sixbit decoder;
-	private int messageType;
-	private int repeatIndicator;
-	private int mmsi;
+    private Sixbit decoder;
+    private String message = "";
+    private int fillbits = 0;
+    private int lastFragmentNr = 0;
 
-	// Common AIS message part
-	private static int MESSAGE_TYPE = 0;
-	private static int REPEAT_INDICATOR = 1;
-	private static int MMSI = 2;
-	private static int[] FROM = { 0, 6, 8 };
-	private static int[] TO = { 6, 8, 38 };
-
-	protected List<Violation> fViolations = new ArrayList<Violation>();
+    protected List<Violation> fViolations = new ArrayList<Violation>();
 
 
 	/**
@@ -94,31 +90,30 @@ public class AISMessageParser implements AISMessage {
 
 	@Override
 	public int getMessageType() {
-		parseAIS();
-		return messageType;
+		return getSixbit().getInt(FROM[MESSAGE_TYPE], TO[MESSAGE_TYPE]);
 	}
 
 	@Override
 	public int getRepeatIndicator() {
-		parseAIS();
-		return repeatIndicator;
+		return getSixbit().getInt(FROM[REPEAT_INDICATOR], TO[REPEAT_INDICATOR]);
 	}
 
 	@Override
 	public int getMMSI() {
-		parseAIS();
-		return mmsi;
+		return getSixbit().getInt(FROM[MMSI], TO[MMSI]);
 	}
 
 	/**
-	 * Returns the message sixbit decoder.
+	 * Returns the six-bit decoder of message.
 	 *
-	 * @return Sixbit
+	 * @return Sixbit decoder.
 	 */
-	public Sixbit getMessageBody() {
-		parseAIS();
-		return decoder;
-	}
+    Sixbit getSixbit() {
+        if (decoder == null) {
+            decoder = new Sixbit(message, fillbits);
+        }
+        return decoder;
+    }
 
 	/**
 	 * Append a paylod fragment to combine messages devivered over multiple
@@ -128,20 +123,12 @@ public class AISMessageParser implements AISMessage {
 	 * @param fragmentIndex Fragment number within the fragments sequence
 	 * @param fillBits Number of additional fill-bits
 	 */
-	public void append(String fragment, int fragmentIndex, int fillBits) {
-		// TODO check correct fragment order and if all fragments are appended
+	void append(String fragment, int fragmentIndex, int fillBits) {
+	    if (fragmentIndex != (lastFragmentNr + 1)) {
+	        throw new IllegalArgumentException("Incorrect order of message fragments");
+        }
 		lastFragmentNr = fragmentIndex;
 		message += fragment;
 		fillbits = fillBits; // we always use the last
-	}
-
-	// TODO lazy parsing
-	private void parseAIS() {
-		if (decoder == null) {
-			decoder = new Sixbit(message, fillbits);
-		}
-		messageType = decoder.getInt(FROM[MESSAGE_TYPE], TO[MESSAGE_TYPE]);
-		repeatIndicator = decoder.getInt(FROM[REPEAT_INDICATOR], TO[REPEAT_INDICATOR]);
-		mmsi = decoder.getInt(FROM[MMSI], TO[MMSI]);
 	}
 }

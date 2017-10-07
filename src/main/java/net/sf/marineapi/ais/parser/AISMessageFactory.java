@@ -82,7 +82,7 @@ public class AISMessageFactory {
         Class<? extends AISMessage> clazz = parsers.get(parser.getMessageType());
         try {
             Constructor<? extends AISMessage> c = clazz.getConstructor(Sixbit.class);
-            result = c.newInstance(parser.getMessageBody());
+            result = c.newInstance(parser.getSixbit());
         } catch (Exception e) {
             throw new IllegalStateException(e.getCause());
         }
