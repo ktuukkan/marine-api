@@ -69,7 +69,6 @@ public class AISMessageParser implements AISMessage {
 			throw new IllegalArgumentException("Sixbit decoder is empty!");
 		}
 		this.decoder = sb;
-		parseAIS();
 	}
 
 	/**
