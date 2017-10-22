@@ -26,6 +26,7 @@ import java.util.List;
 import net.sf.marineapi.ais.message.AISMessage;
 import net.sf.marineapi.ais.util.Sixbit;
 import net.sf.marineapi.ais.util.Violation;
+import net.sf.marineapi.nmea.sentence.AISSentence;
 
 /**
  * Base class for all AIS messages.
@@ -56,9 +57,25 @@ public class AISMessageParser implements AISMessage {
     }
 
     /**
+     * Construct a parser with given AIS sentences.
+     *
+     * @param sentences Single AIS sentence or a sequence of sentences.
+     */
+    public AISMessageParser(AISSentence... sentences) {
+        int index = 1;
+        for (AISSentence s : sentences) {
+            if (s.isFragmented() && s.getFragmentNumber() != index++) {
+                throw new IllegalArgumentException("Incorrect order of AIS sentences");
+            }
+            this.append(s.getPayload(), s.getFragmentNumber(), s.getFillBits());
+        }
+        this.decoder = new Sixbit(this.message, this.fillBits);
+    }
+
+    /**
      * Constucor with Sixbit content decoder.
      *
-     * @param sb Content decoder
+     * @param sb A non-empty six-bit decoder.
      */
     protected AISMessageParser(Sixbit sb) {
         if (sb.length() <= 0) {

@@ -64,14 +64,7 @@ public class AISMessageFactory {
      */
     public AISMessage create(AISSentence... sentences) {
 
-        int index = 1;
-        AISMessageParser parser = new AISMessageParser();
-        for (AISSentence s : sentences) {
-            if (s.isFragmented() && s.getFragmentNumber() != index++) {
-                throw new IllegalArgumentException("Incorrect order of AIS sentences");
-            }
-            parser.append(s.getPayload(), s.getFragmentNumber(), s.getFillBits());
-        }
+        AISMessageParser parser = new AISMessageParser(sentences);
 
         if (!parsers.containsKey(parser.getMessageType())) {
             String msg = String.format("no parser for message type %d", parser.getMessageType());
