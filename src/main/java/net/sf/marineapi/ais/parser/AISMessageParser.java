@@ -46,7 +46,7 @@ public class AISMessageParser implements AISMessage {
     private int fillBits = 0;
     private int lastFragmentNr = 0;
 
-    protected List<Violation> fViolations = new ArrayList<Violation>();
+    private List<Violation> fViolations = new ArrayList<Violation>();
 
 
     /**
@@ -70,7 +70,7 @@ public class AISMessageParser implements AISMessage {
     /**
      * Add a new rule violation to this message
      */
-    public void addViolation(Violation v) {
+    protected void addViolation(Violation v) {
         fViolations.add(v);
     }
 
