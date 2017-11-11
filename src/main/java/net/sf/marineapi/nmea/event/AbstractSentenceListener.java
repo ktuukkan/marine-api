@@ -48,7 +48,7 @@ import net.sf.marineapi.nmea.sentence.Sentence;
 public abstract class AbstractSentenceListener<T extends Sentence>
 	implements SentenceListener {
 
-	private final Type expectedType;
+	final Type expectedType;
 
 	public AbstractSentenceListener() {
 		// if during super class traversal we found a parameterized type we remember the
@@ -120,11 +120,11 @@ public abstract class AbstractSentenceListener<T extends Sentence>
 	 * <p>Resolves the type of each received sentence parser and passes it to
 	 * <code>sentenceRead(T)</code> if the type matches the expected type
 	 * <code>T</code>.</p>
-	 * 
+	 *
 	 * <p>This method may be overridden, but be sure to call
 	 * <code>super.sentencerRead(SentenceEvent)</code> before or after your
 	 * additional event handling. However, for listeners that need to handle all
-	 * incoming sentences, it's recommended to directly implement the 
+	 * incoming sentences, it's recommended to directly implement the
 	 * {@link net.sf.marineapi.nmea.event.SentenceListener} interface.</p>
 	 *
 	 * @see net.sf.marineapi.nmea.event.SentenceListener#sentenceRead(net.sf.marineapi.nmea.event.SentenceEvent)

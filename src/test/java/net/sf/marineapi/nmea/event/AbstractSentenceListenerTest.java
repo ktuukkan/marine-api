@@ -25,6 +25,7 @@ public class AbstractSentenceListenerTest {
         BasicListener bl = new BasicListener();
         bl.sentenceRead(evt);
 
+        assertEquals(BODSentence.class, bl.expectedType);
         assertNotNull(bl.received);
         assertEquals(BODTest.EXAMPLE, bl.received.toSentence());
     }
@@ -37,6 +38,7 @@ public class AbstractSentenceListenerTest {
         BasicListener bl = new BasicListener();
         bl.sentenceRead(evt);
 
+        assertEquals(BODSentence.class, bl.expectedType);
         assertNull(bl.received);
     }
 
@@ -48,6 +50,7 @@ public class AbstractSentenceListenerTest {
         ExtendedBasicListener ebl = new ExtendedBasicListener();
         ebl.sentenceRead(evt);
 
+        assertEquals(BODSentence.class, ebl.expectedType);
         assertNotNull(ebl.getReceived());
         assertEquals(BODTest.EXAMPLE, ebl.getReceived().toSentence());
     }
@@ -60,6 +63,7 @@ public class AbstractSentenceListenerTest {
         ExtendedBasicListener ebl = new ExtendedBasicListener();
         ebl.sentenceRead(evt);
 
+        assertEquals(BODSentence.class, ebl.expectedType);
         assertNull(ebl.getReceived());
     }
 
@@ -71,6 +75,7 @@ public class AbstractSentenceListenerTest {
         GenericsListener<Integer, GGASentence> gl = new GenericsListener<>();
         gl.sentenceRead(evt);
 
+        assertEquals(GGASentence.class, gl.expectedType);
         assertNotNull(gl.received);
         assertEquals("1", gl.stringify(1));
         assertEquals(GGATest.EXAMPLE, gl.received.toSentence());
@@ -84,6 +89,7 @@ public class AbstractSentenceListenerTest {
         GenericsListener<Integer, GGASentence> sl = new GenericsListener<>();
         sl.sentenceRead(evt);
 
+        assertEquals(GGASentence.class, sl.expectedType);
         assertNull(sl.received);
     }
 
@@ -95,9 +101,10 @@ public class AbstractSentenceListenerTest {
         ExtendedGenericsListener<String, Integer, GGASentence> egl = new ExtendedGenericsListener<>();
         egl.sentenceRead(evt);
 
+        assertEquals(GGASentence.class, egl.expectedType);
+        assertNotNull(egl.received);
         assertEquals("3", egl.stringify(3));
         assertEquals(3556498, egl.hashify("test"));
-        assertNotNull(egl.received);
         assertEquals(GGATest.EXAMPLE, egl.received.toSentence());
     }
 
@@ -109,6 +116,7 @@ public class AbstractSentenceListenerTest {
         ExtendedGenericsListener<String, Integer, GLLSentence> egl = new ExtendedGenericsListener<>();
         egl.sentenceRead(evt);
 
+        assertEquals(GLLSentence.class, egl.expectedType);
         assertNull(egl.received);
     }
 
@@ -137,7 +145,7 @@ public class AbstractSentenceListenerTest {
         assertNull(ghl.received);
     }
 
-    
+
     /** Listeners **/
 
     class BasicListener extends AbstractSentenceListener<BODSentence> {
