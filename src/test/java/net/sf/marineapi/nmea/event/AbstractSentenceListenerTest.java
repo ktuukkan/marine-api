@@ -99,7 +99,7 @@ public class AbstractSentenceListenerTest {
         assertEquals("4.5", ghl.dummy(4.5));
         assertEquals("5", ghl.stringify(5));
         assertNotNull(ghl.received);
-        assertEquals(GGATest.EXAMPLE, ghl.received.toSentence());
+        assertEquals(BODTest.EXAMPLE, ghl.received.toSentence());
     }
 
 
