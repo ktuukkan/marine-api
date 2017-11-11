@@ -128,10 +128,11 @@ public class AbstractSentenceListenerTest {
         GenericsHidingListener<Double> ghl = new GenericsHidingListener<>();
         ghl.sentenceRead(evt);
 
-        assertEquals("4.5", ghl.dummy(4.5));
-        assertEquals("5", ghl.stringify(5));
+        assertEquals(GLLSentence.class, ghl.expectedType);
         assertNotNull(ghl.received);
         assertEquals(BODTest.EXAMPLE, ghl.received.toSentence());
+        assertEquals("4.5", ghl.dummy(4.5));
+        assertEquals("5", ghl.stringify(5));
     }
 
     @Test
@@ -142,6 +143,7 @@ public class AbstractSentenceListenerTest {
         GenericsHidingListener<Double> ghl = new GenericsHidingListener<>();
         ghl.sentenceRead(evt);
 
+        assertEquals(GLLSentence.class, ghl.expectedType);
         assertNull(ghl.received);
     }
 
