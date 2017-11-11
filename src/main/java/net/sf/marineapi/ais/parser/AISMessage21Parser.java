@@ -80,6 +80,7 @@ class AISMessage21Parser extends AISMessageParser implements AISMessage21 {
     private static final int RAIMFLAG	= 13;
     private static final int VIRTUALAIDFLAG	= 14;
     private static final int ASSIGNEDMODEFLAG	= 15;
+    @SuppressWarnings("unused")
     private static final int SPARE	= 16;
     private static final int NAMEEXTENSION	= 17;
 

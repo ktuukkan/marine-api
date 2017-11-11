@@ -22,7 +22,10 @@ package net.sf.marineapi.nmea.event;
 
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
+import java.lang.reflect.TypeVariable;
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 
 import net.sf.marineapi.nmea.sentence.Sentence;
 
@@ -48,13 +51,41 @@ public abstract class AbstractSentenceListener<T extends Sentence>
 	private final Type expectedType;
 
 	public AbstractSentenceListener() {
+		// if during super class traversal we found a parameterized type we remember the
+		// concrete parameter types that were used during the type instantiation keyed by
+		// the type parameters
+		final Map<TypeVariable<?>, Class<?>> concreteTypeForTypeVariable = new HashMap<>();
+		ParameterizedType superClass = null;
+		Class<?> c = getClass();
+		while (superClass == null && c != null) {
+			if (c.getGenericSuperclass() instanceof ParameterizedType) {
+				final ParameterizedType pt = (ParameterizedType) c.getGenericSuperclass();
+				if (pt.getRawType() == AbstractSentenceListener.class) {
+					superClass = pt;
+				} else {
+					c = (Class<?>) pt.getRawType();
+					int i=0;
+					for (TypeVariable<?> tv : c.getTypeParameters()) {
+						concreteTypeForTypeVariable.put(tv, resolve(pt.getActualTypeArguments()[i++], concreteTypeForTypeVariable));
+					}
+				}
+			} else {
+				c = (c.getGenericSuperclass() instanceof Class<?>) ? (Class<?>) c.getGenericSuperclass() : null;
+			}
+		}
+		assert superClass == null || superClass.getRawType() == AbstractSentenceListener.class;
+		// we now assume that this class has exactly one type parameter [0] that is the expected type:
+		this.expectedType = resolve(superClass.getActualTypeArguments()[0], concreteTypeForTypeVariable);
+	}
 
-		ParameterizedType superClass =
-			(ParameterizedType) getClass().getGenericSuperclass();
-
-		Type[] superClassTypeArgs = superClass.getActualTypeArguments();
-
-		this.expectedType = superClassTypeArgs[0];
+	private Class<?> resolve(Type type, Map<TypeVariable<?>, Class<?>> concreteTypeForTypeVariable) {
+		if (type instanceof Class<?>) {
+			return (Class<?>) type;
+		} else if (type instanceof TypeVariable<?>) {
+			return concreteTypeForTypeVariable.get((TypeVariable<?>) type);
+		} else {
+			return null;
+		}
 	}
 
 	/**
@@ -101,9 +132,15 @@ public abstract class AbstractSentenceListener<T extends Sentence>
 	@SuppressWarnings("unchecked")
 	public void sentenceRead(SentenceEvent event) {
 		Sentence sentence = event.getSentence();
-		Class<?>[] interfaces = sentence.getClass().getInterfaces();
-		if (Arrays.asList(interfaces).contains(this.expectedType)) {
-			sentenceRead((T) sentence);
+		if (this.expectedType instanceof Class<?>) {
+		        if (((Class<?>) this.expectedType).isAssignableFrom(sentence.getClass())) {
+		                sentenceRead((T) sentence);
+		        }
+		} else {
+		    Class<?>[] interfaces = sentence.getClass().getInterfaces();
+		    if (Arrays.asList(interfaces).contains(this.expectedType)) {
+		    	sentenceRead((T) sentence);
+		    }
 		}
 	}
 

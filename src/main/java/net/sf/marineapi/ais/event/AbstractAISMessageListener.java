@@ -56,7 +56,9 @@ public abstract class AbstractAISMessageListener<T extends AISMessage> implement
 		// TODO: not DRY
 		ParameterizedType superClass = (ParameterizedType) getClass().getGenericSuperclass();
 		Type[] superClassTypeArgs = superClass.getActualTypeArguments();
-		this.expectedMessageType = (Class<T>)superClassTypeArgs[0];
+		@SuppressWarnings("unchecked")
+                final Class<T> tClass = (Class<T>)superClassTypeArgs[0];
+                this.expectedMessageType = tClass;
 	}
 
 	@Override
@@ -85,7 +87,9 @@ public abstract class AbstractAISMessageListener<T extends AISMessage> implement
 				if (message != null) {
 					Class<?>[] interfaces = message.getClass().getInterfaces();
 					if (Arrays.asList(interfaces).contains(expectedMessageType)) {
-						onMessage((T) message);
+						@SuppressWarnings("unchecked")
+						T tMessage = (T) message;
+                                                onMessage((T) tMessage);
 					}
 				}
 			} catch (IllegalArgumentException iae) {

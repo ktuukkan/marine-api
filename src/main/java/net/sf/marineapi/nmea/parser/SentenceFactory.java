@@ -241,7 +241,7 @@ public final class SentenceFactory {
 	 *
 	 * @return SentenceFactory instance
 	 */
-	public static SentenceFactory getInstance() {
+	public synchronized static SentenceFactory getInstance() {
 		if (instance == null) {
 			instance = new SentenceFactory();
 		}
