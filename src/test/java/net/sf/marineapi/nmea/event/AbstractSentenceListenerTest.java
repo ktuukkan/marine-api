@@ -19,48 +19,58 @@ public class AbstractSentenceListenerTest {
 
     @Test
     public void testBasicListenerWithExpectedSentence() {
+
         Sentence bod = factory.createParser(BODTest.EXAMPLE);
         SentenceEvent evt = new SentenceEvent(this, bod);
         BasicListener bl = new BasicListener();
         bl.sentenceRead(evt);
+
         assertNotNull(bl.received);
         assertEquals(BODTest.EXAMPLE, bl.received.toSentence());
     }
 
     @Test
     public void testBasicListenerWithOtherSentence() {
+
         Sentence bod = factory.createParser(GGATest.EXAMPLE);
         SentenceEvent evt = new SentenceEvent(this, bod);
         BasicListener bl = new BasicListener();
         bl.sentenceRead(evt);
+
         assertNull(bl.received);
     }
 
     @Test
     public void testExtendedBasicListenerWithExpectedSentence() {
+
         Sentence bod = factory.createParser(BODTest.EXAMPLE);
         SentenceEvent evt = new SentenceEvent(this, bod);
         ExtendedBasicListener ebl = new ExtendedBasicListener();
         ebl.sentenceRead(evt);
+
         assertNotNull(ebl.getReceived());
         assertEquals(BODTest.EXAMPLE, ebl.getReceived().toSentence());
     }
 
     @Test
-    public void testExtendedBasicListenerWithOtherSentence() {
+    public void testExtendedBasicListenerWithUnexpectedSentence() {
+
         Sentence bod = factory.createParser(GGATest.EXAMPLE);
         SentenceEvent evt = new SentenceEvent(this, bod);
         ExtendedBasicListener ebl = new ExtendedBasicListener();
         ebl.sentenceRead(evt);
+
         assertNull(ebl.getReceived());
     }
 
     @Test
     public void testGenericsListenerWithExpectedSentence() {
+
         Sentence gga = factory.createParser(GGATest.EXAMPLE);
         SentenceEvent evt = new SentenceEvent(this, gga);
         GenericsListener<Integer, GGASentence> gl = new GenericsListener<>();
         gl.sentenceRead(evt);
+
         assertNotNull(gl.received);
         assertEquals("1", gl.stringify(1));
         assertEquals(GGATest.EXAMPLE, gl.received.toSentence());
@@ -68,24 +78,38 @@ public class AbstractSentenceListenerTest {
 
     @Test
     public void testGenericsListenerWithUnexpectedSentence() {
+
         Sentence gga = factory.createParser(GLLTest.EXAMPLE);
         SentenceEvent evt = new SentenceEvent(this, gga);
         GenericsListener<Integer, GGASentence> sl = new GenericsListener<>();
         sl.sentenceRead(evt);
+
         assertNull(sl.received);
-        assertEquals("2", sl.stringify(2));
     }
 
     @Test
     public void testExtendedGenericsListenerWithExpectedSentence() {
+
         Sentence gga = factory.createParser(GGATest.EXAMPLE);
         SentenceEvent evt = new SentenceEvent(this, gga);
-        ExtendedGenericsListener<String, Integer, GLLSentence> egl = new ExtendedGenericsListener<>();
+        ExtendedGenericsListener<String, Integer, GGASentence> egl = new ExtendedGenericsListener<>();
         egl.sentenceRead(evt);
+
         assertEquals("3", egl.stringify(3));
         assertEquals(3556498, egl.hashify("test"));
         assertNotNull(egl.received);
         assertEquals(GGATest.EXAMPLE, egl.received.toSentence());
+    }
+
+    @Test
+    public void testExtendedGenericsListenerWithUnexpectedSentence() {
+
+        Sentence gga = factory.createParser(BODTest.EXAMPLE);
+        SentenceEvent evt = new SentenceEvent(this, gga);
+        ExtendedGenericsListener<String, Integer, GLLSentence> egl = new ExtendedGenericsListener<>();
+        egl.sentenceRead(evt);
+
+        assertNull(egl.received);
     }
 
     @Test
@@ -102,6 +126,19 @@ public class AbstractSentenceListenerTest {
         assertEquals(BODTest.EXAMPLE, ghl.received.toSentence());
     }
 
+    @Test
+    public void testGenericsHidingListenerWithUnexpectedSentence() {
+
+        Sentence bod = factory.createParser(GGATest.EXAMPLE);
+        SentenceEvent evt = new SentenceEvent(this, bod);
+        GenericsHidingListener<Double> ghl = new GenericsHidingListener<>();
+        ghl.sentenceRead(evt);
+
+        assertNull(ghl.received);
+    }
+
+    
+    /** Listeners **/
 
     class BasicListener extends AbstractSentenceListener<BODSentence> {
         BODSentence received;
