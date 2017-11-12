@@ -72,7 +72,7 @@ public class AbstractSentenceListenerTest {
 
         Sentence gga = factory.createParser(GGATest.EXAMPLE);
         SentenceEvent evt = new SentenceEvent(this, gga);
-        GenericsListener<Integer, GGASentence> gl = new GenericsListener<>();
+        GenericsListener<Integer, GGASentence> gl = new GenericsListener<Integer, GGASentence>(){};
         gl.sentenceRead(evt);
 
         assertEquals(GGASentence.class, gl.expectedType);
@@ -86,7 +86,7 @@ public class AbstractSentenceListenerTest {
 
         Sentence gga = factory.createParser(GLLTest.EXAMPLE);
         SentenceEvent evt = new SentenceEvent(this, gga);
-        GenericsListener<Integer, GGASentence> sl = new GenericsListener<>();
+        GenericsListener<Integer, GGASentence> sl = new GenericsListener<Integer, GGASentence>(){};
         sl.sentenceRead(evt);
 
         assertEquals(GGASentence.class, sl.expectedType);
@@ -98,7 +98,7 @@ public class AbstractSentenceListenerTest {
 
         Sentence gga = factory.createParser(GGATest.EXAMPLE);
         SentenceEvent evt = new SentenceEvent(this, gga);
-        ExtendedGenericsListener<String, Integer, GGASentence> egl = new ExtendedGenericsListener<>();
+        ExtendedGenericsListener<String, Integer, GGASentence> egl = new ExtendedGenericsListener<String, Integer, GGASentence>(){};
         egl.sentenceRead(evt);
 
         assertEquals(GGASentence.class, egl.expectedType);
@@ -113,7 +113,7 @@ public class AbstractSentenceListenerTest {
 
         Sentence gga = factory.createParser(BODTest.EXAMPLE);
         SentenceEvent evt = new SentenceEvent(this, gga);
-        ExtendedGenericsListener<String, Integer, GLLSentence> egl = new ExtendedGenericsListener<>();
+        ExtendedGenericsListener<String, Integer, GLLSentence> egl = new ExtendedGenericsListener<String, Integer, GLLSentence>(){};
         egl.sentenceRead(evt);
 
         assertEquals(GLLSentence.class, egl.expectedType);
