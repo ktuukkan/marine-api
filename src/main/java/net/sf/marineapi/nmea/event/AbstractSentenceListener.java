@@ -77,6 +77,10 @@ public abstract class AbstractSentenceListener<T extends Sentence>
 		// we now assume that this class has exactly one type parameter [0] that is the expected type:
 		this.expectedType = resolve(superClass.getActualTypeArguments()[0], concreteTypeForTypeVariable);
 	}
+	
+	protected AbstractSentenceListener(Class<T> expectedType) {
+		this.expectedType = expectedType;
+	}
 
 	private Class<?> resolve(Type type, Map<TypeVariable<?>, Class<?>> concreteTypeForTypeVariable) {
 		if (type instanceof Class<?>) {

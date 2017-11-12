@@ -72,7 +72,7 @@ public class AbstractSentenceListenerTest {
 
         Sentence gga = factory.createParser(GGATest.EXAMPLE);
         SentenceEvent evt = new SentenceEvent(this, gga);
-        GenericsListener<Integer, GGASentence> gl = new GenericsListener<Integer, GGASentence>(){};
+        GenericsListener<Integer, GGASentence> gl = new GenericsListener<>(GGASentence.class);
         gl.sentenceRead(evt);
 
         assertEquals(GGASentence.class, gl.expectedType);
@@ -86,7 +86,7 @@ public class AbstractSentenceListenerTest {
 
         Sentence gga = factory.createParser(GLLTest.EXAMPLE);
         SentenceEvent evt = new SentenceEvent(this, gga);
-        GenericsListener<Integer, GGASentence> sl = new GenericsListener<Integer, GGASentence>(){};
+        GenericsListener<Integer, GGASentence> sl = new GenericsListener<>(GGASentence.class);
         sl.sentenceRead(evt);
 
         assertEquals(GGASentence.class, sl.expectedType);
@@ -98,7 +98,7 @@ public class AbstractSentenceListenerTest {
 
         Sentence gga = factory.createParser(GGATest.EXAMPLE);
         SentenceEvent evt = new SentenceEvent(this, gga);
-        ExtendedGenericsListener<String, Integer, GGASentence> egl = new ExtendedGenericsListener<String, Integer, GGASentence>(){};
+        ExtendedGenericsListener<String, Integer, GGASentence> egl = new ExtendedGenericsListener<>(GGASentence.class);
         egl.sentenceRead(evt);
 
         assertEquals(GGASentence.class, egl.expectedType);
@@ -113,7 +113,7 @@ public class AbstractSentenceListenerTest {
 
         Sentence gga = factory.createParser(BODTest.EXAMPLE);
         SentenceEvent evt = new SentenceEvent(this, gga);
-        ExtendedGenericsListener<String, Integer, GLLSentence> egl = new ExtendedGenericsListener<String, Integer, GLLSentence>(){};
+        ExtendedGenericsListener<String, Integer, GLLSentence> egl = new ExtendedGenericsListener<>(GLLSentence.class);
         egl.sentenceRead(evt);
 
         assertEquals(GLLSentence.class, egl.expectedType);
@@ -165,7 +165,11 @@ public class AbstractSentenceListenerTest {
     class GenericsListener<A, B extends Sentence> extends AbstractSentenceListener<B> {
 
         B received;
-
+        
+        public GenericsListener(Class<B> expectedType) {
+        	super(expectedType);
+        }
+        
         String stringify(A obj) {
             return obj.toString();
         }
@@ -177,11 +181,16 @@ public class AbstractSentenceListenerTest {
     }
 
     class ExtendedGenericsListener<A, B, C extends Sentence> extends GenericsListener<B, C> {
+    	public ExtendedGenericsListener(Class<C> expectedType) { super(expectedType); }
         int hashify(A obj) { return obj.hashCode(); }
         C getReceived() { return super.received; }
     }
 
     class GenericsHidingListener<A> extends GenericsListener<Integer, BODSentence> {
-        String dummy(A a) { return a.toString(); }
+		public GenericsHidingListener() {
+			super(BODSentence.class);
+		}
+
+		String dummy(A a) { return a.toString(); }
     }
 }
