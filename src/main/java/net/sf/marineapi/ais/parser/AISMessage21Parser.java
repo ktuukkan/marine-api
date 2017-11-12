@@ -115,10 +115,10 @@ class AISMessage21Parser extends AISMessageParser implements AISMessage21 {
             fPositionAccuracy = content.getBoolean(TO[POSITIONACCURACY]);
             fLongitude = Longitude28.toDegrees(content.getAs28BitInt(FROM[LONGITUDE], TO[LONGITUDE]));
             if (!PositionInfo.isLongitudeCorrect(fLongitude))
-                fViolations.add(new AISRuleViolation("LongitudeInDegrees", fLongitude, PositionInfo.LONGITUDE_RANGE));
+                addViolation(new AISRuleViolation("LongitudeInDegrees", fLongitude, PositionInfo.LONGITUDE_RANGE));
             fLatitude = Latitude27.toDegrees(content.getAs27BitInt(FROM[LATITUDE], TO[LATITUDE]));
             if (!PositionInfo.isLatitudeCorrect(fLatitude))
-                fViolations.add(new AISRuleViolation("LatitudeInDegrees", fLatitude, PositionInfo.LATITUDE_RANGE));
+                addViolation(new AISRuleViolation("LatitudeInDegrees", fLatitude, PositionInfo.LATITUDE_RANGE));
             fBow = content.getInt(FROM[BOW], TO[BOW]);
             fStern = content.getInt(FROM[STERN], TO[STERN]);
             fPort = content.getInt(FROM[PORT], TO[PORT]);

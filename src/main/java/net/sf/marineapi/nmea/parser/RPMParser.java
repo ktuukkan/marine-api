@@ -1,20 +1,20 @@
 /*
  * RPMParser.java
  * Copyright (C) 2014 Kimmo Tuukkanen
- * 
+ *
  * This file is part of Java Marine API.
  * <http://ktuukkan.github.io/marine-api/>
- * 
+ *
  * Java Marine API is free software: you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by the
  * Free Software Foundation, either version 3 of the License, or (at your
  * option) any later version.
- * 
+ *
  * Java Marine API is distributed in the hope that it will be useful, but
  * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
  * FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License
  * for more details.
- * 
+ *
  * You should have received a copy of the GNU Lesser General Public License
  * along with Java Marine API. If not, see <http://www.gnu.org/licenses/>.
  */
@@ -26,7 +26,7 @@ import net.sf.marineapi.nmea.util.DataStatus;
 
 /**
  * RPM parser
- * 
+ *
  * @author Kimmo Tuukkanen
  */
 class RPMParser extends SentenceParser implements RPMSentence {
@@ -39,7 +39,7 @@ class RPMParser extends SentenceParser implements RPMSentence {
 
 	/**
 	 * Creates a new instance of RPMParser.
-	 * 
+	 *
 	 * @param nmea NMEA sentence String.
 	 */
 	public RPMParser(String nmea) {
@@ -48,7 +48,7 @@ class RPMParser extends SentenceParser implements RPMSentence {
 
 	/**
 	 * Creates a new empty parser.
-	 * 
+	 *
 	 * @param talker TalkerId to set.
 	 */
 	public RPMParser(TalkerId talker) {
@@ -57,7 +57,7 @@ class RPMParser extends SentenceParser implements RPMSentence {
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see net.sf.marineapi.nmea.sentence.RPMSentence#getId()
 	 */
 	@Override
@@ -67,7 +67,7 @@ class RPMParser extends SentenceParser implements RPMSentence {
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see net.sf.marineapi.nmea.sentence.RPMSentence#getPitch()
 	 */
 	@Override
@@ -77,7 +77,7 @@ class RPMParser extends SentenceParser implements RPMSentence {
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see net.sf.marineapi.nmea.sentence.RPMSentence#getRPM()
 	 */
 	@Override
@@ -87,7 +87,7 @@ class RPMParser extends SentenceParser implements RPMSentence {
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see net.sf.marineapi.nmea.sentence.RPMSentence#getSource()
 	 */
 	@Override
@@ -97,7 +97,7 @@ class RPMParser extends SentenceParser implements RPMSentence {
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see net.sf.marineapi.nmea.sentence.RPMSentence#getStatus()
 	 */
 	@Override
@@ -107,7 +107,7 @@ class RPMParser extends SentenceParser implements RPMSentence {
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see net.sf.marineapi.nmea.sentence.RPMSentence#isEngine()
 	 */
 	@Override
@@ -117,7 +117,7 @@ class RPMParser extends SentenceParser implements RPMSentence {
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see net.sf.marineapi.nmea.sentence.RPMSentence#isShaft()
 	 */
 	@Override
@@ -127,7 +127,7 @@ class RPMParser extends SentenceParser implements RPMSentence {
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see net.sf.marineapi.nmea.sentence.RPMSentence#setId(int)
 	 */
 	@Override
@@ -137,7 +137,7 @@ class RPMParser extends SentenceParser implements RPMSentence {
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see net.sf.marineapi.nmea.sentence.RPMSentence#setPitch(double)
 	 */
 	@Override
@@ -147,7 +147,17 @@ class RPMParser extends SentenceParser implements RPMSentence {
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
+	 * @see net.sf.marineapi.nmea.sentence.RPMSentence#setRPM()
+	 */
+	@Override
+	public void setRPM(double rpm) {
+		setDoubleValue(REVOLUTIONS, rpm);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 *
 	 * @see net.sf.marineapi.nmea.sentence.RPMSentence#setSource(char)
 	 */
 	@Override
@@ -161,7 +171,7 @@ class RPMParser extends SentenceParser implements RPMSentence {
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see
 	 * net.sf.marineapi.nmea.sentence.RPMSentence#setStatus(net.sf.marineapi
 	 * .nmea.util.DataStatus)

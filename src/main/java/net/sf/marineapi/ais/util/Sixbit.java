@@ -31,11 +31,23 @@ public class Sixbit {
 
 	public static final int BITSPERCHAR = 6;
 
-	private String			fPayload;
+	private final String	fPayload;
 	private BitVector		fBitVector;
-	private int				fFillBits;	      // Number of padding bits at end
-	
+	private final int	    fFillBits; // Number of padding bits at end
+
+    /**
+     * Constructor.
+     *
+     * @param payload 6-bit encoded String
+     * @param fillBits Fill bits to be added
+     */
 	public Sixbit(String payload, int fillBits) {
+        if (payload == null || payload.isEmpty()) {
+            throw new IllegalArgumentException("Message payload cannot be null or empty");
+        }
+        if (fillBits < 0) {
+            throw new IllegalArgumentException("Fill bits cannot be negative");
+        }
 		fPayload = payload;
 		if (!isValidString(fPayload))
 			throw new IllegalArgumentException("Invalid payload characters");
@@ -186,4 +198,13 @@ public class Sixbit {
 		}
 		return orig.substring(0, end + 1);
 	}
+
+    /**
+     * Returns the full message String in sixbit encoded format.
+     *
+     * @return Sixbit encoded String.
+     */
+    public String getPayload() {
+        return fPayload;
+    }
 }

@@ -35,66 +35,63 @@ import net.sf.marineapi.nmea.sentence.AISSentence;
  */
 public class AISMessageFactory {
 
-	private static AISMessageFactory instance;
-	private Map<Integer, Class<? extends AISMessage>> parsers;
-	
-	/**
-	 * Hidden constructor.
-	 */
-	private AISMessageFactory() {
-		parsers = new HashMap<Integer, Class<? extends AISMessage>>(7);
-		parsers.put(1, AISMessage01Parser.class);
-		parsers.put(2, AISMessage02Parser.class);
-		parsers.put(3, AISMessage03Parser.class);
-		parsers.put(4, AISMessage04Parser.class);
-		parsers.put(5, AISMessage05Parser.class);
-		parsers.put(9, AISMessage09Parser.class);
-		parsers.put(18, AISMessage18Parser.class);
-		parsers.put(19, AISMessage19Parser.class);
-		parsers.put(21, AISMessage21Parser.class);
-		parsers.put(24, AISMessage24Parser.class);
-	}
-	
-	
-	/**
-	 * Creates a new AIS message parser based on given sentences.
-	 *  
-	 * @param sentences One or more AIS sentences in correct sequence order.
-	 * @return AISMessage instance
-	 */
-	public AISMessage create(AISSentence... sentences) {
+    private static AISMessageFactory instance;
+    private Map<Integer, Class<? extends AISMessage>> parsers;
 
-		AISMessageParser parser = new AISMessageParser();
-		for (AISSentence v : sentences) {
-			parser.append(v.getPayload(), v.getFragmentNumber(), v.getFillBits());
-		}
+    /**
+     * Hidden constructor.
+     */
+    private AISMessageFactory() {
+        parsers = new HashMap<Integer, Class<? extends AISMessage>>(7);
+        parsers.put(1, AISMessage01Parser.class);
+        parsers.put(2, AISMessage02Parser.class);
+        parsers.put(3, AISMessage03Parser.class);
+        parsers.put(4, AISMessage04Parser.class);
+        parsers.put(5, AISMessage05Parser.class);
+        parsers.put(9, AISMessage09Parser.class);
+        parsers.put(18, AISMessage18Parser.class);
+        parsers.put(19, AISMessage19Parser.class);
+        parsers.put(21, AISMessage21Parser.class);
+        parsers.put(24, AISMessage24Parser.class);
+    }
 
-		if (!parsers.containsKey(parser.getMessageType())) {
-			String msg = String.format("no parser for message type %d", parser.getMessageType());
-			throw new IllegalArgumentException(msg);
-		}
 
-		AISMessage result;
-		Class<? extends AISMessage> clazz = parsers.get(parser.getMessageType());
-		try {
-			Constructor<? extends AISMessage> c = clazz.getConstructor(Sixbit.class);
-			result = c.newInstance(parser.getMessageBody());
-		} catch (Exception e) {
-			throw new IllegalStateException(e.getCause());
-		}
+    /**
+     * Creates a new AIS message parser based on given sentences.
+     *
+     * @param sentences One or more AIS sentences in correct sequence order.
+     * @return AISMessage instance
+     */
+    public AISMessage create(AISSentence... sentences) {
 
-		return result;
-	}
-	
-	/**
-	 * Returns the factory singleton.
-	 * 
-	 * @return AISMessageFactory
-	 */
-	public static AISMessageFactory getInstance() {
-		if(instance == null) {
-			instance = new AISMessageFactory();
-		}
-		return instance;
-	}
+        AISMessageParser parser = new AISMessageParser(sentences);
+
+        if (!parsers.containsKey(parser.getMessageType())) {
+            String msg = String.format("no parser for message type %d", parser.getMessageType());
+            throw new IllegalArgumentException(msg);
+        }
+
+        AISMessage result;
+        Class<? extends AISMessage> clazz = parsers.get(parser.getMessageType());
+        try {
+            Constructor<? extends AISMessage> c = clazz.getConstructor(Sixbit.class);
+            result = c.newInstance(parser.getSixbit());
+        } catch (Exception e) {
+            throw new IllegalStateException(e.getCause());
+        }
+
+        return result;
+    }
+
+    /**
+     * Returns the factory singleton.
+     *
+     * @return AISMessageFactory
+     */
+    public static AISMessageFactory getInstance() {
+        if(instance == null) {
+            instance = new AISMessageFactory();
+        }
+        return instance;
+    }
 }

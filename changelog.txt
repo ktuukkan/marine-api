@@ -1,9 +1,20 @@
 Java Marine API - changelog
 <http://ktuukkan.github.io/marine-api/>
 
-Version 0.10.0-SNAPSHOT
+Version 0.11.0-SNAPSHOT
 
-  - Basic support for AIS (Automatic Identification System)
+  - Support for $STALK sentences; the NMEA layer of Raymarine SeaTalk protocol.
+  - RPMSentence; added missing RPM setter
+  - ROTSentence; negative rate of turn values are now allowed. Also, the value
+    may now exceed -/+360 degrees.
+  - Support for GST sentences; GPS Pseudorange Noise Statistics
+
+  Contributions:
+  - GST parser written by Tero Laitinen (@tlaitinen)
+
+Version 0.10.0 (2017-06-21)
+
+  - Preliminary support for AIS (Automatic Identification System)
     - Support for VDM and VDO sentences; the NMEA-0183 layer of AIS messages
     - decoding of messages 1, 2, 3, 4, 5, 9, 18, 19, 21 and 24
     - listener intefaces and classes for receiving messages

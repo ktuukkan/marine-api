@@ -19,7 +19,7 @@ public class ROTTest {
     public static final String INVALID_EXAMPLE = "$HCROT,-0.3,V";
     ROTSentence rot;
     ROTSentence irot;
-    
+
     @Before
     public void setUp() throws Exception {
         rot = new ROTParser(EXAMPLE);
@@ -51,17 +51,24 @@ public class ROTTest {
     	rot.setStatus(DataStatus.VOID);
         assertEquals(DataStatus.VOID, rot.getStatus());
     }
-    
+
     @Test
     public void testGetRateOfTurn() {
         double value = rot.getRateOfTurn();
         assertEquals(-0.3, value, 0.1);
     }
-    
+
     @Test
     public void testSetRateOfTurn() {
     	final double newValue = 0.5;
     	rot.setRateOfTurn(newValue);
     	assertEquals(newValue, rot.getRateOfTurn(), 0.1);
+    }
+
+    @Test
+    public void testSetRateOfTurnNegative() {
+      final double newValue = -12.3;
+      rot.setRateOfTurn(newValue);
+      assertEquals(newValue, rot.getRateOfTurn(), 0.1);
     }
 }

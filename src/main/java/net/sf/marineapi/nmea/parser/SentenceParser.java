@@ -604,4 +604,15 @@ public class SentenceParser implements Sentence {
 		fields.clear();
 		fields = temp;
 	}
+
+	/**
+	 * Returns all field values, starting from the specified index towards the
+	 * end of sentence.
+	 *
+	 * @param first Index of first field to get.
+	 */
+	protected final String[] getStringValues(int first) {
+		String[] values = new String[fields.size()-first];
+		return fields.subList(first, fields.size()).toArray(values);
+	}
 }

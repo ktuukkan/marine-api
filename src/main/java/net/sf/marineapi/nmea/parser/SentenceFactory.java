@@ -255,6 +255,7 @@ public final class SentenceFactory {
 	public void reset() {
 		parsers = new HashMap<String, Class<? extends SentenceParser>>();
 		registerParser("APB", APBParser.class);
+		registerParser("ALK", STALKParser.class);
 		registerParser("BOD", BODParser.class);
 		registerParser("CUR", CURParser.class);
 		registerParser("DBT", DBTParser.class);
@@ -264,6 +265,7 @@ public final class SentenceFactory {
 		registerParser("GLL", GLLParser.class);
 		registerParser("GNS", GNSParser.class);
 		registerParser("GSA", GSAParser.class);
+		registerParser("GST", GSTParser.class);
 		registerParser("GSV", GSVParser.class);
 		registerParser("HDG", HDGParser.class);
 		registerParser("HDM", HDMParser.class);

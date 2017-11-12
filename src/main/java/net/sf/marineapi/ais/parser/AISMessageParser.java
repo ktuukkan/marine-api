@@ -26,120 +26,134 @@ import java.util.List;
 import net.sf.marineapi.ais.message.AISMessage;
 import net.sf.marineapi.ais.util.Sixbit;
 import net.sf.marineapi.ais.util.Violation;
+import net.sf.marineapi.nmea.sentence.AISSentence;
 
 /**
  * Base class for all AIS messages.
- * 
+ *
  * @author Lázár József, Kimmo Tuukkanen
  */
 public class AISMessageParser implements AISMessage {
 
-	private String message = "";
-	private int fillbits;
-	@SuppressWarnings("unused")
-	private int lastFragmentNr;
+    // Common AIS message part
+    private static final int MESSAGE_TYPE = 0;
+    private static final int REPEAT_INDICATOR = 1;
+    private static final int MMSI = 2;
+    private static final int[] FROM = { 0, 6, 8 };
+    private static final int[] TO = { 6, 8, 38 };
 
-	private Sixbit decoder;
-	private int messageType;
-	private int repeatIndicator;
-	private int mmsi;
+    private Sixbit decoder;
+    private String message = "";
+    private int fillBits = 0;
+    private int lastFragmentNr = 0;
 
-	// Common AIS message part
-	private static int MESSAGE_TYPE = 0;
-	private static int REPEAT_INDICATOR = 1;
-	private static int MMSI = 2;
-	private static int[] FROM = { 0, 6, 8 };
-	private static int[] TO = { 6, 8, 38 };
-
-	protected List<Violation> fViolations = new ArrayList<Violation>();
+    private List<Violation> fViolations = new ArrayList<Violation>();
 
 
-	/**
-	 * Default constructor.
-	 */
-	public AISMessageParser() {
-	}
+    /**
+     * Default constructor.
+     */
+    public AISMessageParser() {
+    }
 
-	/**
-	 * Constucor with Sixbit content decoder.
-	 *
-	 * @param sb Content decoder
-	 */
-	protected AISMessageParser(Sixbit sb) {
-		this.decoder = sb;
-	}
+    /**
+     * Construct a parser with given AIS sentences.
+     *
+     * @param sentences Single AIS sentence or a sequence of sentences.
+     */
+    public AISMessageParser(AISSentence... sentences) {
+        int index = 1;
+        for (AISSentence s : sentences) {
+            if (s.isFragmented() && s.getFragmentNumber() != index++) {
+                throw new IllegalArgumentException("Incorrect order of AIS sentences");
+            }
+            this.append(s.getPayload(), s.getFragmentNumber(), s.getFillBits());
+        }
+        this.decoder = new Sixbit(this.message, this.fillBits);
+    }
 
-	/**
-	 * Add a new rule violation to this message
-	 */
-	public void addViolation(Violation v) {
-		fViolations.add(v);
-	}
+    /**
+     * Constucor with Sixbit content decoder.
+     *
+     * @param sb A non-empty six-bit decoder.
+     */
+    protected AISMessageParser(Sixbit sb) {
+        if (sb.length() <= 0) {
+            throw new IllegalArgumentException("Sixbit decoder is empty!");
+        }
+        this.decoder = sb;
+    }
 
-	/**
-	 * Returns the number of violations.
-	 */
-	public int getNrOfViolations() {
-		return fViolations.size();
-	}
+    /**
+     * Add a new rule violation to this message
+     */
+    protected void addViolation(Violation v) {
+        fViolations.add(v);
+    }
 
-	/**
-	 * Returns list of discoverd data violations.
-	 */
-	public List<Violation> getViolations() {
-		return fViolations;
-	}
+    /**
+     * Returns the number of violations.
+     */
+    public int getNrOfViolations() {
+        return fViolations.size();
+    }
 
-	@Override
-	public int getMessageType() {
-		parseAIS();
-		return messageType;
-	}
+    /**
+     * Returns list of discoverd data violations.
+     */
+    public List<Violation> getViolations() {
+        return fViolations;
+    }
 
-	@Override
-	public int getRepeatIndicator() {
-		parseAIS();
-		return repeatIndicator;
-	}
+    @Override
+    public int getMessageType() {
+        return getSixbit().getInt(FROM[MESSAGE_TYPE], TO[MESSAGE_TYPE]);
+    }
 
-	@Override
-	public int getMMSI() {
-		parseAIS();
-		return mmsi;
-	}
+    @Override
+    public int getRepeatIndicator() {
+        return getSixbit().getInt(FROM[REPEAT_INDICATOR], TO[REPEAT_INDICATOR]);
+    }
 
-	/**
-	 * Returns the message sixbit decoder.
-	 *
-	 * @return Sixbit
-	 */
-	public Sixbit getMessageBody() {
-		parseAIS();
-		return decoder;
-	}
+    @Override
+    public int getMMSI() {
+        return getSixbit().getInt(FROM[MMSI], TO[MMSI]);
+    }
 
-	/**
-	 * Append a paylod fragment to combine messages devivered over multiple
-	 * sentences.
-	 *
-	 * @param fragment Data fragment in sixbit encoded format
-	 * @param fragmentIndex Fragment number within the fragments sequence
-	 * @param fillBits Number of additional fill-bits
-	 */
-	public void append(String fragment, int fragmentIndex, int fillBits) {
-		// TODO check correct fragment order and if all fragments are appended
-		lastFragmentNr = fragmentIndex;
-		message += fragment;
-		fillbits = fillBits; // we always use the last
-	}
+    /**
+     * Returns the six-bit decoder of message.
+     *
+     * @return Sixbit decoder.
+     * @throws IllegalStateException When message payload has not been appended
+     *     or Sixbit decoder has not been provided as constructor parameter.
+     */
+    Sixbit getSixbit() {
+        if (decoder == null && message.isEmpty()) {
+            throw new IllegalStateException("Message is empty!");
+        }
+        return decoder == null ? new Sixbit(message, fillBits) : decoder;
+    }
 
-	// TODO lazy parsing
-	private void parseAIS() {
-		if (decoder == null) {
-			decoder = new Sixbit(message, fillbits);
-			messageType = decoder.getInt(FROM[MESSAGE_TYPE], TO[MESSAGE_TYPE]);
-			repeatIndicator = decoder.getInt(FROM[REPEAT_INDICATOR], TO[REPEAT_INDICATOR]);
-			mmsi = decoder.getInt(FROM[MMSI], TO[MMSI]);
-		}
-	}
+    /**
+     * Append a paylod fragment to combine messages devivered over multiple
+     * sentences.
+     *
+     * @param fragment Data fragment in sixbit encoded format
+     * @param fragmentIndex Fragment number within the fragments sequence (1-based)
+     * @param fillBits Number of additional fill-bits
+     */
+    void append(String fragment, int fragmentIndex, int fillBits) {
+        if (fragment == null || fragment.isEmpty()) {
+            throw new IllegalArgumentException("Message fragment cannot be null or empty");
+        }
+        if (fragmentIndex < 1 || fragmentIndex != (lastFragmentNr + 1)) {
+            throw new IllegalArgumentException("Invalid fragment index or sequence order");
+        }
+        if (fillBits < 0) {
+            throw new IllegalArgumentException("Fill bits cannot be negative");
+        }
+        this.lastFragmentNr = fragmentIndex;
+        this.message += fragment;
+        this.fillBits = fillBits; // we always use the last
+    }
 }

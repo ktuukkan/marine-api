@@ -103,13 +103,13 @@ class AISMessage09Parser extends AISMessageParser implements AISMessage09 {
             fPositionAccuracy = content.getBoolean(TO[POSITIONACCURACY]);
             fLongitude = Longitude28.toDegrees(content.getAs28BitInt(FROM[LONGITUDE], TO[LONGITUDE]));
             if (!PositionInfo.isLongitudeCorrect(fLongitude))
-                fViolations.add(new AISRuleViolation("LongitudeInDegrees", fLongitude, PositionInfo.LONGITUDE_RANGE));
+                addViolation(new AISRuleViolation("LongitudeInDegrees", fLongitude, PositionInfo.LONGITUDE_RANGE));
             fLatitude = Latitude27.toDegrees(content.getAs27BitInt(FROM[LATITUDE], TO[LATITUDE]));
             if (!PositionInfo.isLatitudeCorrect(fLatitude))
-                fViolations.add(new AISRuleViolation("LatitudeInDegrees", fLatitude, PositionInfo.LATITUDE_RANGE));
+                addViolation(new AISRuleViolation("LatitudeInDegrees", fLatitude, PositionInfo.LATITUDE_RANGE));
             fCOG = content.getInt(FROM[COURSEOVERGROUND], TO[COURSEOVERGROUND]);
             if (!Angle12.isCorrect(fCOG))
-                fViolations.add(new AISRuleViolation("CourseOverGround", fCOG, Angle12.RANGE));
+                addViolation(new AISRuleViolation("CourseOverGround", fCOG, Angle12.RANGE));
             fTimeStamp = content.getInt(FROM[TIMESTAMP], TO[TIMESTAMP]);
             fRegional = content.getInt(FROM[REGIONAL], TO[REGIONAL]);
             fDTE = content.getBoolean(TO[DTE]);

@@ -100,10 +100,10 @@ class AISUTCParser extends AISMessageParser implements AISUTCReport {
 	    fPositionAccuracy = content.getBoolean(FROM[POSITIONACCURACY]);
 	    fLongitude = Longitude28.toDegrees(content.getAs28BitInt(FROM[LONGITUDE], TO[LONGITUDE]));
 	    if (!PositionInfo.isLongitudeCorrect(fLongitude))
-	    	fViolations.add(new AISRuleViolation("LongitudeInDegrees", fLongitude, PositionInfo.LONGITUDE_RANGE));
+	    	addViolation(new AISRuleViolation("LongitudeInDegrees", fLongitude, PositionInfo.LONGITUDE_RANGE));
 	    fLatitude = Latitude27.toDegrees(content.getAs27BitInt(FROM[LATITUDE], TO[LATITUDE]));
 	    if (!PositionInfo.isLatitudeCorrect(fLatitude))
-	    	fViolations.add(new AISRuleViolation("LatitudeInDegrees", fLatitude, PositionInfo.LATITUDE_RANGE));
+	    	addViolation(new AISRuleViolation("LatitudeInDegrees", fLatitude, PositionInfo.LATITUDE_RANGE));
 	    fTypeOfEPFD = content.getInt(FROM[FIXING_DEV_TYPE], TO[FIXING_DEV_TYPE]);
 	}
 
