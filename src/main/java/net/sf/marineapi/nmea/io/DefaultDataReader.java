@@ -52,6 +52,10 @@ class DefaultDataReader extends AbstractDataReader {
 	 */
 	@Override
 	public String read() throws Exception {
-		return input.readLine();
+		final String result = input.readLine();
+		if (result == null) {
+			stop();
+		}
+		return result;
 	}
 }
