@@ -22,7 +22,11 @@ package net.sf.marineapi.nmea.event;
 
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
+import java.lang.reflect.TypeVariable;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 
 import net.sf.marineapi.nmea.sentence.Sentence;
 
@@ -33,29 +37,93 @@ import net.sf.marineapi.nmea.sentence.Sentence;
  * single sentence type and register it in
  * {@link net.sf.marineapi.nmea.io.SentenceReader}.</p>
  * <p>
- * Methods of {@link SentenceListener} interface implemented by this class are
- * empty, except {@link #sentenceRead(SentenceEvent)} which detects the incoming
- * sentence parsers and casts them to correct interface before calling
- * {@link #sentenceRead(Sentence)} method.
+ * Recommended usage:
+ * </p>
+ * <pre>
+ *     class MyListener extends AbstractSentenceListener&lt;GGASentence>&gt;
+ * </pre>
+ * </p>
+ * <p>
+ * The following example requires using the {@link #AbstractSentenceListener(Class)}
+ * constructor:
+ * </p>
+ * <pre>
+ *     class MyListener&lt;A, B extends Sentence&gt; extends AbstractSentenceListener&lt;B>&gt;
+ * </pre>
+ * </p>
+ * Methods of the {@link SentenceListener} interface implemented by this class
+ * are empty, except {@link #sentenceRead(SentenceEvent)} which is final and
+ * detects the incoming sentences and casts them in correct interface before
+ * calling the {@link #sentenceRead(Sentence)} method.
  *
  * @author Kimmo Tuukkanen
  * @param <T> Sentence interface to be listened.
+ * @see net.sf.marineapi.nmea.event.SentenceListener
  * @see net.sf.marineapi.nmea.io.SentenceReader
  */
 public abstract class AbstractSentenceListener<T extends Sentence>
 	implements SentenceListener {
 
-	private final Type expectedType;
+	protected final Type expectedType;
 
-	public AbstractSentenceListener() {
+    /**
+     * Default constructor.
+     *
+     * @throws IllegalStateException When the generic Sentence type <code>T</code> cannot be resolved at runtime.
+     * @see #AbstractSentenceListener(Class)
+     */
+    public AbstractSentenceListener() {
+        this.expectedType = resolve(getClass(), new HashMap<>());
+        if (expectedType == null || expectedType instanceof TypeVariable) {
+            throw new IllegalStateException("Cannot resolve generic type <T>, use constructor with Class<T> param.");
+        }
+    }
 
-		ParameterizedType superClass =
-			(ParameterizedType) getClass().getGenericSuperclass();
+    /**
+     * Constructor with generic type parameter. This constructor may be used
+     * when the default constructor fails to resolve the generic type
+     * <code>T</code> at runtime. This may be due to more advanced usage of
+     * generics or inheritance, for example when generic type information is
+     * lost at compile time because of Java's type erasure.
+     *
+     * @param c Sentence interface <code>T</code> to be listened.
+     */
+    protected AbstractSentenceListener(Class<T> c) {
+        this.expectedType = c;
+    }
 
-		Type[] superClassTypeArgs = superClass.getActualTypeArguments();
+    /**
+     * Resolves the generic type T.
+     */
+    private Type resolve(Class c, Map<TypeVariable, Type> types) {
 
-		this.expectedType = superClassTypeArgs[0];
-	}
+        Type superClass = c.getGenericSuperclass();
+
+        if (superClass instanceof ParameterizedType) {
+
+            ParameterizedType pt = (ParameterizedType) superClass;
+            Class rawType = (Class) pt.getRawType();
+            TypeVariable[] typeParams = rawType.getTypeParameters();
+            Type[] typeArgs = pt.getActualTypeArguments();
+
+            for (int i = 0; i < typeParams.length; i++) {
+                if (typeArgs[i] instanceof TypeVariable) {
+                    TypeVariable arg = (TypeVariable) typeArgs[i];
+                    types.put(typeParams[i], types.getOrDefault(arg, arg));
+                } else {
+                    types.put(typeParams[i], typeArgs[i]);
+                }
+            }
+
+            if (rawType == AbstractSentenceListener.class) {
+                return types.getOrDefault(typeParams[0], typeParams[0]);
+            } else {
+                return resolve(rawType, types);
+            }
+        }
+
+        return resolve((Class) superClass, types);
+    }
 
 	/**
 	 * Empty implementation.
@@ -86,8 +154,8 @@ public abstract class AbstractSentenceListener<T extends Sentence>
 	public abstract void sentenceRead(T sentence);
 
 	/**
-	 * <p>Resolves the type of each received sentence parser and passes it to
-	 * <code>sentenceRead(T)</code> if the type matches the expected type
+	 * <p>Resolves the type of each received sentence and passes it to
+	 * <@link {@link #sentenceRead(Sentence)} if it matches the expected type
 	 * <code>T</code>.</p>
 	 * 
 	 * <p>This method may be overridden, but be sure to call
@@ -99,12 +167,11 @@ public abstract class AbstractSentenceListener<T extends Sentence>
 	 * @see net.sf.marineapi.nmea.event.SentenceListener#sentenceRead(net.sf.marineapi.nmea.event.SentenceEvent)
 	 */
 	@SuppressWarnings("unchecked")
-	public void sentenceRead(SentenceEvent event) {
+	public final void sentenceRead(SentenceEvent event) {
 		Sentence sentence = event.getSentence();
-		Class<?>[] interfaces = sentence.getClass().getInterfaces();
-		if (Arrays.asList(interfaces).contains(this.expectedType)) {
-			sentenceRead((T) sentence);
-		}
+		if (((Class<?>) expectedType).isAssignableFrom(sentence.getClass())) {
+		    sentenceRead((T) sentence);
+        }
 	}
 
 }
