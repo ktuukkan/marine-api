@@ -40,15 +40,16 @@ import net.sf.marineapi.nmea.sentence.Sentence;
  * Recommended usage:
  * </p>
  * <pre>
- *     class MyListener extends AbstractSentenceListener&lt;GGASentence>&gt;
+ *     class MyListener extends AbstractSentenceListener&lt;GGASentence&gt;
  * </pre>
  * </p>
  * <p>
- * The following example requires using the {@link #AbstractSentenceListener(Class)}
- * constructor:
+ * Notice that more advanced use of generics may require using the
+ * {@link #AbstractSentenceListener(Class)} constructor. For example, the
+ * following won't work with default constructor:
  * </p>
  * <pre>
- *     class MyListener&lt;A, B extends Sentence&gt; extends AbstractSentenceListener&lt;B>&gt;
+ *     class MyListener&lt;A, B extends Sentence&gt; extends AbstractSentenceListener&lt;B&gt;
  * </pre>
  * </p>
  * Methods of the {@link SentenceListener} interface implemented by this class
@@ -126,6 +127,32 @@ public abstract class AbstractSentenceListener<T extends Sentence>
     }
 
 	/**
+	 * <p>Resolves the actual type of each received sentence and invokes the
+	 * <@link {@link #sentenceRead(Sentence)} method if it matches the generic
+	 * type <code>T</code>.</p>
+	 * <p>
+	 * This method has been made final and for listeners that need to
+	 * handle all incoming sentences, it is recommended to implement the
+	 * {@link net.sf.marineapi.nmea.event.SentenceListener} interface.</p>
+	 *
+	 * @see net.sf.marineapi.nmea.event.SentenceListener#sentenceRead(net.sf.marineapi.nmea.event.SentenceEvent)
+	 */
+	@SuppressWarnings("unchecked")
+	public final void sentenceRead(SentenceEvent event) {
+		Sentence sentence = event.getSentence();
+		if (((Class<?>) expectedType).isAssignableFrom(sentence.getClass())) {
+			sentenceRead((T) sentence);
+		}
+	}
+
+	/**
+	 * Invoked when sentence of type <code>T</code> has been read and parsed.
+	 *
+	 * @param sentence Sentence of type <code>T</code>.
+	 */
+	public abstract void sentenceRead(T sentence);
+
+	/**
 	 * Empty implementation.
 	 * @see net.sf.marineapi.nmea.event.SentenceListener#readingPaused()
 	 */
@@ -145,33 +172,4 @@ public abstract class AbstractSentenceListener<T extends Sentence>
 	 */
 	public void readingStopped() {
 	}
-
-	/**
-	 * Invoked when sentence of type <code>T</code> has been read and parsed.
-	 *
-	 * @param sentence Sentence of type <code>T</code>.
-	 */
-	public abstract void sentenceRead(T sentence);
-
-	/**
-	 * <p>Resolves the type of each received sentence and passes it to
-	 * <@link {@link #sentenceRead(Sentence)} if it matches the expected type
-	 * <code>T</code>.</p>
-	 * 
-	 * <p>This method may be overridden, but be sure to call
-	 * <code>super.sentencerRead(SentenceEvent)</code> before or after your
-	 * additional event handling. However, for listeners that need to handle all
-	 * incoming sentences, it's recommended to directly implement the 
-	 * {@link net.sf.marineapi.nmea.event.SentenceListener} interface.</p>
-	 *
-	 * @see net.sf.marineapi.nmea.event.SentenceListener#sentenceRead(net.sf.marineapi.nmea.event.SentenceEvent)
-	 */
-	@SuppressWarnings("unchecked")
-	public final void sentenceRead(SentenceEvent event) {
-		Sentence sentence = event.getSentence();
-		if (((Class<?>) expectedType).isAssignableFrom(sentence.getClass())) {
-		    sentenceRead((T) sentence);
-        }
-	}
-
 }
