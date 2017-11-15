@@ -44,11 +44,11 @@ import java.util.Queue;
 public abstract class AbstractAISMessageListener<T extends AISMessage>
     implements SentenceListener {
 
-	private final Class<?> expectedMessageType;
-	private final Queue<AISSentence> queue = new LinkedList<>();
-	private final AISMessageFactory factory = AISMessageFactory.getInstance();
+    private final Class<?> expectedMessageType;
+    private final Queue<AISSentence> queue = new LinkedList<>();
+    private final AISMessageFactory factory = AISMessageFactory.getInstance();
 
-	/**
+    /**
      * Default constructor.
      *
      * @throws IllegalStateException When the generic Sentence type <code>T</code> cannot be resolved at runtime.
@@ -71,43 +71,43 @@ public abstract class AbstractAISMessageListener<T extends AISMessage>
         this.expectedMessageType = c;
     }
 
-	@Override
-	public void sentenceRead(SentenceEvent event) {
-		Sentence s = event.getSentence();
-		if (s.isAISSentence()) {
-			handleAIS((AISSentence) s);
-		}
-	}
+    @Override
+    public void sentenceRead(SentenceEvent event) {
+        Sentence s = event.getSentence();
+        if (s.isAISSentence()) {
+            handleAIS((AISSentence) s);
+        }
+    }
 
-	/**
-	 * Concatenate and pre-parse AIS sentences.
-	 */
-	private void handleAIS(AISSentence sentence) {
+    /**
+     * Concatenate and pre-parse AIS sentences.
+     */
+    private void handleAIS(AISSentence sentence) {
 
-		if (sentence.isFirstFragment()) {
-			queue.clear();
-		}
+        if (sentence.isFirstFragment()) {
+            queue.clear();
+        }
 
-		queue.add(sentence);
+        queue.add(sentence);
 
-		if (sentence.isLastFragment()) {
-			AISSentence[] sentences = queue.toArray(new AISSentence[queue.size()]);
-			try {
-				AISMessage message = factory.create(sentences);
+        if (sentence.isLastFragment()) {
+            AISSentence[] sentences = queue.toArray(new AISSentence[queue.size()]);
+            try {
+                AISMessage message = factory.create(sentences);
                 if (((Class<?>) expectedMessageType).isAssignableFrom(message.getClass())) {
                     onMessage((T) message);
                 }
-			} catch (IllegalArgumentException iae) {
-				// nevermind unsupported message types
-			}
-		}
-	}
+            } catch (IllegalArgumentException iae) {
+                // nevermind unsupported message types
+            }
+        }
+    }
 
-	/**
-	 * Invoked when AIS message has been received.
-	 * @param msg AISMessage of type <code>T</code>
-	 */
-	public abstract void onMessage(T msg);
+    /**
+     * Invoked when AIS message has been received.
+     * @param msg AISMessage of type <code>T</code>
+     */
+    public abstract void onMessage(T msg);
 
     /**
      * Empty implementation.

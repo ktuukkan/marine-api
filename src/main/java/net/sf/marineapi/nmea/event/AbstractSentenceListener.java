@@ -58,7 +58,7 @@ import net.sf.marineapi.util.GenericTypeResolver;
 public abstract class AbstractSentenceListener<T extends Sentence>
     implements SentenceListener {
 
-	protected final Class<?> expectedType;
+    protected final Class<?> expectedType;
 
     /**
      * Default constructor. Resolves the generic type <code>T</code> in order
@@ -85,32 +85,32 @@ public abstract class AbstractSentenceListener<T extends Sentence>
         this.expectedType = c;
     }
 
-	/**
-	 * <p>Checks the type of each received sentence and invokes the
-	 * <@link {@link #sentenceRead(Sentence)} if it matches the generic type
+    /**
+     * <p>Checks the type of each received sentence and invokes the
+     * <@link {@link #sentenceRead(Sentence)} if it matches the generic type
      * <code>T</code>.</p>
-	 * <p>
-	 * This method has been made final to ensure the correct sentence filtering.
+     * <p>
+     * This method has been made final to ensure the correct sentence filtering.
      * For listeners that need to handle all incoming sentences, it is
      * recommended to implement the
      * {@link net.sf.marineapi.nmea.event.SentenceListener} interface.</p>
-	 *
-	 * @see net.sf.marineapi.nmea.event.SentenceListener#sentenceRead(net.sf.marineapi.nmea.event.SentenceEvent)
-	 */
-	@SuppressWarnings("unchecked")
-	public final void sentenceRead(SentenceEvent event) {
-		Sentence sentence = event.getSentence();
-		if (expectedType.isAssignableFrom(sentence.getClass())) {
-			sentenceRead((T) sentence);
-		}
-	}
+     *
+     * @see net.sf.marineapi.nmea.event.SentenceListener#sentenceRead(net.sf.marineapi.nmea.event.SentenceEvent)
+     */
+    @SuppressWarnings("unchecked")
+    public final void sentenceRead(SentenceEvent event) {
+        Sentence sentence = event.getSentence();
+        if (expectedType.isAssignableFrom(sentence.getClass())) {
+            sentenceRead((T) sentence);
+        }
+    }
 
-	/**
-	 * Invoked when sentence of type <code>T</code> is received.
-	 *
-	 * @param sentence Sentence of type <code>T</code>
-	 */
-	public abstract void sentenceRead(T sentence);
+    /**
+     * Invoked when sentence of type <code>T</code> is received.
+     *
+     * @param sentence Sentence of type <code>T</code>
+     */
+    public abstract void sentenceRead(T sentence);
 
     /**
      * Empty implementation.
