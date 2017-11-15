@@ -20,15 +20,8 @@
  */
 package net.sf.marineapi.nmea.event;
 
-import java.lang.reflect.ParameterizedType;
-import java.lang.reflect.Type;
-import java.lang.reflect.TypeVariable;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Map;
-
 import net.sf.marineapi.nmea.sentence.Sentence;
+import net.sf.marineapi.util.GenericTypeResolver;
 
 /**
  * <p>
@@ -63,29 +56,28 @@ import net.sf.marineapi.nmea.sentence.Sentence;
  * @see net.sf.marineapi.nmea.io.SentenceReader
  */
 public abstract class AbstractSentenceListener<T extends Sentence>
-	implements SentenceListener {
+    implements SentenceListener {
 
-	protected final Type expectedType;
+	protected final Class<?> expectedType;
 
     /**
-     * Default constructor.
+     * Default constructor. Resolves the generic type <code>T</code> in order
+     * to filter desired sentences.
      *
-     * @throws IllegalStateException When the generic Sentence type <code>T</code> cannot be resolved at runtime.
+     * @throws IllegalStateException If the generic type cannot be resolved at runtime.
      * @see #AbstractSentenceListener(Class)
      */
     public AbstractSentenceListener() {
-        this.expectedType = resolve(getClass(), new HashMap<>());
-        if (expectedType == null || expectedType instanceof TypeVariable) {
-            throw new IllegalStateException("Cannot resolve generic type <T>, use constructor with Class<T> param.");
-        }
+        expectedType = (Class<?>) GenericTypeResolver
+                .resolve(getClass(), AbstractSentenceListener.class);
     }
 
     /**
      * Constructor with generic type parameter. This constructor may be used
      * when the default constructor fails to resolve the generic type
-     * <code>T</code> at runtime. This may be due to more advanced usage of
-     * generics or inheritance, for example when generic type information is
-     * lost at compile time because of Java's type erasure.
+     * <code>T</code> at runtime. Failure may be due to more advanced usage of
+     * generics or inheritance, for example if the generic type information is
+     * lost at compile time because of type erasure.
      *
      * @param c Sentence interface <code>T</code> to be listened.
      */
@@ -93,83 +85,58 @@ public abstract class AbstractSentenceListener<T extends Sentence>
         this.expectedType = c;
     }
 
-    /**
-     * Resolves the generic type T.
-     */
-    private Type resolve(Class c, Map<TypeVariable, Type> types) {
-
-        Type superClass = c.getGenericSuperclass();
-
-        if (superClass instanceof ParameterizedType) {
-
-            ParameterizedType pt = (ParameterizedType) superClass;
-            Class rawType = (Class) pt.getRawType();
-            TypeVariable[] typeParams = rawType.getTypeParameters();
-            Type[] typeArgs = pt.getActualTypeArguments();
-
-            for (int i = 0; i < typeParams.length; i++) {
-                if (typeArgs[i] instanceof TypeVariable) {
-                    TypeVariable arg = (TypeVariable) typeArgs[i];
-                    types.put(typeParams[i], types.getOrDefault(arg, arg));
-                } else {
-                    types.put(typeParams[i], typeArgs[i]);
-                }
-            }
-
-            if (rawType == AbstractSentenceListener.class) {
-                return types.getOrDefault(typeParams[0], typeParams[0]);
-            } else {
-                return resolve(rawType, types);
-            }
-        }
-
-        return resolve((Class) superClass, types);
-    }
-
 	/**
-	 * <p>Resolves the actual type of each received sentence and invokes the
-	 * <@link {@link #sentenceRead(Sentence)} method if it matches the generic
-	 * type <code>T</code>.</p>
+	 * <p>Checks the type of each received sentence and invokes the
+	 * <@link {@link #sentenceRead(Sentence)} if it matches the generic type
+     * <code>T</code>.</p>
 	 * <p>
-	 * This method has been made final and for listeners that need to
-	 * handle all incoming sentences, it is recommended to implement the
-	 * {@link net.sf.marineapi.nmea.event.SentenceListener} interface.</p>
+	 * This method has been made final to ensure the correct sentence filtering.
+     * For listeners that need to handle all incoming sentences, it is
+     * recommended to implement the
+     * {@link net.sf.marineapi.nmea.event.SentenceListener} interface.</p>
 	 *
 	 * @see net.sf.marineapi.nmea.event.SentenceListener#sentenceRead(net.sf.marineapi.nmea.event.SentenceEvent)
 	 */
 	@SuppressWarnings("unchecked")
 	public final void sentenceRead(SentenceEvent event) {
 		Sentence sentence = event.getSentence();
-		if (((Class<?>) expectedType).isAssignableFrom(sentence.getClass())) {
+		if (expectedType.isAssignableFrom(sentence.getClass())) {
 			sentenceRead((T) sentence);
 		}
 	}
 
 	/**
-	 * Invoked when sentence of type <code>T</code> has been read and parsed.
+	 * Invoked when sentence of type <code>T</code> is received.
 	 *
-	 * @param sentence Sentence of type <code>T</code>.
+	 * @param sentence Sentence of type <code>T</code>
 	 */
 	public abstract void sentenceRead(T sentence);
 
-	/**
-	 * Empty implementation.
-	 * @see net.sf.marineapi.nmea.event.SentenceListener#readingPaused()
-	 */
-	public void readingPaused() {
-	}
+    /**
+     * Empty implementation.
+     *
+     * @see SentenceListener#readingPaused()
+     */
+    @Override
+    public void readingPaused() {
+    }
 
-	/**
-	 * Empty implementation.
-	 * @see net.sf.marineapi.nmea.event.SentenceListener#readingStarted()
-	 */
-	public void readingStarted() {
-	}
+    /**
+     * Empty implementation.
+     *
+     * @see SentenceListener#readingStarted()
+     */
+    @Override
+    public void readingStarted() {
+    }
 
-	/**
-	 * Empty implementation.
-	 * @see net.sf.marineapi.nmea.event.SentenceListener#readingStopped()
-	 */
-	public void readingStopped() {
-	}
+    /**
+     * Empty implementation.
+     *
+     * @see SentenceListener#readingStopped()
+     */
+    @Override
+    public void readingStopped() {
+    }
+
 }
