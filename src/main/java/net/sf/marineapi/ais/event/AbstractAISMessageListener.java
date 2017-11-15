@@ -82,6 +82,7 @@ public abstract class AbstractAISMessageListener<T extends AISMessage>
     /**
      * Concatenate and pre-parse AIS sentences.
      */
+    @SuppressWarnings("unchecked")
     private void handleAIS(AISSentence sentence) {
 
         if (sentence.isFirstFragment()) {
@@ -94,7 +95,7 @@ public abstract class AbstractAISMessageListener<T extends AISMessage>
             AISSentence[] sentences = queue.toArray(new AISSentence[queue.size()]);
             try {
                 AISMessage message = factory.create(sentences);
-                if (((Class<?>) expectedMessageType).isAssignableFrom(message.getClass())) {
+                if (expectedMessageType.isAssignableFrom(message.getClass())) {
                     onMessage((T) message);
                 }
             } catch (IllegalArgumentException iae) {
