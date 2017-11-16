@@ -32,7 +32,7 @@ import java.util.Map;
  * {@link net.sf.marineapi.ais.event.AbstractAISMessageListener} where we need
  * to know the generic type at runtime to filter the desired sentences.
  *
- * @author Kimmo Tuukkanen, Axl Uhl
+ * @author Kimmo Tuukkanen, Axel Uhl
  */
 public final class GenericTypeResolver {
 

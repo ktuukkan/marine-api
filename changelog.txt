@@ -13,7 +13,7 @@ Version 0.11.0-SNAPSHOT
 
   Contributions:
   - GST parser written by Tero Laitinen (@tlaitinen)
-  - AbstractSentenceListener improvements by Axl Uhl (@axluhl)
+  - AbstractSentenceListener improvements by Axel Uhl (@axeluhl)
 
 Version 0.10.0 (2017-06-21)
 
