@@ -41,7 +41,7 @@ public final class GenericTypeResolver {
      *
      * @param c The class of which super-classes and generic types to inspect
      * @param target Target class holding the generic type to be resolved
-     * @return The resolved generic Type (Class or TypeVariable)
+     * @return The resolved generic Type (Class)
      * @throws IllegalStateException If the generic type cannot be resolved
      */
     public static Type resolve(Class<?> c, Class<?> target) {
@@ -58,20 +58,20 @@ public final class GenericTypeResolver {
      * @param c The class of calling listener implementation.
      * @param types Variables and types memo
      */
-    private static Type resolve(Class<?> c, final Class<?> target, final Map<TypeVariable, Type> types) {
+    private static Type resolve(Class<?> c, final Class<?> target, final Map<TypeVariable<?>, Type> types) {
 
         Type superClass = c.getGenericSuperclass();
 
         if (superClass instanceof ParameterizedType) {
 
             ParameterizedType pt = (ParameterizedType) superClass;
-            Class rawType = (Class) pt.getRawType();
-            TypeVariable[] typeParams = rawType.getTypeParameters();
+            Class<?> rawType = (Class<?>) pt.getRawType();
+            TypeVariable<?>[] typeParams = rawType.getTypeParameters();
             Type[] typeArgs = pt.getActualTypeArguments();
 
             for (int i = 0; i < typeParams.length; i++) {
                 if (typeArgs[i] instanceof TypeVariable) {
-                    TypeVariable arg = (TypeVariable) typeArgs[i];
+                    TypeVariable<?> arg = (TypeVariable<?>) typeArgs[i];
                     types.put(typeParams[i], types.getOrDefault(arg, arg));
                 } else {
                     types.put(typeParams[i], typeArgs[i]);
@@ -85,6 +85,6 @@ public final class GenericTypeResolver {
             }
         }
 
-        return resolve((Class) superClass, target, types);
+        return resolve((Class<?>) superClass, target, types);
     }
 }
