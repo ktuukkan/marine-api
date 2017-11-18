@@ -20,91 +20,129 @@
  */
 package net.sf.marineapi.nmea.event;
 
-import java.lang.reflect.ParameterizedType;
-import java.lang.reflect.Type;
-import java.util.Arrays;
-
 import net.sf.marineapi.nmea.sentence.Sentence;
+import net.sf.marineapi.util.GenericTypeResolver;
 
 /**
  * <p>
- * Abstract base class for typed listeners with automatic sentence type
- * resolving and casting. Extend this class to create a listener/handler for a
- * single sentence type and register it in
- * {@link net.sf.marineapi.nmea.io.SentenceReader}.</p>
+ * Abstract listener for NMEA-0183 sentences. Extend this class to create a
+ * listener for a specific sentence type and register it in a {@link
+ * net.sf.marineapi.nmea.io.SentenceReader}. For listeners that need to handle
+ * all incoming sentences, it is recommended to implement the {@link
+ * SentenceListener} interface.
+ * </p>
  * <p>
- * Methods of {@link SentenceListener} interface implemented by this class are
- * empty, except {@link #sentenceRead(SentenceEvent)} which detects the incoming
- * sentence parsers and casts them to correct interface before calling
- * {@link #sentenceRead(Sentence)} method.
+ * Recommended usage:
+ * </p>
+ * <pre>
+ *   class MyListener extends AbstractSentenceListener&lt;GGASentence&gt;
+ * </pre>
+ * </p>
+ * <p>
+ * Notice that more advanced use of generics and inheritance may require using
+ * the {@link #AbstractSentenceListener(Class)} constructor. For example, the 
+ * following example won't work because of the generic types not being available
+ * at runtime:
+ * </p>
+ * <pre>
+ *   class MyListener&lt;A, B extends Sentence&gt; extends AbstractSentenceListener&lt;B&gt;
+ *   ...
+ *   MyListener&lt;String, GGASentence&gt; ml = new MyListener&lt;&gt;();
+ * </pre>
+ * </p>
+ * Methods of the {@link SentenceListener} interface implemented by this class
+ * are empty, except for {@link #sentenceRead(SentenceEvent)} which is final
+ * and detects the incoming sentences and casts them in correct interface
+ * before calling the {@link #sentenceRead(Sentence)} method. The other methods
+ * may be overridden as needed.
  *
  * @author Kimmo Tuukkanen
  * @param <T> Sentence interface to be listened.
  * @see net.sf.marineapi.nmea.io.SentenceReader
  */
 public abstract class AbstractSentenceListener<T extends Sentence>
-	implements SentenceListener {
+    implements SentenceListener {
 
-	private final Type expectedType;
+    protected final Class<?> sentenceType;
 
-	public AbstractSentenceListener() {
+    /**
+     * Default constructor with automatic generic type resolving. Notice that
+     * the {@link GenericTypeResolver} may not always succeed.
+     *
+     * @see #AbstractSentenceListener(Class)
+     * @throws IllegalStateException If the generic type cannot be resolved
+     *                               at runtime.
+     */
+    public AbstractSentenceListener() {
+        sentenceType = GenericTypeResolver.resolve(
+                getClass(), AbstractSentenceListener.class);
+    }
 
-		ParameterizedType superClass =
-			(ParameterizedType) getClass().getGenericSuperclass();
+    /**
+     * Constructor with explicit generic type parameter. This constructor may
+     * be used when the default constructor fails to resolve the generic type
+     * <code>T</code> at runtime.
+     *
+     * @param c Sentence type <code>T</code> to be listened.
+     * @see #AbstractSentenceListener()
+     */
+    protected AbstractSentenceListener(Class<T> c) {
+        this.sentenceType = c;
+    }
 
-		Type[] superClassTypeArgs = superClass.getActualTypeArguments();
+    /**
+     * <p>
+     * Invoked for all received sentences. Checks the type of each sentence
+     * and invokes the {@link #sentenceRead(Sentence)} if it matches the
+     * listener's generic type <code>T</code>.
+     * </p>
+     * <p>
+     * This method has been declared <code>final</code> to ensure the correct
+     * filtering of sentences.
+     * </p>
+     *
+     * @see SentenceListener#sentenceRead(SentenceEvent)
+     */
+    @SuppressWarnings("unchecked")
+    public final void sentenceRead(SentenceEvent event) {
+        Sentence sentence = event.getSentence();
+        if (sentenceType.isAssignableFrom(sentence.getClass())) {
+            sentenceRead((T) sentence);
+        }
+    }
 
-		this.expectedType = superClassTypeArgs[0];
-	}
+    /**
+     * Invoked when sentence of type <code>T</code> is received.
+     *
+     * @param sentence Sentence of type <code>T</code>
+     */
+    public abstract void sentenceRead(T sentence);
 
-	/**
-	 * Empty implementation.
-	 * @see net.sf.marineapi.nmea.event.SentenceListener#readingPaused()
-	 */
-	public void readingPaused() {
-	}
+    /**
+     * Empty implementation.
+     *
+     * @see SentenceListener#readingPaused()
+     */
+    @Override
+    public void readingPaused() {
+    }
 
-	/**
-	 * Empty implementation.
-	 * @see net.sf.marineapi.nmea.event.SentenceListener#readingStarted()
-	 */
-	public void readingStarted() {
-	}
+    /**
+     * Empty implementation.
+     *
+     * @see SentenceListener#readingStarted()
+     */
+    @Override
+    public void readingStarted() {
+    }
 
-	/**
-	 * Empty implementation.
-	 * @see net.sf.marineapi.nmea.event.SentenceListener#readingStopped()
-	 */
-	public void readingStopped() {
-	}
-
-	/**
-	 * Invoked when sentence of type <code>T</code> has been read and parsed.
-	 *
-	 * @param sentence Sentence of type <code>T</code>.
-	 */
-	public abstract void sentenceRead(T sentence);
-
-	/**
-	 * <p>Resolves the type of each received sentence parser and passes it to
-	 * <code>sentenceRead(T)</code> if the type matches the expected type
-	 * <code>T</code>.</p>
-	 * 
-	 * <p>This method may be overridden, but be sure to call
-	 * <code>super.sentencerRead(SentenceEvent)</code> before or after your
-	 * additional event handling. However, for listeners that need to handle all
-	 * incoming sentences, it's recommended to directly implement the 
-	 * {@link net.sf.marineapi.nmea.event.SentenceListener} interface.</p>
-	 *
-	 * @see net.sf.marineapi.nmea.event.SentenceListener#sentenceRead(net.sf.marineapi.nmea.event.SentenceEvent)
-	 */
-	@SuppressWarnings("unchecked")
-	public void sentenceRead(SentenceEvent event) {
-		Sentence sentence = event.getSentence();
-		Class<?>[] interfaces = sentence.getClass().getInterfaces();
-		if (Arrays.asList(interfaces).contains(this.expectedType)) {
-			sentenceRead((T) sentence);
-		}
-	}
+    /**
+     * Empty implementation.
+     *
+     * @see SentenceListener#readingStopped()
+     */
+    @Override
+    public void readingStopped() {
+    }
 
 }

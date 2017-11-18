@@ -60,6 +60,10 @@ public class AISMessageFactory {
      * Creates a new AIS message parser based on given sentences.
      *
      * @param sentences One or more AIS sentences in correct sequence order.
+     * @throws IllegalArgumentException If given message type is not supported
+     *          or sequence order is incorrect.
+     * @throws IllegalStateException If message parser cannot be constructed
+     *          due to illegal state, e.g. invalid or empty message.
      * @return AISMessage instance
      */
     public AISMessage create(AISSentence... sentences) {
@@ -72,10 +76,10 @@ public class AISMessageFactory {
         }
 
         AISMessage result;
-        Class<? extends AISMessage> clazz = parsers.get(parser.getMessageType());
+        Class<? extends AISMessage> c = parsers.get(parser.getMessageType());
         try {
-            Constructor<? extends AISMessage> c = clazz.getConstructor(Sixbit.class);
-            result = c.newInstance(parser.getSixbit());
+            Constructor<? extends AISMessage> co = c.getConstructor(Sixbit.class);
+            result = co.newInstance(parser.getSixbit());
         } catch (Exception e) {
             throw new IllegalStateException(e.getCause());
         }

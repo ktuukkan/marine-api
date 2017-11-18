@@ -22,109 +22,127 @@ package net.sf.marineapi.ais.event;
 
 import net.sf.marineapi.ais.parser.AISMessageFactory;
 import net.sf.marineapi.ais.message.AISMessage;
-import net.sf.marineapi.nmea.event.SentenceEvent;
+import net.sf.marineapi.nmea.event.AbstractSentenceListener;
 import net.sf.marineapi.nmea.event.SentenceListener;
 import net.sf.marineapi.nmea.sentence.AISSentence;
-import net.sf.marineapi.nmea.sentence.Sentence;
+import net.sf.marineapi.util.GenericTypeResolver;
 
-import java.lang.reflect.ParameterizedType;
-import java.lang.reflect.Type;
-import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.Queue;
 
 /**
- * Abstract base listener for AIS messages. Extend this class to create listener
- * for a specific AIS message type. For listening all available AIS sentences,
- * extend <code>AbstractSentenceListener&lt;AISSentence&gt;</code> or implement
- * SentenceListener interface. However, in this case you should also implement
- * AIS message concatenation to combine and parse messages that are deliverd over
- * multiple sentences.
- *
+ * <p>
+ * Abstract listener for AIS messages. Extend this class to create a listener
+ * for a specific AIS message type and register it in a
+ * {@link net.sf.marineapi.nmea.io.SentenceReader}.</p>
+ * <p>
+ * To listen to all incoming AIS sentences, extend the {@link
+ * AbstractSentenceListener} using {@link AISSentence} as type. However, in this
+ * case you also need to implement the message concatenation to parse messages
+ * being delivered over multiple sentences.</p>
+ * <p>
+ * This class is based on {@link AbstractSentenceListener} and thus it has the
+ * same recommendations and limitations regarding the usage of generics and
+ * inheritance.
+ * </p>
+ * 
  * @author Kimmo Tuukkanen
+ * @param <T> AIS message type to be listened.
+ * @see AbstractSentenceListener
+ * @see GenericTypeResolver
  */
-public abstract class AbstractAISMessageListener<T extends AISMessage> implements SentenceListener {
+public abstract class AbstractAISMessageListener<T extends AISMessage>
+    extends AbstractSentenceListener<AISSentence> {
 
-	private final Class<? extends AISMessage> expectedMessageType;
-	private Queue<AISSentence> queue = new LinkedList<AISSentence>();
-	private final AISMessageFactory factory = AISMessageFactory.getInstance();
+    protected final Class<?> messageType;
+    private final Queue<AISSentence> queue = new LinkedList<>();
+    private final AISMessageFactory factory = AISMessageFactory.getInstance();
 
-	/**
-	 * Constructor
-	 */
-	public AbstractAISMessageListener() {
-		// TODO: not DRY
-		ParameterizedType superClass = (ParameterizedType) getClass().getGenericSuperclass();
-		Type[] superClassTypeArgs = superClass.getActualTypeArguments();
-		this.expectedMessageType = (Class<T>)superClassTypeArgs[0];
-	}
+    /**
+     * Default constructor with automatic generic type resolving. Notice that
+     * the {@link GenericTypeResolver} may not always succeed.
+     *
+     * @see #AbstractAISMessageListener(Class)
+     * @throws IllegalStateException If the generic type cannot be resolved
+     *                               at runtime.
+     */
+    public AbstractAISMessageListener() {
+        this.messageType = GenericTypeResolver.resolve(
+                getClass(), AbstractAISMessageListener.class);
+    }
 
-	@Override
-	public void sentenceRead(SentenceEvent event) {
-		Sentence s = event.getSentence();
-		if (s.isAISSentence()) {
-			handleAIS((AISSentence) s);
-		}
-	}
+    /**
+     * Constructor with explicit generic type parameter. This constructor may
+     * be used when the default constructor fails to resolve the generic type
+     * <code>T</code> at runtime.
+     *
+     * @param c Message type <code>T</code> to be listened.
+     * @see #AbstractAISMessageListener()
+     */
+    public AbstractAISMessageListener(Class<T> c) {
+        this.messageType = c;
+    }
 
-	/**
-	 * Concatenate and pre-parse AIS sentences/messages.
-	 */
-	private void handleAIS(AISSentence sentence) {
+    /**
+     * <p>
+     * Invoked when {@link AISSentence} of any type is received. Pre-parses
+     * the message to determine it's type and invokes the
+     * {@link #onMessage(AISMessage)} method when the type matches the generic
+     * type <code>T</code>.</p>
+     * <p>
+     * This method has been declared <code>final</code> to ensure the correct
+     * handling of received sentences.</p>
+     */
+    @Override
+    @SuppressWarnings("unchecked")    
+    public final void sentenceRead(AISSentence sentence) {
 
-		if (sentence.isFirstFragment()) {
-			queue.clear();
-		}
+        if (sentence.isFirstFragment()) {
+            queue.clear();
+        }
 
-		queue.add(sentence);
+        queue.add(sentence);
 
-		if (sentence.isLastFragment()) {
-			AISSentence[] sentences = queue.toArray(new AISSentence[queue.size()]);
-			try {
-				AISMessage message = factory.create(sentences);
-				if (message != null) {
-					Class<?>[] interfaces = message.getClass().getInterfaces();
-					if (Arrays.asList(interfaces).contains(expectedMessageType)) {
-						onMessage((T) message);
-					}
-				}
-			} catch (IllegalArgumentException iae) {
-				// nevermind unsupported message types
-			}
-		}
-	}
+        if (sentence.isLastFragment()) {
+            AISSentence[] sentences = queue.toArray(new AISSentence[queue.size()]);
+            try {
+                AISMessage message = factory.create(sentences);
+                if (messageType.isAssignableFrom(message.getClass())) {
+                    onMessage((T) message);
+                }
+            } catch (IllegalArgumentException iae) {
+                // never mind incorrect order or unsupported message types
+            }
+        }
+    }
 
-	/**
-	 * Invoked when AIS message has been parsed.
-	 *
-	 * @param msg AISMessage of subtype <code>T</code>.
-	 */
-	public abstract void onMessage(T msg);
+    /**
+     * Invoked when AIS message has been received.
+     * @param msg AISMessage of type <code>T</code>
+     */
+    public abstract void onMessage(T msg);
 
-	/**
-	 * Empty implementation.
-	 *
-	 * @see net.sf.marineapi.nmea.event.SentenceListener
-	 */
-	@Override
-	public void readingPaused() {
-	}
+    /**
+     * Empty implementation.
+     * @see SentenceListener#readingPaused()
+     */
+    @Override
+    public void readingPaused() {
+    }
 
-	/**
-	 * Empty implementation.
-	 *
-	 * @see net.sf.marineapi.nmea.event.SentenceListener
-	 */
-	@Override
-	public void readingStarted() {
-	}
+    /**
+     * Empty implementation.
+     * @see SentenceListener#readingStarted()
+     */
+    @Override
+    public void readingStarted() {
+    }
 
-	/**
-	 * Empty implementation.
-	 *
-	 * @see net.sf.marineapi.nmea.event.SentenceListener
-	 */
-	@Override
-	public void readingStopped() {
-	}
+    /**
+     * Empty implementation.
+     * @see SentenceListener#readingStopped()
+     */
+    @Override
+    public void readingStopped() {
+    }
 }

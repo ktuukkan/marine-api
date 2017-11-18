@@ -42,8 +42,9 @@ import net.sf.marineapi.nmea.sentence.SentenceId;
  * data source and dispatches them to registered listeners as sentence events.
  * Each event contains a parser for the read sentence.
  * <p>
- * Parsers dispatched by reader are created using {@link net.sf.marineapi.nmea.parser.SentenceFactory} class,
- * where you can also register your own custom parsers.
+ * Parsers dispatched by the reader are created using {@link
+ * net.sf.marineapi.nmea.parser.SentenceFactory}, where you can also add your
+ * own parsers at runtime.
  *
  * @author Kimmo Tuukkanen
  * @see net.sf.marineapi.nmea.event.AbstractSentenceListener
