@@ -32,16 +32,18 @@ import java.util.Queue;
 
 /**
  * <p>
- * Abstract base listener for AIS messages. Extend this class to create listener
- * for a specific AIS message type. To listen all incoming AIS sentences, extend
- * the {@link AbstractSentenceListener} using {@link AISSentence} as type, or
- * implement the {@link SentenceListener} interface. However, in these cases you
- * also need to implement the message concatenation to parse messages being
- * delivered over multiple sentences.</p>
+ * Abstract listener for AIS messages. Extend this class to create a listener
+ * for a specific AIS message type and register it in a
+ * {@link net.sf.marineapi.nmea.io.SentenceReader}.</p>
  * <p>
- * The implementation of this class is based on {@link AbstractSentenceListener}
- * and thus it has the same recommendations and limitations regarding the usage
- * of generics and inheritance.
+ * To listen to all incoming AIS sentences, extend the {@link
+ * AbstractSentenceListener} using {@link AISSentence} as type. However, in this
+ * case you also need to implement the message concatenation to parse messages
+ * being delivered over multiple sentences.</p>
+ * <p>
+ * This class is based on {@link AbstractSentenceListener} and thus it has the
+ * same recommendations and limitations regarding the usage of generics and
+ * inheritance.
  * </p>
  * 
  * @author Kimmo Tuukkanen

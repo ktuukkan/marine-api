@@ -25,11 +25,11 @@ import net.sf.marineapi.util.GenericTypeResolver;
 
 /**
  * <p>
- * Abstract base class for typed listeners with automatic sentence type
- * resolving and casting. Extend this class to create a listener for a single
- * sentence type and register it in {@link net.sf.marineapi.nmea.io.SentenceReader}.
- * For listeners that need to handle all incoming sentences, it is recommended
- * to implement the {@link SentenceListener} interface.
+ * Abstract listener for NMEA-0183 sentences. Extend this class to create a
+ * listener for a specific sentence type and register it in a {@link
+ * net.sf.marineapi.nmea.io.SentenceReader}. For listeners that need to handle
+ * all incoming sentences, it is recommended to implement the {@link
+ * SentenceListener} interface.
  * </p>
  * <p>
  * Recommended usage:
@@ -41,13 +41,13 @@ import net.sf.marineapi.util.GenericTypeResolver;
  * <p>
  * Notice that more advanced use of generics and inheritance may require using
  * the {@link #AbstractSentenceListener(Class)} constructor. For example, the 
- * following example won't work because the generic types not being available at
- * runtime:
+ * following example won't work because of the generic types not being available
+ * at runtime:
  * </p>
  * <pre>
  *   class MyListener&lt;A, B extends Sentence&gt; extends AbstractSentenceListener&lt;B&gt;
  *   ...
- *   MyListener<String, GGASentence> ml = new MyListener<>();
+ *   MyListener&lt;String, GGASentence&gt; ml = new MyListener&lt;&gt;();
  * </pre>
  * </p>
  * Methods of the {@link SentenceListener} interface implemented by this class

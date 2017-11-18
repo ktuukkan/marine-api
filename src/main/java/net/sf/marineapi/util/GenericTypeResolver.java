@@ -29,8 +29,8 @@ import java.util.Map;
 /**
  * Utility class for resolving the generic type of a class, mainly for
  * {@link net.sf.marineapi.nmea.event.AbstractSentenceListener} and
- * {@link net.sf.marineapi.ais.event.AbstractAISMessageListener} where the
- * generic type needs to be resolved at runtime to filter the incoming
+ * {@link net.sf.marineapi.ais.event.AbstractAISMessageListener} classes where
+ * the generic type needs to be resolved at runtime to filter the incoming
  * messages.
  *
  * @author Kimmo Tuukkanen, Axel Uhl
@@ -44,16 +44,17 @@ public final class GenericTypeResolver {
      * of single generic type parameter. However, the resolving may not always
      * succeed, often due to more advanced or mixed usage of generics and
      * inheritance. For example, the generic type information may be lost
-     * at compile-time because of the Java's type erasure.
+     * at compile-time because of the Java's <a href="https://docs.oracle.com/javase/tutorial/java/generics/nonReifiableVarargsType.html" target="_blank">
+     * type erasure.</a>
      *
-     * @param c The class of which super-classes and generic types to inspect
-     * @param target Target class holding the generic type to be resolved
-     * @return The resolved generic type of <code>target</code>
+     * @param child The class of which parents and generic types to inspect
+     * @param parent The generic class that holds the type being resolved
+     * @return The generic type of <code>parent</code>
      * @throws IllegalStateException If the generic type cannot be resolved
      *                               at runtime.
      */
-    public static Class<?> resolve(Class<?> c, Class<?> target) {
-        Type t = resolve(c, target, new HashMap<>());
+    public static Class<?> resolve(Class<?> child, Class<?> parent) {
+        Type t = resolve(child, parent, new HashMap<>());
         if (t == null || t instanceof TypeVariable) {
             throw new IllegalStateException("Cannot resolve generic type <T>, use constructor with Class<T> param.");
         }
@@ -63,13 +64,14 @@ public final class GenericTypeResolver {
     /**
      * Resolves the generic type of class.
      *
-     * @param c The class of calling listener implementation.
+     * @param child The class of calling listener implementation.
+     * @param parent The parent class that holds the generic type.
      * @param types Variables and types memo
      */
-    private static Type resolve(Class<?> c, final Class<?> target,
+    private static Type resolve(Class<?> child, final Class<?> parent,
                                 final Map<TypeVariable<?>, Type> types) {
 
-        Type superClass = c.getGenericSuperclass();
+        Type superClass = child.getGenericSuperclass();
 
         if (superClass instanceof ParameterizedType) {
 
@@ -87,13 +89,13 @@ public final class GenericTypeResolver {
                 }
             }
 
-            if (rawType == target) {
+            if (rawType == parent) {
                 return types.getOrDefault(typeParams[0], typeParams[0]);
             } else {
-                return resolve(rawType, target, types);
+                return resolve(rawType, parent, types);
             }
         }
 
-        return resolve((Class<?>) superClass, target, types);
+        return resolve((Class<?>) superClass, parent, types);
     }
 }

@@ -35,7 +35,8 @@ import net.sf.marineapi.nmea.sentence.TalkerId;
 /**
  * Factory for creating sentence parsers.
  * <p>
- * Custom parsers may be implemented and registered in factory as follows:
+ * Custom parsers may be implemented and registered in the factory at runtime
+ * by following these steps:
  * <ol>
  * <li>Define a sentence interface by extending the {@link Sentence} interface
  * (e.g. <code>com.acme.XYZSentence</code>).</li>
@@ -49,15 +50,20 @@ import net.sf.marineapi.nmea.sentence.TalkerId;
  * type (e.g. <code>"XYZ"</code>).</li>
  * <li>Add another constructor with {@link TalkerId} parameter. Pass this
  * parameter to {@link SentenceParser#SentenceParser(TalkerId, String, int)}
- * with sentence type and number of data fields.</li>
+ * with sentence type and the expected number of data fields.</li>
  * <li>Register <code>XYZParser</code> in <code>SentenceFactory</code> by using
  * the {@link #registerParser(String, Class)} method.</li>
  * <li>Use {@link SentenceFactory#createParser(String)} or
  * {@link SentenceFactory#createParser(TalkerId, String)} to obtain an instance
  * of your parser. In addition, {@link net.sf.marineapi.nmea.io.SentenceReader}
- * will dispatch instances of <code>XYZSentence</code> when "XYZ" sentences are
- * read from data source.</li>
+ * will now dispatch instances of <code>XYZSentence</code> when "XYZ" sentences
+ * are read from the data source.</li>
  * </ol>
+ * <p>
+ * Notice that there is no need to compile the whole library and the added
+ * parser source code may be located in your own codebase. Additionally, it is
+ * also possible to override any existing parsers of the library as needed.
+ * </p>
  *
  * @author Kimmo Tuukkanen
  */
