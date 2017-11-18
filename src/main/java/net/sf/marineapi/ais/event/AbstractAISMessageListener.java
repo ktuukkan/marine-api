@@ -31,18 +31,21 @@ import java.util.LinkedList;
 import java.util.Queue;
 
 /**
- * Abstract base listener for AIS messages. Extend this class to create listener
- * for a specific AIS message type. For listening all available AIS sentences,
- * extend <code>AbstractSentenceListener&lt;AISSentence&gt;</code> or implement
- * SentenceListener interface. However, in this case you should also implement
- * AIS message concatenation to combine and parse messages that are delivered
- * over multiple sentences.
  * <p>
- * See {@link AbstractSentenceListener} for generics and inheritance related
- * notes.
+ * Abstract base listener for AIS messages. Extend this class to create listener
+ * for a specific AIS message type. To listen all incoming AIS sentences, extend
+ * the {@link AbstractSentenceListener} using {@link AISSentence} as type, or
+ * implement the {@link SentenceListener} interface. However, in these cases you
+ * also need to implement the message concatenation to parse messages being
+ * delivered over multiple sentences.</p>
+ * <p>
+ * The implementation of this class is based on {@link AbstractSentenceListener}
+ * and thus it has the same recommendations and limitations regarding the usage
+ * of generics and inheritance.
  * </p>
  * 
  * @author Kimmo Tuukkanen
+ * @param <T> AIS message type to be listened.
  * @see AbstractSentenceListener
  * @see GenericTypeResolver
  */
@@ -54,10 +57,12 @@ public abstract class AbstractAISMessageListener<T extends AISMessage>
     private final AISMessageFactory factory = AISMessageFactory.getInstance();
 
     /**
-     * Default constructor. Resolves the generic type <code>T</code> in order
-     * to filter incoming messages.
+     * Default constructor with automatic generic type resolving. Notice that
+     * the {@link GenericTypeResolver} may not always succeed.
      *
-     * @throws IllegalStateException When the generic Sentence type <code>T</code> cannot be resolved at runtime.
+     * @see #AbstractAISMessageListener(Class)
+     * @throws IllegalStateException If the generic type cannot be resolved
+     *                               at runtime.
      */
     public AbstractAISMessageListener() {
         this.messageType = GenericTypeResolver.resolve(
@@ -65,13 +70,12 @@ public abstract class AbstractAISMessageListener<T extends AISMessage>
     }
 
     /**
-     * Constructor with generic type parameter. This constructor may be used
-     * when the default constructor fails to resolve the generic type
-     * <code>T</code> at runtime. This may be due to more advanced usage of
-     * generics or inheritance, for example when generic type information is
-     * lost at compile time because of Java's type erasure.
+     * Constructor with explicit generic type parameter. This constructor may
+     * be used when the default constructor fails to resolve the generic type
+     * <code>T</code> at runtime.
      *
      * @param c Message type <code>T</code> to be listened.
+     * @see #AbstractAISMessageListener()
      */
     public AbstractAISMessageListener(Class<T> c) {
         this.messageType = c;
@@ -80,10 +84,11 @@ public abstract class AbstractAISMessageListener<T extends AISMessage>
     /**
      * <p>
      * Invoked when {@link AISSentence} of any type is received. Pre-parses
-     * the message to determine it's type and invokes the {@link #onMessage(AISMessage)}
-     * method when the type matches the generic type <code>T</code>.</p>
+     * the message to determine it's type and invokes the
+     * {@link #onMessage(AISMessage)} method when the type matches the generic
+     * type <code>T</code>.</p>
      * <p>
-     * This method has been declared as <code>final</code> to ensure the correct
+     * This method has been declared <code>final</code> to ensure the correct
      * handling of received sentences.</p>
      */
     @Override

@@ -83,7 +83,7 @@ public class AbstractAISMessageListenerTest {
     public void testSequenceListenerWithMixedOrder() {
 
         SequenceListener sl = new SequenceListener();
-        
+
         sl.sentenceRead(AIS_05_1);
         assertNull(sl.received);
 

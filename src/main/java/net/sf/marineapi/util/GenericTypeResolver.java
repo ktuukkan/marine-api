@@ -40,12 +40,17 @@ public final class GenericTypeResolver {
     private GenericTypeResolver() { }
 
     /**
-     * Resolves the generic type, assuming there is only one.
+     * Attempts to resolve the generic type of given class, with the assumption
+     * of single generic type parameter. However, the resolving may not always
+     * succeed, often due to more advanced or mixed usage of generics and
+     * inheritance. For example, the generic type information may be lost
+     * at compile-time because of the Java's type erasure.
      *
      * @param c The class of which super-classes and generic types to inspect
      * @param target Target class holding the generic type to be resolved
-     * @return The resolved generic Type (Class)
+     * @return The resolved generic type of <code>target</code>
      * @throws IllegalStateException If the generic type cannot be resolved
+     *                               at runtime.
      */
     public static Class<?> resolve(Class<?> c, Class<?> target) {
         Type t = resolve(c, target, new HashMap<>());
@@ -61,7 +66,8 @@ public final class GenericTypeResolver {
      * @param c The class of calling listener implementation.
      * @param types Variables and types memo
      */
-    private static Type resolve(Class<?> c, final Class<?> target, final Map<TypeVariable<?>, Type> types) {
+    private static Type resolve(Class<?> c, final Class<?> target,
+                                final Map<TypeVariable<?>, Type> types) {
 
         Type superClass = c.getGenericSuperclass();
 

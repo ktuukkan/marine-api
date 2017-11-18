@@ -28,6 +28,8 @@ import net.sf.marineapi.util.GenericTypeResolver;
  * Abstract base class for typed listeners with automatic sentence type
  * resolving and casting. Extend this class to create a listener for a single
  * sentence type and register it in {@link net.sf.marineapi.nmea.io.SentenceReader}.
+ * For listeners that need to handle all incoming sentences, it is recommended
+ * to implement the {@link SentenceListener} interface.
  * </p>
  * <p>
  * Recommended usage:
@@ -39,7 +41,7 @@ import net.sf.marineapi.util.GenericTypeResolver;
  * <p>
  * Notice that more advanced use of generics and inheritance may require using
  * the {@link #AbstractSentenceListener(Class)} constructor. For example, the 
- * following example won't work because the generic types are not available at
+ * following example won't work because the generic types not being available at
  * runtime:
  * </p>
  * <pre>
@@ -51,11 +53,11 @@ import net.sf.marineapi.util.GenericTypeResolver;
  * Methods of the {@link SentenceListener} interface implemented by this class
  * are empty, except for {@link #sentenceRead(SentenceEvent)} which is final
  * and detects the incoming sentences and casts them in correct interface
- * before calling the {@link #sentenceRead(Sentence)} method.
+ * before calling the {@link #sentenceRead(Sentence)} method. The other methods
+ * may be overridden as needed.
  *
  * @author Kimmo Tuukkanen
  * @param <T> Sentence interface to be listened.
- * @see net.sf.marineapi.nmea.event.SentenceListener
  * @see net.sf.marineapi.nmea.io.SentenceReader
  */
 public abstract class AbstractSentenceListener<T extends Sentence>
@@ -64,11 +66,12 @@ public abstract class AbstractSentenceListener<T extends Sentence>
     protected final Class<?> sentenceType;
 
     /**
-     * Default constructor. Resolves the generic type <code>T</code> in order
-     * to filter incoming sentences.
+     * Default constructor with automatic generic type resolving. Notice that
+     * the {@link GenericTypeResolver} may not always succeed.
      *
-     * @throws IllegalStateException If the generic type cannot be resolved at runtime.
      * @see #AbstractSentenceListener(Class)
+     * @throws IllegalStateException If the generic type cannot be resolved
+     *                               at runtime.
      */
     public AbstractSentenceListener() {
         sentenceType = GenericTypeResolver.resolve(
@@ -76,13 +79,12 @@ public abstract class AbstractSentenceListener<T extends Sentence>
     }
 
     /**
-     * Constructor with generic type parameter. This constructor may be used
-     * when the default constructor fails to resolve the generic type
-     * <code>T</code> at runtime. The failure may be due to more advanced usage
-     * of generics or inheritance, for example when the generic type information
-     * is lost at compile-time because of the type erasure.
+     * Constructor with explicit generic type parameter. This constructor may
+     * be used when the default constructor fails to resolve the generic type
+     * <code>T</code> at runtime.
      *
-     * @param c Sentence interface <code>T</code> to be listened.
+     * @param c Sentence type <code>T</code> to be listened.
+     * @see #AbstractSentenceListener()
      */
     protected AbstractSentenceListener(Class<T> c) {
         this.sentenceType = c;
@@ -95,10 +97,8 @@ public abstract class AbstractSentenceListener<T extends Sentence>
      * listener's generic type <code>T</code>.
      * </p>
      * <p>
-     * This method has been made <code>final</code> to ensure the correct
-     * filtering of sentences. For listeners that need to handle all incoming
-     * sentences, it is recommended to implement the {@link SentenceListener}
-     * interface.
+     * This method has been declared <code>final</code> to ensure the correct
+     * filtering of sentences.
      * </p>
      *
      * @see SentenceListener#sentenceRead(SentenceEvent)
