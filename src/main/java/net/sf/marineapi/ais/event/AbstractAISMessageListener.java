@@ -49,7 +49,7 @@ import java.util.Queue;
 public abstract class AbstractAISMessageListener<T extends AISMessage>
     extends AbstractSentenceListener<AISSentence> {
 
-    private final Class<?> messageType;
+    protected final Class<?> messageType;
     private final Queue<AISSentence> queue = new LinkedList<>();
     private final AISMessageFactory factory = AISMessageFactory.getInstance();
 
@@ -104,7 +104,7 @@ public abstract class AbstractAISMessageListener<T extends AISMessage>
                     onMessage((T) message);
                 }
             } catch (IllegalArgumentException iae) {
-                // nevermind unsupported message types
+                // never mind incorrect order or unsupported message types
             }
         }
     }

@@ -47,17 +47,22 @@ public class AISMessageParser implements AISMessage {
     private int fillBits = 0;
     private int lastFragmentNr = 0;
 
-    private List<Violation> fViolations = new ArrayList<Violation>();
+    private List<Violation> fViolations = new ArrayList<>();
 
 
     /**
-     * Default constructor.
+     * Default constructor. Message content musts be appended before using
+     * the parser.
+     *
+     * @see #append(String, int, int)
      */
     public AISMessageParser() {
     }
 
     /**
-     * Construct a parser with given AIS sentences.
+     * Construct a parser with given AIS sentences. The result will parser for
+     * common AIS fields (type, repeat and MMSI), from which the actual message
+     * type can be determined for further parsing.
      *
      * @param sentences Single AIS sentence or a sequence of sentences.
      */
@@ -73,7 +78,7 @@ public class AISMessageParser implements AISMessage {
     }
 
     /**
-     * Constucor with Sixbit content decoder.
+     * Constructor with six-bit content decoder.
      *
      * @param sb A non-empty six-bit decoder.
      */
