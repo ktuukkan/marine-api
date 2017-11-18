@@ -29,12 +29,15 @@ import java.util.Map;
 /**
  * Utility class for resolving the generic type of a class, mainly for
  * {@link net.sf.marineapi.nmea.event.AbstractSentenceListener} and
- * {@link net.sf.marineapi.ais.event.AbstractAISMessageListener} where we need
- * to know the generic type at runtime to filter the desired sentences.
+ * {@link net.sf.marineapi.ais.event.AbstractAISMessageListener} where the
+ * generic type needs to be resolved at runtime to filter the incoming
+ * messages.
  *
  * @author Kimmo Tuukkanen, Axel Uhl
  */
 public final class GenericTypeResolver {
+
+    private GenericTypeResolver() { }
 
     /**
      * Resolves the generic type, assuming there is only one.
@@ -44,12 +47,12 @@ public final class GenericTypeResolver {
      * @return The resolved generic Type (Class)
      * @throws IllegalStateException If the generic type cannot be resolved
      */
-    public static Type resolve(Class<?> c, Class<?> target) {
+    public static Class<?> resolve(Class<?> c, Class<?> target) {
         Type t = resolve(c, target, new HashMap<>());
         if (t == null || t instanceof TypeVariable) {
             throw new IllegalStateException("Cannot resolve generic type <T>, use constructor with Class<T> param.");
         }
-        return t;
+        return (Class<?>) t;
     }
 
     /**

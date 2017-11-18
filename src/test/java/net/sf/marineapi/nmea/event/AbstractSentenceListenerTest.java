@@ -21,32 +21,32 @@ public class AbstractSentenceListenerTest {
     @Test
     public void testDefaultConstructor() {
         BasicListener bl = new BasicListener();
-        assertEquals(BODSentence.class, bl.expectedType);
+        assertEquals(BODSentence.class, bl.sentenceType);
     }
 
     @Test
     public void testDefaultConstructorWhenExtended() {
         ExtendedBasicListener ebl = new ExtendedBasicListener();
-        assertEquals(BODSentence.class, ebl.expectedType);
+        assertEquals(BODSentence.class, ebl.sentenceType);
     }
 
     @Test
     public void testParametrizedConstructor() {
         GenericsListener<String, BODSentence> gl = new GenericsListener<>(BODSentence.class);
-        assertEquals(BODSentence.class, gl.expectedType);
+        assertEquals(BODSentence.class, gl.sentenceType);
     }
 
     @Test
     public void testParametrizedConstructorWhenExtended() {
         ExtendedGenericsListener<String, Integer, BODSentence> gl = new ExtendedGenericsListener<>(BODSentence.class);
-        assertEquals(BODSentence.class, gl.expectedType);
+        assertEquals(BODSentence.class, gl.sentenceType);
     }
 
     @Test
     public void testDefaultConstructorThrows() {
         try {
             GenericsListener<String, BODSentence> gl = new GenericsListener<>();
-            fail("default constructor didn't throw, resolved to " + gl.expectedType);
+            fail("default constructor didn't throw, resolved to " + gl.sentenceType);
         } catch (IllegalStateException ise) {
             String msg = "Cannot resolve generic type <T>, use constructor with Class<T> param.";
             assertEquals(msg, ise.getMessage());
@@ -59,7 +59,7 @@ public class AbstractSentenceListenerTest {
     public void testDefaultConstructorThrowsWhenExtended() {
         try {
             ExtendedGenericsListener<String, Integer, GGASentence> egl = new ExtendedGenericsListener<>();
-            fail("default constructor didn't throw, resolved to " + egl.expectedType);
+            fail("default constructor didn't throw, resolved to " + egl.sentenceType);
         } catch (IllegalStateException ise) {
             String msg = "Cannot resolve generic type <T>, use constructor with Class<T> param.";
             assertEquals(msg, ise.getMessage());
