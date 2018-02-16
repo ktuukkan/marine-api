@@ -8,6 +8,7 @@ Version 0.11.0-SNAPSHOT
   - ROTSentence; negative rate of turn values are now allowed. Also, the value
     may now exceed -/+360 degrees.
   - Support for GST sentences; GPS Pseudorange Noise Statistics
+  - Support for TXT sentences; Text messages, e.g. device boot screens etc.
   - AbstracSentenceListener; improvements in generic types resolving to support
     more advanced use of generics and inheritance.
 
