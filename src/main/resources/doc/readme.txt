@@ -99,6 +99,12 @@ documents publicly available in the Internet (URLs checked on 2013-09-08):
  * NMEA International Conference & Expo - Standards Update October 2014 by Steve Spitzer
    <http://www.nmea.org/Assets/20141004%20nmea%20standards%20update%20for%202014%20conference.pdf>
 
+ * Manufacturer Mnemonic Codes and Sentence Formatters List (August 1 2013) by NMEA.org
+   <https://www.nmea.org/Assets/20130801%200183%20identifier%20list.pdf>
+
+ * Approved 0183 Manufacturer's Mnemonic Codes (November 22, 2011) by NMEA.org
+   <https://www.nmea.org/Assets/20160523%200183%20manufacturer%20codes.pdf>
+
  * NMEA 0183 Sentences Not Recommended for New Designs by NMEA
    <http://www.nmea.org/Assets/100108_nmea_0183_sentences_not_recommended_for_new_designs.pdf>
 
@@ -111,7 +117,7 @@ documents publicly available in the Internet (URLs checked on 2013-09-08):
  * The NMEA FAQ by Peter Bennett
    <http://vancouver-webpages.com/peter/nmeafaq.txt> (not found)
    <http://www.eoss.org/pubs/nmeafaq.htm> (archived older version)
-   
+
  * Automatic Identification System Overview by Navigation Center of U.S.
    Department of Homeland Security
    <http://www.navcen.uscg.gov/?pageName=AISMessages>
