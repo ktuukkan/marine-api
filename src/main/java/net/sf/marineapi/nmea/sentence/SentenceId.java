@@ -29,7 +29,7 @@ package net.sf.marineapi.nmea.sentence;
  */
 public enum SentenceId {
 
-    /** Raymarine SeaTalk ($STALK). */
+    /** Raymarine SeaTalk sentence (<code>$STALK</code>). */
     ALK,
     /** Autopilot sentence "B"; xte, bearings and heading toward destination */
     APB,
@@ -43,6 +43,8 @@ public enum SentenceId {
     DPT,
     /** Datum reference. */
     DTM,
+    /** GNSS satellite fault detection (RAIM) */
+    GBS,
     /** Global Positioning System fix data */
     GGA,
     /** Geographic position (latitude/longitude) */
