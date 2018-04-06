@@ -64,7 +64,7 @@ public class TimeTest {
 
 	/**
 	 * Test method for
-	 * {@link net.sf.marineapi.nmea.util.Time#toString(net.sf.marineapi.nmea.util.Time)}
+	 * {@link net.sf.marineapi.nmea.util.Time#toString()}
 	 * .
 	 */
 	@Test
@@ -75,7 +75,7 @@ public class TimeTest {
 
 	/**
 	 * Test method for
-	 * {@link net.sf.marineapi.nmea.util.Time#toString(net.sf.marineapi.nmea.util.Time)}
+	 * {@link net.sf.marineapi.nmea.util.Time#toString()}
 	 * .
 	 */
 	@Test
@@ -86,7 +86,7 @@ public class TimeTest {
 
 	/**
 	 * Test method for
-	 * {@link net.sf.marineapi.nmea.util.Time#toString(net.sf.marineapi.nmea.util.Time)}
+	 * {@link net.sf.marineapi.nmea.util.Time#toString()}
 	 * .
 	 */
 	@Test
@@ -270,7 +270,7 @@ public class TimeTest {
 	}
 
 	/**
-	 * Test method for {@link net.sf.marineapi.nmea.util.Time#setSeconds(int)}.
+	 * Test method for {@link net.sf.marineapi.nmea.util.Time#setSeconds(double)}.
 	 */
 	@Test
 	public void testSetSeconds() {

@@ -310,14 +310,11 @@ public class Time {
 	@Override
 	public String toString() {
 		String str = String.format("%02d%02d", getHour(), getMinutes());
-
 		DecimalFormat nf = new DecimalFormat("00.000");
 		DecimalFormatSymbols dfs = new DecimalFormatSymbols();
 		dfs.setDecimalSeparator('.');
 		nf.setDecimalFormatSymbols(dfs);
-
-		str += nf.format(getSeconds());
-		return str;
+		return str.concat(nf.format(getSeconds()));
 	}
 
 	/**
