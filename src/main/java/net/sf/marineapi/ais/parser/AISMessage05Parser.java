@@ -75,7 +75,7 @@ class AISMessage05Parser extends AISMessageParser implements AISMessage05 {
 	private static final int 	DRAUGHT				= 14;
 	private static final int 	DESTINATION			= 15;
 	private final static int[]	FROM				= {
-		30, 40,  70, 112, 232, 240, 249, 258, 264, 270, 274, 278, 283, 288, 294, 302};
+		38, 40,  70, 112, 232, 240, 249, 258, 264, 270, 274, 278, 283, 288, 294, 302};
 	private final static int[]	TO   				= {
 		40, 70, 112, 232, 240, 249, 258, 264, 270, 274, 278, 283, 288, 294, 302, 422};
 
@@ -102,9 +102,9 @@ class AISMessage05Parser extends AISMessageParser implements AISMessage05 {
 			throw new IllegalArgumentException("Wrong message length");
 		
 		fAISVersion = content.getInt(FROM[AISVERSION], TO[AISVERSION]);
-		fIMONumber = content.getInt(FROM[IMONUMBER],IMONUMBER);
-		fCallSign = content.getString(FROM[CALLSIGN], TO[CALLSIGN]);
-		fName = content.getString(FROM[NAME], TO[NAME]);
+		fIMONumber = content.getInt(FROM[IMONUMBER], TO[IMONUMBER]);
+		fCallSign = content.getString(FROM[CALLSIGN], TO[CALLSIGN]).trim();
+		fName = content.getString(FROM[NAME], TO[NAME]).trim();
 		fShipAndCargoType = content.getInt(FROM[TYPEOFSHIPANDCARGO], TO[TYPEOFSHIPANDCARGO]);
 
 		fBow = content.getInt(FROM[BOW], TO[BOW]); 
@@ -120,7 +120,7 @@ class AISMessage05Parser extends AISMessageParser implements AISMessage05 {
 		fETAMinute = content.getInt(FROM[MINUTE], TO[MINUTE]); 
 
 		fMaximumDraught = content.getInt(FROM[DRAUGHT], TO[DRAUGHT]);
-		fDestination = content.getString(FROM[DESTINATION], TO[DESTINATION]);
+		fDestination = content.getString(FROM[DESTINATION], TO[DESTINATION]).trim();
 	}    
 
 	public int getAISVersionIndicator() { return fAISVersion; }
@@ -151,7 +151,7 @@ class AISMessage05Parser extends AISMessageParser implements AISMessage05 {
 	
 	public int getETAMinute() { return fETAMinute; }
 	
-	public int getMaximumDraught() { return fMaximumDraught; }
+	public double getMaximumDraught() { return fMaximumDraught / 10.0; }
 
 	public String getDestination() { return fDestination; }
 

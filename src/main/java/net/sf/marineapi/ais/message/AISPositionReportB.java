@@ -30,12 +30,12 @@ public interface AISPositionReportB extends AISPositionInfo {
 	/**
 	 * Returns the speed over ground.
 	 */
-	int getSpeedOverGround();
+	double getSpeedOverGround();
 
 	/**
 	 * Returns the course over ground.
 	 */
-	int getCourseOverGround();
+	double getCourseOverGround();
 
 	/**
 	 * Returns the true heading.

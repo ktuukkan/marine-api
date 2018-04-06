@@ -124,36 +124,56 @@ class AISPositionReportParser extends AISMessageParser implements AISPositionRep
 	    	addViolation(new AISRuleViolation("ManouverIndicator", fManouverIndicator, ManeuverIndicator.RANGE));
 	}
 
-	public int getNavigationalStatus() { return fNavigationalStatus; }
-
-	public int getRateOfTurn() { return fRateOfTurn; }
-
-	public int getSpeedOverGround() { return fSOG; }
-
-	public String getSOGString() {
-		String msg;
-		if (fSOG == 1023)
-			msg = "no SOG";
-		else if (fSOG == 1022)
-			msg = ">=102.2";
-		else
-			msg = new DecimalFormat("##0.0").format(fSOG / 10.0);
-		return msg;
+	public int getNavigationalStatus() {
+	    return fNavigationalStatus;
 	}
 
-	public boolean getPositionAccuracy() { return fPositionAccuracy; }
+	public double getRateOfTurn() {
+	    return RateOfTurn.toDegreesPerMinute(fRateOfTurn);
+	}
 
-	public double getLongitudeInDegrees() { return fLongitude; }
+	public double getSpeedOverGround() {
+	    return Angle12.toDegrees(fSOG);
+	}
 
-	public double getLatitudeInDegrees() { return fLatitude; }
+	public boolean getPositionAccuracy() {
+	    return fPositionAccuracy;
+	}
 
-	public int getCourseOverGround() { return fCOG; }
+	public double getLongitudeInDegrees() {
+	    return fLongitude;
+	}
 
-	public int getTrueHeading() { return fTrueHeading; }
+	public double getLatitudeInDegrees() {
+	    return fLatitude;
+	}
 
-	public int getTimeStamp() { return fTimeStamp; }
+	public double getCourseOverGround() {
+	    return Angle12.toDegrees(fCOG);
+	}
 
-	public int getManouverIndicator() { return fManouverIndicator; }
+	public int getTrueHeading() {
+	    return fTrueHeading;
+	}
+
+	public int getTimeStamp() {
+	    return fTimeStamp;
+	}
+
+	public int getManouverIndicator() {
+	    return fManouverIndicator;
+	}
+
+    private String getSOGString() {
+        String msg;
+        if (fSOG == 1023)
+            msg = "no SOG";
+        else if (fSOG == 1022)
+            msg = ">=102.2";
+        else
+            msg = new DecimalFormat("##0.0").format(fSOG / 10.0);
+        return msg;
+    }
 
 	public String toString() {
 		String result =     "\tNav st:  " + NavigationalStatus.toString(fNavigationalStatus);

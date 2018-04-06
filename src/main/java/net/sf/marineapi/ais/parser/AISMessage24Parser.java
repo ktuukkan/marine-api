@@ -83,10 +83,10 @@ class AISMessage24Parser extends AISMessageParser implements AISMessage24 {
     private static final int PORT = 8;
     private static final int STARBOARD = 9;
 
-    private static final int[] FROM_A = new int[]{38, 40, 160};
-    private static final int[] TO_A = new int[]{40, 160, 168};
-    private static final int[] FROM_B = new int[]{38, 40, 48,66,70,90,132,141,150,156};
-    private static final int[] TO_B = new int[]{40, 48,66,70,90,132,141,150,156,162};
+    private static final int[] FROM_A = { 38, 40, 160 };
+    private static final int[] TO_A = { 40, 160, 168 };
+    private static final int[] FROM_B = { 38, 40, 48, 66, 70, 90, 132, 141, 150, 156 };
+    private static final int[] TO_B = { 40, 48, 66, 70, 90, 132, 141, 150, 156, 162 };
 
     private int fPartNumber;
     private String fName;

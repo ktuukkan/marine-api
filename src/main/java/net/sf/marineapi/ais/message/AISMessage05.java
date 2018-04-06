@@ -111,7 +111,7 @@ public interface AISMessage05 extends AISMessage {
 	 * Returns the maximum draught.
 	 * @return an integer value of the maximum static draught in 1/10 m
 	 */
-	int getMaximumDraught();
+	double getMaximumDraught();
 
 	/**
 	 * Returns the destination.

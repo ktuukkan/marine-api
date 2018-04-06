@@ -122,6 +122,9 @@ documents publicly available in the Internet (URLs checked on 2013-09-08):
    Department of Homeland Security
    <http://www.navcen.uscg.gov/?pageName=AISMessages>
 
+ * AIVDM/AIVDO protocol decoding (v1.52, Aug 2016) by Eric S. Raymond
+   <http://catb.org/gpsd/AIVDM.html>
+
  * SeaTalk Technical Reference (revision 3.22) by Thomas Knauf
    <http://www.thomasknauf.de/seatalk.htm>
 

@@ -50,7 +50,9 @@ import net.sf.marineapi.ais.util.TimeStamp;
  * 10       trueHeading                                9    ( 125, 133)
  * 11       timeStamp                                  6    ( 134, 139)
  * </pre>
- * 
+ *
+ * TODO: missing "Class B" flags 13 - 20.
+ *
  * @author Lázár József
  */
 class AISPositionReportBParser extends AISMessageParser implements AISPositionReportB {
@@ -96,7 +98,7 @@ class AISPositionReportBParser extends AISMessageParser implements AISPositionRe
 	    fTimeStamp = content.getInt(FROM[TIMESTAMP], TO[TIMESTAMP]);
 	}
 
-	public int getSpeedOverGround() { return fSOG; }
+	public double getSpeedOverGround() { return fSOG / 10.0; }
 
 	public boolean getPositionAccuracy() { return fPositionAccuracy; }
 
@@ -104,7 +106,7 @@ class AISPositionReportBParser extends AISMessageParser implements AISPositionRe
 
 	public double getLatitudeInDegrees() { return fLatitude; }
 
-	public int getCourseOverGround() { return fCOG; }
+	public double getCourseOverGround() { return Angle12.toDegrees(fCOG); }
 
 	public int getTrueHeading() { return fTrueHeading; }
 

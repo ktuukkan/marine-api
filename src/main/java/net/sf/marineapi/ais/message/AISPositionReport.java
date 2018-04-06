@@ -35,17 +35,17 @@ public interface AISPositionReport extends AISPositionInfo {
 	/**
 	 * Returns the rate of turn.
 	 */
-	int getRateOfTurn();
+	double getRateOfTurn();
 
 	/**
 	 * Returns the speed over ground.
 	 */
-	int getSpeedOverGround();
+	double getSpeedOverGround();
 
 	/**
 	 * Returns the course over ground.
 	 */
-	int getCourseOverGround();
+	double getCourseOverGround();
 
 	/**
 	 * Returns the true heading.

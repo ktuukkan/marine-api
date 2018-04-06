@@ -141,7 +141,7 @@ class AISMessage09Parser extends AISMessageParser implements AISMessage09 {
 
     public double getLatitudeInDegrees() { return fLatitude; }
 
-    public int getCourseOverGround() { return fCOG; }
+    public double getCourseOverGround() { return Angle12.toDegrees(fCOG); }
 
     public int getTimeStamp() { return fTimeStamp; }
 

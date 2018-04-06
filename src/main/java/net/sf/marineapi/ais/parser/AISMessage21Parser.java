@@ -129,7 +129,7 @@ class AISMessage21Parser extends AISMessageParser implements AISMessage21 {
             fRAIMFlag = content.getBoolean(TO[RAIMFLAG]);
             fVirtualAidFlag = content.getBoolean(TO[VIRTUALAIDFLAG]);
             fAssignedModeFlag = content.getBoolean(TO[ASSIGNEDMODEFLAG]);
-            fNameExtension = content.getString(FROM[NAMEEXTENSION], TO[NAMEEXTENSION]);
+            fNameExtension = content.getString(FROM[NAMEEXTENSION], TO[NAMEEXTENSION]).trim();
         } else {
             throw new IllegalArgumentException("Wrong message length");
         }
