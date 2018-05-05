@@ -91,6 +91,8 @@ abstract class AbstractDataReader implements DataReader {
 				} else if (!SentenceValidator.isSentence(data)) {
 					parent.fireDataEvent(data);
 				}
+			} catch (IllegalArgumentException iae) {
+				parent.handleException("No registered parser", iae);
 			} catch (Exception e) {
 				parent.handleException("Data read failed", e);
 				try {
