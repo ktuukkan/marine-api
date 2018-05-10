@@ -206,7 +206,7 @@ public class SentenceFactoryTest {
 		try {
 			instance.createParser("$GPXYZ,1,2,3,4,5,6,7,8");
 			fail("Did not throw exception");
-		} catch (IllegalArgumentException e) {
+		} catch (UnsupportedSentenceException e) {
 			// pass
 		}
 	}

@@ -21,8 +21,11 @@
 package net.sf.marineapi.nmea.io;
 
 import net.sf.marineapi.nmea.parser.SentenceFactory;
+import net.sf.marineapi.nmea.parser.UnsupportedSentenceException;
 import net.sf.marineapi.nmea.sentence.Sentence;
 import net.sf.marineapi.nmea.sentence.SentenceValidator;
+
+import java.util.logging.Logger;
 
 /**
  * Base class for data readers; common methods and run-loop.
@@ -33,6 +36,7 @@ abstract class AbstractDataReader implements DataReader {
 
 	// Sleep time between failed read attempts to prevent busy-looping
 	private static final int SLEEP_TIME = 100;
+	private static final Logger LOGGER = Logger.getLogger(AbstractDataReader.class.getName());
 
 	private final SentenceReader parent;
 	private volatile boolean isRunning = true;
@@ -91,8 +95,8 @@ abstract class AbstractDataReader implements DataReader {
 				} else if (!SentenceValidator.isSentence(data)) {
 					parent.fireDataEvent(data);
 				}
-			} catch (IllegalArgumentException iae) {
-				parent.handleException("No registered parser", iae);
+			} catch (UnsupportedSentenceException use) {
+				LOGGER.warning(use.getMessage());
 			} catch (Exception e) {
 				parent.handleException("Data read failed", e);
 				try {
