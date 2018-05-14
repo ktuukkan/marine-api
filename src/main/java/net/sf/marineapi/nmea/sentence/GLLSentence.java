@@ -55,8 +55,23 @@ public interface GLLSentence extends PositionSentence, TimeSentence {
 	 */
 	void setStatus(DataStatus status);
 
+	/**
+	 * Get the FAA operating mode for GPS. Notice that this field is available in NMEA v3.0 and later.
+	 *
+	 * @return FaaMode enum
+	 * @throws net.sf.marineapi.nmea.parser.DataNotAvailableException If the data is
+	 *             not available.
+	 * @throws net.sf.marineapi.nmea.parser.ParseException If the field contains
+	 *             unexpected or illegal value.
+	 */
 	FaaMode getMode();
 
+	/**
+	 * Set the FAA operation mode of GPS. Notice that this field is available in NMEA v3.0 and later. Thus, the number of
+	 * sentence fields may be adjusted when setting this value.
+	 *
+	 * @param mode FaaMode enum to set
+	 */
 	void setMode(FaaMode mode);
 
 }

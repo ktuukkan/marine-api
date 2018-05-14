@@ -61,7 +61,7 @@ class GLLParser extends PositionParser implements GLLSentence {
 	 * @param talker TalkerId to set
 	 */
 	public GLLParser(TalkerId talker) {
-		super(talker, SentenceId.GLL, 6);
+		super(talker, SentenceId.GLL, 7);
 	}
 
 	/*
@@ -119,6 +119,9 @@ class GLLParser extends PositionParser implements GLLSentence {
 	}
 
 	public void setMode(FaaMode mode) {
+		if (this.getFieldCount() <= MODE) {
+			this.setFieldCount(7);
+		}
 		setCharValue(MODE, mode.toChar());
 	}
 

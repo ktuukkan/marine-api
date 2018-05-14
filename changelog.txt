@@ -12,6 +12,7 @@ Version 0.11.0-SNAPSHOT
   - RPMSentence; added missing RPM setter
   - ROTSentence; negative rate of turn values are now allowed. Also, the value
     may now exceed -/+360 degrees.
+  - GLLSentence; added support for FAA mode field (NMEA v3.0)
   - Improvements in AIS message parsers
     - added tests for all current message parsers
     - speed, course and heading values now converted in actual double values in
