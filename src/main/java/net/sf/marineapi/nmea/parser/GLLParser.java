@@ -24,6 +24,7 @@ import net.sf.marineapi.nmea.sentence.GLLSentence;
 import net.sf.marineapi.nmea.sentence.SentenceId;
 import net.sf.marineapi.nmea.sentence.TalkerId;
 import net.sf.marineapi.nmea.util.DataStatus;
+import net.sf.marineapi.nmea.util.FaaMode;
 import net.sf.marineapi.nmea.util.Position;
 import net.sf.marineapi.nmea.util.Time;
 
@@ -41,6 +42,7 @@ class GLLParser extends PositionParser implements GLLSentence {
 	private static final int LON_HEMISPHERE = 3;
 	private static final int UTC_TIME = 4;
 	private static final int DATA_STATUS = 5;
+	private static final int MODE = 6;
 
 	/**
 	 * Creates a new instance of GLLParser.
@@ -78,6 +80,14 @@ class GLLParser extends PositionParser implements GLLSentence {
 		return DataStatus.valueOf(getCharValue(DATA_STATUS));
 	}
 
+	public FaaMode getMode() {
+		if (getFieldCount() > MODE) {
+			return FaaMode.valueOf(getCharValue(MODE));
+		} else {
+			return null;
+		}
+	}
+
 	/*
 	 * (non-Javadoc)
 	 * @see net.sf.marineapi.nmea.sentence.TimeSentence#getTime()
@@ -106,6 +116,10 @@ class GLLParser extends PositionParser implements GLLSentence {
 	 */
 	public void setStatus(DataStatus status) {
 		setCharValue(DATA_STATUS, status.toChar());
+	}
+
+	public void setMode(FaaMode mode) {
+		setCharValue(MODE, mode.toChar());
 	}
 
 	/*

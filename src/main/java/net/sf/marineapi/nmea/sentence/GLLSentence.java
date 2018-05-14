@@ -21,6 +21,7 @@
 package net.sf.marineapi.nmea.sentence;
 
 import net.sf.marineapi.nmea.util.DataStatus;
+import net.sf.marineapi.nmea.util.FaaMode;
 
 /**
  * Current geographic position and time.
@@ -53,5 +54,9 @@ public interface GLLSentence extends PositionSentence, TimeSentence {
 	 *             unexpected or illegal value.
 	 */
 	void setStatus(DataStatus status);
+
+	FaaMode getMode();
+
+	void setMode(FaaMode mode);
 
 }
