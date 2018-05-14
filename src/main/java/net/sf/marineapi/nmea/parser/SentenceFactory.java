@@ -215,7 +215,7 @@ public final class SentenceFactory {
 
 		if (!hasParser(sid)) {
 			String msg = String.format("Parser for type '%s' not found", sid);
-			throw new IllegalArgumentException(msg);
+			throw new UnsupportedSentenceException(msg);
 		}
 
 		Sentence parser = null;
