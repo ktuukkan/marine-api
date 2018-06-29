@@ -76,4 +76,14 @@ public class AISMessage09ParserTest {
         assertEquals(0, msg.getRadioStatus());
     }
 
+    @Test
+    public void isLatitudeAvailable() {
+        assertEquals(true, msg.isLatitudeAvailable());
+    }
+
+    @Test
+    public void isLongitudeAvailable() {
+        assertEquals(true, msg.isLongitudeAvailable());
+    }
+
 }

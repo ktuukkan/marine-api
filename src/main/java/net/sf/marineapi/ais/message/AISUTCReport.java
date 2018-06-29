@@ -25,7 +25,7 @@ package net.sf.marineapi.ais.message;
  * 
  * @author Lázár József
  */
-public interface AISUTCReport extends AISMessage {
+public interface AISUTCReport extends AISMessage, AISPositionInfo {
 
 	/**
 	 * Returns the UTC year.

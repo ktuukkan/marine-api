@@ -2,10 +2,9 @@ package net.sf.marineapi.ais.parser;
 
 import net.sf.marineapi.ais.message.AISPositionReport;
 import net.sf.marineapi.ais.util.Sixbit;
-import org.junit.Ignore;
 import org.junit.Test;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 /**
  * AISPositionReportParser test, covering parsers for types 01, 02 and 03.
@@ -70,4 +69,33 @@ public class AISPositionReportParserTest {
         assertEquals(0, msg.getManouverIndicator());
     }
 
+    @Test
+    public void isLatitudeAvailable() {
+        assertEquals(true, msg.isLatitudeAvailable());
+    }
+
+    @Test
+    public void isLongitudeAvailable() {
+        assertEquals(true, msg.isLongitudeAvailable());
+    }
+
+    @Test
+    public void isRateOfTurnAvailable() {
+        assertEquals(true, msg.isRateOfTurnAvailable());
+    }
+
+    @Test
+    public void isCourseOverGroundAvailable() {
+        assertEquals(true, msg.isCourseOverGroundAvailable());
+    }
+
+    @Test
+    public void isSpeedOverGroundAvailable() {
+        assertEquals(true, msg.isSpeedOverGroundAvailable());
+    }
+
+    @Test
+    public void isTimeStampAvailable() {
+        assertEquals(true, msg.isTimeStampAvailable());
+    }
 }

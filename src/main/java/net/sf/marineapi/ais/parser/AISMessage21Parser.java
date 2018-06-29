@@ -25,7 +25,6 @@ import net.sf.marineapi.ais.util.AISRuleViolation;
 import net.sf.marineapi.ais.util.Latitude27;
 import net.sf.marineapi.ais.util.Longitude28;
 import net.sf.marineapi.ais.util.NavAidType;
-import net.sf.marineapi.ais.util.PositionInfo;
 import net.sf.marineapi.ais.util.Sixbit;
 
 /**
@@ -89,8 +88,8 @@ class AISMessage21Parser extends AISMessageParser implements AISMessage21 {
     private int fAidType;
     private String fName;
     private boolean	fPositionAccuracy;
-    private double	fLongitude;
-    private double	fLatitude;
+    private int	fLongitude;
+    private int	fLatitude;
     private int fBow;
     private int fStern;
     private int fPort;
@@ -112,12 +111,12 @@ class AISMessage21Parser extends AISMessageParser implements AISMessage21 {
             fAidType = content.getInt(FROM[AIDTYPE], TO[AIDTYPE]);
             fName = content.getString(FROM[NAME], TO[NAME]);
             fPositionAccuracy = content.getBoolean(TO[POSITIONACCURACY]);
-            fLongitude = Longitude28.toDegrees(content.getAs28BitInt(FROM[LONGITUDE], TO[LONGITUDE]));
-            if (!PositionInfo.isLongitudeCorrect(fLongitude))
-                addViolation(new AISRuleViolation("LongitudeInDegrees", fLongitude, PositionInfo.LONGITUDE_RANGE));
-            fLatitude = Latitude27.toDegrees(content.getAs27BitInt(FROM[LATITUDE], TO[LATITUDE]));
-            if (!PositionInfo.isLatitudeCorrect(fLatitude))
-                addViolation(new AISRuleViolation("LatitudeInDegrees", fLatitude, PositionInfo.LATITUDE_RANGE));
+            fLongitude = content.getAs28BitInt(FROM[LONGITUDE], TO[LONGITUDE]);
+            if (!Longitude28.isCorrect(fLongitude))
+                addViolation(new AISRuleViolation("LongitudeInDegrees", fLongitude, Longitude28.RANGE));
+            fLatitude = content.getAs27BitInt(FROM[LATITUDE], TO[LATITUDE]);
+            if (!Latitude27.isCorrect(fLatitude))
+                addViolation(new AISRuleViolation("LatitudeInDegrees", fLatitude, Latitude27.RANGE));
             fBow = content.getInt(FROM[BOW], TO[BOW]);
             fStern = content.getInt(FROM[STERN], TO[STERN]);
             fPort = content.getInt(FROM[PORT], TO[PORT]);
@@ -147,9 +146,9 @@ class AISMessage21Parser extends AISMessageParser implements AISMessage21 {
         return fPositionAccuracy;
     }
 
-    public double getLongitudeInDegrees() { return fLongitude; }
+    public double getLongitudeInDegrees() { return Longitude28.toDegrees(fLongitude); }
 
-    public double getLatitudeInDegrees() { return fLatitude; }
+    public double getLatitudeInDegrees() { return Latitude27.toDegrees(fLatitude); }
 
     public int getBow() {
         return this.fBow;
@@ -195,12 +194,22 @@ class AISMessage21Parser extends AISMessageParser implements AISMessage21 {
         return fNameExtension;
     }
 
+    @Override
+    public boolean isLongitudeAvailable() {
+        return Longitude28.isAvailable(fLongitude);
+    }
+
+    @Override
+    public boolean isLatitudeAvailable() {
+        return Latitude27.isAvailable(fLatitude);
+    }
+
     public String toString() {
         String result = "\tAid Type:      " + NavAidType.toString(fAidType);
         result += SEPARATOR + "Name:      " + this.fName;
         result += SEPARATOR + "Pos acc: " + (fPositionAccuracy ? "high" : "low") + " accuracy";
-        result += SEPARATOR + "Lon:     " + PositionInfo.longitudeToString(fLongitude);
-        result += SEPARATOR + "Lat:     " + PositionInfo.latitudeToString(fLatitude);
+        result += SEPARATOR + "Lon:     " + Longitude28.toString(fLongitude);
+        result += SEPARATOR + "Lat:     " + Latitude27.toString(fLatitude);
         String dim = "Bow: " + this.fBow + ", Stern: " + this.fStern + ", Port: " + this.fPort + ", Starboard: " + this.fStarboard + " [m]";
         result += SEPARATOR + "Dim:       " + dim;
         result += SEPARATOR + "Sec:     " + getUtcSecond();

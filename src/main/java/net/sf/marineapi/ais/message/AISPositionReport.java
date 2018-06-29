@@ -61,4 +61,29 @@ public interface AISPositionReport extends AISPositionInfo {
 	 * Returns the manouver indicator.
 	 */
 	int getManouverIndicator();
+
+	/**
+	 * Returns true if rate of turn is available in the message.
+	 */
+	boolean isRateOfTurnAvailable();
+
+	/**
+	 * Returns true if speed over ground is available in the message.
+	 */
+	boolean isSpeedOverGroundAvailable();
+
+	/**
+	 * Returns true if course over ground is available in the message.
+	 */
+	boolean isCourseOverGroundAvailable();
+
+	/**
+	 * Returns true if true heading is available in the message.
+	 */
+	boolean isTrueHeadingAvailable();
+
+	/**
+	 * Returns true if timestamp is available in the message.
+	 */
+	boolean isTimeStampAvailable();
 }

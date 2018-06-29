@@ -107,4 +107,13 @@ public class AISMessage21ParserTest {
         assertEquals("EXTENDED NAME", msg.getNameExtension());
     }
 
+    @Test
+    public void isLatitudeAvailable() {
+        assertEquals(true, msg.isLatitudeAvailable());
+    }
+
+    @Test
+    public void isLongitudeAvailable() {
+        assertEquals(true, msg.isLongitudeAvailable());
+    }
 }

@@ -46,4 +46,24 @@ public interface AISPositionReportB extends AISPositionInfo {
 	 * Returns the time stamp contained in the message.
 	 */
 	int getTimeStamp();
+
+	/**
+	 * Returns true if speed over ground is available in the message.
+	 */
+	boolean isSpeedOverGroundAvailable();
+
+	/**
+	 * Returns true if course over ground is available in the message.
+	 */
+	boolean isCourseOverGroundAvailable();
+
+	/**
+	 * Returns true if true heading is available in the message.
+	 */
+	boolean isTrueHeadingAvailable();
+
+	/**
+	 * Returns true if timestamp is available in the message.
+	 */
+	boolean isTimeStampAvailable();
 }

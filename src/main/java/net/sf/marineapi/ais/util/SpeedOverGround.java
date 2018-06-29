@@ -1,6 +1,6 @@
 /*
- * AISMessage04.java
- * Copyright (C) 2015 Lázár József
+ * SpeedOverGround.java
+ * Copyright (C) 2018 Jyrki Jakobsson
  *
  * This file is part of Java Marine API.
  * <http://ktuukkan.github.io/marine-api/>
@@ -18,12 +18,32 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Java Marine API. If not, see <http://www.gnu.org/licenses/>.
  */
-package net.sf.marineapi.ais.message;
+package net.sf.marineapi.ais.util;
+
+import java.text.DecimalFormat;
 
 /**
- * Base Station Report.
+ * Checks a speed-over-ground value for validity.
  *
- * @author Lázár József
+ * @author Jyrki Jakobsson
  */
-public interface AISMessage04 extends AISUTCReport {
+public class SpeedOverGround {
+    private static final int DEFAULTVALUE = 1023;
+
+    public static boolean isAvailable(int value) {
+        return value != DEFAULTVALUE;
+    }
+
+    public static double toKnots(int value) {
+        return value / 10d;
+    }
+
+    public static String toString(int value) {
+        if (!isAvailable(value))
+            return "no SOG";
+        else if (value == 1022)
+            return ">=102.2";
+        else
+            return new DecimalFormat("##0.0").format(toKnots(value));
+    }
 }

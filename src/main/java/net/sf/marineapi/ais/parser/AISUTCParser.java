@@ -24,7 +24,6 @@ import net.sf.marineapi.ais.message.AISUTCReport;
 import net.sf.marineapi.ais.util.AISRuleViolation;
 import net.sf.marineapi.ais.util.Latitude27;
 import net.sf.marineapi.ais.util.Longitude28;
-import net.sf.marineapi.ais.util.PositionInfo;
 import net.sf.marineapi.ais.util.PositioningDevice;
 import net.sf.marineapi.ais.util.Sixbit;
 
@@ -82,8 +81,8 @@ class AISUTCParser extends AISMessageParser implements AISUTCReport {
 	private int		fUTCMinute;
 	private int		fUTCSecond;
 	private boolean	fPositionAccuracy;
-	private double	fLongitude;
-	private double	fLatitude;
+	private int		fLongitude;
+	private int		fLatitude;
 	private int		fTypeOfEPFD;
 
 	public AISUTCParser(Sixbit content) {
@@ -98,12 +97,12 @@ class AISUTCParser extends AISMessageParser implements AISUTCReport {
 	    fUTCMinute = content.getInt(FROM[UTC_MINUTE],TO[UTC_MINUTE]);
 	    fUTCSecond = content.getInt(FROM[UTC_SECOND], TO[UTC_SECOND]);
 	    fPositionAccuracy = content.getBoolean(FROM[POSITIONACCURACY]);
-	    fLongitude = Longitude28.toDegrees(content.getAs28BitInt(FROM[LONGITUDE], TO[LONGITUDE]));
-	    if (!PositionInfo.isLongitudeCorrect(fLongitude))
-	    	addViolation(new AISRuleViolation("LongitudeInDegrees", fLongitude, PositionInfo.LONGITUDE_RANGE));
-	    fLatitude = Latitude27.toDegrees(content.getAs27BitInt(FROM[LATITUDE], TO[LATITUDE]));
-	    if (!PositionInfo.isLatitudeCorrect(fLatitude))
-	    	addViolation(new AISRuleViolation("LatitudeInDegrees", fLatitude, PositionInfo.LATITUDE_RANGE));
+	    fLongitude = content.getAs28BitInt(FROM[LONGITUDE], TO[LONGITUDE]);
+	    if (!Longitude28.isCorrect(fLongitude))
+	    	addViolation(new AISRuleViolation("LongitudeInDegrees", fLongitude, Longitude28.RANGE));
+	    fLatitude = content.getAs27BitInt(FROM[LATITUDE], TO[LATITUDE]);
+	    if (!Latitude27.isCorrect(fLatitude))
+	    	addViolation(new AISRuleViolation("LatitudeInDegrees", fLatitude, Latitude27.RANGE));
 	    fTypeOfEPFD = content.getInt(FROM[FIXING_DEV_TYPE], TO[FIXING_DEV_TYPE]);
 	}
 
@@ -121,12 +120,22 @@ class AISUTCParser extends AISMessageParser implements AISUTCReport {
 
 	public boolean getPositionAccuracy() { return fPositionAccuracy; }
 
-	public double getLongitudeInDegrees() { return fLongitude; }
+	public double getLongitudeInDegrees() { return Longitude28.toDegrees(fLongitude); }
 
-	public double getLatitudeInDegrees() { return fLatitude; }
+	public double getLatitudeInDegrees() { return Latitude27.toDegrees(fLatitude); }
 
 	public int getTypeOfEPFD() { return fTypeOfEPFD; }
-	
+
+	@Override
+	public boolean isLongitudeAvailable() {
+		return Longitude28.isAvailable(fLongitude);
+	}
+
+	@Override
+	public boolean isLatitudeAvailable() {
+		return Latitude27.isAvailable(fLatitude);
+	}
+
 	@Override
 	public String toString() {
 		String result =     "\tYear:    " + getUtcYear();
@@ -136,8 +145,8 @@ class AISUTCParser extends AISMessageParser implements AISUTCReport {
 		result += SEPARATOR + "Minute:  " + getUtcMinute();
 		result += SEPARATOR + "Sec:     " + getUtcSecond();
 		result += SEPARATOR + "Pos acc: " + (fPositionAccuracy ? "high" : "low") + " accuracy";
-		result += SEPARATOR + "Lon:     " + PositionInfo.longitudeToString(fLongitude);
-		result += SEPARATOR + "Lat:     " + PositionInfo.latitudeToString(fLatitude);
+		result += SEPARATOR + "Lon:     " + Longitude28.toString(fLongitude);
+		result += SEPARATOR + "Lat:     " + Latitude27.toString(fLatitude);
 		result += SEPARATOR + "EPFD:    " + PositioningDevice.toString(fTypeOfEPFD);
 		return result;
 	}
