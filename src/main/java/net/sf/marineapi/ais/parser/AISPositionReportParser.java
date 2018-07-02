@@ -163,37 +163,37 @@ class AISPositionReportParser extends AISMessageParser implements AISPositionRep
 	}
 
 	@Override
-	public boolean isRateOfTurnAvailable() {
+	public boolean hasRateOfTurn() {
 		return RateOfTurn.isTurnIndicatorAvailable(fRateOfTurn);
 	}
 
 	@Override
-	public boolean isSpeedOverGroundAvailable() {
+	public boolean hasSpeedOverGround() {
 		return SpeedOverGround.isAvailable(fSOG);
 	}
 
 	@Override
-	public boolean isCourseOverGroundAvailable() {
+	public boolean hasCourseOverGround() {
 		return Angle12.isAvailable(fCOG);
 	}
 
 	@Override
-	public boolean isTrueHeadingAvailable() {
+	public boolean hasTrueHeading() {
 		return Angle9.isAvailable(fTrueHeading);
 	}
 
 	@Override
-	public boolean isTimeStampAvailable() {
+	public boolean hasTimeStamp() {
 		return TimeStamp.isAvailable(fTimeStamp);
 	}
 
 	@Override
-	public boolean isLongitudeAvailable() {
+	public boolean hasLongitude() {
 		return Longitude28.isAvailable(fLongitude);
 	}
 
 	@Override
-	public boolean isLatitudeAvailable() {
+	public boolean hasLatitude() {
 		return Latitude27.isAvailable(fLatitude);
 	}
 

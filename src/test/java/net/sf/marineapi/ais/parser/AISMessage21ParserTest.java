@@ -108,12 +108,12 @@ public class AISMessage21ParserTest {
     }
 
     @Test
-    public void isLatitudeAvailable() {
-        assertEquals(true, msg.isLatitudeAvailable());
+    public void hasLatitude() {
+        assertEquals(true, msg.hasLatitude());
     }
 
     @Test
-    public void isLongitudeAvailable() {
-        assertEquals(true, msg.isLongitudeAvailable());
+    public void hasLongitude() {
+        assertEquals(true, msg.hasLongitude());
     }
 }

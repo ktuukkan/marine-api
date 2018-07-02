@@ -46,11 +46,11 @@ interface AISPositionInfo extends AISMessage {
 	 * Returns true if longitude is available in the message.
 	 * If false, getLongitudeInDegrees may return an out-of-range value.
 	 */
-	boolean isLongitudeAvailable();
+	boolean hasLongitude();
 
 	/**
 	 * Returns true if latitude is available in the message.
 	 * If false, getLatitudeInDegrees may return an out-of-range value.
 	 */
-	boolean isLatitudeAvailable();
+	boolean hasLatitude();
 }

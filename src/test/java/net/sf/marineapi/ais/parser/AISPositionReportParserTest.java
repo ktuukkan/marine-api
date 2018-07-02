@@ -70,32 +70,32 @@ public class AISPositionReportParserTest {
     }
 
     @Test
-    public void isLatitudeAvailable() {
-        assertEquals(true, msg.isLatitudeAvailable());
+    public void hasLatitude() {
+        assertEquals(true, msg.hasLatitude());
     }
 
     @Test
-    public void isLongitudeAvailable() {
-        assertEquals(true, msg.isLongitudeAvailable());
+    public void hasLongitude() {
+        assertEquals(true, msg.hasLongitude());
     }
 
     @Test
-    public void isRateOfTurnAvailable() {
-        assertEquals(true, msg.isRateOfTurnAvailable());
+    public void hasRateOfTurn() {
+        assertEquals(true, msg.hasRateOfTurn());
     }
 
     @Test
-    public void isCourseOverGroundAvailable() {
-        assertEquals(true, msg.isCourseOverGroundAvailable());
+    public void hasCourseOverGround() {
+        assertEquals(true, msg.hasCourseOverGround());
     }
 
     @Test
-    public void isSpeedOverGroundAvailable() {
-        assertEquals(true, msg.isSpeedOverGroundAvailable());
+    public void hasSpeedOverGround() {
+        assertEquals(true, msg.hasSpeedOverGround());
     }
 
     @Test
-    public void isTimeStampAvailable() {
-        assertEquals(true, msg.isTimeStampAvailable());
+    public void hasTimeStamp() {
+        assertEquals(true, msg.hasTimeStamp());
     }
 }

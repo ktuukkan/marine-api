@@ -28,10 +28,16 @@ import java.text.DecimalFormat;
  * @author Jyrki Jakobsson
  */
 public class SpeedOverGround {
-    private static final int DEFAULTVALUE = 1023;
+    private static final int MIN_VALUE = 0;
+    private static final int MAX_VALUE = 1022;
+    private static final int DEFAULT_VALUE = 1023;
 
     public static boolean isAvailable(int value) {
-        return value != DEFAULTVALUE;
+        return value >= MIN_VALUE && value <= MAX_VALUE;
+    }
+
+    public static boolean isCorrect(int value) {
+        return isAvailable(value) || (value == DEFAULT_VALUE);
     }
 
     public static double toKnots(int value) {

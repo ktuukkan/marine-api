@@ -166,12 +166,12 @@ class AISMessage09Parser extends AISMessageParser implements AISMessage09 {
     }
 
     @Override
-    public boolean isLongitudeAvailable() {
+    public boolean hasLongitude() {
         return Longitude28.isAvailable(fLongitude);
     }
 
     @Override
-    public boolean isLatitudeAvailable() {
+    public boolean hasLatitude() {
         return Latitude27.isAvailable(fLatitude);
     }
 

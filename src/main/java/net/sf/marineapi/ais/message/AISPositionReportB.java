@@ -50,20 +50,20 @@ public interface AISPositionReportB extends AISPositionInfo {
 	/**
 	 * Returns true if speed over ground is available in the message.
 	 */
-	boolean isSpeedOverGroundAvailable();
+	boolean hasSpeedOverGround();
 
 	/**
 	 * Returns true if course over ground is available in the message.
 	 */
-	boolean isCourseOverGroundAvailable();
+	boolean hasCourseOverGround();
 
 	/**
 	 * Returns true if true heading is available in the message.
 	 */
-	boolean isTrueHeadingAvailable();
+	boolean hasTrueHeading();
 
 	/**
 	 * Returns true if timestamp is available in the message.
 	 */
-	boolean isTimeStampAvailable();
+	boolean hasTimeStamp();
 }
