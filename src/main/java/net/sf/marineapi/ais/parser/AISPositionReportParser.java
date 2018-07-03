@@ -20,8 +20,6 @@
  */
 package net.sf.marineapi.ais.parser;
 
-import java.text.DecimalFormat;
-
 import net.sf.marineapi.ais.message.AISPositionReport;
 import net.sf.marineapi.ais.util.AISRuleViolation;
 import net.sf.marineapi.ais.util.Angle12;
@@ -30,9 +28,9 @@ import net.sf.marineapi.ais.util.Latitude27;
 import net.sf.marineapi.ais.util.Longitude28;
 import net.sf.marineapi.ais.util.ManeuverIndicator;
 import net.sf.marineapi.ais.util.NavigationalStatus;
-import net.sf.marineapi.ais.util.PositionInfo;
 import net.sf.marineapi.ais.util.RateOfTurn;
 import net.sf.marineapi.ais.util.Sixbit;
+import net.sf.marineapi.ais.util.SpeedOverGround;
 import net.sf.marineapi.ais.util.TimeStamp;
 
 /**
@@ -85,8 +83,8 @@ class AISPositionReportParser extends AISMessageParser implements AISPositionRep
 	private int		fRateOfTurn;
 	private int		fSOG;
 	private boolean	fPositionAccuracy;
-	private double	fLongitude;
-	private double	fLatitude;
+	private int		fLongitude;
+	private int		fLatitude;
 	private int		fCOG;
 	private int		fTrueHeading;
 	private int		fTimeStamp;
@@ -106,12 +104,12 @@ class AISPositionReportParser extends AISMessageParser implements AISPositionRep
 	    fRateOfTurn = content.getAs8BitInt(FROM[RATEOFTURN], TO[RATEOFTURN]);
 	    fSOG = content.getInt(FROM[SPEEDOVERGROUND], TO[SPEEDOVERGROUND]);
 	    fPositionAccuracy = content.getBoolean(FROM[POSITIONACCURACY]);
-	    fLongitude = Longitude28.toDegrees(content.getAs28BitInt(FROM[LONGITUDE], TO[LONGITUDE]));
-	    if (!PositionInfo.isLongitudeCorrect(fLongitude))
-	    	addViolation(new AISRuleViolation("LongitudeInDegrees", fLongitude, PositionInfo.LONGITUDE_RANGE));
-	    fLatitude = Latitude27.toDegrees(content.getAs27BitInt(FROM[LATITUDE], TO[LATITUDE]));
-	    if (!PositionInfo.isLatitudeCorrect(fLatitude))
-	    	addViolation(new AISRuleViolation("LatitudeInDegrees", fLatitude, PositionInfo.LATITUDE_RANGE));
+	    fLongitude = content.getAs28BitInt(FROM[LONGITUDE], TO[LONGITUDE]);
+	    if (!Longitude28.isCorrect(fLongitude))
+	    	addViolation(new AISRuleViolation("LongitudeInDegrees", fLongitude, Longitude28.RANGE));
+	    fLatitude = content.getAs27BitInt(FROM[LATITUDE], TO[LATITUDE]);
+	    if (!Latitude27.isCorrect(fLatitude))
+	    	addViolation(new AISRuleViolation("LatitudeInDegrees", fLatitude, Latitude27.RANGE));
 	    fCOG = content.getInt(FROM[COURSEOVERGROUND], TO[COURSEOVERGROUND]);
 	    if (!Angle12.isCorrect(fCOG))
 	    	addViolation(new AISRuleViolation("CourseOverGround", fCOG, Angle12.RANGE));
@@ -133,7 +131,7 @@ class AISPositionReportParser extends AISMessageParser implements AISPositionRep
 	}
 
 	public double getSpeedOverGround() {
-	    return Angle12.toDegrees(fSOG);
+		return SpeedOverGround.toKnots(fSOG);
 	}
 
 	public boolean getPositionAccuracy() {
@@ -141,11 +139,11 @@ class AISPositionReportParser extends AISMessageParser implements AISPositionRep
 	}
 
 	public double getLongitudeInDegrees() {
-	    return fLongitude;
+	    return Longitude28.toDegrees(fLongitude);
 	}
 
 	public double getLatitudeInDegrees() {
-	    return fLatitude;
+	    return Latitude27.toDegrees(fLatitude);
 	}
 
 	public double getCourseOverGround() {
@@ -164,24 +162,48 @@ class AISPositionReportParser extends AISMessageParser implements AISPositionRep
 	    return fManouverIndicator;
 	}
 
-    private String getSOGString() {
-        String msg;
-        if (fSOG == 1023)
-            msg = "no SOG";
-        else if (fSOG == 1022)
-            msg = ">=102.2";
-        else
-            msg = new DecimalFormat("##0.0").format(fSOG / 10.0);
-        return msg;
-    }
+	@Override
+	public boolean hasRateOfTurn() {
+		return RateOfTurn.isTurnIndicatorAvailable(fRateOfTurn);
+	}
+
+	@Override
+	public boolean hasSpeedOverGround() {
+		return SpeedOverGround.isAvailable(fSOG);
+	}
+
+	@Override
+	public boolean hasCourseOverGround() {
+		return Angle12.isAvailable(fCOG);
+	}
+
+	@Override
+	public boolean hasTrueHeading() {
+		return Angle9.isAvailable(fTrueHeading);
+	}
+
+	@Override
+	public boolean hasTimeStamp() {
+		return TimeStamp.isAvailable(fTimeStamp);
+	}
+
+	@Override
+	public boolean hasLongitude() {
+		return Longitude28.isAvailable(fLongitude);
+	}
+
+	@Override
+	public boolean hasLatitude() {
+		return Latitude27.isAvailable(fLatitude);
+	}
 
 	public String toString() {
 		String result =     "\tNav st:  " + NavigationalStatus.toString(fNavigationalStatus);
 		result += SEPARATOR + "ROT:     " + RateOfTurn.toString(fRateOfTurn);
-		result += SEPARATOR + "SOG:     " + getSOGString();
+		result += SEPARATOR + "SOG:     " + SpeedOverGround.toString(fSOG);
 		result += SEPARATOR + "Pos acc: " + (fPositionAccuracy ? "high" : "low") + " accuracy";
-		result += SEPARATOR + "Lat:     " + PositionInfo.longitudeToString(fLongitude);
-		result += SEPARATOR + "Lon:     " + PositionInfo.latitudeToString(fLatitude);
+		result += SEPARATOR + "Lon:     " + Longitude28.toString(fLongitude);
+		result += SEPARATOR + "Lat:     " + Latitude27.toString(fLatitude);
 		result += SEPARATOR + "COG:     " + Angle12.toString(fCOG);
 		result += SEPARATOR + "Heading: " + Angle9.getTrueHeadingString(fTrueHeading);
 		result += SEPARATOR + "Time:    " + TimeStamp.toString(fTimeStamp);

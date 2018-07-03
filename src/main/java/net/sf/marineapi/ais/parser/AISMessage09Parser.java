@@ -25,8 +25,8 @@ import net.sf.marineapi.ais.util.AISRuleViolation;
 import net.sf.marineapi.ais.util.Angle12;
 import net.sf.marineapi.ais.util.Latitude27;
 import net.sf.marineapi.ais.util.Longitude28;
-import net.sf.marineapi.ais.util.PositionInfo;
 import net.sf.marineapi.ais.util.Sixbit;
+import net.sf.marineapi.ais.util.SpeedOverGround;
 import net.sf.marineapi.ais.util.TimeStamp;
 
 import java.text.DecimalFormat;
@@ -82,8 +82,8 @@ class AISMessage09Parser extends AISMessageParser implements AISMessage09 {
     private int fAltitude;
     private int		fSOG;
     private boolean	fPositionAccuracy;
-    private double	fLongitude;
-    private double	fLatitude;
+    private int		fLongitude;
+    private int		fLatitude;
     private int		fCOG;
     private int		fTimeStamp;
     private int	    fRegional;
@@ -100,12 +100,12 @@ class AISMessage09Parser extends AISMessageParser implements AISMessage09 {
             fAltitude = content.getInt(FROM[ALTITUDE], TO[ALTITUDE]);
             fSOG = content.getInt(FROM[SPEEDOVERGROUND], TO[SPEEDOVERGROUND]);
             fPositionAccuracy = content.getBoolean(TO[POSITIONACCURACY]);
-            fLongitude = Longitude28.toDegrees(content.getAs28BitInt(FROM[LONGITUDE], TO[LONGITUDE]));
-            if (!PositionInfo.isLongitudeCorrect(fLongitude))
-                addViolation(new AISRuleViolation("LongitudeInDegrees", fLongitude, PositionInfo.LONGITUDE_RANGE));
-            fLatitude = Latitude27.toDegrees(content.getAs27BitInt(FROM[LATITUDE], TO[LATITUDE]));
-            if (!PositionInfo.isLatitudeCorrect(fLatitude))
-                addViolation(new AISRuleViolation("LatitudeInDegrees", fLatitude, PositionInfo.LATITUDE_RANGE));
+            fLongitude = content.getAs28BitInt(FROM[LONGITUDE], TO[LONGITUDE]);
+            if (!Longitude28.isCorrect(fLongitude))
+                addViolation(new AISRuleViolation("LongitudeInDegrees", fLongitude, Longitude28.RANGE));
+            fLatitude = content.getAs27BitInt(FROM[LATITUDE], TO[LATITUDE]);
+            if (!Latitude27.isCorrect(fLatitude))
+                addViolation(new AISRuleViolation("LatitudeInDegrees", fLatitude, Latitude27.RANGE));
             fCOG = content.getInt(FROM[COURSEOVERGROUND], TO[COURSEOVERGROUND]);
             if (!Angle12.isCorrect(fCOG))
                 addViolation(new AISRuleViolation("CourseOverGround", fCOG, Angle12.RANGE));
@@ -137,9 +137,9 @@ class AISMessage09Parser extends AISMessageParser implements AISMessage09 {
 
     public boolean getPositionAccuracy() { return fPositionAccuracy; }
 
-    public double getLongitudeInDegrees() { return fLongitude; }
+    public double getLongitudeInDegrees() { return Longitude28.toDegrees(fLongitude); }
 
-    public double getLatitudeInDegrees() { return fLatitude; }
+    public double getLatitudeInDegrees() { return Latitude27.toDegrees(fLatitude); }
 
     public double getCourseOverGround() { return Angle12.toDegrees(fCOG); }
 
@@ -165,12 +165,22 @@ class AISMessage09Parser extends AISMessageParser implements AISMessage09 {
         return fRadioStatus;
     }
 
+    @Override
+    public boolean hasLongitude() {
+        return Longitude28.isAvailable(fLongitude);
+    }
+
+    @Override
+    public boolean hasLatitude() {
+        return Latitude27.isAvailable(fLatitude);
+    }
+
     public String toString() {
         String result = "\tAlt:      " + fAltitude;
-        result += SEPARATOR + "SOG:     " + getSOGString();
+        result += SEPARATOR + "SOG:     " + SpeedOverGround.toString(fSOG);
         result += SEPARATOR + "Pos acc: " + (fPositionAccuracy ? "high" : "low") + " accuracy";
-        result += SEPARATOR + "Lat:     " + PositionInfo.longitudeToString(fLongitude);
-        result += SEPARATOR + "Lon:     " + PositionInfo.latitudeToString(fLatitude);
+        result += SEPARATOR + "Lon:     " + Longitude28.toString(fLongitude);
+        result += SEPARATOR + "Lat:     " + Latitude27.toString(fLatitude);
         result += SEPARATOR + "COG:     " + Angle12.toString(fCOG);
         result += SEPARATOR + "Time:    " + TimeStamp.toString(fTimeStamp);
         result += SEPARATOR + "Regional:     " + getRegional();
