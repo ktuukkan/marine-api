@@ -27,6 +27,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.concurrent.Semaphore;
 
 import net.sf.marineapi.nmea.sentence.Sentence;
 import net.sf.marineapi.nmea.sentence.SentenceId;
@@ -69,6 +70,9 @@ import net.sf.marineapi.nmea.sentence.TalkerId;
  */
 public final class SentenceFactory {
 
+	// mutex to control that only one thread creates the singleton factory instance
+	private static final Semaphore INSTANCE_CREATION_MUTEX = new Semaphore(1);
+
 	// map that holds registered sentence types and parser classes
 	private static Map<String, Class<? extends SentenceParser>> parsers;
 
@@ -79,7 +83,7 @@ public final class SentenceFactory {
 	 * Constructor.
 	 */
 	private SentenceFactory() {
-	    reset();
+		reset();
 	}
 
 	/**
@@ -247,10 +251,27 @@ public final class SentenceFactory {
 	 *
 	 * @return SentenceFactory instance
 	 */
-	public synchronized static SentenceFactory getInstance() {
+	public static SentenceFactory getInstance() {
+
 		if (instance == null) {
-			instance = new SentenceFactory();
+
+			try {
+				INSTANCE_CREATION_MUTEX.acquire();
+
+				try {
+
+					if (instance == null) {
+						instance = new SentenceFactory();
+					}
+				} finally {
+					INSTANCE_CREATION_MUTEX.release();
+				}
+			} catch (final InterruptedException exception) {
+				Thread.currentThread().interrupt();
+				return instance;
+			}
 		}
+
 		return instance;
 	}
 
