@@ -73,7 +73,7 @@ public final class SentenceFactory {
 	private static Map<String, Class<? extends SentenceParser>> parsers;
 
 	// singleton factory instance
-	private static volatile SentenceFactory instance;
+	private static SentenceFactory instance;
 
 	/**
 	 * Constructor.
@@ -247,7 +247,7 @@ public final class SentenceFactory {
 	 *
 	 * @return SentenceFactory instance
 	 */
-	public static SentenceFactory getInstance() {
+	public synchronized static SentenceFactory getInstance() {
 		if (instance == null) {
 			instance = new SentenceFactory();
 		}
