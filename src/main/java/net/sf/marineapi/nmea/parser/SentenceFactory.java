@@ -23,11 +23,10 @@ package net.sf.marineapi.nmea.parser;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-import java.util.concurrent.Semaphore;
+import java.util.concurrent.ConcurrentHashMap;
 
 import net.sf.marineapi.nmea.sentence.Sentence;
 import net.sf.marineapi.nmea.sentence.SentenceId;
@@ -70,14 +69,11 @@ import net.sf.marineapi.nmea.sentence.TalkerId;
  */
 public final class SentenceFactory {
 
-	// mutex to control that only one thread creates the singleton factory instance
-	private static final Semaphore INSTANCE_CREATION_MUTEX = new Semaphore(1);
-
 	// map that holds registered sentence types and parser classes
 	private static Map<String, Class<? extends SentenceParser>> parsers;
 
 	// singleton factory instance
-	private static SentenceFactory instance;
+	private static final SentenceFactory INSTANCE = new SentenceFactory();
 
 	/**
 	 * Constructor.
@@ -164,7 +160,7 @@ public final class SentenceFactory {
 	}
 
 	/**
-	 * Register a sentence parser to factory. After registration,
+	 * Registers a sentence parser to the factory. After registration,
 	 * {@link #createParser(String)} method can be used to obtain instances of
 	 * registered parser.
 	 * <p>
@@ -178,6 +174,26 @@ public final class SentenceFactory {
 	 */
 	public void registerParser(String type,
 		Class<? extends SentenceParser> parser) {
+		registerParser(parsers, type, parser);
+	}
+
+	/**
+	 * Registers a sentence parser to the given factory. After registration,
+	 * {@link #createParser(String)} method can be used to obtain instances of
+	 * registered parser.
+	 * <p>
+	 * Sentences supported by the library are registered automatically, but they
+	 * can be overridden simply be registering a new parser implementation for
+	 * chosen sentence type. That is, each sentence type can have only one
+	 * parser registered at a time.
+	 *
+	 * @param parsers The provided factory to register the sentence parsers to.
+	 * @param type Sentence type id, e.g. "GGA" or "GLL".
+	 * @param parser Class of parser implementation for given <code>type</code>.
+	 */
+	private void registerParser(
+			Map<String, Class<? extends SentenceParser>> parsers, String type, 
+			Class<? extends SentenceParser> parser) {
 
 		try {
 			parser.getConstructor(new Class[] { String.class });
@@ -187,7 +203,8 @@ public final class SentenceFactory {
 			String msg = "Unable to register parser due security violation";
 			throw new IllegalArgumentException(msg, e);
 		} catch (NoSuchMethodException e) {
-			String msg = "Required constructors not found; SentenceParser(String), SentenceParser(TalkerId)";
+			String msg = "Required constructors not found; SentenceParser(String),"
+					+ " SentenceParser(TalkerId)";
 			throw new IllegalArgumentException(msg, e);
 		}
 	}
@@ -252,27 +269,7 @@ public final class SentenceFactory {
 	 * @return SentenceFactory instance
 	 */
 	public static SentenceFactory getInstance() {
-
-		if (instance == null) {
-
-			try {
-				INSTANCE_CREATION_MUTEX.acquire();
-
-				try {
-
-					if (instance == null) {
-						instance = new SentenceFactory();
-					}
-				} finally {
-					INSTANCE_CREATION_MUTEX.release();
-				}
-			} catch (final InterruptedException exception) {
-				Thread.currentThread().interrupt();
-				return instance;
-			}
-		}
-
-		return instance;
+		return INSTANCE;
 	}
 
 	/**
@@ -280,51 +277,53 @@ public final class SentenceFactory {
 	 * parsers the have been either removed or added.
 	 */
 	public void reset() {
-		parsers = new HashMap<String, Class<? extends SentenceParser>>();
-		registerParser("APB", APBParser.class);
-		registerParser("ALK", STALKParser.class);
-		registerParser("BOD", BODParser.class);
-		registerParser("CUR", CURParser.class);
-		registerParser("DBT", DBTParser.class);
-		registerParser("DPT", DPTParser.class);
-		registerParser("DTM", DTMParser.class);
-		registerParser("GBS", GBSParser.class);
-		registerParser("GGA", GGAParser.class);
-		registerParser("GLL", GLLParser.class);
-		registerParser("GNS", GNSParser.class);
-		registerParser("GSA", GSAParser.class);
-		registerParser("GST", GSTParser.class);
-		registerParser("GSV", GSVParser.class);
-		registerParser("HDG", HDGParser.class);
-		registerParser("HDM", HDMParser.class);
-		registerParser("HDT", HDTParser.class);
-		registerParser("MHU", MHUParser.class);
-		registerParser("MMB", MMBParser.class);
-		registerParser("MTA", MTAParser.class);
-		registerParser("MTW", MTWParser.class);
-		registerParser("MWV", MWVParser.class);
-		registerParser("RMB", RMBParser.class);
-		registerParser("RMC", RMCParser.class);
-		registerParser("RPM", RPMParser.class);
-		registerParser("ROT", ROTParser.class);
-		registerParser("RTE", RTEParser.class);
-		registerParser("RSA", RSAParser.class);
-		registerParser("TTM", TTMParser.class);
-		registerParser("TXT", TXTParser.class);
-		registerParser("VBW", VBWParser.class);
-		registerParser("VDM", VDMParser.class);
-		registerParser("VDO", VDOParser.class);
-		registerParser("VDR", VDRParser.class);
-		registerParser("VHW", VHWParser.class);
-		registerParser("VLW", VLWParser.class);
-		registerParser("VTG", VTGParser.class);
-		registerParser("VWR", VWRParser.class);
-		registerParser("VWT", VWTParser.class);
-		registerParser("WPL", WPLParser.class);
-		registerParser("XTE", XTEParser.class);
-		registerParser("XDR", XDRParser.class);
-		registerParser("ZDA", ZDAParser.class);
-		registerParser("MDA", MDAParser.class);
-		registerParser("MWD", MWDParser.class);
+		Map<String, Class<? extends SentenceParser>> tempParsers =
+				new ConcurrentHashMap<>();
+		registerParser(tempParsers, "APB", APBParser.class);
+		registerParser(tempParsers, "ALK", STALKParser.class);
+		registerParser(tempParsers, "BOD", BODParser.class);
+		registerParser(tempParsers, "CUR", CURParser.class);
+		registerParser(tempParsers, "DBT", DBTParser.class);
+		registerParser(tempParsers, "DPT", DPTParser.class);
+		registerParser(tempParsers, "DTM", DTMParser.class);
+		registerParser(tempParsers, "GBS", GBSParser.class);
+		registerParser(tempParsers, "GGA", GGAParser.class);
+		registerParser(tempParsers, "GLL", GLLParser.class);
+		registerParser(tempParsers, "GNS", GNSParser.class);
+		registerParser(tempParsers, "GSA", GSAParser.class);
+		registerParser(tempParsers, "GST", GSTParser.class);
+		registerParser(tempParsers, "GSV", GSVParser.class);
+		registerParser(tempParsers, "HDG", HDGParser.class);
+		registerParser(tempParsers, "HDM", HDMParser.class);
+		registerParser(tempParsers, "HDT", HDTParser.class);
+		registerParser(tempParsers, "MHU", MHUParser.class);
+		registerParser(tempParsers, "MMB", MMBParser.class);
+		registerParser(tempParsers, "MTA", MTAParser.class);
+		registerParser(tempParsers, "MTW", MTWParser.class);
+		registerParser(tempParsers, "MWV", MWVParser.class);
+		registerParser(tempParsers, "RMB", RMBParser.class);
+		registerParser(tempParsers, "RMC", RMCParser.class);
+		registerParser(tempParsers, "RPM", RPMParser.class);
+		registerParser(tempParsers, "ROT", ROTParser.class);
+		registerParser(tempParsers, "RTE", RTEParser.class);
+		registerParser(tempParsers, "RSA", RSAParser.class);
+		registerParser(tempParsers, "TTM", TTMParser.class);
+		registerParser(tempParsers, "TXT", TXTParser.class);
+		registerParser(tempParsers, "VBW", VBWParser.class);
+		registerParser(tempParsers, "VDM", VDMParser.class);
+		registerParser(tempParsers, "VDO", VDOParser.class);
+		registerParser(tempParsers, "VDR", VDRParser.class);
+		registerParser(tempParsers, "VHW", VHWParser.class);
+		registerParser(tempParsers, "VLW", VLWParser.class);
+		registerParser(tempParsers, "VTG", VTGParser.class);
+		registerParser(tempParsers, "VWR", VWRParser.class);
+		registerParser(tempParsers, "VWT", VWTParser.class);
+		registerParser(tempParsers, "WPL", WPLParser.class);
+		registerParser(tempParsers, "XTE", XTEParser.class);
+		registerParser(tempParsers, "XDR", XDRParser.class);
+		registerParser(tempParsers, "ZDA", ZDAParser.class);
+		registerParser(tempParsers, "MDA", MDAParser.class);
+		registerParser(tempParsers, "MWD", MWDParser.class);
+		parsers = tempParsers;
 	}
 }
