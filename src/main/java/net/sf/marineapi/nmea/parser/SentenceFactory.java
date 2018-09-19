@@ -131,9 +131,11 @@ public final class SentenceFactory {
 	 *             implement expected constructors or is otherwise unusable.
 	 */
 	public Sentence createParser(TalkerId talker, String type) {
+
 		if (talker == null) {
 			throw new IllegalArgumentException("TalkerId cannot be null");
 		}
+
 		return createParserImpl(type, talker);
 	}
 
@@ -192,7 +194,7 @@ public final class SentenceFactory {
 	 * @param parser Class of parser implementation for given <code>type</code>.
 	 */
 	private void registerParser(
-			Map<String, Class<? extends SentenceParser>> parsers, String type, 
+			Map<String, Class<? extends SentenceParser>> parsers, String type,
 			Class<? extends SentenceParser> parser) {
 
 		try {
@@ -217,7 +219,9 @@ public final class SentenceFactory {
 	 * @see #registerParser(String, Class)
 	 */
 	public void unregisterParser(Class<? extends SentenceParser> parser) {
+
 		for (String key : parsers.keySet()) {
+
 			if (parsers.get(key) == parser) {
 				parsers.remove(key);
 				break;
@@ -246,7 +250,6 @@ public final class SentenceFactory {
 			Class<? extends SentenceParser> c = parsers.get(sid);
 			Constructor<? extends SentenceParser> co = c.getConstructor(klass);
 			parser = co.newInstance(param);
-
 		} catch (NoSuchMethodException e) {
 			String name = klass.getName();
 			String msg = "Constructor with %s parameter not found";
