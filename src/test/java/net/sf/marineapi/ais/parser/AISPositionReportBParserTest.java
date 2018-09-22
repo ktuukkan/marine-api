@@ -55,4 +55,29 @@ public class AISPositionReportBParserTest {
         assertEquals(34, msg.getTimeStamp());
     }
 
+    @Test
+    public void hasLatitude() {
+        assertEquals(true, msg.hasLatitude());
+    }
+
+    @Test
+    public void hasLongitude() {
+        assertEquals(true, msg.hasLongitude());
+    }
+
+    @Test
+    public void hasCourseOverGround() {
+        assertEquals(true, msg.hasCourseOverGround());
+    }
+
+    @Test
+    public void hasSpeedOverGround() {
+        assertEquals(true, msg.hasSpeedOverGround());
+    }
+
+    @Test
+    public void hasTimeStamp() {
+        assertEquals(true, msg.hasTimeStamp());
+    }
+
 }

@@ -138,7 +138,7 @@ public interface RMCSentence extends PositionSentence, TimeSentence,
 	/**
 	 * Set the FAA operation mode of GPS.
 	 * 
-	 * @param mode Mode to set
+	 * @param mode FaaMode enum to set
 	 */
 	void setMode(FaaMode mode);
 

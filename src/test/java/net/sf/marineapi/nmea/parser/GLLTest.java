@@ -5,10 +5,7 @@ import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 import net.sf.marineapi.nmea.sentence.TalkerId;
-import net.sf.marineapi.nmea.util.CompassPoint;
-import net.sf.marineapi.nmea.util.DataStatus;
-import net.sf.marineapi.nmea.util.Position;
-import net.sf.marineapi.nmea.util.Time;
+import net.sf.marineapi.nmea.util.*;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -43,12 +40,12 @@ public class GLLTest {
 
 	@Test
 	public void testConstructor() {
-		assertEquals(6, empty.getFieldCount());
+		assertEquals(7, empty.getFieldCount());
 	}
 
 	/**
 	 * Test method for
-	 * {@link net.sf.marineapi.nmea.parser.GLLParser#getDataStatus()}.
+	 * {@link GLLParser#getStatus()}.
 	 */
 	@Test
 	public void testGetDataStatus() {
@@ -86,10 +83,10 @@ public class GLLTest {
 
 	/**
 	 * Test method for
-	 * {@link net.sf.marineapi.nmea.parser.GLLParser#setDataStatus(DataStatus)}.
+	 * {@link net.sf.marineapi.nmea.parser.GLLParser#setStatus(DataStatus)}.
 	 */
 	@Test
-	public void testSetDataStatus() {
+	public void testSetStatus() {
 		assertEquals(DataStatus.ACTIVE, instance.getStatus());
 		instance.setStatus(DataStatus.VOID);
 		assertEquals(DataStatus.VOID, instance.getStatus());
@@ -146,6 +143,20 @@ public class GLLTest {
 		Time t = new Time(1, 2, 3.4);
 		instance.setTime(t);
 		assertTrue(instance.toString().contains(",E,010203.400,A*"));
+	}
+
+	@Test
+	public void testSetMode() {
+		empty.setMode(FaaMode.DGPS);
+		assertEquals(FaaMode.DGPS, empty.getMode());
+		assertTrue(empty.toString().startsWith("$GPGLL,,,,,,,D*"));
+	}
+
+	@Test
+	public void testSetModeInLegacySentence() {
+		instance.setMode(FaaMode.PRECISE);
+		assertEquals(FaaMode.PRECISE, instance.getMode());
+		assertTrue(instance.toString().startsWith("$GPGLL,6011.552,N,02501.941,E,120045,A,P*"));
 	}
 
 }
