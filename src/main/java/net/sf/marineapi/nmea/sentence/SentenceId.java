@@ -63,6 +63,10 @@ public enum SentenceId {
     HDM,
     /** Vessel heading in degrees true */
     HDT,
+    /** Heading/Track control command */
+    HTC,
+    /** Heading/Track control data */
+    HTD,
     /** Relative and absolute humidity with dew point */
     MHU,
     /** Barometric pressure in inches of mercury and bars. */

@@ -280,8 +280,7 @@ public final class SentenceFactory {
 	 * parsers the have been either removed or added.
 	 */
 	public void reset() {
-		Map<String, Class<? extends SentenceParser>> tempParsers =
-				new ConcurrentHashMap<>();
+		Map<String, Class<? extends SentenceParser>> tempParsers = new ConcurrentHashMap<>();
 		registerParser(tempParsers, "APB", APBParser.class);
 		registerParser(tempParsers, "ALK", STALKParser.class);
 		registerParser(tempParsers, "BOD", BODParser.class);
@@ -299,6 +298,8 @@ public final class SentenceFactory {
 		registerParser(tempParsers, "HDG", HDGParser.class);
 		registerParser(tempParsers, "HDM", HDMParser.class);
 		registerParser(tempParsers, "HDT", HDTParser.class);
+		registerParser(tempParsers, "HTC", HTCParser.class);
+		registerParser(tempParsers, "HTD", HTDParser.class);
 		registerParser(tempParsers, "MHU", MHUParser.class);
 		registerParser(tempParsers, "MMB", MMBParser.class);
 		registerParser(tempParsers, "MTA", MTAParser.class);
