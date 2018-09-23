@@ -21,10 +21,14 @@
 package net.sf.marineapi.nmea.util;
 
 /**
- * Defines the steering mode reported in HTC sentence.
+ * Defines the steering mode reported in HTC sentence. Steering modes represent
+ * steering as selected by a steering selector switch or by a preceding HTC
+ * sentence. Priority levels of these inputs and usage/acceptance of related
+ * fields are to be defined and documented by the manufacturer.
  *
  * @author Paweł Kozioł
  * @see net.sf.marineapi.nmea.sentence.HTCSentence
+ * @see net.sf.marineapi.nmea.sentence.HDTSentence
  */
 public enum SteeringMode {
 

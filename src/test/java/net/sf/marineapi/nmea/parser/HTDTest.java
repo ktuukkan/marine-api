@@ -100,7 +100,7 @@ public class HTDTest {
 
 	@Test
 	public void testGetOffHeadinStatus() throws Exception {
-		assertEquals(DataStatus.ACTIVE, htd.getOffHeadinStatus());
+		assertEquals(DataStatus.ACTIVE, htd.getOffHeadingStatus());
 	}
 
 	@Test

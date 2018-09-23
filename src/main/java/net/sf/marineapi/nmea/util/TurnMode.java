@@ -21,15 +21,16 @@
 package net.sf.marineapi.nmea.util;
 
 /**
- * Defines how the ship changes heading.
+ * Defines how the ship changes heading, as returned by HTC and HTD sentences.
  *
  * @author Paweł Kozioł
+ * @see net.sf.marineapi.nmea.sentence.HTCSentence
+ * @see net.sf.marineapi.nmea.sentence.HTDSentence
  */
 public enum TurnMode {
+
 	RADIUS_CONTROLLED('R'),
-
 	TURN_RATE_CONTROLLED('T'),
-
 	NOT_CONTROLLED('N');
 
 	private final char character;

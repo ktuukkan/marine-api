@@ -26,41 +26,118 @@ import net.sf.marineapi.nmea.util.SteeringMode;
 import net.sf.marineapi.nmea.util.TurnMode;
 
 /**
- * Heading/Track control command.
+ * Heading/Track control systems data and commands. HTC provides input to a
+ * heading controller to set values, modes and references, while HTD provides
+ * output from a heading controller with information about values, modes and
+ * references in use
+ * [<a href="http://www.nuovamarea.com/files/product%20manuals/nm%20manuals/NM-2C_v1.00.pdf">nuovamarea.com</a>].
  *
  * @author Paweł Kozioł
+ * @see HTDSentence
  */
 public interface HTCSentence extends Sentence {
 
-	DataStatus getOverride();
+    /**
+     * Returns the override status. Override provides direct control of the
+     * steering gear, i.e. a temporary interruption of the selected steering
+     * mode. In this period steering is performed by special devices and both
+     * <em>Selected Steering Mode</em> and <em>Turn Mode</em> shall be ignored
+     * by the heading/track controller and its computing parts shall operate as
+     * if manual steering was selected.
+     *
+     * @return {@link DataStatus#ACTIVE} when in use, {@link DataStatus#VOID}
+     *      when not in use.
+     */
+    DataStatus getOverride();
 
-	double getCommandedRudderAngle();
+    /**
+     * Returns the commaded rudder angle.
+     *
+     * @return Rudder angle, in degrees.
+     */
+    double getCommandedRudderAngle();
 
-	Direction getCommandedRudderDirection();
+    /**
+     * Returns the commanded rudder direction.
+     *
+     * @return {@link Direction#RIGHT} (starboard) or {@link Direction#LEFT} (port)
+     */
+    Direction getCommandedRudderDirection();
 
-	SteeringMode getSelectedSteeringMode();
+    /**
+     * Returns the selected steering mode.
+     *
+     * @return {@link SteeringMode} enum.
+     */
+    SteeringMode getSelectedSteeringMode();
 
-	TurnMode getTurnMode();
+    /**
+     * Returns the current turn mode. Turn mode defines how the ship changes
+     * heading, according to the selected mode values given in fields
+     * <em>Commanded Radius of Turn</em> or <em>Commanded Rate of Turn</em>.
+     *
+     * @return {@link TurnMode} enum.
+     */
+    TurnMode getTurnMode();
 
-	double getCommandedRudderLimit();
+    /**
+     * Returns the commanded rudder limit.
+     *
+     * @return Rudder limit, in degrees.
+     */
+    double getCommandedRudderLimit();
 
-	double getCommandedOffHeadingLimit();
+    /**
+     * Returns the commanded off-heading limit.
+     *
+     * @return Off-heading limit, in degrees.
+     */
+    double getCommandedOffHeadingLimit();
 
-	double getCommandedRadiusOfTurnForHeadingChanges();
+    /**
+     * Returns the commanded radius of turn for heading changes.
+     *
+     * @return Radius of turn, in nautical miles.
+     */
+    double getCommandedRadiusOfTurnForHeadingChanges();
 
-	double getCommandedRateOfTurnForHeadingChanges();
+    /**
+     * Returns the commanded rate of turn for heading changes.
+     *
+     * @return Rate of turn, in degrees/min.
+     */
+    double getCommandedRateOfTurnForHeadingChanges();
 
-	double getCommandedHeadingToSteer();
+    /**
+     * Returns the commanded heading to steer.
+     *
+     * @return Heading to steer, in degrees.
+     */
+    double getCommandedHeadingToSteer();
 
-	double getCommandedOffTrackLimit();
+    /**
+     * Returns the commanded off-track limit, can be generated if the selected
+     * steering mode is {@link SteeringMode#TRACK_CONTROL}.
+     *
+     * @return Off-track limit, in nautical miles.
+     */
+    double getCommandedOffTrackLimit();
 
-	double getCommandedTrack();
+    /**
+     * Returns the commanded track, which represents the course line between two
+     * waypoints. It may be altered dynamically in a track-controlled turn
+     * along a pre-planned radius.
+     *
+     * @return Commanded track, in degrees.
+     * @see #getCommandedRadiusOfTurnForHeadingChanges()
+     */
+    double getCommandedTrack();
 
-	/**
-	 * Tells if the heading reference in use is true or magnetic.
-	 *
-	 * @return True if true heading, false for magnetic.
-	 */
-	boolean isHeadingReferenceInUseTrue();
+    /**
+     * Tells if the heading reference in use is true or magnetic.
+     *
+     * @return True if true heading, false for magnetic.
+     */
+    boolean isHeadingReferenceInUseTrue();
 
 }

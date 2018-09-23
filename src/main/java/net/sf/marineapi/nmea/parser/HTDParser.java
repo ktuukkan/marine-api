@@ -25,8 +25,13 @@ import net.sf.marineapi.nmea.sentence.SentenceId;
 import net.sf.marineapi.nmea.sentence.TalkerId;
 import net.sf.marineapi.nmea.util.DataStatus;
 
-public class HTDParser extends HTCParser implements HTDSentence
-{
+/**
+ * HTD parser.
+ *
+ * @author Paweł Kozioł
+ */
+class HTDParser extends HTCParser implements HTDSentence {
+
 	private static final int RUDDER_STATUS = 13;
 	private static final int OFF_HEADING_STATUS = 14;
 	private static final int OFF_TRACK_STATUS = 15;
@@ -50,7 +55,7 @@ public class HTDParser extends HTCParser implements HTDSentence
 	}
 
 	@Override
-	public DataStatus getOffHeadinStatus() {
+	public DataStatus getOffHeadingStatus() {
 		if (hasValue(OFF_HEADING_STATUS)) {
 			return DataStatus.valueOf(getCharValue(OFF_HEADING_STATUS));
 		} else {
