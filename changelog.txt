@@ -5,6 +5,8 @@ Version 0.11.0-SNAPSHOT
 
   - Support for GBS sentences; GNSS satellite fault detection
   - Support for GST sentences; GPS Pseudorange Noise Statistics
+  - Support for HTC sentences; Heading/Track control command
+  - Support for HTD sentences; Heading/Track control data
   - Support for TXT sentences; Text messages, e.g. device boot screens etc.
   - Support for $STALK sentences; NMEA-0183 layer of Raymarine SeaTalk protocol.
   - AbstracSentenceListener; improvements in generic types resolving to support
@@ -21,8 +23,9 @@ Version 0.11.0-SNAPSHOT
     - fixed six-bit vector indexing bugs in message 5
 
   Contributions:
-  - GST parser written by Tero Laitinen (@tlaitinen)
+  - GST parser by Tero Laitinen (@tlaitinen)
   - AbstractSentenceListener improvements by Axel Uhl (@axeluhl)
+  - HTC and HTD parsers by Paweł Kozioł (@pkoziol)
 
 Version 0.10.0 (2017-06-21)
 

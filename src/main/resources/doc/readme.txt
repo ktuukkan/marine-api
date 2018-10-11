@@ -66,8 +66,9 @@ DEVELOPERS
 
 REFERENCES
 
-The NMEA 0183 information for Java Marine API has been acquired from following
-documents publicly available in the Internet (URLs checked on 2013-09-08):
+The NMEA 0183 information for Java Marine API has been acquired from the
+following documents found publicly available in the Internet (availability
+checked on 2013-09-08):
 
  * NMEA 0183 article in Wikipedia
    <http://en.wikipedia.org/wiki/NMEA_0183>
@@ -77,6 +78,9 @@ documents publicly available in the Internet (URLs checked on 2013-09-08):
 
  * SiRF NMEA Reference Manual (Rev. 2.1, Dec 2007) by SiRF Technology, Inc.
    <https://www.sparkfun.com/datasheets/GPS/NMEA%20Reference%20Manual-Rev2.1-Dec07.pdf>
+
+ * NMEA 0183 Sentences Not Recommended for New Designs by NMEA
+   <http://www.nmea.org/Assets/100108_nmea_0183_sentences_not_recommended_for_new_designs.pdf>
 
  * The NMEA Information Sheet (issue 3, 25th Feb 2011) by Actisense
    <http://www.actisense.com/products/nmea-0183/opto-4/downloads-opto-4.html>
@@ -105,9 +109,6 @@ documents publicly available in the Internet (URLs checked on 2013-09-08):
  * Approved 0183 Manufacturer's Mnemonic Codes (November 22, 2011) by NMEA.org
    <https://www.nmea.org/Assets/20160523%200183%20manufacturer%20codes.pdf>
 
- * NMEA 0183 Sentences Not Recommended for New Designs by NMEA
-   <http://www.nmea.org/Assets/100108_nmea_0183_sentences_not_recommended_for_new_designs.pdf>
-
  * NMEA Sentence Information by Glenn Baddeley
    <http://home.mira.net/~gnb/gps/nmea.html>
 
@@ -130,6 +131,9 @@ documents publicly available in the Internet (URLs checked on 2013-09-08):
 
  * RS232 SeaTalk <-> NMEA Converter installation and operation manual by gadgetPool
    <http://www.gadgetpool.de/nuke/downloads/ManualRS232.pdf>
+
+ * NM-2C User's Guide/Installation Manual v1.0 by Nuova Marea Ltd
+   <http://www.nuovamarea.com/files/product%20manuals/nm%20manuals/NM-2C_v1.00.pdf>
 
 All warnings concerning the accuracy of information in above documents apply
 equally to Java Marine API.
