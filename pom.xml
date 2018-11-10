@@ -150,6 +150,9 @@ along with Java Marine API. If not, see <http://www.gnu.org/licenses />.
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-javadoc-plugin</artifactId>
                 <version>3.0.1</version>
+                <configuration>
+                    <excludePackageNames>net.sf.marineapi.example</excludePackageNames>
+                </configuration>
                 <executions>
                     <execution>
                         <id>attach-javadocs</id>
