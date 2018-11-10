@@ -26,6 +26,8 @@ Version 0.11.0-SNAPSHOT
   - GST parser by Tero Laitinen (@tlaitinen)
   - AbstractSentenceListener improvements by Axel Uhl (@axeluhl)
   - HTC and HTD parsers by Paweł Kozioł (@pkoziol)
+  - AIS validation improvements by Jyrki Jakobsson
+  - SentenceReader improvements by Martin Wegner & Michael Skogberg
 
 Version 0.10.0 (2017-06-21)
 
