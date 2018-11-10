@@ -42,6 +42,15 @@ public class SentenceParserTest {
 		assertEquals("$GPGLL,,,,,*7C", s.toString());
 	}
 
+    /**
+     * Test method for SenteceParser constructor.
+     */
+    @Test
+    public void testConstructorForEmptyProprietary() {
+        Sentence s = new SentenceParser(TalkerId.P, "RWIILOG", 5);
+        assertEquals("$PRWIILOG,,,,,*3D", s.toString());
+    }
+
 	/**
 	 * Test method for SentenceParser constructors called from derived custom
 	 * parsers.
@@ -85,24 +94,40 @@ public class SentenceParserTest {
 	 */
 	@Test
 	public void testConstructorWithAIVDO() {
-		Sentence s = new SentenceParser(VDO_EXAMPLE);
-		assertTrue(s.isValid());
-		assertFalse(s.isProprietary());
-		assertEquals(Sentence.ALTERNATIVE_BEGIN_CHAR, s.getBeginChar());
-		assertEquals(VDO_EXAMPLE, s.toString());
-	}
+        testConstructorWithAIS(VDO_EXAMPLE);
+    }
 
 	/**
 	 * Test method for SenteceParser constructor.
 	 */
 	@Test
 	public void testConstructorWithAIVDM() {
-		Sentence s = new SentenceParser(VDM_EXAMPLE);
-		assertTrue(s.isValid());
-		assertFalse(s.isProprietary());
-		assertEquals(Sentence.ALTERNATIVE_BEGIN_CHAR, s.getBeginChar());
-		assertEquals(VDM_EXAMPLE, s.toString());
-	}
+        testConstructorWithAIS(VDM_EXAMPLE);
+    }
+
+    /**
+     * Parse and test given AIS sentence.
+     */
+    private void testConstructorWithAIS(String ais) {
+        Sentence s = new SentenceParser(ais);
+        assertTrue(s.isValid());
+        assertFalse(s.isProprietary());
+        assertEquals(Sentence.ALTERNATIVE_BEGIN_CHAR, s.getBeginChar());
+        assertEquals(ais, s.toString());
+    }
+
+    /**
+     * Test method for SenteceParser constructor with proprietary sentence.
+     */
+    @Test
+    public void testConstructorWithProprietary() {
+        Sentence s = new SentenceParser("$PRWIILOG,GGA,A,T,1,0", "RWIILOG");
+        assertTrue(s.isValid());
+        assertTrue(s.isProprietary());
+        assertEquals(Sentence.BEGIN_CHAR, s.getBeginChar());
+        assertEquals(TalkerId.P, s.getTalkerId());
+        assertEquals("RWIILOG", s.getSentenceId());
+    }
 
 	/**
 	 * Test method for SenteceParser constructor.
@@ -110,7 +135,7 @@ public class SentenceParserTest {
 	@Test
 	public void testConstructorWithNulls() {
 		try {
-			new SentenceParser((String) null, (String) null);
+			new SentenceParser(null, (String) null);
 			fail("Did not throw exception");
 		} catch (IllegalArgumentException iae) {
 			// OK
@@ -200,7 +225,7 @@ public class SentenceParserTest {
 			fail(ex.getMessage());
 		}
 	}
-	
+
 	/**
 	 * Test method for
 	 * {@link net.sf.marineapi.nmea.parser.SentenceParser#getDoubleValue(int)}.
@@ -327,14 +352,16 @@ public class SentenceParserTest {
 	 * Test method for
 	 * {@link net.sf.marineapi.nmea.parser.SentenceParser#isProprietary()}.
 	 */
+	@Test
 	public void testIsProprietary() {
 		assertFalse(instance.isProprietary());
 	}
 
 	/**
 	 * Test method for
-	 * {@link net.sf.marineapi.nmea.parser.SentenceParser#setBeginChar()}.
+	 * {@link net.sf.marineapi.nmea.parser.SentenceParser#setBeginChar(char)}.
 	 */
+	@Test
 	public void testSetBeginChar() {
 		assertEquals(Sentence.BEGIN_CHAR, instance.getBeginChar());
 		instance.setBeginChar(Sentence.ALTERNATIVE_BEGIN_CHAR);
@@ -494,7 +521,7 @@ public class SentenceParserTest {
 			// pass
 		}
 	}
-	
+
 	/**
 	 * Test method for
 	 * {@link net.sf.marineapi.nmea.parser.SentenceParser#equals(Object)
@@ -503,7 +530,7 @@ public class SentenceParserTest {
 	public void testEquals() {
 		assertTrue(instance.equals(new SentenceParser(RMCTest.EXAMPLE)));
 	}
-	
+
 	/**
 	 * Test method for
 	 * {@link net.sf.marineapi.nmea.parser.SentenceParser#equals(Object)
@@ -512,7 +539,7 @@ public class SentenceParserTest {
 	public void testEqualsWithNonEqual() {
 		assertFalse(instance.equals(new SentenceParser(RMBTest.EXAMPLE)));
 	}
-	
+
 	/**
 	 * Test method for
 	 * {@link net.sf.marineapi.nmea.parser.SentenceParser#equals(Object)
@@ -521,7 +548,7 @@ public class SentenceParserTest {
 	public void testEqualsWithNull() {
 		assertFalse(instance.equals(null));
 	}
-	
+
 	/**
 	 * Test method for
 	 * {@link net.sf.marineapi.nmea.parser.SentenceParser#equals(Object)
@@ -530,19 +557,19 @@ public class SentenceParserTest {
 	public void testEqualsWithSelf() {
 		assertTrue(instance.equals(instance));
 	}
-	
+
 	@Test
 	public void testSetFieldCountLowerByOne() {
-		
+
 		final int count = instance.getFieldCount() - 1;
 		final int lastIndex = instance.getFieldCount() - 2;
 		final String value = instance.getStringValue(lastIndex);
-		
+
 		instance.setFieldCount(count);
 		assertEquals(count, instance.getFieldCount());
 		assertEquals(value, instance.getStringValue(lastIndex));
 	}
-	
+
 	@Test
 	public void testSetFieldCountLower() {
 		SentenceParser parser = new SentenceParser("$GPGGA,1,2,3,4");
@@ -552,14 +579,14 @@ public class SentenceParserTest {
 		assertEquals("2", parser.getStringValue(1));
 		assertTrue(parser.toString().startsWith("$GPGGA,1,2*"));
 	}
-	
+
 	@Test
 	public void testSetFieldCountHigherByOne() {
-		
+
 		final int count = instance.getFieldCount() + 1;
 		final int lastIndex = instance.getFieldCount() - 1;
 		final String value = instance.getStringValue(lastIndex);
-		
+
 		instance.setFieldCount(count);
 		assertEquals(count, instance.getFieldCount());
 		assertEquals(value, instance.getStringValue(lastIndex));
@@ -572,7 +599,7 @@ public class SentenceParserTest {
 		assertEquals(8, parser.getFieldCount());
 		assertTrue(parser.toString().startsWith("$GPGGA,1,2,3,4,,,,*"));
 	}
-	
+
 	@Test
 	public void testSetStringValuesReplaceAll() {
 		SentenceParser parser = new SentenceParser("$GPGGA,1,2,3,4");
@@ -583,7 +610,7 @@ public class SentenceParserTest {
 		assertEquals("6", parser.getStringValue(1));
 		assertEquals("7", parser.getStringValue(2));
 	}
-	
+
 	@Test
 	public void testSetStringValuesReplaceTail() {
 		SentenceParser parser = new SentenceParser("$GPGGA,1,2,3,4");
