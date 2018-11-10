@@ -30,7 +30,7 @@ import net.sf.marineapi.nmea.util.Time;
  *
  * $GPGBS,015509.00,-0.031,-0.186,0.219,19,0.000,-0.354,6.972*4D
  */
-public class GBSParser extends SentenceParser implements GBSSentence {
+class GBSParser extends SentenceParser implements GBSSentence {
 
     private static final int UTC = 0;
     private static final int LAT_ERROR = 1;
