@@ -109,6 +109,8 @@ public class SerialPortExample implements SentenceListener {
 
 					sp.setSerialPortParams(4800, SerialPort.DATABITS_8,
 							SerialPort.STOPBITS_1, SerialPort.PARITY_NONE);
+					sp.enableReceiveTimeout(1000);
+					sp.enableReceiveThreshold(0);
 
 					InputStream is = sp.getInputStream();
 					InputStreamReader isr = new InputStreamReader(is);
