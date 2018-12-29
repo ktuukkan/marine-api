@@ -15,6 +15,8 @@ Version 0.11.0-SNAPSHOT
   - ROTSentence; negative rate of turn values are now allowed. Also, the value
     may now exceed -/+360 degrees.
   - GLLSentence; added support for FAA mode field (NMEA v3.0)
+  - Exposed and refactored AbstractDataReader to allow implementing custom data
+    readers for SentenceReader.
   - Improvements in AIS message parsers
     - added tests for all current message parsers
     - speed, course and heading values now converted in actual double values in
@@ -26,8 +28,9 @@ Version 0.11.0-SNAPSHOT
   - GST parser by Tero Laitinen (@tlaitinen)
   - AbstractSentenceListener improvements by Axel Uhl (@axeluhl)
   - HTC and HTD parsers by Paweł Kozioł (@pkoziol)
-  - AIS validation improvements by Jyrki Jakobsson
-  - SentenceReader improvements by Martin Wegner & Michael Skogberg
+  - AIS validation improvements by Jyrki Jakobsson (@jyrkija)
+  - SentenceReader improvements by Martin Wegner (@Martin-Wegner) and
+    Michael Skogberg (@malliina)
 
 Version 0.10.0 (2017-06-21)
 

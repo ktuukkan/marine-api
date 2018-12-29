@@ -1,6 +1,6 @@
 /*
  * AbstractDataReader.java
- * Copyright (C) 2014 Kimmo Tuukkanen
+ * Copyright (C) 2014-2018 Kimmo Tuukkanen
  * 
  * This file is part of Java Marine API.
  * <http://ktuukkan.github.io/marine-api/>
@@ -25,51 +25,83 @@ import net.sf.marineapi.nmea.parser.UnsupportedSentenceException;
 import net.sf.marineapi.nmea.sentence.Sentence;
 import net.sf.marineapi.nmea.sentence.SentenceValidator;
 
+import java.io.InputStream;
+import java.net.DatagramSocket;
 import java.util.logging.Logger;
 
 /**
- * Base class for data readers; common methods and run-loop.
+ * Abstract base class for data readers, with common methods and run loop
+ * for firing events to listeners managed by the parent {@link SentenceReader}.
+ * <p>
+ * Extend this class to implement custom readers, for example when NMEA data
+ * is delivered embedded in a proprietary format. Otherwise, it is recommended
+ * to use <code>SentenceReader</code> directly with <code>InputStream</code>
+ * or <code>DatagramSocket</code>.
+ * </p>
  * 
  * @author Kimmo Tuukkanen
+ * @see SentenceReader#SentenceReader(InputStream)
+ * @see SentenceReader#SentenceReader(DatagramSocket)
+ * @see SentenceReader#SentenceReader(AbstractDataReader)
  */
-abstract class AbstractDataReader implements DataReader {
+public abstract class AbstractDataReader implements Runnable {
 
 	// Sleep time between failed read attempts to prevent busy-looping
 	private static final int SLEEP_TIME = 100;
 	private static final Logger LOGGER = Logger.getLogger(AbstractDataReader.class.getName());
 
-	private final SentenceReader parent;
+	private SentenceReader parent;
 	private volatile boolean isRunning = true;
 
 	/**
-	 * Creates a new instance.
-	 * 
-	 * @param parent {@link SentenceReader} that owns this reader
+	 * Default constructor.
 	 */
-	public AbstractDataReader(SentenceReader parent) {
-		this.parent = parent;
+	protected AbstractDataReader() {
 	}
 
 	/**
-	 * Returns the parent SentenceReader.
+	 * Creates a new instance with parent, mainly for internal use.
+	 *
+	 * @param parent {@link SentenceReader} that owns this reader
 	 */
-	protected SentenceReader getParent() {
+	AbstractDataReader(SentenceReader parent) {
+		setParent(parent);
+	}
+
+	/**
+	 * Returns the parent <code>SentenceReader</code>.
+	 */
+	SentenceReader getParent() {
 		return this.parent;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see net.sf.marineapi.nmea.io.DataReader#isRunning()
+	/**
+	 * Sets the parent <code>SentenceReader</code>.
+	 *
+	 * @param reader <code>SentenceReader</code> to set.
+	 * @throws IllegalArgumentException If given <code>reader</code> is <code>null</code>.
 	 */
-	public boolean isRunning() {
+	void setParent(SentenceReader reader) {
+		if (reader == null) {
+			throw new IllegalArgumentException("Parent SentenceReader cannot be set null");
+		}
+		this.parent = reader;
+	}
+
+	/**
+	 * Tells if the reader is running and actively scanning the data source for
+	 * new data.
+	 *
+	 * @return <code>true</code> if running, otherwise <code>false</code>.
+	 */
+	boolean isRunning() {
 		return isRunning;
 	}
 
 	/**
-	 * Read one line from the data source.
-	 * 
-	 * @return String or <code>null</code> if nothing was read.
+	 * Read one NMEA-0183 sentence and return it.
+	 *
+	 * @return Sentence String or <code>null</code> if nothing was read.
 	 */
 	public abstract String read() throws Exception;
 
@@ -110,10 +142,8 @@ abstract class AbstractDataReader implements DataReader {
 		parent.fireReadingStopped();
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see net.sf.marineapi.nmea.io.DataReader#stop()
+	/**
+	 * Stops the reader permanently.
 	 */
 	public void stop() {
 		isRunning = false;

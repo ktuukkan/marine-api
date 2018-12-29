@@ -35,7 +35,7 @@ class UDPDataReader extends AbstractDataReader {
 
 	private DatagramSocket socket;
 	private byte[] buffer = new byte[1024];
-	private Queue<String> queue = new LinkedList<String>();
+	private Queue<String> queue = new LinkedList<>();
 
 	/**
 	 * Creates a new instance of StreamReader.
@@ -43,7 +43,7 @@ class UDPDataReader extends AbstractDataReader {
 	 * @param socket DatagramSocket to be used as data source.
 	 * @param parent SentenceReader dispatching events for this reader.
 	 */
-	public UDPDataReader(DatagramSocket socket, SentenceReader parent) {
+	UDPDataReader(DatagramSocket socket, SentenceReader parent) {
 		super(parent);
 		this.socket = socket;
 	}

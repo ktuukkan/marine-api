@@ -67,16 +67,21 @@ public class SentenceReader {
 
 	// Thread for running the worker
 	private Thread thread;
-	// worker that reads the input stream
-	private DataReader reader;
+
+	// worker that reads the data source (input stream, socket etc)
+	private AbstractDataReader reader;
+
 	// map of sentence listeners
-	private ConcurrentMap<String, List<SentenceListener>> listeners = new ConcurrentHashMap<String, List<SentenceListener>>();
+	private ConcurrentMap<String, List<SentenceListener>> listeners = new ConcurrentHashMap<>();
+
 	// timeout for "reading paused" in ms
 	private volatile int pauseTimeout = DEFAULT_TIMEOUT;
+
 	// Non-NMEA data listener
 	private DataListener dataListener;
+
 	// Exception listener
-	private ExceptionListener exceptionListener=null;
+	private ExceptionListener exceptionListener;
 
 	/**
 	 * Creates a SentenceReader for UDP/DatagramSocket.
@@ -94,6 +99,20 @@ public class SentenceReader {
 	 */
 	public SentenceReader(InputStream source) {
 		reader = new DefaultDataReader(source, this);
+	}
+
+    /**
+     * Creates a new instance of SentenceReader with custom data reader.
+     *
+     * @param reader Custom data reader to use.
+     * @see AbstractDataReader
+     */
+	public SentenceReader(AbstractDataReader reader) {
+		if (reader == null) {
+			throw new IllegalArgumentException("Data reader cannot be null");
+		}
+		reader.setParent(this);
+		this.reader = reader;
 	}
 
 	/**
@@ -140,7 +159,7 @@ public class SentenceReader {
 				dataListener.dataRead(data);
 			}
 		} catch (Exception e) {
-			
+			LOGGER.log(Level.WARNING, "Exception thrown by DataListener", e);
 		}
 	}
 	
@@ -236,11 +255,11 @@ public class SentenceReader {
 	 * @return List of SentenceListeners or empty list.
 	 */
 	List<SentenceListener> getSentenceListeners() {
-		Set<SentenceListener> all = new HashSet<SentenceListener>();
+		Set<SentenceListener> all = new HashSet<>();
 		for (List<SentenceListener> sl : listeners.values()) {
 			all.addAll(sl);
 		}
-		return new ArrayList<SentenceListener>(all);
+		return new ArrayList<>(all);
 	}
 
 	/**
@@ -272,7 +291,7 @@ public class SentenceReader {
 		if (listeners.containsKey(type)) {
 			listeners.get(type).add(listener);
 		} else {
-			List<SentenceListener> list = new Vector<SentenceListener>();
+			List<SentenceListener> list = new Vector<>();
 			list.add(listener);
 			listeners.put(type, list);
 		}

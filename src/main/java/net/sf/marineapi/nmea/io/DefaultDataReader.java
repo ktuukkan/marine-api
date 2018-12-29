@@ -31,7 +31,7 @@ import java.io.InputStreamReader;
  */
 class DefaultDataReader extends AbstractDataReader {
 
-	private final BufferedReader input;
+	private final BufferedReader buffer;
 
 	/**
 	 * Creates a new instance of DefaultDataReader.
@@ -39,10 +39,9 @@ class DefaultDataReader extends AbstractDataReader {
 	 * @param source InputStream to be used as data source.
 	 * @param parent SentenceReader dispatching events for this reader.
 	 */
-	public DefaultDataReader(InputStream source, SentenceReader parent) {
+	DefaultDataReader(InputStream source, SentenceReader parent) {
 		super(parent);
-		InputStreamReader isr = new InputStreamReader(source);
-		this.input = new BufferedReader(isr);
+		this.buffer = new BufferedReader(new InputStreamReader(source));
 	}
 
 	/*
@@ -52,6 +51,6 @@ class DefaultDataReader extends AbstractDataReader {
 	 */
 	@Override
 	public String read() throws Exception {
-		return input.ready() ? input.readLine() : null;
+		return buffer.ready() ? buffer.readLine() : null;
 	}
 }

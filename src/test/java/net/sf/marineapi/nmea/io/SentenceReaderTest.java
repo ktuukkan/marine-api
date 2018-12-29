@@ -10,17 +10,24 @@ import static org.junit.Assert.fail;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStream;
+import java.net.DatagramSocket;
+import java.net.InetAddress;
+import java.util.ArrayList;
+import java.util.List;
 
+import net.sf.marineapi.nmea.event.AbstractSentenceListener;
 import net.sf.marineapi.nmea.event.SentenceEvent;
 import net.sf.marineapi.nmea.event.SentenceListener;
 import net.sf.marineapi.nmea.parser.BODTest;
 import net.sf.marineapi.nmea.parser.GGATest;
 import net.sf.marineapi.nmea.parser.SentenceFactory;
+import net.sf.marineapi.nmea.parser.TXTTest;
 import net.sf.marineapi.nmea.sentence.Sentence;
 import net.sf.marineapi.nmea.sentence.SentenceId;
 
+import net.sf.marineapi.nmea.sentence.TXTSentence;
+import net.sf.marineapi.test.util.UDPServerMock;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 
 public class SentenceReaderTest {
@@ -50,6 +57,16 @@ public class SentenceReaderTest {
 	}
 
 	@Test
+	public void testConstructorWithCustomReader() throws Throwable {
+		SentenceReader reader = new SentenceReader(new DummyDataReader(TXTTest.EXAMPLE));
+		reader.addSentenceListener(new TestSentenceListener());
+		reader.start();
+		Thread.sleep(200);
+		reader.stop();
+		assertEquals(sentence.toString(), TXTTest.EXAMPLE);
+	}
+
+	@Test
 	public void testAddSentenceListenerSentenceListenerString() {
 		DummySentenceListener dummy = new DummySentenceListener();
 		reader.addSentenceListener(dummy, "GLL");
@@ -76,9 +93,32 @@ public class SentenceReaderTest {
 	}
 
 	@Test
-	@Ignore
-	public void testSetDatagramSocket() {
-		// TODO mock socket
+	public void testSetDatagramSocket() throws Exception {
+
+		UDPServerMock server = new UDPServerMock();
+		List<TXTSentence> received = new ArrayList<>();
+
+		InetAddress host = InetAddress.getLocalHost();
+		DatagramSocket socket = new DatagramSocket(3810, host);
+		reader.setDatagramSocket(socket);
+
+		reader.addSentenceListener(new AbstractSentenceListener<TXTSentence>() {
+			@Override
+			public void sentenceRead(TXTSentence sentence) {
+				received.add(sentence);
+				if (received.size() == 4) {
+					reader.stop();
+					server.stop();
+					socket.close();
+				}
+			}
+		});
+
+		reader.start();
+		Thread.sleep(100);
+
+		assertFalse(received.isEmpty());
+		assertEquals(server.TXT, received.get(0).toString());
 	}
 
 	@Test
@@ -202,6 +242,7 @@ public class SentenceReaderTest {
 	}
 
 	public class TestSentenceListener implements SentenceListener {
+
 		public void readingPaused() {
 			paused = true;
 		}
@@ -218,4 +259,20 @@ public class SentenceReaderTest {
 			sentence = event.getSentence();
 		}
 	}
+
+	// Test "reader" that only repeats the given sentence
+	public class DummyDataReader extends AbstractDataReader {
+
+		private String sentence;
+
+		public DummyDataReader(String sentence) {
+			this.sentence = sentence;
+		}
+
+		@Override
+		public String read() throws Exception {
+			return this.sentence;
+		}
+	}
+
 }
