@@ -20,12 +20,10 @@
  */
 package net.sf.marineapi.ais.parser;
 
-import java.lang.reflect.Constructor;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.ArrayList;
+import java.util.List;
 
 import net.sf.marineapi.ais.message.AISMessage;
-import net.sf.marineapi.ais.util.Sixbit;
 import net.sf.marineapi.nmea.sentence.AISSentence;
 
 /**
@@ -36,23 +34,16 @@ import net.sf.marineapi.nmea.sentence.AISSentence;
 public class AISMessageFactory {
 
     private static AISMessageFactory instance;
-    private Map<Integer, Class<? extends AISMessage>> parsers;
+    private List<AISMessageParserFactory> parserFactories;
 
     /**
      * Hidden constructor.
      */
     private AISMessageFactory() {
-        parsers = new HashMap<Integer, Class<? extends AISMessage>>(7);
-        parsers.put(1, AISMessage01Parser.class);
-        parsers.put(2, AISMessage02Parser.class);
-        parsers.put(3, AISMessage03Parser.class);
-        parsers.put(4, AISMessage04Parser.class);
-        parsers.put(5, AISMessage05Parser.class);
-        parsers.put(9, AISMessage09Parser.class);
-        parsers.put(18, AISMessage18Parser.class);
-        parsers.put(19, AISMessage19Parser.class);
-        parsers.put(21, AISMessage21Parser.class);
-        parsers.put(24, AISMessage24Parser.class);
+        parserFactories = new ArrayList<>();
+        parserFactories.add(new MapBasedLegacyParserFactory());
+        parserFactories.add(new AISMessage08DAC200FID10Parser.Factory());
+        parserFactories.add(new AISMessage08Parser.Factory());
     }
 
 
@@ -70,21 +61,14 @@ public class AISMessageFactory {
 
         AISMessageParser parser = new AISMessageParser(sentences);
 
-        if (!parsers.containsKey(parser.getMessageType())) {
-            String msg = String.format("no parser for message type %d", parser.getMessageType());
-            throw new IllegalArgumentException(msg);
+        for (AISMessageParserFactory parserFactory : parserFactories) {
+            if (parserFactory.canCreate(parser)) {
+                return parserFactory.create(parser);
+            }
         }
 
-        AISMessage result;
-        Class<? extends AISMessage> c = parsers.get(parser.getMessageType());
-        try {
-            Constructor<? extends AISMessage> co = c.getConstructor(Sixbit.class);
-            result = co.newInstance(parser.getSixbit());
-        } catch (Exception e) {
-            throw new IllegalStateException(e.getCause());
-        }
-
-        return result;
+        String msg = String.format("no parser for message type %d", parser.getMessageType());
+        throw new IllegalArgumentException(msg);
     }
 
     /**

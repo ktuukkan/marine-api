@@ -45,9 +45,15 @@ public class BitVector {
 	}
 
 	public void dump() {
-		for(int i = 0; i < fLength; i++)
-			System.out.print(fBitVector.get(i) ? 1 : 0);
-		System.out.print("\n");
+		System.out.println(this);
+	}
+
+	@Override
+	public String toString() {
+		StringBuilder sb = new StringBuilder(fLength);
+		for (int i = 0; i < fLength; i++)
+			sb.append(fBitVector.get(i) ? '1' : '0');
+		return sb.toString();
 	}
 
 	public void set(int index) {
