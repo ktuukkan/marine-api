@@ -34,7 +34,7 @@ import net.sf.marineapi.nmea.util.SatelliteInfo;
  * manufacturer.
  * <p>
  * Example: <br>
- * <code>$GPGSV,3,2,12,15,56,182,51,17,38,163,47,18,63,058,50,21,53,329,47*73</code>
+ * {@code $GPGSV,3,2,12,15,56,182,51,17,38,163,47,18,63,058,50,21,53,329,47*73}
  * 
  * @author Kimmo Tuukkanen
  */
@@ -80,10 +80,10 @@ public interface GSVSentence extends Sentence {
 	/**
 	 * Tells if this is the last sentence in GSV sequence. This is a convenience
 	 * method for comparison of
-	 * <code>({@link #getSentenceCount()} == {@link #getSentenceIndex()})</code>
+	 * {@code ({@link #getSentenceCount()} == {@link #getSentenceIndex()})}
 	 * .
 	 * 
-	 * @return <code>true</code> if first, otherwise <code>false</code>.
+	 * @return {@code true} if first, otherwise {@code false}.
 	 */
 	boolean isLast();
 

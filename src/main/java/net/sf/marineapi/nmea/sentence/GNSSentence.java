@@ -22,8 +22,8 @@ package net.sf.marineapi.nmea.sentence;
 
 /**
  * <p>
- * GNSS capable receivers will always output this message with the <code>GN</code> talker ID.
- * GNSS capable receivers will also output this message with the <code>GP</code> and/or <code>GL</code>
+ * GNSS capable receivers will always output this message with the {@code GN} talker ID.
+ * GNSS capable receivers will also output this message with the {@code GP} and/or {@code GL}
  * talker ID when using more than one constellation for the position fix.</p>
  *
  * <p>
@@ -33,7 +33,6 @@ package net.sf.marineapi.nmea.sentence;
  * $GPGNS,014035.00,,,,,,8,,,,1.0,23*76
  * $GLGNS,014035.00,,,,,,5,,,,1.0,23*67
  * </pre>
- * </p>
  *
  * @author Kimmo Tuukkanen
  */
@@ -41,44 +40,27 @@ public interface GNSSentence extends Sentence, PositionSentence, TimeSentence {
 
     /**
      * GNS operational modes, a mix of {@link net.sf.marineapi.nmea.util.FaaMode}
-     * and {@link net.sf.marineapi.nmea.util.GpsFixQuality} with some values omitted.
+     * and {@link net.sf.marineapi.nmea.util.GpsFixQuality} with some omitted
+     * values.
      */
     enum Mode {
-        /**
-         * Operating in autonomous mode (automatic 2D/3D).
-         */
+        /** Operating in autonomous mode (automatic 2D/3D). */
         AUTOMATIC('A'),
-        /**
-         * Operating in manual mode (forced 2D or 3D).
-         */
+        /** Operating in manual mode (forced 2D or 3D). */
         MANUAL('M'),
-        /**
-         * Operating in differential mode (DGPS).
-         */
+        /** Operating in differential mode (DGPS). */
         DGPS('D'),
-        /**
-         * Operating in estimating mode (dead-reckoning).
-         */
+        /** Operating in estimating mode (dead-reckoning). */
         ESTIMATED('E'),
-        /**
-         * Real Time Kinetic, satellite system used in RTK mode with fixed integers.
-         */
+        /** Real Time Kinetic, satellite system used in RTK mode with fixed integers. */
         RTK('R'),
-        /**
-         * Float RTK, satellite system used in real time kinematic mode with floating integers.
-         */
+        /** Float RTK, satellite system used in real time kinematic mode with floating integers. */
         FRTK('F'),
-        /**
-         * Precise mode, no deliberate degradation like Selective Availability (NMEA 4.00 and later).
-         */
+        /** Precise mode, no deliberate degradation like Selective Availability (NMEA 4.00 and later). */
         PRECISE('P'),
-        /**
-         * Simulated data (running in simulator/demo mode)
-         */
+        /** Simulated data (running in simulator/demo mode). */
         SIMULATED('S'),
-        /**
-         * No valid GPS data available.
-         */
+        /** No valid GPS data available. */
         NONE('N');
 
         private final char ch;
@@ -86,9 +68,21 @@ public interface GNSSentence extends Sentence, PositionSentence, TimeSentence {
         Mode(char c) {
             this.ch = c;
         }
+
+        /**
+         * Returns the operational mode character.
+         *
+         * @return char indicator of mode
+         */
         public char toChar() {
             return ch;
         }
+
+        /**
+         * Returns the operational mode for given char.
+         * @param ch Char indicator
+         * @return Operational mode enum
+         */
         public static Mode valueOf(char ch) {
             for (Mode m : values()) {
                 if (m.toChar() == ch) {
@@ -136,7 +130,7 @@ public interface GNSSentence extends Sentence, PositionSentence, TimeSentence {
 
     /**
      * Sets the additional operational modes, leaving GPS and GLONASS modes unaffected
-     * or setting them both <code>NONE</code> if field is empty.
+     * or setting them both {@code NONE} if field is empty.
      *
      * @param modes Array of additional modes to set
      */
@@ -207,9 +201,9 @@ public interface GNSSentence extends Sentence, PositionSentence, TimeSentence {
 
     /**
      * Returns the age of differential GPS data.
-     * <p>
-     * <p>Notice: field is <code>null</code> when Talker ID is <code>GN</code>, additional GNS messages
-     * follow with <code>GP</code> and/or <code>GL</code> age of differential data.</p>
+     *
+     * <p>Notice: field is {@code null} when Talker ID is {@code GN}, additional GNS messages
+     * follow with {@code GP} and/or {@code GL} age of differential data.</p>
      *
      * @return Age of differential data.
      */
@@ -217,9 +211,9 @@ public interface GNSSentence extends Sentence, PositionSentence, TimeSentence {
 
     /**
      * Sets the age of differential GPS data.
-     * <p>
-     * <p>Notice: field is <code>null</code> when Talker ID is <code>GN</code>, additional GNS messages
-     * follow with <code>GP</code> and/or <code>GL</code> age of differential data.</p>
+     * 
+     * <p>Notice: field is {@code null} when Talker ID is {@code GN}, additional GNS messages
+     * follow with {@code GP} and/or {@code GL} age of differential data.</p>
      *
      * @param age Age to set, negative values will reset the field empty.
      */

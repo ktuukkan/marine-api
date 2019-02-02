@@ -27,12 +27,12 @@ package net.sf.marineapi.nmea.util;
  */
 public enum DataStatus {
 
-	/** Valid data available. May also indicate boolean value <code>true</code>. */
+	/** Valid data available. May also indicate boolean value {@code true}. */
 	ACTIVE('A'),
 
 	/**
 	 * No valid data available. May also indicate boolean value
-	 * <code>false</code>.
+	 * {@code false}.
 	 */
 	VOID('V');
 

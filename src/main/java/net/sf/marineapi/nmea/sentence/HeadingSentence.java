@@ -40,7 +40,7 @@ public interface HeadingSentence extends Sentence {
 	 * {@link #setHeading(double)} methods is <em>true</em> or <em>magnetic</em>
 	 * .
 	 * 
-	 * @return <code>true</code> if true heading, otherwise <code>false</code>
+	 * @return {@code true} if true heading, otherwise {@code false}
 	 *         for magnetic heading.
 	 */
 	boolean isTrue();

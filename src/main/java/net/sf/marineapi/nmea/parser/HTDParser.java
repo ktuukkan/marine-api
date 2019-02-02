@@ -37,10 +37,20 @@ class HTDParser extends HTCParser implements HTDSentence {
 	private static final int OFF_TRACK_STATUS = 15;
 	private static final int HEADING = 16;
 
+	/**
+	 * Constructor.
+	 *
+	 * @param nmea HTD sentence String to parse.
+	 */
 	public HTDParser(String nmea) {
 		super(nmea, SentenceId.HTD);
 	}
 
+	/**
+	 * Constructor for empty HTD sentence.
+	 *
+	 * @param talker Talker ID to set.
+	 */
 	public HTDParser(TalkerId talker) {
 		super(talker, SentenceId.HTD, 17);
 	}

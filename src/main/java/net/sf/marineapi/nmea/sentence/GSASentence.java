@@ -29,7 +29,7 @@ import net.sf.marineapi.nmea.util.GpsFixStatus;
  * the fix. It is a unitless number where smaller is better.
  * <p>
  * Example:<br>
- * <code>$GPGSA,A,3,02,,,07,,09,24,26,,,,,1.6,1.6,1.0*3D</code>
+ * {@code $GPGSA,A,3,02,,,07,,09,24,26,,,,,1.6,1.6,1.0*3D}
  * 
  * @author Kimmo Tuukkanen
  */

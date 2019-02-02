@@ -27,7 +27,7 @@ import net.sf.marineapi.nmea.sentence.TalkerId;
 /**
  * MMBParser - Barometer.
  *
- * $--MMB,x.x,I,x.x,B*hh<CR><LF>
+ * {@code $--MMB,x.x,I,x.x,B*hh<CR><LF>}
  *
  * @author Kimmo Tuukkanen
  */

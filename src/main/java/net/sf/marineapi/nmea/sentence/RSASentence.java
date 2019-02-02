@@ -31,7 +31,7 @@ import net.sf.marineapi.nmea.util.Side;
  * </p>
  * <p>
  * Example:<br>
- * <code>$IIRSA,9,A,,*38</code>
+ * {@code $IIRSA,9,A,,*38}
  * </p>
  * 
  * @author Lázár József, Kimmo Tuukkanen
@@ -40,7 +40,8 @@ public interface RSASentence extends Sentence {
 
 	/**
 	 * Returns the rudder angle for specified side.
-	 * 
+	 *
+	 * @param side Rudder side
 	 * @return Rudder angle in degrees.
 	 */
 	double getRudderAngle(Side side);

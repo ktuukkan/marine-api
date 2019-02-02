@@ -28,7 +28,7 @@ import net.sf.marineapi.nmea.util.Direction;
  * Speed in Knots, Meters Per Second and Kilometers Per Hour
  * <p>
  * Example: <br>
- * <code>---</code>
+ * {@code ---}
  * 
  * @author Henri Laurent
  */

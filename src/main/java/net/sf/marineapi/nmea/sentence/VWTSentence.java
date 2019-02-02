@@ -23,13 +23,14 @@ package net.sf.marineapi.nmea.sentence;
 import net.sf.marineapi.nmea.util.Direction;
 
 /**
- * True Wind Speed and Angle
- * True wind angle in relation to the vessel's heading and true wind speed referenced to the water.
- * Speed in Knots, Meters Per Second and Kilometers Per Hour
  * <p>
- * Example: <br>
- * <code>---</code>
- * $--VWT,x.x,a,x.x,N,x.x,M,x.x,K*hh<CR><LF>
+ * True Wind Speed and Angle. True wind angle in relation to the vessel's
+ * heading and true wind speed referenced to the water. Speed in Knots, Meters
+ * Per Second and Kilometers Per Hour.</p>
+ *
+ * <p>
+ * Example:<br>
+ * {@code $--VWT,x.x,a,x.x,N,x.x,M,x.x,K*hh<CR><LF>}</p>
  *
  * @author Henri Laurent
  */
@@ -46,9 +47,9 @@ public interface VWTSentence extends Sentence {
 	 * Get the Wind angle magnitude in degrees
 	 *
 	 * @return Wind angle
-	 * @throws net.sf.marineapi.parser.DataNotAvailableException If the data is
+	 * @throws net.sf.marineapi.nmea.parser.DataNotAvailableException If the data is
 	 *             not available.
-	 * @throws net.sf.marineapi.parser.ParseException If the field contains
+	 * @throws net.sf.marineapi.nmea.parser.ParseException If the field contains
 	 *             unexpected or illegal value.
 	 */
 	double getWindAngle();
@@ -58,9 +59,9 @@ public interface VWTSentence extends Sentence {
      *
      * @since NMEA 2.3
 	 * @return {@link Direction} enum
-	 * @throws net.sf.marineapi.parser.DataNotAvailableException If the data is
+	 * @throws net.sf.marineapi.nmea.parser.DataNotAvailableException If the data is
 	 *             not available.
-	 * @throws net.sf.marineapi.parser.ParseException If the field contains
+	 * @throws net.sf.marineapi.nmea.parser.ParseException If the field contains
 	 *             unexpected or illegal value.
 	 */
 	Direction getDirectionLeftRight();
@@ -69,9 +70,9 @@ public interface VWTSentence extends Sentence {
 	 * Get relative wind speed, in kilometers per hour.
 	 * 
 	 * @return Speed in km/h
-	 * @throws net.sf.marineapi.parser.DataNotAvailableException If the data is
+	 * @throws net.sf.marineapi.nmea.parser.DataNotAvailableException If the data is
 	 *             not available.
-	 * @throws net.sf.marineapi.parser.ParseException If the field contains
+	 * @throws net.sf.marineapi.nmea.parser.ParseException If the field contains
 	 *             unexpected or illegal value.
 	 */
 	double getSpeedKmh();
@@ -80,9 +81,9 @@ public interface VWTSentence extends Sentence {
 	 * Get relative wind speed in knots.
 	 * 
 	 * @return Speed in knots (nautical miles per hour)
-	 * @throws net.sf.marineapi.parser.DataNotAvailableException If the data is
+	 * @throws net.sf.marineapi.nmea.parser.DataNotAvailableException If the data is
 	 *             not available.
-	 * @throws net.sf.marineapi.parser.ParseException If the field contains
+	 * @throws net.sf.marineapi.nmea.parser.ParseException If the field contains
 	 *             unexpected or illegal value.
 	 */
 	double getSpeedKnots();

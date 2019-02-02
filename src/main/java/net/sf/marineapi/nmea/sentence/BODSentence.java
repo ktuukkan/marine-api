@@ -26,7 +26,7 @@ package net.sf.marineapi.nmea.sentence;
  * route).
  * <p>
  * Example:<br>
- * <code>$GPBOD,234.9,T,228.8,M,RUSKI,*1D</code>
+ * {@code $GPBOD,234.9,T,228.8,M,RUSKI,*1D}
  * 
  * @author Kimmo Tuukkanen
  */

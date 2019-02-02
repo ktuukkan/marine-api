@@ -32,47 +32,61 @@ package net.sf.marineapi.ais.message;
 public interface AISMessage09 extends AISPositionInfo {
 
     /**
-     * Returns the Altitude of the aircraft
-     * Altitude is in meters. The special value 4095 indicates altitude is not available;
-     * 4094 indicates 4094 meters or higher.
+     * Returns the altitude of the aircraft. The special value 4095 indicates
+     * altitude is not available; 4094 indicates 4094 meters or higher.
+     *
+     * @return Altitude, in meters.
      */
     int getAltitude();
 
     /**
-     * Returns the speed over ground.
-     * Speed over ground is in knots, not deciknots as in the common navigation block; planes go faster.
-     * The special value 1023 indicates speed not available, 1022 indicates 1022 knots or higher.
+     * Returns the speed over ground. Not deciknots as in the common navigation
+     * block; planes go faster. The special value 1023 indicates speed not
+     * available, 1022 indicates 1022 knots or higher.
+     *
+     * @return Speed over ground, in knots.
      */
     int getSpeedOverGround();
 
     /**
      * Returns the course over ground.
+     *
+     * @return Course over ground, in degrees.
      */
     double getCourseOverGround();
 
     /**
      * Returns the UTC second.
-     * @return an integer value representing the UTC second (0-59)
+     *
+     * @return An integer value representing the UTC second (0-59)
      */
     int getTimeStamp();
 
     /**
-     * Returns the DTE
+     * Data terminal ready (0 = available 1 = not available = default)
+     *
+     * @return {@code true} if available, otherwise false.
      */
     boolean getDTEFlag();
 
     /**
      * Returns the Assigned-mode flag
+     *
+     * @return {@code true} if assigned mode, otherwise {@code false}.
      */
     boolean getAssignedModeFlag();
 
     /**
-     * Returns the RAIM flag
+     * Returns the RAIM flag.
+     *
+     * @return {@code true} if RAIM in use, otherwise {@code false}.
      */
     boolean getRAIMFlag();
 
     /**
-     * Returns the Radio status
+     * Returns the Radio status.
+     *
+     * @return Radio status int
      */
     int getRadioStatus();
 }

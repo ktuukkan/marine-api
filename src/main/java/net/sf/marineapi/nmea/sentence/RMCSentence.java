@@ -29,7 +29,7 @@ import net.sf.marineapi.nmea.util.FaaMode;
  * position, speed over ground, true course over ground and magnetic variation.
  * <p>
  * Example:<br>
- * <code>$GPRMC,120044,A,6011.552,N,02501.941,E,000.0,360.0,160705,006.1,E*7C</code>
+ * {@code $GPRMC,120044,A,6011.552,N,02501.941,E,000.0,360.0,160705,006.1,E*7C}
  * 
  * @author Kimmo Tuukkanen
  */
@@ -131,7 +131,7 @@ public interface RMCSentence extends PositionSentence, TimeSentence,
 	 * 
 	 * @param dir {@link CompassPoint#EAST} or {@link CompassPoint#WEST}
 	 * @throws IllegalArgumentException If specified Direction is other than
-	 *             defined as valid for param <code>dir</code>.
+	 *             defined as valid for param {@code dir}.
 	 */
 	void setDirectionOfVariation(CompassPoint dir);
 

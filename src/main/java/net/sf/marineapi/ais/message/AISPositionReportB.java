@@ -29,41 +29,61 @@ public interface AISPositionReportB extends AISPositionInfo {
 
 	/**
 	 * Returns the speed over ground.
+	 *
+	 * @return Speed over ground
 	 */
 	double getSpeedOverGround();
 
 	/**
 	 * Returns the course over ground.
+	 *
+	 * @return Course over ground
 	 */
 	double getCourseOverGround();
 
 	/**
 	 * Returns the true heading.
+	 *
+	 * @return true heading value, in degrees
 	 */
 	int getTrueHeading();
 
 	/**
-	 * Returns the time stamp contained in the message.
+	 * Returns the message time stamp. UTC second when the report was generated
+	 * by the EPFS (0-59). 60 if time stamp is not available, which should also
+	 * be the default value. 61 if positioning system is in manual input mode.
+	 * 62 if electronic position fixing system operates in estimated (dead
+	 * reckoning) mode. 63 if the positioning system is inoperative.
+	 *
+	 * @return Timestamp value
 	 */
 	int getTimeStamp();
 
 	/**
 	 * Returns true if speed over ground is available in the message.
+	 *
+	 * @return {@code true} if has SOG, otherwise {@code false}.
 	 */
 	boolean hasSpeedOverGround();
 
 	/**
 	 * Returns true if course over ground is available in the message.
+	 *
+	 * @return {@code true} if has COG, otherwise {@code false}.
 	 */
 	boolean hasCourseOverGround();
 
 	/**
 	 * Returns true if true heading is available in the message.
+	 *
+	 * @return {@code true} if has heading, otherwise {@code false}.
 	 */
 	boolean hasTrueHeading();
 
 	/**
 	 * Returns true if timestamp is available in the message.
+	 *
+	 * @return {@code true} if has timestamp, otherwise {@code false}.
 	 */
 	boolean hasTimeStamp();
 }

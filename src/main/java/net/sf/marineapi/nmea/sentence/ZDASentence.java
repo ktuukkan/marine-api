@@ -28,7 +28,7 @@ import net.sf.marineapi.nmea.util.Time;
  * UTC time and date with local time zone offset.
  * <p>
  * Example: <br>
- * <code>$GPZDA,032915,07,08,2004,00,00*4D</code>
+ * {@code $GPZDA,032915,07,08,2004,00,00*4D}
  *
  * @author Kimmo Tuukkanen
  */

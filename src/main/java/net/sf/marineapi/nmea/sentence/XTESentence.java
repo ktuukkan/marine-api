@@ -33,6 +33,8 @@ public interface XTESentence extends Sentence {
 
 	/**
 	 * Returns the Loran-C cycle lock status, not used for GPS.
+	 *
+	 * @return DataStatus
 	 */
 	DataStatus getCycleLockStatus();
 

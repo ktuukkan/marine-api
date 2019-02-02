@@ -27,7 +27,7 @@ import net.sf.marineapi.nmea.util.DataStatus;
  * </p>
  * <p>
  * Example:<br>
- * <code>$IIVBW,11.0,02.0,A,06.0,03.0,A,05.3,A,01.0,A*43</code>
+ * {@code $IIVBW,11.0,02.0,A,06.0,03.0,A,05.3,A,01.0,A*43}
  * </p>
  * 
  * @author Jeremy Wilson

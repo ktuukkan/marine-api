@@ -24,8 +24,8 @@ package net.sf.marineapi.nmea.sentence;
 /**
  * <p>Distance traveled through water, cumulative and trip.</p>
  * 
- * <p>Example:<br/>
- * <code>$VWVLW,2.8,N,2.8,N*4C</code></p>
+ * <p>Example:<br>
+ * {@code $VWVLW,2.8,N,2.8,N*4C}</p>
  * 
  * @author Kimmo Tuukkanen
  */

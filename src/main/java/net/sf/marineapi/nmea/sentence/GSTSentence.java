@@ -25,7 +25,7 @@ package net.sf.marineapi.nmea.sentence;
  * GPS Pseudorange Noise Statistics. 
  * <p>
  * Example:<br>
- * <code>$GPGST,172814.0,0.006,0.023,0.020,273.6,0.023,0.020,0.031*6A</code>
+ * {@code $GPGST,172814.0,0.006,0.023,0.020,273.6,0.023,0.020,0.031*6A}
  * 
  * @author Tero Laitinen
  */

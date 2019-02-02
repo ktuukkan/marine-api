@@ -44,7 +44,7 @@ class DBTParser extends SentenceParser implements DBTSentence {
 	/**
 	 * Creates a new instance of DBTParser.
 	 * 
-	 * @param nmea
+	 * @param nmea DBT sentence String
 	 */
 	public DBTParser(String nmea) {
 		super(nmea, SentenceId.DBT);

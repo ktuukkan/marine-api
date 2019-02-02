@@ -55,37 +55,52 @@ public interface AISMessage24 extends AISMessage {
 
     /**
      * Returns the Unit Model code
+     *
+     * @return model code int
      */
     int getUnitModelCode();
 
     /**
      * Returns the Serial Number
+     *
+     * @return serial number int
      */
     int getSerialNumber();
 
     /**
      * Returns the call sign of the transmitting ship.
+     *
      * @return at most 7 characters, representing the call sign
      */
     String getCallSign();
 
     /**
      * Returns the distance from the reference point to the bow.
+     *
+     * @return Distance to bow, in meters.
      */
     int getBow();
 
     /**
      * Returns the distance from the reference point to the stern of the ship.
+     *
+     * @return Distance to stern, in meters.
      */
     int getStern();
 
     /**
-     * Returns the distance from the reference point to the port side of the ship.
+     * Returns the distance from the reference point to the port side of the
+     * ship.
+     *
+     * @return Distance to port side, in meters.
      */
     int getPort();
 
     /**
-     * Returns the distance from the reference point to the starboard side of the ship.
+     * Returns the distance from the reference point to the starboard side of
+     * the ship.
+     *
+     * @return Distance to starborad side, in meters.
      */
     int getStarboard();
 

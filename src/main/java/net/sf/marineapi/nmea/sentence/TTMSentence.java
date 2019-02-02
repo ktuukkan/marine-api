@@ -29,7 +29,7 @@ import net.sf.marineapi.nmea.util.Units;
  * speed of target. One message per target.
  * <p>
  * Example:<br>
- * <code>$RATTM,11,11.4,13.6,T,7.0,20.0,T,0.0,0.0,N,,Q,,154125.82,A,*17</code>
+ * {@code $RATTM,11,11.4,13.6,T,7.0,20.0,T,0.0,0.0,N,,Q,,154125.82,A,*17}
  *
  * @author Johan Bergkvist
  */

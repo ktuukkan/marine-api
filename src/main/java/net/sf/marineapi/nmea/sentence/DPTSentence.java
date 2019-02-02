@@ -26,7 +26,7 @@ package net.sf.marineapi.nmea.sentence;
  * distance from transducer to keel. The maximum value is included since NMEA
  * v3.0 and may thus be missing.</p>
  * 
- * <p>Example:<br><code>$SDDPT,2.4,,*7F</code></p>
+ * <p>Example:<br>{@code $SDDPT,2.4,,*7F}</p>
  * 
  * @author Kimmo Tuukkanen
  */

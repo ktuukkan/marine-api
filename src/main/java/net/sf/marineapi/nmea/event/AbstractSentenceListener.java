@@ -37,7 +37,6 @@ import net.sf.marineapi.util.GenericTypeResolver;
  * <pre>
  *   class MyListener extends AbstractSentenceListener&lt;GGASentence&gt;
  * </pre>
- * </p>
  * <p>
  * Notice that more advanced use of generics and inheritance may require using
  * the {@link #AbstractSentenceListener(Class)} constructor. For example, the 
@@ -49,12 +48,12 @@ import net.sf.marineapi.util.GenericTypeResolver;
  *   ...
  *   MyListener&lt;String, GGASentence&gt; ml = new MyListener&lt;&gt;();
  * </pre>
- * </p>
+ * <p>
  * Methods of the {@link SentenceListener} interface implemented by this class
  * are empty, except for {@link #sentenceRead(SentenceEvent)} which is final
  * and detects the incoming sentences and casts them in correct interface
  * before calling the {@link #sentenceRead(Sentence)} method. The other methods
- * may be overridden as needed.
+ * may be overridden as needed.</p>
  *
  * @author Kimmo Tuukkanen
  * @param <T> Sentence interface to be listened.
@@ -63,7 +62,7 @@ import net.sf.marineapi.util.GenericTypeResolver;
 public abstract class AbstractSentenceListener<T extends Sentence>
     implements SentenceListener {
 
-    protected final Class<?> sentenceType;
+    final Class<?> sentenceType;
 
     /**
      * Default constructor with automatic generic type resolving. Notice that
@@ -81,9 +80,9 @@ public abstract class AbstractSentenceListener<T extends Sentence>
     /**
      * Constructor with explicit generic type parameter. This constructor may
      * be used when the default constructor fails to resolve the generic type
-     * <code>T</code> at runtime.
+     * {@code T} at runtime.
      *
-     * @param c Sentence type <code>T</code> to be listened.
+     * @param c Sentence type {@code T} to be listened.
      * @see #AbstractSentenceListener()
      */
     protected AbstractSentenceListener(Class<T> c) {
@@ -94,14 +93,13 @@ public abstract class AbstractSentenceListener<T extends Sentence>
      * <p>
      * Invoked for all received sentences. Checks the type of each sentence
      * and invokes the {@link #sentenceRead(Sentence)} if it matches the
-     * listener's generic type <code>T</code>.
+     * listener's generic type {@code T}.
      * </p>
      * <p>
-     * This method has been declared <code>final</code> to ensure the correct
+     * This method has been declared {@code final} to ensure the correct
      * filtering of sentences.
      * </p>
      *
-     * @see SentenceListener#sentenceRead(SentenceEvent)
      */
     @SuppressWarnings("unchecked")
     public final void sentenceRead(SentenceEvent event) {
@@ -112,16 +110,14 @@ public abstract class AbstractSentenceListener<T extends Sentence>
     }
 
     /**
-     * Invoked when sentence of type <code>T</code> is received.
+     * Invoked when sentence of type {@code T} is received.
      *
-     * @param sentence Sentence of type <code>T</code>
+     * @param sentence Sentence of type {@code T}
      */
     public abstract void sentenceRead(T sentence);
 
     /**
      * Empty implementation.
-     *
-     * @see SentenceListener#readingPaused()
      */
     @Override
     public void readingPaused() {
@@ -129,8 +125,6 @@ public abstract class AbstractSentenceListener<T extends Sentence>
 
     /**
      * Empty implementation.
-     *
-     * @see SentenceListener#readingStarted()
      */
     @Override
     public void readingStarted() {
@@ -138,8 +132,6 @@ public abstract class AbstractSentenceListener<T extends Sentence>
 
     /**
      * Empty implementation.
-     *
-     * @see SentenceListener#readingStopped()
      */
     @Override
     public void readingStopped() {

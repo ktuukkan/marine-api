@@ -54,6 +54,11 @@ import net.sf.marineapi.ais.util.Sixbit;
  */
 class AISMessage04Parser extends AISUTCParser implements AISMessage04 {
 
+	/**
+	 * Constructor.
+	 *
+	 * @param content Six-bit message content to parse.
+	 */
 	public AISMessage04Parser(Sixbit content) {
 		super(content);
 	}

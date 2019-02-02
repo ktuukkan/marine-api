@@ -23,9 +23,6 @@ package net.sf.marineapi.nmea.sentence;
 /**
  * Multi-layer current data sentence is transmitted by navigation central
  * like the NKE ones.
- * <p>
- * Example:<br>
- * <code> </code>
  *
  * @author Henri Laurent
  */

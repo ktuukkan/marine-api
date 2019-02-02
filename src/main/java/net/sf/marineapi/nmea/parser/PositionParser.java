@@ -40,6 +40,10 @@ import net.sf.marineapi.nmea.util.Position;
 abstract class PositionParser extends SentenceParser {
 
 	/**
+	 * Constructor.
+	 *
+	 * @param nmea Sentence string to parse.
+ 	 * @param type Expected Sentence ID
 	 * @see SentenceParser#SentenceParser(String, SentenceId)
 	 */
 	protected PositionParser(String nmea, SentenceId type) {
@@ -47,6 +51,11 @@ abstract class PositionParser extends SentenceParser {
 	}
 
 	/**
+	 * Constructor for empty sentence.
+	 *
+	 * @param talker Talker ID to set
+	 * @param type Sentence ID to set
+	 * @param size Number of empty data fields to set.
 	 * @see SentenceParser#SentenceParser(TalkerId, SentenceId, int)
 	 */
 	protected PositionParser(TalkerId talker, SentenceId type, int size) {
@@ -85,7 +94,7 @@ abstract class PositionParser extends SentenceParser {
 
 	/**
 	 * Parses the latitude degrees from the specified field. The assumed String
-	 * format for latitude is <code>ddmm.mmm</code>.
+	 * format for latitude is {@code ddmm.mmm}.
 	 * 
 	 * @param index Index of field containing the latitude value.
 	 * @return Latitude value in degrees
@@ -99,7 +108,7 @@ abstract class PositionParser extends SentenceParser {
 
 	/**
 	 * Parses the longitude degrees from the specified field. The assumed String
-	 * format for longitude is <code>dddmm.mmm</code>.
+	 * format for longitude is {@code dddmm.mmm}.
 	 * 
 	 * @param index Index of field containing the longitude value.
 	 * @return Longitude value in degrees
@@ -112,7 +121,7 @@ abstract class PositionParser extends SentenceParser {
 	}
 
 	/**
-	 * Parses a <code>Position</code> from specified fields.
+	 * Parses a {@code Position} from specified fields.
 	 * 
 	 * @param latIndex Latitude field index
 	 * @param latHemIndex Latitude hemisphere field index
@@ -212,9 +221,9 @@ abstract class PositionParser extends SentenceParser {
 	}
 
 	/**
-	 * Sets the values from specified <code>Position</code> according to given
+	 * Sets the values from specified {@code Position} according to given
 	 * field indices. Sets the absolute values of latitude and longitude, and
-	 * hemisphere indicators as given by <code>Position</code>. Does not set
+	 * hemisphere indicators as given by {@code Position}. Does not set
 	 * altitude.
 	 * 
 	 * @param p Position to set

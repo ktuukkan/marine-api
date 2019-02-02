@@ -29,8 +29,11 @@ package net.sf.marineapi.nmea.util;
  */
 public enum TurnMode {
 
+	/** Radius controlled */
 	RADIUS_CONTROLLED('R'),
+	/** Turn rate controlled */
 	TURN_RATE_CONTROLLED('T'),
+	/** Not controlled */
 	NOT_CONTROLLED('N');
 
 	private final char character;

@@ -51,7 +51,7 @@ public class Date {
 	private int year;
 
 	/**
-	 * Creates a new instance of <code>Date</code> using the current date.
+	 * Creates a new instance of {@code Date} using the current date.
 	 */
 	public Date() {
 		GregorianCalendar c = new GregorianCalendar();
@@ -61,8 +61,10 @@ public class Date {
 	}
 
 	/**
-	 * Creates a new instance of <code>Date</code>, assumes the default NMEA
-	 * 0183 date formatting, <code>ddmmyy</code> or <code>ddmmyyyy</code>.
+	 * Creates a new instance of {@code Date}, assumes the default NMEA
+	 * 0183 date formatting, {@code ddmmyy} or {@code ddmmyyyy}.
+	 *
+	 * @param date Date String to parse.
 	 */
 	public Date(String date) {
 		setDay(Integer.parseInt(date.substring(0, 2)));
@@ -201,8 +203,8 @@ public class Date {
 	}
 
 	/**
-	 * Returns the String representation of <code>Date</code>. Formats the date
-	 * in <code>ddmmyy</code> format used in NMEA 0183 sentences.
+	 * Returns the String representation of {@code Date}. Formats the date
+	 * in {@code ddmmyy} format used in NMEA 0183 sentences.
 	 */
 	@Override
 	public String toString() {
@@ -214,7 +216,9 @@ public class Date {
 	}
 
 	/**
-	 * Returns the date in ISO 8601 format (<code>yyyy-mm-dd</code>).
+	 * Returns the date in ISO 8601 format ({@code yyyy-mm-dd}).
+	 *
+	 * @return Formatted date String
 	 */
 	public String toISO8601() {
 		return String.format(DATE_PATTERN, getYear(), getMonth(), getDay());
@@ -222,9 +226,10 @@ public class Date {
 
 	/**
 	 * Returns a timestamp in ISO 8601 format
-	 * (<code>yyyy-mm-ddThh:mm:ss+hh:mm</code>).
+	 * ({@code yyyy-mm-ddThh:mm:ss+hh:mm}).
 	 *
-	 * @param t Time to format with date
+	 * @param t {@link Time} to append in the date
+	 * @return The formatted date-time String.
 	 */
 	public String toISO8601(Time t) {
 		return toISO8601().concat("T").concat(t.toISO8601());

@@ -42,11 +42,18 @@ class DTMParser extends SentenceParser implements DTMSentence {
 
 	/**
 	 * Creates a new instance of DTMParser.
+	 *
+	 * @param nmea DTM sentence String to parse.
 	 */
 	public DTMParser(String nmea) {
 		super(nmea, SentenceId.DTM);
 	}
 
+	/**
+	 * Creates a new empty instance of DTMParser.
+	 *
+	 * @param talker Talker ID to set
+	 */
 	public DTMParser(TalkerId talker) {
 		super(talker, SentenceId.DTM, 8);
 	}

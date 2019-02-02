@@ -96,6 +96,11 @@ class AISMessage05Parser extends AISMessageParser implements AISMessage05 {
 	private int			fMaximumDraught;
 	private String		fDestination;
 
+	/**
+	 * Constructor.
+	 *
+	 * @param content Six-bit message content to parse.
+	 */
 	public AISMessage05Parser(Sixbit content) {
 		super(content);
 		if (content.length() != 424)

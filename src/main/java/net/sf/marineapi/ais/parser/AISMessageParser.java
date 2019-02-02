@@ -91,6 +91,7 @@ public class AISMessageParser implements AISMessage {
 
     /**
      * Add a new rule violation to this message
+     * @param v Violation to add
      */
     protected void addViolation(Violation v) {
         fViolations.add(v);
@@ -98,6 +99,8 @@ public class AISMessageParser implements AISMessage {
 
     /**
      * Returns the number of violations.
+     *
+     * @return Number of violations.
      */
     public int getNrOfViolations() {
         return fViolations.size();
@@ -105,6 +108,8 @@ public class AISMessageParser implements AISMessage {
 
     /**
      * Returns list of discoverd data violations.
+     *
+     * @return Number of violations.
      */
     public List<Violation> getViolations() {
         return fViolations;

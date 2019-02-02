@@ -35,7 +35,7 @@ public class Waypoint extends Position {
 	private final Date timeStamp = new Date();
 
 	/**
-	 * Creates a new instance of <code>Waypoint</code> with default WGS84 datum.
+	 * Creates a new instance of {@code Waypoint} with default WGS84 datum.
 	 * 
 	 * @param id Waypoint identifier
 	 * @param lat Latitude degrees of the waypoint location
@@ -47,7 +47,7 @@ public class Waypoint extends Position {
 	}
 
 	/**
-	 * Creates a new instance of <code>Waypoint</code> with default WGS84 datum.
+	 * Creates a new instance of {@code Waypoint} with default WGS84 datum.
 	 * 
 	 * @param id Waypoint identifier
 	 * @param lat Latitude degrees of the waypoint location
@@ -73,7 +73,7 @@ public class Waypoint extends Position {
 	}
 
 	/**
-	 * Creates a new instance of <code>Waypoint</code> with explicitly specified
+	 * Creates a new instance of {@code Waypoint} with explicitly specified
 	 * datum.
 	 * 
 	 * @param id Waypoint identifier/name
@@ -106,7 +106,7 @@ public class Waypoint extends Position {
 	}
 
 	/**
-	 * Returns the time stamp when <code>Waypoint</code> was created.
+	 * Returns the time stamp when {@code Waypoint} was created.
 	 * 
 	 * @return Date
 	 */

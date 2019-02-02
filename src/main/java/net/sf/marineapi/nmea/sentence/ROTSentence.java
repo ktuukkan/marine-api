@@ -26,7 +26,7 @@ import net.sf.marineapi.nmea.util.DataStatus;
  * <p>Vessel's rate of turn given in degrees per minute. Negative values
  * indicate bow turning to port.</p>
  * 
- * <p>Example:<br><code>$GPROT,35.6,A*4E</code></p>
+ * <p>Example:<br>{@code $GPROT,35.6,A*4E}</p>
  * 
  * @author Mike Tamis, Kimmo Tuukkanen
  */

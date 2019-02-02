@@ -28,7 +28,7 @@ import net.sf.marineapi.nmea.util.FaaMode;
  * and may not always be available.
  * <p>
  * Example: <br>
- * <code>$GPVTG,46.96,T,,,16.89,N,31.28,K,A*43</code>
+ * {@code $GPVTG,46.96,T,,,16.89,N,31.28,K,A*43}
  * 
  * @author Kimmo Tuukkanen
  */

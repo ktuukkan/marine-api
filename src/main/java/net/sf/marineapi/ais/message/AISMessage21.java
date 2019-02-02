@@ -46,64 +46,87 @@ public interface AISMessage21 extends AISPositionInfo {
 
     /**
      * Returns the distance from the reference point to the bow.
+     *
+     * @return Distance to bow, in meters.
      */
     int getBow();
 
     /**
      * Returns the distance from the reference point to the stern of the ship.
+     *
+     * @return Distance to stern, in meters.
      */
     int getStern();
 
     /**
-     * Returns the distance from the reference point to the port side of the ship.
+     * Returns the distance from the reference point to the port side of the
+     * ship.
+     *
+     * @return Distance to port side, in meters.
      */
     int getPort();
 
     /**
-     * Returns the distance from the reference point to the starboard side of the ship.
+     * Returns the distance from the reference point to the starboard side of
+     * the ship.
+     *
+     * @return Distance to starboard side, in meters.
      */
     int getStarboard();
 
     /**
      * Returns the type of electronic position fixing device.
+     *
      * @return an integer value of the position device
      */
     int getTypeOfEPFD();
 
     /**
      * Returns the UTC second.
+     *
      * @return an integer value representing the UTC second (0-59)
      */
     int getUtcSecond();
 
     /**
-     * Returns the Off-position indicator.
+     * Returns the Off-position indicator: 0 means on position; 1 means off
+     * position. Only valid if UTC second is equal to or below 59.
+     *
+     * @return {@code true} if off-position, otherwise {@code false}.
      */
     boolean getOffPositionIndicator();
 
     /**
-     * Returns a Regional integer
-     * @return an integer value of the Regional reserved
+     * Returns a Regional integer (reserved)
+     *
+     * @return an integer value
      */
     int getRegional();
 
     /**
      * Returns the RAIM flag
+     *
+     * @return {@code true} if RAIM in use, otherwise {@code false}.
      */
     boolean getRAIMFlag();
 
     /**
      * Returns the Virtual-aid flag
+     *
+     * @return {@code true} if virtual, otherwise {@code false}
      */
     boolean getVirtualAidFlag();
 
     /**
      * Returns the Assigned-mode flag
+     *
+     * @return {@code true} if assigned, otherwise {@code false}.
      */
     boolean getAssignedModeFlag();
 
     /**
-     * Returns the name extension
+     * Returns the name extension.
+     *
      * @return maximum 14 characters, representing the name extension
      */
     String getNameExtension();

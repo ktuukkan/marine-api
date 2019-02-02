@@ -22,7 +22,7 @@ package net.sf.marineapi.nmea.sentence;
 
 /**
  * The enumeration of Talker IDs, i.e. the first two characters in sentence's
- * address field. For example, <code>GP</code> in <code>$GPGGA</code>. Notice
+ * address field. For example, {@code GP} in {@code $GPGGA}. Notice
  * that proprietary sentences are identified by single character {@link #P}.
  * <p>
  * This enum contains also non-NMEA IDs to enable parsing AIS messages;
@@ -198,8 +198,8 @@ public enum TalkerId {
 	ZV;
 
 	/**
-	 * Parses the talker id from specified sentence String and returns the
-	 * corresponding TalkerId enum using the {@link #valueOf(String)} method.
+	 * Parses the Talker ID from specified sentence String and returns the
+	 * corresponding TalkerId enum using the {@link TalkerId#valueOf(Class, String)} method.
 	 * 
 	 * @param nmea Sentence String
 	 * @return TalkerId enum
@@ -218,6 +218,6 @@ public enum TalkerId {
 		} else {
 			tid = nmea.substring(1, 3);
 		}
-		return TalkerId.valueOf(tid);
+		return TalkerId.valueOf(TalkerId.class, tid);
 	}
 }

@@ -33,11 +33,16 @@ public class Angle12 {
 	private static final int MINVALUE		= 0;
 	private static final int MAXVALUE		= 3599;
 
+	/** Valid range with default value for "no value" */
 	public static final String	RANGE		=
 			"[" + MINVALUE + "," + MAXVALUE + "] + {" + DEFAULTVALUE + "}";
 	
 	/**
-	 * @return true if the value is correct
+	 * Tells if the angular value is correct, i.e. within the range 0..3599 or
+	 * the default value 3600.
+	 *
+	 * @param value Angular value to validate.
+	 * @return {@code true} if correct, otherwise {@code false}.
 	 */
 	public static boolean isCorrect(int value) {
 		return (MINVALUE <= value && value <= MAXVALUE) || (value == DEFAULTVALUE);
@@ -45,21 +50,28 @@ public class Angle12 {
 	
 	/**
 	 * Checks if the angular value is available.
-	 * @return true if the angular is not the default value
+
+	 * @param value Angular value to check.
+	 * @return true if the angular is not the default value (3600)
 	 */
 	public static boolean isAvailable(int value) {
 		return value != DEFAULTVALUE;
 	}
 	
 	/**
-	 * Converts the angular value (in 1/10 degrees) to degrees.
-	 * @return the angular  in degrees
+	 * Converts the angular value to degrees.
+	 *
+	 * @param value Angular value to convert, in 1/10 degrees.
+	 * @return The angular value in degrees.
 	 */
 	public static double toDegrees(int value) {
 		return value / 10d; 
 	}
 
 	/**
+	 * Returns the String representation of given angular value.
+	 *
+	 * @param value Angular value to convert to String.
 	 * @return a string representing the angular value
 	 */
 	public static String toString(int value) {

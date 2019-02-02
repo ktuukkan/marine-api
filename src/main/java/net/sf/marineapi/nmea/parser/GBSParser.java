@@ -29,6 +29,8 @@ import net.sf.marineapi.nmea.util.Time;
  * GBS sentence parser.
  *
  * $GPGBS,015509.00,-0.031,-0.186,0.219,19,0.000,-0.354,6.972*4D
+ *
+ * @author Kimmo Tuukkanen
  */
 class GBSParser extends SentenceParser implements GBSSentence {
 

@@ -23,11 +23,11 @@ package net.sf.marineapi.nmea.sentence;
 /**
  * <p>Barometer - Barometric pressure in bars and inches of mercury.</p>
  *
- * <p><em>Notice: not recommended as of Oct 2008, should use <code>XDR</code>
+ * <p><em>Notice: not recommended as of Oct 2008, should use {@code XDR}
  * instead.</em></p>
  *
- * <p>Example:<br/>
- * <code>$IIMMB,29.9870,I,1.0154,B*75</code></p>
+ * <p>Example:<br>
+ * {@code $IIMMB,29.9870,I,1.0154,B*75}</p>
  *
  * @author Kimmo Tuukkanen
  */

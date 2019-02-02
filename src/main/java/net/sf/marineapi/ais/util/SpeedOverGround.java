@@ -28,22 +28,49 @@ import java.text.DecimalFormat;
  * @author Jyrki Jakobsson
  */
 public class SpeedOverGround {
+
     private static final int MIN_VALUE = 0;
     private static final int MAX_VALUE = 1022;
     private static final int DEFAULT_VALUE = 1023;
 
+    /**
+     * Checks if the speed over ground value is available, i.e. within valid
+     * range.
+     *
+     * @param value SOG value to check
+     * @return true if the time stamp falls within a range
+     */
     public static boolean isAvailable(int value) {
         return value >= MIN_VALUE && value <= MAX_VALUE;
     }
 
+    /**
+     * Checks if the speed over ground value is valid, i.e. within range and
+     * not the default value ("no value").
+     *
+     * @param value SOG value to check
+     * @return {@code true} if correct, otherwise {@code false}.
+     */
     public static boolean isCorrect(int value) {
         return isAvailable(value) || (value == DEFAULT_VALUE);
     }
 
+    /**
+     * Converts the specified speed over ground in knots.
+     *
+     * @param value SOG value
+     * @return SOG value in knots
+     */
     public static double toKnots(int value) {
         return value / 10d;
     }
 
+    /**
+     * Stringify the given SOG value.
+     *
+     * @param value Value to convert
+     * @return Formatted value, "no SOG" or "&gt;=102.2"
+     */
     public static String toString(int value) {
         if (!isAvailable(value))
             return "no SOG";

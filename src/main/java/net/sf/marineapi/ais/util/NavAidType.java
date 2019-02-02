@@ -29,6 +29,8 @@ public class NavAidType {
 	
 	/**
 	 * Returns a text string for the NavAid.
+	 *
+	 * @param deviceType Device type value to Stringify.
 	 * @return a text string describing the Nav Aid type
 	 */
 	static public String toString (int deviceType) {

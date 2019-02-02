@@ -5,6 +5,7 @@ import net.sf.marineapi.ais.util.Sixbit;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 /**
  * AISPositionReportParser test, covering parsers for types 01, 02 and 03.
@@ -35,8 +36,8 @@ public class AISPositionReportParserTest {
 
     @Test
     public void getPositionAccuracy() throws Exception {
-        // < 10 == high
-        assertEquals(true, msg.getPositionAccuracy());
+        // 1 == high (< 10 meters)
+        assertTrue(msg.isAccurate());
     }
 
     @Test

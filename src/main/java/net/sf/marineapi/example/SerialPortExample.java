@@ -41,9 +41,9 @@ import net.sf.marineapi.nmea.sentence.SentenceValidator;
  * printing out all sentences the device is broadcasting.
  * 
  * Notice that on Linux you may need to set read/write privileges on correct
- * port (e.g. <code>sudo chmod 666 /dev/ttyUSB0<code>) or add your user in
+ * port (e.g. {@code sudo chmod 666 /dev/ttyUSB0}) or add your user in
  * dialout group before running this example.
- *  
+ *
  * @author Kimmo Tuukkanen
  */
 public class SerialPortExample implements SentenceListener {

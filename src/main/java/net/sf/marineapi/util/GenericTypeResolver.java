@@ -49,7 +49,7 @@ public final class GenericTypeResolver {
      *
      * @param child The class of which parents and generic types to inspect
      * @param parent The generic class that holds the type being resolved
-     * @return The generic type of <code>parent</code>
+     * @return The generic type of {@code parent}
      * @throws IllegalStateException If the generic type cannot be resolved
      *                               at runtime.
      */

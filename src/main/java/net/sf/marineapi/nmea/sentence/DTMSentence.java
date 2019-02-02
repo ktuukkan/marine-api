@@ -23,8 +23,8 @@ package net.sf.marineapi.nmea.sentence;
 /**
  * <p>Datum reference.</p>
  * 
- * <p>Example:<br/>
- * <code>$GPDTM,W84,,0.000000,N,0.000000,E,0.0,W84*6F</code></p>
+ * <p>Example:<br>
+ * {@code $GPDTM,W84,,0.000000,N,0.000000,E,0.0,W84*6F}</p>
  * 
  * @author Kimmo Tuukkanen
  */

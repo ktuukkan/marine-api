@@ -30,11 +30,15 @@ public class ManeuverIndicator {
 	private static final int	DEFAULTVALUE	= 0;
 	private static final int	MINVALUE		= 1 ;
 	private static final int	MAXVALUE		= 2;
+
+	/** Valid range with default value for "no value" */
 	public static final String	RANGE =
 			"[" + MINVALUE + "," + MAXVALUE + "] + {" + DEFAULTVALUE + "}";
 
 	/**
 	 * Checks if the value is in the correct range.
+	 *
+	 * @param value Int value to check
 	 * @return true if the value is correct
 	 */
 	public static boolean isCorrect(int value) {
@@ -43,6 +47,8 @@ public class ManeuverIndicator {
 	
 	/**
 	 * Checks if the maneuver value is available.
+	 *
+	 * @param value Int value to check
 	 * @return true if the value is not the default value
 	 */
 	public static boolean isAvailable(int value) {
@@ -50,6 +56,9 @@ public class ManeuverIndicator {
 	}
 	
 	/**
+	 * Rerturns the string representation of given int value.
+	 *
+	 * @param value Value to stringify
 	 * @return a string representing the maneuvre indicator value
 	 */
 	public static String toString(int value) {

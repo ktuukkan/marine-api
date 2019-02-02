@@ -29,7 +29,7 @@ package net.sf.marineapi.nmea.sentence;
  */
 public enum SentenceId {
 
-    /** Raymarine SeaTalk sentence (<code>$STALK</code>). */
+    /** Raymarine SeaTalk sentence ({@code $STALK}). */
     ALK,
     /** Autopilot sentence "B"; xte, bearings and heading toward destination */
     APB,
@@ -126,7 +126,7 @@ public enum SentenceId {
 
     /**
      * Parses the sentence id from specified sentence String and returns a
-     * corresponding <code>SentenceId</code> enum (assuming it exists).
+     * corresponding {@code SentenceId} enum (assuming it exists).
      *
      * @param nmea Sentence String
      * @return SentenceId enum

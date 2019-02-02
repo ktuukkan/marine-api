@@ -70,6 +70,11 @@ class AISMessage19Parser extends AISPositionReportBParser implements AISMessage1
 	private int			fStarboard;
 	private int			fTypeOfEPFD;
 
+	/**
+	 * Constructor.
+	 *
+	 * @param content Six-bit message content.
+	 */
 	public AISMessage19Parser(Sixbit content) {
 		super(content);
 		if (content.length() != 312)

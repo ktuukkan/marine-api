@@ -69,9 +69,9 @@ class AISMessage09Parser extends AISMessageParser implements AISMessage09 {
     private final static int	LATITUDE				= 4;
     private final static int	COURSEOVERGROUND		= 5;
     private final static int	TIMESTAMP				= 6;
-    private final static int	REGIONAL				= 7;
+    private final static int	REGIONAL				= 7; // spare 1
     private final static int	DTE		        		= 8;
-    private static final int    SPARE	                = 9;
+    private static final int    SPARE	                = 9; // spare 2
     private static final int    ASSIGNEDMODEFLAG	    = 10;
     private static final int    RAIMFLAG	            = 11;
     private static final int    RADIOSTATUS	            = 12;
@@ -92,6 +92,11 @@ class AISMessage09Parser extends AISMessageParser implements AISMessage09 {
     private boolean	fRAIMFlag;
     private int	fRadioStatus;
 
+    /**
+     * Constructor.
+     *
+     * @param content Sib-bit message content
+     */
     public AISMessage09Parser(Sixbit content) {
         super(content);
         if (content.length() != 168){
@@ -124,6 +129,11 @@ class AISMessage09Parser extends AISMessageParser implements AISMessage09 {
 
     public int getSpeedOverGround() { return fSOG; }
 
+    /**
+     * Returns the String representation of speed over ground.
+     *
+     * @return formatted value, "no SOG" or ">=1022"
+     */
     public String getSOGString() {
         String msg;
         if (fSOG == 1023)
@@ -135,7 +145,7 @@ class AISMessage09Parser extends AISMessageParser implements AISMessage09 {
         return msg;
     }
 
-    public boolean getPositionAccuracy() { return fPositionAccuracy; }
+    public boolean isAccurate() { return fPositionAccuracy; }
 
     public double getLongitudeInDegrees() { return Longitude28.toDegrees(fLongitude); }
 
@@ -145,6 +155,11 @@ class AISMessage09Parser extends AISMessageParser implements AISMessage09 {
 
     public int getTimeStamp() { return fTimeStamp; }
 
+    /**
+     * Regional reserved (spare)
+     *
+     * @return Int value
+     */
     public int getRegional() {
         return fRegional;
     }

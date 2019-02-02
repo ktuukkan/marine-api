@@ -26,6 +26,7 @@ import java.util.EventListener;
  * Base interface for provider listeners.
  * 
  * @author Kimmo Tuukkanen
+ * @param <T> {@link ProviderEvent} to be listened.
  */
 public abstract interface ProviderListener<T extends ProviderEvent> extends
 		EventListener {

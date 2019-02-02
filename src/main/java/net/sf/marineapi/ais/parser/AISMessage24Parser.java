@@ -100,7 +100,11 @@ class AISMessage24Parser extends AISMessageParser implements AISMessage24 {
     private int fPort;
     private int fStarboard;
 
-
+    /**
+     * Constructor.
+     *
+     * @param content Six-bit message content.
+     */
     public AISMessage24Parser(Sixbit content) {
         super(content);
         this.fPartNumber = content.getInt(FROM_A[PARTNUMBER], TO_A[PARTNUMBER]);

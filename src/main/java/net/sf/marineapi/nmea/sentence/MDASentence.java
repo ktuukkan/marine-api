@@ -120,6 +120,7 @@ public interface MDASentence extends Sentence {
      *
      * @return Wind speed, meters per second, to the nearest 0,1 m/s. NaN if not
      * available.
+     * @see #getWindSpeedKnots()
      */
     double getWindSpeed();
 
@@ -127,6 +128,7 @@ public interface MDASentence extends Sentence {
      * Returns the wind speed.
      *
      * @return Wind speed, knots. NaN if not available.
+     * @see #getWindSpeed()
      */
     double getWindSpeedKnots();
 
@@ -213,6 +215,7 @@ public interface MDASentence extends Sentence {
      * Sets the wind speed.
      *
      * @param speed Wind speed in meters per second.
+     * @see #setWindSpeedKnots(double)
      */
     void setWindSpeed(double speed);
 
@@ -220,7 +223,7 @@ public interface MDASentence extends Sentence {
      * Sets the wind speed, in knots.
      *
      * @param speed Wind speed in knots.
-     * @see #setWindSpeedKnots(double)
+     * @see #setWindSpeed(double)
      */
     void setWindSpeedKnots(double speed);
 }

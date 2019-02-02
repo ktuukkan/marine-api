@@ -27,7 +27,7 @@ import net.sf.marineapi.nmea.util.Waypoint;
  * GPS models in GOTO mode.
  * <p>
  * Example: <br>
- * <code>$GPWPL,5536.200,N,01436.500,E,RUSKI*1F</code>
+ * {@code $GPWPL,5536.200,N,01436.500,E,RUSKI*1F}
  * 
  * @author Kimmo Tuukkanen
  */

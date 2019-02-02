@@ -82,7 +82,7 @@ public final class SentenceValidator {
 	 * validated only by checking the general sentence characteristics.
 	 *
 	 * @param nmea String to validate
-	 * @return <code>true</code> if valid, otherwise <code>false</code>.
+	 * @return {@code true} if valid, otherwise {@code false}.
 	 */
 	public static boolean isValid(String nmea) {
 

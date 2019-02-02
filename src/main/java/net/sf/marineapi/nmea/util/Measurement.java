@@ -23,7 +23,7 @@ package net.sf.marineapi.nmea.util;
 /**
  * Sensor measurement data delivered by
  * {@link net.sf.marineapi.nmea.sentence.XDRSentence}. Notice that any of the
- * fields may be empty (<code>null</code>), depending on sentence and sensor
+ * fields may be empty ({@code null}), depending on sentence and sensor
  * that produced it.
  * 
  * @author Robert Huitema, Kimmo Tuukkanen
@@ -43,6 +43,11 @@ public class Measurement {
 
 	/**
 	 * Creates a new instance of Measurement with given values.
+	 *
+	 * @param type Type of measurement
+	 * @param value The measured value
+	 * @param units Unit of measurement
+	 * @param name Name of measurement
 	 */
 	public Measurement(String type, double value, String units, String name) {
 		this.type = type;

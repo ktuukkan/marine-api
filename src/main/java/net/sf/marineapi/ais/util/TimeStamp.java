@@ -32,6 +32,8 @@ public class TimeStamp {
 
 	/**
 	 * Checks if the time stamp value is available.
+	 *
+	 * @param value Timetamp value to check
 	 * @return true if the time stamp falls within a range
 	 */
 	public static boolean isAvailable(int value) {
@@ -40,6 +42,8 @@ public class TimeStamp {
 	
 	/**
 	 * Return a string representing the time stamp value.
+	 *
+	 * @param value Timetamp value to stringify
 	 * @return a string representing the time stamp
 	 */
 	public static String toString(int value) {

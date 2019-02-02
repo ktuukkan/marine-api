@@ -85,6 +85,11 @@ class AISUTCParser extends AISMessageParser implements AISUTCReport {
 	private int		fLatitude;
 	private int		fTypeOfEPFD;
 
+	/**
+	 * Constructor.
+	 *
+	 * @param content Six-bit message content.
+	 */
 	public AISUTCParser(Sixbit content) {
 		super(content);
 		if (content.length() != 168)
@@ -118,7 +123,7 @@ class AISUTCParser extends AISMessageParser implements AISUTCReport {
 
 	public int getUtcSecond() { return fUTCSecond; }
 
-	public boolean getPositionAccuracy() { return fPositionAccuracy; }
+	public boolean isAccurate() { return fPositionAccuracy; }
 
 	public double getLongitudeInDegrees() { return Longitude28.toDegrees(fLongitude); }
 

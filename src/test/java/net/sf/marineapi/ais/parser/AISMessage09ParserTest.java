@@ -30,7 +30,7 @@ public class AISMessage09ParserTest {
 
     @Test
     public void getPositionAccuracy() throws Exception {
-        assertEquals(true, msg.getPositionAccuracy());
+        assertEquals(true, msg.isAccurate());
     }
 
     @Test

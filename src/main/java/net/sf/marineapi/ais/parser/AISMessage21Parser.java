@@ -103,8 +103,11 @@ class AISMessage21Parser extends AISMessageParser implements AISMessage21 {
     private boolean	fAssignedModeFlag;
     private String fNameExtension;
 
-
-
+    /**
+     * Constructor.
+     *
+     * @param content Six-bit message content.
+     */
     public AISMessage21Parser(Sixbit content) {
         super(content);
         if(content.length() >= 272 && content.length() <= 361) {
@@ -142,7 +145,7 @@ class AISMessage21Parser extends AISMessageParser implements AISMessage21 {
         return this.fName;
     }
 
-    public boolean getPositionAccuracy() {
+    public boolean isAccurate() {
         return fPositionAccuracy;
     }
 

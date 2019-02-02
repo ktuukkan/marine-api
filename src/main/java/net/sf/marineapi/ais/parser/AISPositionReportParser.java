@@ -92,6 +92,8 @@ class AISPositionReportParser extends AISMessageParser implements AISPositionRep
 
 	/**
 	 * Constructs an AIS Message Position Report parser.
+	 *
+	 * @param content Six-bit message content.
 	 */
 	public AISPositionReportParser(Sixbit content) {
 		super(content);
@@ -134,7 +136,7 @@ class AISPositionReportParser extends AISMessageParser implements AISPositionRep
 		return SpeedOverGround.toKnots(fSOG);
 	}
 
-	public boolean getPositionAccuracy() {
+	public boolean isAccurate() {
 	    return fPositionAccuracy;
 	}
 

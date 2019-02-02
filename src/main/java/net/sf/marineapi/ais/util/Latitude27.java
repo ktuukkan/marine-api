@@ -34,24 +34,47 @@ public class Latitude27 {
 	private static final int MIN_VALUE = -90 * MINUTE_PART_MULTIPLIER;
 	private static final int MAX_VALUE = 90 * MINUTE_PART_MULTIPLIER;
 	private static final int DEFAULT_VALUE = 91 * MINUTE_PART_MULTIPLIER;
+
+	/** Valid range with default value for "no value" */
 	public static final String RANGE = "[" + MIN_VALUE + "," + MAX_VALUE + "] + {" + DEFAULT_VALUE + "}";
 
 	/**
 	 * Converts the latitude value (in 1/10000 minutes) to degrees.
-	 * @return the latitude value in degrees
+	 *
+	 * @param value Int value to convert
+	 * @return The latitude value in degrees
 	 */
 	public static double toDegrees(int value) {
 		return (double)value / (double)MINUTE_PART_MULTIPLIER;
 	}
 
+	/**
+	 * Tells if the given latitude is available, i.e. within expected range.
+	 *
+	 * @param value Latitude value to validate
+	 * @return {@code true} if available, otherwise {@code false}.
+	 */
 	public static boolean isAvailable(int value) {
 		return value >= MIN_VALUE && value <= MAX_VALUE;
 	}
 
+	/**
+	 * Tells if the given value is correct, i.e. within expected range and not
+	 * the no-value.
+	 *
+	 * @param value Latitude value to validate
+	 * @return {@code true} if correct, otherwise {@code false}.
+	 */
 	public static boolean isCorrect(int value) {
 		return isAvailable(value) || (value == DEFAULT_VALUE);
 	}
 
+	/**
+	 * Returns the String representation of given latitude value.
+	 * @param value Value to stringify
+	 * @return "invalid latitude", "latitude not available" or value formatted
+	 * 			in degrees.
+	 */
 	public static String toString(int value) {
 		if (!isCorrect(value)) {
 			return "invalid latitude";

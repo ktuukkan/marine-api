@@ -35,7 +35,7 @@ public enum Side {
 
 	private char ch;
 
-	private Side(char c) {
+	Side(char c) {
 		ch = c;
 	}
 

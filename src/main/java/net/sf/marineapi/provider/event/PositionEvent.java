@@ -45,23 +45,30 @@ public class PositionEvent extends ProviderEvent implements Cloneable {
 	private Double speed;
 	private Time time;
 	private FaaMode mode;
-	private GpsFixQuality fix;
+	private GpsFixQuality fixQuality;
 
 	/**
 	 * Creates a new instance of PositionEvent.
 	 * 
 	 * @param source Source object of event
+	 * @param pos Position of the event
+	 * @param sog Speed over ground
+	 * @param cog Course over ground, in degrees.
+	 * @param date Date when position was recorded
+	 * @param time Time when position was recorded
+	 * @param mode FAA mode
+ 	 * @param fq Position fixQuality quality
 	 */
-	public PositionEvent(Object source, Position p, double sog, Double cog, Date d,
-			Time t, FaaMode m, GpsFixQuality fq) {
+	public PositionEvent(Object source, Position pos, double sog, Double cog,
+						 Date date, Time time, FaaMode mode, GpsFixQuality fq) {
 		super(source);
-		position = p;
-		speed = sog;
-		course = cog;
-		date = d;
-		time = t;
-		mode = m;
-		fix = fq;
+		this.position = pos;
+		this.speed = sog;
+		this.course = cog;
+		this.date = date;
+		this.time = time;
+		this.mode = mode;
+		this.fixQuality = fq;
 	}
 
 	/*
@@ -71,7 +78,8 @@ public class PositionEvent extends ProviderEvent implements Cloneable {
 	@Override
 	public PositionEvent clone() {
 		return new PositionEvent(getSource(), position, speed, course, date, time,
-				mode, fix);
+				mode, fixQuality
+		);
 	}
 
 	/**
@@ -93,17 +101,17 @@ public class PositionEvent extends ProviderEvent implements Cloneable {
 	}
 
 	/**
-	 * Returns the current GPS fix quality.
+	 * Returns the current GPS fixQuality quality.
 	 * 
 	 * @return GpsFixQuality
 	 */
 	public GpsFixQuality getFixQuality() {
-		return fix;
+		return fixQuality;
 	}
 
 	/**
 	 * <p>Returns the current FAA operating mode of GPS receiver.</p>
-	 * <p>Notice: may be always <code>null</code>, depending on the NMEA version
+	 * <p>Notice: may be always {@code null}, depending on the NMEA version
 	 * in use.</p>
 	 * 
 	 * @return FaaMode

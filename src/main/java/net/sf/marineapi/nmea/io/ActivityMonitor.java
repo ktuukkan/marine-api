@@ -31,6 +31,11 @@ class ActivityMonitor {
 	private long lastUpdated = -1;
 	private SentenceReader parent;
 
+	/**
+	 * Creates a new instance for given {@link SentenceReader}.
+	 *
+	 * @param parent Parent {@link SentenceReader} to monitor.
+	 */
 	public ActivityMonitor(SentenceReader parent) {
 		this.parent = parent;
 	}

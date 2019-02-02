@@ -28,13 +28,16 @@ package net.sf.marineapi.nmea.util;
  */
 public enum AcquisitionType {
 
+	/** Automatic */
 	AUTO('A'),
+	/** Manual */
 	MANUAL('M'),
+	/** Reported */
 	REPORTED('R');
 
 	private char ch;
 
-	private AcquisitionType(char ch) {
+	AcquisitionType(char ch) {
 		this.ch = ch;
 	}
 

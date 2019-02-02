@@ -29,7 +29,8 @@ package net.sf.marineapi.ais.util;
  */
 public class Sixbit {
 
-	public static final int BITSPERCHAR = 6;
+	/** Number of bits per character */
+	public static final int BITS_PER_CHAR = 6;
 
 	private final String	fPayload;
 	private BitVector		fBitVector;
@@ -52,18 +53,17 @@ public class Sixbit {
 		if (!isValidString(fPayload))
 			throw new IllegalArgumentException("Invalid payload characters");
 
-		fBitVector = new BitVector(fPayload.length() * BITSPERCHAR);
+		fBitVector = new BitVector(fPayload.length() * BITS_PER_CHAR);
 		for (int i = 0; i < fPayload.length(); i++) {
 			char c = fPayload.charAt(i);
 			int b = transportToBinary(c);
-			convert(b, i * BITSPERCHAR, BITSPERCHAR);
+			convert(b, i * BITS_PER_CHAR, BITS_PER_CHAR);
 		}
-//		fBitVector.dump();
 		fFillBits = fillBits;
 	}
 
 	private void convert(int value, int from, int length) {
-		int index = from + BITSPERCHAR;
+		int index = from + BITS_PER_CHAR;
 		while (value != 0L && length > 0) {
 			if (value % 2L != 0) {
 				fBitVector.set(index);
@@ -74,6 +74,13 @@ public class Sixbit {
 		}
 	}
 
+	/**
+	 * Returns a {@link BitVector} for specified range.
+	 *
+	 * @param from Start index
+	 * @param to End index
+	 * @return BitVector for specified range.
+	 */
 	public BitVector get(int from, int to) {
 		return fBitVector.get(from, to);
 	}
@@ -94,8 +101,13 @@ public class Sixbit {
 		return valid;
 	}
 
+	/**
+	 * Returns the payload length.
+	 *
+	 * @return Number of payload bits.
+	 */
 	public int length() {
-		return fPayload.length() * BITSPERCHAR - fFillBits;
+		return fPayload.length() * BITS_PER_CHAR - fFillBits;
 	}
 
 	/**
@@ -136,8 +148,10 @@ public class Sixbit {
 	}
 
 	/**
-	 * Return bit as boolean from the bit vector
+	 * Return bit as boolean from the bit vector.
+	 *
 	 * @param index start index of bit
+	 * @return Boolean value for specified index
 	 */
 	public boolean getBoolean(int index) {
 		return fBitVector.getBoolean(index);
@@ -153,42 +167,82 @@ public class Sixbit {
 	public int getInt(int from, int to) {
 		return fBitVector.getUInt(from, to);
 	}
-	
+
+	/**
+	 * Get 8-bit integer value.
+	 *
+	 * @param from Start index
+	 * @param to End index
+	 * @return Integer value
+	 */
 	public int getAs8BitInt(int from, int to) {
 		return fBitVector.getAs8BitInt(from, to);
 	}
 
+	/**
+	 * Get 17-bit integer value.
+	 *
+	 * @param from Start index
+	 * @param to End index
+	 * @return Integer value
+	 */
 	public int getAs17BitInt(int from, int to) {
 		return fBitVector.getAs17BitInt(from, to);
 	}
 
+	/**
+	 * Get 18-bit integer value.
+	 *
+	 * @param from Start index
+	 * @param to End index
+	 * @return Integer value
+	 */
 	public int getAs18BitInt(int from, int to) {
 		return fBitVector.getAs18BitInt(from, to);
 	}
 
+	/**
+	 * Get 27-bit integer value.
+	 *
+	 * @param from Start index
+	 * @param to End index
+	 * @return Integer value
+	 */
 	public int getAs27BitInt(int from, int to) {
 		return fBitVector.getAs27BitInt(from, to);
 	}
 
+	/**
+	 * Get 28-bit integer value.
+	 *
+	 * @param from Start index
+	 * @param to End index
+	 * @return Integer value
+	 */
 	public int getAs28BitInt(int from, int to) {
 		return fBitVector.getAs28BitInt(from, to);
 	}
 
 	/**
 	 * Return string from bit vector
+	 *
 	 * @param fromIndex begin index (inclusive)
 	 * @param toIndex end index (inclusive)
+	 * @return String value
 	 */
 	public String getString(int fromIndex, int toIndex) {
 		StringBuilder sb = new StringBuilder();
-		for (int i = fromIndex; i < toIndex; i += BITSPERCHAR) {
-			int value = getInt(i, i + BITSPERCHAR);
+		for (int i = fromIndex; i < toIndex; i += BITS_PER_CHAR) {
+			int value = getInt(i, i + BITS_PER_CHAR);
 			sb.append(binaryToContent(value));
 		}
 		return stripAtSigns(sb.toString());
 	}
 
-	public static String stripAtSigns(String orig) {
+	/**
+	 * Strips the @ characters from specified String.
+	 */
+	private String stripAtSigns(String orig) {
 		int end = orig.length() - 1;
 		for (int i = orig.length() - 1; i >= 0; i--) {
 			if (orig.charAt(i) != '@') {

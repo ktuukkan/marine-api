@@ -116,35 +116,35 @@ public class SentenceReader {
 	}
 
 	/**
-	 * Adds a {@link net.sf.marineapi.nmea.event.SentenceListener} that wants to receive all sentences read
+	 * Adds a {@link SentenceListener} that wants to receive all sentences read
 	 * by the reader.
 	 *
-	 * @param listener {@link net.sf.marineapi.nmea.event.SentenceListener} to be registered.
-	 * @see net.sf.marineapi.nmea.event.SentenceListener
+	 * @param listener {@link SentenceListener} to be registered.
+	 * @see SentenceListener
 	 */
 	public void addSentenceListener(SentenceListener listener) {
 		registerListener(listener, DISPATCH_ALL);
 	}
 
 	/**
-	 * Adds a {@link net.sf.marineapi.nmea.event.SentenceListener} that is interested in receiving only
-	 * sentences of certain type.
+	 * Adds a {@link SentenceListener} that is
+	 * interested in receiving only sentences of certain type.
 	 *
 	 * @param sl SentenceListener to add
 	 * @param type Sentence type for which the listener is registered.
-	 * @see net.sf.marineapi.nmea.event.SentenceListener
+	 * @see SentenceListener
 	 */
 	public void addSentenceListener(SentenceListener sl, SentenceId type) {
 		registerListener(sl, type.toString());
 	}
 
 	/**
-	 * Adds a {@link net.sf.marineapi.nmea.event.SentenceListener} that is interested in receiving only
-	 * sentences of certain type.
+	 * Adds a {@link SentenceListener} that is
+	 * interested in receiving only sentences of certain type.
 	 *
 	 * @param sl SentenceListener to add
 	 * @param type Sentence type for which the listener is registered.
-	 * @see net.sf.marineapi.nmea.event.SentenceListener
+	 * @see SentenceListener
 	 */
 	public void addSentenceListener(SentenceListener sl, String type) {
 		registerListener(sl, type);
@@ -152,6 +152,8 @@ public class SentenceReader {
 
 	/**
 	 * Pass data to DataListener.
+	 *
+	 * @param data Data to be delivered.
 	 */
 	void fireDataEvent(String data) {
 		try {
@@ -233,7 +235,7 @@ public class SentenceReader {
 	/**
 	 * Returns the exception call-back listener.
 	 * 
-	 * @return Currently set ExceptionListener, or <code>null</code> if none.
+	 * @return Currently set ExceptionListener, or {@code null} if none.
 	 */
 	public ExceptionListener getExceptionListener() {
 		return exceptionListener;
@@ -301,7 +303,7 @@ public class SentenceReader {
 	 * Remove a listener from reader. When removed, listener will not receive
 	 * any events from the reader.
 	 *
-	 * @param listener {@link net.sf.marineapi.nmea.event.SentenceListener} to be removed.
+	 * @param listener {@link SentenceListener} to be removed.
 	 */
 	public void removeSentenceListener(SentenceListener listener) {
 		for (List<SentenceListener> list : listeners.values()) {
@@ -329,7 +331,7 @@ public class SentenceReader {
 	 * devices and environments that produce mixed content with both NMEA and
 	 * non-NMEA data.
 	 * 
-	 * @param listener Listener to set, <code>null</code> to remove.
+	 * @param listener Listener to set, {@code null} to remove.
 	 */
 	public void setDataListener(DataListener listener) {
 		this.dataListener = listener;
@@ -338,7 +340,7 @@ public class SentenceReader {
 	/**
 	 * Set exception call-back listener.
 	 * 
-	 * @param exceptionListener Listener to set, or <code>null</code> to reset.
+	 * @param exceptionListener Listener to set, or {@code null} to reset.
 	 */
 	public void setExceptionListener(ExceptionListener exceptionListener) {
 		this.exceptionListener = exceptionListener;

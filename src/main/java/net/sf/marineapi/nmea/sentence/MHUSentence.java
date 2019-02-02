@@ -22,8 +22,8 @@ package net.sf.marineapi.nmea.sentence;
 
 /**
  * <p>Relative and absolute humidity with dew point.</p>
- * <p/>
- * <p><em>Notice: not recommended as of Oct 2008, should use <code>XDR</code>
+ *
+ * <p><em>Notice: not recommended as of Oct 2008, should use {@code XDR}
  * instead.</em></p>
  *
  * @author Kimmo Tuukkanen
@@ -56,7 +56,7 @@ public interface MHUSentence extends Sentence {
     /**
      * Returns the unit of dew point temperature, by default degrees Celsius.
      *
-     * @return Temperature unit char, defaults to <code>'c'</code>.
+     * @return Temperature unit char, defaults to {@code 'c'}.
      */
     char getDewPointUnit();
 
@@ -84,7 +84,7 @@ public interface MHUSentence extends Sentence {
     /**
      * Sets the unit of dew point temperature, by default degrees Celsius.
      *
-     * @param unit Temperature unit char, defaults to <code>'c'</code>.
+     * @param unit Temperature unit char, defaults to {@code 'c'}.
      */
     void setDewPointUnit(char unit);
 }

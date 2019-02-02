@@ -27,7 +27,7 @@ import net.sf.marineapi.nmea.util.FaaMode;
  * Current geographic position and time.
  * <p>
  * Example: <br>
- * <code>$GPGLL,6011.552,N,02501.941,E,120045,A*26</code>
+ * {@code $GPGLL,6011.552,N,02501.941,E,120045,A*26}
  * 
  * @author Kimmo Tuukkanen
  */

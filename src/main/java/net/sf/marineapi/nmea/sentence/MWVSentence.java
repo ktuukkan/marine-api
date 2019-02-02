@@ -27,7 +27,7 @@ import net.sf.marineapi.nmea.util.Units;
  * <p>Wind speed and angle. Speed in km/h, m/s, or knots. Wind angle is given in
  * degrees relative to bow or true north.</p>
  * 
- * <p>Example:<br><code>$IIMWV,199,R,5.9,N,A*2E</code></p>
+ * <p>Example:<br>{@code $IIMWV,199,R,5.9,N,A*2E}</p>
  * 
  * @author Kimmo Tuukkanen
  */

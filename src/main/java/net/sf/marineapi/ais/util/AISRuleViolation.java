@@ -31,6 +31,13 @@ public class AISRuleViolation implements Violation {
 	private Object	fCurrentValue;
 	private String	fValidRange;
 
+	/**
+	 * Creates a new Violation.
+	 *
+	 * @param where Place of violation.
+	 * @param value Current value
+	 * @param range Expected value range
+	 */
 	public AISRuleViolation(String where, Object value, String range) {
 		fPlaceOfViolation = where;
 		fCurrentValue = value;

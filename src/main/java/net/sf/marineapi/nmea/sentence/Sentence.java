@@ -48,13 +48,13 @@ public interface Sentence {
 	char FIELD_DELIMITER = ',';
 
 	/**
-	 * Maximum length of NMEA 0183 sentences, including <code>BEGIN_CHAR</code>
-	 * and <code>TERMINATOR</code>.
+	 * Maximum length of NMEA 0183 sentences, including {@code BEGIN_CHAR}
+	 * and {@code TERMINATOR}.
 	 */
 	int MAX_LENGTH = 82;
 
 	/**
-	 * Sentence terminator <code>&lt;CR&gt;&lt;LF&gt;</code>.
+	 * Sentence terminator {@code &lt;CR&gt;&lt;LF&gt;}.
 	 */
 	String TERMINATOR = "\r\n";
 
@@ -77,7 +77,7 @@ public interface Sentence {
 	/**
 	 * Get the sentence ID that specifies the sentence type and data it holds.
 	 * ID is the last three characters in address field. For example, in case of
-	 * <code>$GPGGA</code> the method returns {@link SentenceId#GGA}.
+	 * {@code $GPGGA} the method returns {@link SentenceId#GGA}.
 	 *
 	 * @return Sentence id String, e.g. "GLL" or "GGA".
 	 * @see SentenceId
@@ -86,8 +86,8 @@ public interface Sentence {
 
 	/**
 	 * Gets the talker ID of the sentence. Talker ID is the next two characters
-	 * after <code>$</code> in sentence address field. For example, in case of
-	 * <code>$GPGGA</code>, the method returns {@link TalkerId#GP}.
+	 * after {@code $} in sentence address field. For example, in case of
+	 * {@code $GPGGA}, the method returns {@link TalkerId#GP}.
 	 *
 	 * @return Talker id enum.
 	 */
@@ -147,7 +147,7 @@ public interface Sentence {
 	 * length, use {@link #toSentence(int)}.
 	 *
 	 * @see #toString()
-	 * @return Sentence as String, equal to <code>toString()</code>.
+	 * @return Sentence as String, equal to {@code toString()}.
 	 * @throws IllegalStateException If formatting results in invalid sentence.
 	 */
 	String toSentence();
@@ -156,17 +156,18 @@ public interface Sentence {
 	 * Formats and validates the sentence like {@link #toSentence()}, but checks
 	 * also that resulting String does not exceed specified length.
 	 *
-	 * @see #toSentence()
-	 * @see #MAX_LENGTH
-	 * @return Sentence as String, equal to <code>toString()</code>.
+	 * @param maxLength Maximum String length
+	 * @return Sentence as String, equal to {@code toString()}.
 	 * @throws IllegalStateException If formatting results in invalid sentence
 	 *           or specified maximum length is exceeded.
+	 * @see #toSentence()
+	 * @see #MAX_LENGTH
 	 */
 	String toSentence(int maxLength);
 
 	/**
 	 * Returns the String representation of the sentence, without line
-	 * terminator <code>CR/LR</code>. Checksum is calculated and appended at the
+	 * terminator {@code CR/LR}. Checksum is calculated and appended at the
 	 * end of the sentence, but no validation is done. Use {@link #toSentence()}
 	 * to also validate the result.
 	 *

@@ -31,7 +31,9 @@ public class MMSI {
 	private static final long MAXVALUE = 999999999;
 
 	/**
-	 * Checks whether the MMSI value is correct.
+	 * Checks whether the MMSI value is correct, i.e. within valid range.
+	 *
+	 * @param value MMSI value to check
 	 * @return true if the value is semantically correct.
 	 */
 	public static boolean isCorrect(long value) {
@@ -40,7 +42,9 @@ public class MMSI {
 
 	/**
 	 * Returns the origin associated with the MMSI number.
-	 * @return a string describing the region of the transmitter
+	 *
+	 * @param value MMSI value to stringify
+	 * @return A String describing the region of the transmitter
 	 */
 	public static String toString(long value) {
 		int firstDigit = (int)(value / 100000000L); 

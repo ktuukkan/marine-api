@@ -28,13 +28,16 @@ package net.sf.marineapi.nmea.util;
  */
 public enum TargetStatus {
 
+	/** Query */
 	QUERY('Q'),
+	/** Lost */
 	LOST('L'),
+	/** Tracking */
 	TRACKING('T');
 
 	private char ch;
 
-	private TargetStatus(char ch) {
+	TargetStatus(char ch) {
 		this.ch = ch;
 	}
 

@@ -44,10 +44,15 @@ public class SatelliteInfoEvent extends ProviderEvent {
 	private List<SatelliteInfo> info;
 
 	/**
-	 * @param source
+	 * Creates a new satellite info event. GSA and GSV satellite info assumed
+	 * to be from same NMEA update sequence/cycle.
+	 *
+	 * @param source The object that sends the event.
+	 * @param gsa GSA sentence
+	 * @param info GSV satellite info
 	 */
-	public SatelliteInfoEvent(
-		Object source, GSASentence gsa, List<SatelliteInfo> info) {
+	public SatelliteInfoEvent(Object source, GSASentence gsa,
+							  List<SatelliteInfo> info) {
 		super(source);
 		this.gsa = gsa;
 		this.info = info;

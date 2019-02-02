@@ -35,8 +35,8 @@ import java.util.logging.Logger;
  * <p>
  * Extend this class to implement custom readers, for example when NMEA data
  * is delivered embedded in a proprietary format. Otherwise, it is recommended
- * to use <code>SentenceReader</code> directly with <code>InputStream</code>
- * or <code>DatagramSocket</code>.
+ * to use {@code SentenceReader} directly with {@code InputStream}
+ * or {@code DatagramSocket}.
  * </p>
  * 
  * @author Kimmo Tuukkanen
@@ -69,17 +69,19 @@ public abstract class AbstractDataReader implements Runnable {
 	}
 
 	/**
-	 * Returns the parent <code>SentenceReader</code>.
+	 * Returns the parent {@code SentenceReader}.
+	 *
+	 * @return The parent {@link SentenceReader}
 	 */
 	SentenceReader getParent() {
 		return this.parent;
 	}
 
 	/**
-	 * Sets the parent <code>SentenceReader</code>.
+	 * Sets the parent {@code SentenceReader}.
 	 *
-	 * @param reader <code>SentenceReader</code> to set.
-	 * @throws IllegalArgumentException If given <code>reader</code> is <code>null</code>.
+	 * @param reader {@code SentenceReader} to set.
+	 * @throws IllegalArgumentException If given {@code reader} is {@code null}.
 	 */
 	void setParent(SentenceReader reader) {
 		if (reader == null) {
@@ -92,7 +94,7 @@ public abstract class AbstractDataReader implements Runnable {
 	 * Tells if the reader is running and actively scanning the data source for
 	 * new data.
 	 *
-	 * @return <code>true</code> if running, otherwise <code>false</code>.
+	 * @return {@code true} if running, otherwise {@code false}.
 	 */
 	boolean isRunning() {
 		return isRunning;
@@ -101,7 +103,8 @@ public abstract class AbstractDataReader implements Runnable {
 	/**
 	 * Read one NMEA-0183 sentence and return it.
 	 *
-	 * @return Sentence String or <code>null</code> if nothing was read.
+	 * @return Sentence String or {@code null} if nothing was read.
+	 * @throws Exception On read failure.
 	 */
 	public abstract String read() throws Exception;
 

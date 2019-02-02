@@ -37,24 +37,24 @@ public interface HTDSentence extends HTCSentence, HeadingSentence {
     /**
      * Returns the rudder status.
      *
-     * @return <code>DataStatus.ACTIVE</code> when within limits or
-     *      <code>DataStatus.VOID</code> when limit reached or exceeded.
+     * @return {@code DataStatus.ACTIVE} when within limits or
+     *      {@code DataStatus.VOID} when limit reached or exceeded.
      */
     DataStatus getRudderStatus();
 
     /**
      * Returns the off-heading status.
      *
-     * @return <code>DataStatus.ACTIVE</code> when within limits or
-     *      <code>DataStatus.VOID</code> when limit reached or exceeded.
+     * @return {@code DataStatus.ACTIVE} when within limits or
+     *      {@code DataStatus.VOID} when limit reached or exceeded.
      */
     DataStatus getOffHeadingStatus();
 
     /**
      * Returns the off-track status.
      *
-     * @return <code>DataStatus.ACTIVE</code> when within limits or
-     *      <code>DataStatus.VOID</code> when limit reached or exceeded.
+     * @return {@code DataStatus.ACTIVE} when within limits or
+     *      {@code DataStatus.VOID} when limit reached or exceeded.
      */
     DataStatus getOffTrackStatus();
 

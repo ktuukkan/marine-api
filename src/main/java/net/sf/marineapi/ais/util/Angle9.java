@@ -30,24 +30,39 @@ public class Angle9 {
 	private static final int	DEFAULTVALUE	= 511;
 	private static final int	MINVALUE		= 0 ;
 	private static final int	MAXVALUE		= 359;
+
+	/** Valid range with default value for "no value" */
 	public static final String	RANGE			=
 			"[" + MINVALUE + "," + MAXVALUE + "] + {" + DEFAULTVALUE + "}";
 	
 	/**
-	 * @return true if the value is in the correct range
+	 * Tells if the given angular value is correct, i.e. within range of 0..359
+	 * or equals the default value (511).
+	 *
+	 * @param value Angular value to validate
+	 * @return {@code true} if correct, otherwise {@code false}.
 	 */
 	public static boolean isCorrect(int value) {
 		return (MINVALUE <= value && value <= MAXVALUE) || (value == DEFAULTVALUE);
 	}
 	
 	/**
-	 * Checks if the angular value is available.
-	 * @return true if the angular is not the default value
+	 * Checks if the angular value is available, i.e. equals not the default
+	 * value (511).
+	 *
+	 * @param value Angular value to check
+	 * @return {@code true} if available, otherwise {@code false}.
 	 */
 	public static boolean isAvailable(int value) {
 		return value != DEFAULTVALUE;
 	}
-	
+
+	/**
+	 * Returns the String representation of given angular value.
+	 *
+	 * @param value Angular value to stringify
+	 * @return Angular value as String or "no heading" or "invalid heading"
+	 */
 	public static String getTrueHeadingString(int value) {
 		String headingString;
 		if (value == DEFAULTVALUE)
@@ -60,7 +75,10 @@ public class Angle9 {
 	}
 
 	/**
-	 * @return a string representing the angular value
+	 * Returns the String representation of given angular value.
+	 *
+	 * @param value Angular value to stringify
+	 * @return Angular value as String or "not available" or "illegal value"
 	 */
 	public static String toString(int value) {
 		String msg;

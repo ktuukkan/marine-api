@@ -33,6 +33,8 @@ public class RateOfTurn {
 
 	/**
 	 * Checks if the ROT value is available.
+	 *
+	 * @param value Int value to check
 	 * @return true if the ROT is not the default value
 	 */
 	public static boolean isTurnInformationAvailable(int value) {
@@ -41,6 +43,8 @@ public class RateOfTurn {
 
 	/**
 	 * Checks if a turn indicator is available.
+	 *
+	 * @param value Int value to check
 	 * @return true if the turn indicator is available
 	 */
 	public static boolean isTurnIndicatorAvailable(int value) {
@@ -49,6 +53,8 @@ public class RateOfTurn {
 
 	/**
 	 * Converts the rate-of-turn value to a estimate degrees/minute value.
+	 *
+	 * @param value Int value to convert
 	 * @return degrees/minute value (positive sign indicates turning right)
 	 */
 	public static double toDegreesPerMinute(int value) {
@@ -65,6 +71,9 @@ public class RateOfTurn {
 	}		
 	
 	/**
+	 * Converts given rate of turn value to String presentation.
+	 *
+	 * @param value Int value to stringify
 	 * @return string representation of the ROT information
 	 */
 	public static String toString(int value) {

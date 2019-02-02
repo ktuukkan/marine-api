@@ -29,7 +29,7 @@ import net.sf.marineapi.nmea.util.Waypoint;
  * GPS receiver when a destination waypoint is active (GOTO mode).
  * <p>
  * Example:<br>
- * <code>$GPRMB,A,0.00,R,,RUSKI,5536.200,N,01436.500,E,432.3,234.9,,V*58</code>
+ * {@code $GPRMB,A,0.00,R,,RUSKI,5536.200,N,01436.500,E,432.3,234.9,,V*58}
  * 
  * @author Kimmo Tuukkanen
  */
@@ -154,7 +154,7 @@ public interface RMBSentence extends Sentence {
 	 * arrived at destination, otherwise {@link DataStatus#ACTIVE}.
 	 * 
 	 * @param status {@link DataStatus#VOID} or {@link DataStatus#ACTIVE}.
-	 * @throws IllegalArgumentException If status is <code>null</code>.
+	 * @throws IllegalArgumentException If status is {@code null}.
 	 */
 	void setArrivalStatus(DataStatus status);
 
@@ -209,7 +209,7 @@ public interface RMBSentence extends Sentence {
 	 * 
 	 * @param steerTo {@link Direction#LEFT} or {@link Direction#RIGHT}
 	 * @throws IllegalArgumentException If specified direction is any other than
-	 *             defined valid for param <code>steer</code>.
+	 *             defined valid for param {@code steer}.
 	 */
 	void setSteerTo(Direction steerTo);
 

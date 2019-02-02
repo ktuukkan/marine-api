@@ -43,8 +43,7 @@ public class SentenceEvent extends EventObject {
 	 * 
 	 * @param src Object that fired the event
 	 * @param s Sentence that triggered the event
-	 * @throws IllegalArgumentException If specified sentence is
-	 *             <code>null</code>
+	 * @throws IllegalArgumentException If specified sentence is {@code null}
 	 */
 	public SentenceEvent(Object src, Sentence s) {
 		super(src);

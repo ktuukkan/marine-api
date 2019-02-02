@@ -37,13 +37,17 @@ class MTAParser extends SentenceParser implements MTASentence {
 
 	/**
 	 * Constructor.
+	 *
+	 * @param mta MTA sentence String to parse.
 	 */
 	public MTAParser(String mta) {
 		super(mta, SentenceId.MTA);
 	}
 
 	/**
-	 * Constructor.
+	 * Constructor for empty MTA sentence.
+	 *
+	 * @param talker Talker ID to set.
 	 */
 	public MTAParser(TalkerId talker) {
 		super(talker, SentenceId.MTA, 2);

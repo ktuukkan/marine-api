@@ -39,24 +39,24 @@ import net.sf.marineapi.nmea.sentence.TalkerId;
  * by following these steps:
  * <ol>
  * <li>Define a sentence interface by extending the {@link Sentence} interface
- * (e.g. <code>com.acme.XYZSentence</code>).</li>
+ * (e.g. {@code com.acme.XYZSentence}).</li>
  * <li>Implement the interface in a class that extends {@link SentenceParser},
- * (e.g. <code>com.acme.XYZParser</code>).</li>
- * <li>Use the protected getters and setters in <code>SentenceParser</code> to
+ * (e.g. {@code com.acme.XYZParser}).</li>
+ * <li>Use the protected getters and setters in {@code SentenceParser} to
  * read and write sentence data.</li>
- * <li>Add a constructor in <code>XYZParser</code> with <code>String</code>
+ * <li>Add a constructor in {@code XYZParser} with {@code String}
  * parameter, i.e. the sentence to be parsed. Pass this parameter to
  * {@link SentenceParser#SentenceParser(String, String)} with expected sentence
- * type (e.g. <code>"XYZ"</code>).</li>
+ * type (e.g. {@code "XYZ"}).</li>
  * <li>Add another constructor with {@link TalkerId} parameter. Pass this
  * parameter to {@link SentenceParser#SentenceParser(TalkerId, String, int)}
  * with sentence type and the expected number of data fields.</li>
- * <li>Register <code>XYZParser</code> in <code>SentenceFactory</code> by using
+ * <li>Register {@code XYZParser} in {@code SentenceFactory} by using
  * the {@link #registerParser(String, Class)} method.</li>
  * <li>Use {@link SentenceFactory#createParser(String)} or
  * {@link SentenceFactory#createParser(TalkerId, String)} to obtain an instance
  * of your parser. In addition, {@link net.sf.marineapi.nmea.io.SentenceReader}
- * will now dispatch instances of <code>XYZSentence</code> when "XYZ" sentences
+ * will now dispatch instances of {@code XYZSentence} when "XYZ" sentences
  * are read from the data source.</li>
  * </ol>
  * <p>
@@ -142,7 +142,7 @@ public final class SentenceFactory {
 	/**
 	 * Tells if the factory is able to create parser for specified sentence
 	 * type. All {@link SentenceId} enum values should result returning
-	 * <code>true</code> at all times.
+	 * {@code true} at all times.
 	 *
 	 * @param type Sentence type id, e.g. "GLL" or "GGA".
 	 * @return true if type is supported, otherwise false.
@@ -172,7 +172,7 @@ public final class SentenceFactory {
 	 * parser registered at a time.
 	 *
 	 * @param type Sentence type id, e.g. "GGA" or "GLL".
-	 * @param parser Class of parser implementation for given <code>type</code>.
+	 * @param parser Class of parser implementation for given {@code type}.
 	 */
 	public void registerParser(String type,
 		Class<? extends SentenceParser> parser) {
@@ -191,7 +191,7 @@ public final class SentenceFactory {
 	 *
 	 * @param parsers The provided factory to register the sentence parsers to.
 	 * @param type Sentence type id, e.g. "GGA" or "GLL".
-	 * @param parser Class of parser implementation for given <code>type</code>.
+	 * @param parser Class of parser implementation for given {@code type}.
 	 */
 	private void registerParser(
 			Map<String, Class<? extends SentenceParser>> parsers, String type,
@@ -215,7 +215,7 @@ public final class SentenceFactory {
 	 * Unregisters a parser class, regardless of sentence type(s) it is
 	 * registered for.
 	 *
-	 * @param parser Parser implementation class for <code>type</code>.
+	 * @param parser Parser implementation class for {@code type}.
 	 * @see #registerParser(String, Class)
 	 */
 	public void unregisterParser(Class<? extends SentenceParser> parser) {
@@ -267,7 +267,7 @@ public final class SentenceFactory {
 	}
 
 	/**
-	 * Returns the singleton instance of <code>SentenceFactory</code>.
+	 * Returns the singleton instance of {@code SentenceFactory}.
 	 *
 	 * @return SentenceFactory instance
 	 */

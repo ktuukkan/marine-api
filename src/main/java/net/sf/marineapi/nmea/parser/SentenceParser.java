@@ -41,15 +41,15 @@ import net.sf.marineapi.nmea.sentence.TalkerId;
  * <em>sentences</em>. Each sentence starts with a '$', a two letter
  * <em>talker ID</em>, a three letter <em>sentence ID</em>, followed by a number
  * of comma separated <em>data fields</em>, <em>optional checksum</em> and a
- * carriage return/line feed terminator (<code>CR/LF</code>). Sentence may
- * contain up to 82 characters including the <code>CR/LF</code>. If data for
+ * carriage return/line feed terminator ({@code CR/LF}). Sentence may
+ * contain up to 82 characters including the {@code CR/LF}. If data for
  * certain field is not available, the field value is simply omitted, but the
  * commas that would delimit it are still sent, with no space between them.
  * <p>
  * Sentence structure:<br>
- * <code>
+ * {@code
  * $&lt;id&gt;,&lt;field #0&gt;,&lt;field #1&gt;,...,&lt;field #n&gt;*&lt;checksum&gt;(CR/LF)
- * </code>
+ * }
  * <p>
  * For more details, see <a href="http://catb.org/gpsd/NMEA.html"
  * target="_blank">NMEA Revealed</a> by Eric S. Raymond.
@@ -142,13 +142,13 @@ public class SentenceParser implements Sentence {
 
 	/**
 	 * Creates a new instance of SentenceParser. Parser may be constructed only
-	 * if parameter <code>nmea</code> contains a valid NMEA 0183 sentence of the
-	 * specified <code>type</code>.
+	 * if parameter {@code nmea} contains a valid NMEA 0183 sentence of the
+	 * specified {@code type}.
 	 * <p>
 	 * For example, GGA sentence parser should specify "GGA" as the type.
 	 *
 	 * @param nmea NMEA 0183 sentence String
-	 * @param type Expected type of the sentence in <code>nmea</code> parameter
+	 * @param type Expected type of the sentence in {@code nmea} parameter
 	 * @throws IllegalArgumentException If the specified sentence is not a valid
 	 *             or is not of expected type.
 	 */
@@ -414,12 +414,12 @@ public class SentenceParser implements Sentence {
 
 	/**
 	 * Get contents of a data field as a String. Field indexing is zero-based.
-	 * The address field (e.g. <code>$GPGGA</code>) and checksum at the end are
+	 * The address field (e.g. {@code $GPGGA}) and checksum at the end are
 	 * not considered as a data fields and cannot therefore be fetched with this
 	 * method.
 	 * <p>
 	 * Field indexing, let i = 1: <br>
-	 * <code>$&lt;id&gt;,&lt;i&gt;,&lt;i+1&gt;,&lt;i+2&gt;,...,&lt;i+n&gt;*&lt;checksum&gt;</code>
+	 * {@code $&lt;id&gt;,&lt;i&gt;,&lt;i+1&gt;,&lt;i+2&gt;,...,&lt;i+n&gt;*&lt;checksum&gt;}
 	 * 
 	 * @param index Field index
 	 * @return Field value as String
@@ -571,7 +571,7 @@ public class SentenceParser implements Sentence {
 	 * Set String value in specified data field.
 	 * 
 	 * @param index Field index
-	 * @param value String to set, <code>null</code> converts to empty String.
+	 * @param value String to set, {@code null} converts to empty String.
 	 */
 	protected final void setStringValue(int index, String value) {
 		fields.set(index, value == null ? "" : value);
@@ -579,16 +579,16 @@ public class SentenceParser implements Sentence {
 
 	/**
 	 * Replace multiple fields with given String array, starting at the
-	 * specified index. If parameter <code>first</code> is zero, all sentence
+	 * specified index. If parameter {@code first} is zero, all sentence
 	 * fields are replaced.
 	 * <p>
-	 * If the length of <code>newFields</code> does not fit in the sentence
+	 * If the length of {@code newFields} does not fit in the sentence
 	 * field count or it contains less values, fields are removed or added
 	 * accordingly. As the result, total number of fields may increase or
 	 * decrease. Thus, if the sentence field count must not change, you may need
-	 * to add empty Strings to <code>newFields</code> in order to preserve the
+	 * to add empty Strings to {@code newFields} in order to preserve the
 	 * original number of fields. Also, all existing values after
-	 * <code>first</code> are lost.
+	 * {@code first} are lost.
 	 * 
 	 * @param first Index of first field to set
 	 * @param newFields Array of Strings to set
@@ -610,6 +610,7 @@ public class SentenceParser implements Sentence {
 	 * end of sentence.
 	 *
 	 * @param first Index of first field to get.
+	 * @return Array of String values
 	 */
 	protected final String[] getStringValues(int first) {
 		String[] values = new String[fields.size()-first];

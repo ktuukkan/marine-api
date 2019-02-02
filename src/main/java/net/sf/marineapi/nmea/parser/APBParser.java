@@ -1,6 +1,6 @@
 /*
  * APBParser.java
- * Copyright (C) 2014 ktuu
+ * Copyright (C) 2014 Kimmo Tuukkanen
  * 
  * This file is part of Java Marine API.
  * <http://ktuukkan.github.io/marine-api/>
@@ -26,8 +26,9 @@ import net.sf.marineapi.nmea.util.DataStatus;
 import net.sf.marineapi.nmea.util.Direction;
 
 /**
- * @author ktuu
- * 
+ * APB parser.
+ *
+ * @author Kimmo Tuukkanen
  */
 class APBParser extends SentenceParser implements APBSentence {
 

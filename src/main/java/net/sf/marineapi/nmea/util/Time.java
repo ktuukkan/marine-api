@@ -52,7 +52,7 @@ public class Time {
 	private int offsetMinutes = 0;
 
 	/**
-	 * Creates a new instance of <code>Time</code> using the current system
+	 * Creates a new instance of {@code Time} using the current system
 	 * time.
 	 */
 	public Time() {
@@ -63,8 +63,8 @@ public class Time {
 	}
 
 	/**
-	 * Creates a new instance of <code>Time</code> based on given String.
-	 * Assumes the <code>hhmmss.sss</code> formatting used in NMEA sentences.
+	 * Creates a new instance of {@code Time} based on given String.
+	 * Assumes the {@code hhmmss.sss} formatting used in NMEA sentences.
 	 *
 	 * @param time Timestamp String
 	 */
@@ -157,6 +157,8 @@ public class Time {
 
 	/**
 	 * Get time zone offset hours. Defaults to 0 (UTC).
+	 *
+	 * @return Offset hours as int.
 	 */
 	public int getOffsetHours() {
 		return this.offsetHours;
@@ -164,6 +166,8 @@ public class Time {
 
 	/**
 	 * Get time zone offset minutes. Defaults to 0 (UTC).
+	 *
+	 * @return Offset minutes as int.
 	 */
 	public int getOffsetMinutes() {
 		return this.offsetMinutes;
@@ -247,7 +251,7 @@ public class Time {
 	 *
 	 * @param seconds Seconds to set
 	 * @throws IllegalArgumentException If seconds out of bounds (
-	 *             <code>0 &lt; seconds &lt; 60</code>)
+	 *             {@code 0 &lt; seconds &lt; 60})
 	 */
 	public void setSeconds(double seconds) {
 		if (seconds < 0 || seconds >= 60) {
@@ -302,8 +306,8 @@ public class Time {
 	}
 
 	/**
-	 * Returns the String representation of <code>Time</code>. Formats the time
-	 * in <code>hhmmss.sss</code> format used in NMEA 0183 sentences. Seconds
+	 * Returns the String representation of {@code Time}. Formats the time
+	 * in {@code hhmmss.sss} format used in NMEA 0183 sentences. Seconds
 	 * are presented with three decimals regardless of precision returned by
 	 * {@link #getSeconds()}.
 	 */
@@ -318,7 +322,9 @@ public class Time {
 	}
 
 	/**
-	 * Returns the ISO 8601 representation of time (<code>hh:mm:ss+hh:mm</code>).
+	 * Returns the ISO 8601 representation of time ({@code hh:mm:ss+hh:mm}).
+	 *
+	 * @return ISO 8601 formatted time String.
 	 */
 	public String toISO8601() {
 		int hr = getHour();

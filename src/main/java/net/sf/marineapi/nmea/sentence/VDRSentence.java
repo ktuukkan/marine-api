@@ -21,14 +21,8 @@
 package net.sf.marineapi.nmea.sentence;
 
 /**
- * <p>
  * Set and drift, true/magnetic direction and speed of current.
- * </p>
- * <p>
- * Example:<br>
- * <code></code>
- * </p>
- * 
+ *
  * @author Kimmo Tuukkanen
  */
 public interface VDRSentence extends Sentence {
@@ -59,7 +53,7 @@ public interface VDRSentence extends Sentence {
 	/**
 	 * Sets the magnetic direction of current.
 	 * 
-	 * @param direction
+	 * @param direction Direction to set, in degrees.
 	 */
 	void setMagneticDirection(double direction);
 

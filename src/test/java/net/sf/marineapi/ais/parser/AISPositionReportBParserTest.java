@@ -27,7 +27,7 @@ public class AISPositionReportBParserTest {
 
     @Test
     public void getPositionAccuracy() throws Exception {
-        assertEquals(false, msg.getPositionAccuracy());
+        assertEquals(false, msg.isAccurate());
     }
 
     @Test

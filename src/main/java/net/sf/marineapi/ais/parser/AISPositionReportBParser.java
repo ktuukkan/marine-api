@@ -77,6 +77,11 @@ class AISPositionReportBParser extends AISMessageParser implements AISPositionRe
 	private int		fTrueHeading;
 	private int		fTimeStamp;
 
+	/**
+	 * Constructor.
+	 *
+	 * @param content Six-bit message content.
+	 */
 	public AISPositionReportBParser(Sixbit content) {
 		super(content);
 		fSOG = content.getInt(FROM[SPEEDOVERGROUND], TO[SPEEDOVERGROUND]);
@@ -98,7 +103,7 @@ class AISPositionReportBParser extends AISMessageParser implements AISPositionRe
 
 	public double getSpeedOverGround() { return SpeedOverGround.toKnots(fSOG); }
 
-	public boolean getPositionAccuracy() { return fPositionAccuracy; }
+	public boolean isAccurate() { return fPositionAccuracy; }
 
 	public double getLongitudeInDegrees() { return Longitude28.toDegrees(fLongitude); }
 

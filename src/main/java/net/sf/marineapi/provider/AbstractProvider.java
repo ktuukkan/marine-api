@@ -41,6 +41,7 @@ import net.sf.marineapi.provider.event.ProviderListener;
  * from within the default NMEA update rate (1/s).</p>
  *
  * @author Kimmo Tuukkanen
+ * @param <T> The {@link ProviderEvent} to be dispatched.
  */
 public abstract class AbstractProvider<T extends ProviderEvent> implements
 		SentenceListener {
@@ -85,7 +86,7 @@ public abstract class AbstractProvider<T extends ProviderEvent> implements
 	}
 
 	/**
-	 * Creates a <code>ProviderEvent</code> of type <code>T</code>.
+	 * Creates a {@code ProviderEvent} of type {@code T}.
 	 * 
 	 * @return Created event, or null if failed.
 	 */
@@ -224,7 +225,7 @@ public abstract class AbstractProvider<T extends ProviderEvent> implements
 	/**
 	 * Validates the collected sentences by checking the ages of each sentence
 	 * and then by calling {@link #isValid()}. If extending implementation has
-	 * no validation criteria, it should return always <code>true</code>.
+	 * no validation criteria, it should return always {@code true}.
 	 * 
 	 * @return true if valid, otherwise false
 	 */

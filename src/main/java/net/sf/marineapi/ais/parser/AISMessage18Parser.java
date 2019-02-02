@@ -24,11 +24,17 @@ import net.sf.marineapi.ais.message.AISMessage18;
 import net.sf.marineapi.ais.util.Sixbit;
 
 /**
- * 
+ * AIS message 18 parser, Standard Class B CS Position Report.
+ *
  * @author Lázár József
  */
 class AISMessage18Parser extends AISPositionReportBParser implements AISMessage18 {
 
+	/**
+	 * Constructor.
+	 *
+	 * @param content Six-bit message content.
+	 */
 	public AISMessage18Parser(Sixbit content) {
 		super(content);
 	}

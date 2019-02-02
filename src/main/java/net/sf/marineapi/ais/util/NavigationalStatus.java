@@ -27,6 +27,7 @@ package net.sf.marineapi.ais.util;
  */
 public class NavigationalStatus {
 
+	/** Valid range */
 	public static final String		RANGE = "[0,8] + [14,15]";
 	final static private String[]	VALUES = {
 		"under way using engine",				// 0
@@ -48,6 +49,9 @@ public class NavigationalStatus {
 	};
 	
 	/**
+	 * Returns the String representing the given status.
+	 *
+	 * @param value Navigational status value to stringify.
 	 * @return text string describing the navigational status
 	 */
 	public static String toString(int value) {
@@ -58,6 +62,9 @@ public class NavigationalStatus {
 	}
 	
 	/**
+	 * Checks if the given status value is correct.
+	 *
+	 * @param value Navigational status value to check
 	 * @return true if the status falls within the range
 	 */
 	public static boolean isCorrect(int value) {

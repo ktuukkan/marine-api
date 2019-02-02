@@ -24,7 +24,7 @@ package net.sf.marineapi.nmea.sentence;
  * GNSS satellite fault detection (RAIM support).
  * <p>
  * Example:<br>
- * <code>$GPGBS,215643.00,0.1190,-0.0872,-0.3320,13,0.9009,-0.8342,2.3281*46</code>
+ * {@code $GPGBS,215643.00,0.1190,-0.0872,-0.3320,13,0.9009,-0.8342,2.3281*46}
  *
  * @author Kimmo Tuukkanen
  */

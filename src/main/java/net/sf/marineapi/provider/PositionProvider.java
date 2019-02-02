@@ -46,7 +46,7 @@ import net.sf.marineapi.provider.event.PositionEvent;
  * {@link net.sf.marineapi.nmea.util.Position}. GPS data statuses are also
  * captured and events are dispatched only when sentences report
  * {@link net.sf.marineapi.nmea.util.DataStatus#ACTIVE}. FAA mode transmitted in
- * RMC is also checked and captured when available, but may be <code>null</code>
+ * RMC is also checked and captured when available, but may be {@code null}
  * depending on used NMEA version.
  *  
  * @author Kimmo Tuukkanen

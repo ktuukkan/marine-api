@@ -81,6 +81,8 @@ public class ShipType {
 	
 	/**
 	 * Return string describing the ship and cargo type.
+	 *
+	 * @param type Ship and cargo type indicator
 	 * @return a text string describing the ship and cargo type.
 	 */
 	static public String shipTypeToString (int type) {

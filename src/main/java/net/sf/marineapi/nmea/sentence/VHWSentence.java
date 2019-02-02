@@ -23,7 +23,7 @@ package net.sf.marineapi.nmea.sentence;
 /**
  * <p>Water speed and heading in respect to true and magnetic north.</p>
  * 
- * <p>Example:<br><code>$IIVHW,,,213,M,0.00,N,,K*2F</code></p>
+ * <p>Example:<br>{@code $IIVHW,,,213,M,0.00,N,,K*2F}</p>
  * 
  * @author Warren Zahra, Kimmo Tuukkanen
  */

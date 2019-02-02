@@ -36,7 +36,10 @@ public class HeadingEvent extends ProviderEvent {
 	private boolean isTrue;
 
 	/**
-	 * @param source
+	 * Creates a new heading event.
+	 *
+	 * @param source The object that sends the event.
+	 * @param s HeadingSentence that triggered the event.
 	 */
 	public HeadingEvent(Object source, HeadingSentence s) {
 		super(source);

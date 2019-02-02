@@ -33,27 +33,43 @@ public class BitVector {
 	private BitSet		fBitVector;
 	private int			fLength;
 
+	/**
+	 * Creates a new instance with given length.
+	 *
+	 * @param bits Vector length
+	 */
 	public BitVector(int bits) {
 		fBitVector = new BitSet(bits);
 		fLength = bits;
 	}
 
+	/**
+	 * Creates a new instance with given BitSet and length.
+	 *
+	 * @param vector BitSet
+	 * @param bits Vector length
+	 */
 	public BitVector(BitSet vector, int bits) {
 		fBitVector = vector;
 		fLength = bits;
-//		dump();
 	}
 
-	public void dump() {
-		for(int i = 0; i < fLength; i++)
-			System.out.print(fBitVector.get(i) ? 1 : 0);
-		System.out.print("\n");
-	}
-
+	/**
+	 * Set bit at given index.
+	 *
+	 * @param index Index of bit to set.
+	 */
 	public void set(int index) {
 		fBitVector.set(index);		
 	}
 
+	/**
+	 * Gets a vector subset.
+	 *
+	 * @param from Start index
+	 * @param to End index
+	 * @return BitVector with specified range
+	 */
 	public BitVector get(int from, int to) {
 		to++;
 		from++;
@@ -62,7 +78,9 @@ public class BitVector {
 
 	/**
 	 * Return bit as boolean from the bit vector
+	 *
 	 * @param index start index of bit
+	 * @return {@code true} if bit is set, otherwise {@code false}.
 	 */
 	public boolean getBoolean(int index) {
 		return fBitVector.get(index);
@@ -82,7 +100,14 @@ public class BitVector {
 		}
 		return value;
 	}
-	
+
+	/**
+	 * Convert to 8-bit integer.
+	 *
+	 * @param from Start index
+	 * @param to End index
+	 * @return Integer value
+	 */
 	public int getAs8BitInt(int from, int to) {
 		int retval = getUInt(from, to);
 		if (retval >= 0x80)
@@ -90,6 +115,13 @@ public class BitVector {
 		return retval;
 	}
 
+	/**
+	 * Convert to 17-bit integer.
+	 *
+	 * @param from Start index
+	 * @param to End index
+	 * @return Integer value
+	 */
 	public int getAs17BitInt(int from, int to) {
 		int retval = getUInt(from, to);
 		if (retval >= 0x10000)
@@ -97,6 +129,13 @@ public class BitVector {
 		return retval;
 	}
 
+	/**
+	 * Convert to 18-bit integer.
+	 *
+	 * @param from Start index
+	 * @param to End index
+	 * @return Integer value
+	 */
 	public int getAs18BitInt(int from, int to) {
 		int retval = getUInt(from, to);
 		if (retval >= 0x20000)
@@ -104,6 +143,13 @@ public class BitVector {
 		return retval;
 	}
 
+	/**
+	 * Convert to 27-bit integer.
+	 *
+	 * @param from Start index
+	 * @param to End index
+	 * @return Integer value
+	 */
 	public int getAs27BitInt(int from, int to) {
 		int retval = getUInt(from, to);
 		if (retval >= 0x4000000)
@@ -111,6 +157,13 @@ public class BitVector {
 		return retval;
 	}
 
+	/**
+	 * Convert to 28-bit integer.
+	 *
+	 * @param from Start index
+	 * @param to End index
+	 * @return Integer value
+	 */
 	public int getAs28BitInt(int from, int to) {
 		int retval = getUInt(from, to);
 		if (retval >= 0x8000000)

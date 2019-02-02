@@ -6,16 +6,16 @@
  * <http://ktuukkan.github.io/marine-api/>
  * 
  * Java Marine API is free software: you can redistribute it and/or modify it
- * under the terms of the GNU Lesser General Public License as published by the
+ * under the terms of the GNU Lesser General License as published by the
  * Free Software Foundation, either version 3 of the License, or (at your
  * option) any later version.
  * 
  * Java Marine API is distributed in the hope that it will be useful, but
  * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
- * FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License
+ * FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General License
  * for more details.
  * 
- * You should have received a copy of the GNU Lesser General Public License
+ * You should have received a copy of the GNU Lesser General License
  * along with Java Marine API. If not, see <http://www.gnu.org/licenses/>.
  */
 package net.sf.marineapi.nmea.sentence;
@@ -31,8 +31,8 @@ package net.sf.marineapi.nmea.sentence;
  * sentence layout, so there is no dedicated interfaces for each AIS sentence
  * type (VDM, VDO etc).
  * </p>
- * <p>Example:</br>
- * <code>!AIVDM,1,1,,B,177KQJ5000G?tO`K>RA1wUbN0TKH,0*5C</code></p>
+ * <p>Example:<br>
+ * {@code !AIVDM,1,1,,B,177KQJ5000G?tO`K>RA1wUbN0TKH,0*5C}</p>
  * 
  * @author Lázár József, Kimmo Tuukkanen
  */
@@ -43,35 +43,35 @@ public interface AISSentence extends Sentence {
 	 * 
 	 * @return number of fragments.
 	 */
-	public int getNumberOfFragments();
+	int getNumberOfFragments();
 
 	/**
 	 * Returns the fragment number of this sentence (1-based).
 	 * 
 	 * @return fragment index
 	 */
-	public int getFragmentNumber();
+	int getFragmentNumber();
 
 	/**
 	 * Returns the sequential message ID for multi-sentence messages.
 	 * 
 	 * @return sequential message ID
 	 */
-	public String getMessageId();
+	String getMessageId();
 
 	/**
 	 * Returns the radio channel information of the messsage.
 	 * 
 	 * @return radio channel id
 	 */
-	public String getRadioChannel();
+	String getRadioChannel();
 
 	/**
 	 * Returns the raw 6-bit decoded message.
 	 * 
 	 * @return message body
 	 */
-	public String getPayload();
+	String getPayload();
 
 	/**
 	 * Returns the number of fill bits required to pad the data payload to a 6
@@ -82,28 +82,28 @@ public interface AISSentence extends Sentence {
 	 * 
 	 * @return number of fill bits
 	 */
-	public int getFillBits();
+	int getFillBits();
 
 	/**
 	 * Tells if the AIS message is being delivered over multiple sentences.
 	 * 
 	 * @return true if this sentence is part of a sequence
 	 */
-	public boolean isFragmented();
+	boolean isFragmented();
 
 	/**
 	 * Tells if this is the first fragment in message sequence.
 	 * 
 	 * @return true if first fragment in sequence
 	 */
-	public boolean isFirstFragment();
+	boolean isFirstFragment();
 
 	/**
 	 * Tells if this is the last fragment in message sequence.
 	 * 
 	 * @return true if last part of a sequence
 	 */
-	public boolean isLastFragment();
+	boolean isLastFragment();
 
 	/**
 	 * <p>
@@ -123,6 +123,6 @@ public interface AISSentence extends Sentence {
 	 * @param sentence AISSentence to compare with.
 	 * @return true if this and given sentence belong in same sequence
 	 */
-	public boolean isPartOfMessage(AISSentence sentence);
+	boolean isPartOfMessage(AISSentence sentence);
 
 }

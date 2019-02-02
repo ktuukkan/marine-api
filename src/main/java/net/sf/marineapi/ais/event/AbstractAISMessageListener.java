@@ -54,7 +54,7 @@ import java.util.Queue;
 public abstract class AbstractAISMessageListener<T extends AISMessage>
     extends AbstractSentenceListener<AISSentence> {
 
-    protected final Class<?> messageType;
+    final Class<?> messageType;
     private final Queue<AISSentence> queue = new LinkedList<>();
     private final AISMessageFactory factory = AISMessageFactory.getInstance();
 
@@ -74,9 +74,9 @@ public abstract class AbstractAISMessageListener<T extends AISMessage>
     /**
      * Constructor with explicit generic type parameter. This constructor may
      * be used when the default constructor fails to resolve the generic type
-     * <code>T</code> at runtime.
+     * {@code T} at runtime.
      *
-     * @param c Message type <code>T</code> to be listened.
+     * @param c Message type {@code T} to be listened.
      * @see #AbstractAISMessageListener()
      */
     public AbstractAISMessageListener(Class<T> c) {
@@ -88,9 +88,9 @@ public abstract class AbstractAISMessageListener<T extends AISMessage>
      * Invoked when {@link AISSentence} of any type is received. Pre-parses
      * the message to determine it's type and invokes the
      * {@link #onMessage(AISMessage)} method when the type matches the generic
-     * type <code>T</code>.</p>
+     * type {@code T}.</p>
      * <p>
-     * This method has been declared <code>final</code> to ensure the correct
+     * This method has been declared {@code final} to ensure the correct
      * handling of received sentences.</p>
      */
     @Override
@@ -118,7 +118,7 @@ public abstract class AbstractAISMessageListener<T extends AISMessage>
 
     /**
      * Invoked when AIS message has been received.
-     * @param msg AISMessage of type <code>T</code>
+     * @param msg AISMessage of type {@code T}
      */
     public abstract void onMessage(T msg);
 

@@ -47,6 +47,7 @@ abstract class AISParser extends SentenceParser implements AISSentence {
      * Creates a new instance of VDOParser.
      *
      * @param nmea NMEA sentence String.
+     * @param sid Expected sentence ID
      */
     public AISParser(String nmea, SentenceId sid) {
         super(nmea, sid);
@@ -56,7 +57,7 @@ abstract class AISParser extends SentenceParser implements AISSentence {
      * Creates a new empty VDOParser.
      *
      * @param tid TalkerId to set
-     * @param sid
+     * @param sid SentenceId to set
      */
     public AISParser(TalkerId tid, SentenceId sid) {
         super('!', tid, sid, 6);

@@ -85,6 +85,7 @@ public class Position {
 	 * 
 	 * @param lat Latitude degrees
 	 * @param lon Longitude degrees
+	 * @param alt Altitude in meters
 	 * @param datum Datum to set
 	 */
 	public Position(double lat, double lon, double alt, Datum datum) {
@@ -93,7 +94,7 @@ public class Position {
 	}
 
 	/**
-	 * Calculates distance to specified <code>Position</code>.
+	 * Calculates distance to specified {@code Position}.
 	 * <p>
 	 * The Distance is calculated using the <a
 	 * href="http://en.wikipedia.org/wiki/Haversine_formula">Haversine
@@ -103,11 +104,11 @@ public class Position {
 	 * <p>
 	 * Earth radius <a
 	 * href="http://en.wikipedia.org/wiki/Earth_radius#Mean_radius">earth
-	 * radius</a> used in calculation is <code>6366.70702</code> km, based on
+	 * radius</a> used in calculation is {@code 6366.70702} km, based on
 	 * the assumption that 1 degrees is exactly 60 NM.
 	 * 
 	 * @param pos Position to which the distance is calculated.
-	 * @return Distance to po<code>pos</code> in meters.
+	 * @return Distance to po{@code pos} in meters.
 	 */
 	public double distanceTo(Position pos) {
 		return haversine(getLatitude(), getLongitude(), pos.getLatitude(),
@@ -117,7 +118,7 @@ public class Position {
 	/**
 	 * Gets the position altitude from mean sea level. Notice that most
 	 * sentences with position don't provide this value. When missing, the
-	 * default value in <code>Position</code> is 0.0.
+	 * default value in {@code Position} is 0.0.
 	 * 
 	 * @return Altitude value in meters
 	 */

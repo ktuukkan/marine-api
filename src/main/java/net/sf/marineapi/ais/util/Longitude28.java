@@ -35,24 +35,46 @@ public class Longitude28 {
 	private static final int MAX_VALUE = 180 * MINUTE_PART_MULTIPLIER;
 	private static final int DEFAULT_VALUE = 181 * MINUTE_PART_MULTIPLIER;
 
+	/** The range of valid longitude values with default for "no value". */
 	public static final String RANGE = "[" + MIN_VALUE + "," + MAX_VALUE + "] + {" + DEFAULT_VALUE + "}";
 
 	/**
 	 * Converts the longitude value (in 1/10000 minutes) to degrees.
+	 *
+	 * @param value Int value to convert
 	 * @return the longitude value in degrees
 	 */
 	public static double toDegrees(int value) {
 		return (double)value / (double)MINUTE_PART_MULTIPLIER;
 	}
 
+	/**
+	 * Tells if the given longitude is available, i.e. within expected range.
+	 *
+	 * @param value Longitude value to validate
+	 * @return {@code true} if available, otherwise {@code false}.
+	 */
 	public static boolean isAvailable(int value) {
 		return value >= MIN_VALUE && value <= MAX_VALUE;
 	}
 
+	/**
+	 * Tells if the given value is correct, i.e. within expected range and not
+	 * the no-value.
+	 *
+	 * @param value Longitude value to validate
+	 * @return {@code true} if correct, otherwise {@code false}.
+	 */
 	public static boolean isCorrect(int value) {
 		return isAvailable(value) || (value == DEFAULT_VALUE);
 	}
 
+	/**
+	 * Returns the string representation of given longitude value.
+	 *
+	 * @param value Value to stringify
+	 * @return formatted value, "invalid longitude" or "longitude not available"
+	 */
 	public static String toString(int value) {
 		if (!isCorrect(value)) {
 			return "invalid longitude";

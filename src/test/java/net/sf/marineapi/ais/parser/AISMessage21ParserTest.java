@@ -32,7 +32,7 @@ public class AISMessage21ParserTest {
 
     @Test
     public void getPositionAccuracy() throws Exception {
-        assertFalse(msg.getPositionAccuracy());
+        assertFalse(msg.isAccurate());
     }
 
     @Test

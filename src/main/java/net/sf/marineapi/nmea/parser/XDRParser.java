@@ -32,11 +32,11 @@ import net.sf.marineapi.nmea.util.Measurement;
 /**
  * <p>
  * Transducer measurements.
- * <pre>
+ * <pre>{@code
  *         1 2   3 4            n
  *         | |   | |            |
  *  $--XDR,a,x.x,a,c--c, ..... *hh<CR><LF>
- * </pre>
+ * }</pre>
  * <p>
  * Where: 
  * <ol>

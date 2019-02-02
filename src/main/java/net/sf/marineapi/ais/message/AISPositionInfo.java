@@ -28,29 +28,39 @@ package net.sf.marineapi.ais.message;
 interface AISPositionInfo extends AISMessage {
 	
     /**
-	 * Returns the position accuracy.
+	 * Tells if the position is accurate.
+	 *
+	 * @return {@code true} if accurate (&lt; 10 meters), otherwise {@code false}.
 	 */
-	boolean getPositionAccuracy();
+	boolean isAccurate();
 
 	/**
 	 * Returns the longitude in degrees.
+	 *
+	 * @return Longitude, in degrees.
 	 */
 	double getLongitudeInDegrees();
 
 	/**
 	 * Returns the latitude in degrees.
+	 *
+	 * @return Latitude, in degrees.
 	 */
 	double getLatitudeInDegrees();
 
 	/**
-	 * Returns true if longitude is available in the message.
-	 * If false, getLongitudeInDegrees may return an out-of-range value.
+	 * Tells if the longitude is available in the message. If not,
+	 * {@link #getLongitudeInDegrees} may return an out-of-range value.
+	 *
+	 * @return {@code true} if available, otherwise {@code false}.
 	 */
 	boolean hasLongitude();
 
 	/**
-	 * Returns true if latitude is available in the message.
-	 * If false, getLatitudeInDegrees may return an out-of-range value.
+	 * Tells if the latitude is available in the message. If not,
+	 * {@link #getLatitudeInDegrees()} may return an out-of-range value.
+	 *
+	 * @return {@code true} if available, otherwise {@code false}.
 	 */
 	boolean hasLatitude();
 }
