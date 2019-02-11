@@ -93,30 +93,20 @@ abstract class PositionParser extends SentenceParser {
 	}
 
 	/**
-	 * Parses the latitude degrees from the specified field. The assumed String
-	 * format for latitude is {@code ddmm.mmm}.
-	 * 
-	 * @param index Index of field containing the latitude value.
-	 * @return Latitude value in degrees
+	 * Parse latitude or longitude degrees and minutes from the specified field.
+	 * Assumes the {@code dddmm.mmmm} formatting where the two digits to the
+	 * left of dot denote full minutes and any remaining digits to the left
+	 * denote full degrees (usually padded with leading zeros). Digits to the
+	 * right of the dot denote the minute decimals.
+	 *
+	 * @param index Index of the lat/lon field.
+	 * @return Degrees decimal value
 	 */
-	protected double parseLatitude(int index) {
+	protected double parseDegrees(int index) {
 		String field = getStringValue(index);
-		int deg = Integer.parseInt(field.substring(0, 2));
-		double min = Double.parseDouble(field.substring(2));
-		return deg + (min / 60);
-	}
-
-	/**
-	 * Parses the longitude degrees from the specified field. The assumed String
-	 * format for longitude is {@code dddmm.mmm}.
-	 * 
-	 * @param index Index of field containing the longitude value.
-	 * @return Longitude value in degrees
-	 */
-	protected double parseLongitude(int index) {
-		String field = getStringValue(index);
-		int deg = Integer.parseInt(field.substring(0, 3));
-		double min = Double.parseDouble(field.substring(3));
+		int minutesIndex = field.indexOf(".") - 2;
+		int deg = Integer.parseInt(field.substring(0, minutesIndex));
+		double min = Double.parseDouble(field.substring(minutesIndex));
 		return deg + (min / 60);
 	}
 
@@ -132,8 +122,8 @@ abstract class PositionParser extends SentenceParser {
 	protected Position parsePosition(int latIndex, int latHemIndex,
 		int lonIndex, int lonHemIndex) {
 
-		double lat = parseLatitude(latIndex);
-		double lon = parseLongitude(lonIndex);
+		double lat = parseDegrees(latIndex);
+		double lon = parseDegrees(lonIndex);
 		CompassPoint lath = parseHemisphereLat(latHemIndex);
 		CompassPoint lonh = parseHemisphereLon(lonHemIndex);
 		if (lath.equals(CompassPoint.SOUTH)) {

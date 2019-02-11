@@ -70,24 +70,56 @@ public class PositionParserTest {
 
 	/**
 	 * Test method for
-	 * {@link net.sf.marineapi.nmea.parser.PositionParser#parseLatitude(int)}.
+	 * {@link net.sf.marineapi.nmea.parser.PositionParser#parseDegrees(int)}.
 	 */
 	@Test
 	public void testParseLatitude() {
-		// 6011.552
+		// 6011.552 = 60 deg 11.552 min
 		final double lat = 60 + (11.552 / 60);
-		assertEquals(lat, instance.parseLatitude(0), 0.000001);
+		assertEquals(lat, instance.parseDegrees(0), 0.000001);
+	}
+
+	@Test
+	public void testParseLatitudeWithLeadingZero() {
+		// 0611.552 = 6 deg 11.552 min
+		final double lat = 6 + (11.552 / 60);
+		PositionParser pp = new PositionParser("$GPGLL,0611.552,N,0.0,E", SentenceId.GLL) {};
+		assertEquals(lat, pp.parseDegrees(0), 0.000001);
+	}
+
+	@Test
+	public void testParseLatitudeWithoutLeadingZero() {
+		// 611.552 = 6 deg 11.552 min
+		final double lat = 6 + (11.552 / 60);
+		PositionParser pp = new PositionParser("$GPGLL,611.552,N,0.0,E", SentenceId.GLL) {};
+		assertEquals(lat, pp.parseDegrees(0), 0.000001);
 	}
 
 	/**
 	 * Test method for
-	 * {@link net.sf.marineapi.nmea.parser.PositionParser#parseLongitude(int)}.
+	 * {@link net.sf.marineapi.nmea.parser.PositionParser#parseDegrees(int)}.
 	 */
 	@Test
 	public void testParseLongitude() {
-		// 02501.941
-		final double lat = 25 + (01.941 / 60);
-		assertEquals(lat, instance.parseLongitude(2), 0.000001);
+		// 02501.941 = 25 deg 1.941 min
+		final double lon = 25 + (1.941 / 60);
+		assertEquals(lon, instance.parseDegrees(2), 0.000001);
+	}
+
+	@Test
+	public void testParseLongitudeWithoutLeadingZero() {
+		// 2501.941 = 25 deg 1.941 min (leading zero omitted)
+		final double lon = 25 + (01.941 / 60);
+		PositionParser pp = new PositionParser("$GPGLL,0.0,N,2501.941,E", SentenceId.GLL) {};
+		assertEquals(lon, pp.parseDegrees(2), 0.000001);
+	}
+
+	@Test
+	public void testParseLongitudeWithoutLeadingZeros() {
+		// 501.941 = 5 deg 1.941 min (two leading zeros omitted)
+		final double lon = 5 + (1.941 / 60);
+		PositionParser pp = new PositionParser("$GPGLL,0.0,N,501.941,E", SentenceId.GLL) {};
+		assertEquals(lon, pp.parseDegrees(2), 0.000001);
 	}
 
 	/**
@@ -113,7 +145,7 @@ public class PositionParserTest {
 		final double lat = 25 + (01.941 / 60);
 		instance.setLatitude(0, lat);
 		assertTrue(instance.toString().contains(",02501.941"));
-		assertEquals(lat, instance.parseLatitude(0), 0.000001);
+		assertEquals(lat, instance.parseDegrees(0), 0.000001);
 	}
 
 	/**
@@ -127,7 +159,7 @@ public class PositionParserTest {
 		final double lon = 28 + (01.941 / 60);
 		instance.setLongitude(2, lon);
 		assertTrue(instance.toString().contains(",02801.941"));
-		assertEquals(lon, instance.parseLongitude(2), 0.000001);
+		assertEquals(lon, instance.parseDegrees(2), 0.000001);
 	}
 
 	/**
