@@ -4,3 +4,8 @@ language: java
 jdk:
  - openjdk8
  - oraclejdk8
+ - oraclejdk9
+ - oraclejdk11
+script:
+  - mvn javadoc:javadoc
+  - mvn test -B
