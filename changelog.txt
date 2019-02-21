@@ -23,7 +23,8 @@ Version 0.11.0-SNAPSHOT
       messages 1-3, 5, 9, 18 and 19.
     - names and call signs are now trimmed in messages 5 and 21
     - fixed six-bit vector indexing bugs in message 5
-  - PositionParser; leading zeros may now be omitted in the lat/lon fields.
+  - PositionParser; leading zeros may now be omitted in the lat/lon fields. The
+    separate lat/lon parser methods replaced with parseDegrees().
 
   Contributions:
   - GST parser by Tero Laitinen (@tlaitinen)

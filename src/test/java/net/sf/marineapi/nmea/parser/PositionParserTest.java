@@ -73,14 +73,14 @@ public class PositionParserTest {
 	 * {@link net.sf.marineapi.nmea.parser.PositionParser#parseDegrees(int)}.
 	 */
 	@Test
-	public void testParseLatitude() {
+	public void testParseDegreesWithLatitude() {
 		// 6011.552 = 60 deg 11.552 min
 		final double lat = 60 + (11.552 / 60);
 		assertEquals(lat, instance.parseDegrees(0), 0.000001);
 	}
 
 	@Test
-	public void testParseLatitudeWithLeadingZero() {
+	public void testParseDegreesLatitudeWithLeadingZero() {
 		// 0611.552 = 6 deg 11.552 min
 		final double lat = 6 + (11.552 / 60);
 		PositionParser pp = new PositionParser("$GPGLL,0611.552,N,0.0,E", SentenceId.GLL) {};
@@ -88,7 +88,7 @@ public class PositionParserTest {
 	}
 
 	@Test
-	public void testParseLatitudeWithoutLeadingZero() {
+	public void testParseDegreesLatitudeWithoutLeadingZero() {
 		// 611.552 = 6 deg 11.552 min
 		final double lat = 6 + (11.552 / 60);
 		PositionParser pp = new PositionParser("$GPGLL,611.552,N,0.0,E", SentenceId.GLL) {};
@@ -100,29 +100,72 @@ public class PositionParserTest {
 	 * {@link net.sf.marineapi.nmea.parser.PositionParser#parseDegrees(int)}.
 	 */
 	@Test
-	public void testParseLongitude() {
+	public void testParseDegreesLongitudeWithLeadingZero() {
 		// 02501.941 = 25 deg 1.941 min
 		final double lon = 25 + (1.941 / 60);
 		assertEquals(lon, instance.parseDegrees(2), 0.000001);
 	}
 
 	@Test
-	public void testParseLongitudeWithoutLeadingZero() {
-		// 2501.941 = 25 deg 1.941 min (leading zero omitted)
+	public void testParseDegreesWithoutLeadingZero() {
+		// one leading zero omitted
+		// 2501.941 = 25 deg 1.941 min
 		final double lon = 25 + (01.941 / 60);
 		PositionParser pp = new PositionParser("$GPGLL,0.0,N,2501.941,E", SentenceId.GLL) {};
 		assertEquals(lon, pp.parseDegrees(2), 0.000001);
 	}
 
 	@Test
-	public void testParseLongitudeWithoutLeadingZeros() {
-		// 501.941 = 5 deg 1.941 min (two leading zeros omitted)
+	public void testParseDegreesWithoutLeadingZeros() {
+		// two leading zeros omitted
+		// 501.941 = 5 deg 1.941 min
 		final double lon = 5 + (1.941 / 60);
 		PositionParser pp = new PositionParser("$GPGLL,0.0,N,501.941,E", SentenceId.GLL) {};
 		assertEquals(lon, pp.parseDegrees(2), 0.000001);
 	}
 
-	/**
+	@Test
+	public void testParseDegreesWithoutFullDegrees() {
+		// full degrees omitted
+		// 28.844957 = 0 deg 28.844957 min
+		final double lon = 0 + (28.844957 / 60);
+		PositionParser pp = new PositionParser("$GPGLL,0.0,N,28.844957,E", SentenceId.GLL) {};
+		assertEquals(lon, pp.parseDegrees(2), 0.000001);
+	}
+
+	@Test
+	public void testParseDegreesWithoutFullDegreesAndLeadingZero() {
+		// full degrees and a leading zero of minutes omitted
+		// 8.844957 = 0 deg 8.844957 min
+		final double lon = 0 + (8.844957 / 60);
+		PositionParser pp = new PositionParser("$GPGLL,0.0,N,8.844957,E", SentenceId.GLL) {};
+		assertEquals(lon, pp.parseDegrees(2), 0.000001);
+	}
+
+	@Test
+	public void testParseDegreesWithoutFullDegreesAndMinutes() {
+		// full degrees and full minutes omitted
+		// .844957 = 0 deg 0.844957 min
+		final double lon = 0 + (0.844957 / 60);
+		PositionParser pp = new PositionParser("$GPGLL,0.0,N,.844957,E", SentenceId.GLL) {};
+		assertEquals(lon, pp.parseDegrees(2), 0.000001);
+	}
+
+	@Test
+	public void testParseDegreesWithZeroInt() {
+		// 0 = 0 deg 0 min
+		PositionParser pp = new PositionParser("$GPGLL,0,N,0,E", SentenceId.GLL) {};
+		assertEquals(0, pp.parseDegrees(2), 0.000001);
+	}
+
+	@Test
+	public void testParseDegreesWithZeroDecimal() {
+		// 0.0 = 0 deg 0 min
+		PositionParser pp = new PositionParser("$GPGLL,0.0,N,0.0,E", SentenceId.GLL) {};
+		assertEquals(0, pp.parseDegrees(2), 0.000001);
+	}
+
+    /**
 	 * Test method for
 	 * {@link net.sf.marineapi.nmea.parser.PositionParser#setLatHemisphere(int, net.sf.marineapi.nmea.util.CompassPoint)}
 	 * .

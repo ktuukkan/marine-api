@@ -103,10 +103,16 @@ abstract class PositionParser extends SentenceParser {
 	 * @return Degrees decimal value
 	 */
 	protected double parseDegrees(int index) {
+
 		String field = getStringValue(index);
-		int minutesIndex = field.indexOf(".") - 2;
-		int deg = Integer.parseInt(field.substring(0, minutesIndex));
-		double min = Double.parseDouble(field.substring(minutesIndex));
+		int dotIndex = field.indexOf(".");
+
+		String degStr = dotIndex > 2 ? field.substring(0, dotIndex - 2) : "0";
+		String minStr = dotIndex > 2 ? field.substring(dotIndex - 2) : field;
+
+		int deg = Integer.parseInt(degStr);
+		double min = Double.parseDouble(minStr);
+
 		return deg + (min / 60);
 	}
 
