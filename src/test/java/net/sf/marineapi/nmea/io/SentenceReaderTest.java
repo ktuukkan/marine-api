@@ -86,6 +86,27 @@ public class SentenceReaderTest {
 	}
 
 	@Test
+	public void testRemoveSentenceListenerByType() {
+
+		reader.removeSentenceListener(testListener);
+		reader.removeSentenceListener(dummyListener);
+		assertEquals(0, reader.getSentenceListeners().size());
+
+		reader.addSentenceListener(testListener, SentenceId.GLL);
+		reader.addSentenceListener(dummyListener, SentenceId.GGA);
+		assertEquals(2, reader.getSentenceListeners().size());
+
+		reader.removeSentenceListener(testListener, SentenceId.GLL);
+		assertEquals(1, reader.getSentenceListeners().size());
+
+		reader.removeSentenceListener(dummyListener, SentenceId.GNS);
+		assertEquals(1, reader.getSentenceListeners().size());
+
+		reader.removeSentenceListener(dummyListener, SentenceId.GGA);
+		assertEquals(0, reader.getSentenceListeners().size());
+	}
+
+	@Test
 	public void testSetInputStream() throws Exception {
 		File file = new File("src/test/resources/data/Garmin-GPS76.txt");
 		InputStream stream = new FileInputStream(file);

@@ -25,6 +25,7 @@ Version 0.11.0-SNAPSHOT
     - fixed six-bit vector indexing bugs in message 5
   - PositionParser; leading zeros may now be omitted in the lat/lon fields. The
     separate lat/lon parser methods replaced with parseDegrees().
+  - SentenceReadeder; added methods for removing listeners by sentence type.
 
   Contributions:
   - GST parser by Tero Laitinen (@tlaitinen)

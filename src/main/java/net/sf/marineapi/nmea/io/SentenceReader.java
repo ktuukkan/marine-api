@@ -116,8 +116,7 @@ public class SentenceReader {
 	}
 
 	/**
-	 * Adds a {@link SentenceListener} that wants to receive all sentences read
-	 * by the reader.
+	 * Adds a {@link SentenceListener} to receive all incoming sentences.
 	 *
 	 * @param listener {@link SentenceListener} to be registered.
 	 * @see SentenceListener
@@ -127,8 +126,7 @@ public class SentenceReader {
 	}
 
 	/**
-	 * Adds a {@link SentenceListener} that is
-	 * interested in receiving only sentences of certain type.
+	 * Adds a {@link SentenceListener} to receive sentences of specified type.
 	 *
 	 * @param sl SentenceListener to add
 	 * @param type Sentence type for which the listener is registered.
@@ -139,8 +137,7 @@ public class SentenceReader {
 	}
 
 	/**
-	 * Adds a {@link SentenceListener} that is
-	 * interested in receiving only sentences of certain type.
+	 * Adds a {@link SentenceListener} to receive sentences of specified type.
 	 *
 	 * @param sl SentenceListener to add
 	 * @param type Sentence type for which the listener is registered.
@@ -213,7 +210,7 @@ public class SentenceReader {
 	void fireSentenceEvent(Sentence sentence) {
 
 		String type = sentence.getSentenceId();
-		Set<SentenceListener> targets = new HashSet<SentenceListener>();
+		Set<SentenceListener> targets = new HashSet<>();
 
 		if (listeners.containsKey(type)) {
 			targets.addAll(listeners.get(type));
@@ -300,17 +297,35 @@ public class SentenceReader {
 	}
 
 	/**
-	 * Remove a listener from reader. When removed, listener will not receive
-	 * any events from the reader.
+	 * Removes the specified sentence listener regardless of sentence type(s)
+	 * it was added for.
 	 *
 	 * @param listener {@link SentenceListener} to be removed.
 	 */
 	public void removeSentenceListener(SentenceListener listener) {
-		for (List<SentenceListener> list : listeners.values()) {
-			if (list.contains(listener)) {
-				list.remove(listener);
-			}
-		}
+		listeners.values().forEach(v -> v.remove(listener));
+	}
+
+
+	/**
+	 * Removes the sentence listener for specified sentence type.
+	 *
+	 * @param listener {@link SentenceListener} to be removed.
+	 * @param sid Sentence Id
+	 */
+	public void removeSentenceListener(SentenceListener listener, SentenceId sid) {
+		this.removeSentenceListener(listener, sid.name());
+	}
+
+	/**
+	 * Removes the sentence listener for specified sentence type.
+	 *
+	 * @param listener {@link SentenceListener} to be removed.
+	 * @param type Sentence type
+	 * @see #removeSentenceListener(SentenceListener, SentenceId)
+	 */
+	public void removeSentenceListener(SentenceListener listener, String type) {
+		listeners.getOrDefault(type, new ArrayList<>()).remove(listener);
 	}
 
 	/**
