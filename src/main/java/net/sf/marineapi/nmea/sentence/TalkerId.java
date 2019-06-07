@@ -93,6 +93,8 @@ public enum TalkerId {
 	GA,
 	/** Beidou satellite navigation system (Chinese) */
 	GB,
+	/** Gas Finder (Boreal) - added by Bob Schwarz*/
+	GF,
 	/** Indian Regional Navigation Satellite System (IRNSS) */
 	GI,
 	/** GLONASS (according to IEIC 61162-1) */

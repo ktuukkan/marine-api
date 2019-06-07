@@ -22,11 +22,18 @@ package net.sf.marineapi.nmea.util;
 
 /**
  * Defines the supported units of measure.
- * 
+ *  
  * @author Kimmo Tuukkanen
+ * 
+ * Added new UNITS BARS, INCHES, MPH. 
+ * @author Bob Schwarz
+ * @see <a href="https://github.com/LoadBalanced/marine-api">marina-api fork</a>
  */
 public enum Units {
 
+	/** Pressure in bars */
+	BARS('B'),
+	
 	/** Temperature in degrees Celsius (centigrade) */
 	CELSIUS('C'),
 
@@ -36,14 +43,20 @@ public enum Units {
 	/** Length in feet */
 	FEET('f'),
 
+	/** Distance/pressure in inches  */
+	INCHES('I'),
+	
 	/** Speed in kilometers per hour */
 	KMH('K'),
 
+	/** Length in meter */
+	METER('M'),
+	
 	/** Speed in knots (nautical miles per hour) */
 	KNOT('N'),
 
-	/** Length in meter */
-	METER('M');
+	/** Speed in statute miles/hr */
+	MPH('S');
 
 	private char ch;
 

@@ -278,6 +278,10 @@ public final class SentenceFactory {
 	/**
 	 * Resets the factory in it's initial state, i.e. restores and removes all
 	 * parsers the have been either removed or added.
+	 * 
+	 * Add new parsers for Boreal GasFinder DTA and DTB
+     * @author Bob Schwarz
+	 * @see <a href="https://github.com/LoadBalanced/marine-api">marina-api fork</a>
 	 */
 	public void reset() {
 		Map<String, Class<? extends SentenceParser>> tempParsers = new ConcurrentHashMap<>();
@@ -328,6 +332,8 @@ public final class SentenceFactory {
 		registerParser(tempParsers, "ZDA", ZDAParser.class);
 		registerParser(tempParsers, "MDA", MDAParser.class);
 		registerParser(tempParsers, "MWD", MWDParser.class);
+		registerParser(tempParsers, "DTA", DTAParser.class);
+		registerParser(tempParsers, "DTB", DTBParser.class);
 		parsers = tempParsers;
 	}
 }
