@@ -1,5 +1,5 @@
 /* 
- * DTATest.java
+ * DTBTest.java
  * Copyright (C) 2010 Kimmo Tuukkanen
  * 
  * This file is part of Java Marine API.
@@ -29,43 +29,43 @@ import java.text.SimpleDateFormat;
 import org.junit.Before;
 import org.junit.Test;
 
-import net.sf.marineapi.nmea.sentence.DTASentence;
+import net.sf.marineapi.nmea.sentence.DTBSentence;
 import net.sf.marineapi.nmea.sentence.TalkerId;
 
 /**
- * DTATest - test class for Boreal GasFinder
+ * DTBTest - test class for Boreal GasFinder Channel B
  * 
  * @author Bob Schwarz
  * @see <a href="https://github.com/LoadBalanced/marine-api">marina-api fork</a>
  * 
  */
-public class DTATest {
+public class DTBTest {
 	
 	// Boreal GasFinderMC has an additional channel number
-    public static final String EXAMPLE_MC = "$GFDTA,1,1.5,99,600,11067,2002/03/01 00:30:28,HF-1xxx,1*3C";	
+    public static final String EXAMPLE_MC = "$GFDTB,1,1.5,99,600,11067,2002/03/01 00:30:28,HF-1xxx,1*3F";	
 
-    public static final String EXAMPLE2 = "$GFDTA,7.7,98,600,5527,2011/01/27 13:29:28,HFH2O-1xxx,1*2B";
+    public static final String EXAMPLE2 = "$GFDTB,7.7,98,600,5527,2011/01/27 13:29:28,HFH2O-1xxx,1*28";
 
-    private DTASentence gasFinderMC;
-    private DTASentence gasFinder2;
+    private DTBSentence gasFinderMC;
+    private DTBSentence gasFinder2;
 
     @Before
     public void setUp() throws Exception {
-        gasFinderMC = new DTAParser(EXAMPLE_MC);
-        gasFinder2 = new DTAParser(EXAMPLE2);
+        gasFinderMC = new DTBParser(EXAMPLE_MC);
+        gasFinder2 = new DTBParser(EXAMPLE2);
     }
 
     @Test
-    public void testDTAParserTalkerId() {
-    	DTAParser mwdp = new DTAParser(TalkerId.GF, 8);
+    public void testDTBParserTalkerId() {
+    	DTBParser mwdp = new DTBParser(TalkerId.GF, 8);
         assertEquals(TalkerId.GF, mwdp.getTalkerId());
-        assertEquals("DTA", mwdp.getSentenceId());
+        assertEquals("DTB", mwdp.getSentenceId());
     }
 
     @Test
     public void testGetChannelNumber() {
-        assertEquals(1, gasFinderMC.getChannelNumber());
-        assertEquals(1, gasFinder2.getChannelNumber());
+        assertEquals(2, gasFinderMC.getChannelNumber());
+        assertEquals(2, gasFinder2.getChannelNumber());
     }
   
     @Test
@@ -110,3 +110,4 @@ public class DTATest {
         assertEquals(1, gasFinder2.getStatusCode());
     }
 }
+

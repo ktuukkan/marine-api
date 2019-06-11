@@ -36,7 +36,11 @@ class DTBParser extends DTAParser implements DTBSentence {
 	public static final String DTB_SENTENCE_ID = "DTB";
 	
 	public DTBParser(TalkerId talker) {
-		super(talker, SentenceId.DTB, 6);
+		super(talker, SentenceId.DTB, 8);
+	}
+	
+	public DTBParser(TalkerId talker, int size) {
+		super(talker, SentenceId.DTB, size);
 	}
 	
 	public DTBParser(String nmea) {

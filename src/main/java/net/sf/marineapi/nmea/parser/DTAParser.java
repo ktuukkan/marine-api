@@ -72,7 +72,7 @@ class DTAParser extends SentenceParser implements DTASentence {
      * @param talker - Talker id to set
      */
     public DTAParser(TalkerId talker) {
-        super(talker, DTA_SENTENCE_ID, 6);
+        super(talker, DTA_SENTENCE_ID, 8);
     }
 	
 	public DTAParser(TalkerId talker, int size) {
@@ -87,8 +87,8 @@ class DTAParser extends SentenceParser implements DTASentence {
 		long count = nmea.chars().filter(ch -> ch == ',').count();	
 		
 		 // Boreal Gas Finder2 is missing the channel number.  
-		 // If more than 8 commas, the channel is there.
-		if (count > 8) {
+		 // If >= 8 commas, the channel is there.
+		if (count >= 8) {
 			this.offset = 0;
 		}
 	}
