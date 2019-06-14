@@ -1,6 +1,6 @@
 /*
  * UDPDataReader.java
- * Copyright (C) 2010-2014 Kimmo Tuukkanen, Ludovic Drouineau
+ * Copyright (C) 2010-2019 Kimmo Tuukkanen, Ludovic Drouineau
  * 
  * This file is part of Java Marine API.
  * <http://ktuukkan.github.io/marine-api/>
@@ -49,16 +49,11 @@ class UDPDataReader extends AbstractDataReader {
 	}
 
 	@Override
-	/**
-	 * Cleaned up and commented - no functional change.
-     * @author Bob Schwarz
-     * @see <a href="https://github.com/LoadBalanced/marine-api">marina-api fork</a>
-	 */
 	public String read() throws Exception {
 		String data = null;
 		
 		while (true) {
-			// If there is a backlog of sentences in the queue, then return the old sentences first so that each packet is uploaded compete
+			// If there is a backlog of sentences in the queue, then return the old sentences first so that each packet is uploaded compete.
 			if ((data = queue.poll()) != null)		
 				break;
 

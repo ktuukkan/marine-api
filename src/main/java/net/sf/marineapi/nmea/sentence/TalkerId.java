@@ -1,6 +1,6 @@
 /* 
  * TalkerId.java
- * Copyright (C) 2010 Kimmo Tuukkanen
+ * Copyright (C) 2019 Kimmo Tuukkanen
  * 
  * This file is part of Java Marine API.
  * <http://ktuukkan.github.io/marine-api/>
@@ -93,7 +93,7 @@ public enum TalkerId {
 	GA,
 	/** Beidou satellite navigation system (Chinese) */
 	GB,
-	/** Gas Finder (Boreal) - added by Bob Schwarz*/
+	/** Gas Finder (Boreal) */
 	GF,
 	/** Indian Regional Navigation Satellite System (IRNSS) */
 	GI,

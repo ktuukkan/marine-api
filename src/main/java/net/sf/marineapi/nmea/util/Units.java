@@ -1,6 +1,6 @@
 /* 
  * Units.java
- * Copyright (C) 2010 Kimmo Tuukkanen
+ * Copyright (C) 2019 Kimmo Tuukkanen
  * 
  * This file is part of Java Marine API.
  * <http://ktuukkan.github.io/marine-api/>
@@ -24,10 +24,7 @@ package net.sf.marineapi.nmea.util;
  * Defines the supported units of measure.
  *  
  * @author Kimmo Tuukkanen
- * 
- * Added new UNITS BARS, INCHES, MPH. 
- * @author Bob Schwarz
- * @see <a href="https://github.com/LoadBalanced/marine-api">marina-api fork</a>
+ *
  */
 public enum Units {
 

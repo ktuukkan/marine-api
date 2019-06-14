@@ -1,6 +1,6 @@
 /* 
  * DTBSentence.java
- * Copyright (C) 2010 Kimmo Tuukkanen
+ * Copyright (C) 2019 Kimmo Tuukkanen
  * 
  * This file is part of Java Marine API.
  * <http://ktuukkan.github.io/marine-api/>
@@ -27,10 +27,9 @@ package net.sf.marineapi.nmea.sentence;
  * <p>Example GasFinder2:<br><code>$GFDTB,  7.7, 98, 600, 5527, 2011/01/27 13:29:28, HFH2O-1xxx, 1, *56 </code></p>
  * 
  * @author Bob Schwarz
- * @see <a href="https://github.com/LoadBalanced/marine-api">marina-api fork</a>
+ * @see <a href="https://github.com/LoadBalanced/marine-api">marine-api fork</a>
  * 
  */
 public interface DTBSentence extends DTASentence {
 
-	
 }

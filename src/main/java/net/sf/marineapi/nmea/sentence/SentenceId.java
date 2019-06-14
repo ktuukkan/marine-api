@@ -1,6 +1,6 @@
 /*
  * SentenceId.java
- * Copyright (C) 2010 Kimmo Tuukkanen
+ * Copyright (C) 2019 Kimmo Tuukkanen
  *
  * This file is part of Java Marine API.
  * <http://ktuukkan.github.io/marine-api/>
@@ -41,9 +41,10 @@ public enum SentenceId {
     DBT,
     /** Depth of water below transducer; in meters. */
     DPT,
-	/** Boreal GasFinder data - added by Bob Schwarz*/
-	DTA,
-	DTB,
+    /** Boreal GasFinder data stream A (GasFinder2 and GasFinderMC) */
+    DTA,
+    /** Boreal GasFinder data stream B (GasFinder2 only) */
+    DTB,
     /** Datum reference. */
     DTM,
     /** GNSS satellite fault detection (RAIM) */

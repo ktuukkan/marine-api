@@ -26,6 +26,8 @@ Version 0.11.0-SNAPSHOT
   - PositionParser; leading zeros may now be omitted in the lat/lon fields. The
     separate lat/lon parser methods replaced with parseDegrees().
   - SentenceReadeder; added methods for removing listeners by sentence type.
+  - Added new UNITS: BARS, INCHES, MPH for Airmar support.
+  - Support for DTA/DTB Sentences and Parsers; Boreal GasFinder2 and GasFinderMC. 
 
   Contributions:
   - GST parser by Tero Laitinen (@tlaitinen)
@@ -34,6 +36,7 @@ Version 0.11.0-SNAPSHOT
   - AIS validation improvements by Jyrki Jakobsson (@jyrkija)
   - SentenceReader improvements by Martin Wegner (@Martin-Wegner) and
     Michael Skogberg (@malliina)
+  - DTA/DTB parsers for Boreal GasFinder support, plus new Units by Bob Schwarz (@LoadBalanced)
 
 Version 0.10.0 (2017-06-21)
 

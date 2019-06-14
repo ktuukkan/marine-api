@@ -1,6 +1,6 @@
 /*
  * SentenceFactory.java
- * Copyright (C) 2010 Kimmo Tuukkanen
+ * Copyright (C) 2019 Kimmo Tuukkanen
  *
  * This file is part of Java Marine API.
  * <http://ktuukkan.github.io/marine-api/>
@@ -279,9 +279,6 @@ public final class SentenceFactory {
 	 * Resets the factory in it's initial state, i.e. restores and removes all
 	 * parsers the have been either removed or added.
 	 * 
-	 * Add new parsers for Boreal GasFinder DTA and DTB
-     * @author Bob Schwarz
-	 * @see <a href="https://github.com/LoadBalanced/marine-api">marina-api fork</a>
 	 */
 	public void reset() {
 		Map<String, Class<? extends SentenceParser>> tempParsers = new ConcurrentHashMap<>();

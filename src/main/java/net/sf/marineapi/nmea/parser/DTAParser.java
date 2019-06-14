@@ -1,6 +1,6 @@
 /* 
  * DTAParser.java
- * Copyright (C) 2010 Kimmo Tuukkanen
+ * Copyright (C) 2019 Kimmo Tuukkanen
  * 
  * This file is part of Java Marine API.
  * <http://ktuukkan.github.io/marine-api/>
@@ -32,7 +32,7 @@ import net.sf.marineapi.nmea.sentence.TalkerId;
  * DTA sentence parser.
  * 
  * @author Bob Schwarz
- * @see <a href="https://github.com/LoadBalanced/marine-api">marina-api fork</a>
+ * @see <a href="https://github.com/LoadBalanced/marine-api">marine-api fork</a>
  * 
  */
 class DTAParser extends SentenceParser implements DTASentence {
@@ -52,6 +52,37 @@ class DTAParser extends SentenceParser implements DTASentence {
 	private int offset = -1;
 	
     /**
+     * Creates a new instance of DTAParser with 8 data fields.
+     * 
+     * @param talker - DTA talkerId
+     */
+    public DTAParser(TalkerId talker) {
+        super(talker, DTA_SENTENCE_ID, 8);
+    }
+	
+    /**
+     * Creates a new instance of DTAParser with specified data fields.
+     * 
+     * @param talker - DTA talkerId
+     * @param size - number of data fields in DTASentence (not counting header and checksum).
+     */
+	public DTAParser(TalkerId talker, int size) {
+		super(talker, SentenceId.DTA, size);
+	}
+	
+    /**
+     * Creates a new instance of DTAParser with specified type and data fields.
+     * 
+     * @param talker - DTA talkerId
+     * @param type - SentenceId enum
+     * @param size - number of data fields in DTASentence (not counting header and checksum).
+     * 
+     */
+	public DTAParser(TalkerId talker, SentenceId type, int size) {
+		super(talker, type, size);
+	}
+
+    /**
      * Creates a new instance of DTAParser.
      * 
      * @param nmea - DTA sentence String
@@ -61,33 +92,26 @@ class DTAParser extends SentenceParser implements DTASentence {
 		setOffset(nmea);
     }
 
+    /**
+     * Creates a new instance of DTAParser.
+     * 
+     * @param nmea - DTA sentence String
+     * @param type - SentenceId enum
+     */
 	public DTAParser(String nmea, SentenceId type) {
 		super(nmea, type.toString());
 		setOffset(nmea);
 	}
-    
-    /**
-     * Creates a new empty instance of DTAParser.
-     * 
-     * @param talker - Talker id to set
-     */
-    public DTAParser(TalkerId talker) {
-        super(talker, DTA_SENTENCE_ID, 8);
-    }
 	
-	public DTAParser(TalkerId talker, int size) {
-		super(talker, SentenceId.DTA, size);
-	}
-	
-	public DTAParser(TalkerId talker, SentenceId type, int size) {
-		super(talker, type, size);
-	}
-
+	/**
+	 * Calculates the offset to compensate for optional channel number.
+	 * Boreal Gas Finder2 is missing the channel number. If >= 8 commas, the channel is there
+	 * and the device is a GasFinderMC.
+	 * 
+	 */
 	private void setOffset(final String nmea) {
 		long count = nmea.chars().filter(ch -> ch == ',').count();	
 		
-		 // Boreal Gas Finder2 is missing the channel number.  
-		 // If >= 8 commas, the channel is there.
 		if (count >= 8) {
 			this.offset = 0;
 		}
@@ -97,6 +121,10 @@ class DTAParser extends SentenceParser implements DTASentence {
 		return offset + field;
 	}
 	
+	/*
+	 * (non-Javadoc)
+	 * @see net.sf.marineapi.nmea.sentence.DTASentence#getChannelNumber()
+	 */
 	@Override
 	public int getChannelNumber() {
 		if (offset == -1) {
@@ -105,26 +133,46 @@ class DTAParser extends SentenceParser implements DTASentence {
 		return getIntValue(CHANNEL_NUMBER);
 	}
 	
+	/*
+	 * (non-Javadoc)
+	 * @see net.sf.marineapi.nmea.sentence.DTASentence#getGasConcentration()
+	 */
 	@Override
 	public double getGasConcentration() {
 		return getDoubleValue(getFieldIndex(GAS_CONCENTRATION));
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * @see net.sf.marineapi.nmea.sentence.DTASentence#getConfidenceFactorR2()
+	 */
 	@Override
 	public int getConfidenceFactorR2() {
 		return getIntValue(getFieldIndex(CONFIDENCE_FACTOR_R2));
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * @see net.sf.marineapi.nmea.sentence.DTASentence#getDistance()
+	 */
 	@Override
 	public double getDistance() {
 		return getDoubleValue(getFieldIndex(DISTANCE));
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * @see net.sf.marineapi.nmea.sentence.DTASentence#getLightLevel()
+	 */
 	@Override
 	public int getLightLevel() {
 		return getIntValue(getFieldIndex(LIGHT_LEVEL));
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * @see net.sf.marineapi.nmea.sentence.DTASentence#getDateTime()
+	 */
 	@Override
 	public Date getDateTime() {
 		Date value;
@@ -136,11 +184,19 @@ class DTAParser extends SentenceParser implements DTASentence {
 		return value;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * @see net.sf.marineapi.nmea.sentence.DTASentence#getSerialNumber()
+	 */
 	@Override
 	public String getSerialNumber() {
 		return getStringValue(getFieldIndex(SER_NUMBER));
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * @see net.sf.marineapi.nmea.sentence.DTASentence#getStatusCode()
+	 */
 	@Override
 	public int getStatusCode() {
 		return getIntValue(getFieldIndex(STATUS_CODE));
