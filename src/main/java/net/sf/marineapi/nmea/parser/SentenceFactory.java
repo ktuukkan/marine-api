@@ -1,6 +1,6 @@
 /*
  * SentenceFactory.java
- * Copyright (C) 2019 Kimmo Tuukkanen
+ * Copyright (C) 2010 Kimmo Tuukkanen
  *
  * This file is part of Java Marine API.
  * <http://ktuukkan.github.io/marine-api/>

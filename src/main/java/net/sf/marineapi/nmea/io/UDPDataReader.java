@@ -1,6 +1,6 @@
 /*
  * UDPDataReader.java
- * Copyright (C) 2010-2019 Kimmo Tuukkanen, Ludovic Drouineau
+ * Copyright (C) 2010-2014 Kimmo Tuukkanen, Ludovic Drouineau
  * 
  * This file is part of Java Marine API.
  * <http://ktuukkan.github.io/marine-api/>
