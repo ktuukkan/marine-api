@@ -41,6 +41,10 @@ public enum SentenceId {
     DBT,
     /** Depth of water below transducer; in meters. */
     DPT,
+    /** Boreal GasFinder data stream A (GasFinder2 and GasFinderMC) */
+    DTA,
+    /** Boreal GasFinder data stream B (GasFinder2 only) */
+    DTB,
     /** Datum reference. */
     DTM,
     /** GNSS satellite fault detection (RAIM) */
@@ -122,7 +126,7 @@ public enum SentenceId {
     /** Wind speed and direction */
     MWD,
     /** UTC time and date with local time zone offset */
-    ZDA;
+	ZDA;
 
     /**
      * Parses the sentence id from specified sentence String and returns a

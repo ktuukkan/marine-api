@@ -50,24 +50,30 @@ class UDPDataReader extends AbstractDataReader {
 
 	@Override
 	public String read() throws Exception {
+		String data = null;
+		
 		while (true) {
-			String data = queue.poll();
-			if (data != null)
-				return data;
+			// If there is a backlog of sentences in the queue, then return the old sentences first so that each packet is uploaded compete.
+			if ((data = queue.poll()) != null)		
+				break;
 
+			// Once the backlog is cleared, then read the port, split the packet into sentences,
+			// and store the individual sentences in the queue.  Queue will always start empty here.
 			data = receive();
-			String[] lines = data.split("\\r?\\n");
-			queue.addAll(Arrays.asList(lines));
+		    String[] lines = data.split("\\r?\\n");
+		    queue.addAll(Arrays.asList(lines));
 		}
+		
+		return data;
 	}
 
 	/**
-	 * Receive UDP packet and return as String
+	 * Receive UDP packet and return as String.  Blocks until data is received.
+	 * Exceptions bubble up to the {@link AbstractDataReader}    
 	 */
 	private String receive() throws Exception {
 		DatagramPacket pkg = new DatagramPacket(buffer, buffer.length);
 		socket.receive(pkg);
 		return new String(pkg.getData(), 0, pkg.getLength());
 	}
-
 }
