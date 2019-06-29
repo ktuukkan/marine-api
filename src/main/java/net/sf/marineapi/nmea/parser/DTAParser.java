@@ -48,7 +48,7 @@ class DTAParser extends SentenceParser implements DTASentence {
 	private static final int STATUS_CODE= 7;
 	
 	private static final DateFormat DATE_PARSER = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss"); 
-	private int offset = getFieldCount() - 8;
+	private int offset = getFieldCount() >= 8 ? 0 : -1;
 	
     /**
      * Creates a new instance of DTAParser with 8 data fields.
