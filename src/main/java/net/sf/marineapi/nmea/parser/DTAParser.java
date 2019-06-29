@@ -37,7 +37,6 @@ import net.sf.marineapi.nmea.sentence.TalkerId;
  */
 class DTAParser extends SentenceParser implements DTASentence {
 
-    public static final String DTA_SENTENCE_ID = "DTA";
 
 	private static final int CHANNEL_NUMBER = 0;
 	private static final int GAS_CONCENTRATION = 1;
@@ -49,7 +48,7 @@ class DTAParser extends SentenceParser implements DTASentence {
 	private static final int STATUS_CODE= 7;
 	
 	private static final DateFormat DATE_PARSER = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss"); 
-	private int offset = -1;
+	private int offset = getFieldCount() - 8;
 	
     /**
      * Creates a new instance of DTAParser with 8 data fields.
@@ -57,7 +56,7 @@ class DTAParser extends SentenceParser implements DTASentence {
      * @param talker - DTA talkerId
      */
     public DTAParser(TalkerId talker) {
-        super(talker, DTA_SENTENCE_ID, 8);
+        super(talker, SentenceId.DTA.name(), 8);
     }
 	
     /**
@@ -88,8 +87,7 @@ class DTAParser extends SentenceParser implements DTASentence {
      * @param nmea - DTA sentence String
      */
     public DTAParser(String nmea) {
-        super(nmea, DTA_SENTENCE_ID);
-		setOffset(nmea);
+        super(nmea, SentenceId.DTA.name());
     }
 
     /**
@@ -100,23 +98,11 @@ class DTAParser extends SentenceParser implements DTASentence {
      */
 	public DTAParser(String nmea, SentenceId type) {
 		super(nmea, type.toString());
-		setOffset(nmea);
 	}
-	
-	/**
-	 * Calculates the offset to compensate for optional channel number.
-	 * Boreal Gas Finder2 is missing the channel number. If >= 8 commas, the channel is there
-	 * and the device is a GasFinderMC.
-	 * 
-	 */
-	private void setOffset(final String nmea) {
-		long count = nmea.chars().filter(ch -> ch == ',').count();	
 		
-		if (count >= 8) {
-			this.offset = 0;
-		}
-	}
-	
+	/**
+	 * Returns the field index fixed with possible offset.
+	*/
 	private int getFieldIndex(int field) {
 		return offset + field;
 	}
