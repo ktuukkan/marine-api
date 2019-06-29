@@ -48,7 +48,7 @@ import net.sf.marineapi.nmea.sentence.TalkerId;
  * <p>
  * Sentence structure:<br>
  * {@code
- * $&lt;id&gt;,&lt;field #0&gt;,&lt;field #1&gt;,...,&lt;field #n&gt;*&lt;checksum&gt;(CR/LF)
+ * $<talker-id><sentence-id>,<field #0>,<field #1>,...,<field #n>*<checksum><cr/lf>
  * }
  * <p>
  * For more details, see <a href="http://catb.org/gpsd/NMEA.html"
