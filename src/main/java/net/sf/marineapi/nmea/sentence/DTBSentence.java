@@ -21,10 +21,10 @@
 package net.sf.marineapi.nmea.sentence;
 
 /**
- * DTB Sentence interface.
+ * <p>Boreal GasFinder data.</p>
  * 
- * <p>Boreal GasFinder data </p>
- * <p>Example GasFinder2:<br><code>$GFDTB,  7.7, 98, 600, 5527, 2011/01/27 13:29:28, HFH2O-1xxx, 1, *56 </code></p>
+ * <p>Example GasFinder2:<br>
+ * {@code $GFDTB,7.7,98,600,5527,2011/01/27 13:29:28,HFH2O-1xxx,1*28}</p>
  * 
  * @author Bob Schwarz
  * @see <a href="https://github.com/LoadBalanced/marine-api">marine-api fork</a>

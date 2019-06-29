@@ -9,6 +9,7 @@ Version 0.11.0-SNAPSHOT
   - Support for HTD sentences; Heading/Track control data
   - Support for TXT sentences; Text messages, e.g. device boot screens etc.
   - Support for $STALK sentences; NMEA-0183 layer of Raymarine SeaTalk protocol.
+  - Support for DTA/DTB sentences; Boreal GasFinder2 and GasFinderMC. 
   - AbstracSentenceListener; improvements in generic types resolving to support
       more advanced use of generics and inheritance.
   - RPMSentence; added missing RPM setter
@@ -26,8 +27,7 @@ Version 0.11.0-SNAPSHOT
   - PositionParser; leading zeros may now be omitted in the lat/lon fields. The
     separate lat/lon parser methods replaced with parseDegrees().
   - SentenceReadeder; added methods for removing listeners by sentence type.
-  - Added new UNITS: BARS, INCHES, MPH for Airmar support.
-  - Support for DTA/DTB Sentences and Parsers; Boreal GasFinder2 and GasFinderMC. 
+  - Units enum; Added BARS, INCHES and MPH for Airmar support.
 
   Contributions:
   - GST parser by Tero Laitinen (@tlaitinen)
@@ -36,7 +36,7 @@ Version 0.11.0-SNAPSHOT
   - AIS validation improvements by Jyrki Jakobsson (@jyrkija)
   - SentenceReader improvements by Martin Wegner (@Martin-Wegner) and
     Michael Skogberg (@malliina)
-  - DTA/DTB parsers for Boreal GasFinder support, plus new Units by Bob Schwarz (@LoadBalanced)
+  - DTA/DTB parsers and new Units by Bob Schwarz (@LoadBalanced)
 
 Version 0.10.0 (2017-06-21)
 

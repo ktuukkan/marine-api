@@ -23,13 +23,14 @@ package net.sf.marineapi.nmea.sentence;
 import java.util.Date;
 
 /**
- * DTA Sentence interface.
+ * <p>Boreal GasFinder data.</p>
  * 
- * <p>Boreal GasFinder data </p>
+ * <p>Example from GasFinder2:<br>
+ * {@code $GFDTA,7.7,98,600,5527,2011/01/27 13:29:28,HFH2O-1xxx,1*2B}</p>
  * 
- * <p>Example GasFinder2:<br><code>$GFDTA,  7.7, 98, 600, 5527, 2011/01/27 13:29:28, HFH2O-1xxx, 1, *56 </code></p>
- * <p>Example GasFinderMC:<br><code>$GFDTA,  1, 1.5, 99, 600, 11067,  2002/03/01  00:30:28,  HF-1xxx, 1, *2F  </code></p>
- *
+ * <p>Example from GasFinderMC with additional channel number:<br>
+ * {@code $GFDTA,1,1.5,99,600,11067,2002/03/01 00:30:28,HF-1xxx,1*3C}</p>
+ * 
  * @author Bob Schwarz
  * @see <a href="https://github.com/LoadBalanced/marine-api">marine-api fork</a>
  * 
@@ -37,49 +38,49 @@ import java.util.Date;
 public interface DTASentence extends Sentence {
 
 	/**
-	 * Gets the optional channel from Sentence (GasFinderMC only).
+	 * Gets the optional channel number (GasFinderMC only).
 	 * @return Channel number 1 - 8.
 	 */
 	int getChannelNumber();
 	
 	/**
-	 * Gets the max eight-digit Gas Concentration from Sentence.
+	 * Gets the max eight-digit Gas Concentration.
 	 * @return Gas Concentration in ppmm (parts per million meter) 
 	 */
 	double getGasConcentration();
 	
 	/**
-	 * Gets the two-digit Confidence Factor from Sentence.
+	 * Gets the two-digit Confidence Factor.
 	 * @return Confidence Factor as number between 0 - 99.
 	 */
 	int getConfidenceFactorR2();
 	
 	/**
-	 * Gets the max four-digit distance to retro from Sentence.
+	 * Gets the max four-digit distance to retro.
 	 * @return distance in meters (GasFinder2) or meters x 10 (GasFinderMC).
 	 */
 	double getDistance();
 	
 	/**
-	 * Gets the max five-digit Light Level from Sentence.
+	 * Gets the max five-digit Light Level.
 	 * @return Light Level as integer.
 	 */
 	int getLightLevel();
 	
 	/**
-	 * Gets the max nineteen-digit current date/time from Sentence.
+	 * Gets the max nineteen-digit current date/time.
 	 * @return date/time as YYYY/MM/DD hh:mm:ss.
 	 */
 	Date getDateTime();
 	
 	/**
-	 * Gets the max ten-char. device serial number from Sentence.
+	 * Gets the max ten-char. device serial number.
 	 * @return Serial Number id
 	 */
 	String getSerialNumber();
 	
 	/**
-	 * Gets the max 4-digit status code from Sentence.
+	 * Gets the max 4-digit status code.
 	 * @return Status Code as number in range: 1 - 0xFFFF
 	 */
 	int getStatusCode();
