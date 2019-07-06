@@ -1,7 +1,7 @@
 Java Marine API - changelog
 <http://ktuukkan.github.io/marine-api/>
 
-Version 0.11.0-SNAPSHOT
+Version 0.11.0 (2019-07-06)
 
   - Support for GBS sentences; GNSS satellite fault detection
   - Support for GST sentences; GPS Pseudorange Noise Statistics
