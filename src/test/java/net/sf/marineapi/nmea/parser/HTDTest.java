@@ -34,18 +34,18 @@ public class HTDTest {
 	}
 
 	@Test
-	public void testGetCommandedRudderAngle() throws Exception {
-		assertEquals(0.1, htd.getCommandedRudderAngle(), 0.01);
+	public void testGetRudderAngle() throws Exception {
+		assertEquals(0.1, htd.getRudderAngle(), 0.01);
 	}
 
 	@Test
 	public void testGetRudderDirection() throws Exception {
-		assertEquals(Direction.RIGHT, htd.getCommandedRudderDirection());
+		assertEquals(Direction.RIGHT, htd.getRudderDirection());
 	}
 
 	@Test
 	public void testGetSteeringMode() throws Exception {
-		assertEquals(SteeringMode.MANUAL, htd.getSelectedSteeringMode());
+		assertEquals(SteeringMode.MANUAL, htd.getSteeringMode());
 	}
 
 	@Test
@@ -54,43 +54,43 @@ public class HTDTest {
 	}
 
 	@Test
-	public void testGetCommandedRudderLimit() throws Exception {
-		assertEquals(15, htd.getCommandedRudderLimit(), 0.1);
+	public void testGetRudderLimit() throws Exception {
+		assertEquals(15, htd.getRudderLimit(), 0.1);
 	}
 
 	@Test
-	public void testGetCommandedOffHeadingLimit() throws Exception {
-		assertEquals(15, htd.getCommandedOffHeadingLimit(), 0.1);
+	public void testGetOffHeadingLimit() throws Exception {
+		assertEquals(15, htd.getOffHeadingLimit(), 0.1);
 	}
 
 	@Test
-	public void testGetCommandedRadiusOfTurnForHEadingChanges() throws Exception {
-		assertTrue(Double.isNaN(htd.getCommandedRadiusOfTurnForHeadingChanges()));
+	public void testGetRadiusOfTurnForHEadingChanges() throws Exception {
+		assertTrue(Double.isNaN(htd.getRadiusOfTurn()));
 	}
 
 	@Test
-	public void testGetCommandedRateOfTurnForHeadingChanges() throws Exception {
-		assertTrue(Double.isNaN(htd.getCommandedRateOfTurnForHeadingChanges()));
+	public void testGetRateOfTurn() throws Exception {
+		assertTrue(Double.isNaN(htd.getRateOfTurn()));
 	}
 
 	@Test
-	public void testGetCommandedHeadingToSteer() throws Exception {
-		assertTrue(Double.isNaN(htd.getCommandedHeadingToSteer()));
+	public void testGetHeadingToSteer() throws Exception {
+		assertTrue(Double.isNaN(htd.getHeadingToSteer()));
 	}
 
 	@Test
-	public void testGetCommandedOffTrackLimit() throws Exception {
-		assertTrue(Double.isNaN(htd.getCommandedOffTrackLimit()));
+	public void testGetOffTrackLimit() throws Exception {
+		assertTrue(Double.isNaN(htd.getOffTrackLimit()));
 	}
 
 	@Test
-	public void testGetCommandedTrack() throws Exception {
-		assertTrue(Double.isNaN(htd.getCommandedTrack()));
+	public void testGetTrack() throws Exception {
+		assertTrue(Double.isNaN(htd.getTrack()));
 	}
 
 	@Test
-	public void testIsHeadingReferenceInUseTrue() throws Exception {
-		assertTrue(htd.isHeadingReferenceInUseTrue());
+	public void testIsHeadingTrue() throws Exception {
+		assertTrue(htd.isHeadingTrue());
 	}
 
 	@Test

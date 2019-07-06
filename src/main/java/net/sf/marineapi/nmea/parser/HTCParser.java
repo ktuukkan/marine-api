@@ -75,7 +75,7 @@ class HTCParser extends SentenceParser implements HTCSentence {
     }
 
     @Override
-    public double getCommandedRudderAngle() {
+    public double getRudderAngle() {
         if (hasValue(COMMANDED_RUDDER_ANGLE)) {
             return getDoubleValue(COMMANDED_RUDDER_ANGLE);
         } else {
@@ -84,7 +84,7 @@ class HTCParser extends SentenceParser implements HTCSentence {
     }
 
     @Override
-    public Direction getCommandedRudderDirection() {
+    public Direction getRudderDirection() {
         if (hasValue(COMMANDED_RUDDER_DIRECTION)) {
             return Direction.valueOf(getCharValue(COMMANDED_RUDDER_DIRECTION));
         } else {
@@ -93,7 +93,7 @@ class HTCParser extends SentenceParser implements HTCSentence {
     }
 
     @Override
-    public SteeringMode getSelectedSteeringMode() {
+    public SteeringMode getSteeringMode() {
         if (hasValue(SELECTED_STEERING_MODE)) {
             return SteeringMode.valueOf(getCharValue(SELECTED_STEERING_MODE));
         } else {
@@ -111,7 +111,7 @@ class HTCParser extends SentenceParser implements HTCSentence {
     }
 
     @Override
-    public double getCommandedRudderLimit() {
+    public double getRudderLimit() {
         if (hasValue(COMMANDED_RUDDER_LIMIT)) {
             return getDoubleValue(COMMANDED_RUDDER_LIMIT);
         } else {
@@ -120,7 +120,7 @@ class HTCParser extends SentenceParser implements HTCSentence {
     }
 
     @Override
-    public double getCommandedOffHeadingLimit() {
+    public double getOffHeadingLimit() {
         if (hasValue(COMMANDED_OFF_HEADING_LIMIT)) {
             return getDoubleValue(COMMANDED_OFF_HEADING_LIMIT);
         } else {
@@ -129,7 +129,7 @@ class HTCParser extends SentenceParser implements HTCSentence {
     }
 
     @Override
-    public double getCommandedRadiusOfTurnForHeadingChanges() {
+    public double getRadiusOfTurn() {
         if (hasValue(COMMANDED_RADIUS_OF_TURN_FOR_HEADING_CHANGES)) {
             return getDoubleValue(COMMANDED_RADIUS_OF_TURN_FOR_HEADING_CHANGES);
         } else {
@@ -138,7 +138,7 @@ class HTCParser extends SentenceParser implements HTCSentence {
     }
 
     @Override
-    public double getCommandedRateOfTurnForHeadingChanges() {
+    public double getRateOfTurn() {
         if (hasValue(COMMANDED_RATE_OF_TURN_FOR_HEADING_CHANGES)) {
             return getDoubleValue(COMMANDED_RATE_OF_TURN_FOR_HEADING_CHANGES);
         } else {
@@ -147,7 +147,7 @@ class HTCParser extends SentenceParser implements HTCSentence {
     }
 
     @Override
-    public double getCommandedHeadingToSteer() {
+    public double getHeadingToSteer() {
         if (hasValue(COMMANDED_HEADING_TO_STEER)) {
             return getDoubleValue(COMMANDED_HEADING_TO_STEER);
         } else {
@@ -156,7 +156,7 @@ class HTCParser extends SentenceParser implements HTCSentence {
     }
 
     @Override
-    public double getCommandedOffTrackLimit() {
+    public double getOffTrackLimit() {
         if (hasValue(COMMANDED_OFF_TRACK_LIMIT)) {
             return getDoubleValue(COMMANDED_OFF_TRACK_LIMIT);
         } else {
@@ -165,7 +165,7 @@ class HTCParser extends SentenceParser implements HTCSentence {
     }
 
     @Override
-    public double getCommandedTrack() {
+    public double getTrack() {
         if (hasValue(COMMANDED_TRACK)) {
             return getDoubleValue(COMMANDED_TRACK);
         } else {
@@ -174,7 +174,7 @@ class HTCParser extends SentenceParser implements HTCSentence {
     }
 
     @Override
-    public boolean isHeadingReferenceInUseTrue() {
+    public boolean isHeadingTrue() {
         return hasValue(HEADING_REFERENCE_IN_USE)
                 && getCharValue(HEADING_REFERENCE_IN_USE) == 'T';
     }

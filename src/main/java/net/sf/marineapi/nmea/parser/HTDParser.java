@@ -93,7 +93,7 @@ class HTDParser extends HTCParser implements HTDSentence {
 
 	@Override
 	public boolean isTrue() {
-		return isHeadingReferenceInUseTrue();
+		return isHeadingTrue();
 	}
 
 	@Override

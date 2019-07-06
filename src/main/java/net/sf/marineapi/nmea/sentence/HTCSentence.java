@@ -55,21 +55,21 @@ public interface HTCSentence extends Sentence {
      *
      * @return Rudder angle, in degrees.
      */
-    double getCommandedRudderAngle();
+    double getRudderAngle();
 
     /**
      * Returns the commanded rudder direction.
      *
      * @return {@link Direction#RIGHT} (starboard) or {@link Direction#LEFT} (port)
      */
-    Direction getCommandedRudderDirection();
+    Direction getRudderDirection();
 
     /**
      * Returns the selected steering mode.
      *
      * @return {@link SteeringMode} enum.
      */
-    SteeringMode getSelectedSteeringMode();
+    SteeringMode getSteeringMode();
 
     /**
      * Returns the current turn mode. Turn mode defines how the ship changes
@@ -77,6 +77,8 @@ public interface HTCSentence extends Sentence {
      * <em>Commanded Radius of Turn</em> or <em>Commanded Rate of Turn</em>.
      *
      * @return {@link TurnMode} enum.
+     * @see #getRadiusOfTurn()
+     * @see #getRateOfTurn()
      */
     TurnMode getTurnMode();
 
@@ -85,35 +87,35 @@ public interface HTCSentence extends Sentence {
      *
      * @return Rudder limit, in degrees.
      */
-    double getCommandedRudderLimit();
+    double getRudderLimit();
 
     /**
      * Returns the commanded off-heading limit.
      *
      * @return Off-heading limit, in degrees.
      */
-    double getCommandedOffHeadingLimit();
+    double getOffHeadingLimit();
 
     /**
      * Returns the commanded radius of turn for heading changes.
      *
      * @return Radius of turn, in nautical miles.
      */
-    double getCommandedRadiusOfTurnForHeadingChanges();
+    double getRadiusOfTurn();
 
     /**
      * Returns the commanded rate of turn for heading changes.
      *
      * @return Rate of turn, in degrees/min.
      */
-    double getCommandedRateOfTurnForHeadingChanges();
+    double getRateOfTurn();
 
     /**
      * Returns the commanded heading to steer.
      *
      * @return Heading to steer, in degrees.
      */
-    double getCommandedHeadingToSteer();
+    double getHeadingToSteer();
 
     /**
      * Returns the commanded off-track limit, can be generated if the selected
@@ -121,7 +123,7 @@ public interface HTCSentence extends Sentence {
      *
      * @return Off-track limit, in nautical miles.
      */
-    double getCommandedOffTrackLimit();
+    double getOffTrackLimit();
 
     /**
      * Returns the commanded track, which represents the course line between two
@@ -129,15 +131,15 @@ public interface HTCSentence extends Sentence {
      * along a pre-planned radius.
      *
      * @return Commanded track, in degrees.
-     * @see #getCommandedRadiusOfTurnForHeadingChanges()
+     * @see #getRadiusOfTurn()
      */
-    double getCommandedTrack();
+    double getTrack();
 
     /**
      * Tells if the heading reference in use is true or magnetic.
      *
      * @return True if true heading, false for magnetic.
      */
-    boolean isHeadingReferenceInUseTrue();
+    boolean isHeadingTrue();
 
 }
