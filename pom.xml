@@ -25,7 +25,7 @@ along with Java Marine API. If not, see <http://www.gnu.org/licenses />.
     <modelVersion>4.0.0</modelVersion>
     <groupId>net.sf.marineapi</groupId>
     <artifactId>marineapi</artifactId>
-    <version>0.11.0-SNAPSHOT</version>
+    <version>0.11.0</version>
     <packaging>bundle</packaging>
 
     <name>Java Marine API</name>

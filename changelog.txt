@@ -8,10 +8,10 @@ Version 0.11.0-SNAPSHOT
   - Support for HTC sentences; Heading/Track control command
   - Support for HTD sentences; Heading/Track control data
   - Support for TXT sentences; Text messages, e.g. device boot screens etc.
-  - Support for $STALK sentences; NMEA-0183 layer of Raymarine SeaTalk protocol.
   - Support for DTA/DTB sentences; Boreal GasFinder2 and GasFinderMC. 
+  - Support for $STALK sentences; NMEA-0183 layer of Raymarine SeaTalk protocol.
   - AbstracSentenceListener; improvements in generic types resolving to support
-      more advanced use of generics and inheritance.
+    more advanced use of generics and inheritance.
   - RPMSentence; added missing RPM setter
   - ROTSentence; negative rate of turn values are now allowed. Also, the value
     may now exceed -/+360 degrees.
@@ -26,7 +26,7 @@ Version 0.11.0-SNAPSHOT
     - fixed six-bit vector indexing bugs in message 5
   - PositionParser; leading zeros may now be omitted in the lat/lon fields. The
     separate lat/lon parser methods replaced with parseDegrees().
-  - SentenceReadeder; added methods for removing listeners by sentence type.
+  - SentenceReader; added methods for removing listeners by sentence type.
   - Units enum; Added BARS, INCHES and MPH for Airmar support.
 
   Contributions:
@@ -36,7 +36,7 @@ Version 0.11.0-SNAPSHOT
   - AIS validation improvements by Jyrki Jakobsson (@jyrkija)
   - SentenceReader improvements by Martin Wegner (@Martin-Wegner) and
     Michael Skogberg (@malliina)
-  - DTA/DTB parsers and new Units by Bob Schwarz (@LoadBalanced)
+  - DTA/DTB parsers and new units by Bob Schwarz (@LoadBalanced)
 
 Version 0.10.0 (2017-06-21)
 

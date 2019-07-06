@@ -2,8 +2,25 @@
 [![License](https://img.shields.io/badge/License-LGPL%20v3-brightgreen.svg)](./LICENSE)
 [![Build Status](https://travis-ci.org/ktuukkan/marine-api.png)](https://travis-ci.org/ktuukkan/marine-api)
 [![Maven Central](https://maven-badges.herokuapp.com/maven-central/net.sf.marineapi/marineapi/badge.svg)](https://maven-badges.herokuapp.com/maven-central/net.sf.marineapi/marineapi)
+[![Download Java Marine API](https://img.shields.io/sourceforge/dm/marineapi.svg)](https://sourceforge.net/projects/marineapi/files/Releases/)
 [![Javadocs](http://www.javadoc.io/badge/net.sf.marineapi/marineapi.svg)](http://www.javadoc.io/doc/net.sf.marineapi/marineapi)
 [![Sponsored by Spice](https://img.shields.io/badge/sponsored%20by-Spice-brightgreen.svg)](http://www.spiceprogram.org)
+
+- [About](#about)
+    - [Features](#features)
+- [Licensing](#licensing)
+- [Disclaimer](#disclaimer)
+- [Requirements](#requirements)
+- [Usage](#usage)
+- [Supported Protocols](#supported-protocols)
+    - [NMEA 0183](#nmea-0183)
+    - [AIS](#ais)
+    - [Raymarine SeaTalk](#raymarine-seatalk1)
+- [Distribution](#distribution)
+    - [Pre-built JARs](#pre-built-jars)
+    - [Maven](#maven)
+- [Contributing](#contributing)
+- [References](#references)
 
 ## About
 
@@ -14,26 +31,17 @@ devices such as GPS, echo sounder and weather instruments.
 ### Features
 
 - Generic and extentable API
-
 - Detects NMEA 0183 sentences from most input streams
     - E.g. from file, serial port, TCP/IP or UDP socket
     - The provided data readers can be overridden with custom implementation
-
-- Converts the ASCII data stream to event/listener model with interfaces and
-parsers for [selected sentences](#supported-protocols)
-
+- Converts the ASCII data stream to event/listener model with interfaces and parsers for [selected sentences](#nmea-0183)
 - Additional parsers may be added by extending the provided base classes
     - This can be done at runtime and does not require compiling the library
-
 - Sentence encoding with common validation and unified formatting
-
 - Several sentences can be aggregated to single event by using [providers](./src/main/java/net/sf/marineapi/provider)
     - For example, to record current position and depth of water
-
 - Decoding of selected [AIS messages](#ais)
-
 - The NMEA 0183 layer of [Raymarine SeaTalk<sup>1</sup>](http://www.raymarine.com/view/?id=5535)
-
 - Utilities and enumerations for handling the extracted data
 
 ### Licensing
@@ -121,6 +129,8 @@ the library. See wiki for
 |CUR    |Water currents information
 |DBT    |Water depth below transducer in meters, feet and fathoms
 |DPT    |Water depth in meters with offset to transducer
+|DTA    |Boreal GasFinder2 and GasFinderMC
+|DTB    |Boreal GasFinder2 and GasFinderMC
 |DTM    |Datum reference
 |GBS    |Glonass satellite fault detection (RAIM support)
 |GGA    |GPS fix data
@@ -205,7 +215,6 @@ The ZIP package should contain all to get you going.
 The project was first published in Sourceforge, hence the `net.sf.marineapi`
 package naming.
 
-[![Download Java Marine API](https://img.shields.io/sourceforge/dm/marineapi.svg)](https://sourceforge.net/projects/marineapi/files/Releases/)
 
 ### Maven
 
