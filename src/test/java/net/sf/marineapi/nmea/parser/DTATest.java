@@ -37,7 +37,6 @@ import net.sf.marineapi.nmea.sentence.TalkerId;
  * 
  * @author Bob Schwarz
  * @see <a href="https://github.com/LoadBalanced/marine-api">marine-api fork</a>
- * 
  */
 public class DTATest {
 	
@@ -57,7 +56,7 @@ public class DTATest {
 
     @Test
     public void testDTAParserTalkerId() {
-    	DTAParser mwdp = new DTAParser(TalkerId.GF, 8);
+        DTAParser mwdp = new DTAParser(TalkerId.GF);
         assertEquals(TalkerId.GF, mwdp.getTalkerId());
         assertEquals("DTA", mwdp.getSentenceId());
     }

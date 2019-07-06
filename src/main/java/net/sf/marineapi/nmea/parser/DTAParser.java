@@ -33,10 +33,8 @@ import net.sf.marineapi.nmea.sentence.TalkerId;
  * 
  * @author Bob Schwarz
  * @see <a href="https://github.com/LoadBalanced/marine-api">marine-api fork</a>
- * 
  */
 class DTAParser extends SentenceParser implements DTASentence {
-
 
 	private static final int CHANNEL_NUMBER = 0;
 	private static final int GAS_CONCENTRATION = 1;
@@ -50,56 +48,44 @@ class DTAParser extends SentenceParser implements DTASentence {
 	private static final DateFormat DATE_PARSER = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss"); 
 	private int offset = getFieldCount() >= 8 ? 0 : -1;
 	
-    /**
-     * Creates a new instance of DTAParser with 8 data fields.
-     * 
-     * @param talker - DTA talkerId
-     */
-    public DTAParser(TalkerId talker) {
-        super(talker, SentenceId.DTA.name(), 8);
-    }
-	
-    /**
-     * Creates a new instance of DTAParser with specified data fields.
-     * 
-     * @param talker - DTA talkerId
-     * @param size - number of data fields in DTASentence (not counting header and checksum).
-     */
-	public DTAParser(TalkerId talker, int size) {
-		super(talker, SentenceId.DTA, size);
+	/**
+	 * Creates a new instance of DTAParser with 8 data fields.
+	 *
+	 * @param talker DTA talkerId
+	 */
+	public DTAParser(TalkerId talker) {
+		super(talker, SentenceId.DTA, 8);
 	}
 	
-    /**
-     * Creates a new instance of DTAParser with specified type and data fields.
-     * 
-     * @param talker - DTA talkerId
-     * @param type - SentenceId enum
-     * @param size - number of data fields in DTASentence (not counting header and checksum).
-     * 
-     */
-	public DTAParser(TalkerId talker, SentenceId type, int size) {
+	/**
+	 * Creates a new instance of DTAParser.
+	 *
+	 * @param nmea DTA sentence String
+	 */
+	public DTAParser(String nmea) {
+		super(nmea, SentenceId.DTA);
+	}
+
+	/**
+	 * Creates a new instance of DTAParser.
+	 *
+	 * @param nmea DTA sentence String
+	 */
+	protected DTAParser(String nmea, SentenceId type) {
+		super(nmea, type);
+	}
+
+	/**
+	 * Creates a new instance of DTAParser with specified type and data fields.
+	 *
+	 * @param talker DTA talkerId 
+	 * @param type SentenceId enum
+	 * @param size number of data fields in DTASentence (not counting header and checksum).
+	 */
+	protected DTAParser(TalkerId talker, SentenceId type, int size) {
 		super(talker, type, size);
 	}
 
-    /**
-     * Creates a new instance of DTAParser.
-     * 
-     * @param nmea - DTA sentence String
-     */
-    public DTAParser(String nmea) {
-        super(nmea, SentenceId.DTA.name());
-    }
-
-    /**
-     * Creates a new instance of DTAParser.
-     * 
-     * @param nmea - DTA sentence String
-     * @param type - SentenceId enum
-     */
-	public DTAParser(String nmea, SentenceId type) {
-		super(nmea, type.toString());
-	}
-		
 	/**
 	 * Returns the field index fixed with possible offset.
 	*/

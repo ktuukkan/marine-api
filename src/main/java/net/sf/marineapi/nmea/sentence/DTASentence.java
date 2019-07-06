@@ -32,8 +32,7 @@ import java.util.Date;
  * {@code $GFDTA,1,1.5,99,600,11067,2002/03/01 00:30:28,HF-1xxx,1*3C}</p>
  * 
  * @author Bob Schwarz
- * @see <a href="https://github.com/LoadBalanced/marine-api">marine-api fork</a>
- * 
+ * @see DTBSentence
  */
 public interface DTASentence extends Sentence {
 

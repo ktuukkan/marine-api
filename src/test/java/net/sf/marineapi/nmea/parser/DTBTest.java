@@ -37,7 +37,6 @@ import net.sf.marineapi.nmea.sentence.TalkerId;
  * 
  * @author Bob Schwarz
  * @see <a href="https://github.com/LoadBalanced/marine-api">marine-api fork</a>
- * 
  */
 public class DTBTest {
 	
@@ -57,7 +56,7 @@ public class DTBTest {
 
     @Test
     public void testDTBParserTalkerId() {
-    	DTBParser mwdp = new DTBParser(TalkerId.GF, 8);
+        DTBParser mwdp = new DTBParser(TalkerId.GF);
         assertEquals(TalkerId.GF, mwdp.getTalkerId());
         assertEquals("DTB", mwdp.getSentenceId());
     }
