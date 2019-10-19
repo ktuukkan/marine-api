@@ -105,7 +105,10 @@ class AISPositionReportParser extends AISMessageParser implements AISPositionRep
 	    	addViolation(new AISRuleViolation("NavigationalStatus", fNavigationalStatus, NavigationalStatus.RANGE));
 	    fRateOfTurn = content.getAs8BitInt(FROM[RATEOFTURN], TO[RATEOFTURN]);
 	    fSOG = content.getInt(FROM[SPEEDOVERGROUND], TO[SPEEDOVERGROUND]);
-	    fPositionAccuracy = content.getBoolean(FROM[POSITIONACCURACY]);
+
+	    // FIXME check indices, should be 61-61?
+	    fPositionAccuracy = content.getBoolean(TO[POSITIONACCURACY]);
+
 	    fLongitude = content.getAs28BitInt(FROM[LONGITUDE], TO[LONGITUDE]);
 	    if (!Longitude28.isCorrect(fLongitude))
 	    	addViolation(new AISRuleViolation("LongitudeInDegrees", fLongitude, Longitude28.RANGE));
