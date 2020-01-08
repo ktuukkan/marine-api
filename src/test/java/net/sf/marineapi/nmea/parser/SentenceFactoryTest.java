@@ -233,6 +233,7 @@ public class SentenceFactoryTest {
 		assertTrue(s instanceof VDMParser);
 		instance.unregisterParser(VDMParser.class);
 		assertFalse(instance.hasParser("VDM"));
+		instance.reset();
 	}
 
 	/**
