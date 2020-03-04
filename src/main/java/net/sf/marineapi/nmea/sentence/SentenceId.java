@@ -93,6 +93,8 @@ public enum SentenceId {
     RSA,
     /** Route data and waypoint list */
     RTE,
+    /** Tracked target Longitude Latitude*/
+    TLL,
     /** Tracked target */
     TTM,
     /** Text message */
