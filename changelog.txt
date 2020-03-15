@@ -1,6 +1,10 @@
 Java Marine API - changelog
 <http://ktuukkan.github.io/marine-api/>
 
+Version 0.12.0-SNAPSHOT
+  - AIS message length validation moved to AISMessageParser.
+  - AISMessage05; added missing DTE flag getter.
+
 Version 0.11.0 (2019-07-06)
 
   - Support for GBS sentences; GNSS satellite fault detection

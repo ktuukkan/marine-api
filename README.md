@@ -258,8 +258,8 @@ to share improvements.
 
 ## References
 
-All information and specifications for this library have been gathered from the
-following documents. The availability was checked on 2018-11-10.
+All information and specifications for this library has been gathered from the
+following documents, availability last checked on 2020-03-15.
 
 *Notice: any warnings regarding the accuracy of the information in below
 documents apply equally to Java Marine API.*
@@ -293,7 +293,7 @@ documents apply equally to Java Marine API.*
 * [RT Intertial+ NMEA Description (rev. 100720)](https://www.datrontechnology.co.uk/wp-content/uploads/2016/10/nmeaman.pdf) by Oxford Technical Solutions Ltd
 * [SeaTalk/NMEA/RS232 Converter Manual](https://community.atmel.com/sites/default/files/project_files/ManualV3-5.pdf) by gadgetPool
 * [SiRF NMEA Reference Manual](https://www.sparkfun.com/datasheets/GPS/NMEA%20Reference%20Manual-Rev2.1-Dec07.pdf) by SiRF Technology, Inc.
-* [The NMEA Information Sheet](https://www.actisense.com/wp-content/uploads/2017/07/NMEA-0183-Information-sheet-issue-4-1-1.pdf) by Actisense
+* [The NMEA Information Sheet](https://www.actisense.com/wp-content/uploads/2020/01/NMEA-0183-Information-sheet-issue-4-1-1.pdf) by Actisense
 
 ### Miscellaneus
 
