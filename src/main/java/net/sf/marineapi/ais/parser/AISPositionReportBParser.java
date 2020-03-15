@@ -84,21 +84,37 @@ class AISPositionReportBParser extends AISMessageParser implements AISPositionRe
 	 */
 	public AISPositionReportBParser(Sixbit content) {
 		super(content);
+		this.parse(content);
+	}
+
+	/**
+	 * Constructor with message length validation.
+	 *
+	 * @param content Six-bit message content.
+	 * @param len Expected content length (bits)
+	 * @throws IllegalArgumentException If content length is not as expected.
+	 */
+	public AISPositionReportBParser(Sixbit content, int len) {
+		super(content, len);
+		this.parse(content);
+	}
+
+	private void parse(Sixbit content) {
 		fSOG = content.getInt(FROM[SPEEDOVERGROUND], TO[SPEEDOVERGROUND]);
 		fPositionAccuracy = content.getBoolean(FROM[POSITIONACCURACY]);
 		fLongitude = content.getAs28BitInt(FROM[LONGITUDE], TO[LONGITUDE]);
-	    if (!Longitude28.isCorrect(fLongitude))
-	    	addViolation(new AISRuleViolation("LongitudeInDegrees", fLongitude, Longitude28.RANGE));
-	    fLatitude = content.getAs27BitInt(FROM[LATITUDE], TO[LATITUDE]);
-	    if (!Latitude27.isCorrect(fLatitude))
-	    	addViolation(new AISRuleViolation("LatitudeInDegrees", fLatitude, Latitude27.RANGE));
-	    fCOG = content.getInt(FROM[COURSEOVERGROUND], TO[COURSEOVERGROUND]);
-	    if (!Angle12.isCorrect(fCOG))
-	    	addViolation(new AISRuleViolation("getCourseOverGround", fCOG, Angle12.RANGE));
-	    fTrueHeading = content.getInt(FROM[TRUEHEADING], TO[TRUEHEADING]);
-	    if (!Angle9.isCorrect(fTrueHeading))
-	    	addViolation(new AISRuleViolation("getTrueHeading",fTrueHeading, Angle9.RANGE));
-	    fTimeStamp = content.getInt(FROM[TIMESTAMP], TO[TIMESTAMP]);
+		if (!Longitude28.isCorrect(fLongitude))
+			addViolation(new AISRuleViolation("LongitudeInDegrees", fLongitude, Longitude28.RANGE));
+		fLatitude = content.getAs27BitInt(FROM[LATITUDE], TO[LATITUDE]);
+		if (!Latitude27.isCorrect(fLatitude))
+			addViolation(new AISRuleViolation("LatitudeInDegrees", fLatitude, Latitude27.RANGE));
+		fCOG = content.getInt(FROM[COURSEOVERGROUND], TO[COURSEOVERGROUND]);
+		if (!Angle12.isCorrect(fCOG))
+			addViolation(new AISRuleViolation("getCourseOverGround", fCOG, Angle12.RANGE));
+		fTrueHeading = content.getInt(FROM[TRUEHEADING], TO[TRUEHEADING]);
+		if (!Angle9.isCorrect(fTrueHeading))
+			addViolation(new AISRuleViolation("getTrueHeading",fTrueHeading, Angle9.RANGE));
+		fTimeStamp = content.getInt(FROM[TIMESTAMP], TO[TIMESTAMP]);
 	}
 
 	public double getSpeedOverGround() { return SpeedOverGround.toKnots(fSOG); }

@@ -109,32 +109,28 @@ class AISMessage21Parser extends AISMessageParser implements AISMessage21 {
      * @param content Six-bit message content.
      */
     public AISMessage21Parser(Sixbit content) {
-        super(content);
-        if(content.length() >= 272 && content.length() <= 361) {
-            fAidType = content.getInt(FROM[AIDTYPE], TO[AIDTYPE]);
-            fName = content.getString(FROM[NAME], TO[NAME]);
-            fPositionAccuracy = content.getBoolean(TO[POSITIONACCURACY]);
-            fLongitude = content.getAs28BitInt(FROM[LONGITUDE], TO[LONGITUDE]);
-            if (!Longitude28.isCorrect(fLongitude))
-                addViolation(new AISRuleViolation("LongitudeInDegrees", fLongitude, Longitude28.RANGE));
-            fLatitude = content.getAs27BitInt(FROM[LATITUDE], TO[LATITUDE]);
-            if (!Latitude27.isCorrect(fLatitude))
-                addViolation(new AISRuleViolation("LatitudeInDegrees", fLatitude, Latitude27.RANGE));
-            fBow = content.getInt(FROM[BOW], TO[BOW]);
-            fStern = content.getInt(FROM[STERN], TO[STERN]);
-            fPort = content.getInt(FROM[PORT], TO[PORT]);
-            fStarboard = content.getInt(FROM[STARBOARD], TO[STARBOARD]);
-            fTypeOfEPFD = content.getInt(FROM[TYPEOFEPFD], TO[TYPEOFEPFD]);
-            fUTCSecond = content.getInt(FROM[UTC_SECOND], TO[UTC_SECOND]);
-            fOffPositionIndicator = content.getBoolean(TO[OFFPOSITIONINDICATOR]);
-            fRegional = content.getInt(FROM[REGIONAL], TO[REGIONAL]);
-            fRAIMFlag = content.getBoolean(TO[RAIMFLAG]);
-            fVirtualAidFlag = content.getBoolean(TO[VIRTUALAIDFLAG]);
-            fAssignedModeFlag = content.getBoolean(TO[ASSIGNEDMODEFLAG]);
-            fNameExtension = content.getString(FROM[NAMEEXTENSION], TO[NAMEEXTENSION]).trim();
-        } else {
-            throw new IllegalArgumentException("Wrong message length");
-        }
+        super(content, 272, 361);
+        fAidType = content.getInt(FROM[AIDTYPE], TO[AIDTYPE]);
+        fName = content.getString(FROM[NAME], TO[NAME]);
+        fPositionAccuracy = content.getBoolean(TO[POSITIONACCURACY]);
+        fLongitude = content.getAs28BitInt(FROM[LONGITUDE], TO[LONGITUDE]);
+        if (!Longitude28.isCorrect(fLongitude))
+            addViolation(new AISRuleViolation("LongitudeInDegrees", fLongitude, Longitude28.RANGE));
+        fLatitude = content.getAs27BitInt(FROM[LATITUDE], TO[LATITUDE]);
+        if (!Latitude27.isCorrect(fLatitude))
+            addViolation(new AISRuleViolation("LatitudeInDegrees", fLatitude, Latitude27.RANGE));
+        fBow = content.getInt(FROM[BOW], TO[BOW]);
+        fStern = content.getInt(FROM[STERN], TO[STERN]);
+        fPort = content.getInt(FROM[PORT], TO[PORT]);
+        fStarboard = content.getInt(FROM[STARBOARD], TO[STARBOARD]);
+        fTypeOfEPFD = content.getInt(FROM[TYPEOFEPFD], TO[TYPEOFEPFD]);
+        fUTCSecond = content.getInt(FROM[UTC_SECOND], TO[UTC_SECOND]);
+        fOffPositionIndicator = content.getBoolean(TO[OFFPOSITIONINDICATOR]);
+        fRegional = content.getInt(FROM[REGIONAL], TO[REGIONAL]);
+        fRAIMFlag = content.getBoolean(TO[RAIMFLAG]);
+        fVirtualAidFlag = content.getBoolean(TO[VIRTUALAIDFLAG]);
+        fAssignedModeFlag = content.getBoolean(TO[ASSIGNEDMODEFLAG]);
+        fNameExtension = content.getString(FROM[NAMEEXTENSION], TO[NAMEEXTENSION]).trim();
     }
 
     public int getAidType() {

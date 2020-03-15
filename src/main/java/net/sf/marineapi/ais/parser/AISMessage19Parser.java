@@ -76,9 +76,7 @@ class AISMessage19Parser extends AISPositionReportBParser implements AISMessage1
 	 * @param content Six-bit message content.
 	 */
 	public AISMessage19Parser(Sixbit content) {
-		super(content);
-		if (content.length() != 312)
-			throw new IllegalArgumentException("Wrong message length");
+		super(content, 312);
 
 		fName = content.getString(FROM[NAME], TO[NAME]);
 		fShipAndCargoType = content.getInt(FROM[TYPEOFSHIPANDCARGO], TO[TYPEOFSHIPANDCARGO]);

@@ -98,29 +98,25 @@ class AISMessage09Parser extends AISMessageParser implements AISMessage09 {
      * @param content Sib-bit message content
      */
     public AISMessage09Parser(Sixbit content) {
-        super(content);
-        if (content.length() != 168){
-            throw new IllegalArgumentException("Wrong message length");
-        } else {
-            fAltitude = content.getInt(FROM[ALTITUDE], TO[ALTITUDE]);
-            fSOG = content.getInt(FROM[SPEEDOVERGROUND], TO[SPEEDOVERGROUND]);
-            fPositionAccuracy = content.getBoolean(TO[POSITIONACCURACY]);
-            fLongitude = content.getAs28BitInt(FROM[LONGITUDE], TO[LONGITUDE]);
-            if (!Longitude28.isCorrect(fLongitude))
-                addViolation(new AISRuleViolation("LongitudeInDegrees", fLongitude, Longitude28.RANGE));
-            fLatitude = content.getAs27BitInt(FROM[LATITUDE], TO[LATITUDE]);
-            if (!Latitude27.isCorrect(fLatitude))
-                addViolation(new AISRuleViolation("LatitudeInDegrees", fLatitude, Latitude27.RANGE));
-            fCOG = content.getInt(FROM[COURSEOVERGROUND], TO[COURSEOVERGROUND]);
-            if (!Angle12.isCorrect(fCOG))
-                addViolation(new AISRuleViolation("CourseOverGround", fCOG, Angle12.RANGE));
-            fTimeStamp = content.getInt(FROM[TIMESTAMP], TO[TIMESTAMP]);
-            fRegional = content.getInt(FROM[REGIONAL], TO[REGIONAL]);
-            fDTE = content.getBoolean(TO[DTE]);
-            fAssignedModeFlag = content.getBoolean(TO[ASSIGNEDMODEFLAG]);
-            fRAIMFlag = content.getBoolean(TO[RAIMFLAG]);
-            fRadioStatus = content.getInt(FROM[RADIOSTATUS], TO[RADIOSTATUS]);
-        }
+        super(content, 168);
+        fAltitude = content.getInt(FROM[ALTITUDE], TO[ALTITUDE]);
+        fSOG = content.getInt(FROM[SPEEDOVERGROUND], TO[SPEEDOVERGROUND]);
+        fPositionAccuracy = content.getBoolean(TO[POSITIONACCURACY]);
+        fLongitude = content.getAs28BitInt(FROM[LONGITUDE], TO[LONGITUDE]);
+        if (!Longitude28.isCorrect(fLongitude))
+            addViolation(new AISRuleViolation("LongitudeInDegrees", fLongitude, Longitude28.RANGE));
+        fLatitude = content.getAs27BitInt(FROM[LATITUDE], TO[LATITUDE]);
+        if (!Latitude27.isCorrect(fLatitude))
+            addViolation(new AISRuleViolation("LatitudeInDegrees", fLatitude, Latitude27.RANGE));
+        fCOG = content.getInt(FROM[COURSEOVERGROUND], TO[COURSEOVERGROUND]);
+        if (!Angle12.isCorrect(fCOG))
+            addViolation(new AISRuleViolation("CourseOverGround", fCOG, Angle12.RANGE));
+        fTimeStamp = content.getInt(FROM[TIMESTAMP], TO[TIMESTAMP]);
+        fRegional = content.getInt(FROM[REGIONAL], TO[REGIONAL]);
+        fDTE = content.getBoolean(TO[DTE]);
+        fAssignedModeFlag = content.getBoolean(TO[ASSIGNEDMODEFLAG]);
+        fRAIMFlag = content.getBoolean(TO[RAIMFLAG]);
+        fRadioStatus = content.getInt(FROM[RADIOSTATUS], TO[RADIOSTATUS]);
     }
 
     public int getAltitude() {

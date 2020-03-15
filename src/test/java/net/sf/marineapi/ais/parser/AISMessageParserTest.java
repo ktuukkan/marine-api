@@ -1,6 +1,10 @@
 package net.sf.marineapi.ais.parser;
 
+import net.sf.marineapi.ais.message.AISMessage;
 import net.sf.marineapi.ais.util.Sixbit;
+import net.sf.marineapi.nmea.parser.SentenceFactory;
+import net.sf.marineapi.nmea.sentence.AISSentence;
+import net.sf.marineapi.nmea.sentence.Sentence;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;

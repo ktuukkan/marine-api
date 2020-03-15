@@ -102,10 +102,7 @@ class AISMessage05Parser extends AISMessageParser implements AISMessage05 {
 	 * @param content Six-bit message content to parse.
 	 */
 	public AISMessage05Parser(Sixbit content) {
-		super(content);
-		if (content.length() != 424)
-			throw new IllegalArgumentException("Wrong message length");
-		
+		super(content, 424);
 		fAISVersion = content.getInt(FROM[AISVERSION], TO[AISVERSION]);
 		fIMONumber = content.getInt(FROM[IMONUMBER], TO[IMONUMBER]);
 		fCallSign = content.getString(FROM[CALLSIGN], TO[CALLSIGN]).trim();

@@ -91,10 +91,7 @@ class AISUTCParser extends AISMessageParser implements AISUTCReport {
 	 * @param content Six-bit message content.
 	 */
 	public AISUTCParser(Sixbit content) {
-		super(content);
-		if (content.length() != 168)
-			throw new IllegalArgumentException("Wrong message length");
-		
+		super(content, 168);
 	    fUTCYear = content.getInt(FROM[UTC_YEAR], TO[UTC_YEAR]);
 	    fUTCMonth = content.getInt(FROM[UTC_MONTH], TO[UTC_MONTH]);
 	    fUTCDay = content.getInt(FROM[UTC_DAY], TO[UTC_DAY]);

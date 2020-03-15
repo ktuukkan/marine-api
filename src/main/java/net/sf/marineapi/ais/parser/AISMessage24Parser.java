@@ -106,29 +106,25 @@ class AISMessage24Parser extends AISMessageParser implements AISMessage24 {
      * @param content Six-bit message content.
      */
     public AISMessage24Parser(Sixbit content) {
-        super(content);
+        super(content, 160, 168);
         this.fPartNumber = content.getInt(FROM_A[PARTNUMBER], TO_A[PARTNUMBER]);
-        if(content.length() != 160 && content.length() != 168) {
-            throw new IllegalArgumentException("Wrong message length");
+        this.fPartNumber = content.getInt(FROM_A[PARTNUMBER], TO_A[PARTNUMBER]);
+        if(this.fPartNumber == 0 && (content.length() == 160 || content.length() == 168) ){
+            // Part A
+            this.fName = content.getString(FROM_A[NAME], TO_A[NAME]);
+        } else if(this.fPartNumber == 1 && content.length() == 168){
+            //Part B
+            this.fShipAndCargoType = content.getInt(FROM_B[TYPEOFSHIPANDCARGO], TO_B[TYPEOFSHIPANDCARGO]);
+            this.fVendorId = content.getString(FROM_B[VENDORID], TO_B[VENDORID]);
+            this.fUnitModelCode = content.getInt(FROM_B[UNITMODELCODE], TO_B[UNITMODELCODE]);
+            this.fSerialNumber = content.getInt(FROM_B[SERIALNUMBER], TO_B[SERIALNUMBER]);
+            this.fCallSign = content.getString(FROM_B[CALLSIGN], TO_B[CALLSIGN]);
+            this.fBow = content.getInt(FROM_B[BOW], TO_B[BOW]);
+            this.fStern = content.getInt(FROM_B[STERN], TO_B[STERN]);
+            this.fPort = content.getInt(FROM_B[PORT], TO_B[PORT]);
+            this.fStarboard = content.getInt(FROM_B[STARBOARD], TO_B[STARBOARD]);
         } else {
-            this.fPartNumber = content.getInt(FROM_A[PARTNUMBER], TO_A[PARTNUMBER]);
-            if(this.fPartNumber == 0 && (content.length() == 160 || content.length() == 168) ){
-                // Part A
-                this.fName = content.getString(FROM_A[NAME], TO_A[NAME]);
-            } else if(this.fPartNumber == 1 && content.length() == 168){
-                //Part B
-                this.fShipAndCargoType = content.getInt(FROM_B[TYPEOFSHIPANDCARGO], TO_B[TYPEOFSHIPANDCARGO]);
-                this.fVendorId = content.getString(FROM_B[VENDORID], TO_B[VENDORID]);
-                this.fUnitModelCode = content.getInt(FROM_B[UNITMODELCODE], TO_B[UNITMODELCODE]);
-                this.fSerialNumber = content.getInt(FROM_B[SERIALNUMBER], TO_B[SERIALNUMBER]);
-                this.fCallSign = content.getString(FROM_B[CALLSIGN], TO_B[CALLSIGN]);
-                this.fBow = content.getInt(FROM_B[BOW], TO_B[BOW]);
-                this.fStern = content.getInt(FROM_B[STERN], TO_B[STERN]);
-                this.fPort = content.getInt(FROM_B[PORT], TO_B[PORT]);
-                this.fStarboard = content.getInt(FROM_B[STARBOARD], TO_B[STARBOARD]);
-            } else {
-                throw new IllegalArgumentException("Wrong part number / message length");
-            }
+            throw new IllegalArgumentException("Invalid part number or message length");
         }
     }
 

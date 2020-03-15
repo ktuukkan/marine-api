@@ -90,6 +90,35 @@ public class AISMessageParser implements AISMessage {
     }
 
     /**
+     * Constructor with six-bit content decoder.
+     *
+     * @param sb A non-empty six-bit decoder.
+     * @param len Expected message length (bits)
+     */
+    protected AISMessageParser(Sixbit sb, int len) {
+        this(sb);
+        if (sb.length() != len) {
+            throw new IllegalArgumentException(
+              String.format("Wrong message length: %s (expected %s)", sb.length(), len));
+        }
+    }
+
+    /**
+     * Constructor with six-bit content decoder.
+     *
+     * @param sb A non-empty six-bit decoder.
+     * @param min Expected minimum length of message (bits)
+     * @param max Expected maximum length of message (bits)
+     */
+    protected AISMessageParser(Sixbit sb, int min, int max) {
+        this(sb);
+        if (sb.length() < min || sb.length() > max) {
+            throw new IllegalArgumentException(
+              String.format("Wrong message length: %s (expected %s - %s)", sb.length(), min, max));
+        }
+    }
+
+    /**
      * Add a new rule violation to this message
      * @param v Violation to add
      */

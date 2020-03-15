@@ -96,10 +96,8 @@ class AISPositionReportParser extends AISMessageParser implements AISPositionRep
 	 * @param content Six-bit message content.
 	 */
 	public AISPositionReportParser(Sixbit content) {
-		super(content);
-		if (content.length() != 168)
-			throw new IllegalArgumentException("Wrong message length");
-		
+		super(content, 168, 204);
+
 	    fNavigationalStatus = content.getInt(FROM[NAVIGATIONALSTATUS], TO[NAVIGATIONALSTATUS]);
 	    if (!NavigationalStatus.isCorrect(fNavigationalStatus))
 	    	addViolation(new AISRuleViolation("NavigationalStatus", fNavigationalStatus, NavigationalStatus.RANGE));
