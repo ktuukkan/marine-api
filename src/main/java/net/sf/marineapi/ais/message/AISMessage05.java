@@ -138,4 +138,11 @@ public interface AISMessage05 extends AISMessage {
 	 * @return maximum 20 characters, representing the destination
 	 */
 	String getDestination();
+
+	/**
+	 * Returns the Data Terminal Equipment (DTE) ready flag.
+	 *
+	 * @return boolean {@code true} if ready, otherwise {@code false}.
+	 */
+	boolean isDteReady();
 }

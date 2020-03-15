@@ -99,4 +99,8 @@ public class AISMessage05Test {
         assertEquals("HOUSTON", msg.getDestination());
     }
 
+    @Test
+    public void testIsDteReady() {
+        assertFalse(msg.isDteReady());
+    }
 }

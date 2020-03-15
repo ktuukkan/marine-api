@@ -74,10 +74,15 @@ class AISMessage05Parser extends AISMessageParser implements AISMessage05 {
 	private static final int 	MINUTE				= 13;
 	private static final int 	DRAUGHT				= 14;
 	private static final int 	DESTINATION			= 15;
-	private final static int[]	FROM				= {
-		38, 40,  70, 112, 232, 240, 249, 258, 264, 270, 274, 278, 283, 288, 294, 302};
-	private final static int[]	TO   				= {
-		40, 70, 112, 232, 240, 249, 258, 264, 270, 274, 278, 283, 288, 294, 302, 422};
+	private static final int	DTE 				= 16;
+
+	private final static int[]	FROM = {
+		38, 40,  70, 112, 232, 240, 249, 258, 264, 270, 274, 278, 283, 288, 294, 302
+	};
+
+	private final static int[]	TO = {
+		40, 70, 112, 232, 240, 249, 258, 264, 270, 274, 278, 283, 288, 294, 302, 422, 423
+	};
 
 	private int			fAISVersion;
 	private int			fIMONumber;
@@ -95,6 +100,7 @@ class AISMessage05Parser extends AISMessageParser implements AISMessage05 {
 	private int			fETAMonth;
 	private int			fMaximumDraught;
 	private String		fDestination;
+	private boolean		fDte;
 
 	/**
 	 * Constructor.
@@ -123,6 +129,7 @@ class AISMessage05Parser extends AISMessageParser implements AISMessage05 {
 
 		fMaximumDraught = content.getInt(FROM[DRAUGHT], TO[DRAUGHT]);
 		fDestination = content.getString(FROM[DESTINATION], TO[DESTINATION]).trim();
+		fDte = content.getBoolean(TO[DTE]);
 	}    
 
 	public int getAISVersionIndicator() { return fAISVersion; }
@@ -157,6 +164,8 @@ class AISMessage05Parser extends AISMessageParser implements AISMessage05 {
 
 	public String getDestination() { return fDestination; }
 
+	public boolean isDteReady() { return fDte; }
+
 	public String toString() {
 		String result =     "\tIMO:       " + Integer.toString(fIMONumber);
 		result += SEPARATOR + "Call sign: " + fCallSign;
@@ -170,6 +179,7 @@ class AISMessage05Parser extends AISMessageParser implements AISMessage05 {
 		result += SEPARATOR + "Draft:     " + Float.toString(fMaximumDraught / 10f);
 		result += SEPARATOR + "EPFD:      " + PositioningDevice.toString(fTypeOfEPFD);
 		result += SEPARATOR + "Dest:      " + fDestination;
+		result += SEPARATOR + "DTE:       " + fDte;
 		return result;
 	}
 }
