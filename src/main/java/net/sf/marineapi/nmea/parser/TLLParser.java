@@ -1,5 +1,8 @@
 package net.sf.marineapi.nmea.parser;
 
+import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
+
 import net.sf.marineapi.nmea.sentence.SentenceId;
 import net.sf.marineapi.nmea.sentence.TLLSentence;
 import net.sf.marineapi.nmea.sentence.TalkerId;
@@ -100,7 +103,16 @@ public class TLLParser extends PositionParser implements TLLSentence{
 
 	@Override
 	public void setTime(Time t) {
-		setStringValue(UTC_TIME, t.toString());
+		String str = String.format("%02d%02d", t.getHour(), t.getMinutes());
+
+		DecimalFormat nf = new DecimalFormat("00.00");
+		DecimalFormatSymbols dfs = new DecimalFormatSymbols();
+		dfs.setDecimalSeparator('.');
+		nf.setDecimalFormatSymbols(dfs);
+
+		str += nf.format(t.getSeconds());
+		setStringValue(UTC_TIME, str);
+		
 		
 	}
 
