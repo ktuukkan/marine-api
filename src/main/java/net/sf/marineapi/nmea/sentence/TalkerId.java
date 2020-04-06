@@ -21,17 +21,17 @@
 package net.sf.marineapi.nmea.sentence;
 
 /**
- * The enumeration of Talker IDs, the first two characters of sentence
- * address field. For example, {@code GP} in {@code $GPGGA}. Notice
- * that proprietary sentences are identified by single character {@link #P}.
- * <p>
- * Notice that this enum contains also some non-standard IDs to enable parsing
- * certain proprietary sentences that do not use {@link #P} identifier.
+ * The enumeration of Talker IDs, i.e. the first two characters of sentence
+ * address field. For example, {@code GP} in {@code $GPGGA}. Proprietary
+ * sentences are identified by single character {@link #P}.
  * <p>
  * The IDs marked as <em>obsolete</em> are deprecated and not recommended for
  * use in new implementations. However, they are not annotated with {@code
- * @Deprecated} to avoid unnecessary compiler warnings when working with
+ * &commat;Deprecated} to avoid unnecessary compiler warnings when working with
  * legacy systems/data.
+ * <p>
+ * Notice that this enum also contains some non-standard IDs to enable parsing
+ * certain proprietary sentences that do not use {@link #P} identifier.
  *
  * @author Kimmo Tuukkanen
  * @see net.sf.marineapi.nmea.sentence.SentenceId
@@ -98,7 +98,7 @@ public enum TalkerId {
 	DU,
 	/** Electronic Chart System (ECS) */
 	EC,
-	/** Electronic Chart Display & Information System (ECDIS) */
+	/** Electronic Chart Display &amp; Information System (ECDIS) */
 	EI,
 	/** Emergency Position Indicating Beacon (EPIRB) */
 	EP,
