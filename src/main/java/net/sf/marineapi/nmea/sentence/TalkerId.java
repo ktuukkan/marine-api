@@ -21,53 +21,63 @@
 package net.sf.marineapi.nmea.sentence;
 
 /**
- * The enumeration of Talker IDs, i.e. the first two characters in sentence's
+ * The enumeration of Talker IDs, the first two characters of sentence
  * address field. For example, {@code GP} in {@code $GPGGA}. Notice
  * that proprietary sentences are identified by single character {@link #P}.
  * <p>
- * This enum contains also non-NMEA IDs to enable parsing AIS messages;
- * {@link #AI}, {@link #AB} and {@link #BS}. However, the correct meaning of
- * these are still unconfirmed.
- * 
+ * Notice that this enum contains also some non-standard IDs to enable parsing
+ * certain proprietary sentences that do not use {@link #P} identifier.
+ * <p>
+ * The IDs marked as <em>obsolete</em> are deprecated and not recommended for
+ * use in new implementations. However, they are not annotated with {@code
+ * @Deprecated} to avoid unnecessary compiler warnings when working with
+ * legacy systems/data.
+ *
  * @author Kimmo Tuukkanen
  * @see net.sf.marineapi.nmea.sentence.SentenceId
  */
 public enum TalkerId {
 
-	/** AIS - Mobile AIS station */
+	/** AIS Mobile Class A or B AIS Station */
 	AI,
-	/** AIS - NMEA 4.0 Base AIS station */
+	/** AIS Independent AIS Base Station (NMEA 4.0) */
 	AB,
-	/** AIS - NMEA 4.0 Dependent AIS Base Station */
+	/** AIS Dependent AIS Base Station (NMEA 4.0) */
 	AD,
-	/** AIS - NMEA 4.0 Aid to Navigation AIS station */
+	/** AIS Aids to Navigation Station (NMEA 4.0) */
 	AN,
-	/** AIS - NMEA 4.0 AIS Receiving Station */
+	/** AIS Receiving Station (NMEA 4.0) */
 	AR,
-	/** AIS - NMEA 4.0 Limited Base Station */
+	/** AIS Limited Base Station (NMEA 4.0) */
 	AS,
-	/** AIS - NMEA 4.0 AIS Transmitting Station */
+	/** AIS Transmitting Station (NMEA 4.0) */
 	AT,
-	/** AIS - NMEA 4.0 Repeater AIS station */
+	/** AIS Simplex Repeater Station (NMEA 4.0) */
 	AX,
-	/** AIS - Base AIS station (deprecated in NMEA 4.0) */
+	/** AIS Base station (obsolete since NMEA 4.0) */
 	BS,
-	/** Autopilot - General */
+	/** Heading Track Controller/Autopilot: General */
 	AG,
-	/** Autopilot - Magnetic */
+	/** Heading Track Controller/Autopilot: Magnetic */
 	AP,
-	/** Beidou satellite navigation system (Chinese) */
+	/** BeiDou satellite navigation system (Chinese) */
 	BD,
+	/** Bilge Systems */
+	BI,
+	/** Bridge Navigational Watch Alarm System */
+	BN,
+	/** Central Alarm Management */
+	CA,
 	/** Computer - Programmed Calculator (obsolete) */
-	@Deprecated
 	CC,
 	/** Communications - Digital Selective Calling (DSC) */
 	CD,
 	/** Computer - Memory Data (obsolete) */
-	@Deprecated
 	CM,
     /** Channel Pilot (Navicom Dynamics proprietary) */
     CP,
+	/** Data Receiver */
+	CR,
 	/** Communications - Satellite */
 	CS,
 	/** Communications - Radio-Telephone (MF/HF) */
@@ -77,116 +87,166 @@ public enum TalkerId {
 	/** Communications - Scanning Receiver */
 	CX,
 	/** DECCA Navigation (obsolete) */
-	@Deprecated
 	DE,
 	/** Direction Finder */
 	DF,
 	/** Velocity Sensor, Speed Log, Water, Magnetic */
 	DM,
-	/** Electronic Chart Display &lt; Information System (ECDIS) */
+	/** Dynamic Position */
+	DP,
+	/** Duplex Repeater Station */
+	DU,
+	/** Electronic Chart System (ECS) */
 	EC,
+	/** Electronic Chart Display & Information System (ECDIS) */
+	EI,
 	/** Emergency Position Indicating Beacon (EPIRB) */
 	EP,
 	/** Engine Room Monitoring Systems */
 	ER,
+	/** Fire Door Controller/Monitoring Point */
+	FD,
+	/** Fire Extinguisher System */
+	FE,
+	/** Fire Detection Point */
+	FR,
+	/** Fire Sprinkler System */
+	FS,
 	/** Galileo satellite navigation system (European) */
 	GA,
-	/** Beidou satellite navigation system (Chinese) */
+	/** BeiDou satellite navigation system (Chinese) */
 	GB,
 	/** Gas Finder (Boreal) */
 	GF,
 	/** Indian Regional Navigation Satellite System (IRNSS) */
 	GI,
-	/** GLONASS (according to IEIC 61162-1) */
+	/** GLONASS Receiver */
 	GL,
-	/** Mixed GLONASS and GPS data (according to IEIC 61162-1) */
+	/** Global Navigation Satellite System (GNSS) */
 	GN,
 	/** Global Positioning System (GPS) */
 	GP,
 	/** Quasi Zenith Satellite System (QXSS, Japanese) */
 	GQ,
-	/** Heading - Magnetic Compass */
+	/** Heading Sensors: Compass, Magnetic */
 	HC,
-	/** Heading - North Seeking Gyro */
+	/** Hull Door Controller/Monitoring Panel */
+	HD,
+	/** Heading Sensors: Gyro, North Seeking */
 	HE,
-	/** Heading - Non North Seeking Gyro */
+	/** Heading Sensors: Fluxgate */
+	HF,
+	/** Heading Sensors: Gyro, Non-North Seeking */
 	HN,
+	/** Hull Stress Monitoring */
+	HS,
 	/** Integrated Instrumentation */
 	II,
 	/** Integrated Navigation */
 	IN,
+	/** Automation: Alarm and monitoring system (reserved for future use) */
+	JA,
+	/** Automation: Reefer Monitoring System (reserved for future use) */
+	JB,
+	/** Automation: Power Management System (reserved for future use) */
+	JC,
+	/** Automation: Propulsion Control System (reserved for future use) */
+	JD,
+	/** Automation: Engine Control Console (reserved for future use) */
+	JE,
+	/** Automation: Propulsion Boiler (reserved for future use) */
+	JF,
+	/** Automation: Auxiliary Boiler (reserved for future use) */
+	JG,
+	/** Automation: Electronic Governor System (reserved for future use) */
+	JH,
 	/** Loran A (obsolete) */
-	@Deprecated
 	LA,
 	/** Loran C (obsolete) */
-	@Deprecated
 	LC,
 	/** Microwave Positioning System (obsolete) */
-	@Deprecated
 	MP,
+	/** Multiplexer */
+	MX,
+	/** Navigation Light Controller */
+	NL,
 	/** OpenPlotter calculated */
 	OC,
 	/** OMEGA Navigation System (obsolete) */
-	@Deprecated
 	OM,
 	/** Distress Alarm System (obsolete) */
-	@Deprecated
 	OS,
-	/** Proprietary sentence format (does not define the talker device). */
+	/** Proprietary Code */
 	P,
 	/** QZSS regional GPS augmentation system (Japan) */
 	QZ,
-	/** RADAR and/or ARPA */
+	/** Radar and/or Radar Plotting */
 	RA,
-	/** Propulsion Remote Control System */
+	/** Record Book (reserved for future use) */
+	RB,
+	/** Propulsion Machinery Including Remote Control */
 	RC,
+	/** Rudder Angle Indicator(reserved for future use) */
+	RI,
 	/** Indian Regional Navigation Satellite System (IRNSS) */
 	IR,
 	/** AIS - NMEA 4.0 Physical Shore AIS Station */
 	SA,
-	/** Sounder, Depth */
+	/** Steering Control System/Device (reserved for future use) */
+	SC,
+	/** Sounder, depth */
 	SD,
+	/** Steering Gear / Steering Engine */
+	SG,
 	/** Electronic Positioning System, other/general */
 	SN,
 	/** Sounder, Scanning */
 	SS,
 	/** Raymarine SeaTalk ($STALK) */
 	ST,
+	/** Track Control System (reserved for future use) */
+	TC,
 	/** Turn Rate Indicator */
 	TI,
 	/** TRANSIT Navigation System */
 	TR,
-	/** Velocity Sensor, Doppler, other/general */
+	/** Microprocessor Controller */
+	UP,
+	/** VHF Data Exchange System: ASM */
+	VA,
+	/** Velocity Sensor: Doppler, other/general */
 	VD,
-	/** Velocity Sensor, Speed Log, Water, Magnetic */
+	/** Velocity Sensor: Speed Log, Water, Magnetic */
 	VM,
-	/** Velocity Sensor, Speed Log, Water, Mechanical */
+	/** Voyage Data Recorder */
+	VR,
+	/** VHF Data Exchange System: Satellite */
+	VS,
+	/** VHF Data Exchange System: Terrestrial */
+	VT,
+	/** Velocity Sensor: Speed Log, Water, Mechanical */
 	VW,
 	/** Weather Instruments */
 	WI,
+	/** Water Level Detection Systems */
+	WL,
+	/** Wärtsilä proprietary */
+	WV,
 	/** Transducer - Temperature (obsolete) */
-	@Deprecated
 	YC,
 	/** Transducer - Displacement, Angular or Linear (obsolete) */
-	@Deprecated
 	YD,
 	/** Transducer - Frequency (obsolete) */
-	@Deprecated
 	YF,
 	/** Transducer - Level (obsolete) */
-	@Deprecated
 	YL,
 	/** Transducer - Pressure (obsolete) */
-	@Deprecated
 	YP,
 	/** Transducer - Flow Rate (obsolete) */
-	@Deprecated
 	YR,
 	/** Transducer - Tachometer (obsolete) */
-	@Deprecated
 	YT,
 	/** Transducer - Volume (obsolete) */
-	@Deprecated
 	YV,
 	/** Transducer */
 	YX,

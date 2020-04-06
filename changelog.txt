@@ -4,6 +4,13 @@ Java Marine API - changelog
 Version 0.12.0-SNAPSHOT
   - AIS message length validation moved to AISMessageParser.
   - AISMessage05; added missing DTE flag getter.
+  - TalkerId enum
+    - Checked against latest list of official mnemonics and added DP, DU, EI,
+      FD, FE, FR, FS, HD, HF, HS, JA, JB, JC, JD, JE, JF, JG, JH, MX, NL, RB,
+      RI, SC, SG, TC, UP, VA, VR, VS, VT and WL
+    - Added WV to suppport Wärtsilä proprietary sentences
+    - Updated javadocs and removed @Deprecated annotation from obsolete entries
+      to avoid unnecessary compiler warnings when working with legacy devices
 
 Version 0.11.0 (2019-07-06)
 
