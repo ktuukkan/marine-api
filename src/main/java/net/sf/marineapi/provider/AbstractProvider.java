@@ -46,9 +46,13 @@ import net.sf.marineapi.provider.event.ProviderListener;
 public abstract class AbstractProvider<T extends ProviderEvent> implements
 		SentenceListener {
 
+	/** The default timeout for receicing a burst of sentences. */
+	public static int DEFAULT_TIMEOUT = 1000;
+
 	private SentenceReader reader;
 	private List<SentenceEvent> events = new ArrayList<SentenceEvent>();
 	private List<ProviderListener<T>> listeners = new ArrayList<ProviderListener<T>>();
+	private int timeout = DEFAULT_TIMEOUT;
 
 	/**
 	 * Creates a new instance of AbstractProvider.
@@ -223,6 +227,25 @@ public abstract class AbstractProvider<T extends ProviderEvent> implements
 	}
 
 	/**
+	 * <p>Sets the timeout for receiving a burst of sentences. The default value
+	 * is 1000 ms as per default update rate of NMEA 0183 (1/s). However, the
+	 * length of data bursts may vary depending on the device. If the timeout is
+	 * exceeded before receiving all needed sentences, the sentences are
+	 * discarded and waiting period for next burst of data is started. Use this
+	 * method to increase the timeout if the bursts are constantly being
+	 * discarded and thus no events are dispatched by the provider.</p>
+	 *
+	 * @param millis Timeout to set, in milliseconds.
+	 * @see #DEFAULT_TIMEOUT
+	 */
+	public void setTimeout(int millis) {
+		if (millis < 1) {
+			throw new IllegalArgumentException("Timeout value must be > 0");
+		}
+		this.timeout = millis;
+	}
+
+	/**
 	 * Validates the collected sentences by checking the ages of each sentence
 	 * and then by calling {@link #isValid()}. If extending implementation has
 	 * no validation criteria, it should return always {@code true}.
@@ -233,7 +256,7 @@ public abstract class AbstractProvider<T extends ProviderEvent> implements
 		long now = System.currentTimeMillis();
 		for (SentenceEvent se : events) {
 			long age = now - se.getTimeStamp();
-			if (age > 1000) {
+			if (age > this.timeout) {
 				return false;
 			}
 		}
