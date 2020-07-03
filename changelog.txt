@@ -16,6 +16,9 @@ Version 0.12.0-SNAPSHOT
 
   Contributions:
   - TTM parser by @NontasPantzopoulos
+  - Added support for u-blox Vendor extension messages:
+    - PUBX,01 - Lat/Long position data
+    - PUBX,03 - Satellite Status
 
 Version 0.11.0 (2019-07-06)
 
@@ -24,7 +27,7 @@ Version 0.11.0 (2019-07-06)
   - Support for HTC sentences; Heading/Track control command
   - Support for HTD sentences; Heading/Track control data
   - Support for TXT sentences; Text messages, e.g. device boot screens etc.
-  - Support for DTA/DTB sentences; Boreal GasFinder2 and GasFinderMC. 
+  - Support for DTA/DTB sentences; Boreal GasFinder2 and GasFinderMC.
   - Support for $STALK sentences; NMEA-0183 layer of Raymarine SeaTalk protocol.
   - AbstracSentenceListener; improvements in generic types resolving to support
     more advanced use of generics and inheritance.

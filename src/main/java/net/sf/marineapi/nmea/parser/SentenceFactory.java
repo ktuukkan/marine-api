@@ -66,8 +66,9 @@ import net.sf.marineapi.nmea.sentence.TalkerId;
  * </p>
  *
  * @author Kimmo Tuukkanen
+ * @author Gunnar Hillert
  */
-public final class SentenceFactory {
+public class SentenceFactory {
 
 	// map that holds registered sentence types and parser classes
 	private static Map<String, Class<? extends SentenceParser>> parsers;
@@ -278,7 +279,7 @@ public final class SentenceFactory {
 	/**
 	 * Resets the factory in it's initial state, i.e. restores and removes all
 	 * parsers the have been either removed or added.
-	 * 
+	 *
 	 */
 	public void reset() {
 		Map<String, Class<? extends SentenceParser>> tempParsers = new ConcurrentHashMap<>();
@@ -315,6 +316,7 @@ public final class SentenceFactory {
 		registerParser(tempParsers, "TLL", TLLParser.class);
 		registerParser(tempParsers, "TTM", TTMParser.class);
 		registerParser(tempParsers, "TXT", TXTParser.class);
+		registerParser(tempParsers, "UBX", UBXParser.class);
 		registerParser(tempParsers, "VBW", VBWParser.class);
 		registerParser(tempParsers, "VDM", VDMParser.class);
 		registerParser(tempParsers, "VDO", VDOParser.class);

@@ -16,6 +16,7 @@
     - [NMEA 0183](#nmea-0183)
     - [AIS](#ais)
     - [Raymarine SeaTalk](#raymarine-seatalk1)
+    - [NMEA Vendor Extensions](#nmea-vendor-extensions)
 - [Distribution](#distribution)
     - [Pre-built JARs](#pre-built-jars)
     - [Maven](#maven)
@@ -200,6 +201,20 @@ Only the NMEA layer is currently supported, see
 [STALKSentence](src/main/java/net/sf/marineapi/nmea/sentence/STALKSentence.java)
 and [Issue #67](https://github.com/ktuukkan/marine-api/issues/67).
 
+### NMEA Vendor Extensions
+
+#### u-blox
+
+The following [u-blox](https://www.u-blox.com/)
+vendor extension messages are supported:
+
+| ID      | Description
+|---      |---
+| PUBX,01 |Lat/Long Position Data
+| PUBX,03 |Satellite Status
+
+For more information, please see the
+[ZED-F9P Interface Description Manual](https://www.u-blox.com/en/docs/UBX-18010854)
 
 ## Distribution
 

@@ -1,20 +1,20 @@
-/* 
+/*
  * PositionParser.java
  * Copyright (C) 2010 Kimmo Tuukkanen
- * 
+ *
  * This file is part of Java Marine API.
  * <http://ktuukkan.github.io/marine-api/>
- * 
+ *
  * Java Marine API is free software: you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by the
  * Free Software Foundation, either version 3 of the License, or (at your
  * option) any later version.
- * 
+ *
  * Java Marine API is distributed in the hope that it will be useful, but
  * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
  * FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License
  * for more details.
- * 
+ *
  * You should have received a copy of the GNU Lesser General Public License
  * along with Java Marine API. If not, see <http://www.gnu.org/licenses/>.
  */
@@ -23,6 +23,7 @@ package net.sf.marineapi.nmea.parser;
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
 
+import net.sf.marineapi.nmea.parser.support.PositionParseUtils;
 import net.sf.marineapi.nmea.sentence.SentenceId;
 import net.sf.marineapi.nmea.sentence.TalkerId;
 import net.sf.marineapi.nmea.util.CompassPoint;
@@ -34,8 +35,9 @@ import net.sf.marineapi.nmea.util.Position;
  * {@link net.sf.marineapi.nmea.sentence.PositionSentence} interface is not
  * implemented by this parser because the extending parser may not always
  * provide current location.
- * 
+ *
  * @author Kimmo Tuukkanen
+ * @author Gunnara Hillert
  */
 abstract class PositionParser extends SentenceParser {
 
@@ -64,32 +66,24 @@ abstract class PositionParser extends SentenceParser {
 
 	/**
 	 * Parses the hemisphere of latitude from specified field.
-	 * 
+	 *
 	 * @param index Index of field that contains the latitude hemisphere value.
 	 * @return Hemisphere of latitude
 	 */
 	protected CompassPoint parseHemisphereLat(int index) {
 		char ch = getCharValue(index);
-		CompassPoint d = CompassPoint.valueOf(ch);
-		if (d != CompassPoint.NORTH && d != CompassPoint.SOUTH) {
-			throw new ParseException("Invalid latitude hemisphere '" + ch + "'");
-		}
-		return d;
+		return PositionParseUtils.parseHemisphereLat(ch);
 	}
 
 	/**
 	 * Parses the hemisphere of longitude from the specified field.
-	 * 
+	 *
 	 * @param index Field index for longitude hemisphere indicator
 	 * @return Hemisphere of longitude
 	 */
 	protected CompassPoint parseHemisphereLon(int index) {
 		char ch = getCharValue(index);
-		CompassPoint d = CompassPoint.valueOf(ch);
-		if (d != CompassPoint.EAST && d != CompassPoint.WEST) {
-			throw new ParseException("Invalid longitude hemisphere " + ch + "'");
-		}
-		return d;
+		return PositionParseUtils.parseHemisphereLon(ch);
 	}
 
 	/**
@@ -99,26 +93,19 @@ abstract class PositionParser extends SentenceParser {
 	 * denote full degrees (usually padded with leading zeros). Digits to the
 	 * right of the dot denote the minute decimals.
 	 *
+	 * @see PositionParseUtils
 	 * @param index Index of the lat/lon field.
 	 * @return Degrees decimal value
 	 */
 	protected double parseDegrees(int index) {
-
 		String field = getStringValue(index);
-		int dotIndex = field.indexOf(".");
-
-		String degStr = dotIndex > 2 ? field.substring(0, dotIndex - 2) : "0";
-		String minStr = dotIndex > 2 ? field.substring(dotIndex - 2) : field;
-
-		int deg = Integer.parseInt(degStr);
-		double min = Double.parseDouble(minStr);
-
-		return deg + (min / 60);
+		return PositionParseUtils.parseDegrees(field);
 	}
 
 	/**
 	 * Parses a {@code Position} from specified fields.
-	 * 
+	 *
+	 * @see PositionParseUtils
 	 * @param latIndex Latitude field index
 	 * @param latHemIndex Latitude hemisphere field index
 	 * @param lonIndex Longitude field index
@@ -128,22 +115,19 @@ abstract class PositionParser extends SentenceParser {
 	protected Position parsePosition(int latIndex, int latHemIndex,
 		int lonIndex, int lonHemIndex) {
 
-		double lat = parseDegrees(latIndex);
-		double lon = parseDegrees(lonIndex);
-		CompassPoint lath = parseHemisphereLat(latHemIndex);
-		CompassPoint lonh = parseHemisphereLon(lonHemIndex);
-		if (lath.equals(CompassPoint.SOUTH)) {
-			lat = -lat;
-		}
-		if (lonh.equals(CompassPoint.WEST)) {
-			lon = -lon;
-		}
-		return new Position(lat, lon);
+		final String latitudeValue = getStringValue(latIndex);
+		final char latitudeHemisphereIndicator = getCharValue(latHemIndex);
+
+		final String longitudeValue = getStringValue(lonIndex);
+		final char longitudeHemisphereIndicator = getCharValue(lonHemIndex);
+
+		return PositionParseUtils.parsePosition(
+				latitudeValue, latitudeHemisphereIndicator, longitudeValue, longitudeHemisphereIndicator);
 	}
 
 	/**
 	 * Set the hemisphere of latitude in specified field.
-	 * 
+	 *
 	 * @param field Field index
 	 * @param hem Direction.NORTH or Direction.SOUTH
 	 * @throws IllegalArgumentException If specified Direction is other than
@@ -159,7 +143,7 @@ abstract class PositionParser extends SentenceParser {
 
 	/**
 	 * Sets the latitude value in specified field, formatted in "ddmm.mmm".
-	 * 
+	 *
 	 * @param index Field index
 	 * @param lat Latitude value in degrees
 	 */
@@ -181,7 +165,7 @@ abstract class PositionParser extends SentenceParser {
 	 * Sets the longitude value in specified field, formatted in "dddmm.mmm".
 	 * Does not check if the given value is logically correct to current
 	 * longitude hemisphere.
-	 * 
+	 *
 	 * @param index Field index
 	 * @param lon Longitude value in degrees
 	 */
@@ -202,7 +186,7 @@ abstract class PositionParser extends SentenceParser {
 	/**
 	 * Set the hemisphere of longitude in specified field. Does not check if the
 	 * given value is logically correct to current longitude value.
-	 * 
+	 *
 	 * @param field Field index
 	 * @param hem Direction.EAST or Direction.WEST
 	 * @throws IllegalArgumentException If specified Direction is other than
@@ -221,7 +205,7 @@ abstract class PositionParser extends SentenceParser {
 	 * field indices. Sets the absolute values of latitude and longitude, and
 	 * hemisphere indicators as given by {@code Position}. Does not set
 	 * altitude.
-	 * 
+	 *
 	 * @param p Position to set
 	 * @param latIndex Index of latitude field
 	 * @param latHemIndex Index of latitude hemisphere field

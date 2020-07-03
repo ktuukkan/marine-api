@@ -25,6 +25,7 @@ package net.sf.marineapi.nmea.sentence;
  * combination of talker and sentence IDs, for example GPBOD, GPGGA or GPGGL.
  *
  * @author Kimmo Tuukkanen
+ * @author Gunnar Hillert
  * @see net.sf.marineapi.nmea.sentence.TalkerId
  */
 public enum SentenceId {
@@ -99,6 +100,8 @@ public enum SentenceId {
     TTM,
     /** Text message */
     TXT,
+    /** Proprietary NMEA messages for u-blox positioning receivers. */
+    UBX,
     /** Dual ground/water speed and stern ground/water speed. */
     VBW,
     /** AIS - Received data from other vessels */
