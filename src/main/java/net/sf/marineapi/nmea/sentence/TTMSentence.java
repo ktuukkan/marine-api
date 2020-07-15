@@ -160,20 +160,27 @@ public interface TTMSentence extends TimeSentence {
 	void setDistance(double distance);
 
 	/**
-	 * Set the bearing from the radar to the target.
+	 * Set the true bearing from the radar to the target.
 	 *
 	 * @param bearing
 	 *            True bearing in degrees.
 	 */
-	void setBearing(double bearing);
+	void setTrueBearing(double bearing);
 
 	/**
-	 * Set the reference bearing.
+	 * Set the relative bearing from the radar to the target.
 	 *
-	 * @param tr
-	 *            T or R (True or Relative).
+	 * @param bearing
+	 *            Relative bearing in degrees.
 	 */
-	void setBearingTrueRel(char tr);
+	void setRelativeBearing(double bearing);
+
+	/**
+	 * Tells if the bearing from radar to target is true or relative.
+	 *
+	 * @return true when true bearing, otherwise false (relative)
+	 */
+	boolean isTrueBearing();
 
 	/**
 	 * Set the speed of the target.
@@ -184,20 +191,27 @@ public interface TTMSentence extends TimeSentence {
 	void setSpeed(double speed);
 
 	/**
-	 * Set the course of the target.
+	 * Set the true course of the target.
 	 *
-	 * @param course
-	 *            True course in degrees.
+	 * @param course True course in degrees.
 	 */
-	void setCourse(double course);
+	void setTrueCourse(double course);
 
 	/**
-	 * Set the course reference.
+	 * Set the relative course of the target.
 	 *
-	 * @param tr
-	 *            T or R (True or Relative).
+	 * @param course Relative course in degrees.
+	 * @see #setTrueCourse(double)
+	 * @see #isTrueCourse()
 	 */
-	void setCourseTrueRel(char tr);
+	void setRelativeCourse(double course);
+
+	/**
+	 * Tells if the target course is true or relative.
+	 *
+	 * @return true if course is true, otherwise false (=relative)
+	 */
+	boolean isTrueCourse();
 
 	/**
 	 * Set the distance at CPA.

@@ -1,9 +1,5 @@
 package net.sf.marineapi.nmea.parser;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.fail;
 import net.sf.marineapi.nmea.sentence.TalkerId;
 import net.sf.marineapi.nmea.util.AcquisitionType;
 import net.sf.marineapi.nmea.util.TargetStatus;
@@ -11,6 +7,8 @@ import net.sf.marineapi.nmea.util.Time;
 
 import org.junit.Before;
 import org.junit.Test;
+
+import static org.junit.Assert.*;
 
 /**
  * Tests the RMC sentence parser.
@@ -170,9 +168,17 @@ public class TTMTest {
 	 * {@link net.sf.marineapi.nmea.parser.TTMParser#setBearing()} .
 	 */
 	@Test
-	public void testSetBearing() {
-		ttm.setBearing(34.1);
+	public void testSetTrueBearing() {
+		ttm.setTrueBearing(34.1);
+		assertTrue(ttm.isTrueBearing());
 		assertTrue(ttm.toString().contains(",34.1,T,"));
+	}
+
+	@Test
+	public void testSetRelativeBearing() {
+		ttm.setRelativeBearing(56.7);
+		assertFalse(ttm.isTrueBearing());
+		assertTrue(ttm.toString().contains(",56.7,R,"));
 	}
 
 	/**
@@ -181,19 +187,31 @@ public class TTMTest {
 	 */
 	@Test
 	public void testSetSpeed() {
-		ttm.setBearing(44.1);
+		ttm.setSpeed(44.1);
 		assertTrue(ttm.toString().contains(",44.1,"));
 		assertTrue(ttm.toString().contains(",N,"));
 	}
 
 	/**
 	 * Test method for
-	 * {@link net.sf.marineapi.nmea.parser.TTMParser#setCourse()} .
+	 * {@link net.sf.marineapi.nmea.parser.TTMParser#setTrueCourse()} .
 	 */
 	@Test
-	public void testSetCourse() {
-		ttm.setCourse(234.9);
+	public void testSetTrueCourse() {
+		ttm.setTrueCourse(234.9);
+		assertTrue(ttm.isTrueCourse());
 		assertTrue(ttm.toString().contains(",234.9,T,"));
+	}
+
+	/**
+	 * Test method for
+	 * {@link net.sf.marineapi.nmea.parser.TTMParser#setTrueCourse()} .
+	 */
+	@Test
+	public void testSetRelativeCourse() {
+		ttm.setRelativeCourse(123.4);
+		assertFalse(ttm.isTrueCourse());
+		assertTrue(ttm.toString().contains(",123.4,R,"));
 	}
 
 	/**
