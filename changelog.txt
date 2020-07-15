@@ -11,6 +11,11 @@ Version 0.12.0-SNAPSHOT
     - Added WV to suppport Wärtsilä proprietary sentences
     - Updated javadocs and removed @Deprecated annotation from obsolete entries
       to avoid unnecessary compiler warnings when working with legacy devices
+  - Added support for TLL sentences;
+  - TTMSentence; refactored bearing and course setters/getters
+
+  Contributions:
+  - TTM parser by @NontasPantzopoulos
 
 Version 0.11.0 (2019-07-06)
 
