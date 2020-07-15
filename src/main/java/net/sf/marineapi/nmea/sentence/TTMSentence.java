@@ -53,11 +53,18 @@ public interface TTMSentence extends TimeSentence {
 	double getDistance();
 
 	/**
-	 * Get the true bearing from the radar to the target.
+	 * Get the bearing from the radar to the target.
 	 *
 	 * @return True bearing in degrees.
 	 */
 	double getBearing();
+
+	/**
+	 * Get the bearing reference.
+	 *
+	 * @return True or Relative (T or R).
+	 */
+	char getBearingTrueRel();
 
 	/**
 	 * Get the speed the target.
@@ -72,6 +79,13 @@ public interface TTMSentence extends TimeSentence {
 	 * @return True course in degrees.
 	 */
 	double getCourse();
+
+	/**
+	 * Get the course reference.
+	 *
+	 * @return True or Relative (T or R).
+	 */
+	char getCourseTrueRel();
 
 	/**
 	 * Get the distance at the Closest Point of Approach (CPA).
@@ -146,12 +160,20 @@ public interface TTMSentence extends TimeSentence {
 	void setDistance(double distance);
 
 	/**
-	 * Set the true bearing from the radar to the target.
+	 * Set the bearing from the radar to the target.
 	 *
 	 * @param bearing
 	 *            True bearing in degrees.
 	 */
 	void setBearing(double bearing);
+
+	/**
+	 * Set the reference bearing.
+	 *
+	 * @param tr
+	 *            T or R (True or Relative).
+	 */
+	void setBearingTrueRel(char tr);
 
 	/**
 	 * Set the speed of the target.
@@ -168,6 +190,14 @@ public interface TTMSentence extends TimeSentence {
 	 *            True course in degrees.
 	 */
 	void setCourse(double course);
+
+	/**
+	 * Set the course reference.
+	 *
+	 * @param tr
+	 *            T or R (True or Relative).
+	 */
+	void setCourseTrueRel(char tr);
 
 	/**
 	 * Set the distance at CPA.

@@ -143,6 +143,16 @@ class TTMParser extends SentenceParser implements TTMSentence {
 	/*
 	 * (non-Javadoc)
 	 *
+	 * @see net.sf.marineapi.nmea.sentence.TTMSentence#getBearingtrueRel()
+	 */
+	@Override
+	public char getBearingTrueRel() {
+		return getCharValue(BEARING_TRUE_REL);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 *
 	 * @see net.sf.marineapi.nmea.sentence.TTMSentence#getSpeed()
 	 */
 	@Override
@@ -158,6 +168,16 @@ class TTMParser extends SentenceParser implements TTMSentence {
 	@Override
 	public double getCourse() {
 		return getDoubleValue(COURSE);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 *
+	 * @see net.sf.marineapi.nmea.sentence.TTMSentence#getCourseTrueRel()
+	 */
+	@Override
+	public char getCourseTrueRel() {
+		return getCharValue(COURSE_TRUE_REL);
 	}
 
 	/*
@@ -259,7 +279,17 @@ class TTMParser extends SentenceParser implements TTMSentence {
 	@Override
 	public void setBearing(double bearing) {
 		setDoubleValue(BEARING, bearing, 1, 1);
-		setCharValue(BEARING_TRUE_REL, 'T');
+		//setCharValue(BEARING_TRUE_REL, 'T');
+	}
+
+	/*
+	 * (non-Javadoc)
+	 *
+	 * @see net.sf.marineapi.nmea.sentence.TTMSentence#setBearingTrueRel()
+	 */
+	@Override
+	public void setBearingTrueRel(char tr) {
+		setCharValue(BEARING_TRUE_REL, tr);
 	}
 
 	/*
@@ -281,7 +311,12 @@ class TTMParser extends SentenceParser implements TTMSentence {
 	@Override
 	public void setCourse(double course) {
 		setDoubleValue(COURSE, course, 1, 1);
-		setCharValue(COURSE_TRUE_REL, 'T');
+		//setCharValue(COURSE_TRUE_REL, 'T');
+	}
+
+	@Override
+	public void setCourseTrueRel(char tr) {
+		setCharValue(COURSE_TRUE_REL, tr);
 	}
 
 	/*

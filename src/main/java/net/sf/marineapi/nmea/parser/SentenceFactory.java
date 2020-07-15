@@ -312,6 +312,7 @@ public final class SentenceFactory {
 		registerParser(tempParsers, "ROT", ROTParser.class);
 		registerParser(tempParsers, "RTE", RTEParser.class);
 		registerParser(tempParsers, "RSA", RSAParser.class);
+		registerParser(tempParsers, "TLL", TLLParser.class);
 		registerParser(tempParsers, "TTM", TTMParser.class);
 		registerParser(tempParsers, "TXT", TXTParser.class);
 		registerParser(tempParsers, "VBW", VBWParser.class);
