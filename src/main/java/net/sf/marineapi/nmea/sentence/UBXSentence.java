@@ -20,12 +20,40 @@
 package net.sf.marineapi.nmea.sentence;
 
 import net.sf.marineapi.nmea.parser.SentenceParser;
-import net.sf.marineapi.nmea.sentence.Sentence;
+import net.sf.marineapi.ublox.message.UBXMessage;
+import net.sf.marineapi.ublox.message.parser.UBXMessage00Parser;
+import net.sf.marineapi.ublox.message.parser.UBXMessage03Parser;
+import net.sf.marineapi.ublox.message.parser.UBXMessageFactory;
+import net.sf.marineapi.ublox.message.parser.UBXMessageParser;
 
 /**
+ * Base interface (Outer layer) for all UBX {@link Sentence}s. UBX sentences are
+ * parsed in two phases and they share the same NMEA sentence layout.
+ * <p>
+ * In the second phase the actual message contents is retrieved. Users should use
+ * a {@link UBXMessageParser} implementation to retrieve specific {@link UBXMessage}s.
+ *
+ * The following {@link UBXMessageParser}s
+ * are available:
+ *
+ * <ul>
+ *   <li> {@link UBXMessage00Parser}
+ *   <li> {@link UBXMessage03Parser}
+ * </ul>
+ * <p>
+ * UBX messages are proprietary NMEA messages (Vendor extensions) for u-blox
+ * positioning receivers. They are also often referred to as {@code PUBX00},
+ * {@code PUBX03} etc. {@code Pxxx} identifies this message as proprietary
+ * followed by {@code UBX}. To be consistent, the Java Marine API uses the term
+ * {@code UBX}.
+ * <p>
+ * Important: u-blox also support a binary messaging format called UBX which is not
+ * supported by the Java Marine API.
  *
  * @author Gunnar Hillert
  *
+ * @see UBXMessageParser
+ * @see UBXMessageFactory
  */
 public interface UBXSentence extends Sentence {
 

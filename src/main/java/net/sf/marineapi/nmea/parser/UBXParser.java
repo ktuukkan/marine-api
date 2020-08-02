@@ -56,17 +56,7 @@ public class UBXParser extends SentenceParser implements UBXSentence {
 	}
 
 	public UBXParser(String nmea, String type) {
-		super(nmea);
-		if (type == null || "".equals(type)) {
-			throw new IllegalArgumentException(
-				"Sentence type must be specified.");
-		}
-		String sid = getSentenceId();
-		if (!sid.equals(type)) {
-			String ptrn = "Sentence id mismatch; expected [%s], found [%s].";
-			String msg = String.format(ptrn, type, sid);
-			throw new IllegalArgumentException(msg);
-		}
+		super(nmea, type);
 	}
 
 	@Override

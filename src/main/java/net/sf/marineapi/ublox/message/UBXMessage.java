@@ -19,10 +19,17 @@
  */
 package net.sf.marineapi.ublox.message;
 
+import net.sf.marineapi.nmea.parser.UBXParser;
+import net.sf.marineapi.nmea.sentence.UBXSentence;
+
 /**
- * Common base interface of UBX messages.
+ * Common base interface of UBX messages. Please be aware that the parsing of
+ * UBX Messages is a two-stage process. Please see {@link UBXParser} and
+ * {@link UBXSentence} for details.
  *
  * @author Gunnar Hillert
+ *
+ * @see UBXSentence
  *
  */
 public interface UBXMessage {
