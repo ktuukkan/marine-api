@@ -1,6 +1,6 @@
 /*
  * ShipType.java
- * Copyright (C) 2015 Lázár József
+ * Copyright (C) 2015-2020 Lázár József, Joshua Sweaney
  *
  * This file is part of Java Marine API.
  * <http://ktuukkan.github.io/marine-api/>
@@ -23,7 +23,7 @@ package net.sf.marineapi.ais.util;
 /**
  * Checks the ship type for validity.
  * 
- * @author Lázár József
+ * @author Lázár József, Joshua Sweaney
  */
 public class ShipType {
 
@@ -99,14 +99,81 @@ public class ShipType {
 			int d2 = type % 10;
 			if (0 <= d1 && d1 <= 9 && 0 <= d2 && d2 <= 9) {
 				switch(d1) {
-				case 0:
-					return FIRST_DIGIT[0] + " " + Integer.toString(type);
-				case 3:
-					return FIRST_DIGIT[3] + ", " + VESSEL[d2];
-				case 5: 
-					return SPECIAL[d2];
-				default:
-					return FIRST_DIGIT[d1] + ", " + SECOND_DIGIT[d2]; 
+					case 0:
+						return FIRST_DIGIT[0] + " " + Integer.toString(type);
+					case 3:
+						return FIRST_DIGIT[3] + ", " + VESSEL[d2];
+					case 5: 
+						return SPECIAL[d2];
+					default:
+						return FIRST_DIGIT[d1] + ", " + SECOND_DIGIT[d2]; 
+				}
+			}
+		}
+		return typeStr;
+	}
+
+	/**
+	 * Returns a string describing the first digit. Describes the type of vessel.
+	 * @param type Ship and cargo type indicator
+	 * @return String a text string describing the ship type digit
+	 */
+	static public String shipTypeToVesselString(int type) {
+		String typeStr ="N/A";
+		if (0 <= type && type <= 255) {
+			if (type >= 200)
+				return "Reserved for future use";
+			if (type >= 100)
+				return "Reserved for regional use";
+			if (type == 0)
+				return "Not available / no ship";
+
+			int d1 = type / 10;
+			int d2 = type % 10;
+			if (0 <= d1 && d1 <= 9 && 0 <= d2 && d2 <= 9) {
+				switch(d1) {
+					case 0:
+						return FIRST_DIGIT[0] + " " + Integer.toString(type); // Ship type not specified, so just print whole type number
+					case 3:
+						return FIRST_DIGIT[3]; // Vessel
+					case 5: 
+						return SPECIAL[d2]; // Describes special vessel types for vessels in U.S. waters
+					default:
+						return FIRST_DIGIT[d1]; // Ship type
+				}
+			}
+		}
+		return typeStr;		
+	}
+
+	/**
+	 * Returns a string describing the second digit. Usually describes the type
+	 * of cargo being carried, but may also describe the activity the vessel is engaged in.
+	 * @param type Ship and cargo type indicator
+	 * @return String a text string describing the cargo type digit
+	 */
+	static public String shipTypeToCargoString(int type) {
+		String typeStr ="N/A";
+		if (0 <= type && type <= 255) {
+			if (type >= 200)
+				return "Reserved for future use";
+			if (type >= 100)
+				return "Reserved for regional use";
+			if (type == 0)
+				return "Not available / no ship";
+
+			int d1 = type / 10;
+			int d2 = type % 10;
+			if (0 <= d1 && d1 <= 9 && 0 <= d2 && d2 <= 9) {
+				switch(d1) {
+					case 0:
+						return FIRST_DIGIT[0] + " " + Integer.toString(type); // Cargo not specified, so just print whole type number
+					case 3:
+						return VESSEL[d2]; // Describes an activity the vessel is engaged in
+					case 5: 
+						return SPECIAL[d2]; // Describes special vessel types for vessels in U.S. waters
+					default:
+						return SECOND_DIGIT[d2]; // Describes the cargo being carried
 				}
 			}
 		}
