@@ -57,7 +57,7 @@ class VDRParser extends SentenceParser implements VDRSentence {
 		super(tid, SentenceId.VDR, 6);
 		setCharValue(TRUE_INDICATOR, 'T');
 		setCharValue(MAGN_INDICATOR, 'M');
-		setCharValue(SPEED_UNITS, Units.KNOT.toChar());
+		setCharValue(SPEED_UNITS, Units.NAUTICAL_MILES.toChar());
 	}
 
 	/*

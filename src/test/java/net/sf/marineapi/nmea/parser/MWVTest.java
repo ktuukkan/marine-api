@@ -187,8 +187,8 @@ public class MWVTest {
 	 */
 	@Test
 	public void testSetSpeedUnit() {
-		mwv.setSpeedUnit(Units.KMH);
-		assertEquals(Units.KMH, mwv.getSpeedUnit());
+		mwv.setSpeedUnit(Units.KILOMETERS);
+		assertEquals(Units.KILOMETERS, mwv.getSpeedUnit());
 	}
 
 	/**

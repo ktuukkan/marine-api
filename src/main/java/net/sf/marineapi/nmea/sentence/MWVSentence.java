@@ -50,8 +50,8 @@ public interface MWVSentence extends Sentence {
 	/**
 	 * Returns the wind speed unit.
 	 * 
-	 * @return {@link Units#METER} for meters per second, {@link Units#KMH} for
-	 *         kilometers per hour and {@link Units#KNOT} for knots.
+	 * @return {@link Units#METER} for meters per second, {@link Units#KILOMETERS} for
+	 *         kilometers per hour and {@link Units#NAUTICAL_MILES} for knots.
 	 */
 	Units getSpeedUnit();
 
@@ -87,8 +87,8 @@ public interface MWVSentence extends Sentence {
 	/**
 	 * Set wind speed unit.
 	 * 
-	 * @param unit {@link Units#METER} for meters per second, {@link Units#KMH}
-	 *            for kilometers per hour and {@link Units#KNOT} for knots.
+	 * @param unit {@link Units#METER} for meters per second, {@link Units#KILOMETERS}
+	 *            for kilometers per hour and {@link Units#NAUTICAL_MILES} for knots.
 	 * @throws IllegalArgumentException If trying to set invalid unit
 	 */
 	void setSpeedUnit(Units unit);

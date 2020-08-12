@@ -1,6 +1,6 @@
 /* 
- * Units.java
- * Copyright (C) 2010 Kimmo Tuukkanen
+ * ReferenceSystem.java
+ * Copyright (C) 2020 Joshua Sweaney
  * 
  * This file is part of Java Marine API.
  * <http://ktuukkan.github.io/marine-api/>
@@ -21,43 +21,28 @@
 package net.sf.marineapi.nmea.util;
 
 /**
- * Defines the supported units of measure.
- *  
- * @author Kimmo Tuukkanen
- *
+ * Defines the various reference systems that can be used to calculate
+ * a vessel's kinematics such as speed and course.
+ * 
+ * @see net.sf.marineapi.nmea.sentence.OSDSentence
+ * 
+ * @author Joshua Sweaney
  */
-public enum Units {
+public enum ReferenceSystem {
 
-	/** Pressure in bars */
-	BARS('B'),
-	
-	/** Temperature in degrees Celsius (centigrade) */
-	CELSIUS('C'),
+    BOTTOM_TRACKING_LOG('B'),
 
-	/** Depth in fathoms */
-	FATHOMS('F'),
+    MANUALLY_ENTERED('M'),
 
-	/** Length in feet */
-	FEET('f'),
+    WATER_REFERENCED('W'),
 
-	/** Distance/pressure in inches  */
-	INCHES('I'),
-	
-	/** Kilometers - used for distance, and speed (as kilometers per hour) */
-	KILOMETERS('K'),
+    RADAR_TRACKING('R'),
 
-	/** Length in meter */
-	METER('M'),
-	
-	/** Nautical miles - used for distance, and for speed (nautical miles per hour, which are knots) */
-	NAUTICAL_MILES('N'),
+    POSITIONING_SYSTEM_GROUND_REFERENCE('P');
 
-	/** Statute miles - used for distance, and for speed (as miles per hour/mph) */
-	STATUTE_MILES('S');
+    private char ch;
 
-	private char ch;
-
-	private Units(char c) {
+	private ReferenceSystem(char c) {
 		ch = c;
 	}
 
@@ -73,15 +58,16 @@ public enum Units {
 	/**
 	 * Get the enum corresponding to specified char.
 	 * 
-	 * @param ch Char indicator for unit
-	 * @return Units enum
+	 * @param ch Char indicator for reference
+	 * @return ReferenceSystem enum
 	 */
-	public static Units valueOf(char ch) {
-		for (Units u : values()) {
-			if (u.toChar() == ch) {
-				return u;
+	public static ReferenceSystem valueOf(char ch) {
+		for (ReferenceSystem r : values()) {
+			if (r.toChar() == ch) {
+				return r;
 			}
 		}
 		return valueOf(String.valueOf(ch));
 	}
+    
 }
