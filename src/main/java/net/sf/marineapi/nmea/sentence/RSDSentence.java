@@ -166,31 +166,31 @@ public interface RSDSentence {
 
     /**
      * Set the range for origin one
-     * @param bearing double the range
+     * @param range the range
      */
     void setOriginOneRange(double range);
 
     /**
      * Set the bearing for origin one
-     * @param bearing double the bearing
+     * @param bearing the bearing
      */
     void setOriginOneBearing(double bearing);
     
     /**
      * Set the range of VRM one
-     * @param range double the range
+     * @param range the range
      */
     void setVRMOneRange(double range);
 
     /**
      * Set the bearing of EBL one
-     * @param bearing double the bearing
+     * @param bearing the bearing
      */
     void setEBLOneBearing(double bearing);
 
     /**
      * Set the range for origin two
-     * @param bearing double the range
+     * @param range the range
      */
     void setOriginTwoRange(double range);
 
@@ -202,37 +202,37 @@ public interface RSDSentence {
     
     /**
      * Set the range of VRM two
-     * @param range double the range
+     * @param range the range
      */
     void setVRMTwoRange(double range);
 
     /**
      * Set the bearing of EBL two
-     * @param bearing double the bearing
+     * @param bearing the bearing
      */
     void setEBLTwoBearing(double bearing);
 
     /**
      * Set the cursor range
-     * @param range double the range
+     * @param range the range
      */
     void setCursorRange(double range);
 
     /**
      * Set the cursor bearing
-     * @param bearing double the bearing
+     * @param bearing the bearing
      */
     void setCursorBearing(double bearing);
 
     /**
      * Set the range scale
-     * @param rangeScale double the range scale
+     * @param rangeScale the range scale
      */
     void setRangeScale(double rangeScale);
 
     /**
      * Set the range units
-     * @param Units the units used for the ranges (either kilometres, nautical miles, or statute miles)
+     * @param units the units used for the ranges (either kilometres, nautical miles, or statute miles)
      */
     void setRangeUnits(Units units);
 

@@ -68,7 +68,8 @@ public interface TLBSentence extends Sentence {
      * Sets the target (id,label) pairs in this sentence. The size of each
      * array must be identical. The nth position in each array corresponds
      * to the nth position in the other array.
-     * @param targetIds int array of target IDs
+     * @param targetIds array of target IDs
+     * @param targetLabels array of target labels
      * @throws java.lang.IllegalArgumentException If array sizes are not the same
      */
     void setTargetPairs(int[] targetIds, String[] targetLabels);

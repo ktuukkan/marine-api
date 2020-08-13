@@ -133,43 +133,43 @@ public interface OSDSentence {
 
     /**
      * Set ownship heading
-     * @param double the heading
+     * @param heading the heading
      */
     void setHeading(double heading);
 
     /**
      * Set the heading data status
-     * @param DataStatus the status
+     * @param status the status
      */
     void setHeadingStatus(DataStatus status);
 
     /**
      * Set ownship course
-     * @param double the course
+     * @param course the course
      */
     void setCourse(double course);
 
     /**
      * Set the reference system for the course
-     * @param ReferenceSystem the reference
+     * @param reference the reference
      */
     void setCourseReference(ReferenceSystem reference);
 
     /**
      * Set ownship speed
-     * @param double the speed
+     * @param speed the speed
      */
     void setSpeed(double speed);
 
     /**
      * Set the reference system for the speed
-     * @param ReferenceSystem the reference
+     * @param reference the reference
      */
     void setSpeedReference(ReferenceSystem reference);
 
     /**
      * Set the vessel set
-     * @param double the vessel set
+     * @param set the vessel set
      */
     void setVesselSet(double set);
 
@@ -181,7 +181,7 @@ public interface OSDSentence {
 
     /**
      * Set the speed units
-     * @param Units the units
+     * @param units the units
      */
     void setSpeedUnits(Units units);
     
