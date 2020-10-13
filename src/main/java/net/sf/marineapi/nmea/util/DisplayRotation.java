@@ -1,6 +1,6 @@
 /* 
- * Units.java
- * Copyright (C) 2010 Kimmo Tuukkanen
+ * DisplayRotation.java
+ * Copyright (C) 2020 Joshua Sweaney
  * 
  * This file is part of Java Marine API.
  * <http://ktuukkan.github.io/marine-api/>
@@ -21,43 +21,27 @@
 package net.sf.marineapi.nmea.util;
 
 /**
- * Defines the supported units of measure.
- *  
- * @author Kimmo Tuukkanen
- *
+ * Defines the various display rotations a navigational display
+ * (such as an ARPA) can select.
+ * 
+ * @see net.sf.marineapi.nmea.sentence.RSDSentence
+ * 
+ * @author Joshua Sweaney
  */
-public enum Units {
+public enum DisplayRotation {
 
-	/** Pressure in bars */
-	BARS('B'),
-	
-	/** Temperature in degrees Celsius (centigrade) */
-	CELSIUS('C'),
+    /** Course up, course-over-ground up, degrees true */
+    COURSE_UP('C'),
 
-	/** Depth in fathoms */
-	FATHOMS('F'),
+    /** Head up, ship's heading (centre line) pointing up */
+    HEAD_UP('H'),
 
-	/** Length in feet */
-	FEET('f'),
+    /** North up, true north 0 degrees is up */
+    NORTH_UP('N');
 
-	/** Distance/pressure in inches  */
-	INCHES('I'),
-	
-	/** Kilometers - used for distance, and speed (as kilometers per hour) */
-	KILOMETERS('K'),
+    private char ch;
 
-	/** Length in meter */
-	METER('M'),
-	
-	/** Nautical miles - used for distance, and for speed (nautical miles per hour, which are knots) */
-	NAUTICAL_MILES('N'),
-
-	/** Statute miles - used for distance, and for speed (as miles per hour/mph) */
-	STATUTE_MILES('S');
-
-	private char ch;
-
-	private Units(char c) {
+	private DisplayRotation(char c) {
 		ch = c;
 	}
 
@@ -73,15 +57,16 @@ public enum Units {
 	/**
 	 * Get the enum corresponding to specified char.
 	 * 
-	 * @param ch Char indicator for unit
-	 * @return Units enum
+	 * @param ch Char indicator for display rotation
+	 * @return DisplayRotation enum
 	 */
-	public static Units valueOf(char ch) {
-		for (Units u : values()) {
-			if (u.toChar() == ch) {
-				return u;
+	public static DisplayRotation valueOf(char ch) {
+		for (DisplayRotation r : values()) {
+			if (r.toChar() == ch) {
+				return r;
 			}
 		}
 		return valueOf(String.valueOf(ch));
 	}
+    
 }

@@ -307,12 +307,15 @@ public class SentenceFactory {
 		registerParser(tempParsers, "MTA", MTAParser.class);
 		registerParser(tempParsers, "MTW", MTWParser.class);
 		registerParser(tempParsers, "MWV", MWVParser.class);
+		registerParser(tempParsers, "OSD", OSDParser.class);
 		registerParser(tempParsers, "RMB", RMBParser.class);
 		registerParser(tempParsers, "RMC", RMCParser.class);
 		registerParser(tempParsers, "RPM", RPMParser.class);
 		registerParser(tempParsers, "ROT", ROTParser.class);
 		registerParser(tempParsers, "RTE", RTEParser.class);
 		registerParser(tempParsers, "RSA", RSAParser.class);
+		registerParser(tempParsers, "RSD", RSDParser.class);
+		registerParser(tempParsers, "TLB", TLBParser.class);
 		registerParser(tempParsers, "TLL", TLLParser.class);
 		registerParser(tempParsers, "TTM", TTMParser.class);
 		registerParser(tempParsers, "TXT", TXTParser.class);

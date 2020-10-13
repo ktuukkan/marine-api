@@ -123,8 +123,8 @@ public class SentenceParser implements Sentence {
 	 * @param size Number of sentence data fields
 	 */
 	protected SentenceParser(char begin, TalkerId talker, String type, int size) {
-		if (size < 1) {
-			throw new IllegalArgumentException("Minimum number of fields is 1");
+		if (size < 0) {
+			throw new IllegalArgumentException("Size cannot be negative.");
 		}
 		if (talker == null) {
 			throw new IllegalArgumentException("Talker ID must be specified");

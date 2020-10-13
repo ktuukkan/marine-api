@@ -6,22 +6,30 @@
 [![Javadocs](http://www.javadoc.io/badge/net.sf.marineapi/marineapi.svg)](http://www.javadoc.io/doc/net.sf.marineapi/marineapi)
 [![Sponsored by Spice](https://img.shields.io/badge/sponsored%20by-Spice-brightgreen.svg)](http://www.spiceprogram.org)
 
-- [About](#about)
+- [Java Marine API](#java-marine-api)
+  - [About](#about)
     - [Features](#features)
-- [Licensing](#licensing)
-- [Disclaimer](#disclaimer)
-- [Requirements](#requirements)
-- [Usage](#usage)
-- [Supported Protocols](#supported-protocols)
+    - [Licensing](#licensing)
+    - [Disclaimer](#disclaimer)
+    - [Requirements](#requirements)
+    - [Usage](#usage)
+  - [Supported Protocols](#supported-protocols)
     - [NMEA 0183](#nmea-0183)
     - [AIS](#ais)
-    - [Raymarine SeaTalk](#raymarine-seatalk1)
+    - [Raymarine SeaTalk<sup>1</sup>](#raymarine-seatalksup1sup)
     - [NMEA Vendor Extensions](#nmea-vendor-extensions)
-- [Distribution](#distribution)
+  - [Distribution](#distribution)
     - [Pre-built JARs](#pre-built-jars)
     - [Maven](#maven)
-- [Contributing](#contributing)
-- [References](#references)
+      - [Snapshots](#snapshots)
+  - [Contributing](#contributing)
+  - [References](#references)
+    - [Wikipedia](#wikipedia)
+    - [National Marine Electronics Association](#national-marine-electronics-association)
+    - [Navigation Center of U.S. Department of Homeland Security](#navigation-center-of-us-department-of-homeland-security)
+    - [Product Manuals and User Guides](#product-manuals-and-user-guides)
+    - [Miscellaneus](#miscellaneus)
+    - [No longer available](#no-longer-available)
 
 ## About
 
@@ -153,12 +161,15 @@ the library. See wiki for
 |MTW    |Water temperature in degrees Celcius
 |MWD    |Wind speed and direction.
 |MWV    |Wind speed and angle
+|OSD    |Own ship data
 |RMB    |Recommended minimum navigation information "type B"
 |RMC    |Recommended minimum navigation information "type C"
 |ROT    |Vessel's rate of turn
 |RPM    |Engine or shaft revolutions
 |RSA    |Rudder angle in degrees
+|RSD    |Radar system data
 |RTE    |GPS route data with list of waypoints
+|TLB    |Target label
 |TTM    |Tracked target message
 |TXT    |Text message
 |VBW    |Dual ground/water speed.
