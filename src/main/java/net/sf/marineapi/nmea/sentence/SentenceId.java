@@ -81,6 +81,8 @@ public enum SentenceId {
     MTW,
     /** Wind speed and angle */
     MWV,
+    /** Own ship data */
+    OSD,
     /** Recommended minimum navigation information */
     RMB,
     /** Recommended minimum specific GPS/TRANSIT data */
@@ -91,8 +93,12 @@ public enum SentenceId {
     RPM,
     /** Rudder angle, measured in degrees */
     RSA,
+    /** Radar system data */
+    RSD,
     /** Route data and waypoint list */
     RTE,
+    /** Target Label */
+    TLB,
     /** Tracked target Longitude Latitude*/
     TLL,
     /** Tracked target */

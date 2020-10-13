@@ -16,6 +16,11 @@ Version 0.12.0-SNAPSHOT
 
   Contributions:
   - TTM parser by @NontasPantzopoulos
+  - TLB, OSD, and RSD sentences and parsers by @joshsweaney
+  - Changed some speed units (KMH, KNOT, MPH) to their base units
+    (KILOMETERS, NAUTICAL_MILES, STATUTE_MILES) so that more sentences
+    can use them @joshsweaney
+  - Added separate convenience methods for ship and cargo type strings @joshsweaney
 
 Version 0.11.0 (2019-07-06)
 

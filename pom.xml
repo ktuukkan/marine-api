@@ -146,6 +146,7 @@ along with Java Marine API. If not, see <http://www.gnu.org/licenses />.
                 <version>3.0.1</version>
                 <configuration>
                     <excludePackageNames>net.sf.marineapi.example</excludePackageNames>
+                    <source>1.8</source>
                 </configuration>
                 <executions>
                     <execution>

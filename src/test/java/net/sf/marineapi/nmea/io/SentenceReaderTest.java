@@ -136,7 +136,7 @@ public class SentenceReaderTest {
 		});
 
 		reader.start();
-		Thread.sleep(100);
+		Thread.sleep(1000);
 
 		assertFalse(received.isEmpty());
 		assertEquals(server.TXT, received.get(0).toString());
