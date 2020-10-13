@@ -1,6 +1,6 @@
 /*
  * TTMParser.java
- * Copyright (C) 2014 Johan Bergkvist
+ * Copyright (C) 2014-2020 Johan Bergkvist, Joshua Sweaney
  *
  * This file is part of Java Marine API.
  * <http://ktuukkan.github.io/marine-api/>
@@ -34,7 +34,7 @@ import net.sf.marineapi.nmea.util.Units;
 /**
  * TTM sentence parser.
  *
- * @author Johan Bergkvist
+ * @author Johan Bergkvist, Joshua Sweaney
  */
 class TTMParser extends SentenceParser implements TTMSentence {
 
@@ -355,6 +355,14 @@ class TTMParser extends SentenceParser implements TTMSentence {
 	@Override
 	public void setTimeToCPA(double minutes) {
 		setDoubleValue(TIME_CPA, minutes, 1, 1);
+	}
+
+	/**
+	 * @see net.sf.marineapi.nmea.sentence.TTMSentence#setUnits(Units)
+	 */
+	@Override
+	public void setUnits(Units units) {
+		setCharValue(UNITS, units.toChar());		
 	}
 
 	/*

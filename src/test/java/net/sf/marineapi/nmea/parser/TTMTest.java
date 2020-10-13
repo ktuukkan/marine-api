@@ -4,6 +4,7 @@ import net.sf.marineapi.nmea.sentence.TalkerId;
 import net.sf.marineapi.nmea.util.AcquisitionType;
 import net.sf.marineapi.nmea.util.TargetStatus;
 import net.sf.marineapi.nmea.util.Time;
+import net.sf.marineapi.nmea.util.Units;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -13,7 +14,7 @@ import static org.junit.Assert.*;
 /**
  * Tests the RMC sentence parser.
  * 
- * @author Johan Bergkvist
+ * @author Johan Bergkvist, Joshua Sweaney
  */
 public class TTMTest {
 
@@ -99,6 +100,15 @@ public class TTMTest {
 	@Test
 	public void testGetTimeToCPA() {
 		assertEquals(20.2, ttm.getTimeToCPA(), 0.001);
+	}
+
+	/**
+	 * Test method for
+	 * {@link net.sf.marineapi.nmea.parser.TTMParser#getUnits()}
+	 */
+	@Test
+	public void testGetUnits() {
+		assertEquals(Units.NAUTICAL_MILES, ttm.getUnits());
 	}
 
 	/**
@@ -232,6 +242,16 @@ public class TTMTest {
 	public void testSetTimeToCPA() {
 		ttm.setTimeToCPA(15.0);
 		assertTrue(ttm.toString().contains(",15.0,"));
+	}
+
+	/**
+	 * Test method for
+	 * {@link net.sf.marineapi.nmea.parser.TTMParser#setUnits(Units)} .
+	 */
+	@Test
+	public void testSetUnits() {
+		ttm.setUnits(Units.KILOMETERS);
+		assertTrue(ttm.toString().contains(",K,"));
 	}
 
 	/**

@@ -1,6 +1,6 @@
 /*
  * TTMSentence.java
- * Copyright (C) 2014 Johan Bergkvist
+ * Copyright (C) 2014-2020 Johan Bergkvist, Joshua Sweaney
  *
  * This file is part of Java Marine API.
  * <http://ktuukkan.github.io/marine-api/>
@@ -31,7 +31,7 @@ import net.sf.marineapi.nmea.util.Units;
  * Example:<br>
  * {@code $RATTM,11,11.4,13.6,T,7.0,20.0,T,0.0,0.0,N,,Q,,154125.82,A,*17}
  *
- * @author Johan Bergkvist
+ * @author Johan Bergkvist, Joshua Sweaney
  */
 public interface TTMSentence extends TimeSentence {
 
@@ -228,6 +228,12 @@ public interface TTMSentence extends TimeSentence {
 	 *            Time to CPA in minutes.
 	 */
 	void setTimeToCPA(double minutes);
+
+	/**
+	 * Set the units used for speed/distance
+	 * @param units The units that the speed and distance values are in (K/N/S)
+	 */
+	void setUnits(Units units);
 
 	/**
 	 * Set the name of the target.
