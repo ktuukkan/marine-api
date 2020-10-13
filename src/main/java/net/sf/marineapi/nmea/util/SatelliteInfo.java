@@ -1,20 +1,20 @@
-/* 
+/*
  * SatelliteInfo.java
  * Copyright (C) 2010 Kimmo Tuukkanen
- * 
+ *
  * This file is part of Java Marine API.
  * <http://ktuukkan.github.io/marine-api/>
- * 
+ *
  * Java Marine API is free software: you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by the
  * Free Software Foundation, either version 3 of the License, or (at your
  * option) any later version.
- * 
+ *
  * Java Marine API is distributed in the hope that it will be useful, but
  * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
  * FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License
  * for more details.
- * 
+ *
  * You should have received a copy of the GNU Lesser General Public License
  * along with Java Marine API. If not, see <http://www.gnu.org/licenses/>.
  */
@@ -23,8 +23,9 @@ package net.sf.marineapi.nmea.util;
 /**
  * SatelliteInfo represents the information about a single GPS satellite
  * vehicle.
- * 
+ *
  * @author Kimmo Tuukkanen
+ * @author Gunnar Hillert
  * @see net.sf.marineapi.nmea.sentence.GSVSentence
  */
 public class SatelliteInfo {
@@ -36,7 +37,7 @@ public class SatelliteInfo {
 
 	/**
 	 * Creates a new instance of SatelliteInfo
-	 * 
+	 *
 	 * @param id Satellite ID
 	 * @param elevation Current elevation of the satellite
 	 * @param azimuth Current azimuth of the satellite
@@ -51,7 +52,7 @@ public class SatelliteInfo {
 
 	/**
 	 * Get satellite azimuth, in degrees from true north (0..359&deg;).
-	 * 
+	 *
 	 * @return azimuth value
 	 */
 	public int getAzimuth() {
@@ -60,7 +61,7 @@ public class SatelliteInfo {
 
 	/**
 	 * Get satellite elevation, in degrees (max. 90&deg;).
-	 * 
+	 *
 	 * @return elevation value
 	 */
 	public int getElevation() {
@@ -69,7 +70,7 @@ public class SatelliteInfo {
 
 	/**
 	 * Get the ID of satellite vehicle, for example "05".
-	 * 
+	 *
 	 * @return ID String
 	 */
 	public String getId() {
@@ -78,7 +79,7 @@ public class SatelliteInfo {
 
 	/**
 	 * Get satellite the signal noise ratio, in dB (0-99 dB).
-	 * 
+	 *
 	 * @return Noise ratio
 	 */
 	public int getNoise() {
@@ -87,7 +88,7 @@ public class SatelliteInfo {
 
 	/**
 	 * Set satellite azimuth, in degrees from true north (0..359&deg;).
-	 * 
+	 *
 	 * @param azimuth the azimuth to set
 	 * @throws IllegalArgumentException If value is out of bounds 0..360 deg.
 	 */
@@ -100,7 +101,7 @@ public class SatelliteInfo {
 
 	/**
 	 * Set satellite elevation, in degrees (max. 90&deg;).
-	 * 
+	 *
 	 * @param elevation the elevation to set
 	 * @throws IllegalArgumentException If value is out of bounds 0..90 deg.
 	 */
@@ -113,7 +114,7 @@ public class SatelliteInfo {
 
 	/**
 	 * Set the ID of satellite vehicle, for example "05".
-	 * 
+	 *
 	 * @param id the id to set
 	 */
 	public void setId(String id) {
@@ -122,7 +123,7 @@ public class SatelliteInfo {
 
 	/**
 	 * Set the satellite signal noise ratio, in dB (0-99 dB).
-	 * 
+	 *
 	 * @param noise the noise to set
 	 * @throws IllegalArgumentException If value is out of bounds 0..99 dB.
 	 */
@@ -131,6 +132,12 @@ public class SatelliteInfo {
 			throw new IllegalArgumentException("Value out of bounds 0..99 dB");
 		}
 		this.noise = noise;
+	}
+
+	@Override
+	public String toString() {
+		return String.format("SatelliteInfo [id=%3s, elevation=%03d deg, azimuth=%03d deg, noise=%02d db]",
+				getId(), getElevation(), getAzimuth(), getNoise());
 	}
 
 }
