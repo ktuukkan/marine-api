@@ -203,6 +203,7 @@ messages are decoded.
 |19     |Extended Class B Equipment Position Report
 |21     |Aid-to-Navigation Report
 |24     |Static Data Report
+|27     |Position Report for long range applications
 
 ### Raymarine SeaTalk<sup>1</sup>
 
