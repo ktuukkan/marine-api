@@ -13,6 +13,7 @@ Version 0.12.0-SNAPSHOT
       to avoid unnecessary compiler warnings when working with legacy devices
   - Added support for TLL sentences;
   - TTMSentence; refactored bearing and course setters/getters
+  - FaaMode enum; added support for RTK modes
 
   Contributions:
   - TTM parser by @NontasPantzopoulos

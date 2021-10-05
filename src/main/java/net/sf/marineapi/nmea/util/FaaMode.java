@@ -51,8 +51,10 @@ public enum FaaMode {
 	/** Operating in precise mode, no degradation like Selective Availability (NMEA 4.00 and later). */
 	PRECISE('P'),
 
+	/** Real-time kinematic mode (fixed) */
 	RTK_FIXED('R'),
 
+	/** Real-time kinematic mode (float) */
 	RTK_FLOAT('F'),
 
 	/** Simulated data (running in simulator/demo mode) */
