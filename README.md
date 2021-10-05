@@ -1,6 +1,6 @@
 # Java Marine API
 [![License](https://img.shields.io/badge/License-LGPL%20v3-brightgreen.svg)](./LICENSE)
-[![Build Status](https://travis-ci.org/ktuukkan/marine-api.png)](https://travis-ci.org/ktuukkan/marine-api)
+[![Build](https://github.com/ktuukkan/marine-api/actions/workflows/test.yml/badge.svg)](https://github.com/ktuukkan/marine-api/actions/workflows/test.yml)
 [![Maven Central](https://maven-badges.herokuapp.com/maven-central/net.sf.marineapi/marineapi/badge.svg)](https://maven-badges.herokuapp.com/maven-central/net.sf.marineapi/marineapi)
 [![Download Java Marine API](https://img.shields.io/sourceforge/dm/marineapi.svg)](https://sourceforge.net/projects/marineapi/files/Releases/)
 [![Javadocs](http://www.javadoc.io/badge/net.sf.marineapi/marineapi.svg)](http://www.javadoc.io/doc/net.sf.marineapi/marineapi)
