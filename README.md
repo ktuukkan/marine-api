@@ -97,25 +97,31 @@ should never be your only reference.
 
 Write a listener:
 
-    class GGAListener extends AbstractSentenceListener<GGASentence> {
-        public void sentenceRead(GGASentence gga) {
-            Position pos = gga.getPosition();
-            // .. your code
-        }
+```java
+class GGAListener extends AbstractSentenceListener<GGASentence> {
+    public void sentenceRead(GGASentence gga) {
+        Position pos = gga.getPosition();
+        // .. your code
     }
+}
+```
 
 Set up the reader:
 
-    File file = new File("/var/log/nmea.log");
-    SentenceReader reader = new SentenceReader(new FileInputStream(file));
-    reader.addSentenceListener(new GGAListener());
-    reader.start();
+```java
+File file = new File("/var/log/nmea.log");
+SentenceReader reader = new SentenceReader(new FileInputStream(file));
+reader.addSentenceListener(new GGAListener());
+reader.start();
+```
 
 Manual parsing:
 
-    String nmea = "$GPGSA,A,3,03,05,07,08,10,15,18,19,21,28,,,1.4,0.9,1.1*3A";
-    SentenceFactory sf = SentenceFactory.getInstance();
-    GSASentence gsa = (GSASentence) sf.createParser(nmea);
+```java
+String nmea = "$GPGSA,A,3,03,05,07,08,10,15,18,19,21,28,,,1.4,0.9,1.1*3A";
+SentenceFactory sf = SentenceFactory.getInstance();
+GSASentence gsa = (GSASentence) sf.createParser(nmea);
+```
 
 See also:
 - [Examples](src/main/java/net/sf/marineapi/example)
