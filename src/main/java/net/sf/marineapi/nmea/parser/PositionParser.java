@@ -23,23 +23,23 @@ package net.sf.marineapi.nmea.parser;
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
 
-import net.sf.marineapi.nmea.parser.support.PositionParseUtils;
 import net.sf.marineapi.nmea.sentence.SentenceId;
 import net.sf.marineapi.nmea.sentence.TalkerId;
 import net.sf.marineapi.nmea.util.CompassPoint;
 import net.sf.marineapi.nmea.util.Position;
 
 /**
- * Abstract base class for sentence parsers that provide geographic position or
- * waypoint data, and thus need to parse lat/lon values. However, notice that
- * {@link net.sf.marineapi.nmea.sentence.PositionSentence} interface is not
- * implemented by this parser because the extending parser may not always
+ * <p>
+ * Abstract base class for sentence parsers that handle geographic position or
+ * waypoint data and parse NMEA 0183 lat/lon values.</p>
+ * <p>
+ * Notice that {@link net.sf.marineapi.nmea.sentence.PositionSentence} interface
+ * is not implemented by this parser because the extending parser may not always
  * provide current location.
  *
  * @author Kimmo Tuukkanen
- * @author Gunnara Hillert
  */
-abstract class PositionParser extends SentenceParser {
+public abstract class PositionParser extends SentenceParser {
 
 	/**
 	 * Constructor.
@@ -72,7 +72,7 @@ abstract class PositionParser extends SentenceParser {
 	 */
 	protected CompassPoint parseHemisphereLat(int index) {
 		char ch = getCharValue(index);
-		return PositionParseUtils.parseHemisphereLat(ch);
+		return PositionParser.parseHemisphereLat(ch);
 	}
 
 	/**
@@ -83,7 +83,7 @@ abstract class PositionParser extends SentenceParser {
 	 */
 	protected CompassPoint parseHemisphereLon(int index) {
 		char ch = getCharValue(index);
-		return PositionParseUtils.parseHemisphereLon(ch);
+		return PositionParser.parseHemisphereLon(ch);
 	}
 
 	/**
@@ -93,19 +93,19 @@ abstract class PositionParser extends SentenceParser {
 	 * denote full degrees (usually padded with leading zeros). Digits to the
 	 * right of the dot denote the minute decimals.
 	 *
-	 * @see PositionParseUtils
+	 * @see PositionParser
 	 * @param index Index of the lat/lon field.
 	 * @return Degrees decimal value
 	 */
 	protected double parseDegrees(int index) {
 		String field = getStringValue(index);
-		return PositionParseUtils.parseDegrees(field);
+		return PositionParser.parseDegrees(field);
 	}
 
 	/**
 	 * Parses a {@code Position} from specified fields.
 	 *
-	 * @see PositionParseUtils
+	 * @see PositionParser
 	 * @param latIndex Latitude field index
 	 * @param latHemIndex Latitude hemisphere field index
 	 * @param lonIndex Longitude field index
@@ -121,8 +121,9 @@ abstract class PositionParser extends SentenceParser {
 		final String longitudeValue = getStringValue(lonIndex);
 		final char longitudeHemisphereIndicator = getCharValue(lonHemIndex);
 
-		return PositionParseUtils.parsePosition(
-				latitudeValue, latitudeHemisphereIndicator, longitudeValue, longitudeHemisphereIndicator);
+		return PositionParser.parsePosition(
+				latitudeValue, latitudeHemisphereIndicator,
+				longitudeValue, longitudeHemisphereIndicator);
 	}
 
 	/**
@@ -219,5 +220,84 @@ abstract class PositionParser extends SentenceParser {
 		setLongitude(lonIndex, Math.abs(p.getLongitude()));
 		setLatHemisphere(latHemIndex, p.getLatitudeHemisphere());
 		setLonHemisphere(lonHemIndex, p.getLongitudeHemisphere());
+	}
+
+	/**
+	 * Parse latitude or longitude degrees and minutes from the specified string.
+	 * Assumes the {@code dddmm.mmmm} formatting where the two digits to the
+	 * left of dot denote full minutes and any remaining digits to the left
+	 * denote full degrees (usually padded with leading zeros). Digits to the
+	 * right of the dot denote the minute decimals.
+	 *
+	 * @param degreeStr NMEA 0183 degrees/minutes String
+	 * @return Degrees decimal value
+	 */
+	public static double parseDegrees(String degreeStr) {
+
+		int dotIndex = degreeStr.indexOf(".");
+
+		String degStr = dotIndex > 2 ? degreeStr.substring(0, dotIndex - 2) : "0";
+		String minStr = dotIndex > 2 ? degreeStr.substring(dotIndex - 2) : degreeStr;
+
+		int deg = Integer.parseInt(degStr);
+		double min = Double.parseDouble(minStr);
+
+		return deg + (min / 60);
+	}
+
+	/**
+	 * Parses the hemisphere of latitude from specified char.
+	 *
+	 * @param ch Hemisphere char indicator.
+	 * @return Corresponding {@link CompassPoint} enum value.
+	 * @throws ParseException If specified char is not 'N' or 'S'.
+	 */
+	public static CompassPoint parseHemisphereLat(char ch) {
+		CompassPoint d = CompassPoint.valueOf(ch);
+		if (d != CompassPoint.NORTH && d != CompassPoint.SOUTH) {
+			throw new ParseException("Invalid latitude hemisphere '" + ch + "'");
+		}
+		return d;
+	}
+
+	/**
+	 * Parses the hemisphere of longitude from the specified char.
+	 *
+	 * @param ch Hemisphere char indicator.
+	 * @return Corresponding {@link CompassPoint} enum value.
+	 * @throws ParseException If specified char is not 'E' or 'W'.
+	 */
+	public static CompassPoint parseHemisphereLon(char ch) {
+		CompassPoint d = CompassPoint.valueOf(ch);
+		if (d != CompassPoint.EAST && d != CompassPoint.WEST) {
+			throw new ParseException("Invalid longitude hemisphere " + ch + "'");
+		}
+		return d;
+	}
+
+	/**
+	 * Parses a {@code Position} from specified fields. The parameters are the raw
+	 * values from the NMEA Sentence.
+	 *
+	 * @param latitudeValue String value from the NMEA Sentence
+	 * @param latitudeHemisphereIndicator Character value from the NMEA Sentence
+	 * @param longitudeValue String value from the NMEA Sentence
+	 * @param longitudeHemisphereIndicator Character value from the NMEA Sentence
+	 * @return Position object
+	 */
+	public static Position parsePosition(String latitudeValue, char latitudeHemisphereIndicator,
+		String longitudeValue, char longitudeHemisphereIndicator) {
+
+		double lat = parseDegrees(latitudeValue);
+		double lon = parseDegrees(longitudeValue);
+		CompassPoint lath = parseHemisphereLat(latitudeHemisphereIndicator);
+		CompassPoint lonh = parseHemisphereLon(longitudeHemisphereIndicator);
+		if (lath.equals(CompassPoint.SOUTH)) {
+			lat = -lat;
+		}
+		if (lonh.equals(CompassPoint.WEST)) {
+			lon = -lon;
+		}
+		return new Position(lat, lon);
 	}
 }

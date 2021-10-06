@@ -19,7 +19,7 @@
  */
 package net.sf.marineapi.ublox.message.parser;
 
-import net.sf.marineapi.nmea.parser.support.PositionParseUtils;
+import net.sf.marineapi.nmea.parser.PositionParser;
 import net.sf.marineapi.nmea.sentence.UBXSentence;
 import net.sf.marineapi.nmea.util.Position;
 import net.sf.marineapi.nmea.util.Time;
@@ -30,7 +30,6 @@ import net.sf.marineapi.ublox.util.UbloxNavigationStatus;
  * Parser implementation for {@link UBXMessage00} (Lat/Long Position Data).
  *
  * @author Gunnar Hillert
- *
  */
 public class UBXMessage00Parser extends UBXMessageParser implements UBXMessage00 {
 
@@ -76,7 +75,7 @@ public class UBXMessage00Parser extends UBXMessageParser implements UBXMessage00
 		final String longitudeField = this.sentence.getUBXFieldStringValue(LONGITUDE);
 		final char longitudeHemisphereIndicatorField = this.sentence.getUBXFieldCharValue(LON_HEMISPHERE);
 
-		final Position position = PositionParseUtils.parsePosition(
+		final Position position = PositionParser.parsePosition(
 				latitudeField, latitudeHemisphereIndicatorField,
 				longitudeField, longitudeHemisphereIndicatorField);
 
