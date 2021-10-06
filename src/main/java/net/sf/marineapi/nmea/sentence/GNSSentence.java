@@ -36,7 +36,7 @@ package net.sf.marineapi.nmea.sentence;
  *
  * @author Kimmo Tuukkanen
  */
-public interface GNSSentence extends Sentence, PositionSentence, TimeSentence {
+public interface GNSSentence extends PositionSentence, TimeSentence {
 
     /**
      * GNS operational modes, a mix of {@link net.sf.marineapi.nmea.util.FaaMode}
@@ -211,7 +211,7 @@ public interface GNSSentence extends Sentence, PositionSentence, TimeSentence {
 
     /**
      * Sets the age of differential GPS data.
-     * 
+     *
      * <p>Notice: field is {@code null} when Talker ID is {@code GN}, additional GNS messages
      * follow with {@code GP} and/or {@code GL} age of differential data.</p>
      *
