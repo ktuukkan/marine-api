@@ -17,17 +17,17 @@
     - [NMEA 0183](#nmea-0183)
     - [AIS](#ais)
     - [Raymarine SeaTalk<sup>1</sup>](#raymarine-seatalksup1sup)
-    - [NMEA Vendor Extensions](#nmea-vendor-extensions)
+    - [u-blox](#u-blox)
   - [Distribution](#distribution)
     - [Pre-built JARs](#pre-built-jars)
     - [Maven](#maven)
       - [Snapshots](#snapshots)
   - [Contributing](#contributing)
   - [References](#references)
-    - [Wikipedia](#wikipedia)
     - [National Marine Electronics Association](#national-marine-electronics-association)
     - [Navigation Center of U.S. Department of Homeland Security](#navigation-center-of-us-department-of-homeland-security)
     - [Product Manuals and User Guides](#product-manuals-and-user-guides)
+    - [Wikipedia](#wikipedia)
     - [Miscellaneus](#miscellaneus)
     - [No longer available](#no-longer-available)
 
@@ -122,6 +122,7 @@ See also:
 - [Javadocs](http://www.javadoc.io/doc/net.sf.marineapi/marineapi)
 - [Graphical User Interface](https://github.com/aitov/gps-info) using marine-api by @aitov
 
+
 ## Supported Protocols
 
 ### NMEA 0183
@@ -213,9 +214,7 @@ Only the NMEA layer is currently supported, see
 [STALKSentence](src/main/java/net/sf/marineapi/nmea/sentence/STALKSentence.java)
 and [Issue #67](https://github.com/ktuukkan/marine-api/issues/67).
 
-### NMEA Vendor Extensions
-
-#### u-blox
+### u-blox
 
 The following [u-blox](https://www.u-blox.com/)
 vendor extension messages are supported:
@@ -224,9 +223,6 @@ vendor extension messages are supported:
 |---      |---
 | PUBX,01 |Lat/Long Position Data
 | PUBX,03 |Satellite Status
-
-For more information, please see the
-[ZED-F9P Interface Description Manual](https://www.u-blox.com/en/docs/UBX-18010854)
 
 ## Distribution
 
@@ -275,6 +271,7 @@ to enable snapshot dependencies.
 Snapshots may also be downloaded manually from the
 [repository](https://oss.sonatype.org/content/repositories/snapshots/net/sf/marineapi/marineapi/).
 
+
 ## Contributing
 
 Any feedback or contribution is welcome. You have several options:
@@ -284,6 +281,7 @@ Any feedback or contribution is welcome. You have several options:
 - [Fork](https://help.github.com/articles/fork-a-repo/) and open a [pullrequest](https://help.github.com/articles/about-pull-requests/)
 to share improvements.
 
+
 ## References
 
 All information and specifications for this library has been gathered from the
@@ -291,11 +289,6 @@ following documents, availability last checked on 2020-03-15.
 
 *Notice: any warnings regarding the accuracy of the information in below
 documents apply equally to Java Marine API.*
-
-### Wikipedia
-
-  * [NMEA 0183](http://en.wikipedia.org/wiki/NMEA_0183)
-  * [Automatic Identification System](https://en.wikipedia.org/wiki/Automatic_identification_system)
 
 ### National Marine Electronics Association
 
@@ -322,12 +315,17 @@ documents apply equally to Java Marine API.*
 * [SeaTalk/NMEA/RS232 Converter Manual](https://community.atmel.com/sites/default/files/project_files/ManualV3-5.pdf) by gadgetPool
 * [SiRF NMEA Reference Manual](https://www.sparkfun.com/datasheets/GPS/NMEA%20Reference%20Manual-Rev2.1-Dec07.pdf) by SiRF Technology, Inc.
 * [The NMEA Information Sheet](https://www.actisense.com/wp-content/uploads/2020/01/NMEA-0183-Information-sheet-issue-4-1-1.pdf) by Actisense
+* [ZED-F9P u-blox F9 high precision GNSS receiver Interface Description](https://www.u-blox.com/en/docs/UBX-18010854)
+
+### Wikipedia
+
+  * [NMEA 0183](http://en.wikipedia.org/wiki/NMEA_0183)
+  * [Automatic Identification System](https://en.wikipedia.org/wiki/Automatic_identification_system)
 
 ### Miscellaneus
 
-* [NMEA Revealed](http://catb.org/gpsd/NMEA.html) by Eric S. Raymond
-* [AIVDM/AIVDO protocol decoding](http://catb.org/gpsd/AIVDM.html) by Eric S. Raymond
-* [NMEA Data](http://www.gpsinformation.org/dale/nmea.htm) by Dale DePriest
+* [NMEA Revealed](https://gpsd.gitlab.io/gpsd/NMEA.html) by Eric S. Raymond
+* [AIVDM/AIVDO protocol decoding](https://gpsd.gitlab.io/gpsd/AIVDM.html) by Eric S. Raymond
 * [SeaTalk Technical Reference](http://www.thomasknauf.de/seatalk.htm) by Thomas Knauf
 
 ### No longer available
@@ -338,3 +336,7 @@ documents apply equally to Java Marine API.*
   by Glenn Baddeley (not found)
 * [The NMEA FAQ](http://vancouver-webpages.com/peter/nmeafaq.txt)
   by Peter Bennett (see [older copy](http://www.eoss.org/pubs/nmeafaq.htm))
+* [NMEA Data](http://www.gpsinformation.org/dale/nmea.htm) by Dale DePriest
+
+
+---
