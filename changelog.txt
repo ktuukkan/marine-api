@@ -2,6 +2,15 @@ Java Marine API - changelog
 <http://ktuukkan.github.io/marine-api/>
 
 Version 0.12.0-SNAPSHOT
+  - Added support for OSD sentences; own ship data
+  - Added support for RSD sentences; radar system data
+  - Added support for TLB sentences; target label data
+  - Added support for TLL sentences; target latitude and longitude
+  - Added support for u-blox PUBX,01; lat/long position data
+  - Added support for u-blox PUBX,03; satellite status
+  - Changed some speed units (KMH, KNOT, MPH) to their base units
+    (KILOMETERS, NAUTICAL_MILES, STATUTE_MILES) so that more sentences
+    can use them.
   - AIS message length validation moved to AISMessageParser.
   - AISMessage05; added missing DTE flag getter.
   - TalkerId enum
@@ -9,23 +18,18 @@ Version 0.12.0-SNAPSHOT
       FD, FE, FR, FS, HD, HF, HS, JA, JB, JC, JD, JE, JF, JG, JH, MX, NL, RB,
       RI, SC, SG, TC, UP, VA, VR, VS, VT and WL
     - Added WV to suppport Wärtsilä proprietary sentences
-    - Updated javadocs and removed @Deprecated annotation from obsolete entries
-      to avoid unnecessary compiler warnings when working with legacy devices
-  - Added support for TLL sentences;
+    - Updated javadocs and removed @Deprecated annotations to avoid unecessary
+      compiler warnings when working with legacy versions of NMEA 0183.
   - TTMSentence; refactored bearing and course setters/getters
-  - FaaMode enum; added support for RTK modes
+  - ShipType; added convenience methods for ship and cargo type (AIS)
+  - FaaMode enum; added RTK modes
 
   Contributions:
   - TTM parser by @NontasPantzopoulos
-  - Added support for u-blox Vendor extension messages:
-    - PUBX,01 - Lat/Long position data
-    - PUBX,03 - Satellite Status
-  - TLB, OSD, and RSD sentences and parsers by @joshsweaney
-  - Changed some speed units (KMH, KNOT, MPH) to their base units
-    (KILOMETERS, NAUTICAL_MILES, STATUTE_MILES) so that more sentences
-    can use them @joshsweaney
-  - Added separate convenience methods for ship and cargo type strings @joshsweaney
-  - Added ability to set units in TTM sentence @joshsweaney
+  - TLB, OSD and RSD sentences by @joshsweaney
+  - Speed unit improvements by @joshsweaney
+  - ShipType methods by @joshsweaney
+  - TTM units setters by @joshsweaney
 
 Version 0.11.0 (2019-07-06)
 
