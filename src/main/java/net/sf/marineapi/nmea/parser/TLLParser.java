@@ -11,13 +11,13 @@ import net.sf.marineapi.nmea.util.TargetStatus;
 import net.sf.marineapi.nmea.util.Time;
 
 /**
- * Sent by the Radar (ARPA / MARPA) and handled by the AIS Decoder in the same way as an AIS target 
- * 
+ * Sent by the Radar (ARPA / MARPA) and handled by the AIS Decoder in the same way as an AIS target
+ *
  * TLL - Target Latitude and Longitude
  *        0  1       2 3        4 5    6         7 8 9
  *        |  |       | |        | |    |         | | |
  * $--TLL,xx,llll.ll,a,yyyyy.yy,a,c--c,hhmmss.ss,a,a*hh)
- * 
+ *
  * Field Number:
  * 0-Target Number (0-999)
  * 1-Target Latitude
@@ -29,11 +29,11 @@ import net.sf.marineapi.nmea.util.Time;
  * 7-Status (L=lost, Q=acquisition, T=tracking)
  * 8-R= reference target; null (,,)= otherwise
  * 9-Checksum
- * 
+ *
  * example ({@code $RATLL,01,3731.51052,N,02436.00000,E,TEST1,161617.88,T,*0C}
  * @author Epameinondas Pantzopoulos
  */
-public class TLLParser extends PositionParser implements TLLSentence{
+class TLLParser extends PositionParser implements TLLSentence{
 
 	private static final int NUMBER = 0;
 	private static final int LATITUDE = 1;
@@ -44,11 +44,11 @@ public class TLLParser extends PositionParser implements TLLSentence{
 	private static final int UTC_TIME = 6;
 	private static final int STATUS = 7;
 	private static final int REFERENCE = 8;
-	
+
 	public TLLParser(String nmea) {
 		super(nmea,SentenceId.TLL);
 	}
-	
+
 	public TLLParser(TalkerId talker) {
 		super(talker, SentenceId.TLL,9);
 	}
@@ -92,13 +92,13 @@ public class TLLParser extends PositionParser implements TLLSentence{
 	@Override
 	public void setNumber(int number) {
 		setIntValue(NUMBER, number, 2);
-		
+
 	}
 
 	@Override
 	public void setName(String name) {
 		setStringValue(NAME, name);
-		
+
 	}
 
 	@Override
@@ -112,14 +112,14 @@ public class TLLParser extends PositionParser implements TLLSentence{
 
 		str += nf.format(t.getSeconds());
 		setStringValue(UTC_TIME, str);
-		
-		
+
+
 	}
 
 	@Override
 	public void setStatus(TargetStatus status) {
 		setCharValue(STATUS, status.toChar());
-		
+
 	}
 
 	@Override
@@ -127,9 +127,9 @@ public class TLLParser extends PositionParser implements TLLSentence{
 		if (isReference) {
 			setCharValue(REFERENCE, 'R');
 		}
-		
+
 	}
-	
-	
-	
+
+
+
 }

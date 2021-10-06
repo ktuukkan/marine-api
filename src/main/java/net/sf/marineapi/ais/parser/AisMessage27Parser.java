@@ -35,7 +35,7 @@ import net.sf.marineapi.ais.util.*;
  *
  * @author Krzysztof Borowski
  */
-public class AisMessage27Parser extends AISMessageParser implements AISMessage27 {
+class AisMessage27Parser extends AISMessageParser implements AISMessage27 {
 
     private final static String SEPARATOR = "\n\t";
     private final static int POSITIONACCURACY = 0;

@@ -1,20 +1,20 @@
-/* 
+/*
  * OSDParser.java
  * Copyright (C) 2020 Joshua Sweaney
- * 
+ *
  * This file is part of Java Marine API.
  * <http://ktuukkan.github.io/marine-api/>
- * 
+ *
  * Java Marine API is free software: you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by the
  * Free Software Foundation, either version 3 of the License, or (at your
  * option) any later version.
- * 
+ *
  * Java Marine API is distributed in the hope that it will be useful, but
  * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
  * FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License
  * for more details.
- * 
+ *
  * You should have received a copy of the GNU Lesser General Public License
  * along with Java Marine API. If not, see <http://www.gnu.org/licenses/>.
  */
@@ -31,10 +31,10 @@ import net.sf.marineapi.nmea.util.Units;
 
 /**
  * OSD sentence parser
- * 
+ *
  * @author Joshua Sweaney
  */
-public class OSDParser extends SentenceParser implements OSDSentence {
+class OSDParser extends SentenceParser implements OSDSentence {
 
     private static final int HEADING = 0;
     private static final int HEADING_STATUS = 1;
@@ -50,7 +50,7 @@ public class OSDParser extends SentenceParser implements OSDSentence {
 
     /**
 	 * Creates a new instance of OSD parser
-	 * 
+	 *
 	 * @param nmea OSD sentence string.
 	 */
 	public OSDParser(String nmea) {
@@ -59,13 +59,13 @@ public class OSDParser extends SentenceParser implements OSDSentence {
 
     /**
 	 * Creates OSD parser with empty sentence.
-	 * 
+	 *
 	 * @param talker TalkerId to set
 	 */
 	public OSDParser(TalkerId talker) {
 		super(talker, SentenceId.OSD, 9);
     }
-    
+
     /**
      * @see net.sf.marineapi.nmea.sentence.OSDSentence#getHeading()
      */
@@ -139,7 +139,7 @@ public class OSDParser extends SentenceParser implements OSDSentence {
     /**
      * @see net.sf.marineapi.nmea.sentence.OSDSentence#setHeadingStatus(DataStatus)
      */
-    public void setHeadingStatus(DataStatus status) {        
+    public void setHeadingStatus(DataStatus status) {
         setCharValue(HEADING_STATUS, status.toChar());
     }
 
@@ -203,5 +203,5 @@ public class OSDParser extends SentenceParser implements OSDSentence {
             throw new IllegalArgumentException(err);
         }
     }
-    
+
 }
