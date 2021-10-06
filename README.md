@@ -85,13 +85,12 @@ should never be your only reference.
 
 ### Requirements
 
-* Java 2 SE JRE/JDK v1.8.0 or newer
-* For serial port communication:
-
-    * [Neuron Robotics Java Serial Library](https://github.com/NeuronRobotics/nrjavaserial)
-    * [PureJavaComm](http://www.sparetimelabs.com/purejavacomm)
-    * [RXTX library](http://rxtx.qbang.org)
-    * [Java Communications API](http://www.oracle.com/technetwork/java/index-jsp-141752.html)
+* Java 2 SE JRE/JDK 11 or newer
+* For serial port communication (choose one):
+  * [Neuron Robotics Java Serial Library](https://github.com/NeuronRobotics/nrjavaserial)
+  * [PureJavaComm](http://www.sparetimelabs.com/purejavacomm)
+  * [RXTX library](http://rxtx.qbang.org)
+  * [Java Communications API](http://www.oracle.com/technetwork/java/index-jsp-141752.html)
 
 ### Usage
 
@@ -251,28 +250,32 @@ package naming.
 Both releases and snapshots are deployed to [Maven Central Repository](https://search.maven.org/#search%7Cga%7C1%7Cg%3A%22net.sf.marineapi%22)
 and may be imported by adding the following dependency in your `pom.xml`.
 
-    <dependency>
-      <groupId>net.sf.marineapi</groupId>
-      <artifactId>marineapi</artifactId>
-      <version>0.10.0</version>
-      <type>bundle</type>
-    </dependency>
+```xml
+<dependency>
+  <groupId>net.sf.marineapi</groupId>
+  <artifactId>marineapi</artifactId>
+  <version>0.10.0</version>
+  <type>bundle</type>
+</dependency>
+```
 
 #### Snapshots
 
 The snapshots should be mostly stable, but they are still *Work In Progress* and
 should be considered as a preview of the next release.
 
-See [changelog](changelog.txt) for the current `SNAPSHOT` version. Notice that
+See [changelog.txt](changelog.txt) for the current `SNAPSHOT` version. Notice that
 you may need to tweak your [Maven settings](https://gist.github.com/ktuukkan/8cf2de1e915185118c60)
 to enable snapshot dependencies.
 
-    <dependency>
-      <groupId>net.sf.marineapi</groupId>
-      <artifactId>marineapi</artifactId>
-      <version>0.11.0-SNAPSHOT</version>
-      <type>bundle</type>
-    </dependency>
+```xml
+<dependency>
+  <groupId>net.sf.marineapi</groupId>
+  <artifactId>marineapi</artifactId>
+  <version>0.11.0-SNAPSHOT</version>
+  <type>bundle</type>
+</dependency>
+```
 
 Snapshots may also be downloaded manually from the
 [repository](https://oss.sonatype.org/content/repositories/snapshots/net/sf/marineapi/marineapi/).
@@ -284,7 +287,7 @@ Any feedback or contribution is welcome. You have several options:
 
 - [Contact me](https://github.com/ktuukkan)
 - [Report a bug](https://github.com/ktuukkan/marine-api/issues)
-- [Fork](https://help.github.com/articles/fork-a-repo/) and open a [pullrequest](https://help.github.com/articles/about-pull-requests/)
+- [Fork](https://help.github.com/articles/fork-a-repo/) and open a [pull request](https://help.github.com/articles/about-pull-requests/)
 to share improvements.
 
 
@@ -321,7 +324,7 @@ documents apply equally to Java Marine API.*
 * [SeaTalk/NMEA/RS232 Converter Manual](https://community.atmel.com/sites/default/files/project_files/ManualV3-5.pdf) by gadgetPool
 * [SiRF NMEA Reference Manual](https://www.sparkfun.com/datasheets/GPS/NMEA%20Reference%20Manual-Rev2.1-Dec07.pdf) by SiRF Technology, Inc.
 * [The NMEA Information Sheet](https://www.actisense.com/wp-content/uploads/2020/01/NMEA-0183-Information-sheet-issue-4-1-1.pdf) by Actisense
-* [ZED-F9P u-blox F9 high precision GNSS receiver Interface Description](https://www.u-blox.com/en/docs/UBX-18010854)
+* [ZED-F9P F9 high precision GNSS receiver Interface Description](https://www.u-blox.com/en/docs/UBX-18010854) by u-blox
 
 ### Wikipedia
 
@@ -330,19 +333,16 @@ documents apply equally to Java Marine API.*
 
 ### Miscellaneus
 
-* [NMEA Revealed](https://gpsd.gitlab.io/gpsd/NMEA.html) by Eric S. Raymond
 * [AIVDM/AIVDO protocol decoding](https://gpsd.gitlab.io/gpsd/AIVDM.html) by Eric S. Raymond
+* [NMEA Revealed](https://gpsd.gitlab.io/gpsd/NMEA.html) by Eric S. Raymond
 * [SeaTalk Technical Reference](http://www.thomasknauf.de/seatalk.htm) by Thomas Knauf
 
 ### No longer available
 
-* [RS232/SeaTalk/NMEA Converter manual](http://www.gadgetpool.de/nuke/downloads/ManualRS232.pdf)
-  by gadgetPool (not found)
-* [NMEA Sentence Information](http://home.mira.net/~gnb/gps/nmea.html)
-  by Glenn Baddeley (not found)
-* [The NMEA FAQ](http://vancouver-webpages.com/peter/nmeafaq.txt)
-  by Peter Bennett (see [older copy](http://www.eoss.org/pubs/nmeafaq.htm))
 * [NMEA Data](http://www.gpsinformation.org/dale/nmea.htm) by Dale DePriest
+* [NMEA Sentence Information](http://home.mira.net/~gnb/gps/nmea.html) by Glenn Baddeley (not found)
+* [RS232/SeaTalk/NMEA Converter manual](http://www.gadgetpool.de/nuke/downloads/ManualRS232.pdf) by gadgetPool (not found)
+* [The NMEA FAQ](http://vancouver-webpages.com/peter/nmeafaq.txt) by Peter Bennett (see [older copy](http://www.eoss.org/pubs/nmeafaq.htm))
 
 
 ---
