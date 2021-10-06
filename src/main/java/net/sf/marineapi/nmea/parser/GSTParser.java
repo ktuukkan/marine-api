@@ -1,20 +1,20 @@
-/* 
+/*
  * GSTParser.java
  * Copyright (C) 2010 Kimmo Tuukkanen
- * 
+ *
  * This file is part of Java Marine API.
  * <http://ktuukkan.github.io/marine-api/>
- * 
+ *
  * Java Marine API is free software: you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by the
  * Free Software Foundation, either version 3 of the License, or (at your
  * option) any later version.
- * 
+ *
  * Java Marine API is distributed in the hope that it will be useful, but
  * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
  * FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License
  * for more details.
- * 
+ *
  * You should have received a copy of the GNU Lesser General Public License
  * along with Java Marine API. If not, see <http://www.gnu.org/licenses/>.
  */
@@ -23,13 +23,11 @@ package net.sf.marineapi.nmea.parser;
 import net.sf.marineapi.nmea.sentence.GSTSentence;
 import net.sf.marineapi.nmea.sentence.SentenceId;
 import net.sf.marineapi.nmea.sentence.TalkerId;
-import net.sf.marineapi.nmea.parser.SentenceParser;
 import net.sf.marineapi.nmea.util.Time;
-import net.sf.marineapi.nmea.util.Units;
 
 /**
  * GST sentence parser.
- * 
+ *
  * @author Tero Laitinen
  */
 class GSTParser extends SentenceParser implements GSTSentence {
@@ -46,7 +44,7 @@ class GSTParser extends SentenceParser implements GSTSentence {
 
 	/**
 	 * Creates a new instance of GST parser.
-	 * 
+	 *
 	 * @param nmea GST sentence String.
 	 * @throws IllegalArgumentException If the specified sentence is invalid or
 	 *						 not a GST sentence.
@@ -57,7 +55,7 @@ class GSTParser extends SentenceParser implements GSTSentence {
 
 	/**
 	 * Creates GSA parser with empty sentence.
-	 * 
+	 *
 	 * @param talker TalkerId to set
 	 */
 	public GSTParser(TalkerId talker) {
@@ -147,7 +145,7 @@ class GSTParser extends SentenceParser implements GSTSentence {
 	public void setPseudoRangeResidualsRMS(double rms) {
 		setDoubleValue(PSEUDORANGE_RESIDUALS_RMS, rms);
 	}
- 
+
 	/*
 	 * (non-Javadoc)
 	 * @see net.sf.marineapi.nmea.sentence.GSTSentence#setSemiMajorError
