@@ -6,11 +6,9 @@ Version 0.12.0-SNAPSHOT
   - Added support for RSD sentences; radar system data
   - Added support for TLB sentences; target label data
   - Added support for TLL sentences; target latitude and longitude
-  - Added support for u-blox PUBX,01; lat/long position data
-  - Added support for u-blox PUBX,03; satellite status
-  - Changed some speed units (KMH, KNOT, MPH) to their base units
-    (KILOMETERS, NAUTICAL_MILES, STATUTE_MILES) so that more sentences
-    can use them.
+  - Added support for AIS message 27; long-range automatic identification
+  - Added support for u-blox message 01; lat/long position data
+  - Added support for u-blox message 03; satellite status
   - AIS message length validation moved to AISMessageParser.
   - AISMessage05; added missing DTE flag getter.
   - TalkerId enum
@@ -21,15 +19,18 @@ Version 0.12.0-SNAPSHOT
     - Updated javadocs and removed @Deprecated annotations to avoid unecessary
       compiler warnings when working with legacy versions of NMEA 0183.
   - TTMSentence; refactored bearing and course setters/getters
+  - Changed some speed units (KMH, KNOT, MPH) to their base units
+    (KILOMETERS, NAUTICAL_MILES, STATUTE_MILES) so that more sentences
+    can use them.
   - ShipType; added convenience methods for ship and cargo type (AIS)
   - FaaMode enum; added RTK modes
 
   Contributions:
-  - TTM parser by @NontasPantzopoulos
-  - TLB, OSD and RSD sentences by @joshsweaney
-  - Speed unit improvements by @joshsweaney
-  - ShipType methods by @joshsweaney
-  - TTM units setters by @joshsweaney
+  - TTM sentence by Epameinondas Pantzopoulos (@NontasPantzopoulos)
+  - TLB, OSD and RSD sentences by Joshua Sweaney (@joshsweaney)
+  - AIS message 27 by Krzysztof Borowski (@liosedhel)
+  - Unit and ShipType improvements by Joshua Sweaney (@joshsweaney)
+  - u-blox support by Gunnar Hillert (@ghillert)
 
 Version 0.11.0 (2019-07-06)
 
