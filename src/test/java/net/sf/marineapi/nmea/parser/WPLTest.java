@@ -14,7 +14,7 @@ import org.junit.Test;
 
 /**
  * WPLTest
- * 
+ *
  * @author Kimmo Tuukkanen
  */
 public class WPLTest {
@@ -46,8 +46,8 @@ public class WPLTest {
 	 */
 	@Test
 	public void testGetWaypoint() {
-		final Double lat = new Double(55 + (36.200 / 60));
-		final Double lon = new Double(14 + (36.500 / 60));
+		final Double lat = Double.valueOf(55 + (36.200 / 60));
+		final Double lon = Double.valueOf(14 + (36.500 / 60));
 
 		Waypoint wp = wpl.getWaypoint();
 
@@ -55,8 +55,8 @@ public class WPLTest {
 		assertEquals("RUSKI", wp.getId());
 		assertEquals(CompassPoint.NORTH, wp.getLatitudeHemisphere());
 		assertEquals(CompassPoint.EAST, wp.getLongitudeHemisphere());
-		assertEquals(lat, new Double(wp.getLatitude()));
-		assertEquals(lon, new Double(wp.getLongitude()));
+		assertEquals(lat, Double.valueOf(wp.getLatitude()));
+		assertEquals(lon, Double.valueOf(wp.getLongitude()));
 	}
 
 	/**

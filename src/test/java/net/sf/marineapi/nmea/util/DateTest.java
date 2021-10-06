@@ -144,7 +144,7 @@ public class DateTest {
 	@Test
 	public void testEqualsWrongType() {
 		Object str = new String("foobar");
-		Object dbl = new Double(123);
+		Object dbl = Double.valueOf(123);
 		assertFalse(instance.equals(str));
 		assertFalse(instance.equals(dbl));
 	}
