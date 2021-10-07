@@ -46,6 +46,7 @@ class AisMessage27Parser extends AISMessageParser implements AISMessage27 {
     private final static int SPEEDOVERGROUND = 5;
     private final static int COURSEOVERGROUND = 6;
     private final static int POSITIONLATENCY = 7;
+    @SuppressWarnings("unused")
     private final static int SPARE = 8;
     private final static int[] FROM = {
             38, 38, 49, 44, 62, 79, 85, 94, 95};
