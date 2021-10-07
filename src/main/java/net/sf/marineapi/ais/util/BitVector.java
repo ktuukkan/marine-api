@@ -45,7 +45,6 @@ public class BitVector {
 	 * Creates a new instance with given BitSet and length.
 	 *
 	 * @param vector BitSet
-	 * @param bits Vector length
 	 */
 	public BitVector(BitSet vector) {
 		fBitVector = vector;

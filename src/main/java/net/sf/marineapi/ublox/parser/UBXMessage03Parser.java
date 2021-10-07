@@ -17,7 +17,7 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Java Marine API. If not, see <http://www.gnu.org/licenses/>.
  */
-package net.sf.marineapi.ublox.message.parser;
+package net.sf.marineapi.ublox.parser;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,7 +34,7 @@ import net.sf.marineapi.ublox.util.UbloxSatelliteStatus;
  * @author Gunnar Hillert
  *
  */
-public class UBXMessage03Parser extends UBXMessageParser implements UBXMessage03 {
+class UBXMessage03Parser extends UBXMessageParser implements UBXMessage03 {
 
 	private static final int NUMBER_OF_TRACKED_SATELLITES = 1;
 

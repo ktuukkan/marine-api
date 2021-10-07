@@ -30,7 +30,6 @@ import net.sf.marineapi.nmea.parser.SentenceFactory;
 import net.sf.marineapi.nmea.sentence.Sentence;
 import net.sf.marineapi.nmea.sentence.UBXSentence;
 import net.sf.marineapi.ublox.message.UBXMessage03;
-import net.sf.marineapi.ublox.message.parser.UBXMessage03Parser;
 import net.sf.marineapi.ublox.util.UbloxSatelliteInfo;
 
 /**

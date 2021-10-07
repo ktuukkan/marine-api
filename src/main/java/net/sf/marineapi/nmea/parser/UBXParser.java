@@ -22,9 +22,7 @@ package net.sf.marineapi.nmea.parser;
 import net.sf.marineapi.nmea.sentence.SentenceId;
 import net.sf.marineapi.nmea.sentence.TalkerId;
 import net.sf.marineapi.nmea.sentence.UBXSentence;
-import net.sf.marineapi.ublox.message.parser.UBXMessage00Parser;
-import net.sf.marineapi.ublox.message.parser.UBXMessage03Parser;
-import net.sf.marineapi.ublox.message.parser.UBXMessageParser;
+import net.sf.marineapi.ublox.parser.UBXMessageParser;
 
 /**
  * Common UBX sentence parser. These messages are often referred to as PUBX messages,
@@ -37,10 +35,8 @@ import net.sf.marineapi.ublox.message.parser.UBXMessageParser;
  *
  * @see UBXSentence
  * @see UBXMessageParser
- * @see UBXMessage00Parser
- * @see UBXMessage03Parser
  */
-public class UBXParser extends SentenceParser implements UBXSentence {
+class UBXParser extends SentenceParser implements UBXSentence {
 
 	public UBXParser(String nmea) {
 		super(nmea, SentenceId.UBX);

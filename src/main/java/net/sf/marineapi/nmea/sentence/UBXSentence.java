@@ -21,10 +21,10 @@ package net.sf.marineapi.nmea.sentence;
 
 import net.sf.marineapi.nmea.parser.SentenceParser;
 import net.sf.marineapi.ublox.message.UBXMessage;
-import net.sf.marineapi.ublox.message.parser.UBXMessage00Parser;
-import net.sf.marineapi.ublox.message.parser.UBXMessage03Parser;
-import net.sf.marineapi.ublox.message.parser.UBXMessageFactory;
-import net.sf.marineapi.ublox.message.parser.UBXMessageParser;
+import net.sf.marineapi.ublox.message.UBXMessage00;
+import net.sf.marineapi.ublox.message.UBXMessage03;
+import net.sf.marineapi.ublox.parser.UBXMessageFactory;
+import net.sf.marineapi.ublox.parser.UBXMessageParser;
 
 /**
  * Base interface (Outer layer) for all UBX {@link Sentence}s. UBX sentences are
@@ -37,8 +37,8 @@ import net.sf.marineapi.ublox.message.parser.UBXMessageParser;
  * are available:
  *
  * <ul>
- *   <li> {@link UBXMessage00Parser}
- *   <li> {@link UBXMessage03Parser}
+ *   <li> {@link UBXMessage00}
+ *   <li> {@link UBXMessage03}
  * </ul>
  * <p>
  * UBX messages are proprietary NMEA messages (Vendor extensions) for u-blox

@@ -17,7 +17,7 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Java Marine API. If not, see <http://www.gnu.org/licenses/>.
  */
-package net.sf.marineapi.ublox.message.parser;
+package net.sf.marineapi.ublox.parser;
 
 import net.sf.marineapi.nmea.parser.SentenceParser;
 import net.sf.marineapi.nmea.sentence.UBXSentence;
@@ -32,7 +32,6 @@ import net.sf.marineapi.ublox.message.UBXMessage;
  *
  * @see UBXMessage00Parser
  * @see UBXMessage03Parser
- *
  */
 public class UBXMessageParser extends SentenceParser implements UBXMessage {
 

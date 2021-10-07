@@ -33,7 +33,6 @@ import net.sf.marineapi.nmea.sentence.Sentence;
 import net.sf.marineapi.nmea.util.CompassPoint;
 import net.sf.marineapi.nmea.util.Position;
 import net.sf.marineapi.ublox.message.UBXMessage00;
-import net.sf.marineapi.ublox.message.parser.UBXMessage00Parser;
 import net.sf.marineapi.ublox.util.UbloxNavigationStatus;
 
 /**

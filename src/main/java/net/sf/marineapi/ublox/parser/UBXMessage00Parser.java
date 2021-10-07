@@ -17,7 +17,7 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Java Marine API. If not, see <http://www.gnu.org/licenses/>.
  */
-package net.sf.marineapi.ublox.message.parser;
+package net.sf.marineapi.ublox.parser;
 
 import net.sf.marineapi.nmea.parser.PositionParser;
 import net.sf.marineapi.nmea.sentence.UBXSentence;
@@ -31,7 +31,7 @@ import net.sf.marineapi.ublox.util.UbloxNavigationStatus;
  *
  * @author Gunnar Hillert
  */
-public class UBXMessage00Parser extends UBXMessageParser implements UBXMessage00 {
+class UBXMessage00Parser extends UBXMessageParser implements UBXMessage00 {
 
 	private static final int UTC_TIME = 1;
 	private static final int LATITUDE = 2;
