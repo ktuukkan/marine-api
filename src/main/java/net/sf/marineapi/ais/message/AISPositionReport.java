@@ -25,7 +25,8 @@ package net.sf.marineapi.ais.message;
  * Common interface for all messages providing position reports.</p>
  * <p>
  * See <a href="https://www.navcen.uscg.gov/?pageName=AISMessagesA">Class A AIS
- * position report</a> specification for more details and status codes.</p>
+ * position report</a> specification for more details on return values and
+ * status codes.</p>
  *
  * @author Lázár József
  */
@@ -46,25 +47,24 @@ public interface AISPositionReport extends AISPositionInfo {
 	double getRateOfTurn();
 
 	/**
-	 * Returns the speed over ground.
+	 * Returns the speed over ground. Notice that maximum returned speed is
+	 * 102.2, even when the actual speed is higher.
 	 *
-	 * @return Speed in 1/10 knot steps (0-102.2 knots), 1023 = not available,
-	 *         1022 = 102.2 knots or higher.
+	 * @return Speed in knots 0-102.2 or 102.3 when not available.
 	 */
 	double getSpeedOverGround();
 
 	/**
 	 * Returns the course over ground.
 	 *
-	 * @return Course in 1/10 = (0-3599). 3600 (E10h) = not available = default,
-	 *         3601-4095 should not be used.
+	 * @return Course in degrees 0-359.9 or 360 when not available (default).
 	 */
 	double getCourseOverGround();
 
 	/**
 	 * Returns the true heading.
 	 *
-	 * @return Degrees (0-359) (511 indicates not available = default)
+	 * @return Heading in degrees 0-359 or 511 when not available (default).
 	 */
 	int getTrueHeading();
 
