@@ -1,20 +1,20 @@
-/* 
+/*
  * AbstractProvider.java
  * Copyright (C) 2011 Kimmo Tuukkanen
- * 
+ *
  * This file is part of Java Marine API.
  * <http://ktuukkan.github.io/marine-api/>
- * 
+ *
  * Java Marine API is free software: you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by the
  * Free Software Foundation, either version 3 of the License, or (at your
  * option) any later version.
- * 
+ *
  * Java Marine API is distributed in the hope that it will be useful, but
  * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
  * FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License
  * for more details.
- * 
+ *
  * You should have received a copy of the GNU Lesser General Public License
  * along with Java Marine API. If not, see <http://www.gnu.org/licenses/>.
  */
@@ -23,6 +23,7 @@ package net.sf.marineapi.provider;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import net.sf.marineapi.nmea.event.SentenceEvent;
 import net.sf.marineapi.nmea.event.SentenceListener;
@@ -56,7 +57,7 @@ public abstract class AbstractProvider<T extends ProviderEvent> implements
 
 	/**
 	 * Creates a new instance of AbstractProvider.
-	 * 
+	 *
 	 * @param reader Sentence reader to be used as data source
 	 * @param ids Types of sentences to capture for creating provider events
 	 */
@@ -69,7 +70,7 @@ public abstract class AbstractProvider<T extends ProviderEvent> implements
 
 	/**
 	 * Creates a new instance of AbstractProvider.
-	 * 
+	 *
 	 * @param reader Sentence reader to be used as data source
 	 * @param ids Types of sentences to capture for creating provider events
 	 */
@@ -82,7 +83,7 @@ public abstract class AbstractProvider<T extends ProviderEvent> implements
 
 	/**
 	 * Inserts a listener to provider.
-	 * 
+	 *
 	 * @param listener Listener to add
 	 */
 	public void addListener(ProviderListener<T> listener) {
@@ -91,14 +92,14 @@ public abstract class AbstractProvider<T extends ProviderEvent> implements
 
 	/**
 	 * Creates a {@code ProviderEvent} of type {@code T}.
-	 * 
+	 *
 	 * @return Created event, or null if failed.
 	 */
 	protected abstract T createProviderEvent();
 
 	/**
 	 * Dispatch the TPV event to all listeners.
-	 * 
+	 *
 	 * @param event TPVUpdateEvent to dispatch
 	 */
 	private void fireProviderEvent(T event) {
@@ -109,7 +110,7 @@ public abstract class AbstractProvider<T extends ProviderEvent> implements
 
 	/**
 	 * Returns the collected sentences.
-	 * 
+	 *
 	 * @return List of sentences.
 	 */
 	protected final List<Sentence> getSentences() {
@@ -122,7 +123,7 @@ public abstract class AbstractProvider<T extends ProviderEvent> implements
 
 	/**
 	 * Tells if the provider has captured all the specified sentences.
-	 * 
+	 *
 	 * @param id Sentence type IDs to look for.
 	 * @return True if all specified IDs match the captured sentences.
 	 */
@@ -138,7 +139,7 @@ public abstract class AbstractProvider<T extends ProviderEvent> implements
 	/**
 	 * Tells if the provider has captured at least one of the specified
 	 * sentences.
-	 * 
+	 *
 	 * @param id Sentence type IDs to look for, in prioritized order.
 	 * @return True if any of the specified IDs matches the type of at least one
 	 *         captured sentences.
@@ -156,7 +157,7 @@ public abstract class AbstractProvider<T extends ProviderEvent> implements
 	/**
 	 * Tells if provider has captured the required sentences for creating new
 	 * ProviderEvent.
-	 * 
+	 *
 	 * @return true if ready to create ProviderEvent, otherwise false.
 	 */
 	protected abstract boolean isReady();
@@ -164,7 +165,7 @@ public abstract class AbstractProvider<T extends ProviderEvent> implements
 	/**
 	 * Tells if the captured sentence events contain valid data to be dispatched
 	 * to ProviderListeners.
-	 * 
+	 *
 	 * @return true if valid, otherwise false.
 	 */
 	protected abstract boolean isValid();
@@ -196,7 +197,7 @@ public abstract class AbstractProvider<T extends ProviderEvent> implements
 
 	/**
 	 * Removes the specified listener from provider.
-	 * 
+	 *
 	 * @param listener Listener to remove
 	 */
 	public void removeListener(ProviderListener<T> listener) {
@@ -208,6 +209,19 @@ public abstract class AbstractProvider<T extends ProviderEvent> implements
 	 */
 	private void reset() {
 		events.clear();
+	}
+
+	/**
+	 * Expunge collected events that are older than {@code timeout} to prevent
+	 * the {@code events} list growing when sentences are being delivered
+	 * without valid data (e.g. during device warm-up or offline state).
+	 */
+	private void expunge() {
+		long now = System.currentTimeMillis();
+		List<SentenceEvent> expired = this.events.stream()
+			.filter(event -> now - event.getTimeStamp() > this.timeout)
+			.collect(Collectors.toList());
+		this.events.removeAll(expired);
 	}
 
 	/*
@@ -223,6 +237,8 @@ public abstract class AbstractProvider<T extends ProviderEvent> implements
 				fireProviderEvent(pEvent);
 			}
 			reset();
+		} else {
+			expunge();
 		}
 	}
 
@@ -249,7 +265,7 @@ public abstract class AbstractProvider<T extends ProviderEvent> implements
 	 * Validates the collected sentences by checking the ages of each sentence
 	 * and then by calling {@link #isValid()}. If extending implementation has
 	 * no validation criteria, it should return always {@code true}.
-	 * 
+	 *
 	 * @return true if valid, otherwise false
 	 */
 	private boolean validate() {
