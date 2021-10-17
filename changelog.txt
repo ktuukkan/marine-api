@@ -24,6 +24,8 @@ Version 0.12.0-SNAPSHOT
     can use them.
   - ShipType; added convenience methods for ship and cargo type (AIS)
   - FaaMode enum; added RTK modes
+  - AbstractProvider; ensure expired events are disposed to avoid unnecessary
+    memory consumption.
 
   Contributions:
   - TTM sentence by Epameinondas Pantzopoulos (@NontasPantzopoulos)
