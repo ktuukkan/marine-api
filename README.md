@@ -122,6 +122,17 @@ SentenceFactory sf = SentenceFactory.getInstance();
 GSASentence gsa = (GSASentence) sf.createParser(nmea);
 ```
 
+Recommended Android Proguard settings when `minifyEnabled` is set `true`:
+
+```
+-keep class net.sf.marineapi.** { *; }
+-keep interface net.sf.marineapi.** { *; }
+-keepattributes MethodParameters
+-dontwarn gnu.io.CommPortIdentifier
+-dontwarn gnu.io.RXTXPort
+-dontwarn gnu.io.SerialPort
+```
+
 See also:
 - [Examples](src/main/java/net/sf/marineapi/example)
 - [Javadocs](http://www.javadoc.io/doc/net.sf.marineapi/marineapi)
