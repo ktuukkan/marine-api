@@ -149,7 +149,7 @@ class AISPositionReportBParser extends AISMessageParser implements AISPositionRe
 
 	@Override
 	public boolean hasLongitude() {
-		return Latitude27.isAvailable(fLongitude);
+		return Longitude28.isAvailable(fLongitude);
 	}
 
 	@Override

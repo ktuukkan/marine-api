@@ -25,7 +25,7 @@ package net.sf.marineapi.ais.message;
  * 
  * @author Lázár József
  */
-interface AISPositionInfo extends AISMessage {
+public interface AISPositionInfo extends AISMessage {
 	
     /**
 	 * Tells if the position is accurate.
