@@ -107,6 +107,18 @@ public class SentenceValidatorTest {
 	}
 
 	@Test
+	public void testIsValidAIS() {
+		assertTrue(SentenceValidator.isValid("!AIVDM,1,1,,A,133sfv002POVWD0Je4sMA:a@00S?,0"));
+		assertTrue(SentenceValidator.isValid("!AIVDM,1,1,,A,133sfv002POVWD0Je4sMA:a@00S?,0*3F"));
+
+		assertTrue(SentenceValidator.isValid("!AIVDM,1,1,,A,13IWB67P00wdI9pKF>atlww>2@G4,0"));
+		assertTrue(SentenceValidator.isValid("!AIVDM,1,1,,A,13IWB67P00wdI9pKF>atlww>2@G4,0*4F"));
+
+		assertTrue(SentenceValidator.isValid("!AIVDM,1,1,,B,1CI7wSg000woG1rK3DMh0q3D00RV,0"));
+		assertTrue(SentenceValidator.isValid("!AIVDM,1,1,,B,1CI7wSg000woG1rK3DMh0q3D00RV,0*6D"));
+	}
+
+	@Test
 	public void testIsValidWithLongProprietaryId() {
 		String str = "$PRWIILOG,GGA,A,T,1,0";
 		assertTrue(SentenceValidator.isSentence(str));
@@ -122,10 +134,10 @@ public class SentenceValidatorTest {
 
 	@Test
 	public void testIsSentenceWithChecksum() {
-		
+
 		String nmea = "$GPRMC,142312.000,V,,,,,,,080514,,*20";
 		assertTrue(SentenceValidator.isSentence(nmea));
-		
+
 		nmea = "$GPRMC,142312.000,V,,,,,,,080514,,*20xy";
 		assertFalse(SentenceValidator.isSentence(nmea));
 
@@ -138,16 +150,16 @@ public class SentenceValidatorTest {
 		nmea = "$GPRMC,142312.000,V,,,,,,,080514,,*";
 		assertFalse(SentenceValidator.isSentence(nmea));
 	}
-	
+
 	@Test
 	public void testIsSentenceWithoutChecksum() {
 		String nmea = "$GPRMC,142312.000,V,,,,,,,080514,,";
 		assertTrue(SentenceValidator.isSentence(nmea));
 	}
-	
+
 	@Test
 	public void testIsSentenceWithChecksumAndNewline() {
-		
+
 		String nmea = "$GPRMC,142312.000,V,,,,,,,080514,,*20\r\n";
 		assertTrue(SentenceValidator.isSentence(nmea));
 
@@ -159,14 +171,14 @@ public class SentenceValidatorTest {
 
 		nmea = "$GPRMC,142312.000,V,,,,,,,080514,,*20\n";
 		assertTrue(SentenceValidator.isSentence(nmea));
-		
+
 		nmea = "$GPRMC,142312.000,V,,,,,,,080514,,*20\r\n\r\n";
 		assertFalse(SentenceValidator.isSentence(nmea));
-	}	
-	
+	}
+
 	@Test
 	public void testIsSentenceNoChecksumWithNewline() {
-		
+
 		String nmea = "$GPRMC,142312.000,V,,,,,,,080514,,\r\n";
 		assertTrue(SentenceValidator.isSentence(nmea));
 
@@ -178,7 +190,7 @@ public class SentenceValidatorTest {
 
 		nmea = "$GPRMC,142312.000,V,,,,,,,080514,,\n";
 		assertTrue(SentenceValidator.isSentence(nmea));
-		
+
 		nmea = "$GPRMC,142312.000,V,,,,,,,080514,,\r\n\r\n";
 		assertFalse(SentenceValidator.isSentence(nmea));
 	}
