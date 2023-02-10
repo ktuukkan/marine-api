@@ -40,6 +40,14 @@ public class AISPositionReportParserTest {
     }
 
     @Test
+    public void getPositionAccuracyIssue138() throws Exception {
+        // !AIVDM,1,1,,A,15S0t`001TlGn>TNurwroHgD05;H,0*21
+        final Sixbit sb = new Sixbit("15S0t`001TlGn>TNurwroHgD05;H", 0);
+        final AISPositionReport report = new AISPositionReportParser(sb);
+        assertTrue(report.isAccurate());
+    }
+
+    @Test
     public void getLongitudeInDegrees() throws Exception {
         assertEquals(11.8329767, msg.getLongitudeInDegrees(), 0.0000001);
     }
