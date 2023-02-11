@@ -33,6 +33,16 @@ public class AISMessageFactoryTest {
     }
 
     @Test
+    public void testCreateIssue138() {
+        String ais = "!AIVDM,1,1,,A,15S0t`001TlGn>TNurwroHgD05;H,0*21";
+        AISSentence s = (AISSentence) sf.createParser(ais);
+        AISMessage msg = amf.create(s);
+        assertTrue(msg instanceof AISMessage01);
+        assertEquals(1, msg.getMessageType());
+        assertTrue((((AISMessage01) msg).isAccurate()));
+    }
+
+    @Test
     public void testCreateWithTwo() {
         AISMessage msg = amf.create(split1, split2);
         assertTrue(msg instanceof AISMessage05);
@@ -50,5 +60,7 @@ public class AISMessageFactoryTest {
             fail("Unexpected exception thrown from AISMessageFactory");
         }
     }
+
+
 
 }
