@@ -25,7 +25,7 @@ along with Java Marine API. If not, see <http://www.gnu.org/licenses />.
     <modelVersion>4.0.0</modelVersion>
     <groupId>net.sf.marineapi</groupId>
     <artifactId>marineapi</artifactId>
-    <version>0.12.0-SNAPSHOT</version>
+    <version>0.12.0</version>
     <packaging>bundle</packaging>
 
     <name>Java Marine API</name>
@@ -202,7 +202,7 @@ along with Java Marine API. If not, see <http://www.gnu.org/licenses />.
                     </archive>
                 </configuration>
             </plugin>
-            <!-- plugin>
+            <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-gpg-plugin</artifactId>
                 <version>1.6</version>
@@ -214,7 +214,7 @@ along with Java Marine API. If not, see <http://www.gnu.org/licenses />.
                         </goals>
                     </execution>
                 </executions>
-            </plugin -->
+            </plugin>
         </plugins>
     </build>
 

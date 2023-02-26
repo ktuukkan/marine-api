@@ -1,7 +1,8 @@
 Java Marine API - changelog
 <http://ktuukkan.github.io/marine-api/>
 
-Version 0.12.0-SNAPSHOT
+Version 0.12.0 (2023-02-26)
+
   - Added support for OSD sentences; own ship data
   - Added support for RSD sentences; radar system data
   - Added support for TLB sentences; target label data
@@ -33,6 +34,7 @@ Version 0.12.0-SNAPSHOT
   - AIS message 27 by Krzysztof Borowski (@liosedhel)
   - Unit and ShipType improvements by Joshua Sweaney (@joshsweaney)
   - u-blox support by Gunnar Hillert (@ghillert)
+  - AIS interfaces improved by Alexis Manin (@alexismanin)
 
 Version 0.11.0 (2019-07-06)
 
