@@ -29,6 +29,7 @@ import net.sf.marineapi.nmea.util.Date;
 import net.sf.marineapi.nmea.util.FaaMode;
 import net.sf.marineapi.nmea.util.Position;
 import net.sf.marineapi.nmea.util.Time;
+import net.sf.marineapi.nmea.util.NavStatus;
 
 /**
  * RMC sentence parser.
@@ -49,6 +50,7 @@ class RMCParser extends PositionParser implements RMCSentence {
 	private static final int MAG_VARIATION = 9;
 	private static final int VAR_HEMISPHERE = 10;
 	private static final int MODE = 11;
+	private static final int NAV_STATUS = 12;
 
 	/**
 	 * Creates a new instance of RMCParser.
@@ -61,12 +63,12 @@ class RMCParser extends PositionParser implements RMCSentence {
 	}
 
 	/**
-	 * Creates a ZDA parser with empty sentence.
+	 * Creates a RMC parser with empty sentence.
 	 *
 	 * @param talker TalkerId to set
 	 */
 	public RMCParser(TalkerId talker) {
-		super(talker, SentenceId.RMC, 12);
+		super(talker, SentenceId.RMC, 13);
 	}
 
 	/*
@@ -108,6 +110,12 @@ class RMCParser extends PositionParser implements RMCSentence {
 	public FaaMode getMode() {
 		return FaaMode.valueOf(getCharValue(MODE));
 	}
+
+	/*
+	 * (non-Javadoc)
+	 *
+	 */
+	public NavStatus getNavStatus() { return NavStatus.valueOf(getCharValue(NAV_STATUS)); }
 
 	/*
 	 * (non-Javadoc)
@@ -181,7 +189,7 @@ class RMCParser extends PositionParser implements RMCSentence {
 	public void setDirectionOfVariation(CompassPoint dir) {
 		if (dir != CompassPoint.EAST && dir != CompassPoint.WEST) {
 			throw new IllegalArgumentException(
-				"Invalid variation direction, expected EAST or WEST.");
+					"Invalid variation direction, expected EAST or WEST.");
 		}
 		setCharValue(VAR_HEMISPHERE, dir.toChar());
 	}
@@ -195,6 +203,16 @@ class RMCParser extends PositionParser implements RMCSentence {
 	public void setMode(FaaMode mode) {
 		setFieldCount(12);
 		setCharValue(MODE, mode.toChar());
+	}
+
+	/*
+	 * (non-Javadoc)
+	 *
+	 */
+	@Override
+	public void setNavStatus(NavStatus navStatus) {
+		setFieldCount(13);
+		setCharValue(NAV_STATUS, navStatus.toChar());
 	}
 
 	/*
