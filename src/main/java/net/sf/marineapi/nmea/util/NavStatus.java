@@ -17,7 +17,7 @@ public enum NavStatus {
     ESTIMATED('E'),
 
     /** Navigation status is Manual. */
-    MANUEL('M'),
+    MANUAL('M'),
 
     /** Navigation status is Not valid. */
     NOT_VALID('N'),

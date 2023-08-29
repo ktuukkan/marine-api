@@ -27,7 +27,7 @@ public class RMCTest {
 	public static final String EXAMPLE = "$GPRMC,120044.567,A,6011.552,N,02501.941,E,000.0,360.0,160705,006.1,E,A,S*74";
 
 	/** Example of legacy format (short by one field) */
-	public static final String EXAMPLE_LEGACY = "$GPRMC,183729,A,3907.356,N,12102.482,W,000.0,360.0,080301,015.5,E*6F";
+	public static final String EXAMPLE_LEGACY = "$GPRMC,183729,A,3907.356,N,12102.482,W,000.0,360.0,080301,015.5,E,S*10";
 
 	RMCParser empty;
 	RMCParser rmc;
@@ -47,7 +47,7 @@ public class RMCTest {
 	@Test
 	public void testConstructor() {
 		assertEquals(13, empty.getFieldCount());
-		assertEquals(11, legacy.getFieldCount());
+		assertEquals(12, legacy.getFieldCount());
 	}
 
 	/**
@@ -268,8 +268,8 @@ public class RMCTest {
 	 */
 	@Test
 	public void testSetNavStatus() {
-		rmc.setNavStatus(NavStatus.MANUEL);
-		assertEquals(NavStatus.MANUEL, rmc.getNavStatus());
+		rmc.setNavStatus(NavStatus.MANUAL);
+		assertEquals(NavStatus.MANUAL, rmc.getNavStatus());
 		rmc.setNavStatus(NavStatus.AUTONOMOUS);
 		assertEquals(NavStatus.AUTONOMOUS, rmc.getNavStatus());
 		rmc.setNavStatus(NavStatus.DIFFERENTIAL);
