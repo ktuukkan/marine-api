@@ -11,6 +11,7 @@ import net.sf.marineapi.nmea.util.Date;
 import net.sf.marineapi.nmea.util.FaaMode;
 import net.sf.marineapi.nmea.util.Position;
 import net.sf.marineapi.nmea.util.Time;
+import net.sf.marineapi.nmea.util.NavStatus;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -23,10 +24,10 @@ import org.junit.Test;
 public class RMCTest {
 
 	/** Example sentence */
-	public static final String EXAMPLE = "$GPRMC,120044.567,A,6011.552,N,02501.941,E,000.0,360.0,160705,006.1,E,A*0B";
+	public static final String EXAMPLE = "$GPRMC,120044.567,A,6011.552,N,02501.941,E,000.0,360.0,160705,006.1,E,A,S*74";
 
 	/** Example of legacy format (short by one field) */
-	public static final String EXAMPLE_LEGACY = "$GPRMC,183729,A,3907.356,N,12102.482,W,000.0,360.0,080301,015.5,E*6F";
+	public static final String EXAMPLE_LEGACY = "$GPRMC,183729,A,3907.356,N,12102.482,W,000.0,360.0,080301,015.5,E,S*10";
 
 	RMCParser empty;
 	RMCParser rmc;
@@ -45,8 +46,8 @@ public class RMCTest {
 
 	@Test
 	public void testConstructor() {
-		assertEquals(12, empty.getFieldCount());
-		assertEquals(11, legacy.getFieldCount());
+		assertEquals(13, empty.getFieldCount());
+		assertEquals(12, legacy.getFieldCount());
 	}
 
 	/**
@@ -112,6 +113,14 @@ public class RMCTest {
 	@Test
 	public void testGetFaaMode() {
 		assertEquals(FaaMode.AUTOMATIC, rmc.getMode());
+	}
+
+	/**
+	 * Test method for {@link RMCParser#getNavStatus()}.
+	 */
+	@Test
+	public void  testGetNavStatus() {
+		assertEquals(NavStatus.SIMULATOR, rmc.getNavStatus());
 	}
 
 	/**
@@ -251,6 +260,28 @@ public class RMCTest {
 		assertEquals(FaaMode.SIMULATED, rmc.getMode());
 		rmc.setMode(FaaMode.ESTIMATED);
 		assertEquals(FaaMode.ESTIMATED, rmc.getMode());
+	}
+
+	/**
+	 * Test method for
+	 * {@link net.sf.marineapi.nmea.parser.RMCParser#setNavStatus(NavStatus)}.
+	 */
+	@Test
+	public void testSetNavStatus() {
+		rmc.setNavStatus(NavStatus.MANUAL);
+		assertEquals(NavStatus.MANUAL, rmc.getNavStatus());
+		rmc.setNavStatus(NavStatus.AUTONOMOUS);
+		assertEquals(NavStatus.AUTONOMOUS, rmc.getNavStatus());
+		rmc.setNavStatus(NavStatus.DIFFERENTIAL);
+		assertEquals(NavStatus.DIFFERENTIAL, rmc.getNavStatus());
+		rmc.setNavStatus(NavStatus.NOT_VALID);
+		assertEquals(NavStatus.NOT_VALID, rmc.getNavStatus());
+		rmc.setNavStatus(NavStatus.ESTIMATED);
+		assertEquals(NavStatus.ESTIMATED, rmc.getNavStatus());
+		rmc.setNavStatus(NavStatus.VALID);
+		assertEquals(NavStatus.VALID, rmc.getNavStatus());
+		rmc.setNavStatus(NavStatus.SIMULATOR);
+		assertEquals(NavStatus.SIMULATOR, rmc.getNavStatus());
 	}
 
 	/**

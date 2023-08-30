@@ -331,7 +331,7 @@ public class SentenceParserTest {
 			String val = instance.getStringValue(0);
 			assertEquals("120044.567", val);
 			val = instance.getStringValue(instance.getFieldCount() - 1);
-			assertEquals("A", val);
+			assertEquals("S", val);
 		} catch (IndexOutOfBoundsException e) {
 			fail("Unexpected IndexOutOfBoundsException");
 		} catch (Exception e) {
