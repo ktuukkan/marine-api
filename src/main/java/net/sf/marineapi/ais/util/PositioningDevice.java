@@ -21,42 +21,67 @@
 package net.sf.marineapi.ais.util;
 
 /**
- * Checks the positioning device type for validity.
+ * Provides functionality related to positioning devices.
  * 
  * @author Lázár József
  */
 public class PositioningDevice {
-	
-	/**
-	 * Returns a text string for the EPFD.
-	 *
-	 * @param deviceType Device type value to Stringify.
-	 * @return a text string describing the positioning device type
-	 */
-	static public String toString (int deviceType) {
-		switch (deviceType) {
-		case 0:
-			return "undefined device";
-		case 1:
-			return "GPS";
-		case 2:
-			return "GLONASS";
-		case 3:
-			return "combined GPS/GLONASS";
-		case 4:
-			return "Loran-C";
-		case 5:
-			return "Chayka";
-		case 6:
-			return "integrated navigation system";
-		case 7:
-			return "surveyed";
-		case 8:
-			return "Galileo";
-		case 15:
-			return "internal GNSS";
-		default:
-			return "not used";
-		}
-	}
+
+    private static final String[] DEVICE_TYPES = {
+        "undefined device",
+        "GPS",
+        "GLONASS",
+        "combined GPS/GLONASS",
+        "Loran-C",
+        "Chayka",
+        "integrated navigation system",
+        "surveyed",
+        "Galileo",
+        "not used",
+        "not used",
+        "not used",
+        "not used",
+        "not used",
+        "not used",
+        "not used",
+        "internal GNSS",
+        "not used",
+        "not used",
+        "not used",
+        "not used",
+        "not used",
+        "not used",
+        "not used",
+        "not used",
+        "not used",
+        "not used",
+        "not used",
+        "not used",
+        "not used",
+        "not used",
+        "not used"
+    };
+
+    /**
+     * Returns a text string for the EPFD.
+     *
+     * @param deviceType Device type value to stringify.
+     * @return a text string describing the positioning device type
+     */
+    static public String toString(int deviceType) {
+        if (isValidDeviceType(deviceType)) {
+            return DEVICE_TYPES[deviceType];
+        }
+        return "not used";
+    }
+
+    /**
+     * Checks whether the device type value is correct.
+     *
+     * @param deviceType Device type value to check.
+     * @return true if the value is semantically correct.
+     */
+    static private boolean isValidDeviceType(int deviceType) {
+        return 0 <= deviceType && deviceType < DEVICE_TYPES.length;
+    }
 }

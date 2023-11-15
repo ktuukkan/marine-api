@@ -33,74 +33,52 @@ public class NavAidType {
 	 * @param deviceType Device type value to Stringify.
 	 * @return a text string describing the Nav Aid type
 	 */
-	static public String toString (int deviceType) {
-		switch (deviceType) {
-			case 0:
-				return "Default, Type of Aid to Navigation not specified";
-			case 1:
-				return "Reference point";
-			case 2:
-				return "RACON (radar transponder marking a navigation hazard)";
-			case 3:
-				return "Fixed structure off shore, such as oil platforms, wind farms, rigs";
-			case 4:
-				return "Spare, Reserved for future use";
-			case 5:
-				return "Light, without sectors";
-			case 6:
-				return "Light, with sectors";
-			case 7:
-				return "Leading Light Front";
-			case 8:
-				return "Leading Light Rear";
-			case 9:
-				return "Beacon, Cardinal N";
-			case 10:
-				return "Beacon, Cardinal E";
-			case 11:
-				return "Beacon, Cardinal S";
-			case 12:
-				return "Beacon, Cardinal W";
-			case 13:
-				return "Beacon, Port hand";
-			case 14:
-				return "Beacon, Starboard hand";
-			case 15:
-				return "Beacon, Preferred Channel port hand";
-			case 16:
-				return "Beacon, Preferred Channel starboard hand";
-			case 17:
-				return "Beacon, Isolated danger";
-			case 18:
-				return "Beacon, Safe water";
-			case 19:
-				return "Beacon, Special mark";
-			case 20:
-				return "Cardinal Mark N";
-			case 21:
-				return "Cardinal Mark E";
-			case 22:
-				return "Cardinal Mark S";
-			case 23:
-				return "Cardinal Mark W";
-			case 24:
-				return "Port hand Mark";
-			case 25:
-				return "Starboard hand Mark";
-			case 26:
-				return "Preferred Channel Port hand";
-			case 27:
-				return "Preferred Channel Starboard hand";
-			case 28:
-				return "Isolated danger";
-			case 29:
-				return "Safe Water";
-			case 30:
-				return "Special Mark";
-			case 31:
-				return "Light Vessel / LANBY / Rigs";
-			default:
-				return "not used";
-		}
-	}
+	static private String[] navAidTypes = {
+	        "Default, Type of Aid to Navigation not specified",
+	        "Reference point",
+	        "RACON (radar transponder marking a navigation hazard)",
+	        "Fixed structure off shore, such as oil platforms, wind farms, rigs",
+	        "Spare, Reserved for future use",
+	        "Light, without sectors",
+	        "Light, with sectors",
+	        "Leading Light Front",
+	        "Leading Light Rear",
+	        "Beacon, Cardinal N",
+	        "Beacon, Cardinal E",
+	        "Beacon, Cardinal S",
+	        "Beacon, Cardinal W",
+	        "Beacon, Port hand",
+	        "Beacon, Starboard hand",
+	        "Beacon, Preferred Channel port hand",
+	        "Beacon, Preferred Channel starboard hand",
+	        "Beacon, Isolated danger",
+	        "Beacon, Safe water",
+	        "Beacon, Special mark",
+	        "Cardinal Mark N",
+	        "Cardinal Mark E",
+	        "Cardinal Mark S",
+	        "Cardinal Mark W",
+	        "Port hand Mark",
+	        "Starboard hand Mark",
+	        "Preferred Channel Port hand",
+	        "Preferred Channel Starboard hand",
+	        "Isolated danger",
+	        "Safe Water",
+	        "Special Mark",
+	        "Light Vessel / LANBY / Rigs",
+	        "not used"
+	    };
+
+	    /**
+	     * Returns a text string for the NavAid.
+	     *
+	     * @param deviceType Device type value to Stringify.
+	     * @return a text string describing the Nav Aid type
+	     */
+	    static public String toString(int deviceType) {
+	        if (deviceType >= 0 && deviceType < navAidTypes.length) {
+	            return navAidTypes[deviceType];
+	        }
+	        return "not used";
+	    }
 }
