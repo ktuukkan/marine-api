@@ -54,7 +54,7 @@ public final class GenericTypeResolver {
      *                               at runtime.
      */
     public static Class<?> resolve(Class<?> child, Class<?> parent) {
-        Type t = resolve(child, parent, new HashMap<>());
+    	final Type t = resolve(child, parent, new HashMap<>());
         if (t == null || t instanceof TypeVariable) {
             throw new IllegalStateException("Cannot resolve generic type <T>, use constructor with Class<T> param.");
         }
@@ -71,18 +71,18 @@ public final class GenericTypeResolver {
     private static Type resolve(Class<?> child, final Class<?> parent,
                                 final Map<TypeVariable<?>, Type> types) {
 
-        Type superClass = child.getGenericSuperclass();
+    	final Type superClass = child.getGenericSuperclass();
 
         if (superClass instanceof ParameterizedType) {
 
-            ParameterizedType pt = (ParameterizedType) superClass;
-            Class<?> rawType = (Class<?>) pt.getRawType();
-            TypeVariable<?>[] typeParams = rawType.getTypeParameters();
-            Type[] typeArgs = pt.getActualTypeArguments();
+        	final ParameterizedType pt = (ParameterizedType) superClass;
+        	final Class<?> rawType = (Class<?>) pt.getRawType();
+            final TypeVariable<?>[] typeParams = rawType.getTypeParameters();
+            final Type[] typeArgs = pt.getActualTypeArguments();
 
             for (int i = 0; i < typeParams.length; i++) {
                 if (typeArgs[i] instanceof TypeVariable) {
-                    TypeVariable<?> arg = (TypeVariable<?>) typeArgs[i];
+                	final TypeVariable<?> arg = (TypeVariable<?>) typeArgs[i];
                     types.put(typeParams[i], types.getOrDefault(arg, arg));
                 } else {
                     types.put(typeParams[i], typeArgs[i]);

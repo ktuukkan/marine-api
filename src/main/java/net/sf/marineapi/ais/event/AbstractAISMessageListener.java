@@ -106,7 +106,7 @@ public abstract class AbstractAISMessageListener<T extends AISMessage>
         if (sentence.isLastFragment()) {
             AISSentence[] sentences = queue.toArray(new AISSentence[queue.size()]);
             try {
-                AISMessage message = factory.create(sentences);
+                final AISMessage message = factory.create(sentences);
                 if (messageType.isAssignableFrom(message.getClass())) {
                     onMessage((T) message);
                 }

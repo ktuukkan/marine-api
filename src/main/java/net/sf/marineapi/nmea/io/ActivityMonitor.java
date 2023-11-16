@@ -63,8 +63,8 @@ class ActivityMonitor {
 	 */
 	public void tick() {
 		if (lastUpdated > 0) {
-			long elapsed = System.currentTimeMillis() - lastUpdated;
-			int timeout = parent.getPauseTimeout();
+			final long elapsed = System.currentTimeMillis() - lastUpdated;
+			final int timeout = parent.getPauseTimeout();
 			if (elapsed >= timeout) {
 				parent.fireReadingPaused();
 				reset();

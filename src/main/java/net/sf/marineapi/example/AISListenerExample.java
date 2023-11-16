@@ -47,7 +47,7 @@ public class AISListenerExample extends AbstractAISMessageListener<AISMessage01>
 	public AISListenerExample(File file) throws IOException {
 
 		// create sentence reader and provide input stream
-		InputStream stream = new FileInputStream(file);
+		final InputStream stream = new FileInputStream(file);
 		reader = new SentenceReader(stream);
 
 		// listen for for all AIS VDM messages
