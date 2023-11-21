@@ -25,13 +25,12 @@ import java.util.BitSet;
 /**
  * Class holding bit values in an array and implementing put/get
  * integer/string operations on it.
- * 
+ *
  * @author Lázár József
  */
 public class BitVector {
 
 	private BitSet		fBitVector;
-	private int			fLength;
 
 	/**
 	 * Creates a new instance with given length.
@@ -40,18 +39,15 @@ public class BitVector {
 	 */
 	public BitVector(int bits) {
 		fBitVector = new BitSet(bits);
-		fLength = bits;
 	}
 
 	/**
 	 * Creates a new instance with given BitSet and length.
 	 *
 	 * @param vector BitSet
-	 * @param bits Vector length
 	 */
-	public BitVector(BitSet vector, int bits) {
+	public BitVector(BitSet vector) {
 		fBitVector = vector;
-		fLength = bits;
 	}
 
 	/**
@@ -60,7 +56,7 @@ public class BitVector {
 	 * @param index Index of bit to set.
 	 */
 	public void set(int index) {
-		fBitVector.set(index);		
+		fBitVector.set(index);
 	}
 
 	/**
@@ -73,7 +69,7 @@ public class BitVector {
 	public BitVector get(int from, int to) {
 		to++;
 		from++;
-		return new BitVector(fBitVector.get(from, to), to - from);
+		return new BitVector(fBitVector.get(from, to));
 	}
 
 	/**
@@ -88,7 +84,7 @@ public class BitVector {
 
 	/**
 	 * Returns the requested bits interpreted as an integer (MSB first) from the message.
-	 * 
+	 *
 	 * @param from begin index (inclusive)
 	 * @param to end index (inclusive)
 	 * @return unsigned int value

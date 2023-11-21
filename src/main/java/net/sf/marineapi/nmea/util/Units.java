@@ -43,17 +43,17 @@ public enum Units {
 	/** Distance/pressure in inches  */
 	INCHES('I'),
 	
-	/** Speed in kilometers per hour */
-	KMH('K'),
+	/** Kilometers - used for distance, and speed (as kilometers per hour) */
+	KILOMETERS('K'),
 
 	/** Length in meter */
 	METER('M'),
 	
-	/** Speed in knots (nautical miles per hour) */
-	KNOT('N'),
+	/** Nautical miles - used for distance, and for speed (nautical miles per hour, which are knots) */
+	NAUTICAL_MILES('N'),
 
-	/** Speed in statute miles/hr */
-	MPH('S');
+	/** Statute miles - used for distance, and for speed (as miles per hour/mph) */
+	STATUTE_MILES('S');
 
 	private char ch;
 

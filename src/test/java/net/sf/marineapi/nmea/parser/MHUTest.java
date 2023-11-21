@@ -26,7 +26,7 @@ import net.sf.marineapi.nmea.sentence.TalkerId;
 import org.junit.Before;
 import org.junit.Test;
 
-import static junit.framework.Assert.assertEquals;
+import static org.junit.Assert.assertEquals;
 
 /**
  * MHU parser tests.
@@ -44,7 +44,7 @@ public class MHUTest {
     public void setUp() {
         mhu = new MHUParser(EXAMPLE);
         empty = new MHUParser(TalkerId.II);
-        assertEquals(4, mhu.getFieldCount());
+        assertEquals(4, mhu.getFieldCount(), 1);
     }
 
     @Test

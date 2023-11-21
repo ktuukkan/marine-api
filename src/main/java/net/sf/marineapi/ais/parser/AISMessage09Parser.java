@@ -71,6 +71,7 @@ class AISMessage09Parser extends AISMessageParser implements AISMessage09 {
     private final static int	TIMESTAMP				= 6;
     private final static int	REGIONAL				= 7; // spare 1
     private final static int	DTE		        		= 8;
+    @SuppressWarnings("unused")
     private static final int    SPARE	                = 9; // spare 2
     private static final int    ASSIGNEDMODEFLAG	    = 10;
     private static final int    RAIMFLAG	            = 11;

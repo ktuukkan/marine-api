@@ -1,26 +1,35 @@
 # Java Marine API
 [![License](https://img.shields.io/badge/License-LGPL%20v3-brightgreen.svg)](./LICENSE)
-[![Build Status](https://travis-ci.org/ktuukkan/marine-api.png)](https://travis-ci.org/ktuukkan/marine-api)
+[![Build](https://github.com/ktuukkan/marine-api/actions/workflows/test.yml/badge.svg)](https://github.com/ktuukkan/marine-api/actions/workflows/test.yml)
 [![Maven Central](https://maven-badges.herokuapp.com/maven-central/net.sf.marineapi/marineapi/badge.svg)](https://maven-badges.herokuapp.com/maven-central/net.sf.marineapi/marineapi)
 [![Download Java Marine API](https://img.shields.io/sourceforge/dm/marineapi.svg)](https://sourceforge.net/projects/marineapi/files/Releases/)
 [![Javadocs](http://www.javadoc.io/badge/net.sf.marineapi/marineapi.svg)](http://www.javadoc.io/doc/net.sf.marineapi/marineapi)
 [![Sponsored by Spice](https://img.shields.io/badge/sponsored%20by-Spice-brightgreen.svg)](http://www.spiceprogram.org)
 
-- [About](#about)
+- [Java Marine API](#java-marine-api)
+  - [About](#about)
     - [Features](#features)
-- [Licensing](#licensing)
-- [Disclaimer](#disclaimer)
-- [Requirements](#requirements)
-- [Usage](#usage)
-- [Supported Protocols](#supported-protocols)
+    - [Licensing](#licensing)
+    - [Disclaimer](#disclaimer)
+    - [Requirements](#requirements)
+    - [Usage](#usage)
+  - [Supported Protocols](#supported-protocols)
     - [NMEA 0183](#nmea-0183)
     - [AIS](#ais)
-    - [Raymarine SeaTalk](#raymarine-seatalk1)
-- [Distribution](#distribution)
+    - [Raymarine SeaTalk<sup>1</sup>](#raymarine-seatalksup1sup)
+    - [u-blox](#u-blox)
+  - [Distribution](#distribution)
     - [Pre-built JARs](#pre-built-jars)
     - [Maven](#maven)
-- [Contributing](#contributing)
-- [References](#references)
+      - [Snapshots](#snapshots)
+  - [Contributing](#contributing)
+  - [References](#references)
+    - [National Marine Electronics Association](#national-marine-electronics-association)
+    - [Navigation Center of U.S. Department of Homeland Security](#navigation-center-of-us-department-of-homeland-security)
+    - [Product Manuals and User Guides](#product-manuals-and-user-guides)
+    - [Wikipedia](#wikipedia)
+    - [Miscellaneus](#miscellaneus)
+    - [No longer available](#no-longer-available)
 
 ## About
 
@@ -76,42 +85,59 @@ should never be your only reference.
 
 ### Requirements
 
-* Java 2 SE JRE/JDK v1.8.0 or newer
-* For serial port communication:
-
-    * [Neuron Robotics Java Serial Library](https://github.com/NeuronRobotics/nrjavaserial)
-    * [PureJavaComm](http://www.sparetimelabs.com/purejavacomm)
-    * [RXTX library](http://rxtx.qbang.org)
-    * [Java Communications API](http://www.oracle.com/technetwork/java/index-jsp-141752.html)
+* Java 2 SE JRE/JDK 11 or newer
+* For serial port communication (choose one):
+  * [Neuron Robotics Java Serial Library](https://github.com/NeuronRobotics/nrjavaserial)
+  * [PureJavaComm](http://www.sparetimelabs.com/purejavacomm)
+  * [RXTX library](http://rxtx.qbang.org)
+  * [Java Communications API](http://www.oracle.com/technetwork/java/index-jsp-141752.html)
 
 ### Usage
 
 Write a listener:
 
-    class GGAListener extends AbstractSentenceListener<GGASentence> {
-        public void sentenceRead(GGASentence gga) {
-            Position pos = gga.getPosition();
-            // .. your code
-        }
+```java
+class GGAListener extends AbstractSentenceListener<GGASentence> {
+    public void sentenceRead(GGASentence gga) {
+        Position pos = gga.getPosition();
+        // .. your code
     }
+}
+```
 
 Set up the reader:
 
-    File file = new File("/var/log/nmea.log");
-    SentenceReader reader = new SentenceReader(new FileInputStream(file));
-    reader.addSentenceListener(new GGAListener());
-    reader.start();
+```java
+File file = new File("/var/log/nmea.log");
+SentenceReader reader = new SentenceReader(new FileInputStream(file));
+reader.addSentenceListener(new GGAListener());
+reader.start();
+```
 
 Manual parsing:
 
-    String nmea = "$GPGSA,A,3,03,05,07,08,10,15,18,19,21,28,,,1.4,0.9,1.1*3A";
-    SentenceFactory sf = SentenceFactory.getInstance();
-    GSASentence gsa = (GSASentence) sf.createParser(nmea);
+```java
+String nmea = "$GPGSA,A,3,03,05,07,08,10,15,18,19,21,28,,,1.4,0.9,1.1*3A";
+SentenceFactory sf = SentenceFactory.getInstance();
+GSASentence gsa = (GSASentence) sf.createParser(nmea);
+```
+
+Recommended Android Proguard settings when `minifyEnabled` is set `true`:
+
+```
+-keep class net.sf.marineapi.** { *; }
+-keep interface net.sf.marineapi.** { *; }
+-keepattributes MethodParameters
+-dontwarn gnu.io.CommPortIdentifier
+-dontwarn gnu.io.RXTXPort
+-dontwarn gnu.io.SerialPort
+```
 
 See also:
 - [Examples](src/main/java/net/sf/marineapi/example)
 - [Javadocs](http://www.javadoc.io/doc/net.sf.marineapi/marineapi)
 - [Graphical User Interface](https://github.com/aitov/gps-info) using marine-api by @aitov
+
 
 ## Supported Protocols
 
@@ -152,12 +178,15 @@ the library. See wiki for
 |MTW    |Water temperature in degrees Celcius
 |MWD    |Wind speed and direction.
 |MWV    |Wind speed and angle
+|OSD    |Own ship data
 |RMB    |Recommended minimum navigation information "type B"
 |RMC    |Recommended minimum navigation information "type C"
 |ROT    |Vessel's rate of turn
 |RPM    |Engine or shaft revolutions
 |RSA    |Rudder angle in degrees
+|RSD    |Radar system data
 |RTE    |GPS route data with list of waypoints
+|TLB    |Target label
 |TTM    |Tracked target message
 |TXT    |Text message
 |VBW    |Dual ground/water speed.
@@ -191,6 +220,7 @@ messages are decoded.
 |19     |Extended Class B Equipment Position Report
 |21     |Aid-to-Navigation Report
 |24     |Static Data Report
+|27     |Position Report for long range applications
 
 ### Raymarine SeaTalk<sup>1</sup>
 
@@ -200,6 +230,15 @@ Only the NMEA layer is currently supported, see
 [STALKSentence](src/main/java/net/sf/marineapi/nmea/sentence/STALKSentence.java)
 and [Issue #67](https://github.com/ktuukkan/marine-api/issues/67).
 
+### u-blox
+
+The following [u-blox](https://www.u-blox.com/)
+vendor extension messages are supported:
+
+| ID      | Description
+|---      |---
+| PUBX,01 |Lat/Long Position Data
+| PUBX,03 |Satellite Status
 
 ## Distribution
 
@@ -222,31 +261,36 @@ package naming.
 Both releases and snapshots are deployed to [Maven Central Repository](https://search.maven.org/#search%7Cga%7C1%7Cg%3A%22net.sf.marineapi%22)
 and may be imported by adding the following dependency in your `pom.xml`.
 
-    <dependency>
-      <groupId>net.sf.marineapi</groupId>
-      <artifactId>marineapi</artifactId>
-      <version>0.10.0</version>
-      <type>bundle</type>
-    </dependency>
+```xml
+<dependency>
+  <groupId>net.sf.marineapi</groupId>
+  <artifactId>marineapi</artifactId>
+  <version>0.10.0</version>
+  <type>bundle</type>
+</dependency>
+```
 
 #### Snapshots
 
 The snapshots should be mostly stable, but they are still *Work In Progress* and
 should be considered as a preview of the next release.
 
-See [changelog](changelog.txt) for the current `SNAPSHOT` version. Notice that
+See [changelog.txt](changelog.txt) for the current `SNAPSHOT` version. Notice that
 you may need to tweak your [Maven settings](https://gist.github.com/ktuukkan/8cf2de1e915185118c60)
 to enable snapshot dependencies.
 
-    <dependency>
-      <groupId>net.sf.marineapi</groupId>
-      <artifactId>marineapi</artifactId>
-      <version>0.11.0-SNAPSHOT</version>
-      <type>bundle</type>
-    </dependency>
+```xml
+<dependency>
+  <groupId>net.sf.marineapi</groupId>
+  <artifactId>marineapi</artifactId>
+  <version>0.11.0-SNAPSHOT</version>
+  <type>bundle</type>
+</dependency>
+```
 
 Snapshots may also be downloaded manually from the
 [repository](https://oss.sonatype.org/content/repositories/snapshots/net/sf/marineapi/marineapi/).
+
 
 ## Contributing
 
@@ -254,8 +298,9 @@ Any feedback or contribution is welcome. You have several options:
 
 - [Contact me](https://github.com/ktuukkan)
 - [Report a bug](https://github.com/ktuukkan/marine-api/issues)
-- [Fork](https://help.github.com/articles/fork-a-repo/) and open a [pullrequest](https://help.github.com/articles/about-pull-requests/)
+- [Fork](https://help.github.com/articles/fork-a-repo/) and open a [pull request](https://help.github.com/articles/about-pull-requests/)
 to share improvements.
+
 
 ## References
 
@@ -264,11 +309,6 @@ following documents, availability last checked on 2020-03-15.
 
 *Notice: any warnings regarding the accuracy of the information in below
 documents apply equally to Java Marine API.*
-
-### Wikipedia
-
-  * [NMEA 0183](http://en.wikipedia.org/wiki/NMEA_0183)
-  * [Automatic Identification System](https://en.wikipedia.org/wiki/Automatic_identification_system)
 
 ### National Marine Electronics Association
 
@@ -295,19 +335,25 @@ documents apply equally to Java Marine API.*
 * [SeaTalk/NMEA/RS232 Converter Manual](https://community.atmel.com/sites/default/files/project_files/ManualV3-5.pdf) by gadgetPool
 * [SiRF NMEA Reference Manual](https://www.sparkfun.com/datasheets/GPS/NMEA%20Reference%20Manual-Rev2.1-Dec07.pdf) by SiRF Technology, Inc.
 * [The NMEA Information Sheet](https://www.actisense.com/wp-content/uploads/2020/01/NMEA-0183-Information-sheet-issue-4-1-1.pdf) by Actisense
+* [ZED-F9P F9 high precision GNSS receiver Interface Description](https://www.u-blox.com/en/docs/UBX-18010854) by u-blox
+
+### Wikipedia
+
+  * [NMEA 0183](http://en.wikipedia.org/wiki/NMEA_0183)
+  * [Automatic Identification System](https://en.wikipedia.org/wiki/Automatic_identification_system)
 
 ### Miscellaneus
 
-* [NMEA Revealed](http://catb.org/gpsd/NMEA.html) by Eric S. Raymond
-* [AIVDM/AIVDO protocol decoding](http://catb.org/gpsd/AIVDM.html) by Eric S. Raymond
-* [NMEA Data](http://www.gpsinformation.org/dale/nmea.htm) by Dale DePriest
+* [AIVDM/AIVDO protocol decoding](https://gpsd.gitlab.io/gpsd/AIVDM.html) by Eric S. Raymond
+* [NMEA Revealed](https://gpsd.gitlab.io/gpsd/NMEA.html) by Eric S. Raymond
 * [SeaTalk Technical Reference](http://www.thomasknauf.de/seatalk.htm) by Thomas Knauf
 
 ### No longer available
 
-* [RS232/SeaTalk/NMEA Converter manual](http://www.gadgetpool.de/nuke/downloads/ManualRS232.pdf)
-  by gadgetPool (not found)
-* [NMEA Sentence Information](http://home.mira.net/~gnb/gps/nmea.html)
-  by Glenn Baddeley (not found)
-* [The NMEA FAQ](http://vancouver-webpages.com/peter/nmeafaq.txt)
-  by Peter Bennett (see [older copy](http://www.eoss.org/pubs/nmeafaq.htm))
+* [NMEA Data](http://www.gpsinformation.org/dale/nmea.htm) by Dale DePriest
+* [NMEA Sentence Information](http://home.mira.net/~gnb/gps/nmea.html) by Glenn Baddeley (not found)
+* [RS232/SeaTalk/NMEA Converter manual](http://www.gadgetpool.de/nuke/downloads/ManualRS232.pdf) by gadgetPool (not found)
+* [The NMEA FAQ](http://vancouver-webpages.com/peter/nmeafaq.txt) by Peter Bennett (see [older copy](http://www.eoss.org/pubs/nmeafaq.htm))
+
+
+---

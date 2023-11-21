@@ -44,7 +44,7 @@ public class STALKTest {
     @Test
     public void testConstructorWithWrongTalkerId() {
         try {
-            STALKParser st = new STALKParser(TalkerId.GP);
+            new STALKParser(TalkerId.GP);
             fail("STALK parser did not throw exception on invalid talker-id");
         } catch (IllegalArgumentException iae) {
             // pass

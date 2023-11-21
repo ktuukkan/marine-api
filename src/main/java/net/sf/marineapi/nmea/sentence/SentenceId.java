@@ -25,6 +25,7 @@ package net.sf.marineapi.nmea.sentence;
  * combination of talker and sentence IDs, for example GPBOD, GPGGA or GPGGL.
  *
  * @author Kimmo Tuukkanen
+ * @author Gunnar Hillert
  * @see net.sf.marineapi.nmea.sentence.TalkerId
  */
 public enum SentenceId {
@@ -81,6 +82,8 @@ public enum SentenceId {
     MTW,
     /** Wind speed and angle */
     MWV,
+    /** Own ship data */
+    OSD,
     /** Recommended minimum navigation information */
     RMB,
     /** Recommended minimum specific GPS/TRANSIT data */
@@ -91,14 +94,20 @@ public enum SentenceId {
     RPM,
     /** Rudder angle, measured in degrees */
     RSA,
+    /** Radar system data */
+    RSD,
     /** Route data and waypoint list */
     RTE,
+    /** Target Label */
+    TLB,
     /** Tracked target Longitude Latitude*/
     TLL,
     /** Tracked target */
     TTM,
     /** Text message */
     TXT,
+    /** Proprietary NMEA messages for u-blox positioning receivers. */
+    UBX,
     /** Dual ground/water speed and stern ground/water speed. */
     VBW,
     /** AIS - Received data from other vessels */

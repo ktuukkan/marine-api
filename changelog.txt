@@ -1,7 +1,15 @@
 Java Marine API - changelog
 <http://ktuukkan.github.io/marine-api/>
 
-Version 0.12.0-SNAPSHOT
+Version 0.12.0 (2023-02-26)
+
+  - Added support for OSD sentences; own ship data
+  - Added support for RSD sentences; radar system data
+  - Added support for TLB sentences; target label data
+  - Added support for TLL sentences; target latitude and longitude
+  - Added support for AIS message 27; long-range automatic identification
+  - Added support for u-blox message 01; lat/long position data
+  - Added support for u-blox message 03; satellite status
   - AIS message length validation moved to AISMessageParser.
   - AISMessage05; added missing DTE flag getter.
   - TalkerId enum
@@ -9,13 +17,24 @@ Version 0.12.0-SNAPSHOT
       FD, FE, FR, FS, HD, HF, HS, JA, JB, JC, JD, JE, JF, JG, JH, MX, NL, RB,
       RI, SC, SG, TC, UP, VA, VR, VS, VT and WL
     - Added WV to suppport Wärtsilä proprietary sentences
-    - Updated javadocs and removed @Deprecated annotation from obsolete entries
-      to avoid unnecessary compiler warnings when working with legacy devices
-  - Added support for TLL sentences;
+    - Updated javadocs and removed @Deprecated annotations to avoid unecessary
+      compiler warnings when working with legacy versions of NMEA 0183.
   - TTMSentence; refactored bearing and course setters/getters
+  - Changed some speed units (KMH, KNOT, MPH) to their base units
+    (KILOMETERS, NAUTICAL_MILES, STATUTE_MILES) so that more sentences
+    can use them.
+  - ShipType; added convenience methods for ship and cargo type (AIS)
+  - FaaMode enum; added RTK modes
+  - AbstractProvider; ensure expired events are disposed to avoid unnecessary
+    memory consumption.
 
   Contributions:
-  - TTM parser by @NontasPantzopoulos
+  - TTM sentence by Epameinondas Pantzopoulos (@NontasPantzopoulos)
+  - TLB, OSD and RSD sentences by Joshua Sweaney (@joshsweaney)
+  - AIS message 27 by Krzysztof Borowski (@liosedhel)
+  - Unit and ShipType improvements by Joshua Sweaney (@joshsweaney)
+  - u-blox support by Gunnar Hillert (@ghillert)
+  - AIS interfaces improved by Alexis Manin (@alexismanin)
 
 Version 0.11.0 (2019-07-06)
 
@@ -24,7 +43,7 @@ Version 0.11.0 (2019-07-06)
   - Support for HTC sentences; Heading/Track control command
   - Support for HTD sentences; Heading/Track control data
   - Support for TXT sentences; Text messages, e.g. device boot screens etc.
-  - Support for DTA/DTB sentences; Boreal GasFinder2 and GasFinderMC. 
+  - Support for DTA/DTB sentences; Boreal GasFinder2 and GasFinderMC.
   - Support for $STALK sentences; NMEA-0183 layer of Raymarine SeaTalk protocol.
   - AbstracSentenceListener; improvements in generic types resolving to support
     more advanced use of generics and inheritance.

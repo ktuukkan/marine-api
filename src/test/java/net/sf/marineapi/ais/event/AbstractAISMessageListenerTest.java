@@ -6,7 +6,6 @@ import net.sf.marineapi.ais.message.AISMessage05;
 import net.sf.marineapi.ais.parser.AISMessageFactory;
 import net.sf.marineapi.nmea.parser.SentenceFactory;
 import net.sf.marineapi.nmea.sentence.AISSentence;
-import net.sf.marineapi.util.GenericTypeResolver;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;

@@ -23,6 +23,7 @@ package net.sf.marineapi.nmea.sentence;
 import net.sf.marineapi.nmea.util.CompassPoint;
 import net.sf.marineapi.nmea.util.DataStatus;
 import net.sf.marineapi.nmea.util.FaaMode;
+import net.sf.marineapi.nmea.util.NavStatus;
 
 /**
  * Recommended minimum navigation information type C. Current time and date,
@@ -85,6 +86,13 @@ public interface RMCSentence extends PositionSentence, TimeSentence,
 	FaaMode getMode();
 
 	/**
+	 * Get the Navigation Status.
+	 *
+	 * @return NavStatus enum
+	 */
+	NavStatus getNavStatus();
+
+	/**
 	 * Get current speed over ground (SOG).
 	 * 
 	 * @return Speed in knots (nautical miles per hour).
@@ -141,6 +149,13 @@ public interface RMCSentence extends PositionSentence, TimeSentence,
 	 * @param mode FaaMode enum to set
 	 */
 	void setMode(FaaMode mode);
+
+	/**
+	 * Set the Navigation Status.
+	 *
+	 * @param navStatus NavStatus enum to set
+	 */
+	void setNavStatus(NavStatus navStatus);
 
 	/**
 	 * Set current speed over ground (SOG).

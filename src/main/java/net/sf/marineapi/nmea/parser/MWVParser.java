@@ -125,7 +125,7 @@ class MWVParser extends SentenceParser implements MWVSentence {
 	 * .nmea.util.Units)
 	 */
 	public void setSpeedUnit(Units unit) {
-		if (unit == Units.METER || unit == Units.KMH || unit == Units.KNOT) {
+		if (unit == Units.METER || unit == Units.KILOMETERS || unit == Units.NAUTICAL_MILES) {
 			setCharValue(SPEED_UNITS, unit.toChar());
 			return;
 		}

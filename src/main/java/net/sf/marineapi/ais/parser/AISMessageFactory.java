@@ -53,6 +53,7 @@ public class AISMessageFactory {
         parsers.put(19, AISMessage19Parser.class);
         parsers.put(21, AISMessage21Parser.class);
         parsers.put(24, AISMessage24Parser.class);
+        parsers.put(27, AisMessage27Parser.class);
     }
 
 

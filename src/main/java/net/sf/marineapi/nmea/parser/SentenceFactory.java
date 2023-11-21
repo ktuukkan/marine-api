@@ -66,8 +66,9 @@ import net.sf.marineapi.nmea.sentence.TalkerId;
  * </p>
  *
  * @author Kimmo Tuukkanen
+ * @author Gunnar Hillert
  */
-public final class SentenceFactory {
+public class SentenceFactory {
 
 	// map that holds registered sentence types and parser classes
 	private static Map<String, Class<? extends SentenceParser>> parsers;
@@ -278,7 +279,7 @@ public final class SentenceFactory {
 	/**
 	 * Resets the factory in it's initial state, i.e. restores and removes all
 	 * parsers the have been either removed or added.
-	 * 
+	 *
 	 */
 	public void reset() {
 		Map<String, Class<? extends SentenceParser>> tempParsers = new ConcurrentHashMap<>();
@@ -306,15 +307,19 @@ public final class SentenceFactory {
 		registerParser(tempParsers, "MTA", MTAParser.class);
 		registerParser(tempParsers, "MTW", MTWParser.class);
 		registerParser(tempParsers, "MWV", MWVParser.class);
+		registerParser(tempParsers, "OSD", OSDParser.class);
 		registerParser(tempParsers, "RMB", RMBParser.class);
 		registerParser(tempParsers, "RMC", RMCParser.class);
 		registerParser(tempParsers, "RPM", RPMParser.class);
 		registerParser(tempParsers, "ROT", ROTParser.class);
 		registerParser(tempParsers, "RTE", RTEParser.class);
 		registerParser(tempParsers, "RSA", RSAParser.class);
+		registerParser(tempParsers, "RSD", RSDParser.class);
+		registerParser(tempParsers, "TLB", TLBParser.class);
 		registerParser(tempParsers, "TLL", TLLParser.class);
 		registerParser(tempParsers, "TTM", TTMParser.class);
 		registerParser(tempParsers, "TXT", TXTParser.class);
+		registerParser(tempParsers, "UBX", UBXParser.class);
 		registerParser(tempParsers, "VBW", VBWParser.class);
 		registerParser(tempParsers, "VDM", VDMParser.class);
 		registerParser(tempParsers, "VDO", VDOParser.class);
