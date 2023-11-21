@@ -17,7 +17,7 @@ import org.junit.Test;
 
 /**
  * Test the GSV sentence parser.
- * 
+ *
  * @author Kimmo Tuukkanen
  */
 public class GSVTest {
@@ -65,17 +65,17 @@ public class GSVTest {
 		testSatelliteInfo(sat.get(2), "18", 63, 58, 50);
 		testSatelliteInfo(sat.get(3), "21", 53, 329, 47);
 	}
-	
+
 	/**
 	 * Test method for
 	 * {@link net.sf.marineapi.nmea.parser.GSVParser#getSatelliteInfo()}.
 	 */
 	@Test
 	public void testGetSatelliteInfoWithEmptyFields() {
-		
+
 		GSVSentence g = new GSVParser("$GPGSV,3,2,12,15,56,182,51,17,38,163,47,18,,,,21,53,329,47");
 		List<SatelliteInfo> sat = g.getSatelliteInfo();
-		
+
 		assertEquals(3, sat.size());
 		testSatelliteInfo(sat.get(0), "15", 56, 182, 51);
 		testSatelliteInfo(sat.get(1), "17", 38, 163, 47);
@@ -88,15 +88,15 @@ public class GSVTest {
 	 */
 	@Test
 	public void testGetSatelliteInfoWithShortSentence() {
-		
+
 		GSVSentence g = new GSVParser("$GPGSV,3,2,12,15,56,182,51,17,38,163,47");
 		List<SatelliteInfo> sat = g.getSatelliteInfo();
-		
+
 		assertEquals(2, sat.size());
 		testSatelliteInfo(sat.get(0), "15", 56, 182, 51);
 		testSatelliteInfo(sat.get(1), "17", 38, 163, 47);
 	}
-	
+
 	/**
 	 * Test method for
 	 * {@link net.sf.marineapi.nmea.parser.GSVParser#getSentenceCount()}.
@@ -179,6 +179,40 @@ public class GSVTest {
 	public void testParserGlonassGSV() {
 		GSVParser gl = new GSVParser("$GLGSV,2,1,07,70,28,145,44,71,67,081,46,72,34,359,40,77,16,245,35,1*76");
 		assertEquals(TalkerId.GL, gl.getTalkerId());
+	}
+
+	@Test
+	public void testGetSignalIdWith1Satellite() {
+		final String EXAMPLE_WITH_SIGNALID = "$GAGSV,2,2,06,27,25,133,29,33,33,238,,2*71";
+		final GSVParser gsv = new GSVParser(EXAMPLE_WITH_SIGNALID);
+		assertEquals(2, gsv.getSignalId());
+	}
+
+	@Test
+	public void testGetSignalIdWith2SatellitesMsgNum1() {
+		final String EXAMPLE_WITH_SIGNALID = "$GAGSV,2,1,06,01,44,330,,13,33,031,19,21,75,093,38,26,73,310,,2*78";
+		GSVParser gsv = new GSVParser(EXAMPLE_WITH_SIGNALID);
+		assertEquals(2, gsv.getSignalId());
+	}
+
+	@Test
+	public void testGetSignalIdWith2SatellitesMsgNum2() {
+		final String EXAMPLE_WITH_SIGNALID = "$GPGSV,4,2,13,10,12,045,,11,47,333,42,14,,,40,16,15,193,33,1*5C";
+		final GSVParser gsv = new GSVParser(EXAMPLE_WITH_SIGNALID);
+		assertEquals(1, gsv.getSignalId());
+	}
+
+
+	@Test
+	public void testGetEmptySignalId() {
+		final String EXAMPLE_WITH_SIGNALID = "$GAGSV,2,2,06,27,25,133,29,33,33,238,,*43";
+		final GSVParser gsv = new GSVParser(EXAMPLE_WITH_SIGNALID); //12
+		try {
+			gsv.getSignalId();
+		} catch (DataNotAvailableException e) {
+			return;
+		}
+		fail("Expected a DataNotAvailableException to be thrown.");
 	}
 
 	/**
