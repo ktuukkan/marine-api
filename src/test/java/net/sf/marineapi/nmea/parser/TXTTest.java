@@ -32,9 +32,17 @@ public class TXTTest {
     }
 
     @Test
-    public void testTalkerIdConstructor() {
+    public void testTalkerId() {
         assertEquals(TalkerId.II, empty.getTalkerId());
+    }
+
+    @Test
+    public void testSentenceId() {
         assertEquals("TXT", empty.getSentenceId());
+    }
+
+    @Test
+    public void testFieldCount() {
         assertEquals(4, empty.getFieldCount());
     }
 
