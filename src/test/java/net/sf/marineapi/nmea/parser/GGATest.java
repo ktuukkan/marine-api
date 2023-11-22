@@ -146,10 +146,14 @@ public class GGATest {
 	}
 
 	@Test
-	public void testSetAltitudeUnits() {
-		assertEquals(Units.METER, gga.getAltitudeUnits());
-		gga.setAltitudeUnits(Units.FEET);
-		assertEquals(Units.FEET, gga.getAltitudeUnits());
+	public void testDefaultAltitudeUnits() {
+	    assertEquals(Units.METER, gga.getAltitudeUnits());
+	}
+
+	@Test
+	public void testSetAltitudeUnitsToFeet() {
+	    gga.setAltitudeUnits(Units.FEET);
+	    assertEquals(Units.FEET, gga.getAltitudeUnits());
 	}
 
 	@Test
@@ -166,10 +170,14 @@ public class GGATest {
 	}
 
 	@Test
-	public void testSetFixQuality() {
-		assertEquals(GpsFixQuality.NORMAL, gga.getFixQuality());
-		gga.setFixQuality(GpsFixQuality.INVALID);
-		assertEquals(GpsFixQuality.INVALID, gga.getFixQuality());
+	public void testDefaultFixQuality() {
+	    assertEquals(GpsFixQuality.NORMAL, gga.getFixQuality());
+	}
+
+	@Test
+	public void testSetFixQualityToInvalid() {
+	    gga.setFixQuality(GpsFixQuality.INVALID);
+	    assertEquals(GpsFixQuality.INVALID, gga.getFixQuality());
 	}
 
 	@Test
@@ -180,10 +188,14 @@ public class GGATest {
 	}
 
 	@Test
-	public void testSetGeoidalHeightUnits() {
-		assertEquals(Units.METER, gga.getGeoidalHeightUnits());
-		gga.setGeoidalHeightUnits(Units.FEET);
-		assertEquals(Units.FEET, gga.getGeoidalHeightUnits());
+	public void testDefaultGeoidalHeightUnits() {
+	    assertEquals(Units.METER, gga.getGeoidalHeightUnits());
+	}
+
+	@Test
+	public void testSetGeoidalHeightUnitsToFeet() {
+	    gga.setGeoidalHeightUnits(Units.FEET);
+	    assertEquals(Units.FEET, gga.getGeoidalHeightUnits());
 	}
 
 	@Test

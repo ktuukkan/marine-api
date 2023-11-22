@@ -26,19 +26,43 @@ public class XTETest {
 	}
 
 	@Test
-	public void testXTEParserString() {
-		assertEquals(TalkerId.II, instance.getTalkerId());
-		assertEquals(SentenceId.XTE.name(), instance.getSentenceId());
-		assertEquals(6, instance.getFieldCount());
-		assertTrue(instance.isValid());
+	public void testTalkerId() {
+	    assertEquals(TalkerId.II, instance.getTalkerId());
 	}
 
 	@Test
-	public void testXTEParserTalkerId() {
-		assertEquals(TalkerId.GP, empty.getTalkerId());
-		assertEquals(SentenceId.XTE.name(), empty.getSentenceId());
-		assertEquals(6, empty.getFieldCount());
-		assertTrue(empty.isValid());
+	public void testSentenceId() {
+	    assertEquals(SentenceId.XTE.name(), instance.getSentenceId());
+	}
+
+	@Test
+	public void testFieldCount() {
+	    assertEquals(6, instance.getFieldCount());
+	}
+
+	@Test
+	public void testIsValid() {
+	    assertTrue(instance.isValid());
+	}
+
+	@Test
+	public void testTalkerId() {
+	    assertEquals(TalkerId.GP, empty.getTalkerId());
+	}
+
+	@Test
+	public void testSentenceId() {
+	    assertEquals(SentenceId.XTE.name(), empty.getSentenceId());
+	}
+
+	@Test
+	public void testFieldCount() {
+	    assertEquals(6, empty.getFieldCount());
+	}
+
+	@Test
+	public void testIsValid() {
+	    assertTrue(empty.isValid());
 	}
 
 	@Test
