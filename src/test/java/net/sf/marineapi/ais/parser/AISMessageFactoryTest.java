@@ -20,10 +20,15 @@ public class AISMessageFactoryTest {
     private String s1 = "!AIVDM,1,1,,A,13aEOK?P00PD2wVMdLDRhgvL289?,0*26";
     private String s2_1 = "!AIVDM,2,1,9,B,53nFBv01SJ<thHp6220H4heHTf2222222222221?50:454o<`9QSlUDp,0*09";
     private String s2_2 = "!AIVDM,2,2,9,B,888888888888880,2*2E";
+   
 
     private final AISSentence single = (AISSentence) sf.createParser(s1);
     private final AISSentence split1 = (AISSentence) sf.createParser(s2_1);
     private final AISSentence split2 = (AISSentence) sf.createParser(s2_2);
+    
+    public AISMessageFactoryTest() {
+    	
+    }
 
     @Test
     public void testCreate() {

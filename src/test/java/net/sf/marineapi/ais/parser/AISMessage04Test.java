@@ -12,12 +12,16 @@ import static org.junit.Assert.*;
  * Expected values based on http://www.maritec.co.za/tools/aisvdmvdodecoding/
  */
 public class AISMessage04Test {
-
-    // !AIVDM,1,1,,A,400TcdiuiT7VDR>3nIfr6>i00000,0*78
+   // !AIVDM,1,1,,A,400TcdiuiT7VDR>3nIfr6>i00000,0*78
     private final String payload = "400TcdiuiT7VDR>3nIfr6>i00000";
     private final Sixbit sixbit = new Sixbit(payload, 0);
     private final AISMessage04 msg = new AISMessage04Parser(sixbit);
-
+    
+    
+	public AISMessage04Test() {
+		
+	}
+	
     @Test
     public void getUtcYear() throws Exception {
         assertEquals(2012, msg.getUtcYear());

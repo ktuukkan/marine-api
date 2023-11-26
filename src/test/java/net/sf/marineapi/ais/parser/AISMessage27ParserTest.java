@@ -17,7 +17,10 @@ public class AISMessage27ParserTest {
     private final String payload = "Kk:qFP0?fhT8=7m@";
     private final Sixbit sixbit = new Sixbit(payload, 0);
     private final AISMessage27 message = new AisMessage27Parser(sixbit);
-
+    
+    public AISMessage27ParserTest() {
+    	
+    }
     @Test
     public void getRepeatIndicator() {
         assertEquals(3, message.getRepeatIndicator());

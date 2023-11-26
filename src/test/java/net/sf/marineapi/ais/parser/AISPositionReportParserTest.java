@@ -17,6 +17,10 @@ public class AISPositionReportParserTest {
     private final String payload = "13u?etPv2;0n:dDPwUM1U1Cb069D";
     private final Sixbit sixbit = new Sixbit(payload, 0);
     private final AISPositionReport msg = new AISPositionReportParser(sixbit);
+    
+    public AISPositionReportParserTest() {
+    	
+    }
 
     @Test
     public void getNavigationalStatus() throws Exception {
