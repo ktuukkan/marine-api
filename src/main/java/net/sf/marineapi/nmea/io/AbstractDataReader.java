@@ -115,17 +115,17 @@ public abstract class AbstractDataReader implements Runnable {
 	 */
 	public void run() {
 
-		ActivityMonitor monitor = new ActivityMonitor(parent);
-		SentenceFactory factory = SentenceFactory.getInstance();
+		final ActivityMonitor monitor = new ActivityMonitor(parent);
+		final SentenceFactory factory = SentenceFactory.getInstance();
 
 		while (isRunning) {
 			try {
-				String data = read();
+				final String data = read();
 				if (data == null) {
 					Thread.sleep(SLEEP_TIME);
 				} else if (SentenceValidator.isValid(data)) {
 					monitor.refresh();
-					Sentence s = factory.createParser(data);
+					final Sentence s = factory.createParser(data);
 					parent.fireSentenceEvent(s);
 				} else if (!SentenceValidator.isSentence(data)) {
 					parent.fireDataEvent(data);

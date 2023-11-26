@@ -18,6 +18,10 @@ public class AISMessage21ParserTest {
     private final String payload = "E1c2;q@b44ah4ah0h:2ab@70VRpU<Bgpm4:gP50HH`Th`QF51CQ1A83PCAH0";
     private final Sixbit sixbit = new Sixbit(payload, 0);
     private final AISMessage21 msg = new AISMessage21Parser(sixbit);
+    
+    public AISMessage21ParserTest() {
+    	
+    }
 
     @Test
     public void getAidType() throws Exception {
