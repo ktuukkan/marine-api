@@ -22,7 +22,6 @@ package net.sf.marineapi.nmea.io;
 
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
-import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.Queue;
 
@@ -36,6 +35,7 @@ class UDPDataReader extends AbstractDataReader {
 	private DatagramSocket socket;
 	private byte[] buffer = new byte[1024];
 	private Queue<String> queue = new LinkedList<>();
+	private StringBuilder tempBuffer = new StringBuilder();
 
 	/**
 	 * Creates a new instance of StreamReader.
@@ -60,8 +60,21 @@ class UDPDataReader extends AbstractDataReader {
 			// Once the backlog is cleared, then read the port, split the packet into sentences,
 			// and store the individual sentences in the queue.  Queue will always start empty here.
 			data = receive();
-		    String[] lines = data.split("\\r?\\n");
-		    queue.addAll(Arrays.asList(lines));
+			tempBuffer.append(data);
+
+			// Check if the temporary buffer contains complete NMEA sentences
+			String[] lines = tempBuffer.toString().split("\\r?\\n");
+			for (int i = 0; i < lines.length; i++) {
+				if (i < lines.length - 1) {
+					// Complete NMEA sentence, add to the queue
+					queue.add(lines[i]);
+				} else {
+					// The last line may be incomplete, keep it in the temporary buffer
+					tempBuffer.setLength(0); // Clear the temporary buffer
+					tempBuffer.append(lines[i]);
+				}
+			}
+
 		}
 		
 		return data;
