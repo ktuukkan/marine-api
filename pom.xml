@@ -143,7 +143,7 @@ along with Java Marine API. If not, see <http://www.gnu.org/licenses />.
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-javadoc-plugin</artifactId>
-                <version>3.6.3</version>
+                <version>3.11.3</version>
                 <configuration>
                     <excludePackageNames>net.sf.marineapi.example</excludePackageNames>
                     <source>11</source>
