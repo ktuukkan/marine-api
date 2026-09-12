@@ -49,7 +49,7 @@ along with Java Marine API. If not, see <http://www.gnu.org/licenses />.
     <parent>
         <groupId>org.sonatype.oss</groupId>
         <artifactId>oss-parent</artifactId>
-        <version>7</version>
+        <version>9</version>
     </parent>
 
     <organization>
