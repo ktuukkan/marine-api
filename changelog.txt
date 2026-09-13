@@ -1,6 +1,14 @@
 Java Marine API - changelog
 <http://ktuukkan.github.io/marine-api/>
 
+Version 0.13.0-SNAPSHOT
+
+  - UDPDataReader; fixed datagrams split across multiple packets and added 
+    support for multiple senders on the same port.
+
+  Contributions:
+  - UDPDataReader improvements by YuHua (@hyson1234567)
+
 Version 0.12.0 (2023-02-26)
 
   - Added support for OSD sentences; own ship data
