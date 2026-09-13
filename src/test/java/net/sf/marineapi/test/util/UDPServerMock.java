@@ -22,7 +22,7 @@ public class UDPServerMock implements Runnable {
         try {
             int port = 3810;
             InetAddress host = InetAddress.getLocalHost();
-            byte[] data = TXT.getBytes();
+            byte[] data = (TXT + "\r\n").getBytes();
             socket = new DatagramSocket();
 
             while (running) {
