@@ -22,10 +22,10 @@ package net.sf.marineapi.nmea.io;
 
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
+import java.util.LinkedHashMap;
 import java.util.LinkedList;
-import java.util.Queue;
 import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
+import java.util.Queue;
 
 /**
  * DataReader implementation using DatagramSocket as data source.
@@ -34,10 +34,19 @@ import java.util.concurrent.ConcurrentHashMap;
  */
 class UDPDataReader extends AbstractDataReader {
 
+    // caps the number of distinct senders to avoid unbounded growth
+    private static final int MAX_TRACKED_SENDERS = 64;
+
     private DatagramSocket socket;
     private byte[] buffer = new byte[1024];
     private Queue<UDPPacket> queue = new LinkedList<>();
-    private Map<String, StringBuilder> senderBuffers = new ConcurrentHashMap<>();
+
+    private Map<String, StringBuilder> senderBuffers = new LinkedHashMap<String, StringBuilder>(16, 0.75f, true) {
+        @Override
+        protected boolean removeEldestEntry(Map.Entry<String, StringBuilder> eldest) {
+            return size() > MAX_TRACKED_SENDERS;
+        }
+    };
 
     private static class UDPPacket {
         private final String data;
