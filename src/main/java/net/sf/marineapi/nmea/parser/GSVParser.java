@@ -1,6 +1,6 @@
 /*
  * GSVParser.java
- * Copyright (C) 2010 Kimmo Tuukkanen
+ * Copyright (C) 2010-2020 Kimmo Tuukkanen
  *
  * This file is part of Java Marine API.
  * <http://ktuukkan.github.io/marine-api/>
@@ -32,6 +32,7 @@ import net.sf.marineapi.nmea.util.SatelliteInfo;
  * GSV sentence parser.
  *
  * @author Kimmo Tuukkanen
+ * @author Gunnar Hillert
  */
 class GSVParser extends SentenceParser implements GSVSentence {
 
@@ -40,8 +41,17 @@ class GSVParser extends SentenceParser implements GSVSentence {
     private static final int SENTENCE_NUMBER = 1;
     private static final int SATELLITES_IN_VIEW = 2;
 
+    // Satellite Group Start Index
+    private static final int SATELLITE_GROUP_START_INDEX = 3;
+
+    // Each Satellite Group has 4 values
+    private static final int SATELLITE_GROUP_SIZE = 4;
+
+    // A GSV Sentence may contain up to 4 satellites
+    private static final int SATELLITE_GROUP_MAX_NUMBER_OF_SATELLITES = 4;
+
     // satellite id fields
-    private static final int[] ID_FIELDS = {3, 7, 11, 15};
+    private static final int[] ID_FIELDS = {SATELLITE_GROUP_START_INDEX, 7, 11, 15};
 
     // satellite data fields, relative to each id field
     private static final int ELEVATION = 1;
@@ -72,6 +82,22 @@ class GSVParser extends SentenceParser implements GSVSentence {
      */
     public int getSatelliteCount() {
         return getIntValue(SATELLITES_IN_VIEW);
+    }
+
+    /**
+     * @see net.sf.marineapi.nmea.sentence.GSVSentence#getSignalId()
+     */
+    @Override
+    public int getSignalId() {
+        final int signalIdIndex;
+        if (!this.isLast()) {
+        	signalIdIndex = SATELLITE_GROUP_START_INDEX + SATELLITE_GROUP_MAX_NUMBER_OF_SATELLITES * SATELLITE_GROUP_SIZE;
+        }
+        else {
+            int numberOfSatellites = this.getSatelliteCount() - ((this.getSentenceIndex() - 1) * SATELLITE_GROUP_SIZE);
+            signalIdIndex = SATELLITE_GROUP_START_INDEX + (SATELLITE_GROUP_SIZE * numberOfSatellites);
+        }
+        return getIntValue(signalIdIndex);
     }
 
     /*
